@@ -1,0 +1,1072 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <DQS Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>DQS</Alias>
+        <ConnectionStringEncrypted>9Fj1SMgJo23LS7mc5QCxJ9E+2S1FAwHZaU3oyU4Y4GONcMFoTwrTpOJapQhjhKRe5VSVSUNRk/XxWtXcanBtL8Nw92hPQaO8zHvZvXs94Hv0XMujYkxDmWphnPTpfGlj1HxTjMVZk91p</ConnectionStringEncrypted>
+        <Name>DQS</Name>
+      </DQS>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <收货记录 Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>收货记录</Alias>
+        <Columns isList="true" count="28">
+          <value>药品ID,System.Int32</value>
+          <value>药品编号,System.String</value>
+          <value>药品名称,System.String</value>
+          <value>药品名称Spell,System.String</value>
+          <value>通用名称,System.String</value>
+          <value>制剂规格,System.String</value>
+          <value>包装规格,System.String</value>
+          <value>药品类别,System.String</value>
+          <value>剂型,System.String</value>
+          <value>批准文号,System.String</value>
+          <value>生产企业,System.String</value>
+          <value>储存库区,System.String</value>
+          <value>收货单号,System.String</value>
+          <value>到货时间,System.DateTime</value>
+          <value>收货人员,System.String</value>
+          <value>订单类型,System.String</value>
+          <value>供应商名称,System.String</value>
+          <value>采购单号,System.String</value>
+          <value>采购下单时间,System.DateTime</value>
+          <value>采购人,System.String</value>
+          <value>数量,System.Int32</value>
+          <value>发货单位,System.String</value>
+          <value>运输单位,System.String</value>
+          <value>启运时间,System.DateTime</value>
+          <value>运输工具,System.String</value>
+          <value>发运地点,System.String</value>
+          <value>到货温度,System.String</value>
+          <value>运输方式,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>收货记录</Name>
+        <NameInSource>DQS</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>SELECT  
+	p.ProductID AS [药品ID],
+	p.ProductCode AS [药品编号],
+	p.ProductName AS [药品名称],
+	p.ProductSpell AS [药品名称Spell],
+	p.CommonName AS [通用名称],
+	p.ProductSpec AS [制剂规格],
+	p.PackageSpec AS [包装规格],
+	p.ProductStyle AS [药品类别],
+	p.PhysicType AS [剂型],
+	p.AuthorizedNo AS [批准文号],
+	p.ProducerName AS [生产企业],
+	p.StockCondition AS [储存库区],
+	r.ReceiveCode AS [收货单号],
+	r.ReceiveDate AS [到货时间],
+	r.ReceivePerson AS [收货人员],
+	r.BillTypeName AS [订单类型],
+	r.DealerName AS [供应商名称],
+	b.BillCode AS [采购单号],
+	b.BillDate AS [采购下单时间],
+	b.Operator AS [采购人],
+	rd.Amount AS [数量],
+	r.DealerName AS [发货单位],
+	r.CarryCompnay AS [运输单位],
+	r.Reservation3 AS [启运时间],
+	r.TransportTool AS [运输工具],
+	r.TransportCode AS [运输方式],
+	bt.DealerAddress AS [发运地点],
+	r.Reservation1 AS [到货温度]
+	FROM BUS_Receive r
+		INNER JOIN BUS_ReceiveDetail rd
+			ON r.ReceiveID = rd.ReceiveID
+		INNER JOIN BFI_Product p
+			ON rd.ProductID = p.ProductID
+		INNER JOIN BUS_Bill b
+			ON r.BillID = b.BillID
+		Left JOIN  BFI_Dealer bt 
+			ON r.DealerID = bt.DealerID
+	 WHERE  p.ProductName  LIKE '%{TextProductName.Text}%' 
+		 AND r.ReceiveCode  LIKE '%{TextReceiveCode.Text}%'
+		 AND (r.ReceiveDate BETWEEN '{Format("{0:yyyy-MM-dd 00:00:00}",TextReceiveDate.Value)}' AND '{Format("{0:yyyy-MM-dd 23:59:59}",TextReceiveDatetwo.Value)}')
+     	 AND b.DealerName   LIKE '%{TextDealerName.Text}%'
+		 AND r.BillTypeName Like '%{TextBillTypeName.Text}%'</SqlCommand>
+      </收货记录>
+      <Enterprise_x0020_ Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Enterprise </Alias>
+        <Columns isList="true" count="1">
+          <value>公司名称,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>Enterprise </Name>
+        <NameInSource>DQS</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>SELECT EnterpriseName AS [公司名称]  FROM dbo.BFI_Enterprise </SqlCommand>
+      </Enterprise_x0020_>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="2">
+    <ReceiveDeatils Ref="5" type="Stimulsoft.Report.Dialogs.StiForm" isKey="true">
+      <BackColor>Control</BackColor>
+      <Components isList="true" count="14">
+        <LabelControl1 Ref="6" type="Stimulsoft.Report.Dialogs.StiLabelControl" isKey="true">
+          <BackColor>Control</BackColor>
+          <ClientRectangle>8,96,120,16</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <ForeColor>Black</ForeColor>
+          <Guid>0a77ef0ad9e0440f96ea4aa56e9d10d0</Guid>
+          <Location>8, 96</Location>
+          <Name>LabelControl1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Size>120, 16</Size>
+          <Text>按照收货单号查询：</Text>
+          <TextAlign>MiddleLeft</TextAlign>
+        </LabelControl1>
+        <TextReceiveCode Ref="7" type="Stimulsoft.Report.Dialogs.StiTextBoxControl" isKey="true">
+          <BackColor>Window</BackColor>
+          <ClientRectangle>136,96,144,20</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <ForeColor>Black</ForeColor>
+          <Guid>80eaee2d0dd14db89abe53c28201cc8e</Guid>
+          <Location>136, 96</Location>
+          <Name>TextReceiveCode</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Size>144, 20</Size>
+          <Text />
+        </TextReceiveCode>
+        <LabelControl2 Ref="8" type="Stimulsoft.Report.Dialogs.StiLabelControl" isKey="true">
+          <BackColor>Control</BackColor>
+          <ClientRectangle>8,64,120,16</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <ForeColor>Black</ForeColor>
+          <Guid>67bacf5b7d6f4447bd4fa9104ee29adc</Guid>
+          <Location>8, 64</Location>
+          <Name>LabelControl2</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Size>120, 16</Size>
+          <Text>按照药品名称查询：</Text>
+          <TextAlign>MiddleLeft</TextAlign>
+        </LabelControl2>
+        <TextProductName Ref="9" type="Stimulsoft.Report.Dialogs.StiTextBoxControl" isKey="true">
+          <BackColor>Window</BackColor>
+          <ClientRectangle>136,64,144,20</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <ForeColor>Black</ForeColor>
+          <Guid>d5b5e0ea9e3d46eabe30ef515f8771e5</Guid>
+          <Location>136, 64</Location>
+          <Name>TextProductName</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Size>144, 20</Size>
+          <Text />
+        </TextProductName>
+        <LabelControl6 Ref="10" type="Stimulsoft.Report.Dialogs.StiLabelControl" isKey="true">
+          <BackColor>Control</BackColor>
+          <ClientRectangle>8,160,120,16</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <ForeColor>Black</ForeColor>
+          <Guid>c2dd167ab84445899d22cb8fd7bd5e88</Guid>
+          <Location>8, 160</Location>
+          <Name>LabelControl6</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Size>120, 16</Size>
+          <Text>按照供应商查询：</Text>
+          <TextAlign>MiddleLeft</TextAlign>
+        </LabelControl6>
+        <TextDealerName Ref="11" type="Stimulsoft.Report.Dialogs.StiTextBoxControl" isKey="true">
+          <BackColor>Window</BackColor>
+          <ClientRectangle>136,160,144,20</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <ForeColor>Black</ForeColor>
+          <Guid>b193ec293f874338a34b604bcc3673b3</Guid>
+          <Location>136, 160</Location>
+          <Name>TextDealerName</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Size>144, 20</Size>
+          <Text />
+        </TextDealerName>
+        <btOK Ref="12" type="Stimulsoft.Report.Dialogs.StiButtonControl" isKey="true">
+          <ClientRectangle>88,184,96,24</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Default>True</Default>
+          <DialogResult>OK</DialogResult>
+          <Font>Microsoft Sans Serif,8</Font>
+          <ForeColor>Black</ForeColor>
+          <Location>88, 184</Location>
+          <Name>btOK</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Size>96, 24</Size>
+          <Text>查询</Text>
+        </btOK>
+        <TextReceiveDate Ref="13" type="Stimulsoft.Report.Dialogs.StiDateTimePickerControl" isKey="true">
+          <BackColor>Window</BackColor>
+          <ClientRectangle>40,32,104,20</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <ForeColor>Black</ForeColor>
+          <Location>40, 32</Location>
+          <MaxDate>12/31/9998 12:00:00 AM</MaxDate>
+          <MinDate>1/1/1753 12:00:00 AM</MinDate>
+          <Name>TextReceiveDate</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Size>104, 20</Size>
+          <Value>7/1/2014 11:08:27 AM</Value>
+        </TextReceiveDate>
+        <TextReceiveDatetwo Ref="14" type="Stimulsoft.Report.Dialogs.StiDateTimePickerControl" isKey="true">
+          <BackColor>Window</BackColor>
+          <ClientRectangle>184,32,104,20</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <ForeColor>Black</ForeColor>
+          <Guid>7c1a265042b049e798f2fefa044d948c</Guid>
+          <Location>184, 32</Location>
+          <MaxDate>12/31/9998 12:00:00 AM</MaxDate>
+          <MinDate>1/1/1753 12:00:00 AM</MinDate>
+          <Name>TextReceiveDatetwo</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Size>104, 20</Size>
+          <Value>7/1/2014 11:08:27 AM</Value>
+        </TextReceiveDatetwo>
+        <LabelControl7 Ref="15" type="Stimulsoft.Report.Dialogs.StiLabelControl" isKey="true">
+          <BackColor>Control</BackColor>
+          <ClientRectangle>152,24,24,32</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <ForeColor>Black</ForeColor>
+          <Location>152, 24</Location>
+          <Name>LabelControl7</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Size>24, 32</Size>
+          <Text>至</Text>
+          <TextAlign>MiddleCenter</TextAlign>
+        </LabelControl7>
+        <TextBillTypeName Ref="16" type="Stimulsoft.Report.Dialogs.StiComboBoxControl" isKey="true">
+          <BackColor>Window</BackColor>
+          <ClientRectangle>136,128,144,20</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <ForeColor>Black</ForeColor>
+          <Items isList="true" count="2">
+            <value>采购进货</value>
+            <value>销售退货</value>
+          </Items>
+          <Location>136, 128</Location>
+          <Name>TextBillTypeName</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Size>144, 20</Size>
+          <Text>下拉框</Text>
+        </TextBillTypeName>
+        <LabelControl8 Ref="17" type="Stimulsoft.Report.Dialogs.StiLabelControl" isKey="true">
+          <BackColor>Control</BackColor>
+          <ClientRectangle>8,128,120,16</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <ForeColor>Black</ForeColor>
+          <Location>8, 128</Location>
+          <Name>LabelControl8</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Size>120, 16</Size>
+          <Text>按照订单类型查询：</Text>
+          <TextAlign>MiddleCenter</TextAlign>
+        </LabelControl8>
+        <LabelControl3 Ref="18" type="Stimulsoft.Report.Dialogs.StiLabelControl" isKey="true">
+          <BackColor>Control</BackColor>
+          <ClientRectangle>8,8,112,16</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Font>微软雅黑,9,Regular,Point,False,134</Font>
+          <ForeColor>Black</ForeColor>
+          <Guid>c5330c2973484483a06d717d7bd3abea</Guid>
+          <Location>8, 8</Location>
+          <Name>LabelControl3</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Size>112, 16</Size>
+          <Text>按照收货日期查询</Text>
+          <TextAlign>MiddleLeft</TextAlign>
+        </LabelControl3>
+        <LabelControl5 Ref="19" type="Stimulsoft.Report.Dialogs.StiLabelControl" isKey="true">
+          <BackColor>Control</BackColor>
+          <ClientRectangle>8,32,24,24</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <ForeColor>Black</ForeColor>
+          <Guid>cfb923750824402d840f0f7a48403426</Guid>
+          <Location>8, 32</Location>
+          <Name>LabelControl5</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Size>24, 24</Size>
+          <Text>从</Text>
+          <TextAlign>MiddleCenter</TextAlign>
+        </LabelControl5>
+      </Components>
+      <Font>Microsoft Sans Serif,8</Font>
+      <Guid>b063738911e54ada90cada95c78c20f6</Guid>
+      <Location>0, 0</Location>
+      <Name>ReceiveDeatils</Name>
+      <Report isRef="0" />
+      <Size>305, 235</Size>
+      <Text>查询条件</Text>
+    </ReceiveDeatils>
+    <Page1 Ref="20" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="6">
+        <PageHeaderBand1 Ref="21" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,27.7,3.6</ClientRectangle>
+          <Components isList="true" count="17">
+            <Text2 Ref="22" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.4,0.8,8,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,20,Bold</Font>
+              <Guid>b786bc1d6d1e4ce4bf193b18b59f44dd</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="20" />
+              <Parent isRef="21" />
+              <Text>收  货  记  录</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text3 Ref="23" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,3,2.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9,Bold</Font>
+              <Guid>e51f088c8a1547c1b9d5ececa4ca088d</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="20" />
+              <Parent isRef="21" />
+              <Text>药品通用名称</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text4 Ref="24" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>20.6,3,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9,Bold</Font>
+              <Guid>9151845f514f4af6b7b2612ad84d7ad3</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="20" />
+              <Parent isRef="21" />
+              <Text>到货温度</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text6 Ref="25" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.2,3,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9,Bold</Font>
+              <Guid>0a5e5e15b2db403ba2a92ef9794ed001</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="20" />
+              <Parent isRef="21" />
+              <Text>发运地点</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text8 Ref="26" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18.4,3,2.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9,Bold</Font>
+              <Guid>7112ce7f1afe4bf2b84385e8686be347</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="20" />
+              <Parent isRef="21" />
+              <Text>到货时间</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text9 Ref="27" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>22,3,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9,Bold</Font>
+              <Guid>f91ec150332742e180efb83d3e9e6ebf</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="20" />
+              <Parent isRef="21" />
+              <Text>收货人员</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <Text11 Ref="28" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>23.6,3,1.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9,Bold</Font>
+              <Guid>9f8d7cb9a75145e488be8991f70a73c5</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="20" />
+              <Parent isRef="21" />
+              <Text>数量</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text12 Ref="29" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.4,3,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9,Bold</Font>
+              <Guid>73786aa9917c435e8759f105a7d5237f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="20" />
+              <Parent isRef="21" />
+              <Text>发货单位</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+            <Text15 Ref="30" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.8,3,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9,Bold</Font>
+              <Guid>20c7fe1a7ba14132bb9ad14c44678902</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="20" />
+              <Parent isRef="21" />
+              <Text>运输单位</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text13 Ref="31" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14.2,3,2.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9,Bold</Font>
+              <Guid>ebfe5a87e78b43678a68e5985faaa324</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="20" />
+              <Parent isRef="21" />
+              <Text>启运时间</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text14 Ref="32" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.4,3,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9,Bold</Font>
+              <Guid>ecf760be770e4ffea5ca8a2d96235a00</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="20" />
+              <Parent isRef="21" />
+              <Text>运输方式</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text5 Ref="33" type="Text" isKey="true">
+              <Border>None;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,1.8,4,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,12,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="20" />
+              <Parent isRef="21" />
+              <Text>{收货记录.订单类型}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text7 Ref="34" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>24.8,3,2.9,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9,Bold</Font>
+              <Guid>603ae40d23874943b1ec3484f177cfb7</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="20" />
+              <Parent isRef="21" />
+              <Text>生产企业</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text10 Ref="35" type="Text" isKey="true">
+              <Border>None;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.4,0.4,8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9,Bold</Font>
+              <Guid>9f19230ddb4f42daaee8afb7420ad061</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="20" />
+              <Parent isRef="21" />
+              <Text>{Enterprise_.公司名称}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text24 Ref="36" type="Text" isKey="true">
+              <Border>None;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>20.2,1.8,6.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8,Bold</Font>
+              <Guid>54d204f774bf43939da933552482bace</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="20" />
+              <Parent isRef="21" />
+              <Text>{Format("{0:yyyy-MM-dd}", TextReceiveDate.Value)} 至 {Format("{0:yyyy-MM-dd}", TextReceiveDatetwo.Value)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text24>
+            <Text21 Ref="37" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4.2,3,2.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9,Bold</Font>
+              <Guid>c1a4597705ce45ea9adc235f631db6b5</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="20" />
+              <Parent isRef="21" />
+              <Text>收货单号</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+            <Text22 Ref="38" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.2,3,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9,Bold</Font>
+              <Guid>0f20e492010d4c029bd4bbb35c386088</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="20" />
+              <Parent isRef="21" />
+              <Text>订单类型</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text22>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="20" />
+          <Parent isRef="20" />
+        </PageHeaderBand1>
+        <PageFooterBand1 Ref="39" type="PageFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,17.8,27.7,1.2</ClientRectangle>
+          <Components isList="true" count="1">
+            <Text20 Ref="40" type="Text" isKey="true">
+              <Border>None;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>24.6,0.4,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="20" />
+              <Parent isRef="39" />
+              <Text>{PageNofM}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>PageFooterBand1</Name>
+          <Page isRef="20" />
+          <Parent isRef="20" />
+        </PageFooterBand1>
+        <Text17 Ref="41" type="Text" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>32,2.8,2,1.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微软雅黑,9,Bold</Font>
+          <Guid>775501d7f9bf432b8eff749beb75bd6f</Guid>
+          <HorAlignment>Center</HorAlignment>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text17</Name>
+          <Page isRef="20" />
+          <Parent isRef="20" />
+          <Text>启运时间</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text17>
+        <Text18 Ref="42" type="Text" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>34,2.8,2,1.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微软雅黑,9,Bold</Font>
+          <Guid>5e5710ebba1a45ecabad6bb4b802c582</Guid>
+          <HorAlignment>Center</HorAlignment>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text18</Name>
+          <Page isRef="20" />
+          <Parent isRef="20" />
+          <Text>发运地点</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text18>
+        <Text19 Ref="43" type="Text" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>36,2.8,2,1.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>微软雅黑,9,Bold</Font>
+          <Guid>9c9ba4d7bf834be59291042f0acf4b4f</Guid>
+          <HorAlignment>Center</HorAlignment>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text19</Name>
+          <Page isRef="20" />
+          <Parent isRef="20" />
+          <Text>到货温度</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text19>
+        <Table1 Ref="44" type="Stimulsoft.Report.Components.Table.StiTable" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,4.8,27.7,1</ClientRectangle>
+          <ColumnCount>13</ColumnCount>
+          <Components isList="true" count="13">
+            <Table1_Cell1 Ref="45" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,2.2,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>0</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>Table1_Cell1</Name>
+              <Page isRef="20" />
+              <Parent isRef="44" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{收货记录.药品名称}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Table1_Cell1>
+            <Table1_Cell2 Ref="46" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.2,0,2,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>1</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>Table1_Cell2</Name>
+              <Page isRef="20" />
+              <Parent isRef="44" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{收货记录.订单类型}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Table1_Cell2>
+            <Table1_Cell3 Ref="47" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4.2,0,2.2,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>2</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>Table1_Cell3</Name>
+              <Page isRef="20" />
+              <Parent isRef="44" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{收货记录.收货单号}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Table1_Cell3>
+            <Table1_Cell4 Ref="48" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.4,0,2.4,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>3</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>Table1_Cell4</Name>
+              <Page isRef="20" />
+              <Parent isRef="44" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{收货记录.发货单位}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Table1_Cell4>
+            <Table1_Cell5 Ref="49" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.8,0,2.4,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>4</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>Table1_Cell5</Name>
+              <Page isRef="20" />
+              <Parent isRef="44" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{收货记录.运输单位}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Table1_Cell5>
+            <Table1_Cell6 Ref="50" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.2,0,3,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>55</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>Table1_Cell6</Name>
+              <Page isRef="20" />
+              <Parent isRef="44" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{收货记录.发运地点}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Table1_Cell6>
+            <Table1_Cell7 Ref="51" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14.2,0,2.2,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>56</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>Table1_Cell7</Name>
+              <Page isRef="20" />
+              <Parent isRef="44" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{收货记录.启运时间}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="52" type="CustomFormat" isKey="true">
+                <StringFormat>yyyy-MM-dd</StringFormat>
+              </TextFormat>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Table1_Cell7>
+            <Table1_Cell8 Ref="53" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.4,0,2,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>57</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>Table1_Cell8</Name>
+              <Page isRef="20" />
+              <Parent isRef="44" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{收货记录.运输方式}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Table1_Cell8>
+            <Table1_Cell9 Ref="54" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18.4,0,2.2,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>58</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>Table1_Cell9</Name>
+              <Page isRef="20" />
+              <Parent isRef="44" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{收货记录.到货时间}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="55" type="CustomFormat" isKey="true">
+                <StringFormat>yyyy-MM-dd</StringFormat>
+              </TextFormat>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Table1_Cell9>
+            <Table1_Cell10 Ref="56" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>20.6,0,1.4,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>59</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>Table1_Cell10</Name>
+              <Page isRef="20" />
+              <Parent isRef="44" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{收货记录.到货温度}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Table1_Cell10>
+            <Table1_Cell11 Ref="57" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>22,0,1.6,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>60</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>Table1_Cell11</Name>
+              <Page isRef="20" />
+              <Parent isRef="44" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{收货记录.收货人员}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Table1_Cell11>
+            <Table1_Cell12 Ref="58" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>23.6,0,1.2,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>61</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>Table1_Cell12</Name>
+              <Page isRef="20" />
+              <Parent isRef="44" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{收货记录.数量}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Table1_Cell12>
+            <Table1_Cell13 Ref="59" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>24.8,0,2.9,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>62</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>Table1_Cell13</Name>
+              <Page isRef="20" />
+              <Parent isRef="44" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{收货记录.生产企业}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Table1_Cell13>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>收货记录</DataSourceName>
+          <Filters isList="true" count="0" />
+          <MinHeight>0.2</MinHeight>
+          <Name>Table1</Name>
+          <NumberID>63</NumberID>
+          <Page isRef="20" />
+          <Parent isRef="20" />
+          <RowCount>1</RowCount>
+          <Sort isList="true" count="0" />
+        </Table1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>aa15bffce9cb47e69e0342963d83bee6</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>21</PageHeight>
+      <PageWidth>29.7</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="60" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="61" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>9/18/2014 5:12:12 PM</ReportChanged>
+  <ReportCreated>6/26/2014 10:58:15 AM</ReportCreated>
+  <ReportFile>C:\Users\Snow\Desktop\GSP最新\收货记录查询.mrt</ReportFile>
+  <ReportGuid>97a8f6feee664124a847dfd41945d21a</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2013.1.1503</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+
+namespace DQS.Controls
+{
+    public class ReportFunction
+    {
+        public static string ConvertToChinese(decimal x)
+        {
+            string s = x.ToString("#L#E#D#C#K#E#D#C#J#E#D#C#I#E#D#C#H#E#D#C#G#E#D#C#F#E#D#C#.0B0A");
+            string d = System.Text.RegularExpressions.Regex.Replace(s, @"((?&lt;=-|^)[^1-9]*)|((?'z'0)[0A-E]*((?=[1-9])|(?'-z'(?=[F-L.]|$))))|((?'b'[F-L])(?'z'0)[0A-L]*((?=[1-9])|(?'-z'(?=[.]|$))))", "${b}${z}");
+            var result = System.Text.RegularExpressions.Regex.Replace(d, ".", m =&gt; "负元空零壹贰叁肆伍陆柒捌玖空空空空空空空分角拾佰仟万亿兆京垓秭穰"[m.Value[0] - '-'].ToString());
+            if (result.EndsWith("元"))
+            {
+                result += "整";
+            }
+            return result;
+        }
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

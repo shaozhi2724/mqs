@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{16CEFA52-FE5B-4D9C-B676-5E228819844A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DQS.SvrHost</RootNamespace>
+    <AssemblyName>DQS.SvrHost</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>svr.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.BonusSkins.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.OfficeSkins.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DQS.Controls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\App\DQS.Controls\obj\Debug\DQS.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="ORMSCore, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\App\DQS.App\ORMSCore.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FrmDbBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDbBack.Designer.cs">
+      <DependentUpon>FrmDbBack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDbBackInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDbBackInfo.Designer.cs">
+      <DependentUpon>FrmDbBackInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDbBackPlan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDbBackPlan.Designer.cs">
+      <DependentUpon>FrmDbBackPlan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDbSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDbSetting.Designer.cs">
+      <DependentUpon>FrmDbSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFunctionLogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFunctionLogs.Designer.cs">
+      <DependentUpon>FrmFunctionLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmHost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHost.Designer.cs">
+      <DependentUpon>FrmHost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRegisterManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRegisterManager.Designer.cs">
+      <DependentUpon>FrmRegisterManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmDbBack.resx">
+      <DependentUpon>FrmDbBack.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDbBackInfo.resx">
+      <DependentUpon>FrmDbBackInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDbBackPlan.resx">
+      <DependentUpon>FrmDbBackPlan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDbSetting.resx">
+      <DependentUpon>FrmDbSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFunctionLogs.resx">
+      <DependentUpon>FrmFunctionLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmHost.resx">
+      <DependentUpon>FrmHost.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRegisterManager.resx">
+      <DependentUpon>FrmRegisterManager.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcDbBackDay.resx">
+      <DependentUpon>UcDbBackDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcDbBackMonth.resx">
+      <DependentUpon>UcDbBackMonth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcDbBackWeek.resx">
+      <DependentUpon>UcDbBackWeek.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UcDbBackDay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcDbBackDay.Designer.cs">
+      <DependentUpon>UcDbBackDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UcDbBackMonth.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcDbBackMonth.Designer.cs">
+      <DependentUpon>UcDbBackMonth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UcDbBackWeek.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcDbBackWeek.Designer.cs">
+      <DependentUpon>UcDbBackWeek.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="svr.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\App\DQS.Common\DQS.Common.csproj">
+      <Project>{43DF1044-5A7E-4FCA-9645-09114FF56690}</Project>
+      <Name>DQS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\App\DQS.Module\DQS.Module.csproj">
+      <Project>{39F06AB8-466F-4D72-95B5-72DE2FF484B7}</Project>
+      <Name>DQS.Module</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

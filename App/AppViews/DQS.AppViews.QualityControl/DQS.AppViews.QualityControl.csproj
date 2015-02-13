@@ -1,0 +1,504 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B2D783E2-C5D1-4914-8454-921CF0673AF5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DQS.AppViews.QualityControl</RootNamespace>
+    <AssemblyName>DQS.AppViews.QualityControl</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v10.1.Core, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v10.1.Extensions, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v10.1.Extensions, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ORMSCore, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DQS.App\ORMSCore.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AuthorityManager\FrmApproveAuthority.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AuthorityManager\FrmApproveAuthority.Designer.cs">
+      <DependentUpon>FrmApproveAuthority.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AuthorityManager\FrmBrowseAuthority.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AuthorityManager\FrmBrowseAuthority.Designer.cs">
+      <DependentUpon>FrmBrowseAuthority.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AuthorityManager\FrmConstitutionDesign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AuthorityManager\FrmConstitutionDesign.Designer.cs">
+      <DependentUpon>FrmConstitutionDesign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AuthorityManager\FrmFunctionAuthority.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AuthorityManager\FrmFunctionAuthority.Designer.cs">
+      <DependentUpon>FrmFunctionAuthority.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AuthorityManager\FrmSingleConstitutionDesign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AuthorityManager\FrmSingleConstitutionDesign.Designer.cs">
+      <DependentUpon>FrmSingleConstitutionDesign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmQualityControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmQualityControl.Designer.cs">
+      <DependentUpon>FrmQualityControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmAcceptDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmAcceptDesigner.Designer.cs">
+      <DependentUpon>FrmAcceptDesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmDownDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmDownDesigner.Designer.cs">
+      <DependentUpon>FrmDownDesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmFirstDealerDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmFirstDealerDesigner.Designer.cs">
+      <DependentUpon>FrmFirstDealerDesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmFirstProductDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmFirstProductDesigner.Designer.cs">
+      <DependentUpon>FrmFirstProductDesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmFirstProviderDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmFirstProviderDesigner.Designer.cs">
+      <DependentUpon>FrmFirstProviderDesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmInventoryDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmInventoryDesigner.Designer.cs">
+      <DependentUpon>FrmInventoryDesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmPurchaseBackDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmPurchaseBackDesigner.Designer.cs">
+      <DependentUpon>FrmPurchaseBackDesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmPurchaseDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmPurchaseDesigner.Designer.cs">
+      <DependentUpon>FrmPurchaseDesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmReceiveDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmReceiveDesigner.Designer.cs">
+      <DependentUpon>FrmReceiveDesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmReviewDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmReviewDesigner.Designer.cs">
+      <DependentUpon>FrmReviewDesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmSaleBackDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmSaleBackDesigner.Designer.cs">
+      <DependentUpon>FrmSaleBackDesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmSaleDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmSaleDesigner.Designer.cs">
+      <DependentUpon>FrmSaleDesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmTransportDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmTransportDesigner.Designer.cs">
+      <DependentUpon>FrmTransportDesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmUpDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintDesignerManager\FrmUpDesigner.Designer.cs">
+      <DependentUpon>FrmUpDesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserManager\FrmRoleInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManager\FrmRoleInfo.Designer.cs">
+      <DependentUpon>FrmRoleInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserManager\FrmSingleRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManager\FrmSingleRole.designer.cs">
+      <DependentUpon>FrmSingleRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserManager\FrmSingleUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManager\FrmSingleUser.designer.cs">
+      <DependentUpon>FrmSingleUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserManager\FrmUserInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManager\FrmUserInfo.Designer.cs">
+      <DependentUpon>FrmUserInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserManager\FrmUserRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManager\FrmUserRole.Designer.cs">
+      <DependentUpon>FrmUserRole.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AuthorityManager\FrmApproveAuthority.resx">
+      <DependentUpon>FrmApproveAuthority.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AuthorityManager\FrmBrowseAuthority.resx">
+      <DependentUpon>FrmBrowseAuthority.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AuthorityManager\FrmConstitutionDesign.resx">
+      <DependentUpon>FrmConstitutionDesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AuthorityManager\FrmFunctionAuthority.resx">
+      <DependentUpon>FrmFunctionAuthority.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AuthorityManager\FrmSingleConstitutionDesign.resx">
+      <DependentUpon>FrmSingleConstitutionDesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmQualityControl.resx">
+      <DependentUpon>FrmQualityControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintDesignerManager\FrmAcceptDesigner.resx">
+      <DependentUpon>FrmAcceptDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintDesignerManager\FrmDownDesigner.resx">
+      <DependentUpon>FrmDownDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintDesignerManager\FrmFirstDealerDesigner.resx">
+      <DependentUpon>FrmFirstDealerDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintDesignerManager\FrmFirstProductDesigner.resx">
+      <DependentUpon>FrmFirstProductDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintDesignerManager\FrmFirstProviderDesigner.resx">
+      <DependentUpon>FrmFirstProviderDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintDesignerManager\FrmInventoryDesigner.resx">
+      <DependentUpon>FrmInventoryDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintDesignerManager\FrmPurchaseBackDesigner.resx">
+      <DependentUpon>FrmPurchaseBackDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintDesignerManager\FrmPurchaseDesigner.resx">
+      <DependentUpon>FrmPurchaseDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintDesignerManager\FrmReceiveDesigner.resx">
+      <DependentUpon>FrmReceiveDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintDesignerManager\FrmReviewDesigner.resx">
+      <DependentUpon>FrmReviewDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintDesignerManager\FrmSaleBackDesigner.resx">
+      <DependentUpon>FrmSaleBackDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintDesignerManager\FrmSaleDesigner.resx">
+      <DependentUpon>FrmSaleDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintDesignerManager\FrmTransportDesigner.resx">
+      <DependentUpon>FrmTransportDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintDesignerManager\FrmUpDesigner.resx">
+      <DependentUpon>FrmUpDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManager\FrmRoleInfo.resx">
+      <DependentUpon>FrmRoleInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManager\FrmSingleRole.resx">
+      <DependentUpon>FrmSingleRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManager\FrmSingleUser.resx">
+      <DependentUpon>FrmSingleUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManager\FrmUserInfo.resx">
+      <DependentUpon>FrmUserInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManager\FrmUserRole.resx">
+      <DependentUpon>FrmUserRole.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DQS.Common\DQS.Common.csproj">
+      <Project>{43DF1044-5A7E-4FCA-9645-09114FF56690}</Project>
+      <Name>DQS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DQS.Controls\DQS.Controls.csproj">
+      <Project>{C6D2365E-91F8-4E34-B9F9-43A99A99020A}</Project>
+      <Name>DQS.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DQS.Module\DQS.Module.csproj">
+      <Project>{39F06AB8-466F-4D72-95B5-72DE2FF484B7}</Project>
+      <Name>DQS.Module</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\操作规程设定.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\功能权限控制.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\角色控制.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\浏览权限控制.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\审批权限控制.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\用户管理.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\用户角色分配.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\操作规程设定MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\功能权限控制MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\角色控制MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\浏览权限控制MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\审批权限控制MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\用户管理MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\用户角色分配MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\采购单.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\采购退货单.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\拣货单.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\盘点单.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\上架单.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\销售单.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\销售退货单.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\采购单MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\采购退货单MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\拣货单MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\盘点单MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\上架单MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\销售单MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\销售退货单MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\新建 %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\编辑 %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\删除 %282%29.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

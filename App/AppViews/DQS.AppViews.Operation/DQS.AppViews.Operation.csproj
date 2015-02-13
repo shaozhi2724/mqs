@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7FA5D7B2-5004-4609-8F98-3EF97CDE0583}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DQS.AppViews.Operation</RootNamespace>
+    <AssemblyName>DQS.AppViews.Operation</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ORMSCore, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DQS.App\ORMSCore.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BackManager\FrmPurchaseBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackManager\FrmPurchaseBack.Designer.cs">
+      <DependentUpon>FrmPurchaseBack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BackManager\FrmReviewRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackManager\FrmReviewRecord.Designer.cs">
+      <DependentUpon>FrmReviewRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BackManager\FrmSaleBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackManager\FrmSaleBack.Designer.cs">
+      <DependentUpon>FrmSaleBack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BackManager\FrmSinglePurchaseBackChangeHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackManager\FrmSinglePurchaseBackChangeHistory.Designer.cs">
+      <DependentUpon>FrmSinglePurchaseBackChangeHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BackManager\FrmSinglePurchaseBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackManager\FrmSinglePurchaseBack.Designer.cs">
+      <DependentUpon>FrmSinglePurchaseBack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BackManager\FrmSingleSaleBackChangeHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackManager\FrmSingleSaleBackChangeHistory.Designer.cs">
+      <DependentUpon>FrmSingleSaleBackChangeHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BackManager\FrmSingleSaleBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackManager\FrmSingleSaleBack.Designer.cs">
+      <DependentUpon>FrmSingleSaleBack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BackManager\FrmStoreInRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackManager\FrmStoreInRecord.Designer.cs">
+      <DependentUpon>FrmStoreInRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAlter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAlter.Designer.cs">
+      <DependentUpon>FrmAlter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmOperation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmOperation.Designer.cs">
+      <DependentUpon>FrmOperation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PriceManager\FrmSalePrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PriceManager\FrmSalePrice.Designer.cs">
+      <DependentUpon>FrmSalePrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PriceManager\FrmPurchasePrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PriceManager\FrmPurchasePrice.Designer.cs">
+      <DependentUpon>FrmPurchasePrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PriceManager\FrmSingleSalePrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PriceManager\FrmSingleSalePrice.Designer.cs">
+      <DependentUpon>FrmSingleSalePrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PriceManager\FrmSingleSalePriceItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PriceManager\FrmSingleSalePriceItem.Designer.cs">
+      <DependentUpon>FrmSingleSalePriceItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PriceManager\FrmSinglePurchasePriceItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PriceManager\FrmSinglePurchasePriceItem.Designer.cs">
+      <DependentUpon>FrmSinglePurchasePriceItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PriceManager\FrmSingleSalePriceVersion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PriceManager\FrmSingleSalePriceVersion.Designer.cs">
+      <DependentUpon>FrmSingleSalePriceVersion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PriceManager\FrmSinglePurchasePriceVersion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PriceManager\FrmSinglePurchasePriceVersion.Designer.cs">
+      <DependentUpon>FrmSinglePurchasePriceVersion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PriceManager\FrmSinglePurchasePrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PriceManager\FrmSinglePurchasePrice.Designer.cs">
+      <DependentUpon>FrmSinglePurchasePrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseAndSaleManager\FrmPurchase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PurchaseAndSaleManager\FrmPurchase.Designer.cs">
+      <DependentUpon>FrmPurchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmReason.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReason.Designer.cs">
+      <DependentUpon>FrmReason.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseAndSaleManager\FrmSale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PurchaseAndSaleManager\FrmSale.Designer.cs">
+      <DependentUpon>FrmSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseAndSaleManager\FrmSinglePurchaseChangeHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PurchaseAndSaleManager\FrmSinglePurchaseChangeHistory.Designer.cs">
+      <DependentUpon>FrmSinglePurchaseChangeHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseAndSaleManager\FrmSinglePurchase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PurchaseAndSaleManager\FrmSinglePurchase.Designer.cs">
+      <DependentUpon>FrmSinglePurchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseAndSaleManager\FrmSingleSaleChangeHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PurchaseAndSaleManager\FrmSingleSaleChangeHistory.Designer.cs">
+      <DependentUpon>FrmSingleSaleChangeHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseAndSaleManager\FrmSingleSale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PurchaseAndSaleManager\FrmSingleSale.Designer.cs">
+      <DependentUpon>FrmSingleSale.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BackManager\FrmPurchaseBack.resx">
+      <DependentUpon>FrmPurchaseBack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BackManager\FrmReviewRecord.resx">
+      <DependentUpon>FrmReviewRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BackManager\FrmSaleBack.resx">
+      <DependentUpon>FrmSaleBack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BackManager\FrmSinglePurchaseBackChangeHistory.resx">
+      <DependentUpon>FrmSinglePurchaseBackChangeHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BackManager\FrmSinglePurchaseBack.resx">
+      <DependentUpon>FrmSinglePurchaseBack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BackManager\FrmSingleSaleBackChangeHistory.resx">
+      <DependentUpon>FrmSingleSaleBackChangeHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BackManager\FrmSingleSaleBack.resx">
+      <DependentUpon>FrmSingleSaleBack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BackManager\FrmStoreInRecord.resx">
+      <DependentUpon>FrmStoreInRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAlter.resx">
+      <DependentUpon>FrmAlter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmOperation.resx">
+      <DependentUpon>FrmOperation.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PriceManager\FrmSalePrice.resx">
+      <DependentUpon>FrmSalePrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PriceManager\FrmPurchasePrice.resx">
+      <DependentUpon>FrmPurchasePrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PriceManager\FrmSingleSalePrice.resx">
+      <DependentUpon>FrmSingleSalePrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PriceManager\FrmSingleSalePriceItem.resx">
+      <DependentUpon>FrmSingleSalePriceItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PriceManager\FrmSinglePurchasePriceItem.resx">
+      <DependentUpon>FrmSinglePurchasePriceItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PriceManager\FrmSingleSalePriceVersion.resx">
+      <DependentUpon>FrmSingleSalePriceVersion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PriceManager\FrmSinglePurchasePriceVersion.resx">
+      <DependentUpon>FrmSinglePurchasePriceVersion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PriceManager\FrmSinglePurchasePrice.resx">
+      <DependentUpon>FrmSinglePurchasePrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PurchaseAndSaleManager\FrmPurchase.resx">
+      <DependentUpon>FrmPurchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmReason.resx">
+      <DependentUpon>FrmReason.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PurchaseAndSaleManager\FrmSale.resx">
+      <DependentUpon>FrmSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PurchaseAndSaleManager\FrmSinglePurchaseChangeHistory.resx">
+      <DependentUpon>FrmSinglePurchaseChangeHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PurchaseAndSaleManager\FrmSinglePurchase.resx">
+      <DependentUpon>FrmSinglePurchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PurchaseAndSaleManager\FrmSingleSaleChangeHistory.resx">
+      <DependentUpon>FrmSingleSaleChangeHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PurchaseAndSaleManager\FrmSingleSale.resx">
+      <DependentUpon>FrmSingleSale.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DQS.Common\DQS.Common.csproj">
+      <Project>{43DF1044-5A7E-4FCA-9645-09114FF56690}</Project>
+      <Name>DQS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DQS.Controls\DQS.Controls.csproj">
+      <Project>{C6D2365E-91F8-4E34-B9F9-43A99A99020A}</Project>
+      <Name>DQS.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DQS.Module\DQS.Module.csproj">
+      <Project>{39F06AB8-466F-4D72-95B5-72DE2FF484B7}</Project>
+      <Name>DQS.Module</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\采购订单管理.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\采购退货制单.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\销售订单管理.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\销售退货订单管理.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\采购订单管理MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\采购退货制单MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\销售出库单管理MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\销售退货单管理MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C6D2365E-91F8-4E34-B9F9-43A99A99020A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DQS.Controls</RootNamespace>
+    <AssemblyName>DQS.Controls</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Charts.v10.1.Core, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v10.1.Core, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPivotGrid.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPivotGrid.v10.1.Core, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v10.1.Extensions, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ORMSCore, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DQS.App\ORMSCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Base, Version=2013.1.1503.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a" />
+    <Reference Include="Stimulsoft.Controls, Version=2013.1.1503.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a" />
+    <Reference Include="Stimulsoft.Controls.Win, Version=2013.1.1503.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a" />
+    <Reference Include="Stimulsoft.Editor, Version=2013.1.1503.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a" />
+    <Reference Include="Stimulsoft.Report, Version=2013.1.1503.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a" />
+    <Reference Include="Stimulsoft.Report.Check, Version=2013.1.1503.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a" />
+    <Reference Include="Stimulsoft.Report.Design, Version=2013.1.1503.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL" />
+    <Reference Include="Stimulsoft.Report.Helper, Version=2013.1.1503.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a" />
+    <Reference Include="Stimulsoft.Report.Win, Version=2013.1.1503.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ButtonNavigator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ComboBoxCategoryEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ComboBoxEntityEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ComboBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommonCode\BeforePopupFormShowArgs.cs" />
+    <Compile Include="CommonCode\BeforePopupShowArgs.cs" />
+    <Compile Include="CommonCode\OperationGridColumn.cs" />
+    <Compile Include="CommonCode\OperationGridSetting.cs" />
+    <Compile Include="CommonCode\OperationPopupForm.cs" />
+    <Compile Include="CommonCode\OperationReportSetting.cs" />
+    <Compile Include="CommonCode\PopupFormClosedArgs.cs" />
+    <Compile Include="CommonCode\TotalPriceChangedArgs.cs" />
+    <Compile Include="DataEditTable.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DateQueryEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DesignerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FieldTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FieldTextBoxPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FrmApprove.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmApprove.Designer.cs">
+      <DependentUpon>FrmApprove.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmApproveStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmApproveStatus.Designer.cs">
+      <DependentUpon>FrmApproveStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAttachmentPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAttachmentPreview.Designer.cs">
+      <DependentUpon>FrmAttachmentPreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmHighQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHighQuery.Designer.cs">
+      <DependentUpon>FrmHighQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPageSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPageSetting.Designer.cs">
+      <DependentUpon>FrmPageSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmProductPopupQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmProductPopupQuery.Designer.cs">
+      <DependentUpon>FrmProductPopupQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPopupQueryMultiple.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPopupQueryMultiple.Designer.cs">
+      <DependentUpon>FrmPopupQueryMultiple.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPopupQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPopupQuery.Designer.cs">
+      <DependentUpon>FrmPopupQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmProgressing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmProgressing.Designer.cs">
+      <DependentUpon>FrmProgressing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmQualification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmQualification.Designer.cs">
+      <DependentUpon>FrmQualification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSingleAttribute.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSingleAttribute.Designer.cs">
+      <DependentUpon>FrmSingleAttribute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSingleQualification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSingleQualification.Designer.cs">
+      <DependentUpon>FrmSingleQualification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HomePageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListDataRowItem.cs" />
+    <Compile Include="ListEntityItem.cs" />
+    <Compile Include="PageNavigator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PageSimpleNavigator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PopupGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintDesignerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintDesignerForm.Designer.cs">
+      <DependentUpon>PrintDesignerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StiPrintButtonEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintPreviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintPreviewForm.Designer.cs">
+      <DependentUpon>PrintPreviewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PreviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreviewForm.Designer.cs">
+      <DependentUpon>PreviewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintButtonEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="StandardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StandardGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="StandardGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TextBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TextBoxEnterPopupEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TextBoxPopupMultipleEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TextBoxPopupEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TextBoxQueryEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ToolBarPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ToolButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DQS.Common\DQS.Common.csproj">
+      <Project>{43DF1044-5A7E-4FCA-9645-09114FF56690}</Project>
+      <Name>DQS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DQS.Module\DQS.Module.csproj">
+      <Project>{39F06AB8-466F-4D72-95B5-72DE2FF484B7}</Project>
+      <Name>DQS.Module</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DesignerForm.resx">
+      <DependentUpon>DesignerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmApprove.resx">
+      <DependentUpon>FrmApprove.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmApproveStatus.resx">
+      <DependentUpon>FrmApproveStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAttachmentPreview.resx">
+      <DependentUpon>FrmAttachmentPreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmHighQuery.resx">
+      <DependentUpon>FrmHighQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPageSetting.resx">
+      <DependentUpon>FrmPageSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmProductPopupQuery.resx">
+      <DependentUpon>FrmProductPopupQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPopupQueryMultiple.resx">
+      <DependentUpon>FrmPopupQueryMultiple.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPopupQuery.resx">
+      <DependentUpon>FrmPopupQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmProgressing.resx">
+      <DependentUpon>FrmProgressing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmQualification.resx">
+      <DependentUpon>FrmQualification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSingleAttribute.resx">
+      <DependentUpon>FrmSingleAttribute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSingleQualification.resx">
+      <DependentUpon>FrmSingleQualification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PageNavigator.resx">
+      <DependentUpon>PageNavigator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopupGrid.resx">
+      <DependentUpon>PopupGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintDesignerForm.resx">
+      <DependentUpon>PrintDesignerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintPreviewForm.resx">
+      <DependentUpon>PrintPreviewForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreviewForm.resx">
+      <DependentUpon>PreviewForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StandardForm.resx">
+      <DependentUpon>StandardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StandardGrid.resx">
+      <DependentUpon>StandardGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolBarPanel.resx">
+      <DependentUpon>ToolBarPanel.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\编辑.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\查询.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\打印.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\导出.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\高级查询.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\删除.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\刷新.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\显示设置.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\新建.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\重置.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\审批.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\保存.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\编辑 %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\电子档案.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\上传.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\下载.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\新建 %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\预览.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\删除 %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\审批状态.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue-loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\价格信息.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

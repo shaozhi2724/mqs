@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6CB73CC1-86D2-4661-B998-ED0D9477CEA9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DQS.AppViews.WarehouseIn</RootNamespace>
+    <AssemblyName>DQS.AppViews.WarehouseIn</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ORMSCore, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DQS.App\ORMSCore.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FrmWarehouseIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmWarehouseIn.Designer.cs">
+      <DependentUpon>FrmWarehouseIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmAcceptAttachmentProgressing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmAcceptAttachmentProgressing.Designer.cs">
+      <DependentUpon>FrmAcceptAttachmentProgressing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmReceiveAttachmentProgressing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmReceiveAttachmentProgressing.Designer.cs">
+      <DependentUpon>FrmReceiveAttachmentProgressing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmAcceptAttachment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmAcceptAttachment.Designer.cs">
+      <DependentUpon>FrmAcceptAttachment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmAcceptAttachmentPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmAcceptAttachmentPreview.Designer.cs">
+      <DependentUpon>FrmAcceptAttachmentPreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmReceiveAttachmentPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmReceiveAttachmentPreview.Designer.cs">
+      <DependentUpon>FrmReceiveAttachmentPreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmDeclined.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmDeclined.Designer.cs">
+      <DependentUpon>FrmDeclined.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmAccept.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmAccept.Designer.cs">
+      <DependentUpon>FrmAccept.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmCondition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmCondition.Designer.cs">
+      <DependentUpon>FrmCondition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmReceiveAttachment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmReceiveAttachment.Designer.cs">
+      <DependentUpon>FrmReceiveAttachment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmReceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmReceive.Designer.cs">
+      <DependentUpon>FrmReceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSampling.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSampling.Designer.cs">
+      <DependentUpon>FrmSampling.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSingleAccept.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSingleAccept.designer.cs">
+      <DependentUpon>FrmSingleAccept.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSingleCondition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSingleCondition.designer.cs">
+      <DependentUpon>FrmSingleCondition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSingleDeclined.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSingleDeclined.designer.cs">
+      <DependentUpon>FrmSingleDeclined.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSingleReceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSingleReceive.designer.cs">
+      <DependentUpon>FrmSingleReceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSingleReceiveInspection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSingleReceiveInspection.designer.cs">
+      <DependentUpon>FrmSingleReceiveInspection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSingleSampling.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSingleSampling.designer.cs">
+      <DependentUpon>FrmSingleSampling.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSingleStockIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSingleStockIn.designer.cs">
+      <DependentUpon>FrmSingleStockIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmStockIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmStockIn.Designer.cs">
+      <DependentUpon>FrmStockIn.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FrmWarehouseIn.resx">
+      <DependentUpon>FrmWarehouseIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmAcceptAttachmentProgressing.resx">
+      <DependentUpon>FrmAcceptAttachmentProgressing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmReceiveAttachmentProgressing.resx">
+      <DependentUpon>FrmReceiveAttachmentProgressing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmAcceptAttachment.resx">
+      <DependentUpon>FrmAcceptAttachment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmAcceptAttachmentPreview.resx">
+      <DependentUpon>FrmAcceptAttachmentPreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmReceiveAttachmentPreview.resx">
+      <DependentUpon>FrmReceiveAttachmentPreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmDeclined.resx">
+      <DependentUpon>FrmDeclined.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmAccept.resx">
+      <DependentUpon>FrmAccept.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmCondition.resx">
+      <DependentUpon>FrmCondition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmReceiveAttachment.resx">
+      <DependentUpon>FrmReceiveAttachment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmReceive.resx">
+      <DependentUpon>FrmReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmSampling.resx">
+      <DependentUpon>FrmSampling.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmSingleAccept.resx">
+      <DependentUpon>FrmSingleAccept.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmSingleCondition.resx">
+      <DependentUpon>FrmSingleCondition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmSingleDeclined.resx">
+      <DependentUpon>FrmSingleDeclined.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmSingleReceive.resx">
+      <DependentUpon>FrmSingleReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmSingleReceiveInspection.resx">
+      <DependentUpon>FrmSingleReceiveInspection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmSingleSampling.resx">
+      <DependentUpon>FrmSingleSampling.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmSingleStockIn.resx">
+      <DependentUpon>FrmSingleStockIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmStockIn.resx">
+      <DependentUpon>FrmStockIn.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\抽检单管理.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\入库单管理.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\收货单管理.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\收货验收情况定义.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\验收单管理.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DQS.Common\DQS.Common.csproj">
+      <Project>{43DF1044-5A7E-4FCA-9645-09114FF56690}</Project>
+      <Name>DQS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DQS.Controls\DQS.Controls.csproj">
+      <Project>{C6D2365E-91F8-4E34-B9F9-43A99A99020A}</Project>
+      <Name>DQS.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DQS.Module\DQS.Module.csproj">
+      <Project>{39F06AB8-466F-4D72-95B5-72DE2FF484B7}</Project>
+      <Name>DQS.Module</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\抽检单管理MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\入库单管理MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\收货单管理MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\收货验收情况定义MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\验收单管理MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\line_d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\line_l.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\line_s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\删除.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\上传.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\刷新.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\下载.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\预览.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue-loading.gif" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

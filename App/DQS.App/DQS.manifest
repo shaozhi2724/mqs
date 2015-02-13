@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <!-- 更新日期 -->
+  <date>2014-05-22T23:21:52</date>
+  <!-- 更新系统名称 -->
+  <appname>DQS药品经营质量管理系统</appname>
+  <!-- 更新版本 -->
+  <version>1.0.0.0</version>
+  <!-- 更新信息文件，用于描述当前版本更新了哪些功能 -->
+  <info>http://localhost/BokesysSoft/DQSUpdater1000.xhtml</info>
+  <!-- 更新文件压缩包下载地址 -->
+  <download>http://localhost/BokesysSoft/files/DQS.1.0.0.0.zip</download>
+</manifest>

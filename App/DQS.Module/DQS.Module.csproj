@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{39F06AB8-466F-4D72-95B5-72DE2FF484B7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DQS.Module</RootNamespace>
+    <AssemblyName>DQS.Module</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ORMSCore, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DQS.App\ORMSCore.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\ATCAntiApproveDetailEntity.cs" />
+    <Compile Include="Entities\ATCAntiApproveEntity.cs" />
+    <Compile Include="Entities\ATCAntiApproveQualificationActionEntity.cs" />
+    <Compile Include="Entities\ATCAntiApproveQualificationDetailEntity.cs" />
+    <Compile Include="Entities\ATCApproveEntity.cs" />
+    <Compile Include="Entities\ATCApproveNotificationEntity.cs" />
+    <Compile Include="Entities\ATCConstitutionEntity.cs" />
+    <Compile Include="Entities\ATCRoleEntity.cs" />
+    <Compile Include="Entities\ATCRoleMenuEntity.cs" />
+    <Compile Include="Entities\ATCRolePageEntity.cs" />
+    <Compile Include="Entities\ATCUserAreaEntity.cs" />
+    <Compile Include="Entities\ATCUserEntity.cs" />
+    <Compile Include="Entities\ATCUserPageEntity.cs" />
+    <Compile Include="Entities\ATCUserProductEntity.cs" />
+    <Compile Include="Entities\ATCUserQueryEntity.cs" />
+    <Compile Include="Entities\ATCUserRoleEntity.cs" />
+    <Compile Include="Entities\BFIBusinessRangeEntity.cs" />
+    <Compile Include="Entities\BFIDealerAddressEntity.cs" />
+    <Compile Include="Entities\BFIDealerEntity.cs" />
+    <Compile Include="Entities\BFIDepartmentEntity.cs" />
+    <Compile Include="Entities\BFIElectronicLabelEntity.cs" />
+    <Compile Include="Entities\BFIEmployeeEntity.cs" />
+    <Compile Include="Entities\BFIEnterpriseAddressEntity.cs" />
+    <Compile Include="Entities\BFIEnterpriseChangeHistoryEntity.cs" />
+    <Compile Include="Entities\BFIEnterpriseEntity.cs" />
+    <Compile Include="Entities\BFIEnterpriseLicenseLockHistoryEntity.cs" />
+    <Compile Include="Entities\BFIEnterpriseTradeLicenseLockHistoryEntity.cs" />
+    <Compile Include="Entities\BFILabelStructureEntity.cs" />
+    <Compile Include="Entities\BFIPriceListEntity.cs" />
+    <Compile Include="Entities\BFIPriceListItemEntity.cs" />
+    <Compile Include="Entities\BFIPriceListVersionEntity.cs" />
+    <Compile Include="Entities\BFIProductBatchEntity.cs" />
+    <Compile Include="Entities\BFIProductEntity.cs" />
+    <Compile Include="Entities\BFIProductPriceEntity.cs" />
+    <Compile Include="Entities\BFIProductPriceHistoryEntity.cs" />
+    <Compile Include="Entities\BFIProductStructureEntity.cs" />
+    <Compile Include="Entities\BFIQualificationAttachmentEntity.cs" />
+    <Compile Include="Entities\BFIQualificationAttributeEntity.cs" />
+    <Compile Include="Entities\BFIQualificationEntity.cs" />
+    <Compile Include="Entities\BFISalesmanEntity.cs" />
+    <Compile Include="Entities\BFIStorageStructureEntity.cs" />
+    <Compile Include="Entities\BFITransportCompanyEntity.cs" />
+    <Compile Include="Entities\BFITransportToolEntity.cs" />
+    <Compile Include="Entities\BFITransportTypeEntity.cs" />
+    <Compile Include="Entities\BFIWarehouseEntity.cs" />
+    <Compile Include="Entities\BUSAcceptAttachmentEntity.cs" />
+    <Compile Include="Entities\BUSAcceptDetailEntity.cs" />
+    <Compile Include="Entities\BUSAcceptEntity.cs" />
+    <Compile Include="Entities\BUSAdverseReactionEntity.cs" />
+    <Compile Include="Entities\BUSBillChangeHistoryEntity.cs" />
+    <Compile Include="Entities\BUSBillDetailChangeHistoryEntity.cs" />
+    <Compile Include="Entities\BUSBillDetailEntity.cs" />
+    <Compile Include="Entities\BUSBillEntity.cs" />
+    <Compile Include="Entities\BUSBillPayableEntity.cs" />
+    <Compile Include="Entities\BUSBillPriceHistoryDetailEntity.cs" />
+    <Compile Include="Entities\BUSBillPriceHistoryEntity.cs" />
+    <Compile Include="Entities\BUSBillReceivableEntity.cs" />
+    <Compile Include="Entities\BUSCuringCycleEntity.cs" />
+    <Compile Include="Entities\BUSCuringPlanEntity.cs" />
+    <Compile Include="Entities\BUSCuringRecordEntity.cs" />
+    <Compile Include="Entities\BUSDeclinedDetailEntity.cs" />
+    <Compile Include="Entities\BUSDeclinedEntity.cs" />
+    <Compile Include="Entities\BUSEmployeeTrainPlanEntity.cs" />
+    <Compile Include="Entities\BUSExceptionReportDetailEntity.cs" />
+    <Compile Include="Entities\BUSExceptionReportEntity.cs" />
+    <Compile Include="Entities\BUSInventoryDetailEntity.cs" />
+    <Compile Include="Entities\BUSInventoryEntity.cs" />
+    <Compile Include="Entities\BUSLockedBarCodeEntity.cs" />
+    <Compile Include="Entities\BUSProdcutDestroyDetailEntity.cs" />
+    <Compile Include="Entities\BUSProdcutDestroyEntity.cs" />
+    <Compile Include="Entities\BUSProductLockedEntity.cs" />
+    <Compile Include="Entities\BUSProductLoseBatchEntity.cs" />
+    <Compile Include="Entities\BUSProductNearBatchEntity.cs" />
+    <Compile Include="Entities\BUSProductPurchasePriceEntity.cs" />
+    <Compile Include="Entities\BUSProductSalePriceEntity.cs" />
+    <Compile Include="Entities\BUSProductStockWarningEntity.cs" />
+    <Compile Include="Entities\BUSProductUnqualifiedDetailEntity.cs" />
+    <Compile Include="Entities\BUSProductUnqualifiedEntity.cs" />
+    <Compile Include="Entities\BUSQualificationLoseEntity.cs" />
+    <Compile Include="Entities\BUSQualityAdvisoryEntity.cs" />
+    <Compile Include="Entities\BUSQualityComplaintEntity.cs" />
+    <Compile Include="Entities\BUSReceiveAcceptConditionEntity.cs" />
+    <Compile Include="Entities\BUSReceiveDetailEntity.cs" />
+    <Compile Include="Entities\BUSReceiveEntity.cs" />
+    <Compile Include="Entities\BUSReceiveInspectionEntity.cs" />
+    <Compile Include="Entities\BUSReceiveTemperatureAttachmentEntity.cs" />
+    <Compile Include="Entities\BUSReviewDetailEntity.cs" />
+    <Compile Include="Entities\BUSReviewEntity.cs" />
+    <Compile Include="Entities\BUSSamplingEntity.cs" />
+    <Compile Include="Entities\BUSStoreBillBarCodeEntity.cs" />
+    <Compile Include="Entities\BUSStoreBillDetailEntity.cs" />
+    <Compile Include="Entities\BUSStoreBillEntity.cs" />
+    <Compile Include="Entities\BUSStoreDetailChangeHistoryEntity.cs" />
+    <Compile Include="Entities\BUSStoreDetailEntity.cs" />
+    <Compile Include="Entities\BUSTransportCarEntity.cs" />
+    <Compile Include="Entities\BUSTransportDetailEntity.cs" />
+    <Compile Include="Entities\BUSTransportRecordEntity.cs" />
+    <Compile Include="Entities\BUSTransportTemperatureAttachmentEntity.cs" />
+    <Compile Include="Entities\BUSUnqualifiedStoreDetailEntity.cs" />
+    <Compile Include="Entities\SYSCategoryEntity.cs" />
+    <Compile Include="Entities\SYSConfigureEntity.cs" />
+    <Compile Include="Entities\SYSDbBackupEntity.cs" />
+    <Compile Include="Entities\SYSDocumentEntity.cs" />
+    <Compile Include="Entities\SYSFunctionEntity.cs" />
+    <Compile Include="Entities\SYSFunctionLogEntity.cs" />
+    <Compile Include="Entities\SYSMedicalProductCategoryEntity.cs" />
+    <Compile Include="Entities\SYSMenuEntity.cs" />
+    <Compile Include="Entities\SYSPageEntity.cs" />
+    <Compile Include="Entities\SYSPageFunctionEntity.cs" />
+    <Compile Include="Entities\WMSRegulatoryCodeEntity.cs" />
+    <Compile Include="EntityType.cs" />
+    <Compile Include="Procedures.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RelationType.cs" />
+    <Compile Include="Views\AllAcceptDetailView.cs" />
+    <Compile Include="Views\AllAcceptView.cs" />
+    <Compile Include="Views\AllAdverseReactionView.cs" />
+    <Compile Include="Views\AllApproveView.cs" />
+    <Compile Include="Views\AllAttachmentView.cs" />
+    <Compile Include="Views\AllAttributeView.cs" />
+    <Compile Include="Views\AllConstitutionView.cs" />
+    <Compile Include="Views\AllCuringCycleView.cs" />
+    <Compile Include="Views\AllCuringPlanView.cs" />
+    <Compile Include="Views\AllCuringRecordView.cs" />
+    <Compile Include="Views\AllDbBackupsView.cs" />
+    <Compile Include="Views\AllDealerView.cs" />
+    <Compile Include="Views\AllDepartmentView.cs" />
+    <Compile Include="Views\AllEmployeeTrainPlanView.cs" />
+    <Compile Include="Views\AllEmployeeView.cs" />
+    <Compile Include="Views\AllExceptionReportDetailView.cs" />
+    <Compile Include="Views\AllExceptionReportView.cs" />
+    <Compile Include="Views\AllFirstDealerPrintView.cs" />
+    <Compile Include="Views\AllFirstDealerView.cs" />
+    <Compile Include="Views\AllFirstProductPrintView.cs" />
+    <Compile Include="Views\AllFirstProductView.cs" />
+    <Compile Include="Views\AllFirstProviderPrintView.cs" />
+    <Compile Include="Views\AllFirstProviderView.cs" />
+    <Compile Include="Views\AllInventoryDetailView.cs" />
+    <Compile Include="Views\AllInventoryView.cs" />
+    <Compile Include="Views\AllProdcutDestroyDetailView.cs" />
+    <Compile Include="Views\AllProdcutDestroyView.cs" />
+    <Compile Include="Views\AllProductForStructureView.cs" />
+    <Compile Include="Views\AllProductLockedView.cs" />
+    <Compile Include="Views\AllProductPriceHistoryView.cs" />
+    <Compile Include="Views\AllProductPriceStyleView.cs" />
+    <Compile Include="Views\AllProductPriceView.cs" />
+    <Compile Include="Views\AllProductStructureView.cs" />
+    <Compile Include="Views\AllProductStyleView.cs" />
+    <Compile Include="Views\AllProductUnqualifiedDetailView.cs" />
+    <Compile Include="Views\AllProductUnqualifiedView.cs" />
+    <Compile Include="Views\AllProductView.cs" />
+    <Compile Include="Views\AllProviderSalesmanView.cs" />
+    <Compile Include="Views\AllProviderView.cs" />
+    <Compile Include="Views\AllPurchaseBackDetailView.cs" />
+    <Compile Include="Views\AllPurchaseBackView.cs" />
+    <Compile Include="Views\AllPurchaseDetailView.cs" />
+    <Compile Include="Views\AllPurchaseView.cs" />
+    <Compile Include="Views\AllQualificationView.cs" />
+    <Compile Include="Views\AllQualificationWithParentView.cs" />
+    <Compile Include="Views\AllQualityAdvisoryView.cs" />
+    <Compile Include="Views\AllQualityComplaintView.cs" />
+    <Compile Include="Views\AllReceiveDetailView.cs" />
+    <Compile Include="Views\AllReceiveView.cs" />
+    <Compile Include="Views\AllReviewDetailView.cs" />
+    <Compile Include="Views\AllReviewView.cs" />
+    <Compile Include="Views\AllRoleView.cs" />
+    <Compile Include="Views\AllSaleBackDetailView.cs" />
+    <Compile Include="Views\AllSaleBackReviewView.cs" />
+    <Compile Include="Views\AllSaleBackView.cs" />
+    <Compile Include="Views\AllSaleDetailView.cs" />
+    <Compile Include="Views\AllSalesmanView.cs" />
+    <Compile Include="Views\AllSaleView.cs" />
+    <Compile Include="Views\AllSamplingDetailView.cs" />
+    <Compile Include="Views\AllSamplingView.cs" />
+    <Compile Include="Views\AllStockInDeatilView.cs" />
+    <Compile Include="Views\AllStockInView.cs" />
+    <Compile Include="Views\AllStockOutDeatilView.cs" />
+    <Compile Include="Views\AllStockOutView.cs" />
+    <Compile Include="Views\AllStructureForProductView.cs" />
+    <Compile Include="Views\AllTransportCarView.cs" />
+    <Compile Include="Views\AllTransportView.cs" />
+    <Compile Include="Views\AllUserView.cs" />
+    <Compile Include="Views\AllWarehouseInBillDetailView.cs" />
+    <Compile Include="Views\AllWarehouseInBillView.cs" />
+    <Compile Include="Views\AllWarehouseOutBillDetailView.cs" />
+    <Compile Include="Views\AllWarehouseOutBillView.cs" />
+    <Compile Include="Views\AllWarehouseStructureView.cs" />
+    <Compile Include="Views\AllWarehouseView.cs" />
+    <Compile Include="Views\ProductQueryView.cs" />
+    <Compile Include="Views\ProductSummaryAmountView.cs" />
+    <Compile Include="Views\ReceiveAcceptConditionView.cs" />
+    <Compile Include="Views\StoreDetailView.cs" />
+    <Compile Include="Views\StoreProductQueryView.cs" />
+    <Compile Include="Views\SummaryDestroyView.cs" />
+    <Compile Include="Views\SummaryStockInView.cs" />
+    <Compile Include="Views\SummaryStockOutView.cs" />
+    <Compile Include="Views\SummaryUnqualifiedView.cs" />
+    <Compile Include="ViewType.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

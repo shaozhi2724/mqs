@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D973FB6C-8AEF-4546-9A27-A2DEC03835B4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DQS.AppViews.StatReport</RootNamespace>
+    <AssemblyName>DQS.AppViews.StatReport</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ORMSCore, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DQS.App\ORMSCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Base, Version=2013.1.1503.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Stimulsoft.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Controls, Version=2013.1.1503.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Stimulsoft.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Controls.Win, Version=2013.1.1503.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Stimulsoft.Controls.Win.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report, Version=2013.1.1503.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Stimulsoft.Report.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Win, Version=2013.1.1503.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Stimulsoft.Report.Win.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FrmStatReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmStatReport.Designer.cs">
+      <DependentUpon>FrmStatReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmPastProductStoreDeatils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmPastProductStoreDeatils.Designer.cs">
+      <DependentUpon>FrmPastProductStoreDeatils.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmCuringRecordDeatils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmCuringRecordDeatils.Designer.cs">
+      <DependentUpon>FrmCuringRecordDeatils.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmAcceptDeatils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmAcceptDeatils.Designer.cs">
+      <DependentUpon>FrmAcceptDeatils.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmPurchaseBackDeatils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmPurchaseBackDeatils.Designer.cs">
+      <DependentUpon>FrmPurchaseBackDeatils.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmReportViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmReportViewer.Designer.cs">
+      <DependentUpon>FrmReportViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmPurchaseDeatils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmPurchaseDeatils.Designer.cs">
+      <DependentUpon>FrmPurchaseDeatils.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmReceiveDeatils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmReceiveDeatils.Designer.cs">
+      <DependentUpon>FrmReceiveDeatils.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmReviewDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmReviewDetails.Designer.cs">
+      <DependentUpon>FrmReviewDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmSaleBackDeatils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmSaleBackDeatils.Designer.cs">
+      <DependentUpon>FrmSaleBackDeatils.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmSaleDeatils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmSaleDeatils.Designer.cs">
+      <DependentUpon>FrmSaleDeatils.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmStockInDeatils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmStockInDeatils.Designer.cs">
+      <DependentUpon>FrmStockInDeatils.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmStockOutDeatils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmStockOutDeatils.Designer.cs">
+      <DependentUpon>FrmStockOutDeatils.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmSummaryDestroy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmSummaryDestroy.Designer.cs">
+      <DependentUpon>FrmSummaryDestroy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmSummaryStockIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmSummaryStockIn.Designer.cs">
+      <DependentUpon>FrmSummaryStockIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmSummaryStockOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmSummaryStockOut.Designer.cs">
+      <DependentUpon>FrmSummaryStockOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmSummaryUnqualified.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmSummaryUnqualified.Designer.cs">
+      <DependentUpon>FrmSummaryUnqualified.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FrmStatReport.resx">
+      <DependentUpon>FrmStatReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmPastProductStoreDeatils.resx">
+      <DependentUpon>FrmPastProductStoreDeatils.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmCuringRecordDeatils.resx">
+      <DependentUpon>FrmCuringRecordDeatils.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmAcceptDeatils.resx">
+      <DependentUpon>FrmAcceptDeatils.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmPurchaseBackDeatils.resx">
+      <DependentUpon>FrmPurchaseBackDeatils.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmReportViewer.resx">
+      <DependentUpon>FrmReportViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmPurchaseDeatils.resx">
+      <DependentUpon>FrmPurchaseDeatils.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmReceiveDeatils.resx">
+      <DependentUpon>FrmReceiveDeatils.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmReviewDetails.resx">
+      <DependentUpon>FrmReviewDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmSaleBackDeatils.resx">
+      <DependentUpon>FrmSaleBackDeatils.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmSaleDeatils.resx">
+      <DependentUpon>FrmSaleDeatils.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmStockInDeatils.resx">
+      <DependentUpon>FrmStockInDeatils.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmStockOutDeatils.resx">
+      <DependentUpon>FrmStockOutDeatils.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmSummaryDestroy.resx">
+      <DependentUpon>FrmSummaryDestroy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmSummaryStockIn.resx">
+      <DependentUpon>FrmSummaryStockIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmSummaryStockOut.resx">
+      <DependentUpon>FrmSummaryStockOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmSummaryUnqualified.resx">
+      <DependentUpon>FrmSummaryUnqualified.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\不合格品汇总统计.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\出库汇总统计.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\入库汇总统计.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\销毁汇总统计.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DQS.Common\DQS.Common.csproj">
+      <Project>{43DF1044-5A7E-4FCA-9645-09114FF56690}</Project>
+      <Name>DQS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DQS.Controls\DQS.Controls.csproj">
+      <Project>{C6D2365E-91F8-4E34-B9F9-43A99A99020A}</Project>
+      <Name>DQS.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DQS.Module\DQS.Module.csproj">
+      <Project>{39F06AB8-466F-4D72-95B5-72DE2FF484B7}</Project>
+      <Name>DQS.Module</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\不合格品汇总统计MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\出库汇总统计MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\入库汇总统计MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\销毁汇总统计MouseEnter.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

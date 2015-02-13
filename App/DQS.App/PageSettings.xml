@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PageSettings>
+  <Pages>
+    <Page />
+    <Page PageCode="FrmRoleInfo" ViewName="vw_AllRole" PrimaryField="角色ID" SortField="" SortType="" PageSize="50">
+      <Filed Name="序号" IsShow="true" />
+      <Filed Name="角色ID" IsShow="true" />
+      <Filed Name="角色编号" IsShow="true" />
+      <Filed Name="角色名称" IsShow="true" />
+      <Filed Name="角色名称Spell" IsShow="true" />
+      <Filed Name="角色状态" IsShow="true" />
+      <Filed Name="创建人" IsShow="true" />
+      <Filed Name="创建日期" IsShow="true" />
+      <Filed Name="最后修改人" IsShow="true" />
+      <Filed Name="最后修改日期" IsShow="true" />
+      <Filed Name="角色备注" IsShow="true" />
+    </Page>
+  </Pages>
+</PageSettings>

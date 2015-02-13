@@ -1,0 +1,567 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C2382B5B-BE02-469E-BC0D-A44FC1876CA3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DQS.App</RootNamespace>
+    <AssemblyName>DQS.App</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>security.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SenseLockLicense1</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.BonusSkins.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Charts.v10.1.Core, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.OfficeSkins.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v10.1.Core, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v10.1.Extensions, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v10.1.UI, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPivotGrid.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPivotGrid.v10.1.Core, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v10.1.Extensions, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v10.1.Extensions, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraVerticalGrid.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DQS.Controls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DQS.Controls\obj\Debug\DQS.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="KellermanSoftware.Compare-NET-Objects">
+      <HintPath>..\..\packages\CompareNETObjects.3.00.0.0\lib\net40\KellermanSoftware.Compare-NET-Objects.dll</HintPath>
+    </Reference>
+    <Reference Include="LinqToExcel">
+      <HintPath>..\..\packages\LinqToExcel.1.10.1\lib\LinqToExcel.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="ORMSCore, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Remotion">
+      <HintPath>..\..\packages\LinqToExcel.1.10.1\lib\Remotion.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\LinqToExcel.1.10.1\lib\Remotion.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Interfaces">
+      <HintPath>..\..\packages\LinqToExcel.1.10.1\lib\Remotion.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Design, Version=2013.1.1503.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Stimulsoft.Report.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FrmApproveNotifications.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FrmApproveNotifications.Designer.cs">
+      <DependentUpon>FrmApproveNotifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCategorySetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCategorySetting.Designer.cs">
+      <DependentUpon>FrmCategorySetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmChangePassword.Designer.cs">
+      <DependentUpon>FrmChangePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDbSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDbSetting.Designer.cs">
+      <DependentUpon>FrmDbSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmLicenserIdentification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLicenserIdentification.Designer.cs">
+      <DependentUpon>FrmLicenserIdentification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmWarningMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmWarningMessage.Designer.cs">
+      <DependentUpon>FrmWarningMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmWarningShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmWarningShow.Designer.cs">
+      <DependentUpon>FrmWarningShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Licenser\DQSLicenseManager.cs" />
+    <Compile Include="Licenser\SenseLockKeyManager.cs" />
+    <Compile Include="Notification.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForm.designer.cs">
+      <DependentUpon>UpdateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Updater.cs" />
+    <EmbeddedResource Include="FrmApproveNotifications.resx">
+      <DependentUpon>FrmApproveNotifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCategorySetting.resx">
+      <DependentUpon>FrmCategorySetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForm.resx">
+      <DependentUpon>UpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <Content Include="DQS.manifest">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="app.manifest" />
+    <None Include="packages.config" />
+    <None Include="Resources\ReportFunction.cs" />
+    <EmbeddedResource Include="FrmChangePassword.resx">
+      <DependentUpon>FrmChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDbSetting.resx">
+      <DependentUpon>FrmDbSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmLicenserIdentification.resx">
+      <DependentUpon>FrmLicenserIdentification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmWarningMessage.resx">
+      <DependentUpon>FrmWarningMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmWarningShow.resx">
+      <DependentUpon>FrmWarningShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Content Include="养护计划查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="养护记录.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="历史商品库存明细表.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="拒收单管理.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="运输记录.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="采购单.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="销售单.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="首营客户.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="首营经销商.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="首营药品.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="验收单.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="上架单.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="不合格品入库记录查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="不合格品养护记录查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="付款汇总.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="企业证书预警记录查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="入库记录查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="养护记录查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="出库记录查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="复核记录查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="拒收记录查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="收款汇总.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="收货记录查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="运输记录查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="近效期药品催销查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="采购汇总.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="采购记录查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="采购退回记录查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="销售汇总.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="销售记录查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="销售退回记录查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="销毁记录查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="验收记录查询.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="在库不合格品处理记录查询.mrt" />
+    <None Include="验收不合格品直接入库记录.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppViews\DQS.AppViews.ExceptionControl\DQS.AppViews.ExceptionControl.csproj">
+      <Project>{E91A9C74-EDC1-427E-9F87-1E338B8449BC}</Project>
+      <Name>DQS.AppViews.ExceptionControl</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\AppViews\DQS.AppViews.Operation\DQS.AppViews.Operation.csproj">
+      <Project>{7FA5D7B2-5004-4609-8F98-3EF97CDE0583}</Project>
+      <Name>DQS.AppViews.Operation</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\AppViews\DQS.AppViews.OtherOperation\DQS.AppViews.OtherOperation.csproj">
+      <Project>{DD6556B3-3FA1-4705-8A18-E11C6802F7C5}</Project>
+      <Name>DQS.AppViews.OtherOperation</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\AppViews\DQS.AppViews.QualityControl\DQS.AppViews.QualityControl.csproj">
+      <Project>{B2D783E2-C5D1-4914-8454-921CF0673AF5}</Project>
+      <Name>DQS.AppViews.QualityControl</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\AppViews\DQS.AppViews.QualityDocument\DQS.AppViews.QualityDocument.csproj">
+      <Project>{6D2BC077-8350-4301-8C86-1A123D33C282}</Project>
+      <Name>DQS.AppViews.QualityDocument</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\AppViews\DQS.AppViews.StatReport\DQS.AppViews.StatReport.csproj">
+      <Project>{D973FB6C-8AEF-4546-9A27-A2DEC03835B4}</Project>
+      <Name>DQS.AppViews.StatReport</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\AppViews\DQS.AppViews.StoreAndCuring\DQS.AppViews.StoreAndCuring.csproj">
+      <Project>{2F55DB71-B8F6-40D4-911D-94DA047E35D9}</Project>
+      <Name>DQS.AppViews.StoreAndCuring</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AppViews\DQS.AppViews.WarehouseIn\DQS.AppViews.WarehouseIn.csproj">
+      <Project>{6CB73CC1-86D2-4661-B998-ED0D9477CEA9}</Project>
+      <Name>DQS.AppViews.WarehouseIn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AppViews\DQS.AppViews.WarehouseOut\DQS.AppViews.WarehouseOut.csproj">
+      <Project>{D7A2270B-EA2A-4128-A26A-42957AAF7E95}</Project>
+      <Name>DQS.AppViews.WarehouseOut</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DQS.Common\DQS.Common.csproj">
+      <Project>{43DF1044-5A7E-4FCA-9645-09114FF56690}</Project>
+      <Name>DQS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DQS.Module\DQS.Module.csproj">
+      <Project>{39F06AB8-466F-4D72-95B5-72DE2FF484B7}</Project>
+      <Name>DQS.Module</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DQS.Updater.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="OperationSettings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ORMSCore.dll">
+    </Content>
+    <None Include="Resources\采购单.png" />
+    <None Include="Resources\采购退货单.png" />
+    <None Include="Resources\拣货单.png" />
+    <None Include="Resources\盘点单.png" />
+    <None Include="Resources\上架单.png" />
+    <None Include="Resources\销售单.png" />
+    <None Include="Resources\销售退货单.png" />
+    <None Include="Resources\首营单位.png" />
+    <None Include="Resources\首营药品.png" />
+    <Content Include="security.ico" />
+    <None Include="Resources\业务管理Moudle.png" />
+    <None Include="Resources\质量控制Moudle.png" />
+    <None Include="Resources\质量档案Moudle.png" />
+    <None Include="Resources\异常处理Moudle.png" />
+    <None Include="Resources\统计分析Moudle.png" />
+    <None Include="Resources\入库管理Moudle.png" />
+    <None Include="Resources\其他业务Moudle.png" />
+    <None Include="Resources\储存及保养Moudle.png" />
+    <None Include="Resources\出库管理Moudle.png" />
+    <None Include="Resources\登录背景2.jpg" />
+    <None Include="Resources\标题2.png" />
+    <None Include="Resources\登录背景.jpg" />
+    <None Include="Resources\top.png" />
+    <None Include="Resources\标题.png" />
+    <None Include="Resources\登录.jpg" />
+    <None Include="Resources\用户角色分配.png" />
+    <None Include="Resources\用户管理.png" />
+    <None Include="Resources\审批权限控制.png" />
+    <None Include="Resources\浏览权限控制.png" />
+    <None Include="Resources\角色管理.png" />
+    <None Include="Resources\功能权限控制.png" />
+    <None Include="Resources\操作规程设定.png" />
+    <None Include="Resources\药品信息.png" />
+    <None Include="Resources\药品存放位置.png" />
+    <None Include="Resources\销售人员档案.png" />
+    <None Include="Resources\往来单位信息.png" />
+    <None Include="Resources\人员档案.png" />
+    <None Include="Resources\经营范围2.png" />
+    <None Include="Resources\经营范围.png" />
+    <None Include="Resources\价格信息.png" />
+    <None Include="Resources\价格分类.png" />
+    <None Include="Resources\存储单位设定.png" />
+    <None Include="Resources\仓库信息.png" />
+    <None Include="Resources\部门档案.png" />
+    <None Include="Resources\异常上报.png" />
+    <None Include="Resources\药品销毁处理.png" />
+    <None Include="Resources\药品锁定.png" />
+    <None Include="Resources\不合格药品处理.png" />
+    <None Include="Resources\销毁汇总统计.png" />
+    <None Include="Resources\入库汇总统计.png" />
+    <None Include="Resources\出库汇总统计.png" />
+    <None Include="Resources\不合格品汇总统计.png" />
+    <None Include="Resources\验收单管理.png" />
+    <None Include="Resources\销售退货制单.png" />
+    <None Include="Resources\收货验收情况定义.png" />
+    <None Include="Resources\收货单管理.png" />
+    <None Include="Resources\入库管理.png" />
+    <None Include="Resources\抽检单管理.png" />
+    <None Include="Resources\采购订单管理.png" />
+    <None Include="Resources\质量咨询记录.png" />
+    <None Include="Resources\质量投诉记录.png" />
+    <None Include="Resources\职工培训计划.png" />
+    <None Include="Resources\药品不良反应记录.png" />
+    <None Include="Resources\在库药品查询.png" />
+    <None Include="Resources\养护周期管理.png" />
+    <None Include="Resources\养护记录.png" />
+    <None Include="Resources\养护计划制定.png" />
+    <None Include="Resources\盘点管理.png" />
+    <None Include="Resources\库存详情.png" />
+    <None Include="Resources\运输记录.png" />
+    <None Include="Resources\运输车辆登记.png" />
+    <None Include="Resources\销售单管理.png" />
+    <None Include="Resources\出库复核单管理.png" />
+    <None Include="Resources\出库单管理.png" />
+    <None Include="Resources\采购退货单管理.png" />
+    <None Include="PageSettings.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

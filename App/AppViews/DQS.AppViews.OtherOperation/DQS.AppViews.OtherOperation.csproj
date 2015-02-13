@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DD6556B3-3FA1-4705-8A18-E11C6802F7C5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DQS.AppViews.OtherOperation</RootNamespace>
+    <AssemblyName>DQS.AppViews.OtherOperation</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\..\..\packages\NPOI.1.2.5\lib\net40\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\..\..\packages\NPOI.1.2.5\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="ORMSCore, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DQS.App\ORMSCore.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BillPriceManager\FrmPurchaseBackBillPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BillPriceManager\FrmPurchaseBackBillPrice.Designer.cs">
+      <DependentUpon>FrmPurchaseBackBillPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BillPriceManager\FrmPurchaseBillPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BillPriceManager\FrmPurchaseBillPrice.Designer.cs">
+      <DependentUpon>FrmPurchaseBillPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BillPriceManager\FrmSaleBackBillPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BillPriceManager\FrmSaleBackBillPrice.Designer.cs">
+      <DependentUpon>FrmSaleBackBillPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BillPriceManager\FrmSaleBillPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BillPriceManager\FrmSaleBillPrice.Designer.cs">
+      <DependentUpon>FrmSaleBillPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BillPriceManager\FrmSinglePurchaseBackBillPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BillPriceManager\FrmSinglePurchaseBackBillPrice.Designer.cs">
+      <DependentUpon>FrmSinglePurchaseBackBillPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BillPriceManager\FrmSinglePurchaseBillPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BillPriceManager\FrmSinglePurchaseBillPrice.Designer.cs">
+      <DependentUpon>FrmSinglePurchaseBillPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BillPriceManager\FrmSingleSaleBackBillPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BillPriceManager\FrmSingleSaleBackBillPrice.Designer.cs">
+      <DependentUpon>FrmSingleSaleBackBillPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BillPriceManager\FrmSingleSaleBillPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BillPriceManager\FrmSingleSaleBillPrice.Designer.cs">
+      <DependentUpon>FrmSingleSaleBillPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\FrmCorpCodeSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\FrmCorpCodeSetting.Designer.cs">
+      <DependentUpon>FrmCorpCodeSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\FrmExportTickets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\FrmExportTickets.Designer.cs">
+      <DependentUpon>FrmExportTickets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\FrmImportCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\FrmImportCode.Designer.cs">
+      <DependentUpon>FrmImportCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FinanceManager\FrmPayable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FinanceManager\FrmPayable.Designer.cs">
+      <DependentUpon>FrmPayable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FinanceManager\FrmPayReceivable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FinanceManager\FrmPayReceivable.Designer.cs">
+      <DependentUpon>FrmPayReceivable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FinanceManager\FrmSinglePayable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FinanceManager\FrmSinglePayable.Designer.cs">
+      <DependentUpon>FrmSinglePayable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FinanceManager\FrmSinglePayReceivable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FinanceManager\FrmSinglePayReceivable.Designer.cs">
+      <DependentUpon>FrmSinglePayReceivable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmOtherOperation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmOtherOperation.Designer.cs">
+      <DependentUpon>FrmOtherOperation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OtherManager\FrmAdverseReaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OtherManager\FrmAdverseReaction.Designer.cs">
+      <DependentUpon>FrmAdverseReaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OtherManager\FrmEmployeeTrainPlan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OtherManager\FrmEmployeeTrainPlan.Designer.cs">
+      <DependentUpon>FrmEmployeeTrainPlan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OtherManager\FrmQualityAdvisory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OtherManager\FrmQualityAdvisory.Designer.cs">
+      <DependentUpon>FrmQualityAdvisory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OtherManager\FrmQualityComplaint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OtherManager\FrmQualityComplaint.Designer.cs">
+      <DependentUpon>FrmQualityComplaint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OtherManager\FrmSingleAdverseReaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OtherManager\FrmSingleAdverseReaction.designer.cs">
+      <DependentUpon>FrmSingleAdverseReaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OtherManager\FrmSingleEmployeeTrainPlan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OtherManager\FrmSingleEmployeeTrainPlan.designer.cs">
+      <DependentUpon>FrmSingleEmployeeTrainPlan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OtherManager\FrmSingleQualityAdvisory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OtherManager\FrmSingleQualityAdvisory.designer.cs">
+      <DependentUpon>FrmSingleQualityAdvisory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OtherManager\FrmSingleQualityComplaint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OtherManager\FrmSingleQualityComplaint.designer.cs">
+      <DependentUpon>FrmSingleQualityComplaint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadNew\FrmUploadNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UploadNew\FrmUploadNew.Designer.cs">
+      <DependentUpon>FrmUploadNew.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BillPriceManager\FrmPurchaseBackBillPrice.resx">
+      <DependentUpon>FrmPurchaseBackBillPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BillPriceManager\FrmPurchaseBillPrice.resx">
+      <DependentUpon>FrmPurchaseBillPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BillPriceManager\FrmSaleBackBillPrice.resx">
+      <DependentUpon>FrmSaleBackBillPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BillPriceManager\FrmSaleBillPrice.resx">
+      <DependentUpon>FrmSaleBillPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BillPriceManager\FrmSinglePurchaseBackBillPrice.resx">
+      <DependentUpon>FrmSinglePurchaseBackBillPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BillPriceManager\FrmSinglePurchaseBillPrice.resx">
+      <DependentUpon>FrmSinglePurchaseBillPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BillPriceManager\FrmSingleSaleBackBillPrice.resx">
+      <DependentUpon>FrmSingleSaleBackBillPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BillPriceManager\FrmSingleSaleBillPrice.resx">
+      <DependentUpon>FrmSingleSaleBillPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\FrmCorpCodeSetting.resx">
+      <DependentUpon>FrmCorpCodeSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\FrmExportTickets.resx">
+      <DependentUpon>FrmExportTickets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\FrmImportCode.resx">
+      <DependentUpon>FrmImportCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FinanceManager\FrmPayable.resx">
+      <DependentUpon>FrmPayable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FinanceManager\FrmPayReceivable.resx">
+      <DependentUpon>FrmPayReceivable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FinanceManager\FrmSinglePayable.resx">
+      <DependentUpon>FrmSinglePayable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FinanceManager\FrmSinglePayReceivable.resx">
+      <DependentUpon>FrmSinglePayReceivable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmOtherOperation.resx">
+      <DependentUpon>FrmOtherOperation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OtherManager\FrmAdverseReaction.resx">
+      <DependentUpon>FrmAdverseReaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OtherManager\FrmEmployeeTrainPlan.resx">
+      <DependentUpon>FrmEmployeeTrainPlan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OtherManager\FrmQualityAdvisory.resx">
+      <DependentUpon>FrmQualityAdvisory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OtherManager\FrmQualityComplaint.resx">
+      <DependentUpon>FrmQualityComplaint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OtherManager\FrmSingleAdverseReaction.resx">
+      <DependentUpon>FrmSingleAdverseReaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OtherManager\FrmSingleEmployeeTrainPlan.resx">
+      <DependentUpon>FrmSingleEmployeeTrainPlan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OtherManager\FrmSingleQualityAdvisory.resx">
+      <DependentUpon>FrmSingleQualityAdvisory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OtherManager\FrmSingleQualityComplaint.resx">
+      <DependentUpon>FrmSingleQualityComplaint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UploadNew\FrmUploadNew.resx">
+      <DependentUpon>FrmUploadNew.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\上传单据.xls" />
+    <None Include="Resources\药品不良反应记录.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\职工培训计划.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\质量投诉记录.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\质量咨询记录.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DQS.Common\DQS.Common.csproj">
+      <Project>{43DF1044-5A7E-4FCA-9645-09114FF56690}</Project>
+      <Name>DQS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DQS.Controls\DQS.Controls.csproj">
+      <Project>{C6D2365E-91F8-4E34-B9F9-43A99A99020A}</Project>
+      <Name>DQS.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DQS.Module\DQS.Module.csproj">
+      <Project>{39F06AB8-466F-4D72-95B5-72DE2FF484B7}</Project>
+      <Name>DQS.Module</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\药品不良反应记录MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\职工培训计划MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\质量投诉记录MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\质量咨询记录MouseEnter.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

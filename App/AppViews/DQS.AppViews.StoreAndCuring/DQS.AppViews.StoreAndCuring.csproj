@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2F55DB71-B8F6-40D4-911D-94DA047E35D9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DQS.AppViews.StoreAndCuring</RootNamespace>
+    <AssemblyName>DQS.AppViews.StoreAndCuring</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LinqToExcel, Version=1.10.1.0, Culture=neutral, PublicKeyToken=9c8ea65a58f03f1f, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\LinqToExcel.1.10.1\lib\LinqToExcel.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="ORMSCore, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DQS.App\ORMSCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion">
+      <HintPath>..\..\..\packages\LinqToExcel.1.10.1\lib\Remotion.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\LinqToExcel.1.10.1\lib\Remotion.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Interfaces">
+      <HintPath>..\..\..\packages\LinqToExcel.1.10.1\lib\Remotion.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Base, Version=2013.1.1503.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL" />
+    <Reference Include="Stimulsoft.Report, Version=2013.1.1503.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CuringManager\FrmCuringCycle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmCuringCycle.Designer.cs">
+      <DependentUpon>FrmCuringCycle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuringManager\FrmCuringPlan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmCuringPlan.Designer.cs">
+      <DependentUpon>FrmCuringPlan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuringManager\FrmCuringRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmCuringRecord.Designer.cs">
+      <DependentUpon>FrmCuringRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuringManager\FrmSingleCuringCycle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmSingleCuringCycle.Designer.cs">
+      <DependentUpon>FrmSingleCuringCycle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuringManager\FrmSingleCuringRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmSingleCuringRecord.Designer.cs">
+      <DependentUpon>FrmSingleCuringRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmStoreAndCuring.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmStoreAndCuring.Designer.cs">
+      <DependentUpon>FrmStoreAndCuring.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="StockManager\FrmInitInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmInitInventory.Designer.cs">
+      <DependentUpon>FrmInitInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StockManager\FrmInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmInventory.Designer.cs">
+      <DependentUpon>FrmInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StockManager\FrmProductQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmProductQuery.Designer.cs">
+      <DependentUpon>FrmProductQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StockManager\FrmSingleInitInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmSingleInitInventory.Designer.cs">
+      <DependentUpon>FrmSingleInitInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StockManager\FrmSingleInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmSingleInventory.Designer.cs">
+      <DependentUpon>FrmSingleInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StockManager\FrmStockDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmStockDetail.Designer.cs">
+      <DependentUpon>FrmStockDetail.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CuringManager\FrmCuringCycle.resx">
+      <DependentUpon>FrmCuringCycle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmCuringPlan.resx">
+      <DependentUpon>FrmCuringPlan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmCuringRecord.resx">
+      <DependentUpon>FrmCuringRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmSingleCuringCycle.resx">
+      <DependentUpon>FrmSingleCuringCycle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmSingleCuringRecord.resx">
+      <DependentUpon>FrmSingleCuringRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmStoreAndCuring.resx">
+      <DependentUpon>FrmStoreAndCuring.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmInitInventory.resx">
+      <DependentUpon>FrmInitInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmInventory.resx">
+      <DependentUpon>FrmInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmProductQuery.resx">
+      <DependentUpon>FrmProductQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmSingleInitInventory.resx">
+      <DependentUpon>FrmSingleInitInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmSingleInventory.resx">
+      <DependentUpon>FrmSingleInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmStockDetail.resx">
+      <DependentUpon>FrmStockDetail.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\仓库盘点.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\库存详情.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\养护计划设定.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\养护记录.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\养护周期管理.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\在库药品查询.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DQS.Common\DQS.Common.csproj">
+      <Project>{43DF1044-5A7E-4FCA-9645-09114FF56690}</Project>
+      <Name>DQS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DQS.Controls\DQS.Controls.csproj">
+      <Project>{C6D2365E-91F8-4E34-B9F9-43A99A99020A}</Project>
+      <Name>DQS.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DQS.Module\DQS.Module.csproj">
+      <Project>{39F06AB8-466F-4D72-95B5-72DE2FF484B7}</Project>
+      <Name>DQS.Module</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\仓库盘点MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\库存详情MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\在库药品查询MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\养护计划设定MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\养护记录MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\养护周期管理MouseEnter.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
