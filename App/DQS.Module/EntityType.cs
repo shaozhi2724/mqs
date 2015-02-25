@@ -187,6 +187,11 @@ namespace DQS.Module
             get { return new BFIWarehouseEntity(); }
         }
 
+        public static EntityBase BFIPriceOfDealerEntity
+        {
+            get { return new BFIPriceOfDealerEntity(); }
+        }
+
         public static EntityBase BUSAcceptEntity
         {
             get { return new BUSAcceptEntity(); }
@@ -537,6 +542,8 @@ namespace DQS.Module
         BFIStorageStructureEntity,
 
         BFIWarehouseEntity,
+
+        BFIPriceOfDealerEntity,
 
         BUSAcceptEntity,
 
