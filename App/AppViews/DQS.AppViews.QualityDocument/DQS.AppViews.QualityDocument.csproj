@@ -234,6 +234,12 @@
     <Compile Include="ProductManager\FrmPriceInfo.Designer.cs">
       <DependentUpon>FrmPriceInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProductManager\FrmPriceOfDealer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductManager\FrmPriceOfDealer.Designer.cs">
+      <DependentUpon>FrmPriceOfDealer.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProductManager\FrmPriceStyle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,6 +293,12 @@
     </Compile>
     <Compile Include="ProductManager\FrmSinglePrice2.Designer.cs">
       <DependentUpon>FrmSinglePrice2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductManager\FrmSinglePriceOfDealer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductManager\FrmSinglePriceOfDealer.Designer.cs">
+      <DependentUpon>FrmSinglePriceOfDealer.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductManager\FrmSinglePriceStyle.cs">
       <SubType>Form</SubType>
@@ -470,6 +482,9 @@
     <EmbeddedResource Include="ProductManager\FrmPriceInfo.resx">
       <DependentUpon>FrmPriceInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProductManager\FrmPriceOfDealer.resx">
+      <DependentUpon>FrmPriceOfDealer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProductManager\FrmPriceStyle.resx">
       <DependentUpon>FrmPriceStyle.cs</DependentUpon>
     </EmbeddedResource>
@@ -497,6 +512,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProductManager\FrmSinglePrice2.resx">
       <DependentUpon>FrmSinglePrice2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductManager\FrmSinglePriceOfDealer.resx">
+      <DependentUpon>FrmSinglePriceOfDealer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductManager\FrmSinglePriceStyle.resx">
       <DependentUpon>FrmSinglePriceStyle.cs</DependentUpon>

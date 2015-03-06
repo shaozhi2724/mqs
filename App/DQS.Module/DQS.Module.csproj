@@ -86,6 +86,7 @@
     <Compile Include="Entities\BFIPriceListEntity.cs" />
     <Compile Include="Entities\BFIPriceListItemEntity.cs" />
     <Compile Include="Entities\BFIPriceListVersionEntity.cs" />
+    <Compile Include="Entities\BFIPriceOfDealerEntity.cs" />
     <Compile Include="Entities\BFIProductBatchEntity.cs" />
     <Compile Include="Entities\BFIProductEntity.cs" />
     <Compile Include="Entities\BFIProductPriceEntity.cs" />

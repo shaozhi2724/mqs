@@ -87,6 +87,7 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                     XtraMessageBox.Show("销售单" + entity.BillStatusName + "，不允许修改！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+/* //不能在点击修改时就将减掉的业务库存加回来，此操作必须在修改点击“保存”之前做，避免用户点修改后又取消
                 else
                 {
                     int departmentID = 0;
@@ -136,8 +137,9 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
                             }
                         }
                     }
-                    base.CustomModify();
                 }
+*/
+                base.CustomModify();
             }
         }
 
@@ -331,7 +333,9 @@ UPDATE dbo.BUS_Bill SET BillStatus=9,BillStatusName='已删除',LastModifyDate=G
                 departmentID = employee.DepartmentID;
             }
             //将销售单减掉的业务库存加回来
-            string sql = @"
+
+/*
+              string sql = @"
 UPDATE SD
     SET SD.Amount = SD.Amount + BD.Amount
 FROM dbo.BUS_BillDetail AS BD
@@ -341,7 +345,8 @@ AND BD.BatchNo = SD.BatchNo
 WHERE BD.BillID='{0}' AND SD.DepartmentID='{1}'
 
 UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,ReviewCode=NULL,AcceptID=NULL,AcceptCode=NULL,Reservation10='反审批' WHERE BillID='{0}'
-";
+";*/
+            string sql = @"UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,ReviewCode=NULL,AcceptID=NULL,AcceptCode=NULL,Reservation10='反审批' WHERE BillID='{0}'";
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 conn.Open();//连接数据库

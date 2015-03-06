@@ -212,7 +212,10 @@
             // 
             // cbxDeliveryType
             // 
+            this.cbxDeliveryType.AddFirstDefaultItem = false;
             this.cbxDeliveryType.CategoryCode = "DeliveryType";
+            this.cbxDeliveryType.FirstDefaultItemText = null;
+            this.cbxDeliveryType.FormatQueryString = null;
             this.cbxDeliveryType.Location = new System.Drawing.Point(501, 116);
             this.cbxDeliveryType.Name = "cbxDeliveryType";
             this.cbxDeliveryType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -225,7 +228,10 @@
             // 
             // cbxPaymentType
             // 
+            this.cbxPaymentType.AddFirstDefaultItem = false;
             this.cbxPaymentType.CategoryCode = "PaymentType";
+            this.cbxPaymentType.FirstDefaultItemText = null;
+            this.cbxPaymentType.FormatQueryString = null;
             this.cbxPaymentType.Location = new System.Drawing.Point(87, 116);
             this.cbxPaymentType.Name = "cbxPaymentType";
             this.cbxPaymentType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -597,6 +603,7 @@
             this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 2;
             this.btnPrint.Text = "打印(&P)";
+            this.btnPrint.BeforePrint += new DQS.Controls.StiPrintButtonEx.OnBeforePrint(this.btnPrint_BeforePrint);
             // 
             // groupControl
             // 

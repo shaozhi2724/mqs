@@ -185,11 +185,6 @@ namespace DQS.Controls
                 {
                     SendKeys.Send("{TAB}");
                 }
-                else if (gridPopupView.FocusedColumn.FieldName == "数量")
-                {
-                    gridPopupView.FocusedRowHandle = gridPopupView.FocusedRowHandle + 1;
-                    gridPopupView.FocusedColumn = gridPopupView.Columns["药品名称"];
-                }
                 else
                 {
 

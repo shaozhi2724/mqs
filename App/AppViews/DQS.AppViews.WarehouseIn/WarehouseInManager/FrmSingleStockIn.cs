@@ -290,7 +290,6 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
         //入库总数量必须等于订单数量
         private bool ValidateAmount()
         {
-
             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
             {
                 object amount = this.popupGrid.PopupView.GetRowCellValue(i, "验收数量");
@@ -325,7 +324,6 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     }
                 }
             }
-
             return true;
         }
 
@@ -356,6 +354,8 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 storeDetail.CreateStoreID = billDetail.StoreID;
                 storeDetail.LastStoreID = billDetail.StoreID;
                 storeDetail.DepartmentID = storeDetailBelongDepartmentId;
+                //停掉库存中价格计算。
+                /*
                 if (txtBillTypeName.Text == "采购进货")
                 {
                     storeDetail.Price = Convert.ToDouble(price);
@@ -369,6 +369,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         storeDetail.TotalPrice = 0;
                     }
                 }
+                */
                 storeDetail.Save();
                 
             }
@@ -383,6 +384,8 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 storeDetail.LastStoreID = billDetail.StoreID;
                 storeDetail.LastModifyDate = DateTime.Now;
                 storeDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
+                //停掉库存中价格计算。
+                /*
                 if (txtBillTypeName.Text == "采购进货")
                 {
                     storeDetail.TotalPrice = storeDetail.TotalPrice + (billDetail.Amount * Convert.ToDouble(price));
@@ -392,6 +395,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 {
                     storeDetail.TotalPrice = storeDetail.Price * (storeDetail.Amount + billDetail.Amount);
                 }
+                */
                 storeDetail.Amount = storeDetail.Amount + billDetail.Amount;
                 storeDetail.Update();
             }

@@ -49,11 +49,11 @@ namespace DQS.App
                 File.AppendAllText(reportScriptFile, Resources.ReportFunction);
             }
 
-            if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length > 1)
-            {
-                XtraMessageBox.Show("DQS质量安全管理系统正在运行中,不能重复启动.", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            else
+            //if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length > 1)
+            //{
+            //    XtraMessageBox.Show("DQS质量安全管理系统正在运行中,不能重复启动.", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //}
+            //else
             {
 
 #if SenseLockLicense

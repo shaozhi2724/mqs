@@ -868,5 +868,67 @@ WHERE BillID={1}
                 XtraMessageBox.Show("请选择药品。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void btnPrint_BeforePrint(EventArgs e)
+        {
+            if (CheckAndSaveCode(this.txtBillCode.Text))
+            {
+                this.btnPrint.Tag = "true";
+            }
+            else
+            {
+                this.btnPrint.Tag = "false";
+            }
+        }
+
+        private bool CheckAndSaveCode(string saleCode)
+        {
+            string issql = "SELECT COUNT(*) FROM dbo.WMS_RegulatoryCode WHERE ReviewCode = '" + saleCode + "'";
+            string sql = "SELECT TOP 1 Code FROM dbo.WMS_RegulatoryCode WHERE StatusID = 0 AND StatusName = '未使用'";
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                conn.Open(); //连接数据库
+                //必须为SqlCommand指定数据库连接和登记的事务
+                SqlCommand cmd = new SqlCommand(issql, conn);
+                try
+                {
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (count > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        cmd = new SqlCommand(sql, conn);
+                        object code = cmd.ExecuteScalar();
+                        if (code != DBNull.Value && code != null)
+                        {
+                            WMSRegulatoryCodeEntity wmscode = new WMSRegulatoryCodeEntity { Code = code.ToString() };
+                            wmscode.Fetch();
+                            wmscode.ReviewCode = saleCode;
+                            wmscode.StatusID = 1;
+                            wmscode.StatusName = "已关联";
+                            wmscode.RelationDate = DateTime.Now;
+                            wmscode.Update();
+                        }
+                        else
+                        {
+                            XtraMessageBox.Show("没有可用流通监管码，请联系管理员成功导入后再使用。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            return true;
+        }
     }
 }

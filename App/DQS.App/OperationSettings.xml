@@ -259,12 +259,14 @@
         <Column Name="批发价" EntityField="TradePrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Product" PopupField="批发价"/>
         <Column Name="零售价" EntityField="RetailPrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Product" PopupField="零售价"/>
         <Column Name="单价" EntityField="UnitPrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price3" PopupField="价格"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格"/>
-        <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="单位"/>
-        <Column Name="库存数量" FieldType="System.Int32" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="库存数量"/>
         <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
         <Column Name="金额" EntityField="TotalPrice" FieldType="System.Double"  Visible="true" AllowEdit="false" />
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批号"/>
+        <Column Name="库存数量" FieldType="System.Int32" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="库存数量"/>
+        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产日期"/>
+        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="有效期至"/>
+        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格"/>
+        <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="单位"/>
         <Column Name="所属部门" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="所属部门"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产厂商"/>
         <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格"/>
@@ -273,8 +275,6 @@
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="贮藏条件"/>
         <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="剂型"/>
         <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品类别"/>
-        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产日期"/>
-        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="有效期至"/>
         <Column Name="过期状态" FieldType="System.String" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="过期状态"/>
         <Column Name="锁定状态" FieldType="System.String" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="锁定状态"/>
         <Column Name="件数" FieldType="System.Double"  Visible="true" AllowEdit="false" />

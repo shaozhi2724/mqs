@@ -845,12 +845,13 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
         {
             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
             {
-                object amount = this.popupGrid.PopupView.GetRowCellValue(i, "订单数量");
+                object amount = this.popupGrid.PopupView.GetRowCellValue(i, "验收数量");
                 if (amount != null)
                 {
                     if (!string.IsNullOrEmpty(amount.ToString()))
                     {
-                        this.popupGrid.PopupView.SetRowCellValue(i, "到货数量", amount);
+                        this.popupGrid.PopupView.SetRowCellValue(i, "验收合格数量", amount);
+                        this.popupGrid.PopupView.SetRowCellValue(i, "验收不合格数量", "0");
                         this.popupGrid.PopupView.SetRowCellValue(i, "验收结果", "合格");
                     }
                 }

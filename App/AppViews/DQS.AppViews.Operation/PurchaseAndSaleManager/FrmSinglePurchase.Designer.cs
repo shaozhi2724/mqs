@@ -161,6 +161,7 @@
             this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 2;
             this.btnPrint.Text = "打印(&P)";
+            this.btnPrint.BeforePrint += new DQS.Controls.StiPrintButtonEx.OnBeforePrint(this.btnPrint_BeforePrint);
             // 
             // groupButtom
             // 
@@ -270,7 +271,10 @@
             // 
             // cbxDeliveryType
             // 
+            this.cbxDeliveryType.AddFirstDefaultItem = false;
             this.cbxDeliveryType.CategoryCode = "DeliveryType";
+            this.cbxDeliveryType.FirstDefaultItemText = null;
+            this.cbxDeliveryType.FormatQueryString = null;
             this.cbxDeliveryType.Location = new System.Drawing.Point(489, 91);
             this.cbxDeliveryType.Name = "cbxDeliveryType";
             this.cbxDeliveryType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -283,7 +287,10 @@
             // 
             // cbxPaymentType
             // 
+            this.cbxPaymentType.AddFirstDefaultItem = false;
             this.cbxPaymentType.CategoryCode = "PaymentType";
+            this.cbxPaymentType.FirstDefaultItemText = null;
+            this.cbxPaymentType.FormatQueryString = null;
             this.cbxPaymentType.Location = new System.Drawing.Point(75, 91);
             this.cbxPaymentType.Name = "cbxPaymentType";
             this.cbxPaymentType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -315,6 +322,7 @@
             this.txtDealerName.Fields = "单位ID,单位编号,单位名称,单位名称Spell,单位类型,通讯地址";
             this.txtDealerName.Filter = "[状态] is  null or [状态] = \'正常\'";
             this.txtDealerName.FormatQueryString = "[单位编号] LIKE \'%{0}%\' OR ([单位名称] LIKE \'%{0}%\' OR [单位名称Spell] LIKE \'%{0}%\')";
+            this.txtDealerName.GroupColumn = null;
             this.txtDealerName.IsIntegerOnly = false;
             this.txtDealerName.IsNullString = "单位名称不能为空。";
             this.txtDealerName.IsNullValidate = true;
@@ -354,6 +362,7 @@
             this.txtOperator.Fields = "";
             this.txtOperator.Filter = "[岗位名称] = \'采购员\'";
             this.txtOperator.FormatQueryString = "[员工编号] LIKE \'%{0}%\' OR ([员工姓名] LIKE \'%{0}%\' OR [员工姓名Spell] LIKE \'%{0}%\')";
+            this.txtOperator.GroupColumn = null;
             this.txtOperator.IsIntegerOnly = false;
             this.txtOperator.IsNullString = null;
             this.txtOperator.IsNullValidate = false;
@@ -393,6 +402,7 @@
             this.txtBusinessPerson.Fields = null;
             this.txtBusinessPerson.Filter = null;
             this.txtBusinessPerson.FormatQueryString = "[人员编号] LIKE \'%{0}%\' OR ([人员姓名] LIKE \'%{0}%\' OR [人员姓名Spell] LIKE \'%{0}%\')";
+            this.txtBusinessPerson.GroupColumn = null;
             this.txtBusinessPerson.IsIntegerOnly = false;
             this.txtBusinessPerson.IsNullString = null;
             this.txtBusinessPerson.IsNullValidate = false;

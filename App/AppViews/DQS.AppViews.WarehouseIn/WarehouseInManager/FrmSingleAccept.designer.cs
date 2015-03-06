@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.ftPanel = new DQS.Controls.FieldTextBoxPanel();
             this.layControl = new DevExpress.XtraLayout.LayoutControl();
             this.txtAcceptDate = new DQS.Controls.BUSAcceptEntityTextBox();
@@ -46,7 +45,7 @@
             this.layDealerName = new DevExpress.XtraLayout.LayoutControlItem();
             this.layAcceptRemark = new DevExpress.XtraLayout.LayoutControlItem();
             this.layAcceptDate = new DevExpress.XtraLayout.LayoutControlItem();
-            this.barPopManager = new DevExpress.XtraBars.BarManager(this.components);
+            this.barPopManager = new DevExpress.XtraBars.BarManager();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -61,7 +60,7 @@
             this.btnSaveAndIn = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnOneKeyFinish = new DevExpress.XtraEditors.SimpleButton();
-            this.popupMenuSampling = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.popupMenuSampling = new DevExpress.XtraBars.PopupMenu();
             this.gpcSampling = new DevExpress.XtraEditors.GroupControl();
             this.popupGridSampling = new DQS.Controls.PopupGrid();
             this.splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
@@ -492,12 +491,11 @@
             this.btnOneKeyFinish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOneKeyFinish.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOneKeyFinish.Appearance.Options.UseFont = true;
-            this.btnOneKeyFinish.Location = new System.Drawing.Point(0, 15);
+            this.btnOneKeyFinish.Location = new System.Drawing.Point(13, 15);
             this.btnOneKeyFinish.Name = "btnOneKeyFinish";
             this.btnOneKeyFinish.Size = new System.Drawing.Size(25, 21);
             this.btnOneKeyFinish.TabIndex = 2;
             this.btnOneKeyFinish.Text = "一键完成(&K)";
-            this.btnOneKeyFinish.Visible = false;
             this.btnOneKeyFinish.Click += new System.EventHandler(this.btnOneKeyFinish_Click);
             // 
             // popupMenuSampling

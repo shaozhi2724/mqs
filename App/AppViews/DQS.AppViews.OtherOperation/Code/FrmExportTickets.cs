@@ -30,10 +30,6 @@ namespace DQS.AppViews.OtherOperation.Code
         private void btnExport_Click(object sender, EventArgs e)
         {
             var dialogResult = saveFileDialog.ShowDialog(this);
-            if (dialogResult == DialogResult.OK)
-            {
-                this.Close();
-            }
         }
 
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
@@ -43,9 +39,10 @@ namespace DQS.AppViews.OtherOperation.Code
             {
                 var filename = saveFileDialog.FileName;
                 string sql = @"
-SELECT rc.Code,rc.CorpCode,rc.ReviewCode,b.DealerCode,b.DealerName,b.DealerAddress,b.BillTypeName,b.BillDate,
+SELECT rc.Code,rc.CorpCode,rc.ReviewCode,d.DealerCode,d.DealerName,d.DealerAddress,b.BillTypeName,b.BillDate,
 p.ProductCode,bd.BatchNo,bd.Amount,bd.ProduceDate,bd.ValidateDate,ISNULL(bd.DetailRemark,'') AS [DetailRemark] FROM dbo.WMS_RegulatoryCode rc
 INNER JOIN dbo.BUS_Bill b ON rc.ReviewCode = b.BillCode
+INNER JOIN dbo.BFI_Dealer d ON b.DealerID = d.DealerID
 INNER JOIN dbo.BUS_BillDetail bd ON b.BillID = bd.BillID
 INNER JOIN dbo.BFI_Product p ON bd.ProductID = p.ProductID
 WHERE rc.StatusID = 1";

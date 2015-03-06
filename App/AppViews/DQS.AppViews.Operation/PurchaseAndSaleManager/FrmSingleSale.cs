@@ -26,12 +26,13 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
         private bool _useInternalProductPrice = true;
         private List<int> _selectedProductIds;
         private int? m_id;
-
+        private List<string> _amountErrors;
 
         public FrmSingleSale()
         {
             InitializeComponent();
             _selectedProductIds = new List<int>();
+            _amountErrors = new List<string>();
         }
 
         private void FrmSingleSale_Load(object sender, EventArgs e)
@@ -250,6 +251,7 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
         public string alter;
         private void btnSave_Click(object sender, EventArgs e)
         {
+            _amountErrors = new List<string>();
             //using (TransactionScope tx = new TransactionScope())
             //{
                 try
@@ -265,6 +267,7 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                     if (this.m_id != null)
                     {
                         #region 修改
+
                         using (FrmAlter fa = new FrmAlter(this))
                         {
                             if (DialogResult.Yes == fa.ShowDialog())
@@ -484,8 +487,8 @@ FROM dbo.BUS_BillDetail
 WHERE BillID={1}
 ";
                                 string changeUserName = null == GlobalItem.g_CurrentEmployee
-                                    ? GlobalItem.g_CurrentUser.UserName
-                                    : GlobalItem.g_CurrentEmployee.EmployeeName;
+                                                            ? GlobalItem.g_CurrentUser.UserName
+                                                            : GlobalItem.g_CurrentEmployee.EmployeeName;
                                 string sql = string.Format(sqlString, Guid.NewGuid(), m_id.Value, changeUserName, alter);
                                 SqlCommand command = new SqlConnection(GlobalItem.g_DbConnectStrings).CreateCommand();
                                 command.CommandType = CommandType.Text;
@@ -513,92 +516,99 @@ WHERE BillID={1}
                                 bool needUpdateStoreAmount = false;
                                 List<EntityBase> children = this.popupGrid.GetEntities();
 
-                                if (!this.ValidateBatchNo()) return;
-                                if (!this.ValidateSaleAmount()) return; //验证库存和销售数量
-                                if (!this.ValidateBatchDate()) return;
-                                if (!ValidateUnitPrice()) return;
+                                if (!this.ValidateBatchNo())
+                                    return;
+                                if (!this.ValidateSaleAmount())
+                                    return; //验证库存和销售数量
+                                if (!this.ValidateBatchDate())
+                                    return;
+                                if (!ValidateUnitPrice())
+                                    return;
 
-                            if (!this.Amount()) return;
-                            if (!this.MonthAmount()) return;
+                                if (!this.Amount())
+                                    return;
+                                if (!this.MonthAmount())
+                                    return;
 
-                            BUSBillEntity bill = new BUSBillEntity { BillID = m_id.Value };
-                            bill.Fetch();
+                                BUSBillEntity bill = new BUSBillEntity {BillID = m_id.Value};
+                                bill.Fetch();
 
-                            Guid billCreateUserId = bill.CreateUserID;
-                            if (!bill.IsNullField("Reservation10"))
-                            {
-                                if (bill.BillStatusName == "已下单" && bill.Reservation10 == "反审批")
+                                CorrectStockAmount();
+
+                                Guid billCreateUserId = bill.CreateUserID;
+                                if (!bill.IsNullField("Reservation10"))
                                 {
-                                    needUpdateStoreAmount = true;
-                                    entity.Reservation10 = "";
-                                    entity.BillStatus = 2;
-                                    entity.BillStatusName = "已审核";
-                                }
-                                if (bill.BillStatusName == "已下单" && bill.Reservation10 == "修改")
-                                {
-                                    needUpdateStoreAmount = true;
-                                    entity.Reservation10 = "";
-                                }
-                            }
-                            entity.LastModifyDate = DateTime.Now;
-                            entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
-                            entity.Update();
-
-                        //先删除
-                        BUSBillDetailEntity childToDelete = new BUSBillDetailEntity {BillID = m_id.Value};
-                        childToDelete.DeleteByCommonly();
-
-                        //后加
-                        foreach (EntityBase childEntity in children)
-                        {
-                            BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
-                            child.BillID = m_id.Value;
-                            child.Save();
-
-                            BUSProductSalePriceEntity priceEntity = new BUSProductSalePriceEntity();
-                            priceEntity.DealerID = entity.DealerID;
-                            priceEntity.SaleBillID = child.BillID;
-                            priceEntity.ProductID = child.ProductID;
-                            priceEntity.BatchNo = child.BatchNo;
-                            priceEntity.SalePrice = child.UnitPrice;
-                            priceEntity.CreateDate = DateTime.Now;
-                            priceEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                            priceEntity.Save();
-                        }
-
-                        if (needUpdateStoreAmount)
-                        {
-                            int employeeID = Convert.ToInt32(txtOperator.SelectedValue);
-                            if (employeeID == 0)
-                            {
-                                ATCUserEntity userEntity = new ATCUserEntity {UserID = billCreateUserId};
-                                userEntity.Fetch();
-                                int billCreateEmployeeId = userEntity.EmployeeID;
-                                BFIEmployeeEntity employee = new BFIEmployeeEntity {EmployeeID = billCreateEmployeeId};
-                                employee.Fetch();
-
-                                if (!employee.IsNullField("DepartmentID"))
-                                {
-                                    departmentID = employee.DepartmentID;
-                                }
-                            }
-                            else
-                            {
-                                BFIEmployeeEntity employee = new BFIEmployeeEntity { EmployeeID = employeeID };
-                                employee.Fetch();
-
-                                if (!employee.IsNullField("DepartmentID"))
-                                {
-                                    departmentID = employee.DepartmentID;
-                                }
-                            }
-
-                                    //更新库存
-                                    foreach (EntityBase childEntity in children)
+                                    if (bill.BillStatusName == "已下单" && bill.Reservation10 == "反审批")
                                     {
-                                        BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
-                                        UpdateStoreDetail(child, departmentID);
+                                        entity.Reservation10 = "";
+                                        entity.BillStatus = 2;
+                                        entity.BillStatusName = "已审核";
                                     }
+                                    if (bill.BillStatusName == "已下单" && bill.Reservation10 == "修改")
+                                    {
+                                        entity.Reservation10 = "";
+                                    }
+                                }
+                                entity.LastModifyDate = DateTime.Now;
+                                entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
+                                entity.Update();
+
+                                //先删除
+                                BUSBillDetailEntity childToDelete = new BUSBillDetailEntity {BillID = m_id.Value};
+                                childToDelete.DeleteByCommonly();
+
+                                //后加
+                                foreach (EntityBase childEntity in children)
+                                {
+                                    BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
+                                    child.BillID = m_id.Value;
+                                    child.Save();
+
+                                    BUSProductSalePriceEntity priceEntity = new BUSProductSalePriceEntity();
+                                    priceEntity.DealerID = entity.DealerID;
+                                    priceEntity.SaleBillID = child.BillID;
+                                    priceEntity.ProductID = child.ProductID;
+                                    priceEntity.BatchNo = child.BatchNo;
+                                    priceEntity.SalePrice = child.UnitPrice;
+                                    priceEntity.CreateDate = DateTime.Now;
+                                    priceEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+                                    priceEntity.Save();
+                                }
+
+                                int employeeID = Convert.ToInt32(txtOperator.SelectedValue);
+                                if (employeeID == 0)
+                                {
+                                    ATCUserEntity userEntity = new ATCUserEntity {UserID = billCreateUserId};
+                                    userEntity.Fetch();
+                                    int billCreateEmployeeId = userEntity.EmployeeID;
+                                    BFIEmployeeEntity employee = new BFIEmployeeEntity
+                                                                 {
+                                                                     EmployeeID =
+                                                                         billCreateEmployeeId
+                                                                 };
+                                    employee.Fetch();
+
+                                    if (!employee.IsNullField("DepartmentID"))
+                                    {
+                                        departmentID = employee.DepartmentID;
+                                    }
+                                }
+                                else
+                                {
+                                    BFIEmployeeEntity employee = new BFIEmployeeEntity {EmployeeID = employeeID};
+                                    employee.Fetch();
+
+                                    if (!employee.IsNullField("DepartmentID"))
+                                    {
+                                        departmentID = employee.DepartmentID;
+                                    }
+                                }
+
+                                //更新库存
+                                foreach (EntityBase childEntity in children)
+                                {
+                                    BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
+                                    UpdateStoreDetail(child, departmentID);
                                 }
                             }
                         }
@@ -614,7 +624,7 @@ WHERE BillID={1}
                             if (!this.ValidateDealerQualification()) return; //验证客户的电子档案
                             if (!this.ValidateSaleAmount()) return; //验证库存和销售数量
                             if (!ValidateUnitPrice()) return;
-                            //if (!this.ProductStyle()) return;//验证现金交易
+                            if (!this.ProductStyle()) return;//验证现金交易
 
                             if (!this.ValidateBatchDate()) return;
                             if (!this.ValidateValidDate()) return;
@@ -654,8 +664,20 @@ WHERE BillID={1}
                             entity.BillStatusName = "已下单";
 
                             List<EntityBase> children = this.popupGrid.GetEntities();
-                            //entity.BillCode = GlobalMethod.GetNewSaleBillCode(txtBillCode.Text.Substring(0, 2),
-                            //    txtBillCode.Text);
+
+                            //保存单据前检测库存是否足够出库
+                            foreach(EntityBase childEntity in children)
+                            {
+                                BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
+                                ValidateStoreDetails(child, departmentID);
+                            }
+                            //只要有一条库存错误信息，就不能保存销售单
+                            if(_amountErrors.Any())
+                            {
+                                string message = string.Join("\n", _amountErrors);
+                                XtraMessageBox.Show(message, "销售数据错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
 
                             entity.BillDate = DateTime.Now;
                             entity.CreateDate = DateTime.Now;
@@ -666,29 +688,39 @@ WHERE BillID={1}
 
                             //查询出其ID
                             entity.Fetch();
-
+                            List<string> errors = new List<string>();
                             foreach (EntityBase childEntity in children)
                             {
                                 BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
                                 child.BillID = entity.BillID;
-                                child.Save();
 
-                                BUSProductSalePriceEntity priceEntity = new BUSProductSalePriceEntity();
-                                priceEntity.DealerID = entity.DealerID;
-                                priceEntity.SaleBillID = child.BillID;
-                                priceEntity.ProductID = child.ProductID;
-                                priceEntity.BatchNo = child.BatchNo;
-                                priceEntity.SalePrice = child.UnitPrice;
-                                priceEntity.CreateDate = DateTime.Now;
-                                priceEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                                priceEntity.Save();
+                                ValidateStoreDetails(child, departmentID);
+                                if (!_amountErrors.Any())
+                                {
+                                    //保存明细
+                                    child.Save();
+
+                                    //更新库存
+                                    UpdateStoreDetail(child, departmentID);
+
+                                    BUSProductSalePriceEntity priceEntity = new BUSProductSalePriceEntity();
+                                    priceEntity.DealerID = entity.DealerID;
+                                    priceEntity.SaleBillID = child.BillID;
+                                    priceEntity.ProductID = child.ProductID;
+                                    priceEntity.BatchNo = child.BatchNo;
+                                    priceEntity.SalePrice = child.UnitPrice;
+                                    priceEntity.CreateDate = DateTime.Now;
+                                    priceEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+                                    priceEntity.Save();
+                                }
+                                errors.AddRange(_amountErrors);
+                                _amountErrors.Clear();
                             }
-
-                            //更新库存
-                            foreach (EntityBase childEntity in children)
+                            //提示业务库存错误
+                            if(!errors.Any())
                             {
-                                BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
-                                UpdateStoreDetail(child, departmentID);
+                                string message = string.Join("\n", errors);
+                                XtraMessageBox.Show(message, "销售数据错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
 
                             #endregion
@@ -1260,43 +1292,6 @@ WHERE BillID={1}
                             e.Cancel = true;
                         }
                     }
-/*
-                //原逻辑 - 如果新建，看当前人所在部门过滤药品。如果修改，看创建单据员工所在部门过滤药品
-                if (e.ActiveOperationColumn.PopupForm.Name == "Product")
-                {
-                    int departmentID = 0;
-                    if (null == this.m_id)
-                    {
-                        BFIEmployeeEntity employee = GlobalItem.g_CurrentEmployee;
-                        if (null != employee
-                            && !employee.IsNullField("DepartmentID"))
-                        {
-                            departmentID = employee.DepartmentID;
-                        }
-                    }
-                    else
-                    {
-                        int billCreateEmployeeId = 0;
-                        BUSBillEntity billEntity = new BUSBillEntity {BillID = this.m_id.Value};
-                        billEntity.Fetch();
-
-                        var billCreateUserId = billEntity.CreateUserID;
-                        ATCUserEntity userEntity = new ATCUserEntity {UserID = billCreateUserId};
-                        userEntity.Fetch();
-
-                        billCreateEmployeeId = userEntity.EmployeeID;
-                        BFIEmployeeEntity employee = new BFIEmployeeEntity {EmployeeID = billCreateEmployeeId};
-                        employee.Fetch();
-
-                        if (!employee.IsNullField("DepartmentID"))
-                        {
-                            departmentID = employee.DepartmentID;
-                        }
-                    }
-                    string departmentFilter = String.Format("[所属部门ID] = {0}", departmentID);
-                    e.ActiveOperationColumn.PopupForm.Filter = departmentFilter;
-                }
-*/
                     //新逻辑 - 按所选择业务员对应授权药品进行药品过滤
                     if (e.ActiveOperationColumn.PopupForm.Name == "Product")
                     {
@@ -1328,15 +1323,9 @@ WHERE BillID={1}
                             EntityCollection<ATCUserProductEntity> userProducts =
                                 new EntityCollection<ATCUserProductEntity>();
                             userProducts.Fetch(ATCUserProductEntityFields.UserID == userID);
-                            //List<int> productIDs = new List<int>();
-                            //foreach (var userProduct in userProducts)
-                            //{
-                            //    productIDs.Add(((ATCUserProductEntity) userProduct).ProductID);
-                            //}
-                            //if (productIDs.Any())
+
                             if(userProducts.Count > 0)
                             {
-                                //string productFilter = string.Join(",", productIDs);
                                 e.ActiveOperationColumn.PopupForm.Filter =
                                     string.Format("[所属部门ID]={0} AND [药品ID] IN (SELECT ProductID FROM ATC_UserProduct WHERE UserID='{1}')", departmentID, userID);
                             }
@@ -1932,6 +1921,38 @@ WHERE BillID={1}
             this.txtProductAmount.Text = _selectedProductIds.Distinct().Count().ToString();
         }
 
+        //检测出库库存
+        public void ValidateStoreDetails(BUSBillDetailEntity billDetail, int storeDetailBelongDepartmentId)
+        {
+            BFIProductEntity productEntity = new BFIProductEntity
+                                             {
+                                                 ProductID = billDetail.ProductID
+                                             };
+            productEntity.Fetch();
+            EntityCollection<BUSStoreDetailEntity> storeDetails = new EntityCollection<BUSStoreDetailEntity>();
+            storeDetails.Fetch(BUSStoreDetailEntityFields.ProductID == billDetail.ProductID
+                & BUSStoreDetailEntityFields.BatchNo == billDetail.BatchNo
+                & BUSStoreDetailEntityFields.DepartmentID == storeDetailBelongDepartmentId);
+            if (storeDetails.Count <= 0)
+            {
+                _amountErrors.Add(String.Format("{0} 没有批号为 {1} 库存信息。", productEntity.ProductName, billDetail.BatchNo));
+            }
+            BUSStoreDetailEntity storeDetail = new BUSStoreDetailEntity
+            {
+                StoreDetailID = (storeDetails[0] as BUSStoreDetailEntity).StoreDetailID
+            };
+            //更新库存
+            storeDetail.Fetch();
+            if (storeDetail.IsNullField("Amount"))
+            {
+                _amountErrors.Add(String.Format("{0} 没有批号为 {1} 库存信息。", productEntity.ProductName, billDetail.BatchNo));
+            }
+            storeDetail.Amount = storeDetail.Amount - billDetail.Amount;
+            if (storeDetail.Amount < 0)
+            {
+                _amountErrors.Add(String.Format("{0} 库存不足。", productEntity.ProductName));
+            }
+        }
         //更新库存
         public static void UpdateStoreDetail(BUSBillDetailEntity billDetail, int storeDetailBelongDepartmentId)
         {
@@ -2000,7 +2021,15 @@ WHERE BillID={1}
                 && (!(ActiveControl is BaseButton))
                 && (!(ActiveControl is GridControl)))
                 {
-                    SendKeys.Send("{TAB}");
+                    if (popupGrid.PopupView.FocusedColumn.FieldName == "数量")
+                    {
+                        popupGrid.PopupView.FocusedRowHandle = popupGrid.PopupView.FocusedRowHandle + 1;
+                        popupGrid.PopupView.FocusedColumn = popupGrid.PopupView.Columns["药品名称"];
+                    }
+                    else
+                    {
+                        SendKeys.Send("{TAB}");
+                    }
                     return true;
                 }
             }
@@ -2027,7 +2056,131 @@ WHERE BillID={1}
 
         private void btnSaveAndOut_Click(object sender, EventArgs e)
         {
-            this.btnSave_Click(null, null);
+            try
+            {
+                if (!this.ftPanel.ValidateIsNullFields()) return;
+                SaveDealerAddress();
+                BUSBillEntity entity = this.ftPanel.GetEntity() as BUSBillEntity;
+
+                this.CustomSetEntity(entity);
+
+                int departmentID = 0;
+
+                if (entity.IsNew())
+                {
+                    if (!this.ValidateBatchNo()) return;
+                    if (!this.ValidateDealerRange()) return; //验证客户经营范围
+                    if (!this.ValidateDealerQualification()) return; //验证客户的电子档案
+                    if (!this.ValidateSaleAmount()) return; //验证库存和销售数量
+                    if (!ValidateUnitPrice()) return;
+                    if (!this.ProductStyle()) return;//验证现金交易
+
+                    if (!this.ValidateBatchDate()) return;
+                    if (!this.ValidateValidDate()) return;
+                    if (!this.ValidateLockStatus()) return;
+                    //新添加，验证特殊药品数量不能超过
+                    if (!this.Amount()) return;
+                    if (!this.MonthAmount()) return;
+
+                    #region 新建
+
+                    int employeeID = Convert.ToInt32(txtOperator.SelectedValue);
+                    if (employeeID == 0)
+                    {
+
+                        BFIEmployeeEntity employee = GlobalItem.g_CurrentEmployee;
+                        if (null != employee
+                            && !employee.IsNullField("DepartmentID"))
+                        {
+                            departmentID = employee.DepartmentID;
+                        }
+                    }
+                    else
+                    {
+                        BFIEmployeeEntity employee = new BFIEmployeeEntity { EmployeeID = employeeID };
+                        employee.Fetch();
+
+                        if (!employee.IsNullField("DepartmentID"))
+                        {
+                            departmentID = employee.DepartmentID;
+                        }
+                    }
+                    entity.IsBillIn = false; //出库订单
+                    entity.BillTypeID = 1;
+                    entity.BillTypeName = "销售出货";
+                    entity.BillTypeSpell = "xsch";
+                    entity.BillStatus = 1;
+                    entity.BillStatusName = "已下单";
+
+                    List<EntityBase> children = this.popupGrid.GetEntities();
+                    //entity.BillCode = GlobalMethod.GetNewSaleBillCode(txtBillCode.Text.Substring(0, 2),
+                    //    txtBillCode.Text);
+
+                    entity.BillDate = DateTime.Now;
+                    entity.CreateDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.Now;
+                    entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+                    entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
+                    entity.Save();
+
+                    //查询出其ID
+                    entity.Fetch();
+
+                    foreach (EntityBase childEntity in children)
+                    {
+                        BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
+                        child.BillID = entity.BillID;
+                        child.Save();
+
+                        BUSProductSalePriceEntity priceEntity = new BUSProductSalePriceEntity();
+                        priceEntity.DealerID = entity.DealerID;
+                        priceEntity.SaleBillID = child.BillID;
+                        priceEntity.ProductID = child.ProductID;
+                        priceEntity.BatchNo = child.BatchNo;
+                        priceEntity.SalePrice = child.UnitPrice;
+                        priceEntity.CreateDate = DateTime.Now;
+                        priceEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+                        priceEntity.Save();
+                    }
+
+                    //更新库存
+                    foreach (EntityBase childEntity in children)
+                    {
+                        BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
+                        UpdateStoreDetail(child, departmentID);
+                    }
+
+                    #endregion
+
+                    EntityCollection<ATCUserPageEntity> userPages = new EntityCollection<ATCUserPageEntity>();
+                    PredicateExpression pe = new PredicateExpression();
+                    pe.Add(ATCUserPageEntityFields.UserID == GlobalItem.g_CurrentUser.UserID);
+                    pe.Add(ATCUserPageEntityFields.DocumentCode == "SaleBill");
+                    DataTable data = userPages.FetchTable(pe);
+
+                    if (data.Rows.Count > 0)
+                    {
+                    }
+                    else
+                    {
+                        entity.BillStatus = 2;
+                        entity.BillStatusName = "已审核";
+                        entity.Update();
+                    }
+                }
+                else
+                {
+                    XtraMessageBox.Show("销售单号已存在。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            //tx.Complete();
+            this.DialogResult = DialogResult.OK;
             BUSBillEntity bill = new BUSBillEntity
             {
                 BillCode = txtBillCode.Text
@@ -2072,6 +2225,74 @@ WHERE BillID={1}
                     storebilldetail.Amount = (int)this.popupGrid.PopupView.GetRowCellValue(i, "数量");
                     storebilldetail.StoreAmount = 0;
                     storebilldetail.Save();
+                }
+            }
+        }
+
+        private void CorrectStockAmount()
+        {
+            if(!m_id.HasValue || m_id.Value <= 0)
+            {
+                return;
+            }
+
+            BUSBillEntity entity = new BUSBillEntity
+            {
+                BillID = m_id.Value
+            };
+            entity.Fetch();
+
+            int departmentID = 0;
+            var billCreateUserId = entity.CreateUserID;
+            ATCUserEntity userEntity = new ATCUserEntity
+            {
+                UserID = billCreateUserId
+            };
+            userEntity.Fetch();
+            var billCreateEmployeeId = userEntity.EmployeeID;
+            var employee = new BFIEmployeeEntity
+            {
+                EmployeeID = billCreateEmployeeId
+            };
+            employee.Fetch();
+            if(!employee.IsNullField("DepartmentID"))
+            {
+                departmentID = employee.DepartmentID;
+            }
+            string sql = @"
+UPDATE SD
+    SET SD.Amount = SD.Amount + BD.Amount
+FROM dbo.BUS_BillDetail AS BD
+LEFT JOIN dbo.BUS_StoreDetail AS SD
+ON BD.ProductID = SD.ProductID
+AND BD.BatchNo = SD.BatchNo
+WHERE BD.BillID='{0}' AND SD.DepartmentID='{1}'
+
+UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,ReviewCode=NULL,AcceptID=NULL,AcceptCode=NULL,Reservation10='修改' WHERE BillID='{0}'
+";
+            using(SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                conn.Open();//连接数据库
+                //开始一个本地事务
+                SqlTransaction transaction = conn.BeginTransaction("SaleTransaction");
+                //必须为SqlCommand指定数据库连接和登记的事务
+                SqlCommand cmd = new SqlCommand("", conn, transaction);
+                try
+                {
+                    //向数据表中插入记录的命令语句
+                    cmd.CommandText = string.Format(sql, entity.BillID, departmentID);
+                    cmd.ExecuteNonQuery();
+                    transaction.Commit();//提交事务
+                }
+                catch(Exception ex)
+                {
+                    try
+                    {
+                        transaction.Rollback();//回滚事务
+                    }
+                    catch(Exception ex2)
+                    {
+                    }
                 }
             }
         }

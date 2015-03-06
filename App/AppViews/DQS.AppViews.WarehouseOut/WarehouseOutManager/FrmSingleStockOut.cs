@@ -143,7 +143,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                             child.StoreID = entity.StoreID;
                             child.Save();
                             //更新库存价格
-                            UpdateStoreDetailPrice(child, storeDetailBelongDepartmentId);
+                            //UpdateStoreDetailPrice(child, storeDetailBelongDepartmentId);
                         }
 
                         #endregion

@@ -30,6 +30,7 @@
         {
             this.ftPanel = new DQS.Controls.FieldTextBoxPanel();
             this.layControl = new DevExpress.XtraLayout.LayoutControl();
+            this.busBillEntityTextBox1 = new DQS.Controls.BUSBillEntityTextBox();
             this.txtReason = new DQS.Controls.BUSBillEntityTextBox();
             this.rdgBillStyle = new DevExpress.XtraEditors.RadioGroup();
             this.txtReviewCode = new DQS.Controls.BUSBillEntityTextBox();
@@ -50,6 +51,7 @@
             this.layDeliveryType = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layReason = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItemDel = new DevExpress.XtraLayout.LayoutControlItem();
             this.panelAction = new DevExpress.XtraEditors.PanelControl();
             this.btnViewHistory = new DevExpress.XtraEditors.SimpleButton();
             this.btnReviewRecord = new DevExpress.XtraEditors.SimpleButton();
@@ -58,12 +60,11 @@
             this.btnPrint = new DQS.Controls.StiPrintButtonEx();
             this.groupControl = new DevExpress.XtraEditors.GroupControl();
             this.popupGrid = new DQS.Controls.PopupGrid();
-            this.busBillEntityTextBox1 = new DQS.Controls.BUSBillEntityTextBox();
-            this.layoutControlItemDel = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
             this.ftPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
             this.layControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.busBillEntityTextBox1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReason.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdgBillStyle.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReviewCode.Properties)).BeginInit();
@@ -84,13 +85,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.layDeliveryType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layReason)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelAction)).BeginInit();
             this.panelAction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl)).BeginInit();
             this.groupControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.popupGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.busBillEntityTextBox1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDel)).BeginInit();
             this.SuspendLayout();
             // 
             // ftPanel
@@ -122,6 +122,20 @@
             this.layControl.Size = new System.Drawing.Size(868, 172);
             this.layControl.TabIndex = 0;
             this.layControl.Text = "layControl";
+            // 
+            // busBillEntityTextBox1
+            // 
+            this.busBillEntityTextBox1.AlphabeticFiled = null;
+            this.busBillEntityTextBox1.EntityField = DQS.Module.Entities.BUSBillEntityFields2.Reservation5;
+            this.busBillEntityTextBox1.IsIntegerOnly = false;
+            this.busBillEntityTextBox1.IsNullString = "";
+            this.busBillEntityTextBox1.IsNullValidate = false;
+            this.busBillEntityTextBox1.IsTransferAlphabetic = false;
+            this.busBillEntityTextBox1.Location = new System.Drawing.Point(87, 166);
+            this.busBillEntityTextBox1.Name = "busBillEntityTextBox1";
+            this.busBillEntityTextBox1.Size = new System.Drawing.Size(752, 21);
+            this.busBillEntityTextBox1.StyleController = this.layControl;
+            this.busBillEntityTextBox1.TabIndex = 5;
             // 
             // txtReason
             // 
@@ -185,7 +199,10 @@
             // 
             // cbxDeliveryType
             // 
+            this.cbxDeliveryType.AddFirstDefaultItem = false;
             this.cbxDeliveryType.CategoryCode = "DeliveryType";
+            this.cbxDeliveryType.FirstDefaultItemText = null;
+            this.cbxDeliveryType.FormatQueryString = null;
             this.cbxDeliveryType.Location = new System.Drawing.Point(502, 91);
             this.cbxDeliveryType.Name = "cbxDeliveryType";
             this.cbxDeliveryType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -198,7 +215,10 @@
             // 
             // cbxPaymentType
             // 
+            this.cbxPaymentType.AddFirstDefaultItem = false;
             this.cbxPaymentType.CategoryCode = "PaymentType";
+            this.cbxPaymentType.FirstDefaultItemText = null;
+            this.cbxPaymentType.FormatQueryString = null;
             this.cbxPaymentType.Location = new System.Drawing.Point(87, 91);
             this.cbxPaymentType.Name = "cbxPaymentType";
             this.cbxPaymentType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -230,6 +250,7 @@
             this.txtDealerName.Fields = "单位ID,单位编号,单位名称,单位名称Spell,单位类型,通讯地址";
             this.txtDealerName.Filter = null;
             this.txtDealerName.FormatQueryString = "[单位编号] LIKE \'%{0}%\' OR ([单位名称] LIKE \'%{0}%\' OR [单位名称Spell] LIKE \'%{0}%\')";
+            this.txtDealerName.GroupColumn = null;
             this.txtDealerName.IsIntegerOnly = false;
             this.txtDealerName.IsNullString = "往来单位不能为空。";
             this.txtDealerName.IsNullValidate = true;
@@ -392,6 +413,17 @@
             this.layReason.Text = "销退原因";
             this.layReason.TextSize = new System.Drawing.Size(72, 17);
             // 
+            // layoutControlItemDel
+            // 
+            this.layoutControlItemDel.Control = this.busBillEntityTextBox1;
+            this.layoutControlItemDel.CustomizationFormText = "删除原因";
+            this.layoutControlItemDel.Location = new System.Drawing.Point(0, 154);
+            this.layoutControlItemDel.Name = "layoutControlItemDel";
+            this.layoutControlItemDel.Size = new System.Drawing.Size(831, 25);
+            this.layoutControlItemDel.Text = "删除原因";
+            this.layoutControlItemDel.TextSize = new System.Drawing.Size(72, 17);
+            this.layoutControlItemDel.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            // 
             // panelAction
             // 
             this.panelAction.Controls.Add(this.btnViewHistory);
@@ -467,6 +499,7 @@
             this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 2;
             this.btnPrint.Text = "打印(&P)";
+            this.btnPrint.BeforePrint += new DQS.Controls.StiPrintButtonEx.OnBeforePrint(this.btnPrint_BeforePrint);
             // 
             // groupControl
             // 
@@ -493,31 +526,6 @@
             this.popupGrid.TotalPriceChanged += new DQS.Controls.PopupGrid.OnTotalPriceChangedEventHandler(this.popupGrid_TotalPriceChanged);
             this.popupGrid.BeforePopupFormShow += new DQS.Controls.PopupGrid.OnBeforePopupFormShowEventHandler(this.popupGrid_BeforePopupFormShow);
             // 
-            // busBillEntityTextBox1
-            // 
-            this.busBillEntityTextBox1.AlphabeticFiled = null;
-            this.busBillEntityTextBox1.EntityField = DQS.Module.Entities.BUSBillEntityFields2.Reservation5;
-            this.busBillEntityTextBox1.IsIntegerOnly = false;
-            this.busBillEntityTextBox1.IsNullString = "";
-            this.busBillEntityTextBox1.IsNullValidate = false;
-            this.busBillEntityTextBox1.IsTransferAlphabetic = false;
-            this.busBillEntityTextBox1.Location = new System.Drawing.Point(87, 166);
-            this.busBillEntityTextBox1.Name = "busBillEntityTextBox1";
-            this.busBillEntityTextBox1.Size = new System.Drawing.Size(752, 21);
-            this.busBillEntityTextBox1.StyleController = this.layControl;
-            this.busBillEntityTextBox1.TabIndex = 5;
-            // 
-            // layoutControlItemDel
-            // 
-            this.layoutControlItemDel.Control = this.busBillEntityTextBox1;
-            this.layoutControlItemDel.CustomizationFormText = "删除原因";
-            this.layoutControlItemDel.Location = new System.Drawing.Point(0, 154);
-            this.layoutControlItemDel.Name = "layoutControlItemDel";
-            this.layoutControlItemDel.Size = new System.Drawing.Size(831, 25);
-            this.layoutControlItemDel.Text = "删除原因";
-            this.layoutControlItemDel.TextSize = new System.Drawing.Size(72, 17);
-            this.layoutControlItemDel.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            // 
             // FrmSingleSaleBack
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -537,6 +545,7 @@
             this.ftPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).EndInit();
             this.layControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.busBillEntityTextBox1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReason.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdgBillStyle.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReviewCode.Properties)).EndInit();
@@ -557,13 +566,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.layDeliveryType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layReason)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelAction)).EndInit();
             this.panelAction.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl)).EndInit();
             this.groupControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.popupGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.busBillEntityTextBox1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDel)).EndInit();
             this.ResumeLayout(false);
 
         }
