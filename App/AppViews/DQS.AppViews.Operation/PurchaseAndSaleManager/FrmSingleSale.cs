@@ -18,6 +18,7 @@ using ORMSCore;
 using DQS.Module.Views;
 using DQS.Controls.CommonCode;
 
+
 namespace DQS.AppViews.Operation.PurchaseAndSaleManager
 {
     public partial class FrmSingleSale : DevExpress.XtraEditors.XtraForm
