@@ -234,8 +234,15 @@
     <Compile Include="ProductManager\FrmPriceInfo.Designer.cs">
       <DependentUpon>FrmPriceInfo.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+    <Compile Include="ProductManager\FrmPriceOfDealer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductManager\FrmPriceOfDealer.Designer.cs">
+=======
     <Compile Include="ProductManager\FrmPriceOfDealer.cs" />
     <Compile Include="ProductManager\FrmPriceOfDealer.designer.cs">
+>>>>>>> 79cbf3a82322075a4a0dc67d370128451892bc63
       <DependentUpon>FrmPriceOfDealer.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductManager\FrmPriceStyle.cs">
@@ -292,8 +299,15 @@
     <Compile Include="ProductManager\FrmSinglePrice2.Designer.cs">
       <DependentUpon>FrmSinglePrice2.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+    <Compile Include="ProductManager\FrmSinglePriceOfDealer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductManager\FrmSinglePriceOfDealer.Designer.cs">
+=======
     <Compile Include="ProductManager\FrmSinglePriceOfDealer.cs" />
     <Compile Include="ProductManager\FrmSinglePriceOfDealer.designer.cs">
+>>>>>>> 79cbf3a82322075a4a0dc67d370128451892bc63
       <DependentUpon>FrmSinglePriceOfDealer.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductManager\FrmSinglePriceStyle.cs">
