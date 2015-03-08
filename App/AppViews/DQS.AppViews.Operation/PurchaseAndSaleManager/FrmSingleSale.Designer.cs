@@ -68,6 +68,8 @@
             this.layPrice = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.panelAction = new DevExpress.XtraEditors.PanelControl();
+            this.lblStyleName = new DevExpress.XtraEditors.LabelControl();
+            this.lblStyleID = new DevExpress.XtraEditors.LabelControl();
             this.btnViewHistory = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnSaveAndOut = new DevExpress.XtraEditors.SimpleButton();
@@ -76,8 +78,6 @@
             this.btnFix = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl = new DevExpress.XtraEditors.GroupControl();
             this.popupGrid = new DQS.Controls.PopupGrid();
-            this.lblStyleID = new DevExpress.XtraEditors.LabelControl();
-            this.lblStyleName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
             this.ftPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
@@ -165,7 +165,7 @@
             // 
             // cbxPrice
             // 
-            this.cbxPrice.Location = new System.Drawing.Point(87, 113);
+            this.cbxPrice.Location = new System.Drawing.Point(87, 145);
             this.cbxPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbxPrice.Name = "cbxPrice";
             this.cbxPrice.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
@@ -192,7 +192,7 @@
             this.busBillEntityTextBox1.IsNullString = null;
             this.busBillEntityTextBox1.IsNullValidate = false;
             this.busBillEntityTextBox1.IsTransferAlphabetic = false;
-            this.busBillEntityTextBox1.Location = new System.Drawing.Point(87, 238);
+            this.busBillEntityTextBox1.Location = new System.Drawing.Point(87, 270);
             this.busBillEntityTextBox1.Name = "busBillEntityTextBox1";
             this.busBillEntityTextBox1.Size = new System.Drawing.Size(752, 21);
             this.busBillEntityTextBox1.StyleController = this.layControl;
@@ -206,7 +206,7 @@
             this.txtBillRemark.IsNullString = null;
             this.txtBillRemark.IsNullValidate = false;
             this.txtBillRemark.IsTransferAlphabetic = false;
-            this.txtBillRemark.Location = new System.Drawing.Point(87, 213);
+            this.txtBillRemark.Location = new System.Drawing.Point(87, 245);
             this.txtBillRemark.Name = "txtBillRemark";
             this.txtBillRemark.Size = new System.Drawing.Size(752, 21);
             this.txtBillRemark.StyleController = this.layControl;
@@ -215,7 +215,7 @@
             // rdgBillStyle
             // 
             this.rdgBillStyle.EditValue = "正常";
-            this.rdgBillStyle.Location = new System.Drawing.Point(482, -20);
+            this.rdgBillStyle.Location = new System.Drawing.Point(482, 12);
             this.rdgBillStyle.Name = "rdgBillStyle";
             this.rdgBillStyle.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.rdgBillStyle.Properties.Appearance.Options.UseBackColor = true;
@@ -235,7 +235,7 @@
             this.txtDealerCode.IsNullString = null;
             this.txtDealerCode.IsNullValidate = false;
             this.txtDealerCode.IsTransferAlphabetic = false;
-            this.txtDealerCode.Location = new System.Drawing.Point(483, 13);
+            this.txtDealerCode.Location = new System.Drawing.Point(483, 45);
             this.txtDealerCode.Name = "txtDealerCode";
             this.txtDealerCode.Properties.ReadOnly = true;
             this.txtDealerCode.Size = new System.Drawing.Size(356, 21);
@@ -251,7 +251,7 @@
             this.txtProductAmount.IsNullString = null;
             this.txtProductAmount.IsNullValidate = false;
             this.txtProductAmount.IsTransferAlphabetic = false;
-            this.txtProductAmount.Location = new System.Drawing.Point(483, 138);
+            this.txtProductAmount.Location = new System.Drawing.Point(483, 170);
             this.txtProductAmount.Name = "txtProductAmount";
             this.txtProductAmount.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtProductAmount.Properties.Appearance.Options.UseBackColor = true;
@@ -272,7 +272,7 @@
             this.txtPickUpPerson.IsNullString = null;
             this.txtPickUpPerson.IsNullValidate = false;
             this.txtPickUpPerson.IsTransferAlphabetic = true;
-            this.txtPickUpPerson.Location = new System.Drawing.Point(87, 163);
+            this.txtPickUpPerson.Location = new System.Drawing.Point(87, 195);
             this.txtPickUpPerson.MemberText = "人员姓名";
             this.txtPickUpPerson.MemberValue = "人员ID";
             this.txtPickUpPerson.Name = "txtPickUpPerson";
@@ -293,7 +293,7 @@
             this.cbxDeliveryType.CategoryCode = "DeliveryType";
             this.cbxDeliveryType.FirstDefaultItemText = null;
             this.cbxDeliveryType.FormatQueryString = null;
-            this.cbxDeliveryType.Location = new System.Drawing.Point(483, 63);
+            this.cbxDeliveryType.Location = new System.Drawing.Point(483, 95);
             this.cbxDeliveryType.Name = "cbxDeliveryType";
             this.cbxDeliveryType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -309,7 +309,7 @@
             this.cbxPaymentType.CategoryCode = "PaymentType";
             this.cbxPaymentType.FirstDefaultItemText = null;
             this.cbxPaymentType.FormatQueryString = null;
-            this.cbxPaymentType.Location = new System.Drawing.Point(87, 63);
+            this.cbxPaymentType.Location = new System.Drawing.Point(87, 95);
             this.cbxPaymentType.Name = "cbxPaymentType";
             this.cbxPaymentType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -327,7 +327,7 @@
             this.txtContractNo.IsNullString = null;
             this.txtContractNo.IsNullValidate = false;
             this.txtContractNo.IsTransferAlphabetic = false;
-            this.txtContractNo.Location = new System.Drawing.Point(87, 88);
+            this.txtContractNo.Location = new System.Drawing.Point(87, 120);
             this.txtContractNo.Name = "txtContractNo";
             this.txtContractNo.Size = new System.Drawing.Size(317, 21);
             this.txtContractNo.StyleController = this.layControl;
@@ -341,7 +341,7 @@
             this.txtBillCode.IsNullString = "销售单号不能为空。";
             this.txtBillCode.IsNullValidate = true;
             this.txtBillCode.IsTransferAlphabetic = false;
-            this.txtBillCode.Location = new System.Drawing.Point(87, -20);
+            this.txtBillCode.Location = new System.Drawing.Point(87, 12);
             this.txtBillCode.Name = "txtBillCode";
             this.txtBillCode.Size = new System.Drawing.Size(316, 21);
             this.txtBillCode.StyleController = this.layControl;
@@ -359,7 +359,7 @@
             this.txtOperator.IsNullString = null;
             this.txtOperator.IsNullValidate = false;
             this.txtOperator.IsTransferAlphabetic = true;
-            this.txtOperator.Location = new System.Drawing.Point(483, 88);
+            this.txtOperator.Location = new System.Drawing.Point(483, 120);
             this.txtOperator.MemberText = "员工姓名";
             this.txtOperator.MemberValue = "员工ID";
             this.txtOperator.Name = "txtOperator";
@@ -387,7 +387,7 @@
             this.txtDealerName.IsNullString = "往来单位不能为空。";
             this.txtDealerName.IsNullValidate = true;
             this.txtDealerName.IsTransferAlphabetic = true;
-            this.txtDealerName.Location = new System.Drawing.Point(87, 13);
+            this.txtDealerName.Location = new System.Drawing.Point(87, 45);
             this.txtDealerName.MemberText = "单位名称";
             this.txtDealerName.MemberValue = "单位ID";
             this.txtDealerName.Name = "txtDealerName";
@@ -412,7 +412,7 @@
             this.txtTotalPrice.IsNullString = null;
             this.txtTotalPrice.IsNullValidate = false;
             this.txtTotalPrice.IsTransferAlphabetic = false;
-            this.txtTotalPrice.Location = new System.Drawing.Point(87, 138);
+            this.txtTotalPrice.Location = new System.Drawing.Point(87, 170);
             this.txtTotalPrice.Name = "txtTotalPrice";
             this.txtTotalPrice.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtTotalPrice.Properties.Appearance.Options.UseBackColor = true;
@@ -433,7 +433,7 @@
             this.txtBusinessPerson.IsNullString = null;
             this.txtBusinessPerson.IsNullValidate = false;
             this.txtBusinessPerson.IsTransferAlphabetic = true;
-            this.txtBusinessPerson.Location = new System.Drawing.Point(87, 188);
+            this.txtBusinessPerson.Location = new System.Drawing.Point(87, 220);
             this.txtBusinessPerson.MemberText = "人员姓名";
             this.txtBusinessPerson.MemberValue = "人员ID";
             this.txtBusinessPerson.Name = "txtBusinessPerson";
@@ -457,7 +457,7 @@
             this.txtBusinessPhone.IsNullString = null;
             this.txtBusinessPhone.IsNullValidate = false;
             this.txtBusinessPhone.IsTransferAlphabetic = false;
-            this.txtBusinessPhone.Location = new System.Drawing.Point(482, 188);
+            this.txtBusinessPhone.Location = new System.Drawing.Point(482, 220);
             this.txtBusinessPhone.Name = "txtBusinessPhone";
             this.txtBusinessPhone.Size = new System.Drawing.Size(357, 21);
             this.txtBusinessPhone.StyleController = this.layControl;
@@ -465,7 +465,7 @@
             // 
             // txtDealerAddress
             // 
-            this.txtDealerAddress.Location = new System.Drawing.Point(87, 38);
+            this.txtDealerAddress.Location = new System.Drawing.Point(87, 70);
             this.txtDealerAddress.Name = "txtDealerAddress";
             this.txtDealerAddress.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -500,7 +500,7 @@
             this.layoutControlDel,
             this.layPrice,
             this.emptySpaceItem2});
-            this.layControlGroup.Location = new System.Drawing.Point(0, -32);
+            this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(851, 303);
             this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
@@ -717,6 +717,22 @@
             this.panelAction.Size = new System.Drawing.Size(872, 48);
             this.panelAction.TabIndex = 0;
             // 
+            // lblStyleName
+            // 
+            this.lblStyleName.Location = new System.Drawing.Point(171, 16);
+            this.lblStyleName.Name = "lblStyleName";
+            this.lblStyleName.Size = new System.Drawing.Size(0, 14);
+            this.lblStyleName.TabIndex = 100;
+            this.lblStyleName.Visible = false;
+            // 
+            // lblStyleID
+            // 
+            this.lblStyleID.Location = new System.Drawing.Point(104, 16);
+            this.lblStyleID.Name = "lblStyleID";
+            this.lblStyleID.Size = new System.Drawing.Size(0, 14);
+            this.lblStyleID.TabIndex = 100;
+            this.lblStyleID.Visible = false;
+            // 
             // btnViewHistory
             // 
             this.btnViewHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -818,22 +834,6 @@
             this.popupGrid.PopupClosed += new DQS.Controls.PopupGrid.OnPopupClosedEventHandler(this.popupGrid_PopupClosed);
             this.popupGrid.TotalPriceChanged += new DQS.Controls.PopupGrid.OnTotalPriceChangedEventHandler(this.popupGrid_TotalPriceChanged);
             this.popupGrid.BeforePopupFormShow += new DQS.Controls.PopupGrid.OnBeforePopupFormShowEventHandler(this.popupGrid_BeforePopupFormShow);
-            // 
-            // lblStyleID
-            // 
-            this.lblStyleID.Location = new System.Drawing.Point(104, 16);
-            this.lblStyleID.Name = "lblStyleID";
-            this.lblStyleID.Size = new System.Drawing.Size(0, 14);
-            this.lblStyleID.TabIndex = 100;
-            this.lblStyleID.Visible = false;
-            // 
-            // lblStyleName
-            // 
-            this.lblStyleName.Location = new System.Drawing.Point(171, 16);
-            this.lblStyleName.Name = "lblStyleName";
-            this.lblStyleName.Size = new System.Drawing.Size(0, 14);
-            this.lblStyleName.TabIndex = 100;
-            this.lblStyleName.Visible = false;
             // 
             // FrmSingleSale
             // 

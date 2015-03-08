@@ -717,7 +717,7 @@ WHERE BillID={1}
                                 _amountErrors.Clear();
                             }
                             //提示业务库存错误
-                            if(!errors.Any())
+                            if(errors.Any())
                             {
                                 string message = string.Join("\n", errors);
                                 XtraMessageBox.Show(message, "销售数据错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
