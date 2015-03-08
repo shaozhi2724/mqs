@@ -22,7 +22,6 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
 {
     public partial class FrmSingleSale : DevExpress.XtraEditors.XtraForm
     {
-
         private bool _useInternalProductPrice = true;
         private List<int> _selectedProductIds;
         private int? m_id;
