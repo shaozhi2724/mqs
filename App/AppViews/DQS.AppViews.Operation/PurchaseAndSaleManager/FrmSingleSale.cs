@@ -2056,6 +2056,7 @@ WHERE BillID={1}
 
         private void btnSaveAndOut_Click(object sender, EventArgs e)
         {
+            _amountErrors = new List<string>();
             try
             {
                 if (!this.ftPanel.ValidateIsNullFields()) return;
@@ -2113,8 +2114,21 @@ WHERE BillID={1}
                     entity.BillStatusName = "已下单";
 
                     List<EntityBase> children = this.popupGrid.GetEntities();
-                    //entity.BillCode = GlobalMethod.GetNewSaleBillCode(txtBillCode.Text.Substring(0, 2),
-                    //    txtBillCode.Text);
+
+                    //保存单据前检测库存是否足够出库
+                    foreach(EntityBase childEntity in children)
+                    {
+                        BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
+                        ValidateStoreDetails(child, departmentID);
+                    }
+                    //只要有一条库存错误信息，就不能保存销售单
+                    if(_amountErrors.Any())
+                    {
+                        string message = string.Join("\n", _amountErrors);
+                        XtraMessageBox.Show(message, "销售数据错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
 
                     entity.BillDate = DateTime.Now;
                     entity.CreateDate = DateTime.Now;
@@ -2125,31 +2139,37 @@ WHERE BillID={1}
 
                     //查询出其ID
                     entity.Fetch();
-
+                    List<string> errors = new List<string>();
                     foreach (EntityBase childEntity in children)
                     {
                         BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
                         child.BillID = entity.BillID;
-                        child.Save();
+                        ValidateStoreDetails(child, departmentID);
+                        if (!_amountErrors.Any())
+                        {
+                            //保存明细
+                            child.Save();
+                            UpdateStoreDetail(child, departmentID);
 
-                        BUSProductSalePriceEntity priceEntity = new BUSProductSalePriceEntity();
-                        priceEntity.DealerID = entity.DealerID;
-                        priceEntity.SaleBillID = child.BillID;
-                        priceEntity.ProductID = child.ProductID;
-                        priceEntity.BatchNo = child.BatchNo;
-                        priceEntity.SalePrice = child.UnitPrice;
-                        priceEntity.CreateDate = DateTime.Now;
-                        priceEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                        priceEntity.Save();
+                            BUSProductSalePriceEntity priceEntity = new BUSProductSalePriceEntity();
+                            priceEntity.DealerID = entity.DealerID;
+                            priceEntity.SaleBillID = child.BillID;
+                            priceEntity.ProductID = child.ProductID;
+                            priceEntity.BatchNo = child.BatchNo;
+                            priceEntity.SalePrice = child.UnitPrice;
+                            priceEntity.CreateDate = DateTime.Now;
+                            priceEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+                            priceEntity.Save();
+                        }
+                        errors.AddRange(_amountErrors);
+                        _amountErrors.Clear();
                     }
-
-                    //更新库存
-                    foreach (EntityBase childEntity in children)
+                    //提示业务库存错误
+                    if(errors.Any())
                     {
-                        BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
-                        UpdateStoreDetail(child, departmentID);
+                        string message = string.Join("\n", errors);
+                        XtraMessageBox.Show(message, "销售数据错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
                     #endregion
 
                     EntityCollection<ATCUserPageEntity> userPages = new EntityCollection<ATCUserPageEntity>();
