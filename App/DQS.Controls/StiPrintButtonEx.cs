@@ -38,11 +38,6 @@ namespace DQS.Controls
             if (this.BeforePrint != null)
             {
                 BeforePrint(e);
-                string s = this.Tag.ToString();
-                if (s == "false")
-                {
-                    return;
-                }
             }
             string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ReportName + ".mrt");
             if (File.Exists(fileName))

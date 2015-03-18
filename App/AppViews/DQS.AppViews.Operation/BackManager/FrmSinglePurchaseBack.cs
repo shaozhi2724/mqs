@@ -12,6 +12,7 @@ using DQS.Module.Entities;
 using ORMSCore;
 using DQS.Common;
 using DevExpress.XtraLayout.Utils;
+using DQS.AppViews.Operation.Properties;
 
 namespace DQS.AppViews.Operation.BackManager
 {
@@ -871,13 +872,13 @@ WHERE BillID={1}
 
         private void btnPrint_BeforePrint(EventArgs e)
         {
-            if (CheckAndSaveCode(this.txtBillCode.Text))
+            if (Settings.Default.AllowNoCodeStoreOut)
             {
-                this.btnPrint.Tag = "true";
+                CheckAndSaveCode(this.txtBillCode.Text);
             }
             else
             {
-                this.btnPrint.Tag = "false";
+                return;
             }
         }
 

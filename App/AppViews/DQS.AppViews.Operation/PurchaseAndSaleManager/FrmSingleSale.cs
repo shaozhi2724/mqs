@@ -17,6 +17,7 @@ using DQS.Common;
 using ORMSCore;
 using DQS.Module.Views;
 using DQS.Controls.CommonCode;
+using DQS.AppViews.Operation.Properties;
 
 
 namespace DQS.AppViews.Operation.PurchaseAndSaleManager
@@ -37,6 +38,7 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
 
         private void FrmSingleSale_Load(object sender, EventArgs e)
         {
+            this.btnSaveAndOut.Visible = Settings.Default.IsSaveAndOutStoreButtonVisible;
             _useInternalProductPrice = GlobalItem.g_CurrentUser.UseInternalProductPrice;
             this.cbxDeliveryType.InitSource();
             this.cbxPaymentType.InitSource();
@@ -2044,13 +2046,13 @@ WHERE BillID={1}
 
         private void btnPrint_BeforePrint(EventArgs e)
         {
-            if (CheckAndSaveCode(this.txtBillCode.Text))
+            if (Settings.Default.AllowNoCodeStoreOut)
             {
-                this.btnPrint.Tag = "true";
+                CheckAndSaveCode(this.txtBillCode.Text);
             }
             else
             {
-                this.btnPrint.Tag = "false";
+                return;
             }
         }
 
