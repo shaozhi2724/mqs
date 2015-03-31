@@ -272,6 +272,7 @@
             this.txtPopCarCode.Fields = "";
             this.txtPopCarCode.Filter = "";
             this.txtPopCarCode.FormatQueryString = "[车牌号] = \'{0}\'";
+            this.txtPopCarCode.GroupColumn = null;
             this.txtPopCarCode.IsIntegerOnly = false;
             this.txtPopCarCode.IsNullString = "";
             this.txtPopCarCode.IsNullValidate = false;
@@ -329,6 +330,7 @@
             this.txtBillCode.Fields = "";
             this.txtBillCode.Filter = "[状态] = \'已复核\'";
             this.txtBillCode.FormatQueryString = "[订单编号] LIKE \'%{0}%\'";
+            this.txtBillCode.GroupColumn = "线路";
             this.txtBillCode.IsIntegerOnly = false;
             this.txtBillCode.IsNullString = "订单编号不能为空。";
             this.txtBillCode.IsNullValidate = true;
@@ -399,6 +401,7 @@
             this.txtRelatePerson.Fields = null;
             this.txtRelatePerson.Filter = null;
             this.txtRelatePerson.FormatQueryString = "[人员编号] LIKE \'%{0}%\' OR ([人员姓名] LIKE \'%{0}%\' OR [人员姓名Spell] LIKE \'%{0}%\')";
+            this.txtRelatePerson.GroupColumn = null;
             this.txtRelatePerson.IsIntegerOnly = false;
             this.txtRelatePerson.IsNullString = "";
             this.txtRelatePerson.IsNullValidate = false;

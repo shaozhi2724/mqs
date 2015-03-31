@@ -62,10 +62,6 @@
             this.txtUnqualifiedAmount = new DQS.Controls.BUSCuringRecordEntityTextBox();
             this.txtCuringRemrk = new DQS.Controls.BUSCuringRecordEntityTextBox();
             this.txtQualifiedAmount = new DQS.Controls.BUSCuringRecordEntityTextBox();
-            this.txtCuringResult = new DQS.Controls.BUSCuringRecordEntityTextBox();
-            this.txtCuringMeasure = new DQS.Controls.BUSCuringRecordEntityTextBox();
-            this.txtQualityCondition = new DQS.Controls.BUSCuringRecordEntityTextBox();
-            this.txtCheckItem = new DQS.Controls.BUSCuringRecordEntityTextBox();
             this.txtCuringMan = new DQS.Controls.BUSCuringRecordEntityTextBox();
             this.txtCuringCode = new DQS.Controls.BUSCuringRecordEntityTextBox();
             this.layControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -82,6 +78,10 @@
             this.layProduceDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.layAmount = new DevExpress.XtraLayout.LayoutControlItem();
             this.layValidateDate = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtCheckItem = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txtQualityCondition = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txtCuringMeasure = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txtCuringResult = new DevExpress.XtraEditors.ComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.pnOperating)).BeginInit();
             this.pnOperating.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gpcProduct)).BeginInit();
@@ -120,10 +120,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtUnqualifiedAmount.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCuringRemrk.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQualifiedAmount.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCuringResult.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCuringMeasure.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtQualityCondition.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCheckItem.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCuringMan.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCuringCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layControlGroup1)).BeginInit();
@@ -140,6 +136,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layProduceDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layValidateDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCheckItem.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQualityCondition.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCuringMeasure.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCuringResult.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // pnOperating
@@ -491,12 +491,12 @@
             this.layControl1.Controls.Add(this.txtUnqualifiedAmount);
             this.layControl1.Controls.Add(this.txtCuringRemrk);
             this.layControl1.Controls.Add(this.txtQualifiedAmount);
-            this.layControl1.Controls.Add(this.txtCuringResult);
-            this.layControl1.Controls.Add(this.txtCuringMeasure);
-            this.layControl1.Controls.Add(this.txtQualityCondition);
-            this.layControl1.Controls.Add(this.txtCheckItem);
             this.layControl1.Controls.Add(this.txtCuringMan);
             this.layControl1.Controls.Add(this.txtCuringCode);
+            this.layControl1.Controls.Add(this.txtCheckItem);
+            this.layControl1.Controls.Add(this.txtQualityCondition);
+            this.layControl1.Controls.Add(this.txtCuringMeasure);
+            this.layControl1.Controls.Add(this.txtCuringResult);
             this.layControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layControl1.Location = new System.Drawing.Point(2, 2);
             this.layControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -617,66 +617,6 @@
             this.txtQualifiedAmount.StyleController = this.layControl1;
             this.txtQualifiedAmount.TabIndex = 4;
             this.txtQualifiedAmount.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.txtQualifiedAmount_EditValueChanging);
-            // 
-            // txtCuringResult
-            // 
-            this.txtCuringResult.AlphabeticFiled = null;
-            this.txtCuringResult.EntityField = DQS.Module.Entities.BUSCuringRecordEntityFields2.CuringResult;
-            this.txtCuringResult.IsIntegerOnly = false;
-            this.txtCuringResult.IsNullString = null;
-            this.txtCuringResult.IsNullValidate = false;
-            this.txtCuringResult.IsTransferAlphabetic = false;
-            this.txtCuringResult.Location = new System.Drawing.Point(441, 157);
-            this.txtCuringResult.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtCuringResult.Name = "txtCuringResult";
-            this.txtCuringResult.Size = new System.Drawing.Size(260, 25);
-            this.txtCuringResult.StyleController = this.layControl1;
-            this.txtCuringResult.TabIndex = 6;
-            // 
-            // txtCuringMeasure
-            // 
-            this.txtCuringMeasure.AlphabeticFiled = null;
-            this.txtCuringMeasure.EntityField = DQS.Module.Entities.BUSCuringRecordEntityFields2.CuringMeasure;
-            this.txtCuringMeasure.IsIntegerOnly = false;
-            this.txtCuringMeasure.IsNullString = null;
-            this.txtCuringMeasure.IsNullValidate = false;
-            this.txtCuringMeasure.IsTransferAlphabetic = false;
-            this.txtCuringMeasure.Location = new System.Drawing.Point(90, 157);
-            this.txtCuringMeasure.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtCuringMeasure.Name = "txtCuringMeasure";
-            this.txtCuringMeasure.Size = new System.Drawing.Size(269, 25);
-            this.txtCuringMeasure.StyleController = this.layControl1;
-            this.txtCuringMeasure.TabIndex = 5;
-            // 
-            // txtQualityCondition
-            // 
-            this.txtQualityCondition.AlphabeticFiled = null;
-            this.txtQualityCondition.EntityField = DQS.Module.Entities.BUSCuringRecordEntityFields2.QualityCondition;
-            this.txtQualityCondition.IsIntegerOnly = false;
-            this.txtQualityCondition.IsNullString = null;
-            this.txtQualityCondition.IsNullValidate = false;
-            this.txtQualityCondition.IsTransferAlphabetic = false;
-            this.txtQualityCondition.Location = new System.Drawing.Point(441, 41);
-            this.txtQualityCondition.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtQualityCondition.Name = "txtQualityCondition";
-            this.txtQualityCondition.Size = new System.Drawing.Size(260, 25);
-            this.txtQualityCondition.StyleController = this.layControl1;
-            this.txtQualityCondition.TabIndex = 3;
-            // 
-            // txtCheckItem
-            // 
-            this.txtCheckItem.AlphabeticFiled = null;
-            this.txtCheckItem.EntityField = DQS.Module.Entities.BUSCuringRecordEntityFields2.CheckItem;
-            this.txtCheckItem.IsIntegerOnly = false;
-            this.txtCheckItem.IsNullString = null;
-            this.txtCheckItem.IsNullValidate = false;
-            this.txtCheckItem.IsTransferAlphabetic = false;
-            this.txtCheckItem.Location = new System.Drawing.Point(90, 41);
-            this.txtCheckItem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtCheckItem.Name = "txtCheckItem";
-            this.txtCheckItem.Size = new System.Drawing.Size(269, 25);
-            this.txtCheckItem.StyleController = this.layControl1;
-            this.txtCheckItem.TabIndex = 2;
             // 
             // txtCuringMan
             // 
@@ -864,6 +804,50 @@
             this.layValidateDate.Text = "有效期至";
             this.layValidateDate.TextSize = new System.Drawing.Size(75, 18);
             // 
+            // txtCheckItem
+            // 
+            this.txtCheckItem.Location = new System.Drawing.Point(90, 41);
+            this.txtCheckItem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCheckItem.Name = "txtCheckItem";
+            this.txtCheckItem.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtCheckItem.Size = new System.Drawing.Size(269, 25);
+            this.txtCheckItem.StyleController = this.layControl1;
+            this.txtCheckItem.TabIndex = 2;
+            // 
+            // txtQualityCondition
+            // 
+            this.txtQualityCondition.Location = new System.Drawing.Point(441, 41);
+            this.txtQualityCondition.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtQualityCondition.Name = "txtQualityCondition";
+            this.txtQualityCondition.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtQualityCondition.Size = new System.Drawing.Size(260, 25);
+            this.txtQualityCondition.StyleController = this.layControl1;
+            this.txtQualityCondition.TabIndex = 3;
+            // 
+            // txtCuringMeasure
+            // 
+            this.txtCuringMeasure.Location = new System.Drawing.Point(90, 157);
+            this.txtCuringMeasure.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCuringMeasure.Name = "txtCuringMeasure";
+            this.txtCuringMeasure.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtCuringMeasure.Size = new System.Drawing.Size(269, 25);
+            this.txtCuringMeasure.StyleController = this.layControl1;
+            this.txtCuringMeasure.TabIndex = 5;
+            // 
+            // txtCuringResult
+            // 
+            this.txtCuringResult.Location = new System.Drawing.Point(441, 157);
+            this.txtCuringResult.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCuringResult.Name = "txtCuringResult";
+            this.txtCuringResult.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtCuringResult.Size = new System.Drawing.Size(260, 25);
+            this.txtCuringResult.StyleController = this.layControl1;
+            this.txtCuringResult.TabIndex = 6;
+            // 
             // FrmSingleCuringRecord
             // 
             this.AcceptButton = this.btnSave;
@@ -921,10 +905,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtUnqualifiedAmount.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCuringRemrk.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQualifiedAmount.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCuringResult.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCuringMeasure.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtQualityCondition.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCheckItem.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCuringMan.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCuringCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layControlGroup1)).EndInit();
@@ -941,6 +921,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layProduceDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layValidateDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCheckItem.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQualityCondition.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCuringMeasure.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCuringResult.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -974,9 +958,6 @@
         private DevExpress.XtraEditors.GroupControl gpcRecord;
         private DQS.Controls.FieldTextBoxPanel ftPanel;
         private DevExpress.XtraLayout.LayoutControl layControl1;
-        private DQS.Controls.BUSCuringRecordEntityTextBox txtCuringMeasure;
-        private DQS.Controls.BUSCuringRecordEntityTextBox txtQualityCondition;
-        private DQS.Controls.BUSCuringRecordEntityTextBox txtCheckItem;
         private DQS.Controls.BUSCuringRecordEntityTextBox txtCuringMan;
         private DQS.Controls.BUSCuringRecordEntityTextBox txtCuringCode;
         private DevExpress.XtraLayout.LayoutControlGroup layControlGroup1;
@@ -986,7 +967,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layQualityCondition;
         private DevExpress.XtraLayout.LayoutControlItem layCuringMeasure;
         private DQS.Controls.BUSCuringRecordEntityTextBox txtCuringRemrk;
-        private DQS.Controls.BUSCuringRecordEntityTextBox txtCuringResult;
         private DevExpress.XtraLayout.LayoutControlItem layCuringResult;
         private DevExpress.XtraLayout.LayoutControlItem layCuringRemrk;
         private DQS.Controls.BUSCuringRecordEntityTextBox txtUnqualifiedAmount;
@@ -1001,5 +981,9 @@
         public DQS.Controls.BUSCuringRecordEntityTextBox txtValidateDate;
         public DQS.Controls.BUSCuringRecordEntityTextBox txtAmount;
         public DQS.Controls.BUSCuringRecordEntityTextBox txtProduceDate;
+        private DevExpress.XtraEditors.ComboBoxEdit txtCheckItem;
+        private DevExpress.XtraEditors.ComboBoxEdit txtQualityCondition;
+        private DevExpress.XtraEditors.ComboBoxEdit txtCuringMeasure;
+        private DevExpress.XtraEditors.ComboBoxEdit txtCuringResult;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
@@ -25,6 +26,82 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
         {
             InitializeComponent();
             this.m_ProductID = productID;
+            BindCheckItems();
+            BindQualityCondition();
+            BindCuringMeasure();
+            BindCuringResult();
+        }
+
+        private void BindCuringResult()
+        {
+            EntityCollection<BUSCuringRecordEntity> records = new EntityCollection<BUSCuringRecordEntity>();
+            records.Fetch();
+
+            List<string> curingResults = records.Cast<BUSCuringRecordEntity>()
+                                                .AsQueryable<BUSCuringRecordEntity>()
+                                                .Select(p => p.CuringResult)
+                                                .Distinct()
+                                                .ToList();
+
+            List<string> results = curingResults.Distinct().OrderBy(p => p).ToList();
+            foreach (var result in results)
+            {
+                txtCuringResult.Properties.Items.Add(result);
+            }
+        }
+
+        private void BindCuringMeasure()
+        {
+            EntityCollection<BUSCuringRecordEntity> records = new EntityCollection<BUSCuringRecordEntity>();
+            records.Fetch();
+
+            List<string> curingMeasures = records.Cast<BUSCuringRecordEntity>()
+                                                .AsQueryable<BUSCuringRecordEntity>()
+                                                .Select(p => p.CuringMeasure)
+                                                .Distinct()
+                                                .ToList();
+
+            List<string> measure = curingMeasures.Distinct().OrderBy(p => p).ToList();
+            foreach(var result in measure)
+            {
+                txtCuringMeasure.Properties.Items.Add(result);
+            }
+        }
+
+        private void BindQualityCondition()
+        {
+            EntityCollection<BUSCuringRecordEntity> records = new EntityCollection<BUSCuringRecordEntity>();
+            records.Fetch();
+
+            List<string> qualityConditions = records.Cast<BUSCuringRecordEntity>()
+                                                .AsQueryable<BUSCuringRecordEntity>()
+                                                .Select(p => p.QualityCondition)
+                                                .Distinct()
+                                                .ToList();
+
+            List<string> conditions = qualityConditions.Distinct().OrderBy(p => p).ToList();
+            foreach(var result in conditions)
+            {
+                txtQualityCondition.Properties.Items.Add(result);
+            }
+        }
+
+        private void BindCheckItems()
+        {
+            EntityCollection<BUSCuringRecordEntity> records = new EntityCollection<BUSCuringRecordEntity>();
+            records.Fetch();
+
+            List<string> checkItems = records.Cast<BUSCuringRecordEntity>()
+                                                .AsQueryable<BUSCuringRecordEntity>()
+                                                .Select(p => p.CheckItem)
+                                                .Distinct()
+                                                .ToList();
+
+            List<string> items = checkItems.Distinct().OrderBy(p => p).ToList();
+            foreach(var result in items)
+            {
+                txtCheckItem.Properties.Items.Add(result);
+            }
         }
 
         private void FrmSingleCuringRecord_Load(object sender, EventArgs e)
@@ -56,6 +133,10 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
                 entity.LastModifyDate = DateTime.Now;
                 entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
+                entity.CheckItem = txtCheckItem.Text;
+                entity.CuringResult = txtCuringResult.Text;
+                entity.CuringMeasure = txtCuringMeasure.Text;
+                entity.QualityCondition = txtQualityCondition.Text;
                 entity.Save();
 
                 //更新养护时间

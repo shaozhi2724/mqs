@@ -70,7 +70,18 @@ namespace DQS.Controls
         /// 每页大小
         /// </summary>
         [Description("每页大小")]
-        public int PageSize { get; set; }
+        public int PageSize
+        {
+            get;
+            set;
+        }
+
+        [Description("分组字段名称")]
+        public string GroupColumn
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 要显示的Text
@@ -137,6 +148,10 @@ namespace DQS.Controls
 
             using (FrmPopupQueryMultiple popup = new FrmPopupQueryMultiple(this))
             {
+                if(!string.IsNullOrWhiteSpace(GroupColumn))
+                {
+                    popup.GroupColumn = GroupColumn;
+                }
                 if (popup.ShowDialog(this) == DialogResult.OK)
                 {
                     if (this.PopupClosing != null)

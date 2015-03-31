@@ -32,6 +32,12 @@ namespace DQS.Controls
         /// </summary>
         //public DataRow EditRow { get; set; }
         private string _groupColumn;
+        [Description("分组字段名称")]
+        public string GroupColumn
+        {
+            get { return _groupColumn; }
+            set { _groupColumn = value; }
+        }
         public FrmPopupQueryMultiple()
         {
             InitializeComponent();
@@ -50,6 +56,14 @@ namespace DQS.Controls
             this.pageNavigator.Fields = string.IsNullOrEmpty(popupBox.Fields) ? "*" : popupBox.Fields;
             this.pageNavigator.Filter = string.IsNullOrEmpty(popupBox.Filter) ? "" : popupBox.Filter;
             this.pageNavigator.PageSize = popupBox.PageSize == 0 ? 100 : popupBox.PageSize;
+            if(!string.IsNullOrWhiteSpace(GroupColumn))
+            {
+                _groupColumn = GroupColumn;
+            }
+            else
+            {
+                _groupColumn = string.Empty;
+            }
         }
 
         public FrmPopupQueryMultiple(string formatQueryString, string viewName, string primaryField, string fields, string filter, int pageSize, string groupColumn)

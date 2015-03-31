@@ -94,25 +94,37 @@ namespace DQS.Module.Entities
 
 		public string CheckItem
 		{
-			get { return (string)this.GetValue("CheckItem"); } 
+            get
+            {
+                return IsNullField("CheckItem") ? "" : (string)this.GetValue("CheckItem");
+            } 
 			set { this.SetValue("CheckItem", value); } 
 		}
 
 		public string QualityCondition
 		{
-			get { return (string)this.GetValue("QualityCondition"); } 
+            get
+            {
+                return IsNullField("QualityCondition") ? "" : (string)this.GetValue("QualityCondition");
+            } 
 			set { this.SetValue("QualityCondition", value); } 
 		}
 
 		public string CuringMeasure
 		{
-			get { return (string)this.GetValue("CuringMeasure"); } 
+            get
+            {
+                return IsNullField("CuringMeasure") ? "" : (string)this.GetValue("CuringMeasure");
+            } 
 			set { this.SetValue("CuringMeasure", value); } 
 		}
 
 		public string CuringResult
 		{
-			get { return (string)this.GetValue("CuringResult"); } 
+            get
+            {
+                return IsNullField("CuringResult") ? "" : (string)this.GetValue("CuringResult");
+            } 
 			set { this.SetValue("CuringResult", value); } 
 		}
 
