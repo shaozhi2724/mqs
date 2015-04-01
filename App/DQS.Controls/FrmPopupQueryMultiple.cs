@@ -14,6 +14,7 @@ namespace DQS.Controls
     public partial class FrmPopupQueryMultiple : DevExpress.XtraEditors.XtraForm
     {
         private TextBoxPopupMultipleEx m_PopupBox;
+        private string _defaultFilter;
 
         public int PageSize
         {
@@ -55,7 +56,7 @@ namespace DQS.Controls
             this.pageNavigator.ViewName = popupBox.ViewName;
             this.pageNavigator.Fields = string.IsNullOrEmpty(popupBox.Fields) ? "*" : popupBox.Fields;
             this.pageNavigator.Filter = string.IsNullOrEmpty(popupBox.Filter) ? "" : popupBox.Filter;
-            this.pageNavigator.PageSize = popupBox.PageSize == 0 ? 100 : popupBox.PageSize;
+            this.pageNavigator.PageSize = popupBox.PageSize == 0 ? 5000 : popupBox.PageSize;
             if(!string.IsNullOrWhiteSpace(GroupColumn))
             {
                 _groupColumn = GroupColumn;
@@ -64,6 +65,7 @@ namespace DQS.Controls
             {
                 _groupColumn = string.Empty;
             }
+            _defaultFilter = pageNavigator.Filter;
         }
 
         public FrmPopupQueryMultiple(string formatQueryString, string viewName, string primaryField, string fields, string filter, int pageSize, string groupColumn)
@@ -76,7 +78,7 @@ namespace DQS.Controls
             this.pageNavigator.ViewName = viewName;
             this.pageNavigator.Fields = string.IsNullOrEmpty(fields) ? "*" : fields;
             this.pageNavigator.Filter = string.IsNullOrEmpty(filter) ? "" : filter;
-            this.pageNavigator.PageSize = pageSize == 0 ? 100 : pageSize;
+            this.pageNavigator.PageSize = pageSize == 0 ? 5000 : pageSize;
             if (!string.IsNullOrWhiteSpace(groupColumn))
             {
                 _groupColumn = groupColumn;
@@ -85,6 +87,7 @@ namespace DQS.Controls
             {
                 _groupColumn = string.Empty;
             }
+            _defaultFilter = pageNavigator.Filter;
         }
 
         private void FrmPopupQueryMultiple_Load(object sender, EventArgs e)
@@ -112,14 +115,36 @@ namespace DQS.Controls
         {
             if (this.txtQuery.Text.Trim().Length > 0)
             {
-                this.pageNavigator.Filter = "";
-                if (!string.IsNullOrEmpty(this.pageNavigator.Filter))
+                if(!string.IsNullOrEmpty(this.pageNavigator.Filter))
                 {
-                    this.pageNavigator.Filter += " AND " + string.Format(this.txtQuery.FormatQueryString, this.txtQuery.Text.Trim());
+                    this.pageNavigator.Filter = "";
+                    if(!string.IsNullOrWhiteSpace(_defaultFilter))
+                    {
+                        this.pageNavigator.Filter = "(" + _defaultFilter + ") AND (" + string.Format(this.txtQuery.FormatQueryString, this.txtQuery.Text.Trim()) + ")";
+                    }
+                    else
+                    {
+                        if(!string.IsNullOrWhiteSpace(this.pageNavigator.Filter))
+                        {
+                            this.pageNavigator.Filter += " AND (" + string.Format(this.txtQuery.FormatQueryString, this.txtQuery.Text.Trim()) + ")";
+                        }
+                        else
+                        {
+                            this.pageNavigator.Filter = string.Format(this.txtQuery.FormatQueryString, this.txtQuery.Text.Trim());
+                        }
+                    }
                 }
                 else
                 {
-                    this.pageNavigator.Filter = string.Format(this.txtQuery.FormatQueryString, this.txtQuery.Text.Trim());
+                    if(!string.IsNullOrWhiteSpace(_defaultFilter))
+                    {
+                        this.pageNavigator.Filter = _defaultFilter;
+                    }
+                    else
+                    {
+                        this.pageNavigator.Filter = string.Format(this.txtQuery.FormatQueryString, this.txtQuery.Text.Trim());
+                    }
+
                 }
                 this.pageNavigator.ShowData();
             }
@@ -127,9 +152,23 @@ namespace DQS.Controls
             {
                 if (this.pageNavigator.ViewName != "vw_AllWarehouseInBill" && this.pageNavigator.ViewName != "vw_AllWarehouseOutBill")
                 {
-                    this.pageNavigator.Filter = "";
+                    if(!string.IsNullOrWhiteSpace(_defaultFilter))
+                    {
+                        this.pageNavigator.Filter = _defaultFilter;
+                    }
+                    else
+                    {
+                        this.pageNavigator.Filter = "";
+                    }
                 }
-
+                else
+                {
+                    this.pageNavigator.Filter = "";
+                    if(!string.IsNullOrWhiteSpace(_defaultFilter))
+                    {
+                        this.pageNavigator.Filter = _defaultFilter;
+                    }
+                }
                 this.pageNavigator.ShowData();
             }
             ShowGroup();
