@@ -6,6 +6,7 @@ using DQS.App.Properties;
 using DQS.Common;
 using DQS.Module.Entities;
 using System;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Xml;
@@ -47,6 +48,7 @@ namespace DQS.App
             }
             this.lblUserError.Text = "";
             this.lblPasswordError.Text = "";
+            this.Text += " - V " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
         private void txtUserCode_TextChanged(object sender, EventArgs e)

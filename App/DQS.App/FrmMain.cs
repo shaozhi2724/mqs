@@ -209,6 +209,7 @@ namespace DQS.App
 
             this.lblDate.Text += " " + Week();
 
+            this.Text += " - V " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             this.AutoLoadTopMenu();
 
             //点击第一个大菜单
