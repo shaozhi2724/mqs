@@ -234,7 +234,9 @@
     <Compile Include="ProductManager\FrmPriceInfo.Designer.cs">
       <DependentUpon>FrmPriceInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProductManager\FrmPriceOfDealer.cs" />
+    <Compile Include="ProductManager\FrmPriceOfDealer.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ProductManager\FrmPriceOfDealer.designer.cs">
       <DependentUpon>FrmPriceOfDealer.cs</DependentUpon>
     </Compile>
@@ -292,7 +294,9 @@
     <Compile Include="ProductManager\FrmSinglePrice2.Designer.cs">
       <DependentUpon>FrmSinglePrice2.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProductManager\FrmSinglePriceOfDealer.cs" />
+    <Compile Include="ProductManager\FrmSinglePriceOfDealer.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ProductManager\FrmSinglePriceOfDealer.designer.cs">
       <DependentUpon>FrmSinglePriceOfDealer.cs</DependentUpon>
     </Compile>

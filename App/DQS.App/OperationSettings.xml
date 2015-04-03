@@ -219,22 +219,22 @@
           <PageSize>100</PageSize>
         </PopupForm>
         <PopupForm Name="Price1" PopStyle="EnterKey">
-          <FormatQueryString>[价格分类] LIKE '%{0}%' OR [价格分类Spell] LIKE '%{0}%'</FormatQueryString>
-          <ViewName>vw_AllProductPrice</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,价格分类,价格分类Spell,[价格]</Fields>
+          <FormatQueryString>[往来单位] = '{0}' AND [药品名称] = '{1}'</FormatQueryString>
+          <ViewName>vw_PriceOfDealer</ViewName>
+          <PrimaryField>PriceID</PrimaryField>
+          <Fields>[往来单位],[药品名称],[批发价],[零售价],[创建人],[创建日期],[最后修改人],[最后修改日期]</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
         <PopupForm Name="Price2" PopStyle="EnterKey">
-          <FormatQueryString>[价格分类] LIKE '%{0}%' OR [价格分类Spell] LIKE '%{0}%'</FormatQueryString>
-          <ViewName>vw_AllProductPrice</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,价格分类,价格分类Spell,[价格]</Fields>
+          <FormatQueryString>[往来单位] = '{0}' AND [药品名称] = '{1}'</FormatQueryString>
+          <ViewName>vw_PriceOfDealer</ViewName>
+          <PrimaryField>PriceID</PrimaryField>
+          <Fields>[往来单位],[药品名称],[批发价],[零售价],[创建人],[创建日期],[最后修改人],[最后修改日期]</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
-        <PopupForm Name="Price3" PopStyle="EnterKey">
+        <PopupForm Name="Price3" PopStyle="DoubleClick">
           <FormatQueryString>[价格分类] LIKE '%{0}%' OR [价格分类Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_AllProductPrice</ViewName>
           <PrimaryField>药品ID</PrimaryField>
@@ -256,8 +256,8 @@
         <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品编号"/>
         <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品名称"/>
         <Column Name="进货价" FieldType="System.Double" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="进货价"/>
-        <Column Name="批发价" EntityField="TradePrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Product" PopupField="批发价"/>
-        <Column Name="零售价" EntityField="RetailPrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Product" PopupField="零售价"/>
+        <Column Name="批发价" EntityField="TradePrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price1" PopupField="批发价"/>
+        <Column Name="零售价" EntityField="RetailPrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price2" PopupField="零售价"/>
         <Column Name="单价" EntityField="UnitPrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price3" PopupField="价格"/>
         <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
         <Column Name="金额" EntityField="TotalPrice" FieldType="System.Double"  Visible="true" AllowEdit="false" />

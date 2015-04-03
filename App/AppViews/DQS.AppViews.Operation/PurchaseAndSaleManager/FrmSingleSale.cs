@@ -871,212 +871,283 @@ WHERE BillID={1}
 
         private void popupGrid_PopupClosed(object sender, DQS.Controls.CommonCode.PopupFormClosedArgs e)
         {
-
+            string popupFormName = "";
             if (null != e.PopupRow)
             {
+                var grid = (sender as PopupGrid);
 
-                string style = e.PopupRow["StyleID"].ToString();
-                if (style != "0" )
+                if (grid != null)
                 {
-                    if (lblStyleID.Text == "")
+                    if (null != grid.PopupView.FocusedColumn.Tag)
                     {
-                        lblStyleID.Text = e.PopupRow["StyleID"].ToString();
-                        lblStyleName.Text = e.PopupRow["StyleName"].ToString();
-                    }
-                    else
-                    {
-                        if (!style.Equals(lblStyleID.Text))
-                        {
-                            XtraMessageBox.Show("该药品为" + e.PopupRow["StyleName"].ToString() + "，该单据属于" + lblStyleName.Text + "单据，不能混开，需要重新下单。点击确定后，请按Del键删除此药品。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
+                        var column = grid.PopupView.FocusedColumn.Tag as OperationGridColumn;
+                        popupFormName = column.PopupForm.Name;
                     }
                 }
-
-                DataRow dealer = txtDealerName.EditData as DataRow;
-                if (null != dealer && !dealer.IsNull("单位ID"))
+                if (popupFormName == "Product")
                 {
-                    int dealerID = int.Parse(dealer["单位ID"].ToString());
-                    int productID = int.Parse(e.PopupRow["药品ID"].ToString());
-                    string batchNo = e.PopupRow["批号"].ToString();
-                    string productCategory = e.PopupRow["药品类别"].ToString();
-                    
-                    #region 新的价格计算规则
-                    //1 - 根据药品获取价格配置
-                    //2 - 根据选择价格表获取适合的价格版本
-                    //3 - 根据价格表版本获取所有价格规则
-                    //4 - 根据药品明细获取适合的唯一价格规则,得到价格计算公式
-                    //5 - 根据价格计算公式计算单价
-                    //6 - 设置单价
-                    decimal finalPrice = 0;
-                    //根据药品获取价格配置
-                    EntityCollection<BFIProductPriceEntity> productPrices = new EntityCollection<BFIProductPriceEntity>();
-                    productPrices.Fetch(BFIProductPriceEntityFields.ProductID == productID);
-                    List<BFIProductPriceEntity> basePrices =
-                        productPrices.Cast<BFIProductPriceEntity>().AsQueryable().ToList();
-                    //根据选择价格表获取适合的价格版本
-                    int priceListId = Convert.ToInt32(cbxPrice.EditValue);
-                    if(priceListId > 0)
+
+                    string style = e.PopupRow["StyleID"].ToString();
+                    if (style != "0")
                     {
-                        //找到所选价格表的所有可用价格表版本
-                        EntityCollection<BFIPriceListVersionEntity> priceVersionEntities = new EntityCollection<BFIPriceListVersionEntity>();
-                        priceVersionEntities.Fetch(BFIPriceListVersionEntityFields.PriceListID == priceListId
-                            & BFIPriceListVersionEntityFields.Active == true);
-
-                        if(priceVersionEntities.Count > 0)
+                        if (lblStyleID.Text == "")
                         {
-                            var priceVersions =
-                                priceVersionEntities.Cast<BFIPriceListVersionEntity>().AsQueryable().ToList();
-                            List<DateRange> versionRanges = (from v in priceVersions
-                                                             select new DateRange
-                                                             {
-                                                                 DataItem = v,
-                                                                 Start =
-                                                                     v.IsNullField("StartDate")
-                                                                         ? DateTime.MinValue
-                                                                         : v.StartDate,
-                                                                 End =
-                                                                     v.IsNullField("EndDate") ? DateTime.MaxValue : v.EndDate
-                                                             })
-                                                             .OrderBy(p => p.Start)
-                                                             .ThenBy(p => p.End)
-                                                             .ToList();
-                            //找有效的价格表版本 - 当前日期必须在价格表版本开始日期、结束日期范围内
-                            var version = versionRanges.FirstOrDefault(p => DateTime.Today >= p.Start && DateTime.Today <= p.End);
-                            if(null != version)
+                            lblStyleID.Text = e.PopupRow["StyleID"].ToString();
+                            lblStyleName.Text = e.PopupRow["StyleName"].ToString();
+                        }
+                        else
+                        {
+                            if (!style.Equals(lblStyleID.Text))
                             {
-                                var priceVersion = version.DataItem as BFIPriceListVersionEntity;
-                                int priceVersionId = priceVersion.PriceListVersionID;
-                                //根据有效价格表版本找所有的价格规则
-                                EntityCollection<BFIPriceListItemEntity> priceRuleEntities = new EntityCollection<BFIPriceListItemEntity>();
-                                priceRuleEntities.Fetch(BFIPriceListItemEntityFields.PriceVersionID == priceVersionId);
-
-                                //如果价格版本设置了规则
-                                if (priceRuleEntities.Count > 0)
-                                {
-                                    List<BFIPriceListItemEntity> priceRules =
-                                        priceRuleEntities.Cast<BFIPriceListItemEntity>().AsQueryable().ToList();
-
-                                    int minSequence = priceRules.Min(p => p.Sequence);
-
-                                    int sequenceCount = priceRules.Count(p => p.Sequence == minSequence);
-                                    BFIPriceListItemEntity rule = null;
-                                    if (sequenceCount == 1) //最高优先级只有一条规则
-                                    {
-                                        rule = priceRules.First(p => p.Sequence == minSequence);
-                                    }
-                                    else //最高优先级有多条规则
-                                    {
-                                        //1 - 先按药品ID找匹配的价格规则
-                                        var productPriceRules = priceRules
-                                                                .Where(p => p.Sequence == minSequence)
-                                                                .Where(p => !p.IsNullField("ProductID"))
-                                                                .Where(p => p.ProductID == productID)
-                                                                .ToList();
-                                        if(productPriceRules.Count >= 1)
-                                        {
-                                            rule = productPriceRules.FirstOrDefault();
-                                        }
-                                        else
-                                        {
-                                            //2 - 没有设置药品ID的价格规则，按药品类型找价格规则
-                                            var productCategoryPriceRules = priceRules
-                                                                .Where(p => p.Sequence == minSequence)
-                                                                .Where(p => !p.IsNullField("ProductCategory"))
-                                                                .Where(p => p.ProductCategory == productCategory)
-                                                                .ToList();
-                                            if(productCategoryPriceRules.Count >= 1)
-                                            {
-                                                rule = productCategoryPriceRules.FirstOrDefault();
-                                            }
-                                            else
-                                            {
-                                                //3 - 没有设置药品ID和药品类型的价格规则，按优先级找未设置药品ID和药品类型的价格规则
-                                                var noSpecailPriceRules = priceRules
-                                                                .Where(p => p.Sequence == minSequence)
-                                                                .Where(p => p.IsNullField("ProductCategory"))
-                                                                .Where(p => p.IsNullField("ProductID"))
-                                                                .ToList();
-                                                rule = noSpecailPriceRules.FirstOrDefault();
-                                            }
-                                        }
-                                    }
-
-                                    if (null != rule)
-                                    {
-                                        int priceStyleId = rule.BasePriceCategoryID;
-                                        string priceStyleName = rule.BasePriceCategoryName;
-
-                                        double basePrice = 0;
-                                        if (priceStyleId > 0)
-                                        {
-                                            var basePriceEntity =
-                                                basePrices.FirstOrDefault(p => p.PriceID == priceStyleId);
-                                            if (null != basePriceEntity)
-                                            {
-                                                basePrice = basePriceEntity.Price;
-                                            }
-
-                                        }
-                                        else
-                                        {
-                                            if(priceStyleName == "上次进货价")
-                                            {
-                                                //上次的采购单价
-                                                EntityCollection<BUSProductPurchasePriceEntity> purchasePriceEntities = new EntityCollection<BUSProductPurchasePriceEntity>();
-                                                purchasePriceEntities.Fetch(BUSProductPurchasePriceEntityFields.DealerID == dealerID &
-                                                                    BUSProductPurchasePriceEntityFields.ProductID == productID &
-                                                                    BUSProductPurchasePriceEntityFields.BatchNo == batchNo);
-                                                Dictionary<int, double> prices = new Dictionary<int, double>();
-                                                foreach(var purchasePriceEntity in purchasePriceEntities)
-                                                {
-                                                    var price = purchasePriceEntity as BUSProductPurchasePriceEntity;
-                                                    prices.Add(price.ProductPurchasePriceID, price.PurchasePrice);
-                                                }
-
-                                                if(prices.Count > 0)
-                                                {
-                                                    var purchasePrice = prices.OrderByDescending(p => p.Key).FirstOrDefault();
-                                                    basePrice = purchasePrice.Value;
-                                                }
-                                            }
-                                            else if(priceStyleName == "上次销售价")
-                                            {
-                                                //上次的销售单价
-                                                EntityCollection<BUSProductSalePriceEntity> salePriceEntities = new EntityCollection<BUSProductSalePriceEntity>();
-                                                salePriceEntities.Fetch(BUSProductSalePriceEntityFields.DealerID == dealerID &
-                                                                    BUSProductSalePriceEntityFields.ProductID == productID &
-                                                                    BUSProductSalePriceEntityFields.BatchNo == batchNo);
-                                                Dictionary<int, double> prices = new Dictionary<int, double>();
-                                                foreach (var salePriceEntity in salePriceEntities)
-                                                {
-                                                    var price = salePriceEntity as BUSProductSalePriceEntity;
-                                                    prices.Add(price.ProductSalePriceID, price.SalePrice);
-                                                }
-                    
-                                                if (prices.Count > 0)
-                                                {
-                                                    var saleprice = prices.OrderByDescending(p => p.Key).FirstOrDefault();
-                                                    basePrice = saleprice.Value;
-                                                }
-                                            }
-                                        }
-                                        //单价 = 基本价 * (1 + 折扣) + 附加费
-                                        double discount = rule.PriceDiscount;
-                                        double surcharge = rule.PriceSurcharge;
-                                        double unitPrice = basePrice*(1 + discount) + surcharge;
-                                        finalPrice = Math.Round((decimal) unitPrice, 2, MidpointRounding.AwayFromZero);
-                                    }
-                                }
-
+                                XtraMessageBox.Show(
+                                                    "该药品为" + e.PopupRow["StyleName"].ToString() + "，该单据属于" +
+                                                    lblStyleName.Text + "单据，不能混开，需要重新下单。点击确定后，请按Del键删除此药品。",
+                                                    "系统提示",
+                                                    MessageBoxButtons.OK,
+                                                    MessageBoxIcon.Warning);
                             }
                         }
                     }
+                    if(null != e.PopupRow["批发价"])
+                    {
+                        this.popupGrid.PopupView.SetFocusedRowCellValue("批发价", e.PopupRow["批发价"]);
+                        
+                    }
 
-                    this.popupGrid.PopupView.SetFocusedRowCellValue("单价", finalPrice);
-                    #endregion
+                    if(null != e.PopupRow["零售价"])
+                    {
+                        this.popupGrid.PopupView.SetFocusedRowCellValue("零售价", e.PopupRow["零售价"]);
+                    }
+
+                    DataRow dealer = txtDealerName.EditData as DataRow;
+                    if (null != dealer && !dealer.IsNull("单位ID"))
+                    {
+                        int dealerID = int.Parse(dealer["单位ID"].ToString());
+                        int productID = int.Parse(e.PopupRow["药品ID"].ToString());
+                        string batchNo = e.PopupRow["批号"].ToString();
+                        string productCategory = e.PopupRow["药品类别"].ToString();
+
+                        #region 新的价格计算规则
+
+                        //1 - 根据药品获取价格配置
+                        //2 - 根据选择价格表获取适合的价格版本
+                        //3 - 根据价格表版本获取所有价格规则
+                        //4 - 根据药品明细获取适合的唯一价格规则,得到价格计算公式
+                        //5 - 根据价格计算公式计算单价
+                        //6 - 设置单价
+                        decimal finalPrice = 0;
+                        //根据药品获取价格配置
+                        EntityCollection<BFIProductPriceEntity> productPrices =
+                            new EntityCollection<BFIProductPriceEntity>();
+                        productPrices.Fetch(BFIProductPriceEntityFields.ProductID == productID);
+                        List<BFIProductPriceEntity> basePrices =
+                            productPrices.Cast<BFIProductPriceEntity>().AsQueryable().ToList();
+                        //根据选择价格表获取适合的价格版本
+                        int priceListId = Convert.ToInt32(cbxPrice.EditValue);
+                        if (priceListId > 0)
+                        {
+                            //找到所选价格表的所有可用价格表版本
+                            EntityCollection<BFIPriceListVersionEntity> priceVersionEntities =
+                                new EntityCollection<BFIPriceListVersionEntity>();
+                            priceVersionEntities.Fetch(BFIPriceListVersionEntityFields.PriceListID == priceListId
+                                                       & BFIPriceListVersionEntityFields.Active == true);
+
+                            if (priceVersionEntities.Count > 0)
+                            {
+                                var priceVersions =
+                                    priceVersionEntities.Cast<BFIPriceListVersionEntity>().AsQueryable().ToList();
+                                List<DateRange> versionRanges = (from v in priceVersions
+                                                                 select new DateRange
+                                                                        {
+                                                                            DataItem = v,
+                                                                            Start =
+                                                                                v.IsNullField("StartDate")
+                                                                                    ? DateTime.MinValue
+                                                                                    : v.StartDate,
+                                                                            End =
+                                                                                v.IsNullField("EndDate")
+                                                                                    ? DateTime.MaxValue
+                                                                                    : v.EndDate
+                                                                        })
+                                    .OrderBy(p => p.Start)
+                                    .ThenBy(p => p.End)
+                                    .ToList();
+                                //找有效的价格表版本 - 当前日期必须在价格表版本开始日期、结束日期范围内
+                                var version =
+                                    versionRanges.FirstOrDefault(
+                                                                 p =>
+                                                                 DateTime.Today >= p.Start && DateTime.Today <= p.End);
+                                if (null != version)
+                                {
+                                    var priceVersion = version.DataItem as BFIPriceListVersionEntity;
+                                    int priceVersionId = priceVersion.PriceListVersionID;
+                                    //根据有效价格表版本找所有的价格规则
+                                    EntityCollection<BFIPriceListItemEntity> priceRuleEntities =
+                                        new EntityCollection<BFIPriceListItemEntity>();
+                                    priceRuleEntities.Fetch(BFIPriceListItemEntityFields.PriceVersionID ==
+                                                            priceVersionId);
+
+                                    //如果价格版本设置了规则
+                                    if (priceRuleEntities.Count > 0)
+                                    {
+                                        List<BFIPriceListItemEntity> priceRules =
+                                            priceRuleEntities.Cast<BFIPriceListItemEntity>().AsQueryable().ToList();
+
+                                        int minSequence = priceRules.Min(p => p.Sequence);
+
+                                        int sequenceCount = priceRules.Count(p => p.Sequence == minSequence);
+                                        BFIPriceListItemEntity rule = null;
+                                        if (sequenceCount == 1) //最高优先级只有一条规则
+                                        {
+                                            rule = priceRules.First(p => p.Sequence == minSequence);
+                                        }
+                                        else //最高优先级有多条规则
+                                        {
+                                            //1 - 先按药品ID找匹配的价格规则
+                                            var productPriceRules = priceRules
+                                                .Where(p => p.Sequence == minSequence)
+                                                .Where(p => !p.IsNullField("ProductID"))
+                                                .Where(p => p.ProductID == productID)
+                                                .ToList();
+                                            if (productPriceRules.Count >= 1)
+                                            {
+                                                rule = productPriceRules.FirstOrDefault();
+                                            }
+                                            else
+                                            {
+                                                //2 - 没有设置药品ID的价格规则，按药品类型找价格规则
+                                                var productCategoryPriceRules = priceRules
+                                                    .Where(p => p.Sequence == minSequence)
+                                                    .Where(p => !p.IsNullField("ProductCategory"))
+                                                    .Where(p => p.ProductCategory == productCategory)
+                                                    .ToList();
+                                                if (productCategoryPriceRules.Count >= 1)
+                                                {
+                                                    rule = productCategoryPriceRules.FirstOrDefault();
+                                                }
+                                                else
+                                                {
+                                                    //3 - 没有设置药品ID和药品类型的价格规则，按优先级找未设置药品ID和药品类型的价格规则
+                                                    var noSpecailPriceRules = priceRules
+                                                        .Where(p => p.Sequence == minSequence)
+                                                        .Where(p => p.IsNullField("ProductCategory"))
+                                                        .Where(p => p.IsNullField("ProductID"))
+                                                        .ToList();
+                                                    rule = noSpecailPriceRules.FirstOrDefault();
+                                                }
+                                            }
+                                        }
+
+                                        if (null != rule)
+                                        {
+                                            int priceStyleId = rule.BasePriceCategoryID;
+                                            string priceStyleName = rule.BasePriceCategoryName;
+
+                                            double basePrice = 0;
+                                            if (priceStyleId > 0)
+                                            {
+                                                var basePriceEntity =
+                                                    basePrices.FirstOrDefault(p => p.PriceID == priceStyleId);
+                                                if (null != basePriceEntity)
+                                                {
+                                                    basePrice = basePriceEntity.Price;
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                if (priceStyleName == "上次进货价")
+                                                {
+                                                    //上次的采购单价
+                                                    EntityCollection<BUSProductPurchasePriceEntity>
+                                                        purchasePriceEntities =
+                                                            new EntityCollection<BUSProductPurchasePriceEntity>();
+                                                    purchasePriceEntities.Fetch(
+                                                                                BUSProductPurchasePriceEntityFields
+                                                                                    .DealerID ==
+                                                                                dealerID &
+                                                                                BUSProductPurchasePriceEntityFields
+                                                                                    .ProductID == productID &
+                                                                                BUSProductPurchasePriceEntityFields
+                                                                                    .BatchNo ==
+                                                                                batchNo);
+                                                    Dictionary<int, double> prices = new Dictionary<int, double>();
+                                                    foreach (var purchasePriceEntity in purchasePriceEntities)
+                                                    {
+                                                        var price = purchasePriceEntity as BUSProductPurchasePriceEntity;
+                                                        prices.Add(price.ProductPurchasePriceID, price.PurchasePrice);
+                                                    }
+
+                                                    if (prices.Count > 0)
+                                                    {
+                                                        var purchasePrice =
+                                                            prices.OrderByDescending(p => p.Key).FirstOrDefault();
+                                                        basePrice = purchasePrice.Value;
+                                                    }
+                                                }
+                                                else if (priceStyleName == "上次销售价")
+                                                {
+                                                    //上次的销售单价
+                                                    EntityCollection<BUSProductSalePriceEntity> salePriceEntities =
+                                                        new EntityCollection<BUSProductSalePriceEntity>();
+                                                    salePriceEntities.Fetch(BUSProductSalePriceEntityFields.DealerID ==
+                                                                            dealerID &
+                                                                            BUSProductSalePriceEntityFields.ProductID ==
+                                                                            productID &
+                                                                            BUSProductSalePriceEntityFields.BatchNo ==
+                                                                            batchNo);
+                                                    Dictionary<int, double> prices = new Dictionary<int, double>();
+                                                    foreach (var salePriceEntity in salePriceEntities)
+                                                    {
+                                                        var price = salePriceEntity as BUSProductSalePriceEntity;
+                                                        prices.Add(price.ProductSalePriceID, price.SalePrice);
+                                                    }
+
+                                                    if (prices.Count > 0)
+                                                    {
+                                                        var saleprice =
+                                                            prices.OrderByDescending(p => p.Key).FirstOrDefault();
+                                                        basePrice = saleprice.Value;
+                                                    }
+                                                }
+                                            }
+                                            //单价 = 基本价 * (1 + 折扣) + 附加费
+                                            double discount = rule.PriceDiscount;
+                                            double surcharge = rule.PriceSurcharge;
+                                            double unitPrice = basePrice*(1 + discount) + surcharge;
+                                            finalPrice = Math.Round((decimal) unitPrice,
+                                                                    2,
+                                                                    MidpointRounding.AwayFromZero);
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+
+                        this.popupGrid.PopupView.SetFocusedRowCellValue("单价", finalPrice);
+
+                        #endregion
+                    }
+
+                    this.SetProductAmount(e);
+                }
+                else if(popupFormName == "Price1" || popupFormName == "Price2")
+                {
+                    if(null != e.PopupRow["批发价"])
+                    {
+                        this.popupGrid.PopupView.SetFocusedRowCellValue("批发价", e.PopupRow["批发价"]);
+                        
+                    }
+
+                    if(null != e.PopupRow["零售价"])
+                    {
+                        this.popupGrid.PopupView.SetFocusedRowCellValue("零售价", e.PopupRow["零售价"]);
+                    
+                    }
                 }
             }
-            this.SetProductAmount(e);
+
         }
 
         private void popupGrid_TotalPriceChanged(object sender, DQS.Controls.CommonCode.TotalPriceChangedArgs e)
@@ -1254,21 +1325,14 @@ WHERE BillID={1}
             {
                 if (e.ActiveOperationColumn.PopupForm != null)
                 {
-                    if (e.ActiveOperationColumn.PopupForm.Name == "Price1")
+                    if(e.ActiveOperationColumn.PopupForm.Name == "Price1" || e.ActiveOperationColumn.PopupForm.Name == "Price2")
                     {
-                        object priceID = this.popupGrid.PopupView.GetFocusedRowCellValue("药品ID");
-                        if (priceID != null && priceID != DBNull.Value)
-                        {
-                            e.ActiveOperationColumn.PopupForm.Filter = "[药品ID] = " + priceID;
-                        }
-                    }
+                        var dealerName = txtDealerName.Text.Trim();
 
-                    if (e.ActiveOperationColumn.PopupForm.Name == "Price2")
-                    {
-                        object priceID = this.popupGrid.PopupView.GetFocusedRowCellValue("药品ID");
-                        if (priceID != null && priceID != DBNull.Value)
+                        object productName = this.popupGrid.PopupView.GetFocusedRowCellValue("药品名称");
+                        if (productName != null && productName != DBNull.Value)
                         {
-                            e.ActiveOperationColumn.PopupForm.Filter = "[药品ID] = " + priceID;
+                            e.ActiveOperationColumn.PopupForm.Filter = string.Format("[往来单位] = '{0}' AND [药品名称] = '{1}'", dealerName, productName);
                         }
                     }
 
@@ -2009,6 +2073,7 @@ WHERE BillID={1}
             txtOperator.Tag = txtOperator.Text.Trim();
         }
 
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Enter)
@@ -2030,7 +2095,15 @@ WHERE BillID={1}
                     }
                     else
                     {
-                        SendKeys.Send("{TAB}");
+                        if (popupGrid.PopupView.FocusedColumn.FieldName != "批发价" &&
+                            popupGrid.PopupView.FocusedColumn.FieldName != "零售价")
+                        {
+                            SendKeys.Send("{TAB}");
+                        }
+                        else
+                        {
+                            return base.ProcessCmdKey(ref msg, keyData);
+                        }
                     }
                     return true;
                 }
