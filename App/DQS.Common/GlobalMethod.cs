@@ -678,6 +678,7 @@ namespace DQS.Common
                 return dataSet;
             }
         }
-
+        //全局销退允许不选复核单标记 - 用于非本系统销售数据退货
+        public static bool AllowNoReviewSaleBack { get; set; }
     }
 }

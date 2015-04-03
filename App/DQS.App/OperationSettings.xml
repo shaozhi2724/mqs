@@ -355,7 +355,7 @@
     </Grid>
   </Operation>
   <Operation Name="SaleBack">
-    <Grid EntityName="BUSBillDetailEntity" ViewName="vw_AllSaleBackDetail" KeyField="销售退货单ID" EmptyRows="1">
+    <Grid EntityName="BUSBillDetailEntity" ViewName="vw_AllSaleBackDetail" KeyField="销售退货单ID" EmptyRows="100">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
           <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>

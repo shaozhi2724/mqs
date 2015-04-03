@@ -73,6 +73,10 @@ namespace DQS.App
                     return true;
                 }
             }
+            if (keyData == (Keys.Alt | Keys.F2))
+            {
+                GlobalMethod.AllowNoReviewSaleBack = true;
+            }
             return base.ProcessDialogKey(keyData);
         }
         

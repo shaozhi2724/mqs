@@ -22,6 +22,19 @@ namespace DQS.AppViews.Operation.BackManager
         private int? m_id;
 
         private string _operator;
+
+
+        protected override bool ProcessDialogKey(Keys keyData)
+        {
+            if(keyData == (Keys.Alt | Keys.F2))
+            {
+                GlobalMethod.AllowNoReviewSaleBack = true;
+                popupGrid.PopupView.Columns["复核数量"].OptionsColumn.AllowEdit = true;
+                popupGrid.PopupView.Columns["金额"].OptionsColumn.AllowEdit = true;
+                popupGrid.Refresh();
+            }
+            return base.ProcessDialogKey(keyData);
+        }
         public FrmSingleSaleBack()
         {
             InitializeComponent();
@@ -110,7 +123,13 @@ namespace DQS.AppViews.Operation.BackManager
                 BUSBillEntity entity = this.ftPanel.GetEntity() as BUSBillEntity;
 
                 this.CustomSetEntity(entity);
-                if (!this.ValidateAmount()) return;
+
+                //全局销退允许不选复核单标记 - 用于非本系统销售数据退货
+                if (!GlobalMethod.AllowNoReviewSaleBack)
+                {
+                    if (!this.ValidateAmount()) return;
+                }
+
                 if (this.m_id != null)
                 {
                     #region 修改
@@ -852,6 +871,12 @@ WHERE BillID={1}
                 }
             }
             return true;
+        }
+
+        private void btnChoose_Click(object sender, EventArgs e)
+        {
+            FrmReviewRecordQuery doc = new FrmReviewRecordQuery();
+            doc.ShowDialog();
         }
     }
 }
