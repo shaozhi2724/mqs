@@ -118,6 +118,7 @@
             // 
             // pageNavigator
             // 
+            this.pageNavigator.DefaultFilter = "";
             this.pageNavigator.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pageNavigator.EmptySource = null;
             this.pageNavigator.Fields = "*";
@@ -155,12 +156,6 @@
             // 
             this.gvData.Appearance.EvenRow.BackColor = System.Drawing.Color.WhiteSmoke;
             this.gvData.Appearance.EvenRow.Options.UseBackColor = true;
-            this.gvData.Appearance.FocusedCell.BackColor = System.Drawing.Color.Aqua;
-            this.gvData.Appearance.FocusedCell.Options.UseBackColor = true;
-            this.gvData.Appearance.FocusedRow.BackColor = System.Drawing.Color.Beige;
-            this.gvData.Appearance.FocusedRow.ForeColor = System.Drawing.Color.Black;
-            this.gvData.Appearance.FocusedRow.Options.UseBackColor = true;
-            this.gvData.Appearance.FocusedRow.Options.UseForeColor = true;
             this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.gvData.Appearance.HeaderPanel.Options.UseFont = true;
             this.gvData.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;

@@ -8,12 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DQS.Module.Entities;
 using ORMSCore;
 using DQS.Common;
 using DevExpress.XtraLayout.Utils;
+using DevExpress.XtraPrinting.Export;
 using DQS.AppViews.Operation.Properties;
+using DQS.Controls.CommonCode;
 
 namespace DQS.AppViews.Operation.BackManager
 {
@@ -76,6 +79,8 @@ namespace DQS.AppViews.Operation.BackManager
                     this.popupGrid.PopupView.KeyDown -= PopupView_KeyDown;
                     this.popupGrid.RemoveRowCellClickEvent();
                     btnSave.Enabled = false;
+                    btnChoose.Enabled = false;
+                    btnReviewRecord.Enabled = false;
                 }
                 else
                 {
@@ -103,6 +108,8 @@ namespace DQS.AppViews.Operation.BackManager
                         this.popupGrid.PopupView.KeyDown -= PopupView_KeyDown;
                         this.popupGrid.RemoveRowCellClickEvent();
                         btnSave.Enabled = false;
+                        btnChoose.Enabled = false;
+                        btnReviewRecord.Enabled = false;
                     }
                 }
             }
@@ -561,7 +568,15 @@ WHERE BillID={1}
                 billDetailEntityCollection.Fetch(BUSBillDetailEntityFields.BillID == saleBackBill.BillID);
                 foreach (BUSBillDetailEntity billDetailEntity in billDetailEntityCollection)
                 {
-                    oldSaleBackDetails.Add(billDetailEntity);
+                    BUSBillEntity bill = new BUSBillEntity
+                                         {
+                                             BillID = billDetailEntity.BillID
+                                         };
+                    bill.Fetch();
+                    if(null != bill && bill.BillStatusName != "已删除")
+                    {
+                        oldSaleBackDetails.Add(billDetailEntity);
+                    }
                 }
             }
 
@@ -606,7 +621,7 @@ WHERE BillID={1}
                     {
                         totalBackCount = matchedBillDetails.Sum(p => p.Amount);
                     }
-
+                    
                     if (totalReviewCount > 0)
                     {
                         if ((totalBackCount+(int)amount) > totalReviewCount)
@@ -875,8 +890,79 @@ WHERE BillID={1}
 
         private void btnChoose_Click(object sender, EventArgs e)
         {
-            FrmReviewRecordQuery doc = new FrmReviewRecordQuery();
-            doc.ShowDialog();
+            popupGrid.PopupView.OptionsBehavior.Editable = false;
+
+            //this.popupGrid.PopupView.KeyDown -= PopupView_KeyDown;
+            this.popupGrid.RemoveRowCellClickEvent();
+            string dealerName = this.txtDealerName.Text;
+            if(!string.IsNullOrWhiteSpace(dealerName))
+            {
+                int dealerID = Convert.ToInt32((this.txtDealerName.EditData as DataRow)["单位ID"]);
+                FrmReviewRecordQuery doc = new FrmReviewRecordQuery(dealerID, dealerName);
+                var dr = doc.ShowDialog();
+                if(dr == DialogResult.OK)
+                {
+                    BindSelectedReviewDetails(doc);
+                }
+            }
+            else
+            {
+                FrmReviewRecordQuery doc = new FrmReviewRecordQuery();
+                var dr = doc.ShowDialog(this);
+                if(dr == DialogResult.OK)
+                {
+                    BindSelectedReviewDetails(doc);
+                }
+            }
+        }
+
+        private void BindSelectedReviewDetails(FrmReviewRecordQuery doc)
+        {
+            txtSaleBillCode.Text = doc.SaleBillCode;
+            txtReviewCode.Text = doc.ReviewCode;
+            if (doc.EditRows.Any())
+            {
+                _operator = doc.EditRows[0]["业务员"].ToString();
+                popupGrid.EmptySource.Clear();
+                for (int i = 0; i < doc.EditRows.Length; i++)
+                {
+                    DataRow row = popupGrid.EmptySource.NewRow();
+                    popupGrid.EmptySource.Rows.Add(row);
+                }
+
+                popupGrid.ClearGrid();
+
+                for (int i = 0; i < doc.EditRows.Length; i++)
+                {
+                    foreach (GridColumn col in popupGrid.PopupView.Columns)
+                    {
+                        if (!col.Visible && col.Caption != "药品ID")
+                        {
+                            continue;
+                        }
+                        if (col.Caption == "数量")
+                        {
+                            popupGrid.PopupView.SetRowCellValue(i, col.Caption, doc.EditRows[i]["出库数量"]);
+                        }
+                        else
+                        {
+                            if (col.Caption == "金额")
+                            {
+                                double changedPrice = Convert.ToDouble(doc.EditRows[i]["单价"])*
+                                                      Convert.ToDouble(doc.EditRows[i]["出库数量"]);
+                                popupGrid.PopupView.SetRowCellValue(i, col.Caption, changedPrice);
+
+                                popupGrid_TotalPriceChanged(this, new TotalPriceChangedArgs(popupGrid.GetSummaryPrice()));
+                            }
+                            else
+                            {
+                                popupGrid.PopupView.SetRowCellValue(i, col.Caption, doc.EditRows[i][col.Caption]);
+                            }
+                        }
+                    }
+                }
+                popupGrid.PopupView.BestFitColumns();
+            }
         }
     }
 }

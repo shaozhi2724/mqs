@@ -463,7 +463,6 @@
             this.btnChoose.Size = new System.Drawing.Size(136, 30);
             this.btnChoose.TabIndex = 6;
             this.btnChoose.Text = "按复核记录选择(&V)";
-            this.btnChoose.Visible = false;
             this.btnChoose.Click += new System.EventHandler(this.btnChoose_Click);
             // 
             // btnViewHistory
