@@ -26,6 +26,23 @@ namespace DQS.AppViews.Operation.BackManager
             InitializeComponent();
         }
 
+        protected override bool ProcessDialogKey(Keys keyData)
+        {
+            if(keyData == (Keys.Alt | Keys.F2))
+            {
+                GlobalMethod.AllowNoStoreInPurchaseBack = true;
+                txtDealerName.Properties.ReadOnly = false;
+                txtDealerName2.Properties.ReadOnly = false;
+                layoutControlItem1.Visibility = LayoutVisibility.Never;
+                layDealerName.Visibility = LayoutVisibility.Always;
+                popupGrid.PopupView.Columns["入库数量"].OptionsColumn.AllowEdit = true;
+                popupGrid.PopupView.Columns["数量"].OptionsColumn.AllowEdit = true;
+                popupGrid.PopupView.Columns["单价"].OptionsColumn.AllowEdit = true;
+                popupGrid.PopupView.Columns["金额"].OptionsColumn.AllowEdit = true;
+                popupGrid.Refresh();
+            }
+            return base.ProcessDialogKey(keyData);
+        }
         private void FrmSinglePurchaseBack_Load(object sender, EventArgs e)
         {
             this.cbxDeliveryType.InitSource();

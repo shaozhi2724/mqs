@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DQS.Common;
 
@@ -61,6 +62,10 @@ namespace DQS.AppViews.Operation.BackManager
         /// </summary>
         public string ReviewCode { get; set; }
 
+        public int DealerID { get; set; }
+
+        public string DealerName { get; set; }
+
         public FrmReviewRecordQuery()
         {
             InitializeComponent();
@@ -71,34 +76,38 @@ namespace DQS.AppViews.Operation.BackManager
             InitializeComponent();
             this.txtDealerName.Tag = dealerID;
             this.txtDealerName.Text = dealerName;
-            //this.txtProductName.Tag = Convert.ToInt32(productID);
-            //this.txtProductName.Text = productName.ToString();
-            //this.txtProductSpec.Text = productSpec.ToString();
-            //this.txtPackageSpec.Text = packageSpec.ToString();
-            //this.txtProducerName.Text = producerName.ToString();
-            //this.txtBatchNo.Text = batchNo.ToString();
-            //this.txtValidateDate.Text = validateDate.ToString();
-            //this.txtProduceDate.Text = produceDate.ToString();
+
+            DealerID = dealerID;
+            DealerName = dealerName;
         }
 
         private void FrmReviewRecordQuery_Load(object sender, EventArgs e)
         {
             this.gvBill.GridViewData.FocusedRowChanged += GridViewData_FocusedRowChanged;
-            //string dealerName = this.txtDealerName.Text;
-            //int dealerID = (int)this.txtDealerName.Tag;
-            //int productID = (int)this.txtProductName.Tag;
-            //string productName = this.txtProductName.Text;
-            //string batchNo = this.txtBatchNo.Text;
-            //DataTable data = GlobalMethod.GetReviewByProduct(productID, batchNo, dealerID);
-            //this.gvBill.DataSource = data;
-
-
         }
 
         public void GridViewData_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
+            ChangeFocusedReview(e);
+        }
+
+        private void ChangeFocusedReview(FocusedRowChangedEventArgs e)
+        {
             object reviewCode = this.gvBill.GridViewData.GetRowCellValue(e.FocusedRowHandle, "复核单号");
             object saleBillCode = this.gvBill.GridViewData.GetRowCellValue(e.FocusedRowHandle, "销售单号");
+            int dealerId = int.Parse(this.gvBill.GridViewData.GetRowCellValue(e.FocusedRowHandle, "往来单位ID").ToString());
+            string dealerName = this.gvBill.GridViewData.GetRowCellValue(e.FocusedRowHandle, "往来单位名称").ToString();
+            if (DealerID != dealerId)
+            {
+                DealerID = dealerId;
+                txtDealerName.Tag = dealerId;
+            }
+            if (DealerName != dealerName)
+            {
+                DealerName = dealerName;
+                txtDealerName.Text = dealerName;
+            }
+
             if (reviewCode != null && reviewCode != DBNull.Value)
             {
                 if (saleBillCode != null && saleBillCode != DBNull.Value)
@@ -164,7 +173,7 @@ namespace DQS.AppViews.Operation.BackManager
                 int reviewID = Convert.ToInt32(dataRow["复核ID"]);
                 this.txtBillCode.Tag = reviewID;
 
-                string querySql = String.Format("SELECT [复核ID],[复核单号],[复核日期],[复核人员],[销售单号],[往来单位名称],[备注] FROM [dbo].[vw_AllReview] WHERE 复核ID = '{0}'", reviewID);
+                string querySql = String.Format("SELECT [复核ID],[复核单号],[复核日期],[复核人员],[销售单号],[往来单位ID],[往来单位名称],[备注] FROM [dbo].[vw_AllReview] WHERE 复核ID = '{0}'", reviewID);
                 using(DataSet dataSet = new DataSet())
                 {
                     using(SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
@@ -174,7 +183,9 @@ namespace DQS.AppViews.Operation.BackManager
                     gvBill.DataSource = dataSet.Tables[0];
                     var gridView = gvBill.MainView as GridView;
                     gridView.Columns["复核ID"].VisibleIndex = -1;
+                    gridView.Columns["往来单位ID"].VisibleIndex = -1;
                     gridView.BestFitColumns();
+                    ChangeFocusedReview(new FocusedRowChangedEventArgs(-1, 0));
                 }
             }
         }
@@ -188,8 +199,10 @@ namespace DQS.AppViews.Operation.BackManager
                     if(this.txtDealerName.EditData != null)
                     {
                         var dataRow = this.txtDealerName.EditData as DataRow;
-                        txtDealerName.Text = dataRow["单位名称"].ToString();
-                        this.txtDealerName.Tag = dataRow["单位ID"].ToString();
+                        DealerID = int.Parse(dataRow["单位ID"].ToString());
+                        DealerName = dataRow["单位名称"].ToString();
+                        txtDealerName.Text = DealerName;
+                        this.txtDealerName.Tag = DealerID;
                     }
                     if(!string.IsNullOrWhiteSpace(txtBillCode.Text))
                     {
@@ -208,6 +221,9 @@ namespace DQS.AppViews.Operation.BackManager
                         txtBatchNo.Text = "";
                         txtBatchNo.Tag = null;
                     }
+                    gvBill.DataSource = null;
+                    gvDetails.DataSource = null;
+                    gvDetails.RefreshDataSource();
                 }
                 else
                 {
@@ -220,7 +236,11 @@ namespace DQS.AppViews.Operation.BackManager
         {
 
             var rowIndexes = gvData.GetSelectedRows().Where(p => p >= 0).ToArray();
-
+            if(rowIndexes.Length == 0)
+            {
+                XtraMessageBox.Show("请选择要退回的药品明细！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             List<DataRow> rows = new List<DataRow>();
             foreach(var rowIndex in rowIndexes)
             {

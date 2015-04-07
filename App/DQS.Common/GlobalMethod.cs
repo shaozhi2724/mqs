@@ -680,5 +680,9 @@ namespace DQS.Common
         }
         //全局销退允许不选复核单标记 - 用于非本系统销售数据退货
         public static bool AllowNoReviewSaleBack { get; set; }
+
+
+        //全局采退允许不选出库单标记 - 用于非本系统采购数据退货
+        public static bool AllowNoStoreInPurchaseBack { get; set; }
     }
 }

@@ -890,14 +890,28 @@ WHERE BillID={1}
 
         private void btnChoose_Click(object sender, EventArgs e)
         {
-            popupGrid.PopupView.OptionsBehavior.Editable = false;
+            foreach(GridColumn col in popupGrid.PopupView.Columns)
+            {
+                col.OptionsColumn.AllowEdit = col.Visible && col.Caption == "数量";
+            }
 
-            //this.popupGrid.PopupView.KeyDown -= PopupView_KeyDown;
             this.popupGrid.RemoveRowCellClickEvent();
             string dealerName = this.txtDealerName.Text;
             if(!string.IsNullOrWhiteSpace(dealerName))
             {
-                int dealerID = Convert.ToInt32((this.txtDealerName.EditData as DataRow)["单位ID"]);
+                int dealerID = 0;
+                if (null != txtDealerName.Tag)
+                {
+                    dealerID = Convert.ToInt32(txtDealerName.Tag);
+                }
+                else
+                {
+                    var dataRow = this.txtDealerName.EditData as DataRow;
+                    if (null != dataRow)
+                    {
+                        dealerID = Convert.ToInt32(dataRow["单位ID"]);
+                    }
+                }
                 FrmReviewRecordQuery doc = new FrmReviewRecordQuery(dealerID, dealerName);
                 var dr = doc.ShowDialog();
                 if(dr == DialogResult.OK)
@@ -918,6 +932,8 @@ WHERE BillID={1}
 
         private void BindSelectedReviewDetails(FrmReviewRecordQuery doc)
         {
+            txtDealerName.Tag = doc.DealerID;
+            txtDealerName.Text = doc.DealerName;
             txtSaleBillCode.Text = doc.SaleBillCode;
             txtReviewCode.Text = doc.ReviewCode;
             if (doc.EditRows.Any())
