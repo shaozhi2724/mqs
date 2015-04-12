@@ -176,8 +176,8 @@ namespace DQS.AppViews.QualityControl.UserManager
                     return;
                 }
             }
-            SaveGrantedProducts(this.m_id.Value, txtUserName.Text.Trim());
-            SaveDeputyProducts(this.m_id.Value, txtUserName.Text.Trim());
+            //SaveGrantedProducts(this.m_id.Value, txtUserName.Text.Trim());
+            //SaveDeputyProducts(this.m_id.Value, txtUserName.Text.Trim());
             
             this.DialogResult = DialogResult.OK;
         }
@@ -281,13 +281,13 @@ namespace DQS.AppViews.QualityControl.UserManager
                     selectedProductIDs = enumerableRowCollection.Select(p => Convert.ToInt32(p["药品ID"])).ToList();
                 }
             }
-            */
             if (selectedProductIDs.Any())
             {
                 string productsFilter = string.Join(",", selectedProductIDs);
                 filter += string.Format(" AND ([药品ID] NOT IN ({0}))", productsFilter);
                 //filter += string.Format(" AND ([归属人] = '未关联' )");
             }
+            */
             using (FrmPopupQueryMultiple frmPopupQueryMultiple = new FrmPopupQueryMultiple(formatQueryString, viewName, primaryField, fields, filter, pageSize, "药品类别"))
             {
                 DialogResult result = frmPopupQueryMultiple.ShowDialog();
@@ -295,6 +295,8 @@ namespace DQS.AppViews.QualityControl.UserManager
                 {
                     var rows = frmPopupQueryMultiple.EditRows;
                     BindGrantedProducts(rows);
+                    SaveGrantedProducts(this.m_id.Value, txtUserName.Text.Trim());
+                    BindGrantedProducts(); 
                 }
             }
         }
@@ -309,8 +311,7 @@ namespace DQS.AppViews.QualityControl.UserManager
 
                 if (selectedRows.Length > 0)
                 {
-                    DialogResult result = XtraMessageBox.Show("确定要删除选中的药品授权吗？", "警告", MessageBoxButtons.OKCancel,
-                        MessageBoxIcon.Question);
+                    DialogResult result = XtraMessageBox.Show("确定要删除选中的药品授权吗？", "警告", MessageBoxButtons.OKCancel,MessageBoxIcon.Question);
                     if (result == DialogResult.OK)
                     {
                         foreach (var rowIndex in selectedRows)
@@ -527,13 +528,17 @@ VALUES");
             string viewName = "vw_AllUserProduct";
             string primaryField = "药品ID";
             string fields = "药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,包装规格,包装比例,批准文号,贮藏条件,剂型,药品类别,单位,归属人";
-            string filter = "([状态] IS NULL OR [状态] = '正常') AND ([归属人] != '未关联' AND [归属人] != '" + txtPopupEmployee.Text.Trim() + "')";
+            string filter = "([状态] IS NULL OR [状态] = '正常') AND ([归属人] != '未关联' AND [归属人] != '" + txtPopupEmployee.Text.Trim() + "' AND NOT EXISTS(SELECT * FROM ATC_UserProduct WHERE [药品ID]=ProductID AND UserName = '" + txtUserName.Text.Trim() + "'))";
+
+            filter += string.Format("");
+            /*
             if (ProductIDs.Any())
             {
                 string productsFilter = string.Join(",", ProductIDs);
                 filter += string.Format(" AND ([药品ID] NOT IN ({0}))", productsFilter);
             }
             else
+            */
             {
                 DataTable dataSource = GridDeputy.DataSource as DataTable;
                 if (dataSource != null)
@@ -544,11 +549,13 @@ VALUES");
                         ProductIDs = enumerableRowCollection.Select(p => Convert.ToInt32(p["药品ID"])).ToList();
                     }
                 }
+                /*
                 if (ProductIDs.Any())
                 {
                     string productsFilter = string.Join(",", ProductIDs);
                     filter += string.Format(" AND ([药品ID] NOT IN ({0}))", productsFilter);
                 }
+                */
             }
             using (FrmPopupQueryMultiple frmPopupQueryMultiple = new FrmPopupQueryMultiple(formatQueryString, viewName, primaryField, fields, filter, pageSize, "药品类别"))
             {
@@ -557,6 +564,8 @@ VALUES");
                 {
                     var rows = frmPopupQueryMultiple.EditRows;
                     BindGridDeputy(rows);
+                    SaveDeputyProducts(this.m_id.Value, txtUserName.Text.Trim());
+                    BindGridDeputy();
                 }
             }
         }

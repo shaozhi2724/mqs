@@ -120,10 +120,13 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                 this.txtBillCode.Text = GlobalMethod.GenSaleBillCode("XS");
                 this.txtBillCode.Select(this.txtBillCode.Text.Length, 0);
 
-                if (GlobalItem.g_CurrentEmployee != null)
+                if (!Settings.Default.SettingBusinessPersonISNULL)
                 {
-                    this.txtOperator.Text = GlobalItem.g_CurrentEmployee.EmployeeName;
-                    txtOperator.SetMemberValue(GlobalItem.g_CurrentEmployee.EmployeeID);
+                    if (GlobalItem.g_CurrentEmployee != null)
+                    {
+                        this.txtOperator.Text = GlobalItem.g_CurrentEmployee.EmployeeName;
+                        txtOperator.SetMemberValue(GlobalItem.g_CurrentEmployee.EmployeeID);
+                    }
                 }
             }
 
@@ -520,8 +523,8 @@ WHERE BillID={1}
 
                                 if (!this.ValidateBatchNo())
                                     return;
-                                if (!this.ValidateSaleAmount())
-                                    return; //验证库存和销售数量
+                                //if (!this.ValidateSaleAmount())
+                                //    return; //验证库存和销售数量
                                 if (!this.ValidateBatchDate())
                                     return;
                                 if (!ValidateUnitPrice())
@@ -624,7 +627,7 @@ WHERE BillID={1}
                             if (!this.ValidateBatchNo()) return;
                             if (!this.ValidateDealerRange()) return; //验证客户经营范围
                             if (!this.ValidateDealerQualification()) return; //验证客户的电子档案
-                            if (!this.ValidateSaleAmount()) return; //验证库存和销售数量
+                            //if (!this.ValidateSaleAmount()) return; //验证库存和销售数量
                             if (!ValidateUnitPrice()) return;
                             if (!this.ProductStyle()) return;//验证现金交易
 
@@ -1311,11 +1314,11 @@ WHERE BillID={1}
 
         private void popupGrid_BeforePopupFormShow(object sender, DQS.Controls.CommonCode.BeforePopupFormShowArgs e)
         {
-            //if (string.IsNullOrWhiteSpace(txtOperator.Text))
-            //{
-            //    XtraMessageBox.Show("请先选择业务员！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            //    e.Cancel = true;
-            //}
+            if (string.IsNullOrWhiteSpace(txtOperator.Text))
+            {
+                XtraMessageBox.Show("请先选择业务员！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Cancel = true;
+            }
             if (string.IsNullOrWhiteSpace(txtDealerName.Text))
             {
                 XtraMessageBox.Show(string.Format("请先选择{0}！", layDealerName.CustomizationFormText), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1393,11 +1396,12 @@ WHERE BillID={1}
                             if(userProducts.Count > 0)
                             {
                                 e.ActiveOperationColumn.PopupForm.Filter =
-                                    string.Format("[所属部门ID]={0} AND [药品ID] IN (SELECT ProductID FROM ATC_UserProduct WHERE UserID='{1}')", departmentID, userID);
+                                    string.Format("[所属部门ID]={0} AND EXISTS (SELECT * FROM ATC_UserProduct WHERE [药品ID]=ProductID AND UserID='{1}')", departmentID, userID);
                             }
                             else
                             {
-                                e.ActiveOperationColumn.PopupForm.Filter = "[药品ID] = 0";
+                                e.ActiveOperationColumn.PopupForm.Filter = 
+                                    string.Format("[所属部门ID]={0}", departmentID);
                             }
                         }
                     }
@@ -1480,12 +1484,33 @@ WHERE BillID={1}
                     && purchasePrice != null && purchasePrice != DBNull.Value
                     && tradePrice != null && tradePrice != DBNull.Value)
                 {
-                    if (Convert.ToDecimal(unitPrice) < Convert.ToDecimal(purchasePrice)
-                        || (Convert.ToDecimal(tradePrice) > 0 && Convert.ToDecimal(unitPrice) > Convert.ToDecimal(tradePrice)))
+                    if (Settings.Default.JudgementSaleBillPrice)
                     {
-                        var dialogResult = XtraMessageBox.Show(String.Format("第{0}行，药品的单价不能小于进货价，不能高于批发价。是否提交？", (i + 1)), "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                        return dialogResult == DialogResult.Yes;
+                        if (Convert.ToDecimal(unitPrice) < Convert.ToDecimal(purchasePrice)
+                            || (Convert.ToDecimal(tradePrice) > 0 && Convert.ToDecimal(unitPrice) > Convert.ToDecimal(tradePrice)))
+                        {
+                            var dialogResult = XtraMessageBox.Show(String.Format("第{0}行，药品的单价不能小于进货价，不能高于批发价。是否提交？", (i + 1)), "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                            return dialogResult == DialogResult.Yes;
 
+                        }
+                    }
+                    else
+                    {
+                        if (Convert.ToDecimal(unitPrice) < Convert.ToDecimal(purchasePrice))
+                        {
+                            var dialogResult = XtraMessageBox.Show(String.Format("第{0}行，药品的单价不能小于进货价！", (i + 1)), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return dialogResult == DialogResult.No;
+                        }
+                        if (Convert.ToDecimal(unitPrice) == Convert.ToDecimal(purchasePrice))
+                        {
+                            var dialogResult = XtraMessageBox.Show(String.Format("第{0}行，药品的单价等于进货价，是否开单！", (i + 1)), "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                            return dialogResult == DialogResult.Yes;
+                        }
+                        if (Convert.ToDecimal(tradePrice) > 0 && Convert.ToDecimal(unitPrice) > Convert.ToDecimal(tradePrice))
+                        {
+                            var dialogResult = XtraMessageBox.Show(String.Format("第{0}行，不能高于批发价。是否提交？", (i + 1)), "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                            return dialogResult == DialogResult.Yes;
+                        }
                     }
                 }
             }
@@ -2073,7 +2098,6 @@ WHERE BillID={1}
             txtOperator.Tag = txtOperator.Text.Trim();
         }
 
-
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Enter)
@@ -2147,7 +2171,7 @@ WHERE BillID={1}
                     if (!this.ValidateBatchNo()) return;
                     if (!this.ValidateDealerRange()) return; //验证客户经营范围
                     if (!this.ValidateDealerQualification()) return; //验证客户的电子档案
-                    if (!this.ValidateSaleAmount()) return; //验证库存和销售数量
+                    //if (!this.ValidateSaleAmount()) return; //验证库存和销售数量
                     if (!ValidateUnitPrice()) return;
                     if (!this.ProductStyle()) return;//验证现金交易
 

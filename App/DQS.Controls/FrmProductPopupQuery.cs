@@ -175,7 +175,6 @@ namespace DQS.Controls
             {
                 //SendKeys.Send("{TAB}");
                 DevExpress.XtraGrid.Columns.GridColumn gc = gvData.Columns[1];
-
                 gvData.FocusedColumn = gc;
                 gvData.SelectCell(1, gc);
                 gvData.SelectRow(0);

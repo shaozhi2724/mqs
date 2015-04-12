@@ -361,7 +361,9 @@ namespace DQS.Controls
             //设置查询事件
             this.SetEnterQueryKeyPress(this.gpcQuery);
 
-            gvData.BestFitColumns();
+            gvData.OptionsView.ColumnAutoWidth = false;
+
+            //gvData.BestFitColumns();
         }
 
         private List<string> GetFiledNames()

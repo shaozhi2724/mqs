@@ -170,6 +170,7 @@
             // txtTransportDate
             // 
             this.txtTransportDate.AlphabeticFiled = "";
+            this.txtTransportDate.EditValue = "*";
             this.txtTransportDate.EntityField = DQS.Module.Entities.BUSReceiveEntityFields2.Reservation3;
             this.txtTransportDate.IsIntegerOnly = false;
             this.txtTransportDate.IsNullString = "启运时间不能为空。";
@@ -196,6 +197,7 @@
             // txtTransportTime
             // 
             this.txtTransportTime.AlphabeticFiled = "";
+            this.txtTransportTime.EditValue = "*";
             this.txtTransportTime.EntityField = DQS.Module.Entities.BUSReceiveEntityFields2.Reservation2;
             this.txtTransportTime.IsIntegerOnly = false;
             this.txtTransportTime.IsNullString = "在途时间不能为空。";
@@ -210,6 +212,7 @@
             // txtReceiveTemperature
             // 
             this.txtReceiveTemperature.AlphabeticFiled = "";
+            this.txtReceiveTemperature.EditValue = "*";
             this.txtReceiveTemperature.EntityField = DQS.Module.Entities.BUSReceiveEntityFields2.Reservation1;
             this.txtReceiveTemperature.IsIntegerOnly = false;
             this.txtReceiveTemperature.IsNullString = "到货温度不能为空。";

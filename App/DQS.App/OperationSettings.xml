@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <OperationSettings>
   <Operation Name="Purchase">
-    <Grid EntityName="BUSBillDetailEntity" ViewName="vw_AllPurchaseDetail" KeyField="采购单ID" EmptyRows="50">
+    <Grid EntityName="BUSBillDetailEntity" ViewName="vw_AllPurchaseDetail" KeyField="采购单ID" EmptyRows="200">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
           <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
@@ -98,7 +98,7 @@
     </Grid>
   </Operation>
   <Operation Name="PurchaseBack">
-    <Grid EntityName="BUSBillDetailEntity" ViewName="vw_AllPurchaseBackDetail" KeyField="采购退货单ID" EmptyRows="1">
+    <Grid EntityName="BUSBillDetailEntity" ViewName="vw_AllPurchaseBackDetail" KeyField="采购退货单ID" EmptyRows="200">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
           <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
@@ -208,7 +208,7 @@
     </Grid>
   </Operation>
   <Operation Name="Sale">
-    <Grid EntityName="BUSBillDetailEntity" ViewName="vw_AllSaleDetail" KeyField="销售单ID" EmptyRows="50">
+    <Grid EntityName="BUSBillDetailEntity" ViewName="vw_AllSaleDetail" KeyField="销售单ID" EmptyRows="200">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
           <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
@@ -355,7 +355,7 @@
     </Grid>
   </Operation>
   <Operation Name="SaleBack">
-    <Grid EntityName="BUSBillDetailEntity" ViewName="vw_AllSaleBackDetail" KeyField="销售退货单ID" EmptyRows="100">
+    <Grid EntityName="BUSBillDetailEntity" ViewName="vw_AllSaleBackDetail" KeyField="销售退货单ID" EmptyRows="200">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
           <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
@@ -580,7 +580,7 @@
     </Report>
   </Operation>
   <Operation Name="Accept">
-    <Grid EntityName="BUSAcceptDetailEntity" ViewName="vw_AllAcceptDetail" KeyField="验收单ID" EmptyRows="50">
+    <Grid EntityName="BUSAcceptDetailEntity" ViewName="vw_AllAcceptDetail" KeyField="验收单ID" EmptyRows="300">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
           <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
@@ -648,7 +648,7 @@
     </Report>
   </Operation>
   <Operation Name="Sampling">
-    <Grid EntityName="BUSSamplingEntity" ViewName="vw_AllSamplingDetail" KeyField="验收单ID" EmptyRows="50">
+    <Grid EntityName="BUSSamplingEntity" ViewName="vw_AllSamplingDetail" KeyField="验收单ID" EmptyRows="300">
       <PopupForms>
         <PopupForm Name="Condition" PopStyle="DoubleClick">
           <FormatQueryString>[检查项目编号] LIKE '%{0}%' OR [检查项目名称] LIKE '%{0}%'</FormatQueryString>
@@ -684,7 +684,7 @@
     </Grid>
   </Operation>
   <Operation Name="StockIn">
-    <Grid EntityName="BUSStoreBillDetailEntity" ViewName="vw_AllStockInDeatil" KeyField="入库单ID" EmptyRows="50">
+    <Grid EntityName="BUSStoreBillDetailEntity" ViewName="vw_AllStockInDeatil" KeyField="入库单ID" EmptyRows="500">
       <Columns>
         <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
         <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
@@ -754,7 +754,7 @@
     </Report>
   </Operation>
   <Operation Name="StockOut">
-    <Grid EntityName="BUSStoreBillDetailEntity" ViewName="vw_AllStockOutDeatil" KeyField="出库单ID" EmptyRows="50">
+    <Grid EntityName="BUSStoreBillDetailEntity" ViewName="vw_AllStockOutDeatil" KeyField="出库单ID" EmptyRows="500">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
           <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
@@ -827,7 +827,7 @@
     </Report>
   </Operation>
   <Operation Name="Review">
-    <Grid EntityName="BUSReviewDetailEntity" ViewName="vw_AllReviewDetail" KeyField="复核单ID" EmptyRows="50">
+    <Grid EntityName="BUSReviewDetailEntity" ViewName="vw_AllReviewDetail" KeyField="复核单ID" EmptyRows="500">
       <Columns>
         <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
         <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
@@ -879,7 +879,7 @@
     </Report>
   </Operation>
   <Operation Name="Transport">
-    <Grid EntityName="BUSTransportDetailEntity" ViewName="vw_AllReviewDetail" KeyField="复核单ID" EmptyRows="50">
+    <Grid EntityName="BUSTransportDetailEntity" ViewName="vw_AllReviewDetail" KeyField="复核单ID" EmptyRows="500">
       <Columns>
         <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
         <Column Name="订单编号" FieldType="System.String" Visible="true" AllowEdit="false"/>

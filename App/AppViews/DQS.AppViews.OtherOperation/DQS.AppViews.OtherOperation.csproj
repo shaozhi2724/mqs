@@ -177,6 +177,187 @@
     <Compile Include="FinanceManager\FrmSinglePayReceivable.Designer.cs">
       <DependentUpon>FrmSinglePayReceivable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Finance\FrmChooseBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmChooseBill.Designer.cs">
+      <DependentUpon>FrmChooseBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmDealer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmDealer.Designer.cs">
+      <DependentUpon>FrmDealer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmFirstInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmFirstInventory.Designer.cs">
+      <DependentUpon>FrmFirstInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmInventory.Designer.cs">
+      <DependentUpon>FrmInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmMakeCollections.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmMakeCollections.Designer.cs">
+      <DependentUpon>FrmMakeCollections.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmMakeCollectionsBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmMakeCollectionsBill.Designer.cs">
+      <DependentUpon>FrmMakeCollectionsBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmFinChooseBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmFinChooseBill.Designer.cs">
+      <DependentUpon>FrmFinChooseBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmMakeCollectionsForOnPassage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmMakeCollectionsForOnPassage.Designer.cs">
+      <DependentUpon>FrmMakeCollectionsForOnPassage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmMakeCollectionsOnPassage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmMakeCollectionsOnPassage.Designer.cs">
+      <DependentUpon>FrmMakeCollectionsOnPassage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmMakeCollectionsSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmMakeCollectionsSearch.Designer.cs">
+      <DependentUpon>FrmMakeCollectionsSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmPayables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmPayables.Designer.cs">
+      <DependentUpon>FrmPayables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmPayablesSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmPayablesSearch.Designer.cs">
+      <DependentUpon>FrmPayablesSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmPayment.Designer.cs">
+      <DependentUpon>FrmPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmPaymentBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmPaymentBill.Designer.cs">
+      <DependentUpon>FrmPaymentBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmPaymentForOnPassage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmPaymentForOnPassage.Designer.cs">
+      <DependentUpon>FrmPaymentForOnPassage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmPaymentOnPassage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmPaymentOnPassage.Designer.cs">
+      <DependentUpon>FrmPaymentOnPassage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmPaymentSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmPaymentSearch.Designer.cs">
+      <DependentUpon>FrmPaymentSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmReceivables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmReceivables.Designer.cs">
+      <DependentUpon>FrmReceivables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmReceivablesSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmReceivablesSearch.Designer.cs">
+      <DependentUpon>FrmReceivablesSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmShowInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmShowInventory.Designer.cs">
+      <DependentUpon>FrmShowInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmShowMakeCollections.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmShowMakeCollections.Designer.cs">
+      <DependentUpon>FrmShowMakeCollections.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmShowMakeCollectionsBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmShowMakeCollectionsBill.Designer.cs">
+      <DependentUpon>FrmShowMakeCollectionsBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmShowMakeCollectionsForOnPassage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmShowMakeCollectionsForOnPassage.Designer.cs">
+      <DependentUpon>FrmShowMakeCollectionsForOnPassage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmShowPayables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmShowPayables.Designer.cs">
+      <DependentUpon>FrmShowPayables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmShowPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmShowPayment.Designer.cs">
+      <DependentUpon>FrmShowPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmShowPaymentBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmShowPaymentBill.Designer.cs">
+      <DependentUpon>FrmShowPaymentBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmShowPaymentForOnPassage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmShowPaymentForOnPassage.Designer.cs">
+      <DependentUpon>FrmShowPaymentForOnPassage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmShowReceivables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmShowReceivables.Designer.cs">
+      <DependentUpon>FrmShowReceivables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmShowSecond.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmShowSecond.Designer.cs">
+      <DependentUpon>FrmShowSecond.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmStoreInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmStoreInventory.Designer.cs">
+      <DependentUpon>FrmStoreInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\GridCheckMarksSelection.cs" />
     <Compile Include="FrmOtherOperation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,6 +471,96 @@
     <EmbeddedResource Include="FinanceManager\FrmSinglePayReceivable.resx">
       <DependentUpon>FrmSinglePayReceivable.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmChooseBill.resx">
+      <DependentUpon>FrmChooseBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmDealer.resx">
+      <DependentUpon>FrmDealer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmFirstInventory.resx">
+      <DependentUpon>FrmFirstInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmInventory.resx">
+      <DependentUpon>FrmInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmMakeCollections.resx">
+      <DependentUpon>FrmMakeCollections.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmMakeCollectionsBill.resx">
+      <DependentUpon>FrmMakeCollectionsBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmFinChooseBill.resx">
+      <DependentUpon>FrmFinChooseBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmMakeCollectionsForOnPassage.resx">
+      <DependentUpon>FrmMakeCollectionsForOnPassage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmMakeCollectionsOnPassage.resx">
+      <DependentUpon>FrmMakeCollectionsOnPassage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmMakeCollectionsSearch.resx">
+      <DependentUpon>FrmMakeCollectionsSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmPayables.resx">
+      <DependentUpon>FrmPayables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmPayablesSearch.resx">
+      <DependentUpon>FrmPayablesSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmPayment.resx">
+      <DependentUpon>FrmPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmPaymentBill.resx">
+      <DependentUpon>FrmPaymentBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmPaymentForOnPassage.resx">
+      <DependentUpon>FrmPaymentForOnPassage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmPaymentOnPassage.resx">
+      <DependentUpon>FrmPaymentOnPassage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmPaymentSearch.resx">
+      <DependentUpon>FrmPaymentSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmReceivables.resx">
+      <DependentUpon>FrmReceivables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmReceivablesSearch.resx">
+      <DependentUpon>FrmReceivablesSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmShowInventory.resx">
+      <DependentUpon>FrmShowInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmShowMakeCollections.resx">
+      <DependentUpon>FrmShowMakeCollections.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmShowMakeCollectionsBill.resx">
+      <DependentUpon>FrmShowMakeCollectionsBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmShowMakeCollectionsForOnPassage.resx">
+      <DependentUpon>FrmShowMakeCollectionsForOnPassage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmShowPayables.resx">
+      <DependentUpon>FrmShowPayables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmShowPayment.resx">
+      <DependentUpon>FrmShowPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmShowPaymentBill.resx">
+      <DependentUpon>FrmShowPaymentBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmShowPaymentForOnPassage.resx">
+      <DependentUpon>FrmShowPaymentForOnPassage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmShowReceivables.resx">
+      <DependentUpon>FrmShowReceivables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmShowSecond.resx">
+      <DependentUpon>FrmShowSecond.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmStoreInventory.resx">
+      <DependentUpon>FrmStoreInventory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmOtherOperation.resx">
       <DependentUpon>FrmOtherOperation.cs</DependentUpon>
     </EmbeddedResource>
@@ -363,6 +634,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\质量咨询记录MouseEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

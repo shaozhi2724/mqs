@@ -87,9 +87,10 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                     XtraMessageBox.Show("销售单" + entity.BillStatusName + "，不允许修改！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-/* //不能在点击修改时就将减掉的业务库存加回来，此操作必须在修改点击“保存”之前做，避免用户点修改后又取消
+//不能在点击修改时就将减掉的业务库存加回来，此操作必须在修改点击“保存”之前做，避免用户点修改后又取消
                 else
                 {
+                    /*
                     int departmentID = 0;
                     var billCreateUserId = entity.CreateUserID;
                     ATCUserEntity userEntity = new ATCUserEntity { UserID = billCreateUserId };
@@ -100,16 +101,8 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                     if (!employee.IsNullField("DepartmentID"))
                     {
                         departmentID = employee.DepartmentID;
-                    }
+                    }*/
                     string sql = @"
-UPDATE SD
-    SET SD.Amount = SD.Amount + BD.Amount
-FROM dbo.BUS_BillDetail AS BD
-LEFT JOIN dbo.BUS_StoreDetail AS SD
-ON BD.ProductID = SD.ProductID
-AND BD.BatchNo = SD.BatchNo
-WHERE BD.BillID='{0}' AND SD.DepartmentID='{1}'
-
 UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,ReviewCode=NULL,AcceptID=NULL,AcceptCode=NULL,Reservation10='修改' WHERE BillID='{0}'
 ";
                     using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
@@ -122,7 +115,7 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
                         try
                         {
                             //向数据表中插入记录的命令语句
-                            cmd.CommandText = string.Format(sql, entity.BillID, departmentID);
+                            cmd.CommandText = string.Format(sql, entity.BillID);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();//提交事务
                         }
@@ -138,7 +131,7 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
                         }
                     }
                 }
-*/
+
                 base.CustomModify();
             }
         }
