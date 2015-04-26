@@ -201,7 +201,7 @@
             // 
             // cboChoose
             // 
-            this.cboChoose.EditValue = "按单据收款";
+            this.cboChoose.EditValue = "按单位收款";
             this.cboChoose.Location = new System.Drawing.Point(646, 42);
             this.cboChoose.Name = "cboChoose";
             this.cboChoose.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {

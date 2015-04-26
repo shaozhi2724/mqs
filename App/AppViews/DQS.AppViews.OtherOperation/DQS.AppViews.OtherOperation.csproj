@@ -219,6 +219,18 @@
     <Compile Include="Finance\FrmFinChooseBill.Designer.cs">
       <DependentUpon>FrmFinChooseBill.cs</DependentUpon>
     </Compile>
+    <Compile Include="Finance\FrmMakeCollectionsChooseBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmMakeCollectionsChooseBill.Designer.cs">
+      <DependentUpon>FrmMakeCollectionsChooseBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmMakeCollectionsForBusiness.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmMakeCollectionsForBusiness.Designer.cs">
+      <DependentUpon>FrmMakeCollectionsForBusiness.cs</DependentUpon>
+    </Compile>
     <Compile Include="Finance\FrmMakeCollectionsForOnPassage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -236,6 +248,12 @@
     </Compile>
     <Compile Include="Finance\FrmMakeCollectionsSearch.Designer.cs">
       <DependentUpon>FrmMakeCollectionsSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmMakeCollectionsSecond.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmMakeCollectionsSecond.Designer.cs">
+      <DependentUpon>FrmMakeCollectionsSecond.cs</DependentUpon>
     </Compile>
     <Compile Include="Finance\FrmPayables.cs">
       <SubType>Form</SubType>
@@ -308,6 +326,12 @@
     </Compile>
     <Compile Include="Finance\FrmShowMakeCollectionsBill.Designer.cs">
       <DependentUpon>FrmShowMakeCollectionsBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmShowMakeCollectionsForBusiness.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmShowMakeCollectionsForBusiness.Designer.cs">
+      <DependentUpon>FrmShowMakeCollectionsForBusiness.cs</DependentUpon>
     </Compile>
     <Compile Include="Finance\FrmShowMakeCollectionsForOnPassage.cs">
       <SubType>Form</SubType>
@@ -492,6 +516,12 @@
     <EmbeddedResource Include="Finance\FrmFinChooseBill.resx">
       <DependentUpon>FrmFinChooseBill.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmMakeCollectionsChooseBill.resx">
+      <DependentUpon>FrmMakeCollectionsChooseBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmMakeCollectionsForBusiness.resx">
+      <DependentUpon>FrmMakeCollectionsForBusiness.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Finance\FrmMakeCollectionsForOnPassage.resx">
       <DependentUpon>FrmMakeCollectionsForOnPassage.cs</DependentUpon>
     </EmbeddedResource>
@@ -500,6 +530,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Finance\FrmMakeCollectionsSearch.resx">
       <DependentUpon>FrmMakeCollectionsSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmMakeCollectionsSecond.resx">
+      <DependentUpon>FrmMakeCollectionsSecond.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Finance\FrmPayables.resx">
       <DependentUpon>FrmPayables.cs</DependentUpon>
@@ -536,6 +569,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Finance\FrmShowMakeCollectionsBill.resx">
       <DependentUpon>FrmShowMakeCollectionsBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmShowMakeCollectionsForBusiness.resx">
+      <DependentUpon>FrmShowMakeCollectionsForBusiness.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Finance\FrmShowMakeCollectionsForOnPassage.resx">
       <DependentUpon>FrmShowMakeCollectionsForOnPassage.cs</DependentUpon>

@@ -25,6 +25,8 @@ namespace DQS.AppViews.OtherOperation.Finance
         string BillCode = "";
         //记录上一次结存日期
         string stringDate = "";
+        //查询条件
+        string sqlSearch = "";
 
         private void btnChooseBill_Click(object sender, EventArgs e)
         {
@@ -54,7 +56,9 @@ namespace DQS.AppViews.OtherOperation.Finance
 
         private void FrmMakeCollectionsOnPassage_Load(object sender, EventArgs e)
         {
-            this.btnInventory.Visible = IsInventory();
+            //this.btnInventory.Visible = IsInventory();
+            //deStartDate.Text = DateTime.Today.ToString("d");
+            //deEndDate.Text = DateTime.Today.ToString("d");
             LastInventoryDate();
             gridLoad();
         }
@@ -78,7 +82,7 @@ SELECT BusinessBillID AS [ID] ,
           StoreOutPerson AS [出库员] ,
           StoreOutDate AS [出库日期] ,
           OperateDate AS [操作时间] 
-FROM FIN_MakeCollectionsOnPassage m WHERE (DealerCode LIKE '%" + txtDealerCode.Text.Trim() + "%' OR DealerName LIKE '%" + txtDealerCode.Text.Trim() + "%' OR DealerSpell LIKE '%" + txtDealerCode.Text.Trim() + "%') AND (BusinessBillCode LIKE '%" + txtBillCode.Text.Trim() + "%') AND (BusinessPerson LIKE '%" + txtBusinessPerson.Text.Trim() + "%' OR dbo.fn_GetPy(BusinessPerson) LIKE '%" + txtBusinessPerson.Text.Trim() + "%')";
+FROM FIN_MakeCollectionsOnPassage m WHERE (DealerCode LIKE '%" + txtDealerCode.Text.Trim() + "%' OR DealerName LIKE '%" + txtDealerCode.Text.Trim() + "%' OR DealerSpell LIKE '%" + txtDealerCode.Text.Trim() + "%') AND (BusinessBillCode LIKE '%" + txtBillCode.Text.Trim() + "%') AND (BusinessPerson LIKE '%" + txtBusinessPerson.Text.Trim() + "%' OR dbo.fn_GetPy(BusinessPerson) LIKE '%" + txtBusinessPerson.Text.Trim() + "%')" + sqlSearch;
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 try
@@ -253,6 +257,12 @@ DELETE FIN_MakeCollectionsOnPassageDetail WHERE BusinessBillID = '{0}'
                 DevExpress.XtraEditors.XtraMessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);  
 
             }  
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            sqlSearch = " AND (BusinessBillDate BETWEEN '" + deStartDate.Text.Trim() + " 00:00:00' AND '" + deEndDate.Text.Trim() + " 23:59:59')";
+            gridLoad();
         }
     }
 }

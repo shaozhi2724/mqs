@@ -469,7 +469,7 @@
       <Name>DQS.AppViews.WarehouseIn</Name>
     </ProjectReference>
     <ProjectReference Include="..\AppViews\DQS.AppViews.WarehouseOut\DQS.AppViews.WarehouseOut.csproj">
-      <Project>{D7A2270B-EA2A-4128-A26A-42957AAF7E95}</Project>
+      <Project>{d7a2270b-ea2a-4128-a26a-42957aaf7e95}</Project>
       <Name>DQS.AppViews.WarehouseOut</Name>
     </ProjectReference>
     <ProjectReference Include="..\DQS.Common\DQS.Common.csproj">

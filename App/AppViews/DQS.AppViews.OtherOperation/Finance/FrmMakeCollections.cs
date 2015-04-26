@@ -244,7 +244,7 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.Busine
         private void FrmMakeCollections_Load(object sender, EventArgs e)
         {
             deMakeCollectionDate.Text = DateTime.Today.ToString("d");
-            txtDealerName.Properties.ReadOnly = true;
+            txtDealerName.Properties.ReadOnly = false;
             LoadCboChoose();
             LoadType();
             if (GlobalItem.g_CurrentEmployee != null)
@@ -324,7 +324,7 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.Busine
             {
                 string str = DateTime.Now.ToString("yyyyMMdd");
                 string strban = DateTime.Now.ToString("yyyyMM");
-                string sql = "SELECT TOP 1 MakeCollectionsCode FROM FIN_MakeCollections WHERE MakeCollectionsCode LIKE 'SKDJ" + strban + "%' ORDER BY MakeCollectionsID DESC";
+                string sql = "SELECT TOP 1 MakeCollectionsCode FROM FIN_MakeCollections WHERE MakeCollectionsCode LIKE 'YSSK" + strban + "%' ORDER BY MakeCollectionsID DESC";
                 try
                 {
                     SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
@@ -356,7 +356,7 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.Busine
                             No = Num.ToString();
                         }
                     }
-                    this.txtMakeCollectionsCode.Text = "SKDJ" + str + No;
+                    this.txtMakeCollectionsCode.Text = "YSSK" + str + No;
                 }
                 catch (Exception ex)
                 {
@@ -382,18 +382,29 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.Busine
                 deMakeCollectionDate.Focus();
                 return false;
             }
-            else if (gridView.RowCount < 1)
-            {
-                XtraMessageBox.Show("请选择收款单据！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;
-            }
 
             if (cboChoose.Text == "按单据收款")
             {
+                if (gridView.RowCount < 1)
+                {
+                    XtraMessageBox.Show("请选择收款单据！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
                 if (Convert.ToDecimal(txtTotalPrice.Text) != Convert.ToDecimal(lblTotalPrice.Text))
                 {
                     XtraMessageBox.Show("收款金额与所选单据金额不符，请查看！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
+                }
+            }
+            if (cboChoose.Text == "按单位收款")
+            {
+                if (Convert.ToDecimal(txtTotalPrice.Text) != Convert.ToDecimal(lblTotalPrice.Text))
+                {
+                    DialogResult dr = XtraMessageBox.Show("收款金额与所选单据金额不符，是否保存？", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dr == DialogResult.No)
+                    {
+                        return false;
+                    }
                 }
             }
             return true;
@@ -448,7 +459,7 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.Busine
             {
                 string insertBill = "EXEC fn_InsertReceivablesAuto '{0}'";
                 string insertMakecollections = "EXEC fn_InsertMakeCollections '{0}','{1}','{2}',{3},'{4}','{5}','{6}','{7}','{8}'";
-                string insertMakecollectionsDetail = "EXEC fn_InsertMakeCollectionsDetail {0},'{1}'";
+                string insertMakecollectionsDetail = "EXEC fn_InsertMakeCollectionsDetail {0},'{1}','{2}'";
                 try
                 {
                     conn.Open();
@@ -493,7 +504,7 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.Busine
 
                     foreach (int detailid in DetailList)
                     {
-                        command = new SqlCommand(String.Format(insertMakecollectionsDetail, detailid,txtMakeCollectionsCode.Text.Trim()), conn);
+                        command = new SqlCommand(String.Format(insertMakecollectionsDetail, detailid,txtMakeCollectionsCode.Text.Trim(),txtVoucherCode.Text.Trim()), conn);
                         command.ExecuteNonQuery();
                     }
                 }

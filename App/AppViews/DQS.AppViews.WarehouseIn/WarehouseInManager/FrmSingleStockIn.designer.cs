@@ -48,12 +48,12 @@
             this.layOperator = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.pnlAction = new DevExpress.XtraEditors.PanelControl();
+            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnOneKeyFinish = new DevExpress.XtraEditors.SimpleButton();
             this.btnPrint = new DQS.Controls.StiPrintButtonEx();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.gpcCenter = new DevExpress.XtraEditors.GroupControl();
             this.popupGrid = new DQS.Controls.PopupGrid();
-            this.btnOneKeyFinish = new DevExpress.XtraEditors.SimpleButton();
-            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
             this.ftPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
@@ -366,6 +366,30 @@
             this.pnlAction.Size = new System.Drawing.Size(872, 48);
             this.pnlAction.TabIndex = 1;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Appearance.Options.UseFont = true;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(783, 13);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 5;
+            this.btnCancel.Text = "取消(&C)";
+            // 
+            // btnOneKeyFinish
+            // 
+            this.btnOneKeyFinish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOneKeyFinish.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOneKeyFinish.Appearance.Options.UseFont = true;
+            this.btnOneKeyFinish.Location = new System.Drawing.Point(805, 17);
+            this.btnOneKeyFinish.Name = "btnOneKeyFinish";
+            this.btnOneKeyFinish.Size = new System.Drawing.Size(36, 16);
+            this.btnOneKeyFinish.TabIndex = 0;
+            this.btnOneKeyFinish.Text = "一键完成(&K)";
+            this.btnOneKeyFinish.Click += new System.EventHandler(this.btnOneKeyFinish_Click);
+            // 
             // btnPrint
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -412,30 +436,6 @@
             this.popupGrid.OperationName = "StockIn";
             this.popupGrid.Size = new System.Drawing.Size(868, 305);
             this.popupGrid.TabIndex = 3;
-            // 
-            // btnOneKeyFinish
-            // 
-            this.btnOneKeyFinish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOneKeyFinish.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOneKeyFinish.Appearance.Options.UseFont = true;
-            this.btnOneKeyFinish.Location = new System.Drawing.Point(805, 17);
-            this.btnOneKeyFinish.Name = "btnOneKeyFinish";
-            this.btnOneKeyFinish.Size = new System.Drawing.Size(36, 16);
-            this.btnOneKeyFinish.TabIndex = 0;
-            this.btnOneKeyFinish.Text = "一键完成(&K)";
-            this.btnOneKeyFinish.Click += new System.EventHandler(this.btnOneKeyFinish_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Appearance.Options.UseFont = true;
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(783, 13);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "取消(&C)";
             // 
             // FrmSingleStockIn
             // 

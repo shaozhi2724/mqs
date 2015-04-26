@@ -36,6 +36,8 @@
             this.btnDel = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
+            this.txtBusinessPerson = new DevExpress.XtraEditors.TextEdit();
             this.lblTotalPrice = new DevExpress.XtraEditors.LabelControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.deEndDate = new DevExpress.XtraEditors.DateEdit();
@@ -56,6 +58,7 @@
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBusinessPerson.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deStartDate.Properties.VistaTimeProperties)).BeginInit();
@@ -142,6 +145,8 @@
             // 
             this.panelControl2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelControl2.Controls.Add(this.labelControl9);
+            this.panelControl2.Controls.Add(this.txtBusinessPerson);
             this.panelControl2.Controls.Add(this.lblTotalPrice);
             this.panelControl2.Controls.Add(this.labelControl8);
             this.panelControl2.Controls.Add(this.deEndDate);
@@ -160,6 +165,21 @@
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(878, 66);
             this.panelControl2.TabIndex = 11;
+            // 
+            // labelControl9
+            // 
+            this.labelControl9.Location = new System.Drawing.Point(215, 40);
+            this.labelControl9.Name = "labelControl9";
+            this.labelControl9.Size = new System.Drawing.Size(48, 14);
+            this.labelControl9.TabIndex = 9;
+            this.labelControl9.Text = "业务员：";
+            // 
+            // txtBusinessPerson
+            // 
+            this.txtBusinessPerson.Location = new System.Drawing.Point(269, 37);
+            this.txtBusinessPerson.Name = "txtBusinessPerson";
+            this.txtBusinessPerson.Size = new System.Drawing.Size(128, 21);
+            this.txtBusinessPerson.TabIndex = 8;
             // 
             // lblTotalPrice
             // 
@@ -204,7 +224,7 @@
             // 
             this.txtDealerCode.Location = new System.Drawing.Point(75, 37);
             this.txtDealerCode.Name = "txtDealerCode";
-            this.txtDealerCode.Size = new System.Drawing.Size(322, 21);
+            this.txtDealerCode.Size = new System.Drawing.Size(116, 21);
             this.txtDealerCode.TabIndex = 1;
             this.txtDealerCode.TextChanged += new System.EventHandler(this.txtChanged);
             // 
@@ -300,6 +320,7 @@
             this.gridView.IndicatorWidth = 40;
             this.gridView.Name = "gridView";
             this.gridView.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
+            this.gridView.DoubleClick += new System.EventHandler(this.gridView_DoubleClick);
             // 
             // FrmShowReceivables
             // 
@@ -319,6 +340,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             this.panelControl2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBusinessPerson.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deStartDate.Properties.VistaTimeProperties)).EndInit();
@@ -359,5 +381,7 @@
         private DevExpress.XtraEditors.SimpleButton btnExport;
         private DevExpress.XtraEditors.LabelControl lblTotalPrice;
         private DevExpress.XtraEditors.LabelControl labelControl8;
+        private DevExpress.XtraEditors.LabelControl labelControl9;
+        private DevExpress.XtraEditors.TextEdit txtBusinessPerson;
     }
 }

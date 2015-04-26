@@ -1,6 +1,6 @@
 ﻿namespace DQS.AppViews.OtherOperation.Finance
 {
-    partial class FrmShowMakeCollectionsForOnPassage
+    partial class FrmShowMakeCollectionsForBusiness
     {
         /// <summary>
         /// Required designer variable.
@@ -76,7 +76,7 @@
             this.gridControl.MainView = this.gridView;
             this.gridControl.Name = "gridControl";
             this.gridControl.Size = new System.Drawing.Size(900, 294);
-            this.gridControl.TabIndex = 18;
+            this.gridControl.TabIndex = 21;
             this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView});
             // 
@@ -111,7 +111,7 @@
             this.panelControl2.Location = new System.Drawing.Point(3, 55);
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(900, 66);
-            this.panelControl2.TabIndex = 17;
+            this.panelControl2.TabIndex = 20;
             // 
             // btnSearch
             // 
@@ -259,7 +259,7 @@
             this.panelControl1.Location = new System.Drawing.Point(3, 3);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(900, 50);
-            this.panelControl1.TabIndex = 16;
+            this.panelControl1.TabIndex = 19;
             // 
             // btnExport
             // 
@@ -288,7 +288,7 @@
             this.btnAdd.Text = "新建";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // FrmShowMakeCollectionsForOnPassage
+            // FrmShowMakeCollectionsForBusiness
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -296,10 +296,10 @@
             this.Controls.Add(this.gridControl);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
-            this.Name = "FrmShowMakeCollectionsForOnPassage";
+            this.Name = "FrmShowMakeCollectionsForBusiness";
             this.ShowIcon = false;
-            this.Text = "在途转收款";
-            this.Load += new System.EventHandler(this.FrmShowMakeCollectionsForOnPassage_Load);
+            this.Text = "业务转收款";
+            this.Load += new System.EventHandler(this.FrmShowMakeCollectionsForBusiness_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
@@ -324,6 +324,13 @@
         private DevExpress.XtraGrid.GridControl gridControl;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView;
         private DevExpress.XtraEditors.PanelControl panelControl2;
+        private DevExpress.XtraEditors.SimpleButton btnSearch;
+        private DevExpress.XtraEditors.DateEdit deEndDate;
+        private DevExpress.XtraEditors.DateEdit deStartDate;
+        private DevExpress.XtraEditors.LabelControl labelControl6;
+        private DevExpress.XtraEditors.LabelControl labelControl7;
+        private DevExpress.XtraEditors.LabelControl labelControl5;
+        private DevExpress.XtraEditors.TextEdit txtBusinessPerson;
         private DevExpress.XtraEditors.SimpleButton btnReSet;
         private DevExpress.XtraEditors.LabelControl lblTotalPrice;
         private DevExpress.XtraEditors.LabelControl labelControl8;
@@ -337,13 +344,5 @@
         private DevExpress.XtraEditors.SimpleButton btnExport;
         private DevExpress.XtraEditors.SimpleButton btnDel;
         private DevExpress.XtraEditors.SimpleButton btnAdd;
-        private DevExpress.XtraEditors.SimpleButton btnSearch;
-        private DevExpress.XtraEditors.DateEdit deEndDate;
-        private DevExpress.XtraEditors.DateEdit deStartDate;
-        private DevExpress.XtraEditors.LabelControl labelControl6;
-        private DevExpress.XtraEditors.LabelControl labelControl7;
-        private DevExpress.XtraEditors.LabelControl labelControl5;
-        private DevExpress.XtraEditors.TextEdit txtBusinessPerson;
-
     }
 }

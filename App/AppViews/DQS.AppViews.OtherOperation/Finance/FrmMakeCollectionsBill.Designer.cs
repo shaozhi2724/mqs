@@ -37,6 +37,7 @@
             this.txtIncludeTaxPrice = new DevExpress.XtraEditors.TextEdit();
             this.txtTaxPrice = new DevExpress.XtraEditors.TextEdit();
             this.txtNotIncludeTaxPrice = new DevExpress.XtraEditors.TextEdit();
+            this.txtDealerName = new DevExpress.XtraEditors.TextEdit();
             this.txtVoucherCode = new DevExpress.XtraEditors.TextEdit();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
@@ -54,7 +55,6 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.gridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.txtDealerName = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deBillDate.Properties.VistaTimeProperties)).BeginInit();
@@ -65,12 +65,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtIncludeTaxPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTaxPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNotIncludeTaxPrice.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDealerName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVoucherCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDealerName.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -169,6 +169,14 @@
             this.txtNotIncludeTaxPrice.Name = "txtNotIncludeTaxPrice";
             this.txtNotIncludeTaxPrice.Size = new System.Drawing.Size(114, 21);
             this.txtNotIncludeTaxPrice.TabIndex = 15;
+            // 
+            // txtDealerName
+            // 
+            this.txtDealerName.Location = new System.Drawing.Point(76, 11);
+            this.txtDealerName.Name = "txtDealerName";
+            this.txtDealerName.Size = new System.Drawing.Size(259, 21);
+            this.txtDealerName.TabIndex = 15;
+            this.txtDealerName.Click += new System.EventHandler(this.txtDealerName_Click);
             // 
             // txtVoucherCode
             // 
@@ -316,13 +324,6 @@
             this.gridView.IndicatorWidth = 40;
             this.gridView.Name = "gridView";
             // 
-            // txtDealerName
-            // 
-            this.txtDealerName.Location = new System.Drawing.Point(76, 11);
-            this.txtDealerName.Name = "txtDealerName";
-            this.txtDealerName.Size = new System.Drawing.Size(259, 21);
-            this.txtDealerName.TabIndex = 15;
-            // 
             // FrmMakeCollectionsBill
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -348,13 +349,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtIncludeTaxPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTaxPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNotIncludeTaxPrice.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDealerName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVoucherCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             this.panelControl2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDealerName.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

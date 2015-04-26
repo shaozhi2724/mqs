@@ -216,7 +216,8 @@ namespace DQS.Controls
         {
             int dealerID = int.Parse(this.Tag.ToString().Split('$')[0]);
             EntityCollection<BUSProductSalePriceEntity> salePrices = new EntityCollection<BUSProductSalePriceEntity>();
-            salePrices.Fetch(BUSProductSalePriceEntityFields.DealerID == dealerID & BUSProductSalePriceEntityFields.ProductID == productId & BUSProductSalePriceEntityFields.BatchNo == batchNo);
+            //salePrices.Fetch(BUSProductSalePriceEntityFields.DealerID == dealerID & BUSProductSalePriceEntityFields.ProductID == productId & BUSProductSalePriceEntityFields.BatchNo == batchNo);
+            salePrices.Fetch(BUSProductSalePriceEntityFields.DealerID == dealerID & BUSProductSalePriceEntityFields.ProductID == productId);
             gridControl1.DataSource = salePrices.Cast<BUSProductSalePriceEntity>().AsQueryable().OrderByDescending(p => p.ProductSalePriceID).ToList();
             gridView1.BestFitColumns();
         }

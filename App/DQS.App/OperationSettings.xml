@@ -71,6 +71,49 @@
       </Deatils>
     </Report>
   </Operation>
+
+  <Operation Name="OnlyBack">
+    <Grid EntityName="BUSOnlyBillDetailEntity" ViewName="vw_AllOnlyBackDetail" KeyField="直调单ID" EmptyRows="50">
+      <PopupForms>
+        <PopupForm Name="Product" PopStyle="DoubleClick">
+          <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
+          <ViewName>vw_AllProduct</ViewName>
+          <PrimaryField>药品ID</PrimaryField>
+          <Fields>药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,包装规格,包装比例,批准文号,贮藏条件,剂型,药品类别,单位</Fields>
+          <Filter>[状态] is  null or [状态] = '正常'</Filter>
+          <PageSize>100</PageSize>
+        </PopupForm>
+        <PopupForm Name="Price" PopStyle="EnterKey">
+          <FormatQueryString>[价格分类] LIKE '%{0}%' OR [价格分类Spell] LIKE '%{0}%'</FormatQueryString>
+          <ViewName>vw_AllProductPrice</ViewName>
+          <PrimaryField>药品ID</PrimaryField>
+          <Fields>药品ID,价格分类,价格分类Spell,[价格]</Fields>
+          <Filter></Filter>
+          <PageSize>100</PageSize>
+        </PopupForm>
+      </PopupForms>
+      <Columns>
+        <!--Name：表格显示的列名称，EntityField：对应实体的字段名，Visible：是否显示，AllowEdit：是否可编辑，PopupForm：弹出的窗体，PopupField：对应窗体中要回显的列-->
+        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="药品ID"/>
+        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品编号"/>
+        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品名称"/>
+        <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产厂商"/>
+        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格"/>
+        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格"/>
+        <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装比例"/>
+        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批准文号"/>
+        <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="贮藏条件"/>
+        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="剂型"/>
+        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品类别"/>
+        <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="单位"/>
+        <Column Name="单价" EntityField="PUnitPrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price" PopupField="价格"/>
+        <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
+        <Column Name="金额" EntityField="PTotalPrice" FieldType="System.Double"  Visible="true" AllowEdit="false" />
+        <Column Name="销售单价" EntityField="SUnitPrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price" PopupField="价格"/>
+        <Column Name="销售金额" EntityField="STotalPrice" FieldType="System.Double"  Visible="true" AllowEdit="false" />
+      </Columns>
+    </Grid>
+  </Operation>
   <Operation Name="PurchaseBillPrice">
     <Grid EntityName="BUSBillPriceHistoryDetailEntity" ViewName="vw_AllPurchaseBillPriceDetail" KeyField="调价单ID" EmptyRows="50">
       <Columns>

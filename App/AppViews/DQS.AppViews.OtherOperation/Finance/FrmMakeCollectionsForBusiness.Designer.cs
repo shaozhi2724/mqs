@@ -1,6 +1,6 @@
 ﻿namespace DQS.AppViews.OtherOperation.Finance
 {
-    partial class FrmMakeCollections
+    partial class FrmMakeCollectionsForBusiness
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSave = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
+            this.lblTotalPrice = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
+            this.gridControl = new DevExpress.XtraGrid.GridControl();
+            this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.cboChoose = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cboType = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.btnOnPassage = new DevExpress.XtraEditors.SimpleButton();
+            this.btnOnBusiness = new DevExpress.XtraEditors.SimpleButton();
             this.deMakeCollectionDate = new DevExpress.XtraEditors.DateEdit();
             this.btnBill = new DevExpress.XtraEditors.SimpleButton();
             this.txtDealerName = new DevExpress.XtraEditors.TextEdit();
@@ -47,16 +57,10 @@
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.gridControl = new DevExpress.XtraGrid.GridControl();
-            this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
-            this.btnSave = new DevExpress.XtraEditors.SimpleButton();
-            this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
-            this.lblTotalPrice = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
+            this.panelControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cboChoose.Properties)).BeginInit();
@@ -68,11 +72,105 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtMakeCollectionPerson.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMakeCollectionsCode.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
-            this.panelControl2.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // panelControl2
+            // 
+            this.panelControl2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelControl2.Controls.Add(this.btnCancel);
+            this.panelControl2.Controls.Add(this.btnSave);
+            this.panelControl2.Controls.Add(this.labelControl11);
+            this.panelControl2.Controls.Add(this.lblTotalPrice);
+            this.panelControl2.Controls.Add(this.labelControl9);
+            this.panelControl2.Controls.Add(this.labelControl8);
+            this.panelControl2.Controls.Add(this.labelControl7);
+            this.panelControl2.Location = new System.Drawing.Point(3, 398);
+            this.panelControl2.Name = "panelControl2";
+            this.panelControl2.Size = new System.Drawing.Size(965, 48);
+            this.panelControl2.TabIndex = 11;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(871, 14);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 0;
+            this.btnCancel.Text = "取消";
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Location = new System.Drawing.Point(752, 14);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 0;
+            this.btnSave.Text = "保存";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // labelControl11
+            // 
+            this.labelControl11.Location = new System.Drawing.Point(459, 17);
+            this.labelControl11.Name = "labelControl11";
+            this.labelControl11.Size = new System.Drawing.Size(84, 14);
+            this.labelControl11.TabIndex = 0;
+            this.labelControl11.Text = "选中单据总额：";
+            // 
+            // lblTotalPrice
+            // 
+            this.lblTotalPrice.Location = new System.Drawing.Point(549, 17);
+            this.lblTotalPrice.Name = "lblTotalPrice";
+            this.lblTotalPrice.Size = new System.Drawing.Size(0, 14);
+            this.lblTotalPrice.TabIndex = 0;
+            // 
+            // labelControl9
+            // 
+            this.labelControl9.Location = new System.Drawing.Point(294, 17);
+            this.labelControl9.Name = "labelControl9";
+            this.labelControl9.Size = new System.Drawing.Size(60, 14);
+            this.labelControl9.TabIndex = 0;
+            this.labelControl9.Text = "本期应付：";
+            this.labelControl9.Visible = false;
+            // 
+            // labelControl8
+            // 
+            this.labelControl8.Location = new System.Drawing.Point(149, 17);
+            this.labelControl8.Name = "labelControl8";
+            this.labelControl8.Size = new System.Drawing.Size(60, 14);
+            this.labelControl8.TabIndex = 0;
+            this.labelControl8.Text = "本期应收：";
+            this.labelControl8.Visible = false;
+            // 
+            // labelControl7
+            // 
+            this.labelControl7.Location = new System.Drawing.Point(9, 17);
+            this.labelControl7.Name = "labelControl7";
+            this.labelControl7.Size = new System.Drawing.Size(60, 14);
+            this.labelControl7.TabIndex = 0;
+            this.labelControl7.Text = "上期结存：";
+            this.labelControl7.Visible = false;
+            // 
+            // gridControl
+            // 
+            this.gridControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridControl.Location = new System.Drawing.Point(3, 81);
+            this.gridControl.MainView = this.gridView;
+            this.gridControl.Name = "gridControl";
+            this.gridControl.Size = new System.Drawing.Size(964, 315);
+            this.gridControl.TabIndex = 10;
+            this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView});
+            // 
+            // gridView
+            // 
+            this.gridView.GridControl = this.gridControl;
+            this.gridView.IndicatorWidth = 40;
+            this.gridView.Name = "gridView";
+            this.gridView.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
             // 
             // panelControl1
             // 
@@ -80,7 +178,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelControl1.Controls.Add(this.cboChoose);
             this.panelControl1.Controls.Add(this.cboType);
-            this.panelControl1.Controls.Add(this.btnOnPassage);
+            this.panelControl1.Controls.Add(this.btnOnBusiness);
             this.panelControl1.Controls.Add(this.deMakeCollectionDate);
             this.panelControl1.Controls.Add(this.btnBill);
             this.panelControl1.Controls.Add(this.txtDealerName);
@@ -98,8 +196,8 @@
             this.panelControl1.Controls.Add(this.labelControl1);
             this.panelControl1.Location = new System.Drawing.Point(3, 3);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1089, 76);
-            this.panelControl1.TabIndex = 0;
+            this.panelControl1.Size = new System.Drawing.Size(964, 76);
+            this.panelControl1.TabIndex = 9;
             // 
             // cboChoose
             // 
@@ -121,15 +219,14 @@
             this.cboType.Size = new System.Drawing.Size(90, 21);
             this.cboType.TabIndex = 21;
             // 
-            // btnOnPassage
+            // btnOnBusiness
             // 
-            this.btnOnPassage.Location = new System.Drawing.Point(943, 32);
-            this.btnOnPassage.Name = "btnOnPassage";
-            this.btnOnPassage.Size = new System.Drawing.Size(156, 27);
-            this.btnOnPassage.TabIndex = 18;
-            this.btnOnPassage.Text = "选择在途单据";
-            this.btnOnPassage.Visible = false;
-            this.btnOnPassage.Click += new System.EventHandler(this.btnOnPassage_Click);
+            this.btnOnBusiness.Location = new System.Drawing.Point(765, 38);
+            this.btnOnBusiness.Name = "btnOnBusiness";
+            this.btnOnBusiness.Size = new System.Drawing.Size(156, 27);
+            this.btnOnBusiness.TabIndex = 18;
+            this.btnOnBusiness.Text = "选择业务单据";
+            this.btnOnBusiness.Click += new System.EventHandler(this.btnOnBusiness_Click);
             // 
             // deMakeCollectionDate
             // 
@@ -145,12 +242,12 @@
             // 
             // btnBill
             // 
-            this.btnBill.Location = new System.Drawing.Point(786, 38);
+            this.btnBill.Location = new System.Drawing.Point(927, 14);
             this.btnBill.Name = "btnBill";
             this.btnBill.Size = new System.Drawing.Size(135, 27);
             this.btnBill.TabIndex = 2;
             this.btnBill.Text = "选择应收单据";
-            this.btnBill.Click += new System.EventHandler(this.btnBill_Click);
+            this.btnBill.Visible = false;
             // 
             // txtDealerName
             // 
@@ -254,118 +351,25 @@
             this.labelControl1.TabIndex = 0;
             this.labelControl1.Text = "收款编号：";
             // 
-            // gridControl
-            // 
-            this.gridControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridControl.Location = new System.Drawing.Point(3, 81);
-            this.gridControl.MainView = this.gridView;
-            this.gridControl.Name = "gridControl";
-            this.gridControl.Size = new System.Drawing.Size(1089, 280);
-            this.gridControl.TabIndex = 1;
-            this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView});
-            // 
-            // gridView
-            // 
-            this.gridView.GridControl = this.gridControl;
-            this.gridView.IndicatorWidth = 40;
-            this.gridView.Name = "gridView";
-            this.gridView.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
-            // 
-            // panelControl2
-            // 
-            this.panelControl2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelControl2.Controls.Add(this.btnCancel);
-            this.panelControl2.Controls.Add(this.btnSave);
-            this.panelControl2.Controls.Add(this.labelControl11);
-            this.panelControl2.Controls.Add(this.lblTotalPrice);
-            this.panelControl2.Controls.Add(this.labelControl9);
-            this.panelControl2.Controls.Add(this.labelControl8);
-            this.panelControl2.Controls.Add(this.labelControl7);
-            this.panelControl2.Location = new System.Drawing.Point(3, 363);
-            this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(1090, 48);
-            this.panelControl2.TabIndex = 5;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(996, 14);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 0;
-            this.btnCancel.Text = "取消";
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(877, 14);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "保存";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // labelControl11
-            // 
-            this.labelControl11.Location = new System.Drawing.Point(459, 17);
-            this.labelControl11.Name = "labelControl11";
-            this.labelControl11.Size = new System.Drawing.Size(84, 14);
-            this.labelControl11.TabIndex = 0;
-            this.labelControl11.Text = "选中单据总额：";
-            // 
-            // lblTotalPrice
-            // 
-            this.lblTotalPrice.Location = new System.Drawing.Point(549, 17);
-            this.lblTotalPrice.Name = "lblTotalPrice";
-            this.lblTotalPrice.Size = new System.Drawing.Size(0, 14);
-            this.lblTotalPrice.TabIndex = 0;
-            // 
-            // labelControl9
-            // 
-            this.labelControl9.Location = new System.Drawing.Point(294, 17);
-            this.labelControl9.Name = "labelControl9";
-            this.labelControl9.Size = new System.Drawing.Size(60, 14);
-            this.labelControl9.TabIndex = 0;
-            this.labelControl9.Text = "本期应付：";
-            this.labelControl9.Visible = false;
-            // 
-            // labelControl8
-            // 
-            this.labelControl8.Location = new System.Drawing.Point(149, 17);
-            this.labelControl8.Name = "labelControl8";
-            this.labelControl8.Size = new System.Drawing.Size(60, 14);
-            this.labelControl8.TabIndex = 0;
-            this.labelControl8.Text = "本期应收：";
-            this.labelControl8.Visible = false;
-            // 
-            // labelControl7
-            // 
-            this.labelControl7.Location = new System.Drawing.Point(9, 17);
-            this.labelControl7.Name = "labelControl7";
-            this.labelControl7.Size = new System.Drawing.Size(60, 14);
-            this.labelControl7.TabIndex = 0;
-            this.labelControl7.Text = "上期结存：";
-            this.labelControl7.Visible = false;
-            // 
-            // FrmMakeCollections
+            // FrmMakeCollectionsForBusiness
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1096, 414);
+            this.ClientSize = new System.Drawing.Size(971, 449);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.gridControl);
             this.Controls.Add(this.panelControl1);
-            this.Name = "FrmMakeCollections";
+            this.Name = "FrmMakeCollectionsForBusiness";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "应收转收款";
+            this.Text = "业务转收款";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.FrmMakeCollections_Load);
+            this.Load += new System.EventHandler(this.FrmMakeCollectionsForBusiness_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
+            this.panelControl2.ResumeLayout(false);
+            this.panelControl2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
@@ -378,45 +382,40 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtMakeCollectionPerson.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMakeCollectionsCode.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
-            this.panelControl2.ResumeLayout(false);
-            this.panelControl2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private DevExpress.XtraEditors.PanelControl panelControl2;
+        private DevExpress.XtraEditors.SimpleButton btnCancel;
+        private DevExpress.XtraEditors.SimpleButton btnSave;
+        private DevExpress.XtraEditors.LabelControl labelControl11;
+        private DevExpress.XtraEditors.LabelControl lblTotalPrice;
+        private DevExpress.XtraEditors.LabelControl labelControl9;
+        private DevExpress.XtraEditors.LabelControl labelControl8;
+        private DevExpress.XtraEditors.LabelControl labelControl7;
         private DevExpress.XtraGrid.GridControl gridControl;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private DevExpress.XtraEditors.ComboBoxEdit cboChoose;
+        private DevExpress.XtraEditors.ComboBoxEdit cboType;
+        private DevExpress.XtraEditors.SimpleButton btnOnBusiness;
+        private DevExpress.XtraEditors.DateEdit deMakeCollectionDate;
         private DevExpress.XtraEditors.SimpleButton btnBill;
+        private DevExpress.XtraEditors.TextEdit txtDealerName;
         private DevExpress.XtraEditors.TextEdit txtVoucherCode;
         private DevExpress.XtraEditors.TextEdit txtMakeCollectionPerson;
         private DevExpress.XtraEditors.TextEdit txtTotalPrice;
+        private DevExpress.XtraEditors.LabelControl labelControl12;
         private DevExpress.XtraEditors.TextEdit txtMakeCollectionsCode;
+        private DevExpress.XtraEditors.LabelControl labelControl10;
         private DevExpress.XtraEditors.LabelControl labelControl6;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.DateEdit deMakeCollectionDate;
-        private DevExpress.XtraEditors.SimpleButton btnOnPassage;
-        private DevExpress.XtraEditors.PanelControl panelControl2;
-        private DevExpress.XtraEditors.SimpleButton btnCancel;
-        private DevExpress.XtraEditors.SimpleButton btnSave;
-        private DevExpress.XtraEditors.LabelControl lblTotalPrice;
-        private DevExpress.XtraEditors.LabelControl labelControl9;
-        private DevExpress.XtraEditors.LabelControl labelControl8;
-        private DevExpress.XtraEditors.LabelControl labelControl7;
-        private DevExpress.XtraEditors.LabelControl labelControl10;
-        private DevExpress.XtraEditors.ComboBoxEdit cboType;
-        private DevExpress.XtraEditors.LabelControl labelControl11;
-        private DevExpress.XtraEditors.ComboBoxEdit cboChoose;
-        private DevExpress.XtraEditors.LabelControl labelControl12;
-        private DevExpress.XtraEditors.TextEdit txtDealerName;
     }
 }

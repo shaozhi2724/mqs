@@ -214,7 +214,10 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 if (!this.ftPanel.ValidateIsNullFields()) return;
 
                 if (!ValidateDealerQualification()) return;
-                if (!ValidateProductQualification()) return;
+                if (txtBillTypeName.Text.Trim() != "销售退货")
+                {
+                    if (!ValidateProductQualification()) return;
+                }
                 BUSAcceptEntity entity = this.ftPanel.GetEntity() as BUSAcceptEntity;
                 this.CustomSetEntity(entity);
                 List<EntityBase> children = this.popupGrid.GetEntities();

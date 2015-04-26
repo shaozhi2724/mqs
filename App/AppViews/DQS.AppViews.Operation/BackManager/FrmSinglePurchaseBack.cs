@@ -684,6 +684,9 @@ WHERE BillID={1}
             if (this.txtDealerName.EditData != null)
             {
                 this.txtDealerAddress.Text = (this.txtDealerName.EditData as DataRow)["通讯地址"].ToString();
+                txtDealerName2.Text = (this.txtDealerName.EditData as DataRow)["单位名称"].ToString();
+                txtDealerName2.Tag = Convert.ToInt32((txtDealerName.EditData as DataRow)["单位ID"]);
+                dealerCode = (this.txtDealerName.EditData as DataRow)["单位编号"].ToString();
             }
         }
 

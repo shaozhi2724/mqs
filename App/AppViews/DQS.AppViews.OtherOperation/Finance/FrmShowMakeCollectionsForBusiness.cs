@@ -12,18 +12,23 @@ using System.Windows.Forms;
 
 namespace DQS.AppViews.OtherOperation.Finance
 {
-    public partial class FrmShowMakeCollections : XtraForm
+    public partial class FrmShowMakeCollectionsForBusiness : XtraForm
     {
-        public FrmShowMakeCollections()
+        public FrmShowMakeCollectionsForBusiness()
         {
             InitializeComponent();
         }
         //查询条件
         string sqlSearch = "";
 
+        private void FrmShowMakeCollectionsForBusiness_Load(object sender, EventArgs e)
+        {
+            gridLoad();
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            using (FrmMakeCollections mc = new FrmMakeCollections())
+            using (FrmMakeCollectionsForBusiness mc = new FrmMakeCollectionsForBusiness())
             {
                 DialogResult dr = mc.ShowDialog();
                 if (dr == DialogResult.Yes)
@@ -39,18 +44,12 @@ namespace DQS.AppViews.OtherOperation.Finance
                 e.Info.DisplayText = (e.RowHandle + 1).ToString();
         }
 
-        private void FrmShowMakeCollections_Load(object sender, EventArgs e)
-        {
-            gridLoad();
-        }
-
         private void gridLoad()
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 string sqlBill = @"SELECT DISTINCT m.MakeCollectionsID,m.MakeCollectionsCode AS [收款单号],m.VoucherCode AS [凭证号],m.MakeCollectionsPerson AS [收款人],m.OperateDate AS [收款日期],m.DealerName AS [往来单位名称],m.MakeCollectionsType AS [收款方式],TotalPrice AS [总金额],m.DealerCode AS [往来单位编号],m.DealerSpell AS [往来单位简拼]
-FROM dbo.FIN_MakeCollections m WHERE m.MakeCollectionsCode LIKE 'YSSK%' AND (m.DealerCode LIKE '%{0}%' OR m.DealerName LIKE '%{0}%' OR m.DealerSpell LIKE '%{0}%') AND (m.MakeCollectionsCode LIKE '%{1}%') AND (m.VoucherCode LIKE '%{2}%')" + sqlSearch;
-
+FROM dbo.FIN_MakeCollections m WHERE m.MakeCollectionsCode LIKE 'YWSK%' AND (m.DealerCode LIKE '%{0}%' OR m.DealerName LIKE '%{0}%' OR m.DealerSpell LIKE '%{0}%') AND (m.MakeCollectionsCode LIKE '%{1}%') AND (m.VoucherCode LIKE '%{2}%')" + sqlSearch;
                 sqlBill = String.Format(sqlBill, txtDealerCode.Text.Trim(), txtMakeCollectionsCode.Text.Trim(), txtVoucherCode.Text.Trim());
                 SqlDataAdapter sdad = new SqlDataAdapter(sqlBill, conn);
                 DataSet ds = new DataSet();
@@ -94,13 +93,13 @@ FROM dbo.FIN_MakeCollections m WHERE m.MakeCollectionsCode LIKE 'YSSK%' AND (m.D
             gridLoad();
         }
 
-        
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
             sqlSearch = " AND (m.OperateDate BETWEEN '" + deStartDate.Text.Trim() + " 00:00:00' AND '" + deEndDate.Text.Trim() + " 23:59:59')";
             gridLoad();
         }
-        
+
 
         private void btnDel_Click(object sender, EventArgs e)
         {
@@ -115,7 +114,17 @@ FROM dbo.FIN_MakeCollections m WHERE m.MakeCollectionsCode LIKE 'YSSK%' AND (m.D
 
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string Delsql = @"DELETE dbo.FIN_MakeCollections WHERE {0}
+                string Delsql = @"DELETE FIN_MakeCollectionsOnPassage FROM dbo.FIN_MakeCollectionsOnPassage mo 
+WHERE EXISTS(SELECT * FROM FIN_MakeCollectionsDetail WHERE {0} AND BusinessBillCode = mo.BusinessBillCode)
+DELETE FIN_MakeCollectionsOnPassageDetail FROM dbo.FIN_MakeCollectionsOnPassageDetail mo 
+WHERE EXISTS(SELECT * FROM FIN_MakeCollectionsDetail WHERE {0} AND BusinessBillCode = mo.BusinessBillCode)
+
+DELETE dbo.FIN_Receivables FROM dbo.FIN_Receivables nr
+WHERE EXISTS(SELECT * FROM FIN_MakeCollectionsDetail WHERE {0} AND BusinessBillCode = nr.BusinessBillCode AND nr.IsAutoCreate = 1)
+DELETE dbo.FIN_ReceivablesDetail FROM dbo.FIN_ReceivablesDetail nr
+WHERE EXISTS(SELECT * FROM FIN_MakeCollectionsDetail WHERE {0} AND BusinessBillCode = nr.BusinessBillCode AND nr.IsAutoCreate = 1)
+
+DELETE dbo.FIN_MakeCollections WHERE {0}
 DELETE dbo.FIN_MakeCollectionsDetail WHERE {0}";
                 if (dr == DialogResult.Yes)
                 {
@@ -178,7 +187,7 @@ DELETE dbo.FIN_MakeCollectionsDetail WHERE {0}";
 
                 DevExpress.XtraEditors.XtraMessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            }  
+            }
         }
 
         private void gridView_DoubleClick(object sender, EventArgs e)

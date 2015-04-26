@@ -118,15 +118,16 @@ WHERE (d.编号 LIKE '%" + txtDealerCode.Text.Trim() + "%' OR d.客户名称 LIK
             decimal thisAblesPrice = Convert.ToDecimal(gridView.GetDataRow(gridView.FocusedRowHandle)["余额"]);
             string sql = @"SELECT * FROM 
 (
-SELECT MakeCollectionsCode AS [单据编号],'收款单' AS [类型],DealerCode AS [客户编号],DealerName AS [客户名称],CONVERT(NVARCHAR(60),OperateDate,23) AS [日期],0 AS [应收],TotalPrice AS [收款] FROM dbo.FIN_MakeCollections
+SELECT MakeCollectionsCode AS [单据编号],'收款单' AS [类型],DealerCode AS [客户编号],DealerName AS [客户名称],CONVERT(NVARCHAR(60),OperateDate,23) AS [日期],0 AS [应收],TotalPrice AS [收款] FROM dbo.FIN_MakeCollections WHERE DealerCode = '{0}'
 UNION 
 SELECT BusinessBillCode,
 CASE SUBSTRING(BusinessBillCode,0,3)
 WHEN 'XS' THEN '销售单'
 WHEN 'XT' THEN '销退单'
 END
-,DealerCode,DealerName,CONVERT(NVARCHAR(60),StoreOutDate,23) AS [StoreOutDate],TotalPrice,0 FROM dbo.FIN_Receivables) a
-WHERE a.客户编号 = '"+dealerCode+"' ORDER BY a.日期";
+,DealerCode,DealerName,CONVERT(NVARCHAR(60),StoreOutDate,23) AS [StoreOutDate],TotalPrice,0 FROM dbo.FIN_Receivables
+WHERE DealerCode = '{0}') a ORDER BY a.日期";
+            sql = String.Format(sql, dealerCode);
             using (FrmShowSecond fss = new FrmShowSecond())
             {
                 fss.sql = sql;
@@ -138,7 +139,6 @@ WHERE a.客户编号 = '"+dealerCode+"' ORDER BY a.日期";
                 fss.lblFact.Text = "本期实收：";
                 fss.lblDealerName.Text = dealerName;
                 DialogResult dr = fss.ShowDialog();
-                
             }
         }
 

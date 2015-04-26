@@ -38,7 +38,7 @@ namespace DQS.AppViews.OtherOperation.Finance
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 string sql = @"SELECT ReceivablesID,ReceivablesCode AS [应收编号],VoucherCode AS [凭证号],BusinessBillID AS [StoreID],BusinessBillCode AS [单据编号],DealerName AS [往来单位名称],TotalPrice AS [总金额],(SELECT SUM((UnitPrice-PurchaasePrice)*Amount) FROM dbo.FIN_ReceivablesDetail rd WHERE rd.BusinessBillID = r.BusinessBillID) AS [利润],OperatePerson AS [开票员],BusinessPerson AS [业务员],BusinessBillDate AS [下单日期],StoreOutPerson AS [出库员],StoreOutDate AS [出库日期],DealerCode AS [往来单位编码],DealerSpell AS [往来单位简拼],DealerType AS [往来单位类型],OperateDate AS [应收日期]
-FROM dbo.FIN_Receivables r WHERE (DealerCode LIKE '%{0}%' OR DealerName LIKE '%{0}%' OR DealerSpell LIKE '%{0}%') AND (ReceivablesCode LIKE '%{1}%') AND (VoucherCode LIKE '%{2}%') AND (BusinessBillCode LIKE '%{3}%')" + sqlSearch;
+FROM dbo.FIN_Receivables r WHERE (DealerCode LIKE '%{0}%' OR DealerName LIKE '%{0}%' OR DealerSpell LIKE '%{0}%') AND (ReceivablesCode LIKE '%{1}%') AND (VoucherCode LIKE '%{2}%') AND (BusinessBillCode LIKE '%{3}%') AND (BusinessPerson LIKE '%" + txtBusinessPerson.Text.Trim() + "%' OR dbo.fn_GetPy(BusinessPerson) LIKE '%" + txtBusinessPerson.Text.Trim() + "%')" + sqlSearch;
                 sql = String.Format(sql, txtDealerCode.Text.Trim(), txtReceivablesCode.Text.Trim(), txtVoucherCode.Text.Trim(), txtBillCode.Text.Trim());
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
@@ -170,6 +170,26 @@ DELETE dbo.FIN_ReceivablesDetail WHERE {0}";
 
                 DevExpress.XtraEditors.XtraMessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            }
+        }
+
+        private void gridView_DoubleClick(object sender, EventArgs e)
+        {
+            DialogResult drcode = XtraMessageBox.Show("是否按照收款单号查询", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string sql = "SELECT rd.ReceivablesCode AS [应收单据],rd.VoucherCode AS [凭证号],rd.BusinessBillCode AS [单据编号],rd.DealerCode AS [往来单位编码],rd.DealerName AS [往来单位名称],rd.DealerSpell AS [往来单位简拼],OperatePerson AS [操作员],BusinessPerson AS [业务员],CONVERT(NVARCHAR(60),BusinessBillDate,23) AS [下单日期],CONVERT(NVARCHAR(60),StoreOutDate,23) AS [出库日期],ProductName AS [药品名称],BatchNo AS [批号],Amount AS [数量],UnitPrice AS [单价],rd.TotalPrice AS [金额],PurchaasePrice AS [进价],ProductStyle AS [类别],PhysicType AS [剂型],ProducerName AS [生产厂家],AuthorizedNo AS [批准文号],ProduceDate AS [生产日期],ValidateDate AS [有效期],ProductSpec AS [规格],PackageSpec AS [包装规格],ProductUnit AS [单位] FROM dbo.FIN_ReceivablesDetail rd LEFT JOIN dbo.FIN_Receivables r ON rd.ReceivablesCode = r.ReceivablesCode WHERE (BusinessPerson LIKE '%{0}%' OR dbo.fn_GetPy(BusinessPerson) LIKE '%{0}%') AND (rd.DealerCode LIKE '%{1}%' OR rd.DealerName LIKE '%{1}%' OR rd.DealerSpell LIKE '%{1}%') AND (ProductStyle LIKE '%{2}%' OR dbo.fn_GetPy(ProductStyle) LIKE '%{2}%')";
+            string code = sql + " AND rd.ReceivablesCode = '" + gridView.GetDataRow(gridView.FocusedRowHandle)["应收编号"].ToString() + "'";
+            string vcode = sql + " AND rd.VoucherCode = '" + gridView.GetDataRow(gridView.FocusedRowHandle)["凭证号"].ToString() + "'";
+            using (FrmMakeCollectionsSecond fs = new FrmMakeCollectionsSecond())
+            {
+                if (drcode == DialogResult.Yes)
+                {
+                    fs.sqlConditions = code;
+                }
+                else
+                {
+                    fs.sqlConditions = vcode;
+                }
+                DialogResult dr = fs.ShowDialog();
             }
         }
     }

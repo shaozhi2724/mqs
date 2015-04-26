@@ -181,6 +181,12 @@
     <Compile Include="StockManager\FrmStockDetail.Designer.cs">
       <DependentUpon>FrmStockDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="StockManager\FrmUnStockDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmUnStockDetail.Designer.cs">
+      <DependentUpon>FrmUnStockDetail.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CuringManager\FrmCuringCycle.resx">
@@ -222,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StockManager\FrmStockDetail.resx">
       <DependentUpon>FrmStockDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmUnStockDetail.resx">
+      <DependentUpon>FrmUnStockDetail.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

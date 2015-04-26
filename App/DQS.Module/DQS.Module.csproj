@@ -124,6 +124,8 @@
     <Compile Include="Entities\BUSInventoryDetailEntity.cs" />
     <Compile Include="Entities\BUSInventoryEntity.cs" />
     <Compile Include="Entities\BUSLockedBarCodeEntity.cs" />
+    <Compile Include="Entities\BUSOnlyBillDetailEntity.cs" />
+    <Compile Include="Entities\BUSOnlyBillEntity.cs" />
     <Compile Include="Entities\BUSProdcutDestroyDetailEntity.cs" />
     <Compile Include="Entities\BUSProdcutDestroyEntity.cs" />
     <Compile Include="Entities\BUSProductLockedEntity.cs" />
@@ -155,6 +157,7 @@
     <Compile Include="Entities\BUSTransportRecordEntity.cs" />
     <Compile Include="Entities\BUSTransportTemperatureAttachmentEntity.cs" />
     <Compile Include="Entities\BUSUnqualifiedStoreDetailEntity.cs" />
+    <Compile Include="Entities\BUSUnStoreDetailEntity.cs" />
     <Compile Include="Entities\SYSCategoryEntity.cs" />
     <Compile Include="Entities\SYSConfigureEntity.cs" />
     <Compile Include="Entities\SYSDbBackupEntity.cs" />

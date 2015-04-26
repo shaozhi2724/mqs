@@ -57,6 +57,8 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                 BUSBillEntity entity = new BUSBillEntity { BillID = m_id.Value };
                 entity.Fetch();
 
+                popupGrid.Tag = entity.DealerID.ToString() + "$" + entity.DealerName.ToString();
+
                 this.btnFix.Visible = entity.BillStatus == 1 && (entity.IsNullField("Reservation10") || entity.Reservation10 == "");
                 this.ftPanel.SetEntity(entity);
 
@@ -1310,6 +1312,7 @@ WHERE BillID={1}
                     popupGrid.Tag = dataRow["单位ID"].ToString() + "$" + dataRow["单位名称"].ToString();
                 }
             }
+            if (!this.ValidateDealerQualification()) return;
         }
 
         private void popupGrid_BeforePopupFormShow(object sender, DQS.Controls.CommonCode.BeforePopupFormShowArgs e)
@@ -1322,6 +1325,10 @@ WHERE BillID={1}
             if (string.IsNullOrWhiteSpace(txtDealerName.Text))
             {
                 XtraMessageBox.Show(string.Format("请先选择{0}！", layDealerName.CustomizationFormText), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Cancel = true;
+            }
+            if (!this.ValidateDealerQualification())
+            {
                 e.Cancel = true;
             }
             else
@@ -1773,7 +1780,7 @@ WHERE BillID={1}
         {
             int rowCount = this.popupGrid.PopupView.RowCount;
             int specialNum = 0;
-            string sql = "SELECT SUM(bd.Amount) FROM dbo.BUS_BillDetail bd INNER JOIN dbo.BUS_Bill b ON bd.BillID = b.BillID WHERE bd.ProductID = {0} AND b.DealerID = {1} AND (CONVERT(NVARCHAR(100),b.BillDate,23) = CONVERT(NVARCHAR(100),GETDATE(),23)) AND b.BillStatusName <> '已删除' AND (b.Reservation10 = '' OR b.Reservation10 = NULL)";
+            string sql = "SELECT SUM(bd.Amount) FROM dbo.BUS_BillDetail bd INNER JOIN dbo.BUS_Bill b ON bd.BillID = b.BillID WHERE bd.ProductID = {0} AND b.DealerID = {1} AND (CONVERT(NVARCHAR(100),b.BillDate,23) = CONVERT(NVARCHAR(100),GETDATE(),23)) AND b.BillStatusName <> '已删除'";
 
             int dealerID = Convert.ToInt32(this.txtDealerName.SelectedValue);
 

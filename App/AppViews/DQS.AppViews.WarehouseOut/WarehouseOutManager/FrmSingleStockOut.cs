@@ -461,6 +461,22 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
             }
             return true;
         }
+
+        private void btnOneKeyFinish_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
+            {
+                object amount = this.popupGrid.PopupView.GetRowCellValue(i, "订单数量");
+                if (amount != null)
+                {
+                    if (!string.IsNullOrEmpty(amount.ToString()))
+                    {
+                        this.popupGrid.PopupView.SetRowCellValue(i, "出库数量", amount);
+                    }
+                }
+            }
+        }
+
 /*
         ////更新库存
         public static void UpdateStoreDetail(BUSStoreBillDetailEntity storeBillDetail, int storeDetailBelongDepartmentId)

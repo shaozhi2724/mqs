@@ -223,6 +223,11 @@ namespace DQS.Controls
 		[Description("实体中的属性名称")]
 		public BUSBillEntityFields2 EntityField { get; set; }
 	}
+	public class BUSOnlyBillEntityTextBox : TextBoxEx
+	{
+		[Description("实体中的属性名称")]
+		public BUSBillEntityFields2 EntityField { get; set; }
+	}
 
 	public class BUSBillChangeHistoryEntityTextBox : TextBoxEx
 	{

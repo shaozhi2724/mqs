@@ -149,7 +149,11 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     return;
                 }
                 if (!ValidateDealerQualification()) return;
-                if (!ValidateProductQualification()) return;
+                if (txtBillTypeName.Text.Trim() != "销售退货")
+                {
+                    if (!ValidateProductQualification()) return;
+                }
+                
                 SaveLookupData();
                 BUSReceiveEntity entity = this.ftPanel.GetEntity() as BUSReceiveEntity;
 

@@ -211,6 +211,14 @@ namespace DQS.Module
         {
             get { return new BUSBillEntity(); }
         }
+        public static EntityBase BUSOnlyBillEntity
+        {
+            get { return new BUSOnlyBillEntity(); }
+        }
+        public static EntityBase BUSOnlyBillDetailEntity
+        {
+            get { return new BUSOnlyBillDetailEntity(); }
+        }
 
         public static EntityBase BUSBillChangeHistoryEntity
         {
@@ -552,6 +560,10 @@ namespace DQS.Module
         BUSAdverseReactionEntity,
 
         BUSBillEntity,
+
+        BUSOnlyBillEntity,
+
+        BUSOnlyBillDetailEntity,
 
         BUSBillPayableEntity,
 

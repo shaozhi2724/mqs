@@ -33,6 +33,9 @@ namespace DQS.Controls
         [Description("调价总价变动事件")]
         public event OnTotalPriceChangedEventHandler NewTotalPriceChanged;
 
+        [Description("直调销售总价变动事件")]
+        public event OnTotalPriceChangedEventHandler NewOnlySaleTotalPriceChanged;
+
         public delegate void OnBeforePopupFormShowEventHandler(object sender, BeforePopupFormShowArgs e);
 
         [Description("窗体弹出之前出发的事件")]
@@ -585,6 +588,44 @@ namespace DQS.Controls
                         }
                     }
                 }
+                if (e.Column.Caption == "销售单价")
+                {
+                    double price = 0.0D;
+                    try
+                    {
+                        if (e.Value.ToString().Trim() != "")
+                        {
+                            price = Convert.ToDouble(e.Value);
+                        }
+                    }
+                    catch
+                    {
+                        XtraMessageBox.Show("单价输入格式错误.", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+
+                    object amount = this.gridPopupView.GetFocusedRowCellValue("数量");
+                    if (amount != null && amount != DBNull.Value)
+                    {
+                        try
+                        {
+                            double changedPrice = price * Convert.ToDouble(amount);
+                            this.gridPopupView.SetFocusedRowCellValue("销售金额", changedPrice);
+
+
+                            //触发事件
+                            if (this.NewOnlySaleTotalPriceChanged != null)
+                            {
+                                this.NewOnlySaleTotalPriceChanged(this, new TotalPriceChangedArgs(this.GetOnlySummaryPrice()));
+                            }
+                        }
+                        catch
+                        {
+                            XtraMessageBox.Show("计算金额发生错误.", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            this.gridPopupView.SetFocusedRowCellValue("销售金额", 0);
+                        }
+                    }
+                }
 
                 if (e.Column.Caption == "数量")
                 {
@@ -670,6 +711,19 @@ namespace DQS.Controls
             for (int i = 0; i < this.gridPopupView.RowCount; i++)
             {
                 object price = this.gridPopupView.GetRowCellValue(i, "调价后金额");
+                if (price != null && price != DBNull.Value)
+                {
+                    totalPrice += Convert.ToDouble(price);
+                }
+            }
+            return totalPrice;
+        }
+        public double GetOnlySummaryPrice()
+        {
+            double totalPrice = 0.0;
+            for (int i = 0; i < this.gridPopupView.RowCount; i++)
+            {
+                object price = this.gridPopupView.GetRowCellValue(i, "销售金额");
                 if (price != null && price != DBNull.Value)
                 {
                     totalPrice += Convert.ToDouble(price);

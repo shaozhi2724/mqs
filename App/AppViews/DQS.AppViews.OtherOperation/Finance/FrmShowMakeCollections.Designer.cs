@@ -31,6 +31,13 @@
             this.gridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
+            this.deEndDate = new DevExpress.XtraEditors.DateEdit();
+            this.deStartDate = new DevExpress.XtraEditors.DateEdit();
+            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
+            this.txtBusinessPerson = new DevExpress.XtraEditors.TextEdit();
             this.btnReSet = new DevExpress.XtraEditors.SimpleButton();
             this.lblTotalPrice = new DevExpress.XtraEditors.LabelControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
@@ -48,6 +55,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deStartDate.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deStartDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBusinessPerson.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealerCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVoucherCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMakeCollectionsCode.Properties)).BeginInit();
@@ -74,11 +86,19 @@
             this.gridView.IndicatorWidth = 40;
             this.gridView.Name = "gridView";
             this.gridView.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
+            this.gridView.DoubleClick += new System.EventHandler(this.gridView_DoubleClick);
             // 
             // panelControl2
             // 
             this.panelControl2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelControl2.Controls.Add(this.btnSearch);
+            this.panelControl2.Controls.Add(this.deEndDate);
+            this.panelControl2.Controls.Add(this.deStartDate);
+            this.panelControl2.Controls.Add(this.labelControl6);
+            this.panelControl2.Controls.Add(this.labelControl7);
+            this.panelControl2.Controls.Add(this.labelControl5);
+            this.panelControl2.Controls.Add(this.txtBusinessPerson);
             this.panelControl2.Controls.Add(this.btnReSet);
             this.panelControl2.Controls.Add(this.lblTotalPrice);
             this.panelControl2.Controls.Add(this.labelControl8);
@@ -93,9 +113,73 @@
             this.panelControl2.Size = new System.Drawing.Size(900, 66);
             this.panelControl2.TabIndex = 14;
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(738, 4);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(79, 27);
+            this.btnSearch.TabIndex = 16;
+            this.btnSearch.Text = "查询";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // deEndDate
+            // 
+            this.deEndDate.EditValue = null;
+            this.deEndDate.Location = new System.Drawing.Point(632, 11);
+            this.deEndDate.Name = "deEndDate";
+            this.deEndDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deEndDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.deEndDate.Size = new System.Drawing.Size(91, 21);
+            this.deEndDate.TabIndex = 14;
+            // 
+            // deStartDate
+            // 
+            this.deStartDate.EditValue = null;
+            this.deStartDate.Location = new System.Drawing.Point(469, 11);
+            this.deStartDate.Name = "deStartDate";
+            this.deStartDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deStartDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.deStartDate.Size = new System.Drawing.Size(91, 21);
+            this.deStartDate.TabIndex = 15;
+            // 
+            // labelControl6
+            // 
+            this.labelControl6.Location = new System.Drawing.Point(566, 14);
+            this.labelControl6.Name = "labelControl6";
+            this.labelControl6.Size = new System.Drawing.Size(60, 14);
+            this.labelControl6.TabIndex = 12;
+            this.labelControl6.Text = "结束日期：";
+            // 
+            // labelControl7
+            // 
+            this.labelControl7.Location = new System.Drawing.Point(403, 14);
+            this.labelControl7.Name = "labelControl7";
+            this.labelControl7.Size = new System.Drawing.Size(60, 14);
+            this.labelControl7.TabIndex = 13;
+            this.labelControl7.Text = "开始日期：";
+            // 
+            // labelControl5
+            // 
+            this.labelControl5.Location = new System.Drawing.Point(403, 40);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(48, 14);
+            this.labelControl5.TabIndex = 11;
+            this.labelControl5.Text = "业务员：";
+            // 
+            // txtBusinessPerson
+            // 
+            this.txtBusinessPerson.Location = new System.Drawing.Point(469, 37);
+            this.txtBusinessPerson.Name = "txtBusinessPerson";
+            this.txtBusinessPerson.Size = new System.Drawing.Size(91, 21);
+            this.txtBusinessPerson.TabIndex = 10;
+            // 
             // btnReSet
             // 
-            this.btnReSet.Location = new System.Drawing.Point(640, 34);
+            this.btnReSet.Location = new System.Drawing.Point(738, 35);
             this.btnReSet.Name = "btnReSet";
             this.btnReSet.Size = new System.Drawing.Size(79, 27);
             this.btnReSet.TabIndex = 0;
@@ -104,14 +188,14 @@
             // 
             // lblTotalPrice
             // 
-            this.lblTotalPrice.Location = new System.Drawing.Point(474, 40);
+            this.lblTotalPrice.Location = new System.Drawing.Point(637, 40);
             this.lblTotalPrice.Name = "lblTotalPrice";
             this.lblTotalPrice.Size = new System.Drawing.Size(0, 14);
             this.lblTotalPrice.TabIndex = 8;
             // 
             // labelControl8
             // 
-            this.labelControl8.Location = new System.Drawing.Point(403, 40);
+            this.labelControl8.Location = new System.Drawing.Point(566, 40);
             this.labelControl8.Name = "labelControl8";
             this.labelControl8.Size = new System.Drawing.Size(60, 14);
             this.labelControl8.TabIndex = 9;
@@ -221,6 +305,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             this.panelControl2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deStartDate.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deStartDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBusinessPerson.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealerCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVoucherCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMakeCollectionsCode.Properties)).EndInit();
@@ -248,6 +337,13 @@
         private DevExpress.XtraEditors.LabelControl lblTotalPrice;
         private DevExpress.XtraEditors.LabelControl labelControl8;
         private DevExpress.XtraEditors.SimpleButton btnExport;
+        private DevExpress.XtraEditors.DateEdit deEndDate;
+        private DevExpress.XtraEditors.DateEdit deStartDate;
+        private DevExpress.XtraEditors.LabelControl labelControl6;
+        private DevExpress.XtraEditors.LabelControl labelControl7;
+        private DevExpress.XtraEditors.LabelControl labelControl5;
+        private DevExpress.XtraEditors.TextEdit txtBusinessPerson;
+        private DevExpress.XtraEditors.SimpleButton btnSearch;
 
     }
 }

@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace DQS.AppViews.OtherOperation.Finance
 {
-    public partial class FrmMakeCollectionsForOnPassage : XtraForm
+    public partial class FrmMakeCollectionsForBusiness : XtraForm
     {
-        public FrmMakeCollectionsForOnPassage()
+        public FrmMakeCollectionsForBusiness()
         {
             InitializeComponent();
         }
@@ -39,6 +39,24 @@ namespace DQS.AppViews.OtherOperation.Finance
         string saveDealerCode = "";
         //单位简拼
         string saveDealerSpell = "";
+        //记录上一次结存日期
+        string stringDate = "";
+
+        private void FrmMakeCollectionsForBusiness_Load(object sender, EventArgs e)
+        {
+            LastInventoryDate();
+            deMakeCollectionDate.Text = DateTime.Today.ToString("d");
+            txtDealerName.Properties.ReadOnly = false;
+            LoadCboChoose();
+            LoadType();
+            if (GlobalItem.g_CurrentEmployee != null)
+            {
+                this.txtMakeCollectionPerson.Text = GlobalItem.g_CurrentEmployee.EmployeeName;
+            }
+            LoadCode();
+            //BindDealers();
+            GainData();
+        }
 
         /// <summary>
         /// 点击选择应收单据
@@ -123,6 +141,69 @@ namespace DQS.AppViews.OtherOperation.Finance
             }
         }
 
+        private void btnOnBusiness_Click(object sender, EventArgs e)
+        {
+            if (cboChoose.Text == "按单位收款")
+            {
+                if (this.txtDealerName.Text == "")
+                {
+                    XtraMessageBox.Show("请选择往来单位", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+            }
+            using (FrmMakeCollectionsChooseBill fmb = new FrmMakeCollectionsChooseBill())
+            {
+                fmb.FrmSql = "fn_MakeCollectionsOnPassage";
+                fmb.FrmDetailSql = "fn_MakeCollectionsOnPassageDetail";
+                fmb.BillList = BillList;
+                fmb.DetailList = DetailList;
+                fmb.TotalPrice = TotalPrice;
+                fmb.stringDate = stringDate;
+                fmb.dealerCode = txtDealerName.Text.Trim();
+                if (cboChoose.Text == "按单位收款")
+                    fmb.txtDealerCode.Properties.ReadOnly = true;
+                fmb.billCode = billCode;
+                DialogResult dr = fmb.ShowDialog();
+                if (dr == DialogResult.Yes)
+                {
+                    BillList = fmb.BillList;
+                    DetailList = fmb.DetailList;
+                    TotalPrice = fmb.TotalPrice;
+                    lblTotalPrice.Text = TotalPrice.ToString();
+                    txtTotalPrice.Text = TotalPrice.ToString();
+                    TotalPrice = fmb.TotalPrice;
+                    dealerCode = fmb.dealerCode;
+                    billCode = fmb.billCode;
+                    GainData();
+                    valDealer();
+                }
+            }
+        }
+
+        private void LastInventoryDate()
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                string sql = "SELECT TOP 1 CONVERT(NVARCHAR(100),OperateDate,23) FROM dbo.FIN_Inventory ORDER BY InventoryID DESC";
+                try
+                {
+                    SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
+                    DataSet ds = new DataSet();
+                    sda.Fill(ds, "Table");
+                    if (ds.Tables["Table"].Rows.Count == 0)
+                    {
+                        return;
+                    }
+                    stringDate = ds.Tables["Table"].Rows[0][0].ToString();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
         //加载在途所有往来单位
         /*
         private void BindDealers()
@@ -170,34 +251,43 @@ namespace DQS.AppViews.OtherOperation.Finance
             }
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sql = @"SELECT 
-	onp.MakeCollectionsOnPassageID AS [OnPassageID],
-	ra.ReceivablesCode AS [应收单据编号],
-	ra.VoucherCode AS [凭证号],
-	onp.BusinessBillID AS [StoreID],
-	onp.BusinessBillCode AS [单据编码],
-	onp.DealerCode AS [往来单位编码],
-	onp.DealerName AS [往来单位名称],
-	onp.DealerSpell AS [往来单位简拼],
-	onp.DealerType AS [往来单位类型],
-	fm.OperatePerson AS [开票员],
-	fm.BusinessPerson AS [业务员],
-	fm.BusinessBillDate AS [下单日期],
-	fm.StoreOutPerson AS [出库人],
-	fm.StoreOutDate AS [出库日期],
-	onp.BusinessBillDetailID AS [DetailID],
-	onp.ProductName AS [药品名称],
-	onp.BatchNo AS [批号],
-	onp.Amount AS [数量],
-	onp.TotalPrice AS [金额],
-	onp.PackageSpec AS [包装规格],
-	onp.ProducerName AS [生产厂商],
-	onp.ProductStyle AS [类别],
-	onp.PhysicType AS [剂型]
-FROM dbo.FIN_MakeCollectionsOnPassageDetail onp 
-INNER JOIN dbo.FIN_MakeCollectionsOnPassage fm ON onp.BusinessBillID = fm.BusinessBillID
-LEFT JOIN dbo.FIN_Receivables ra ON onp.BusinessBillID = ra.BusinessBillID
-WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.BusinessBillID = nr.BusinessBillID) AND onp.BusinessBillDetailID IN (" + StoreID + ")";
+                string sql = @"SELECT * FROM
+(SELECT 
+	sb.StoreID,
+	sb.StoreCode AS [单据编号],
+	sbd.DetailID,
+	d.DealerCode AS [往来单位编码],
+	d.DealerName AS [往来单位名称],
+	d.DealerSpell AS [往来单位简拼],
+	d.DealerType AS [往来单位类型],
+	p.ProductName AS [药品名称],
+	bd.BatchNo AS [批号],
+	CASE sb.StoreTypeName
+	WHEN '销售出货' THEN bd.Amount
+	WHEN '销售退货' THEN -bd.Amount
+	ELSE bd.Amount
+	END AS [数量],
+	bd.UnitPrice AS [单价],
+	CASE sb.StoreTypeName
+	WHEN '销售出货' THEN bd.TotalPrice
+	WHEN '销售退货' THEN -bd.TotalPrice
+	ELSE bd.TotalPrice
+	END AS [金额],
+	p.ProductStyle AS [类别],
+	p.PhysicType AS [剂型],
+	p.ProducerName AS [生产厂商],
+	p.AuthorizedNo AS [批准文号],
+	bd.ProduceDate AS [生产日期],
+	bd.ValidateDate AS [有效期],
+	p.ProductSpec AS [规格],
+	p.ProductUnit AS [单位],
+	p.PackageSpec AS [包装规格]
+FROM dbo.BUS_StoreBillDetail sbd
+	INNER JOIN dbo.BUS_StoreBill sb ON sbd.StoreID = sb.StoreID
+	INNER JOIN dbo.BUS_BillDetail bd ON (sb.SaleBillID = bd.BillID OR sb.PurchaseBillID = bd.BillID) AND sbd.ProductID = bd.ProductID AND sbd.BatchNo = bd.BatchNo
+	INNER JOIN dbo.BFI_Product p ON sbd.ProductID = p.ProductID
+	INNER JOIN dbo.BFI_Dealer d ON sb.DealerID = d.DealerID
+	) t WHERE t.DetailID IN (" + StoreID + ")";
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 try
@@ -239,21 +329,6 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.Busine
             {
                 this.txtDealerName.Properties.ReadOnly = false;
             }
-        }
-
-        private void FrmMakeCollectionsForOnPassage_Load(object sender, EventArgs e) 
-        {
-            deMakeCollectionDate.Text = DateTime.Today.ToString("d");
-            txtDealerName.Properties.ReadOnly = false;
-            LoadCboChoose();
-            LoadType();
-            if (GlobalItem.g_CurrentEmployee != null)
-            {
-                this.txtMakeCollectionPerson.Text = GlobalItem.g_CurrentEmployee.EmployeeName;
-            }
-            LoadCode();
-            //BindDealers();
-            GainData();
         }
 
         private void LoadCboChoose()
@@ -324,7 +399,7 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.Busine
             {
                 string str = DateTime.Now.ToString("yyyyMMdd");
                 string strban = DateTime.Now.ToString("yyyyMM");
-                string sql = "SELECT TOP 1 MakeCollectionsCode FROM FIN_MakeCollections WHERE MakeCollectionsCode LIKE 'ZTSK" + strban + "%' ORDER BY MakeCollectionsID DESC";
+                string sql = "SELECT TOP 1 MakeCollectionsCode FROM FIN_MakeCollections WHERE MakeCollectionsCode LIKE 'YWSK" + strban + "%' ORDER BY MakeCollectionsID DESC";
                 try
                 {
                     SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
@@ -356,7 +431,7 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.Busine
                             No = Num.ToString();
                         }
                     }
-                    this.txtMakeCollectionsCode.Text = "ZTSK" + str + No;
+                    this.txtMakeCollectionsCode.Text = "YWSK" + str + No;
                 }
                 catch (Exception ex)
                 {
@@ -423,10 +498,24 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.Busine
                 }
                 StoreID = StoreID.Substring(0, StoreID.Length - 1);
             }
-                DataSet ds = new DataSet();
+            DataSet ds = new DataSet();
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sql = "SELECT DealerCode,DealerName,DealerSpell,SUM(TotalPrice) AS [TotalPrice] FROM FIN_MakeCollectionsOnPassageDetail WHERE BusinessBillDetailID IN (" + StoreID + ") GROUP BY DealerCode,DealerName,DealerSpell";
+                string sql = @"SELECT DealerCode,DealerName,DealerSpell,SUM(TotalPrice) AS [TotalPrice] FROM
+(SELECT 
+	d.DealerCode,
+	d.DealerName,
+	d.DealerSpell,
+	CASE sb.StoreTypeName
+	WHEN '销售出货' THEN bd.TotalPrice
+	WHEN '销售退货' THEN -bd.TotalPrice
+	ELSE bd.TotalPrice
+	END AS [TotalPrice]
+FROM dbo.BUS_StoreBillDetail sbd
+	LEFT JOIN dbo.BUS_StoreBill sb ON sbd.StoreID = sb.StoreID
+	LEFT JOIN dbo.BUS_BillDetail bd ON (sb.SaleBillID = bd.BillID OR sb.PurchaseBillID = bd.BillID) AND sbd.ProductID = bd.ProductID AND sbd.BatchNo = bd.BatchNo
+	LEFT JOIN dbo.BFI_Dealer d ON sb.DealerID = d.DealerID
+	 WHERE sbd.DetailID IN (" + StoreID + ")) t GROUP BY DealerCode,DealerName,DealerSpell";
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 try
                 {
@@ -457,7 +546,8 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.Busine
             if (!validatetxt()) return;
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string insertBill = "EXEC fn_InsertReceivablesAuto '{0}'";
+                string insertBill = @"EXEC fn_InsertOnPassage '{0}'
+EXEC fn_InsertReceivablesAuto '{0}'";
                 string insertMakecollections = "EXEC fn_InsertMakeCollections '{0}','{1}','{2}',{3},'{4}','{5}','{6}','{7}','{8}'";
                 string insertMakecollectionsDetail = "EXEC fn_InsertMakeCollectionsDetail {0},'{1}','{2}'";
                 try
@@ -553,7 +643,7 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.Busine
             }
             using (FrmDealer fd = new FrmDealer())
             {
-                fd.table = "FIN_MakeCollectionsOnPassage";
+                fd.table = "BFI_Dealer";
                 if (fd.ShowDialog() == DialogResult.Yes)
                 {
                     saveDealerCode = fd.code;
