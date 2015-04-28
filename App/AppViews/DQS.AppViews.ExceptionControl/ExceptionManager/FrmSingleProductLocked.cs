@@ -11,8 +11,7 @@ using DQS.Common;
 
 namespace DQS.AppViews.ExceptionControl.ExceptionManager
 {
-    public partial class FrmSingleProductLocked : DevExpress.XtraEditors.XtraForm
-    {
+    public partial class FrmSingleProductLocked : DevExpress.XtraEditors.XtraForm   {
         private int? m_id;
 
         public FrmSingleProductLocked()
@@ -36,6 +35,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                 rdgIsLockedBatch.Enabled = false;
                 txtLockedRemark.Enabled = false;
                 txtPopBatch.Enabled = false;
+                txtLockedAmount.Enabled = false;
                 this.CustomGetEntity(entity);
 
             }
@@ -91,6 +91,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
             if (!entity.IsNullField("BatchNo"))
             {
                 this.txtPopBatch.Text = entity.BatchNo;
+                this.txtLockedAmount.Text = entity.LockedAmount.ToString();
             }
 
             /*if (!entity.IsNullField("ProduceDate"))
@@ -144,6 +145,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
             if (this.txtPopBatch.SelectedValue != null)
             {
                 entity.BatchNo = this.txtPopBatch.Text.Trim();
+                entity.LockedAmount = Convert.ToInt32(this.txtLockedAmount.Text.Trim());
             }
 
             if (!string.IsNullOrEmpty(dteLockedDate.Text))
@@ -207,6 +209,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                /* this.txtProduceDate.Text = (this.txtPopBatch.EditData as DataRow)["生产日期"].ToString();
                 this.txtValidateDate.Text = (this.txtPopBatch.EditData as DataRow)["有效期至"].ToString();
 */
+                this.txtLockedAmount.Text = (this.txtPopBatch.EditData as DataRow)["库存数量"].ToString();
                 this.rdgIsUnLocked.Focus();
             }
         }
@@ -270,7 +273,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
         private void SetLockedBatch(bool isLocked)
         {
             this.txtPopBatch.Enabled = isLocked;
-            /*this.txtLockedAmount.Enabled = isLocked;*/
+            this.txtLockedAmount.Enabled = isLocked;
         }
 
         //设置是否解除锁定
