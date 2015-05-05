@@ -891,25 +891,28 @@ WHERE BillID={1}
                 }
                 if (popupFormName == "Product")
                 {
-
-                    string style = e.PopupRow["StyleID"].ToString();
-                    if (style != "0")
+                    if (null != e.PopupRow["StyleID"])
                     {
-                        if (lblStyleID.Text == "")
+
+                        string style = e.PopupRow["StyleID"].ToString();
+                        if (style != "0")
                         {
-                            lblStyleID.Text = e.PopupRow["StyleID"].ToString();
-                            lblStyleName.Text = e.PopupRow["StyleName"].ToString();
-                        }
-                        else
-                        {
-                            if (!style.Equals(lblStyleID.Text))
+                            if (lblStyleID.Text == "")
                             {
-                                XtraMessageBox.Show(
-                                                    "该药品为" + e.PopupRow["StyleName"].ToString() + "，该单据属于" +
-                                                    lblStyleName.Text + "单据，不能混开，需要重新下单。点击确定后，请按Del键删除此药品。",
-                                                    "系统提示",
-                                                    MessageBoxButtons.OK,
-                                                    MessageBoxIcon.Warning);
+                                lblStyleID.Text = e.PopupRow["StyleID"].ToString();
+                                lblStyleName.Text = e.PopupRow["StyleName"].ToString();
+                            }
+                            else
+                            {
+                                if (!style.Equals(lblStyleID.Text))
+                                {
+                                    XtraMessageBox.Show(
+                                                        "该药品为" + e.PopupRow["StyleName"].ToString() + "，该单据属于" +
+                                                        lblStyleName.Text + "单据，不能混开，需要重新下单。点击确定后，请按Del键删除此药品。",
+                                                        "系统提示",
+                                                        MessageBoxButtons.OK,
+                                                        MessageBoxIcon.Warning);
+                                }
                             }
                         }
                     }
@@ -1371,8 +1374,11 @@ WHERE BillID={1}
                     //新逻辑 - 按所选择业务员对应授权药品进行药品过滤
                     if (e.ActiveOperationColumn.PopupForm.Name == "Product")
                     {
-
-                        int employeeId = Convert.ToInt32(txtOperator.SelectedValue);
+                        //2015-05-04:lnj
+                        //涵更要求按当前账号所属部门过滤药品
+                        int employeeId = GlobalItem.g_CurrentEmployee.EmployeeID;
+                        ATCUserEntity user = GlobalItem.g_CurrentUser;
+                        /*int employeeId = Convert.ToInt32(txtOperator.SelectedValue);
                         EntityCollection<ATCUserEntity> users = new EntityCollection<ATCUserEntity>();
                         users.Fetch(ATCUserEntityFields.EmployeeID == employeeId);
                         ATCUserEntity user = users.Cast<ATCUserEntity>().FirstOrDefault();
@@ -1380,7 +1386,7 @@ WHERE BillID={1}
                         if (employeeId == 0)
                         {
                             user = GlobalItem.g_CurrentUser;
-                        }
+                        }*/
 
                         if (null != user)
                         {
