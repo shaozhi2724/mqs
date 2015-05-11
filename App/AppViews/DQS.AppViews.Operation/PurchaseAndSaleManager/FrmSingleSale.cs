@@ -1403,7 +1403,7 @@ WHERE BillID={1}
                         //涵更要求按当前账号所属部门过滤药品
                         int employeeId = GlobalItem.g_CurrentEmployee.EmployeeID;
                         ATCUserEntity user = GlobalItem.g_CurrentUser;
-                        int employeeId = Convert.ToInt32(txtOperator.SelectedValue);
+                        /*int employeeId = Convert.ToInt32(txtOperator.SelectedValue);
                         EntityCollection<ATCUserEntity> users = new EntityCollection<ATCUserEntity>();
                         users.Fetch(ATCUserEntityFields.EmployeeID == employeeId);
                         ATCUserEntity user = users.Cast<ATCUserEntity>().FirstOrDefault();
