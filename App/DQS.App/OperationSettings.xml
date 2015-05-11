@@ -1019,7 +1019,7 @@
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
           <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
-          <ViewName>vw_StoreDetail</ViewName>
+          <ViewName>vw_LockedStoreDetail</ViewName>
           <PrimaryField>药品ID</PrimaryField>
           <Fields>药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,包装规格,包装比例,批准文号,贮藏条件,剂型,药品类别,单位,批号,生产日期,有效期至,库存数量</Fields>
           <Filter></Filter>
@@ -1053,7 +1053,7 @@
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
           <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
-          <ViewName>vw_AllUnqualifiedProductStore</ViewName>
+          <ViewName>vw_UnStoreDetail</ViewName>
           <PrimaryField>药品ID</PrimaryField>
           <Fields>药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,包装规格,包装比例,批准文号,贮藏条件,剂型,药品类别,单位,批号,生产日期,有效期至,数量</Fields>
           <Filter></Filter>

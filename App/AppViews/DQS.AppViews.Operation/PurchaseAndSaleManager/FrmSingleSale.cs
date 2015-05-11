@@ -255,9 +255,32 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
             this.Close();
         }
 
+        private bool TotalPrice()
+        {
+            for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
+            {
+                object unitprice = this.popupGrid.PopupView.GetRowCellValue(i, "单价");
+                object amount = this.popupGrid.PopupView.GetRowCellValue(i, "数量");
+                object ttprice = this.popupGrid.PopupView.GetRowCellValue(i, "金额");
+
+                if (unitprice == DBNull.Value || unitprice == null)
+                {
+                    break;
+                }
+                if (Convert.ToDecimal(unitprice) * Convert.ToDecimal(amount) != Convert.ToDecimal(ttprice))
+                {
+                    XtraMessageBox.Show(String.Format("第{0}行，药品的金额不正确，请确认。", (i + 1)), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+
+                }
+            }
+            return true;
+        }
+
         public string alter;
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (!this.TotalPrice()) return;
             _amountErrors = new List<string>();
             //using (TransactionScope tx = new TransactionScope())
             //{
@@ -642,7 +665,8 @@ WHERE BillID={1}
 
                             #region 新建
 
-                            int employeeID = Convert.ToInt32(txtOperator.SelectedValue);
+                            //int employeeID = Convert.ToInt32(txtOperator.SelectedValue);
+                            int employeeID = GlobalItem.g_CurrentEmployee.EmployeeID;
                             if (employeeID == 0)
                             {
 
@@ -1101,9 +1125,10 @@ WHERE BillID={1}
                                                     salePriceEntities.Fetch(BUSProductSalePriceEntityFields.DealerID ==
                                                                             dealerID &
                                                                             BUSProductSalePriceEntityFields.ProductID ==
-                                                                            productID &
-                                                                            BUSProductSalePriceEntityFields.BatchNo ==
-                                                                            batchNo);
+                                                                            productID// &
+                                                                            //BUSProductSalePriceEntityFields.BatchNo ==
+                                                                           // batchNo
+                                                                            );
                                                     Dictionary<int, double> prices = new Dictionary<int, double>();
                                                     foreach (var salePriceEntity in salePriceEntities)
                                                     {
@@ -1378,7 +1403,7 @@ WHERE BillID={1}
                         //涵更要求按当前账号所属部门过滤药品
                         int employeeId = GlobalItem.g_CurrentEmployee.EmployeeID;
                         ATCUserEntity user = GlobalItem.g_CurrentUser;
-                        /*int employeeId = Convert.ToInt32(txtOperator.SelectedValue);
+                        int employeeId = Convert.ToInt32(txtOperator.SelectedValue);
                         EntityCollection<ATCUserEntity> users = new EntityCollection<ATCUserEntity>();
                         users.Fetch(ATCUserEntityFields.EmployeeID == employeeId);
                         ATCUserEntity user = users.Cast<ATCUserEntity>().FirstOrDefault();
