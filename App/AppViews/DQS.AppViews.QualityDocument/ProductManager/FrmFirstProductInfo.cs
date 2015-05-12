@@ -118,52 +118,71 @@ namespace DQS.AppViews.QualityDocument.ProductManager
             object id = this.gvData.GetFocusedRowCellValue("药品ID");
             if (id != null && id != DBNull.Value)
             {
-                //检查证书完成情况
-                EntityCollection<BFIQualificationEntity> quatities = new EntityCollection<BFIQualificationEntity>();
-                quatities.Fetch(BFIQualificationEntityFields.BelongTable == "BFI_Product"
-                                & BFIQualificationEntityFields.QualificationBelong == "BFI_Product"
-                                & BFIQualificationEntityFields.BelongFieldName == "ProductID"
-                                & BFIQualificationEntityFields.BelongID == id.ToString());
-                List<string> defaultQuatificateNames = new List<string>();
-                List<string> unFinishedDefaultQuatificateNames = new List<string>();
-                List<string> unValidQuatificateNames = new List<string>();
-                foreach (var quatity in quatities.Cast<BFIQualificationEntity>())
+                object approveStatus = this.gvData.GetFocusedRowCellValue("审批状态");
+                object productCode = this.gvData.GetFocusedRowCellValue("药品编号");
+                if (productCode != null && productCode != DBNull.Value && approveStatus != null &&
+                    approveStatus != DBNull.Value)
                 {
-                    if (!quatity.IsNullField("ValidateDate"))
+                    if (approveStatus.ToString() != "审批结束")
                     {
-                        if (DateTime.Now > quatity.ValidateDate)
+                        EntityCollection<ATCApproveEntity> approveEntities =
+                            new EntityCollection<ATCApproveEntity>();
+                        PredicateExpression pe = new PredicateExpression();
+                        pe.Add(ATCApproveEntityFields.DocumentCode == "FirstProduct");
+                        pe.Add(ATCApproveEntityFields.BillCode == productCode.ToString());
+                        pe.Add(ATCApproveEntityFields.IsApprovaled == 1);
+                        approveEntities.Fetch(pe);
+                        if (approveEntities.Count == 0)
                         {
-                            unValidQuatificateNames.Add(quatity.CertificateStyle);
-                        }
-                        if (quatity.CertificateNo.Length == 0 || quatity.IssuingAuthority.Length == 0)
-                        {
-                            unFinishedDefaultQuatificateNames.Add(quatity.CertificateStyle);
+                            //检查证书完成情况
+                            EntityCollection<BFIQualificationEntity> quatities = new EntityCollection<BFIQualificationEntity>();
+                            quatities.Fetch(BFIQualificationEntityFields.BelongTable == "BFI_Product"
+                                            & BFIQualificationEntityFields.QualificationBelong == "BFI_Product"
+                                            & BFIQualificationEntityFields.BelongFieldName == "ProductID"
+                                            & BFIQualificationEntityFields.BelongID == id.ToString());
+                            List<string> defaultQuatificateNames = new List<string>();
+                            List<string> unFinishedDefaultQuatificateNames = new List<string>();
+                            List<string> unValidQuatificateNames = new List<string>();
+                            foreach (var quatity in quatities.Cast<BFIQualificationEntity>())
+                            {
+                                if (!quatity.IsNullField("ValidateDate"))
+                                {
+                                    if (DateTime.Now > quatity.ValidateDate)
+                                    {
+                                        unValidQuatificateNames.Add(quatity.CertificateStyle);
+                                    }
+                                    if (quatity.CertificateNo.Length == 0 || quatity.IssuingAuthority.Length == 0)
+                                    {
+                                        unFinishedDefaultQuatificateNames.Add(quatity.CertificateStyle);
+                                    }
+                                }
+                                if (quatity.QualificationCode.Length == 20 && quatity.QualificationCode.EndsWith("D"))
+                                {
+                                    defaultQuatificateNames.Add(quatity.CertificateStyle);
+                                    if (quatity.IsNullField("ValidateDate"))
+                                    {
+                                        unFinishedDefaultQuatificateNames.Add(quatity.CertificateStyle);
+                                    }
+                                }
+                            }
+                            if (defaultQuatificateNames.Count == 0 || unFinishedDefaultQuatificateNames.Count > 0)
+                            {
+                                XtraMessageBox.Show("电子档案信息不全，请返回并录入电子档案！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            if (unValidQuatificateNames.Count > 0)
+                            {
+                                var message = string.Empty;
+                                for (int i = 0; i < unValidQuatificateNames.Count; i++)
+                                {
+                                    var unValidQuatificateName = unValidQuatificateNames[i];
+                                    message += (i + 1).ToString() + ". " + unValidQuatificateName + "\n";
+                                }
+                                XtraMessageBox.Show("以下电子档案已过期，请返回并修改电子档案：\n" + message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
                         }
                     }
-                    if (quatity.QualificationCode.Length == 20 && quatity.QualificationCode.EndsWith("D"))
-                    {
-                        defaultQuatificateNames.Add(quatity.CertificateStyle);
-                        if (quatity.IsNullField("ValidateDate"))
-                        {
-                            unFinishedDefaultQuatificateNames.Add(quatity.CertificateStyle);
-                        }
-                    }
-                }
-                if (defaultQuatificateNames.Count == 0 || unFinishedDefaultQuatificateNames.Count > 0)
-                {
-                    XtraMessageBox.Show("电子档案信息不全，请返回并录入电子档案！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                if (unValidQuatificateNames.Count > 0)
-                {
-                    var message = string.Empty;
-                    for (int i = 0; i < unValidQuatificateNames.Count; i++)
-                    {
-                        var unValidQuatificateName = unValidQuatificateNames[i];
-                        message += (i + 1).ToString() + ". " + unValidQuatificateName + "\n";
-                    }
-                    XtraMessageBox.Show("以下电子档案已过期，请返回并修改电子档案：\n" + message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
                 }
                 DialogResult dr = base.BaseApprove();
                 if (dr == DialogResult.Yes)
