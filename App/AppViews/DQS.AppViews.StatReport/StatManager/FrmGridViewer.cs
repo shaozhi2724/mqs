@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
 using DQS.Common;
 using DQS.Module.Entities;
 using System;
@@ -121,6 +122,32 @@ namespace DQS.AppViews.StatReport.StatManager
                     {
                         conn.Close();
                     }
+                }
+            }
+            if (sysPage.Reservation2 != "")
+            {
+                //DevExpress.XtraGrid.Columns.GridColumn col_Profit = gridView.Columns["总数"];
+                //gridView.Columns["数量"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                //gridView.Columns["数量"].SummaryItem.DisplayFormat = "数量合计: {0}";
+                //GridGroupSummaryItem item1 = new GridGroupSummaryItem();
+                //item1.FieldName = "参考利润";
+                //item1.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                //item1.DisplayFormat = "利润小计:  {0:c2}";//格式
+                //item1.ShowInGroupColumnFooter = col_Profit;
+                if (sysPage.Reservation2.Contains(","))
+                {
+                    string s = sysPage.Reservation2;
+                    string[] sArray = s.Split(',');
+                    foreach (string i in sArray)
+                    {
+                        gridView.Columns[i.ToString()].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                        gridView.Columns[i.ToString()].SummaryItem.DisplayFormat = i.ToString() + "合计: {0}";
+                    }
+                }
+                else
+                {
+                    gridView.Columns[sysPage.Reservation2].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                    gridView.Columns[sysPage.Reservation2].SummaryItem.DisplayFormat = sysPage.Reservation2 + "合计: {0}";
                 }
             }
         }
