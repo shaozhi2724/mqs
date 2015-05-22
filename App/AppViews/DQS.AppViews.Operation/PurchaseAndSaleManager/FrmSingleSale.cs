@@ -1401,45 +1401,80 @@ WHERE BillID={1}
                     {
                         //2015-05-04:lnj
                         //涵更要求按当前账号所属部门过滤药品
-                        int employeeId = GlobalItem.g_CurrentEmployee.EmployeeID;
-                        ATCUserEntity user = GlobalItem.g_CurrentUser;
-                        /*int employeeId = Convert.ToInt32(txtOperator.SelectedValue);
-                        EntityCollection<ATCUserEntity> users = new EntityCollection<ATCUserEntity>();
-                        users.Fetch(ATCUserEntityFields.EmployeeID == employeeId);
-                        ATCUserEntity user = users.Cast<ATCUserEntity>().FirstOrDefault();
-
-                        if (employeeId == 0)
+                        if (Settings.Default.IsUseDepartment)
                         {
-                            user = GlobalItem.g_CurrentUser;
-                        }*/
+                            int employeeId = GlobalItem.g_CurrentEmployee.EmployeeID;
+                            ATCUserEntity user = GlobalItem.g_CurrentUser;
 
-                        if (null != user)
-                        {
-                            Guid userID = user.UserID;
-                            int departmentID = 0;
-                            if (employeeId > 0)
+                            if (null != user)
                             {
-                                BFIEmployeeEntity employee = new BFIEmployeeEntity {EmployeeID = employeeId};
-                                employee.Fetch();
-
-                                if (!employee.IsNullField("DepartmentID"))
+                                Guid userID = user.UserID;
+                                int departmentID = 0;
+                                if (employeeId > 0)
                                 {
-                                    departmentID = employee.DepartmentID;
+                                    BFIEmployeeEntity employee = new BFIEmployeeEntity { EmployeeID = employeeId };
+                                    employee.Fetch();
+
+                                    if (!employee.IsNullField("DepartmentID"))
+                                    {
+                                        departmentID = employee.DepartmentID;
+                                    }
+                                }
+                                EntityCollection<ATCUserProductEntity> userProducts =
+                                    new EntityCollection<ATCUserProductEntity>();
+                                userProducts.Fetch(ATCUserProductEntityFields.UserID == userID);
+
+                                if (userProducts.Count > 0)
+                                {
+                                    e.ActiveOperationColumn.PopupForm.Filter =
+                                        string.Format("[所属部门ID]={0} AND EXISTS (SELECT * FROM ATC_UserProduct WHERE [药品ID]=ProductID AND UserID='{1}')", departmentID, userID);
+                                }
+                                else
+                                {
+                                    e.ActiveOperationColumn.PopupForm.Filter =
+                                        string.Format("[所属部门ID]={0}", departmentID);
                                 }
                             }
-                            EntityCollection<ATCUserProductEntity> userProducts =
-                                new EntityCollection<ATCUserProductEntity>();
-                            userProducts.Fetch(ATCUserProductEntityFields.UserID == userID);
+                        }
+                        else
+                        {
+                            int employeeId = Convert.ToInt32(txtOperator.SelectedValue);
+                            EntityCollection<ATCUserEntity> users = new EntityCollection<ATCUserEntity>();
+                            users.Fetch(ATCUserEntityFields.EmployeeID == employeeId);
+                            ATCUserEntity user = users.Cast<ATCUserEntity>().FirstOrDefault();
 
-                            if(userProducts.Count > 0)
+                            if (employeeId == 0)
                             {
-                                e.ActiveOperationColumn.PopupForm.Filter =
-                                    string.Format("[所属部门ID]={0} AND EXISTS (SELECT * FROM ATC_UserProduct WHERE [药品ID]=ProductID AND UserID='{1}')", departmentID, userID);
+                                user = GlobalItem.g_CurrentUser;
                             }
-                            else
+                            if (null != user)
                             {
-                                e.ActiveOperationColumn.PopupForm.Filter = 
-                                    string.Format("[所属部门ID]={0}", departmentID);
+                                Guid userID = user.UserID;
+                                int departmentID = 0;
+                                if (employeeId > 0)
+                                {
+                                    BFIEmployeeEntity employee = new BFIEmployeeEntity { EmployeeID = employeeId };
+                                    employee.Fetch();
+
+                                    if (!employee.IsNullField("DepartmentID"))
+                                    {
+                                        departmentID = employee.DepartmentID;
+                                    }
+                                }
+                                EntityCollection<ATCUserProductEntity> userProducts =
+                                    new EntityCollection<ATCUserProductEntity>();
+                                userProducts.Fetch(ATCUserProductEntityFields.UserID == userID);
+
+                                if (userProducts.Count > 0)
+                                {
+                                    e.ActiveOperationColumn.PopupForm.Filter =
+                                        string.Format("[所属部门ID]={0} AND EXISTS (SELECT * FROM ATC_UserProduct WHERE [药品ID]=ProductID AND UserID='{1}')", departmentID, userID);
+                                }
+                                else
+                                {
+                                    e.ActiveOperationColumn.PopupForm.Filter =
+                                        string.Format("[所属部门ID]={0}", departmentID);
+                                }
                             }
                         }
                     }

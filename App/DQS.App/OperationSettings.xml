@@ -521,7 +521,7 @@
     </Grid>
   </Operation>
   <Operation Name="Receive">
-    <Grid EntityName="BUSReceiveDetailEntity" ViewName="vw_AllReceiveDetail" KeyField="收货单ID" EmptyRows="50">
+    <Grid EntityName="BUSReceiveDetailEntity" ViewName="vw_AllReceiveDetail" KeyField="收货单ID" EmptyRows="200">
       <Columns>
         <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
         <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
@@ -573,7 +573,7 @@
     </Report>
   </Operation>
   <Operation Name="Declined">
-    <Grid EntityName="BUSDeclinedDetailEntity" ViewName="vw_AllDeclinedDetail" KeyField="拒收单ID" EmptyRows="1">
+    <Grid EntityName="BUSDeclinedDetailEntity" ViewName="vw_AllDeclinedDetail" KeyField="拒收单ID" EmptyRows="100">
       <Columns>
         <Column Name="药品ID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
         <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>

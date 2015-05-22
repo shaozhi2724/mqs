@@ -82,5 +82,17 @@ namespace DQS.AppViews.Operation.Properties {
                 this["JudgementSaleBillPrice"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsUseDepartment {
+            get {
+                return ((bool)(this["IsUseDepartment"]));
+            }
+            set {
+                this["IsUseDepartment"] = value;
+            }
+        }
     }
 }

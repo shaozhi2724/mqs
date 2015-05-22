@@ -85,7 +85,49 @@ namespace DQS.AppViews.OtherOperation.BillPriceManager
 
                     child.CreateDate = DateTime.Now;
                     child.CreateUserName = GlobalItem.g_CurrentEmployee != null ? GlobalItem.g_CurrentEmployee.EmployeeName : GlobalItem.g_CurrentUser.UserName;
+                    entity.BillStatus = 1;
+                    entity.BillStatusName = "已下单";
                     child.Save();
+                }
+
+
+                EntityCollection<ATCUserPageEntity> userPages = new EntityCollection<ATCUserPageEntity>();
+                PredicateExpression pe = new PredicateExpression();
+                pe.Add(ATCUserPageEntityFields.UserID == GlobalItem.g_CurrentUser.UserID);
+                pe.Add(ATCUserPageEntityFields.DocumentCode == "PurchaseBillPrice");
+                DataTable data = userPages.FetchTable(pe);
+
+                if (data.Rows.Count > 0)
+                {
+                    //按审批顺序排序
+                    data.DefaultView.Sort = "ApprovalSort";
+                    data = data.DefaultView.ToTable();
+
+                    ATCApproveEntity approveEntity = new ATCApproveEntity();
+                    approveEntity.InternalNo = entity.BillPriceHistoryCode;
+                    approveEntity.DocumentCode = "PurchaseBillPrice";
+                    approveEntity.BillCode = entity.BillPriceHistoryCode;
+                    approveEntity.ApproveTitle = string.Format("销售退货调价(正常)，编号：{0}", entity.BillPriceHistoryCode);
+                    approveEntity.ApprovalContent = String.Format("销售退货调价(正常) {0} 申请审批。", entity.BillPriceHistoryCode);
+                    approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+                    approveEntity.CreateDate = DateTime.Now;
+                    approveEntity.IsApprovaled = false;
+                    for (int i = 0; i < data.Rows.Count; i++)
+                    {
+                        var approveCode = approveEntity.InternalNo + (i + 1).ToString("00");
+                        approveEntity.ApproveCode = approveCode;
+                        approveEntity.IsWhole = Convert.ToBoolean(data.Rows[i]["IsWhole"]);
+                        approveEntity.ApproveOrder = Convert.ToInt32(data.Rows[i]["ApprovalSort"]);
+                        var approvalUserId = new Guid(data.Rows[i]["ApprovalUserID"].ToString());
+                        approveEntity.ApprovalUserID = approvalUserId;
+                        approveEntity.Save();
+                    }
+                }
+                else
+                {
+                    entity.BillStatus = 2;
+                    entity.BillStatusName = "已审核";
+                    entity.Update();
                 }
 
             }

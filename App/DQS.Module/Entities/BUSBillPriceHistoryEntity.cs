@@ -71,8 +71,20 @@ namespace DQS.Module.Entities
 		public string PriceHistoryRemark
 		{
 			get { return (string)this.GetValue("PriceHistoryRemark"); } 
-			set { this.SetValue("PriceHistoryRemark", value); } 
-		}
+			set { this.SetValue("PriceHistoryRemark", value); }
+        }
+
+        public int BillStatus
+        {
+            get { return (int)this.GetValue("BillStatus"); }
+            set { this.SetValue("BillStatus", value); }
+        }
+
+        public string BillStatusName
+        {
+            get { return (string)this.GetValue("BillStatusName"); }
+            set { this.SetValue("BillStatusName", value); }
+        }
 
 		public string CreateUserName
 		{
@@ -100,6 +112,8 @@ namespace DQS.Module.Entities
 			this.Fields.Add("OldTotalPrice", BUSBillPriceHistoryEntityFields.OldTotalPrice);
 			this.Fields.Add("NewTotalPrice", BUSBillPriceHistoryEntityFields.NewTotalPrice);
 			this.Fields.Add("PriceHistoryRemark", BUSBillPriceHistoryEntityFields.PriceHistoryRemark);
+            this.Fields.Add("BillStatus", BUSBillPriceHistoryEntityFields.BillStatus);
+            this.Fields.Add("BillStatusName", BUSBillPriceHistoryEntityFields.BillStatusName);
 			this.Fields.Add("CreateUserName", BUSBillPriceHistoryEntityFields.CreateUserName);
 			this.Fields.Add("CreateDate", BUSBillPriceHistoryEntityFields.CreateDate);
 		}
@@ -157,16 +171,26 @@ namespace DQS.Module.Entities
 		public static EntityField PriceHistoryRemark
 		{
 			get { return new EntityField("BUS_BillPriceHistory", 9, "PriceHistoryRemark", SqlDbType.NVarChar, false, false, false, false); }
-		}
+        }
+
+        public static EntityField BillStatus
+        {
+            get { return new EntityField("BUS_BillPriceHistory", 10, "BillStatus", SqlDbType.Int, false, false, false, false); }
+        }
+
+        public static EntityField BillStatusName
+        {
+            get { return new EntityField("BUS_BillPriceHistory", 11, "BillStatusName", SqlDbType.NVarChar, false, false, false, false); }
+        }
 
 		public static EntityField CreateUserName
 		{
-			get { return new EntityField("BUS_BillPriceHistory", 10, "CreateUserName", SqlDbType.NVarChar, false, false, false, false); }
+			get { return new EntityField("BUS_BillPriceHistory", 12, "CreateUserName", SqlDbType.NVarChar, false, false, false, false); }
 		}
 
 		public static EntityField CreateDate
 		{
-			get { return new EntityField("BUS_BillPriceHistory", 11, "CreateDate", SqlDbType.DateTime, false, false, false, false); }
+			get { return new EntityField("BUS_BillPriceHistory", 13, "CreateDate", SqlDbType.DateTime, false, false, false, false); }
 		}
 
 	}
@@ -196,6 +220,10 @@ namespace DQS.Module.Entities
 		NewTotalPrice,
 
 		PriceHistoryRemark,
+
+        BillStatus,
+
+        BillStatusName,
 
 		CreateUserName,
 

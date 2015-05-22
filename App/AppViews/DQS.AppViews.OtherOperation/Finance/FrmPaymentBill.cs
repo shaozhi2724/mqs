@@ -170,7 +170,7 @@ namespace DQS.AppViews.OtherOperation.Finance
 	CONVERT(DECIMAL(18,2), onp.TotalPrice/{1}*{2}) AS [税额]
 FROM dbo.FIN_PaymentOnPassageDetail onp 
 INNER JOIN dbo.FIN_PaymentOnPassage fm ON onp.BusinessBillID = fm.BusinessBillID
-WHERE NOT EXISTS(SELECT * FROM dbo.FIN_PaymentBillDetail nr WHERE onp.BusinessBillID = nr.BusinessBillID) AND onp.BusinessBillDetailID IN (" + StoreID + ")";
+WHERE NOT EXISTS(SELECT * FROM dbo.FIN_PaymentBillDetail nr WHERE onp.BusinessBillDetailID = nr.BusinessBillDetailID) AND onp.BusinessBillDetailID IN (" + StoreID + ")";
                 sql = String.Format(sql,tax,taxadd,taxabate);
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
