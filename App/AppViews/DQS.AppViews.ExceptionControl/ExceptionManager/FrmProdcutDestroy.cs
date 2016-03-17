@@ -63,7 +63,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                                 }
                                 else
                                 {
-                                    unqualifiedStoreDetailEntity.Save();
+                                    unqualifiedStoreDetailEntity.Update();
                                 }
                             }
                         }

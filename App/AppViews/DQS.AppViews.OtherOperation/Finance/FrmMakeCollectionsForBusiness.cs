@@ -260,7 +260,7 @@ namespace DQS.AppViews.OtherOperation.Finance
 	d.DealerName AS [往来单位名称],
 	d.DealerSpell AS [往来单位简拼],
 	d.DealerType AS [往来单位类型],
-	p.ProductName AS [药品名称],
+	p.ProductName AS [产品名称],
 	bd.BatchNo AS [批号],
 	CASE sb.StoreTypeName
 	WHEN '销售出货' THEN bd.Amount
@@ -276,7 +276,7 @@ namespace DQS.AppViews.OtherOperation.Finance
 	p.ProductStyle AS [类别],
 	p.PhysicType AS [剂型],
 	p.ProducerName AS [生产厂商],
-	p.AuthorizedNo AS [批准文号],
+	p.AuthorizedNo AS [注册证号],
 	bd.ProduceDate AS [生产日期],
 	bd.ValidateDate AS [有效期],
 	p.ProductSpec AS [规格],

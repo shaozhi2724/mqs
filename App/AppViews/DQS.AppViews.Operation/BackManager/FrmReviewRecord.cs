@@ -84,13 +84,13 @@ namespace DQS.AppViews.Operation.BackManager
 
             if (this.EditRow != null)
             {
-                var selectedProductName = EditRow["药品名称"].ToString();
+                var selectedProductName = EditRow["产品名称"].ToString();
                 var selectedBatchNo = EditRow["批号"].ToString();
-                var selectedPackageSpec = EditRow["包装规格"].ToString();
+                var selectedPackageSpec = EditRow["包装规格型号"].ToString();
 
                 if (selectedProductName != txtProductName.Text.Trim())
                 {
-                    XtraMessageBox.Show("药品名称不匹配，请选择: " + txtProductName.Text.Trim(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    XtraMessageBox.Show("产品名称不匹配，请选择: " + txtProductName.Text.Trim(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
                 if (selectedBatchNo != txtBatchNo.Text.Trim())

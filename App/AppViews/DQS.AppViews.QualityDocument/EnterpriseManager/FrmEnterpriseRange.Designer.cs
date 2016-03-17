@@ -127,7 +127,7 @@
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(511, 482);
             this.groupControl2.TabIndex = 4;
-            this.groupControl2.Text = "药品类别清单";
+            this.groupControl2.Text = "产品类别清单";
             // 
             // chklbcProductStyle
             // 

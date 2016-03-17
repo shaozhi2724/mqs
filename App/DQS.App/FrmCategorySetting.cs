@@ -33,7 +33,7 @@ namespace DQS.App
             this.panelAdd.Visible = false;
             this.btnSaveNew.Enabled = false;
             this.btnCancelAdd.Enabled = false;
-            string categorySql = "SELECT CategoryName FROM dbo.SYS_Category WHERE CategoryName IN ('证书类型(供应商)','证书类型(供应商人员)','往来单位企业性质','证书类型(内部员工)','付款方式','制剂类型','证书类型(药品)','医疗机构诊疗科目','药品类型','证书类型(客户)','证书类型(客户人员)','员工岗位分类') GROUP BY CategoryName";
+            string categorySql = "SELECT CategoryName FROM dbo.SYS_Category WHERE CategoryName IN ('证书类型(供应商)','证书类型(供应商人员)','往来单位企业性质','证书类型(内部员工)','付款方式','制剂类型','证书类型(产品)','医疗机构诊疗科目','产品类型','证书类型(客户)','证书类型(客户人员)','员工岗位分类') GROUP BY CategoryName";
             using (DataSet dataSet = new DataSet())
             {
                 using (SqlDataAdapter adapter = new SqlDataAdapter(categorySql, GlobalItem.g_DbConnectStrings))
@@ -297,7 +297,7 @@ namespace DQS.App
 
         private void btnDelProductStyle_Click(object sender, EventArgs e)
         {
-            string sql = "DELETE ProductStyle WHERE ProductStyle = '" + gridViewProductStyle.GetFocusedRowCellValue("药品类别").ToString() + "'";
+            string sql = "DELETE ProductStyle WHERE ProductStyle = '" + gridViewProductStyle.GetFocusedRowCellValue("产品类别").ToString() + "'";
             int num = GetCountBySQL(sql);
             if (num == 1)
             {
@@ -329,7 +329,7 @@ namespace DQS.App
         {
             string sql = "DELETE ProductStyle WHERE StyleID = " + gridViewStyle.GetFocusedRowCellValue("类别ID").ToString();
             string sqlstyle = "DELETE TotalStyle WHERE StyleID = " + gridViewStyle.GetFocusedRowCellValue("类别ID").ToString();
-            DialogResult dr = XtraMessageBox.Show("删除类别，会自动把类别下所关联的药品类别全部情况，确定删除吗？", "系统提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            DialogResult dr = XtraMessageBox.Show("删除类别，会自动把类别下所关联的产品类别全部情况，确定删除吗？", "系统提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (DialogResult.OK == dr)
             {
                 GetCountBySQL(sql);
@@ -386,7 +386,7 @@ namespace DQS.App
 
         private void LoadView()
         {
-            string productstyle = "SELECT ProductStyle AS [药品类别] FROM ProductStyle WHERE StyleID = " + gridViewStyle.GetFocusedRowCellValue("类别ID").ToString();
+            string productstyle = "SELECT ProductStyle AS [产品类别] FROM ProductStyle WHERE StyleID = " + gridViewStyle.GetFocusedRowCellValue("类别ID").ToString();
             DataTable dt = GetDataBySQL(productstyle);
             if (dt.Rows.Count <= 0)
             {

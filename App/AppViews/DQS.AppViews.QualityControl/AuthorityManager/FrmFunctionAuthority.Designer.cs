@@ -82,9 +82,9 @@
             // 
             this.lbcRole.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbcRole.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
-            this.lbcRole.Location = new System.Drawing.Point(2, 66);
+            this.lbcRole.Location = new System.Drawing.Point(2, 65);
             this.lbcRole.Name = "lbcRole";
-            this.lbcRole.Size = new System.Drawing.Size(293, 414);
+            this.lbcRole.Size = new System.Drawing.Size(293, 415);
             this.lbcRole.TabIndex = 1;
             this.lbcRole.SelectedIndexChanged += new System.EventHandler(this.lbcRole_SelectedIndexChanged);
             // 
@@ -94,7 +94,7 @@
             this.pnlLeft.Controls.Add(this.lblRole);
             this.pnlLeft.Controls.Add(this.txtRoleName);
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlLeft.Location = new System.Drawing.Point(2, 24);
+            this.pnlLeft.Location = new System.Drawing.Point(2, 23);
             this.pnlLeft.Name = "pnlLeft";
             this.pnlLeft.Size = new System.Drawing.Size(293, 42);
             this.pnlLeft.TabIndex = 0;
@@ -155,9 +155,9 @@
             // 
             this.lbcPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbcPage.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
-            this.lbcPage.Location = new System.Drawing.Point(2, 66);
+            this.lbcPage.Location = new System.Drawing.Point(2, 65);
             this.lbcPage.Name = "lbcPage";
-            this.lbcPage.Size = new System.Drawing.Size(293, 414);
+            this.lbcPage.Size = new System.Drawing.Size(293, 415);
             this.lbcPage.TabIndex = 1;
             this.lbcPage.SelectedIndexChanged += new System.EventHandler(this.lbcPage_SelectedIndexChanged);
             // 
@@ -167,7 +167,7 @@
             this.pnlCenter.Controls.Add(this.lblPage);
             this.pnlCenter.Controls.Add(this.txtPageName);
             this.pnlCenter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlCenter.Location = new System.Drawing.Point(2, 24);
+            this.pnlCenter.Location = new System.Drawing.Point(2, 23);
             this.pnlCenter.Name = "pnlCenter";
             this.pnlCenter.Size = new System.Drawing.Size(293, 42);
             this.pnlCenter.TabIndex = 0;
@@ -204,7 +204,7 @@
             this.gpcRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gpcRight.Location = new System.Drawing.Point(606, 0);
             this.gpcRight.Name = "gpcRight";
-            this.gpcRight.Size = new System.Drawing.Size(208, 482);
+            this.gpcRight.Size = new System.Drawing.Size(296, 482);
             this.gpcRight.TabIndex = 6;
             this.gpcRight.Text = "功能清单";
             // 
@@ -214,10 +214,10 @@
             this.chklbcFunction.ColumnWidth = 200;
             this.chklbcFunction.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chklbcFunction.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Skinned;
-            this.chklbcFunction.Location = new System.Drawing.Point(2, 66);
+            this.chklbcFunction.Location = new System.Drawing.Point(2, 65);
             this.chklbcFunction.MultiColumn = true;
             this.chklbcFunction.Name = "chklbcFunction";
-            this.chklbcFunction.Size = new System.Drawing.Size(204, 414);
+            this.chklbcFunction.Size = new System.Drawing.Size(292, 415);
             this.chklbcFunction.TabIndex = 2;
             // 
             // pnlRight
@@ -225,9 +225,9 @@
             this.pnlRight.Controls.Add(this.chkCheck);
             this.pnlRight.Controls.Add(this.btnSave);
             this.pnlRight.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlRight.Location = new System.Drawing.Point(2, 24);
+            this.pnlRight.Location = new System.Drawing.Point(2, 23);
             this.pnlRight.Name = "pnlRight";
-            this.pnlRight.Size = new System.Drawing.Size(204, 42);
+            this.pnlRight.Size = new System.Drawing.Size(292, 42);
             this.pnlRight.TabIndex = 0;
             // 
             // chkCheck
@@ -235,7 +235,7 @@
             this.chkCheck.Location = new System.Drawing.Point(1, 11);
             this.chkCheck.Name = "chkCheck";
             this.chkCheck.Properties.Caption = "全选";
-            this.chkCheck.Size = new System.Drawing.Size(58, 20);
+            this.chkCheck.Size = new System.Drawing.Size(58, 19);
             this.chkCheck.TabIndex = 7;
             this.chkCheck.CheckedChanged += new System.EventHandler(this.chkCheck_CheckedChanged);
             // 
@@ -252,7 +252,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 482);
+            this.ClientSize = new System.Drawing.Size(902, 482);
             this.Controls.Add(this.gpcRight);
             this.Controls.Add(this.splitterControl2);
             this.Controls.Add(this.gpcCenter);

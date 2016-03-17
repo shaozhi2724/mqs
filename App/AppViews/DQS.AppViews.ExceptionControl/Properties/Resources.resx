@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="不合格药品处理" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="不合格产品处理" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\不合格药品处理.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="不合格药品处理MouseEnter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="不合格产品处理MouseEnter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\不合格药品处理MouseEnter.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="异常上报" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -130,16 +130,16 @@
   <data name="异常上报MouseEnter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\异常上报MouseEnter.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="药品销毁处理" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="产品销毁处理" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\药品销毁处理.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="药品锁定" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="产品锁定" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\药品锁定.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="药品锁定MouseEnter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="产品锁定MouseEnter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\药品锁定MouseEnter.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="销毁药品处理MouseEnter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="销毁产品处理MouseEnter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\销毁药品处理MouseEnter.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -442,163 +442,348 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                                 busAcceptDetailEntity.UnqualifiedAmount = 0;
                             }
                         }
-                        var countedAcceptDetails = from a in acceptDetails
-                                                   group a by a.ProductID
-                                                       into g
-                                                       select new
-                                                       {
-                                                           ProductID = g.Key,
-                                                           TotalBillAmount = g.Sum(p => p.Amount),
-                                                           TotalReceiveAmount = g.Sum(p => p.ReceiveAmount),
-                                                           TotalQualifiedAmount = g.Sum(p => p.QualifiedAmount),
-                                                           TotalUnqualifiedAmount = g.Sum(p => p.ReceiveAmount) - g.Sum(p => p.QualifiedAmount),
-                                                       };
-                        var rejectedDetails =
-                            countedAcceptDetails.Where(p => p.TotalReceiveAmount < p.TotalBillAmount).ToList();
-                        var unqualifiedDetails = countedAcceptDetails.Where(p => p.TotalUnqualifiedAmount > 0).ToList();
-                        //1 - 收货数 < 订单数: 拒收提示
-                        //2 - 不合格品数 > 0: 不合格平入库提示
-                        if (rejectedDetails.Any() || unqualifiedDetails.Any())
+                        if (txtBillTypeName.Text.Trim() == "销售退货")
                         {
-                            var message = string.Empty;
-                            if (rejectedDetails.Any() && unqualifiedDetails.Any())
+                            var countedAcceptDetails = from a in acceptDetails
+                                                       group a by new { a.ProductID, a.BatchNo }
+                                                           into g
+                                                           select new
+                                                           {
+                                                               ProductID = g.Key.ProductID,
+                                                               BatchNo = g.Key.BatchNo,
+                                                               TotalBillAmount = g.Sum(p => p.Amount),
+                                                               TotalReceiveAmount = g.Sum(p => p.ReceiveAmount),
+                                                               TotalQualifiedAmount = g.Sum(p => p.QualifiedAmount),
+                                                               TotalUnqualifiedAmount = g.Sum(p => p.ReceiveAmount) - g.Sum(p => p.QualifiedAmount),
+                                                           };
+                            var rejectedDetails =
+                                countedAcceptDetails.Where(p => p.TotalReceiveAmount < p.TotalBillAmount).ToList();
+                            var unqualifiedDetails = countedAcceptDetails.Where(p => p.TotalUnqualifiedAmount > 0).ToList();
+                            //1 - 收货数 < 订单数: 拒收提示
+                            //2 - 不合格品数 > 0: 不合格平入库提示
+                            if (rejectedDetails.Any() || unqualifiedDetails.Any())
                             {
-                                message = "收货数量与验收数量不符，是否生成拒收记录？\n验收合格数量与验收到货数量不符，是否生成不合格品记录？";
-                            }
-                            else if (rejectedDetails.Any())
-                            {
-                                message = "收货数量与验收数量不符，是否生成拒收记录？";
-                            }
-                            else if (unqualifiedDetails.Any())
-                            {
-                                message = "验收合格数量与验收数量不符，是否生成不合格品记录？";
-                            }
-                            var dialogResult = XtraMessageBox.Show(message, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                            if (dialogResult == DialogResult.No)
-                            {
-                                return;
-                            }
-                            if (dialogResult == DialogResult.Yes)
-                            {
-                                List<BUSAcceptDetailEntity> rejectedAcceptDetails = new List<BUSAcceptDetailEntity>();
-                                foreach (var rejectedDetail in rejectedDetails)
+                                var message = string.Empty;
+                                if (rejectedDetails.Any() && unqualifiedDetails.Any())
                                 {
-                                    var detail = acceptDetails.FirstOrDefault(p => p.ProductID == rejectedDetail.ProductID);
-                                    if (null != detail)
+                                    message = "收货数量与验收数量不符，是否生成拒收记录？\n验收合格数量与验收到货数量不符，是否生成不合格品记录？";
+                                }
+                                else if (rejectedDetails.Any())
+                                {
+                                    message = "收货数量与验收数量不符，是否生成拒收记录？";
+                                }
+                                else if (unqualifiedDetails.Any())
+                                {
+                                    message = "验收合格数量与验收数量不符，是否生成不合格品记录？";
+                                }
+                                var dialogResult = XtraMessageBox.Show(message, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                                if (dialogResult == DialogResult.No)
+                                {
+                                    return;
+                                }
+                                if (dialogResult == DialogResult.Yes)
+                                {
+                                    List<BUSAcceptDetailEntity> rejectedAcceptDetails = new List<BUSAcceptDetailEntity>();
+                                    foreach (var rejectedDetail in rejectedDetails)
                                     {
-                                        var busAcceptDetailEntity = new BUSAcceptDetailEntity
+                                        var detail = acceptDetails.FirstOrDefault(p => p.ProductID == rejectedDetail.ProductID);
+                                        if (null != detail)
                                         {
-                                            ProductID = detail.ProductID,
-                                            Amount = rejectedDetail.TotalBillAmount,
-                                            ReceiveAmount = rejectedDetail.TotalReceiveAmount
-                                        };
-                                        if (!detail.IsNullField("ProduceDate"))
-                                        {
-                                            busAcceptDetailEntity.ProduceDate = detail.ProduceDate;
+                                            var busAcceptDetailEntity = new BUSAcceptDetailEntity
+                                            {
+                                                ProductID = detail.ProductID,
+                                                Amount = rejectedDetail.TotalBillAmount,
+                                                ReceiveAmount = rejectedDetail.TotalReceiveAmount
+                                            };
+                                            if (!detail.IsNullField("ProduceDate"))
+                                            {
+                                                busAcceptDetailEntity.ProduceDate = detail.ProduceDate;
+                                            }
+                                            if (!detail.IsNullField("ValidateDate"))
+                                            {
+                                                busAcceptDetailEntity.ValidateDate = detail.ValidateDate;
+                                            }
+                                            if (!detail.IsNullField("BatchNo"))
+                                            {
+                                                busAcceptDetailEntity.BatchNo = detail.BatchNo;
+                                            }
+                                            rejectedAcceptDetails.Add(busAcceptDetailEntity);
                                         }
-                                        if (!detail.IsNullField("ValidateDate"))
+                                    }
+                                    if (rejectedAcceptDetails.Any())
+                                    {
+                                        GenerateDeclinedBill(entity, rejectedAcceptDetails);
+                                    }
+
+                                    List<BUSAcceptDetailEntity> unqualifiedAcceptDetails = new List<BUSAcceptDetailEntity>();
+                                    foreach (var unqualifiedDetail in unqualifiedDetails)
+                                    {
+                                        var detail = acceptDetails.FirstOrDefault(p => p.ProductID == unqualifiedDetail.ProductID && p.BatchNo == unqualifiedDetail.BatchNo);
+                                        if (null != detail)
                                         {
-                                            busAcceptDetailEntity.ValidateDate = detail.ValidateDate;
+                                            var busAcceptDetailEntity = new BUSAcceptDetailEntity
+                                            {
+                                                ProductID = detail.ProductID,
+                                                BatchNo = detail.BatchNo,
+                                                Amount = unqualifiedDetail.TotalBillAmount,
+                                                ReceiveAmount = unqualifiedDetail.TotalUnqualifiedAmount,
+                                                QualifiedAmount = unqualifiedDetail.TotalQualifiedAmount,
+                                                UnqualifiedAmount = unqualifiedDetail.TotalUnqualifiedAmount
+                                            };
+                                            if (!detail.IsNullField("ProduceDate"))
+                                            {
+                                                busAcceptDetailEntity.ProduceDate = detail.ProduceDate;
+                                            }
+                                            if (!detail.IsNullField("ValidateDate"))
+                                            {
+                                                busAcceptDetailEntity.ValidateDate = detail.ValidateDate;
+                                            }
+                                            if (!detail.IsNullField("BatchNo"))
+                                            {
+                                                busAcceptDetailEntity.BatchNo = detail.BatchNo;
+                                            }
+                                            unqualifiedAcceptDetails.Add(busAcceptDetailEntity);
                                         }
-                                        if (!detail.IsNullField("BatchNo"))
-                                        {
-                                            busAcceptDetailEntity.BatchNo = detail.BatchNo;
-                                        }
-                                        rejectedAcceptDetails.Add(busAcceptDetailEntity);
+                                    }
+                                    if (unqualifiedAcceptDetails.Any())
+                                    {
+                                        GenerateUnqualifiedStoreBill(entity, unqualifiedAcceptDetails);
                                     }
                                 }
-                                if (rejectedAcceptDetails.Any())
-                                {
-                                    GenerateDeclinedBill(entity, rejectedAcceptDetails);
-                                }
+                            }
+                            entity.CreateDate = DateTime.Now;
+                            entity.LastModifyDate = DateTime.Now;
+                            entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+                            entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
+                            entity.Save();
+                            //查询出其ID
+                            entity.Fetch();
 
-                                List<BUSAcceptDetailEntity> unqualifiedAcceptDetails = new List<BUSAcceptDetailEntity>();
-                                foreach (var unqualifiedDetail in unqualifiedDetails)
+                            BUSBillEntity bill = new BUSBillEntity { BillID = entity.BillID };
+                            if (!countedAcceptDetails.Any() ||
+                                countedAcceptDetails.ToList().TrueForAll(p => p.TotalReceiveAmount == 0))
+                            {
+                                bill.BillStatus = 6;
+                                bill.BillStatusName = "拒收";
+                            }
+                            else
+                            {
+                                bill.BillStatus = 4;
+                                bill.BillStatusName = "已验收";
+                                bill.AcceptID = entity.AcceptID;
+                                bill.AcceptCode = entity.AcceptCode;
+                            }
+                            bill.Update();
+                            foreach (EntityBase childEntity in children)
+                            {
+                                BUSAcceptDetailEntity child = childEntity as BUSAcceptDetailEntity;
+                                child.AcceptID = entity.AcceptID;
+                                child.Save();
+                            }
+                            //存在则添加
+                            if (this.popupGridSampling.PopupView.GetRowCellValue(0, this.popupGridSampling.PopupView.Columns[0]) != null && this.popupGridSampling.PopupView.GetRowCellValue(0, this.popupGridSampling.PopupView.Columns[0]) != DBNull.Value)
+                            {
+                                List<EntityBase> samplings = this.popupGridSampling.GetEntities();
+                                //添加抽检记录
+                                foreach (EntityBase samplingEntity in samplings)
                                 {
-                                    var detail = acceptDetails.FirstOrDefault(p => p.ProductID == unqualifiedDetail.ProductID);
-                                    if (null != detail)
-                                    {
-                                        var busAcceptDetailEntity = new BUSAcceptDetailEntity
-                                        {
-                                            ProductID = detail.ProductID,
-                                            Amount = unqualifiedDetail.TotalBillAmount,
-                                            ReceiveAmount = unqualifiedDetail.TotalUnqualifiedAmount,
-                                            QualifiedAmount = unqualifiedDetail.TotalQualifiedAmount,
-                                            UnqualifiedAmount = unqualifiedDetail.TotalUnqualifiedAmount
-                                        };
-                                        if (!detail.IsNullField("ProduceDate"))
-                                        {
-                                            busAcceptDetailEntity.ProduceDate = detail.ProduceDate;
-                                        }
-                                        if (!detail.IsNullField("ValidateDate"))
-                                        {
-                                            busAcceptDetailEntity.ValidateDate = detail.ValidateDate;
-                                        }
-                                        if (!detail.IsNullField("BatchNo"))
-                                        {
-                                            busAcceptDetailEntity.BatchNo = detail.BatchNo;
-                                        }
-                                        unqualifiedAcceptDetails.Add(busAcceptDetailEntity);
-                                    }
-                                }
-                                if (unqualifiedAcceptDetails.Any())
-                                {
-                                    GenerateUnqualifiedStoreBill(entity, unqualifiedAcceptDetails);
+                                    BUSSamplingEntity sampling = samplingEntity as BUSSamplingEntity;
+                                    sampling.SamplingCode = Guid.NewGuid().ToString();
+                                    sampling.SamplingDate = DateTime.Now;
+                                    sampling.AcceptID = entity.AcceptID;
+                                    sampling.BillCode = entity.BillCode;
+                                    sampling.BillDate = entity.BillDate;
+                                    sampling.BillID = entity.BillID;
+                                    sampling.BillTypeID = entity.BillTypeID;
+                                    sampling.BillTypeName = entity.BillTypeName;
+                                    sampling.BillTypeSpell = entity.BillTypeSpell;
+                                    sampling.DealerID = entity.DealerID;
+                                    sampling.DealerCode = entity.DealerCode;
+                                    sampling.DealerName = entity.DealerName;
+                                    sampling.Inspector = this.txtAcceptPerson.Text.Trim();
+                                    sampling.InspectorSpell = GlobalMethod.GetAlphabetic(this.txtAcceptPerson.Text.Trim());
+                                    sampling.Save();
                                 }
                             }
-                        }
-                        entity.CreateDate = DateTime.Now;
-                        entity.LastModifyDate = DateTime.Now;
-                        entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                        entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
-                        entity.Save();
-                        //查询出其ID
-                        entity.Fetch();
-
-                        BUSBillEntity bill = new BUSBillEntity { BillID = entity.BillID };
-                        if (!countedAcceptDetails.Any() ||
-                            countedAcceptDetails.ToList().TrueForAll(p => p.TotalReceiveAmount == 0))
-                        {
-                            bill.BillStatus = 6;
-                            bill.BillStatusName = "拒收";
                         }
                         else
                         {
-                            bill.BillStatus = 4;
-                            bill.BillStatusName = "已验收";
-                            bill.AcceptID = entity.AcceptID;
-                            bill.AcceptCode = entity.AcceptCode;
-                        }
-                        bill.Update();
-                        foreach (EntityBase childEntity in children)
-                        {
-                            BUSAcceptDetailEntity child = childEntity as BUSAcceptDetailEntity;
-                            child.AcceptID = entity.AcceptID;
-                            child.Save();
-                        }
-                        //存在则添加
-                        if (this.popupGridSampling.PopupView.GetRowCellValue(0, this.popupGridSampling.PopupView.Columns[0]) != null && this.popupGridSampling.PopupView.GetRowCellValue(0, this.popupGridSampling.PopupView.Columns[0]) != DBNull.Value)
-                        {
-                            List<EntityBase> samplings = this.popupGridSampling.GetEntities();
-                            //添加抽检记录
-                            foreach (EntityBase samplingEntity in samplings)
+                            var countedAcceptDetails = from a in acceptDetails
+                                                       group a by a.ProductID
+                                                           into g
+                                                           select new
+                                                           {
+                                                               ProductID = g.Key,
+                                                               TotalBillAmount = g.Sum(p => p.Amount),
+                                                               TotalReceiveAmount = g.Sum(p => p.ReceiveAmount),
+                                                               TotalQualifiedAmount = g.Sum(p => p.QualifiedAmount),
+                                                               TotalUnqualifiedAmount = g.Sum(p => p.ReceiveAmount) - g.Sum(p => p.QualifiedAmount),
+                                                           };
+                            var countedAcceptDetailsAll = from a in acceptDetails
+                                                          select new
+                                                          {
+                                                              ProductID = a.ProductID,
+                                                              BatchNo = a.BatchNo,
+                                                              ReceiveAmount = a.ReceiveAmount,
+                                                              QualifiedAmount = a.QualifiedAmount,
+                                                              UnqualifiedAmount = a.UnqualifiedAmount
+                                                          };
+
+                            var rejectedDetails =
+                                countedAcceptDetails.Where(p => p.TotalReceiveAmount < p.TotalBillAmount).ToList();
+                            var unqualifiedDetails = countedAcceptDetailsAll.Where(p => p.UnqualifiedAmount > 0).ToList();
+                            //1 - 收货数 < 订单数: 拒收提示
+                            //2 - 不合格品数 > 0: 不合格平入库提示
+                            if (rejectedDetails.Any() || unqualifiedDetails.Any())
                             {
-                                BUSSamplingEntity sampling = samplingEntity as BUSSamplingEntity;
-                                sampling.SamplingCode = Guid.NewGuid().ToString();
-                                sampling.SamplingDate = DateTime.Now;
-                                sampling.AcceptID = entity.AcceptID;
-                                sampling.BillCode = entity.BillCode;
-                                sampling.BillDate = entity.BillDate;
-                                sampling.BillID = entity.BillID;
-                                sampling.BillTypeID = entity.BillTypeID;
-                                sampling.BillTypeName = entity.BillTypeName;
-                                sampling.BillTypeSpell = entity.BillTypeSpell;
-                                sampling.DealerID = entity.DealerID;
-                                sampling.DealerCode = entity.DealerCode;
-                                sampling.DealerName = entity.DealerName;
-                                sampling.Inspector = this.txtAcceptPerson.Text.Trim();
-                                sampling.InspectorSpell = GlobalMethod.GetAlphabetic(this.txtAcceptPerson.Text.Trim());
-                                sampling.Save();
+                                var message = string.Empty;
+                                if (rejectedDetails.Any() && unqualifiedDetails.Any())
+                                {
+                                    message = "收货数量与验收数量不符，是否生成拒收记录？\n验收合格数量与验收到货数量不符，是否生成不合格品记录？";
+                                }
+                                else if (rejectedDetails.Any())
+                                {
+                                    message = "收货数量与验收数量不符，是否生成拒收记录？";
+                                }
+                                else if (unqualifiedDetails.Any())
+                                {
+                                    message = "验收合格数量与验收数量不符，是否生成不合格品记录？";
+                                }
+                                var dialogResult = XtraMessageBox.Show(message, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                                if (dialogResult == DialogResult.No)
+                                {
+                                    return;
+                                }
+                                if (dialogResult == DialogResult.Yes)
+                                {
+                                    List<BUSAcceptDetailEntity> rejectedAcceptDetails = new List<BUSAcceptDetailEntity>();
+                                    foreach (var rejectedDetail in rejectedDetails)
+                                    {
+                                        var detail = acceptDetails.FirstOrDefault(p => p.ProductID == rejectedDetail.ProductID);
+                                        if (null != detail)
+                                        {
+                                            var busAcceptDetailEntity = new BUSAcceptDetailEntity
+                                            {
+                                                ProductID = detail.ProductID,
+                                                Amount = rejectedDetail.TotalBillAmount,
+                                                ReceiveAmount = rejectedDetail.TotalReceiveAmount
+                                            };
+                                            if (!detail.IsNullField("ProduceDate"))
+                                            {
+                                                busAcceptDetailEntity.ProduceDate = detail.ProduceDate;
+                                            }
+                                            if (!detail.IsNullField("ValidateDate"))
+                                            {
+                                                busAcceptDetailEntity.ValidateDate = detail.ValidateDate;
+                                            }
+                                            if (!detail.IsNullField("BatchNo"))
+                                            {
+                                                busAcceptDetailEntity.BatchNo = detail.BatchNo;
+                                            }
+                                            rejectedAcceptDetails.Add(busAcceptDetailEntity);
+                                        }
+                                    }
+                                    if (rejectedAcceptDetails.Any())
+                                    {
+                                        GenerateDeclinedBill(entity, rejectedAcceptDetails);
+                                    }
+
+                                    List<BUSAcceptDetailEntity> unqualifiedAcceptDetails = new List<BUSAcceptDetailEntity>();
+                                    foreach (var unqualifiedDetail in unqualifiedDetails)
+                                    {
+                                        var detail = acceptDetails.FirstOrDefault(p => p.ProductID == unqualifiedDetail.ProductID && p.BatchNo==unqualifiedDetail.BatchNo);
+                                        if (null != detail)
+                                        {
+
+                                            var ReceiveAmountList = (from a in acceptDetails.Where(p => p.ProductID==detail.ProductID && p.BatchNo.Equals(detail.BatchNo))
+                                                             group a by a.ProductID
+                                                                 into g
+                                                                 select new
+                                                                 {
+                                                                     ReceiveAmount = g.Sum(p => p.ReceiveAmount)
+                                                                 }).ToList();
+                                            var busAcceptDetailEntity = new BUSAcceptDetailEntity
+                                            {
+                                                ProductID = detail.ProductID,
+                                                Amount = unqualifiedDetail.UnqualifiedAmount,
+                                                ReceiveAmount = ReceiveAmountList[0].ReceiveAmount,
+                                                QualifiedAmount = unqualifiedDetail.QualifiedAmount,
+                                                UnqualifiedAmount = unqualifiedDetail.UnqualifiedAmount
+                                            };
+                                            if (!detail.IsNullField("ProduceDate"))
+                                            {
+                                                busAcceptDetailEntity.ProduceDate = detail.ProduceDate;
+                                            }
+                                            if (!detail.IsNullField("ValidateDate"))
+                                            {
+                                                busAcceptDetailEntity.ValidateDate = detail.ValidateDate;
+                                            }
+                                            if (!detail.IsNullField("BatchNo"))
+                                            {
+                                                busAcceptDetailEntity.BatchNo = detail.BatchNo;
+                                            }
+                                            unqualifiedAcceptDetails.Add(busAcceptDetailEntity);
+                                        }
+                                    }
+                                    if (unqualifiedAcceptDetails.Any())
+                                    {
+                                        GenerateUnqualifiedStoreBill(entity, unqualifiedAcceptDetails);
+                                    }
+                                }
+                            }
+                            entity.CreateDate = DateTime.Now;
+                            entity.LastModifyDate = DateTime.Now;
+                            entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+                            entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
+                            entity.Save();
+                            //查询出其ID
+                            entity.Fetch();
+
+                            BUSBillEntity bill = new BUSBillEntity { BillID = entity.BillID };
+                            if (!countedAcceptDetails.Any() ||
+                                countedAcceptDetails.ToList().TrueForAll(p => p.TotalReceiveAmount == 0))
+                            {
+                                bill.BillStatus = 6;
+                                bill.BillStatusName = "拒收";
+                            }
+                            else
+                            {
+                                bill.BillStatus = 4;
+                                bill.BillStatusName = "已验收";
+                                bill.AcceptID = entity.AcceptID;
+                                bill.AcceptCode = entity.AcceptCode;
+                            }
+                            bill.Update();
+                            foreach (EntityBase childEntity in children)
+                            {
+                                BUSAcceptDetailEntity child = childEntity as BUSAcceptDetailEntity;
+                                child.AcceptID = entity.AcceptID;
+                                child.Save();
+                            }
+                            //存在则添加
+                            if (this.popupGridSampling.PopupView.GetRowCellValue(0, this.popupGridSampling.PopupView.Columns[0]) != null && this.popupGridSampling.PopupView.GetRowCellValue(0, this.popupGridSampling.PopupView.Columns[0]) != DBNull.Value)
+                            {
+                                List<EntityBase> samplings = this.popupGridSampling.GetEntities();
+                                //添加抽检记录
+                                foreach (EntityBase samplingEntity in samplings)
+                                {
+                                    BUSSamplingEntity sampling = samplingEntity as BUSSamplingEntity;
+                                    sampling.SamplingCode = Guid.NewGuid().ToString();
+                                    sampling.SamplingDate = DateTime.Now;
+                                    sampling.AcceptID = entity.AcceptID;
+                                    sampling.BillCode = entity.BillCode;
+                                    sampling.BillDate = entity.BillDate;
+                                    sampling.BillID = entity.BillID;
+                                    sampling.BillTypeID = entity.BillTypeID;
+                                    sampling.BillTypeName = entity.BillTypeName;
+                                    sampling.BillTypeSpell = entity.BillTypeSpell;
+                                    sampling.DealerID = entity.DealerID;
+                                    sampling.DealerCode = entity.DealerCode;
+                                    sampling.DealerName = entity.DealerName;
+                                    sampling.Inspector = this.txtAcceptPerson.Text.Trim();
+                                    sampling.InspectorSpell = GlobalMethod.GetAlphabetic(this.txtAcceptPerson.Text.Trim());
+                                    sampling.Save();
+                                }
                             }
                         }
                         #endregion
@@ -678,7 +863,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 {
                     StoreID = storeBillEntity.StoreID,
                     ProductID = unqualifiedAcceptDetail.ProductID,
-                    BillAmount = unqualifiedAcceptDetail.Amount,
+                    BillAmount = unqualifiedAcceptDetail.ReceiveAmount,
                     QualifiedAmount = unqualifiedAcceptDetail.QualifiedAmount,
                     Amount = unqualifiedAcceptDetail.UnqualifiedAmount,
                     CreateUserID = GlobalItem.g_CurrentUser.UserID,
@@ -867,7 +1052,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
             {
                 object amount = this.popupGrid.PopupView.GetRowCellValue(i, "订单数量");
-                object productCode = this.popupGrid.PopupView.GetRowCellValue(i, "药品编号");
+                object productCode = this.popupGrid.PopupView.GetRowCellValue(i, "产品编号");
 
                 if (amount != null && amount != DBNull.Value)
                 {
@@ -875,7 +1060,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     int qua = 0, uqua = 0;
                     for (int j = 0; j < this.popupGrid.PopupView.RowCount; j++)
                     {
-                        object productCode2 = this.popupGrid.PopupView.GetRowCellValue(j, "药品编号");//同一药品比较
+                        object productCode2 = this.popupGrid.PopupView.GetRowCellValue(j, "产品编号");//同一产品比较
                         if (productCode.ToString().Trim() == productCode2.ToString().Trim())
                         {
                             object quAmount = this.popupGrid.PopupView.GetRowCellValue(j, "收货数量");
@@ -894,7 +1079,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
                     if (qua + uqua != Convert.ToInt32(amount))
                     {
-                        XtraMessageBox.Show(String.Format("验收时，药品‘{0}’的总体收货数量和订单数量不符。", productCode), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        XtraMessageBox.Show(String.Format("验收时，产品‘{0}’的总体收货数量和订单数量不符。", productCode), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return false;
                     }
                 }
@@ -909,15 +1094,37 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
             {
                 object amount = this.popupGrid.PopupView.GetRowCellValue(i, "收货数量");
-                object productCode = this.popupGrid.PopupView.GetRowCellValue(i, "药品编号");
+                object productCode = this.popupGrid.PopupView.GetRowCellValue(i, "产品编号");
 
                 if (amount != null && amount != DBNull.Value)
                 {
                     //获取所有验收数量
                     int totalReceiveAmount = 0, totalQualifiedAmount = 0, totalUnqualifiedAmount = 0;
+
+                    if (txtBillTypeName.Text.Trim() == "销售退货")
+                    {
+                        object receiveAmount = this.popupGrid.PopupView.GetRowCellValue(i, "验收数量");
+                        if (receiveAmount != null && receiveAmount != DBNull.Value)
+                        {
+                            totalReceiveAmount = Convert.ToInt32(receiveAmount);
+                        }
+                        object qualifiedAmount = this.popupGrid.PopupView.GetRowCellValue(i, "验收合格数量");
+                        if (qualifiedAmount != null && qualifiedAmount != DBNull.Value)
+                        {
+                            totalQualifiedAmount = Convert.ToInt32(qualifiedAmount);
+                        }
+
+                        object unQualifiedAmount = this.popupGrid.PopupView.GetRowCellValue(i, "验收不合格数量");
+                        if (unQualifiedAmount != null && unQualifiedAmount != DBNull.Value)
+                        {
+                            totalUnqualifiedAmount = Convert.ToInt32(unQualifiedAmount);
+                        }
+                    }
+                    else
+                    {
                     for (int j = 0; j < this.popupGrid.PopupView.RowCount; j++)
                     {
-                        object productCode2 = this.popupGrid.PopupView.GetRowCellValue(j, "药品编号");//同一药品比较
+                        object productCode2 = this.popupGrid.PopupView.GetRowCellValue(j, "产品编号");//同一产品比较
                         if (productCode.ToString().Trim() == productCode2.ToString().Trim())
                         {
                             object receiveAmount = this.popupGrid.PopupView.GetRowCellValue(j, "验收数量");
@@ -938,18 +1145,19 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                             }
                         }
                     }
+                    }
                     totalUnqualifiedAmount = totalReceiveAmount - totalQualifiedAmount;
                     int totalBillAmount = Convert.ToInt32(amount);
                     //收货数 > 订单数， 错误
                     if (totalReceiveAmount > totalBillAmount && totalBillAmount > 0)
                     {
-                        XtraMessageBox.Show(String.Format("验收时，药品‘{0}’的总体到货数量和收货数量不符。", productCode), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        XtraMessageBox.Show(String.Format("验收时，产品‘{0}’的总体到货数量和收货数量不符。", productCode), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return false;
                     }
                     //合格品数 > 收货数， 错误
                     if (totalQualifiedAmount > totalReceiveAmount && totalReceiveAmount > 0)
                     {
-                        XtraMessageBox.Show(String.Format("验收时，药品‘{0}’的总体到货数量和验收合格数量不符。", productCode), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        XtraMessageBox.Show(String.Format("验收时，产品‘{0}’的总体到货数量和验收合格数量不符。", productCode), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return false;
                     }
                     //1 - 收货数 < 订单数: 拒收提示
@@ -971,9 +1179,9 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
             {
                 object amount = this.popupGrid.PopupView.GetRowCellValue(i, "订单数量");
-                object productName = this.popupGrid.PopupView.GetRowCellValue(i, "药品名称");
-                object productSpec = this.popupGrid.PopupView.GetRowCellValue(i, "规格");
-                object packageSpec = this.popupGrid.PopupView.GetRowCellValue(i, "包装规格");
+                object productName = this.popupGrid.PopupView.GetRowCellValue(i, "产品名称");
+                object productSpec = this.popupGrid.PopupView.GetRowCellValue(i, "规格型号");
+                object packageSpec = this.popupGrid.PopupView.GetRowCellValue(i, "包装规格型号");
 
                 if (amount != null && amount != DBNull.Value)
                 {
@@ -981,9 +1189,9 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
                     for (int j = 0; j < this.popupGrid.PopupView.RowCount; j++)
                     {
-                        object productName2 = this.popupGrid.PopupView.GetRowCellValue(j, "药品名称");//同一药品比较
-                        object productSpec2 = this.popupGrid.PopupView.GetRowCellValue(j, "规格");
-                        object packageSpec2 = this.popupGrid.PopupView.GetRowCellValue(j, "包装规格");
+                        object productName2 = this.popupGrid.PopupView.GetRowCellValue(j, "产品名称");//同一产品比较
+                        object productSpec2 = this.popupGrid.PopupView.GetRowCellValue(j, "规格型号");
+                        object packageSpec2 = this.popupGrid.PopupView.GetRowCellValue(j, "包装规格型号");
                         if (productName.ToString().Trim() == productName2.ToString().Trim()
                             && productSpec.ToString().Trim() == productSpec2.ToString().Trim()
                             && packageSpec.ToString().Trim() == packageSpec2.ToString().Trim())
@@ -991,7 +1199,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                             object batchNo = this.popupGrid.PopupView.GetRowCellValue(j, "批号");
                             if (batchNos.Contains(batchNo.ToString().Trim()))
                             {
-                                XtraMessageBox.Show(String.Format("药品‘{0}’存在相同的批号{1}。", productName, batchNo), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                XtraMessageBox.Show(String.Format("产品‘{0}’存在相同的批号{1}。", productName, batchNo), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 return false;
                             }
                             else
@@ -1015,21 +1223,31 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 object validateDate = this.popupGrid.PopupView.GetRowCellValue(i, "有效期至");
                 if (produceDate != null && produceDate != DBNull.Value && validateDate != null && validateDate != DBNull.Value)
                 {
+                    int PID = (int)this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
+                    BFIProductEntity product = new BFIProductEntity { ProductID = PID };
+                    product.Fetch();
                     if (Convert.ToDateTime(validateDate) <= Convert.ToDateTime(produceDate))
                     {
-                        XtraMessageBox.Show(String.Format("第{0}行，药品的有效期至必须大于生产日期。", (i + 1)), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        XtraMessageBox.Show(String.Format("第{0}行，产品的有效期至必须大于生产日期。", (i + 1)), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return false;
                     }
-					/*
-                    if (Convert.ToDateTime(validateDate) < DateTime.Today.AddDays(180))
+
+                    if (txtBillTypeName.Text.Trim() != "销售退货")
                     {
-                        XtraMessageBox.Show(String.Format("第{0}行，药品属于近效期不能入库。", (i + 1)), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        if (Convert.ToDateTime(validateDate) < DateTime.Today.AddDays(product.BatchPreWarningDays))
+                        {
+                            XtraMessageBox.Show(String.Format("第{0}行，产品属于近效期不能入库。", (i + 1)), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return false;
+                        }
+                    }
+                    if (Convert.ToDateTime(produceDate) > DateTime.Today)
+                    {
+                        XtraMessageBox.Show("生产日期不正确，请重新填写！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
-					*/
                     if (Convert.ToDateTime(validateDate) < DateTime.Today)
                     {
-                        var dialogResult = XtraMessageBox.Show(String.Format("第{0}行，药品已过有效期，属于不合格品，应该按不合格品验收。\n“确定”：操作无误，继续保存。\n“取消”：返回重新填写。", (i + 1)), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+                        var dialogResult = XtraMessageBox.Show(String.Format("第{0}行，产品已过有效期，属于不合格品，应该按不合格品验收。\n“确定”：操作无误，继续保存。\n“取消”：返回重新填写。", (i + 1)), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
                         return dialogResult == DialogResult.OK;
                     }
                 }
@@ -1043,7 +1261,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             //抽检数量、合格数量、不合格数量不能为空，且合格数量与不合格数量之和必须等于抽检数量
             for (int i = 0; i < this.popupGridSampling.PopupView.RowCount; i++)
             {
-                object productName = this.popupGridSampling.PopupView.GetRowCellValue(i, "药品名称");
+                object productName = this.popupGridSampling.PopupView.GetRowCellValue(i, "产品名称");
                 object samplingAmount = this.popupGridSampling.PopupView.GetRowCellValue(i, "抽检数量");
                 object qsAmount = this.popupGridSampling.PopupView.GetRowCellValue(i, "抽检合格数量");
                 object uqsAmount = this.popupGridSampling.PopupView.GetRowCellValue(i, "抽检不合格数量");
@@ -1079,7 +1297,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             for (int i = 0; i < this.popupGridSampling.PopupView.RowCount; i++)
             {
                 object amount = this.popupGridSampling.PopupView.GetRowCellValue(i, "订单数量");
-                object productName = this.popupGridSampling.PopupView.GetRowCellValue(i, "药品名称");
+                object productName = this.popupGridSampling.PopupView.GetRowCellValue(i, "产品名称");
 
                 if (amount != null && amount != DBNull.Value)
                 {
@@ -1087,7 +1305,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     int samplingAmount = 0;
                     for (int j = 0; j < this.popupGridSampling.PopupView.RowCount; j++)
                     {
-                        object productName2 = this.popupGridSampling.PopupView.GetRowCellValue(j, "药品名称");//同一药品比较
+                        object productName2 = this.popupGridSampling.PopupView.GetRowCellValue(j, "产品名称");//同一产品比较
                         if (productName.ToString().Trim() == productName2.ToString().Trim())
                         {
                             object sAmount = this.popupGridSampling.PopupView.GetRowCellValue(j, "抽检数量");
@@ -1100,7 +1318,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
                     if (samplingAmount > Convert.ToInt32(amount))
                     {
-                        XtraMessageBox.Show(String.Format("抽检时，药品‘{0}’的总体抽检数量不能大于订单数量。", productName), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        XtraMessageBox.Show(String.Format("抽检时，产品‘{0}’的总体抽检数量不能大于订单数量。", productName), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return false;
                     }
                 }
@@ -1131,12 +1349,12 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
         }
 
         /// <summary>
-        /// 验证药品的电子档案
+        /// 验证产品的电子档案
         /// </summary>
         /// <returns></returns>
         private bool ValidateProductQualification()
         {
-            //获取所有药品的过期证书
+            //获取所有产品的过期证书
             ViewCollection<AllQualificationView> qualifications = new ViewCollection<AllQualificationView>();
 
             PredicateExpression pe = new PredicateExpression();
@@ -1147,7 +1365,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             int rowCount = this.popupGrid.PopupView.RowCount;
             for (int i = 0; i < rowCount; i++)
             {
-                object id = this.popupGrid.PopupView.GetRowCellValue(i, "药品ID");
+                object id = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
                 if (id != null && id != DBNull.Value)
                 {
                     bool isHava = false;
@@ -1160,9 +1378,9 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         }
                     }
 
-                    if (isHava)//存在则药品过期
+                    if (isHava)//存在则产品过期
                     {
-                        XtraMessageBox.Show(String.Format("表格中第{0}行药品的电子档案存在已过期档案，无法生成验收单，请修改！", (i + 1)), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(String.Format("表格中第{0}行产品的电子档案存在已过期档案，无法生成验收单，请修改！", (i + 1)), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
                 }
@@ -1204,14 +1422,14 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     object amount = this.popupGrid.PopupView.GetFocusedRowCellValue("订单数量");
                     if (amount != null && amount != DBNull.Value)
                     {
-                        //订单中的原始药品不须弹出窗体进行选择
+                        //订单中的原始产品不须弹出窗体进行选择
                         e.Cancel = true;
                     }
 
                     List<string> productIDs = new List<string>();
                     for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
                     {
-                        object productID = this.popupGrid.PopupView.GetRowCellValue(i, "药品ID");
+                        object productID = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
                         if (productID != null && productID != DBNull.Value)
                         {
                             productIDs.Add(productID.ToString());
@@ -1220,7 +1438,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
                     if (productIDs.Count > 0)
                     {
-                        e.ActiveOperationColumn.PopupForm.Filter = String.Format("[药品ID] IN ({0}) ", string.Join(",", productIDs.ToArray()));
+                        e.ActiveOperationColumn.PopupForm.Filter = String.Format("[产品ID] IN ({0}) ", string.Join(",", productIDs.ToArray()));
                     }
                     else
                     {
@@ -1241,7 +1459,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 object amount = this.popupGrid.PopupView.GetFocusedRowCellValue("订单数量");
                 if (amount != null && amount != DBNull.Value)
                 {
-                    //订单中的原始药品不可删除
+                    //订单中的原始产品不可删除
                     return;
                 }
 
@@ -1253,14 +1471,14 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             }
         }
 
-        //有药品才可抽检
+        //有产品才可抽检
         private void PopupView_MouseUp(object sender, MouseEventArgs e)
         {
             DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo hi = this.popupGrid.PopupView.CalcHitInfo(e.Location);
             if (hi.InRow && e.Button == MouseButtons.Right)
             {
-                object productID = this.popupGrid.PopupView.GetFocusedRowCellValue("药品ID");
-                if (productID != null && productID != DBNull.Value)//有药品才可抽检
+                object productID = this.popupGrid.PopupView.GetFocusedRowCellValue("产品ID");
+                if (productID != null && productID != DBNull.Value)//有产品才可抽检
                 {
                     this.popupMenuSampling.ShowPopup(Control.MousePosition);
                 }
@@ -1270,7 +1488,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
         //抽检
         private void bbiSampling_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            object productID = this.popupGrid.PopupView.GetFocusedRowCellValue("药品ID");
+            object productID = this.popupGrid.PopupView.GetFocusedRowCellValue("产品ID");
             if (productID != null && productID != DBNull.Value)
             {
 
@@ -1286,7 +1504,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 //已抽检的产品无法再次抽检
                 for (int i = 0; i < this.popupGridSampling.PopupView.RowCount; i++)
                 {
-                    object productID2 = this.popupGridSampling.PopupView.GetRowCellValue(i, "药品ID");
+                    object productID2 = this.popupGridSampling.PopupView.GetRowCellValue(i, "产品ID");
                     object batchNo2 = this.popupGridSampling.PopupView.GetRowCellValue(i, "批号");
                     if (productID2 != null && productID2 != DBNull.Value && batchNo2 != null && productID2 != DBNull.Value)
                     {
@@ -1308,7 +1526,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             int samplingRow = 0;
             for (int i = 0; i < this.popupGridSampling.PopupView.RowCount; i++)
             {
-                object productID = this.popupGridSampling.PopupView.GetRowCellValue(i, "药品ID");
+                object productID = this.popupGridSampling.PopupView.GetRowCellValue(i, "产品ID");
                 if (productID == null || productID == DBNull.Value)
                 {
                     samplingRow = i;
@@ -1316,26 +1534,26 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 }
             }
 
-            object value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "药品ID");
-            this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "药品ID", value);
+            object value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "产品ID");
+            this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "产品ID", value);
 
-            value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "药品编号");
-            this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "药品编号", value);
+            value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "产品编号");
+            this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "产品编号", value);
 
-            value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "药品名称");
-            this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "药品名称", value);
+            value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "产品名称");
+            this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "产品名称", value);
 
             value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "生产厂商");
             this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "生产厂商", value);
 
-            value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "规格");
-            this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "规格", value);
+            value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "规格型号");
+            this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "规格型号", value);
 
             value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "剂型");
             this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "剂型", value);
 
-            value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "药品类别");
-            this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "药品类别", value);
+            value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "产品类别");
+            this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "产品类别", value);
 
             value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "单位");
             this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "单位", value);
@@ -1355,17 +1573,17 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "包装比例");
             this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "包装比例", value);
 
-            value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "包装规格");
-            this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "包装规格", value);
+            value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "包装规格型号");
+            this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "包装规格型号", value);
 
-            value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "批准文号");
-            this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "批准文号", value);
+            value = this.popupGrid.PopupView.GetRowCellValue(acceptRowHandle, "注册证号");
+            this.popupGridSampling.PopupView.SetRowCellValue(samplingRow, "注册证号", value);
         }
 
         //无抽检信息无法弹出抽检项目
         private void popupGridSampling_BeforePopupFormShow(object sender, DQS.Controls.CommonCode.BeforePopupFormShowArgs e)
         {
-            object productID = this.popupGridSampling.PopupView.GetFocusedRowCellValue("药品ID");
+            object productID = this.popupGridSampling.PopupView.GetFocusedRowCellValue("产品ID");
             if (productID == null || productID == DBNull.Value)
             {
                 e.Cancel = true;
@@ -1374,7 +1592,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
         private void btnProductQualification_Click(object sender, EventArgs e)
         {
-            object id = this.popupGrid.PopupView.GetFocusedRowCellValue("药品ID");
+            object id = this.popupGrid.PopupView.GetFocusedRowCellValue("产品ID");
             if (id != null && id != DBNull.Value)
             {
                 using (FrmQualification frmQualification = new FrmQualification(Convert.ToInt32(id), "BFI_Product", "ProductID", "ProductCertificate"))

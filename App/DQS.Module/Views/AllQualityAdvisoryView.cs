@@ -80,10 +80,10 @@ namespace DQS.Module.Views
 			set { this.SetValue("咨询师Spell", value); } 
 		}
 
-		public string 咨询的药品
+		public string 咨询的产品
 		{
-			get { return (string)this.GetValue("咨询的药品"); } 
-			set { this.SetValue("咨询的药品", value); } 
+			get { return (string)this.GetValue("咨询的产品"); } 
+			set { this.SetValue("咨询的产品", value); } 
 		}
 
 		public string 咨询的内容
@@ -149,7 +149,7 @@ namespace DQS.Module.Views
 			this.Fields.Add("咨询时间", AllQualityAdvisoryViewFields.咨询时间);
 			this.Fields.Add("咨询师", AllQualityAdvisoryViewFields.咨询师);
 			this.Fields.Add("咨询师Spell", AllQualityAdvisoryViewFields.咨询师Spell);
-			this.Fields.Add("咨询的药品", AllQualityAdvisoryViewFields.咨询的药品);
+			this.Fields.Add("咨询的产品", AllQualityAdvisoryViewFields.咨询的产品);
 			this.Fields.Add("咨询的内容", AllQualityAdvisoryViewFields.咨询的内容);
 			this.Fields.Add("咨询回复", AllQualityAdvisoryViewFields.咨询回复);
 			this.Fields.Add("回复时间", AllQualityAdvisoryViewFields.回复时间);
@@ -220,9 +220,9 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllQualityAdvisory", 10, "咨询师Spell", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 咨询的药品
+		public static EntityField 咨询的产品
 		{
-			get { return new EntityField("vw_AllQualityAdvisory", 11, "咨询的药品", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllQualityAdvisory", 11, "咨询的产品", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 咨询的内容

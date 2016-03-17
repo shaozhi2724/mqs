@@ -255,11 +255,11 @@
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.txtProductName;
-            this.layoutControlItem2.CustomizationFormText = "药品名称";
+            this.layoutControlItem2.CustomizationFormText = "产品名称";
             this.layoutControlItem2.Location = new System.Drawing.Point(360, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(429, 25);
-            this.layoutControlItem2.Text = "药品名称";
+            this.layoutControlItem2.Text = "产品名称";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(48, 14);
             // 
             // layoutControlItem4
@@ -305,21 +305,21 @@
             // layPackageSpec
             // 
             this.layPackageSpec.Control = this.txtPackageSpec;
-            this.layPackageSpec.CustomizationFormText = "包装规格";
+            this.layPackageSpec.CustomizationFormText = "包装规格型号";
             this.layPackageSpec.Location = new System.Drawing.Point(360, 75);
             this.layPackageSpec.Name = "layPackageSpec";
             this.layPackageSpec.Size = new System.Drawing.Size(429, 25);
-            this.layPackageSpec.Text = "包装规格";
+            this.layPackageSpec.Text = "包装规格型号";
             this.layPackageSpec.TextSize = new System.Drawing.Size(48, 14);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.txtProductSpec;
-            this.layoutControlItem3.CustomizationFormText = "规格";
+            this.layoutControlItem3.CustomizationFormText = "规格型号";
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 75);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Size = new System.Drawing.Size(360, 25);
-            this.layoutControlItem3.Text = "规格";
+            this.layoutControlItem3.Text = "规格型号";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(48, 14);
             // 
             // gpcTop

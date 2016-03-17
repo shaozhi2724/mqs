@@ -577,7 +577,7 @@ namespace DQS.Common
 
         public static DataTable GetReviewByProduct(int productID,string batchNo,int dealerID)
         {
-            string querySql = String.Format("SELECT DISTINCT(复核ID),复核单号,复核日期,复核人员,销售单号,往来单位名称,业务员,备注 FROM vw_AllSaleBackReview WHERE 往来单位ID = '{0}' AND 药品ID = '{1}' AND 批号 = '{2}'", dealerID, productID, batchNo);
+            string querySql = String.Format("SELECT DISTINCT(复核ID),复核单号,复核日期,复核人员,销售单号,往来单位名称,业务员,备注 FROM vw_AllSaleBackReview WHERE 往来单位ID = '{0}' AND 产品ID = '{1}' AND 批号 = '{2}'", dealerID, productID, batchNo);
             using (DataSet dataSet = new DataSet())
             {
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
@@ -595,7 +595,7 @@ namespace DQS.Common
         /// <returns></returns>
         public static DataTable GetStoreInByProduct(int productID,string batchNo)
         {
-            string querySql = String.Format("SELECT DISTINCT(入库单ID),入库单编号,入库日期,入库员,订单ID,采购单编号,采购员,往来单位ID,往来单位编码,往来单位名称,往来单位地址,采购员	FROM vw_AllStoreInRecord WHERE 药品ID = '{0}' AND 批号 = '{1}'", productID, batchNo);
+            string querySql = String.Format("SELECT DISTINCT(入库单ID),入库单编号,入库日期,入库员,订单ID,采购单编号,采购员,往来单位ID,往来单位编码,往来单位名称,往来单位地址,采购员	FROM vw_AllStoreInRecord WHERE 产品ID = '{0}' AND 批号 = '{1}'", productID, batchNo);
             using (DataSet dataSet = new DataSet())
             {
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
@@ -612,7 +612,7 @@ namespace DQS.Common
         /// <returns></returns>
         public static DataTable GetStoreInByProduct(int storeID)
         {
-            string querySql = String.Format("SELECT 药品ID,药品编号, 药品名称, 生产厂商, 包装规格, 包装比例, 批准文号, 存储条件, 剂型, 类别, 单位, 批号, 生产日期, 有效期至,单价,数量 FROM dbo.vw_AllStoreInRecord WHERE 入库单ID = '{0}'", storeID);
+            string querySql = String.Format("SELECT 产品ID,产品编号, 产品名称, 生产厂商, 包装规格型号, 包装比例, 注册证号, 存储条件, 类别, 单位, 批号, 生产日期, 有效期至,单价,数量 FROM dbo.vw_AllStoreInRecord WHERE 入库单ID = '{0}'", storeID);
             using (DataSet dataSet = new DataSet())
             {
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
@@ -625,7 +625,7 @@ namespace DQS.Common
 
         public static DataTable GetReviewDetialByProduct(string reviewCode)
         {
-            string querySql = String.Format("SELECT 药品ID, 药品编号, 药品名称, 生产厂商, 规格, 包装规格, 包装比例,业务员, 批准文号, 贮藏条件, 剂型, 药品类别, 单位, 批号, 生产日期, 有效期至, 出库数量, 复核数量, 单价 FROM vw_AllSaleBackReview WHERE 复核单号 = '{0}'", reviewCode);
+            string querySql = String.Format("SELECT 产品ID, 产品编号, 产品名称, 生产厂商, 规格型号, 包装规格型号, 包装比例,业务员, 注册证号, 贮藏条件, 产品类别, 单位, 批号, 生产日期, 有效期至, 出库数量, 复核数量, 单价, 入库ID FROM vw_AllSaleBackReview WHERE 复核单号 = '{0}'", reviewCode);
             using (DataSet dataSet = new DataSet())
             {
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
@@ -643,31 +643,43 @@ namespace DQS.Common
             {
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
                 {
-                    adapter.Fill(dataSet,"药品效期预警");
+                    adapter.Fill(dataSet,"产品效期预警");
                 }
 
                 querySql = "SELECT * FROM vw_StoreDetail WHERE 锁定状态='已锁定'";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
                 {
-                    adapter.Fill(dataSet, "药品锁定预警");
+                    adapter.Fill(dataSet, "产品锁定预警");
                 }
 
-                querySql = "SELECT 证书所属, 所属名称, 档案编号, 档案名称, 证书类型, 证书编号, 发证机关, 发证日期, 到期日期, 到期状态 FROM vw_AllQualificationWithParent WHERE 到期状态 IN ('已过期','即将过期') ORDER BY 证书所属";
+                querySql = "SELECT 供应商编号, 供应商名称, 档案编号, 档案名称, 证书类型, 证书编号, 发证机关, 发证日期, 到期日期, 到期状态 FROM vw_DealerQualificationWithParent WHERE 到期状态 IN ('已过期','即将过期')";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
                 {
-                    adapter.Fill(dataSet, "电子档案到期预警");
+                    adapter.Fill(dataSet, "供应商电子档案到期预警");
+                }
+
+                querySql = "SELECT 客户编号, 客户名称, 档案编号, 档案名称, 证书类型, 证书编号, 发证机关, 发证日期, 到期日期, 到期状态 FROM vw_ProviderQualificationWithParent WHERE 到期状态 IN ('已过期','即将过期')";
+                using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
+                {
+                    adapter.Fill(dataSet, "客户电子档案到期预警");
+                }
+
+                querySql = "SELECT 药品编号, 药品名称,包装规格,生产厂商, 档案编号, 档案名称, 证书类型, 证书编号, 发证机关, 发证日期, 到期日期, 到期状态 FROM vw_ProductQualificationWithParent WHERE 到期状态 IN ('已过期','即将过期')";
+                using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
+                {
+                    adapter.Fill(dataSet, "药品电子档案到期预警");
                 }
 
                 querySql = "SELECT OldLicenseValidateDate AS 原到期日期, NewLicenseValidateDate AS 新到期日期, ActionName AS 状态, LockDate AS 锁定日期, UnLockDate AS 解锁日期, CreateUserName AS 操作人 FROM dbo.BFI_EnterpriseLicenseLockHistory ORDER BY EnterpriseLicenseLockHistoryID DESC";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
                 {
-                    adapter.Fill(dataSet, "本企业GSP证书到期日锁定记录");
+                    adapter.Fill(dataSet, "本企业营业执照到期日锁定记录");
                 }
 
                 querySql = "SELECT OldLicenseValidateDate AS 原到期日期, NewLicenseValidateDate AS 新到期日期, ActionName AS 状态, LockDate AS 锁定日期, UnLockDate AS 解锁日期, CreateUserName AS 操作人 FROM dbo.BFI_EnterpriseTradeLicenseLockHistory ORDER BY EnterpriseTradeLicenseLockHistoryID DESC";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
                 {
-                    adapter.Fill(dataSet, "本企业药品经营许可证到期日锁定记录");
+                    adapter.Fill(dataSet, "本企业经营许可证到期日锁定记录");
                 }
 
                 querySql = "SELECT * FROM vw_Transport";

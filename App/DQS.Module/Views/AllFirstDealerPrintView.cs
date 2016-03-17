@@ -98,58 +98,58 @@ namespace DQS.Module.Views
 			set { this.SetValue("营业执照备注", value); } 
 		}
 
-		public string 药品经营许可证
+		public string 产品经营许可证
 		{
-			get { return (string)this.GetValue("药品经营许可证"); } 
-			set { this.SetValue("药品经营许可证", value); } 
+			get { return (string)this.GetValue("产品经营许可证"); } 
+			set { this.SetValue("产品经营许可证", value); } 
 		}
 
-		public string 药品经营许可证编号
+		public string 产品经营许可证编号
 		{
-			get { return (string)this.GetValue("药品经营许可证编号"); } 
-			set { this.SetValue("药品经营许可证编号", value); } 
+			get { return (string)this.GetValue("产品经营许可证编号"); } 
+			set { this.SetValue("产品经营许可证编号", value); } 
 		}
 
-		public string 药品经营许可证发证机关
+		public string 产品经营许可证发证机关
 		{
-			get { return (string)this.GetValue("药品经营许可证发证机关"); } 
-			set { this.SetValue("药品经营许可证发证机关", value); } 
+			get { return (string)this.GetValue("产品经营许可证发证机关"); } 
+			set { this.SetValue("产品经营许可证发证机关", value); } 
 		}
 
-		public string 药品经营许可证发证日期
+		public string 产品经营许可证发证日期
 		{
-			get { return (string)this.GetValue("药品经营许可证发证日期"); } 
-			set { this.SetValue("药品经营许可证发证日期", value); } 
+			get { return (string)this.GetValue("产品经营许可证发证日期"); } 
+			set { this.SetValue("产品经营许可证发证日期", value); } 
 		}
 
-		public string 药品经营许可证效期至
+		public string 产品经营许可证效期至
 		{
-			get { return (string)this.GetValue("药品经营许可证效期至"); } 
-			set { this.SetValue("药品经营许可证效期至", value); } 
+			get { return (string)this.GetValue("产品经营许可证效期至"); } 
+			set { this.SetValue("产品经营许可证效期至", value); } 
 		}
 
-		public string 药品经营许可证备注
+		public string 产品经营许可证备注
 		{
-			get { return (string)this.GetValue("药品经营许可证备注"); } 
-			set { this.SetValue("药品经营许可证备注", value); } 
+			get { return (string)this.GetValue("产品经营许可证备注"); } 
+			set { this.SetValue("产品经营许可证备注", value); } 
 		}
 
-		public string 药品GSPGMP证书
+		public string 产品GSPGMP证书
 		{
-			get { return (string)this.GetValue("药品GSPGMP证书"); } 
-			set { this.SetValue("药品GSPGMP证书", value); } 
+			get { return (string)this.GetValue("产品GSPGMP证书"); } 
+			set { this.SetValue("产品GSPGMP证书", value); } 
 		}
 
-		public string 药品GSPGMP证书编号
+		public string 产品GSPGMP证书编号
 		{
-			get { return (string)this.GetValue("药品GSPGMP证书编号"); } 
-			set { this.SetValue("药品GSPGMP证书编号", value); } 
+			get { return (string)this.GetValue("产品GSPGMP证书编号"); } 
+			set { this.SetValue("产品GSPGMP证书编号", value); } 
 		}
 
-		public string 药品GSPGMP证书效期至
+		public string 产品GSPGMP证书效期至
 		{
-			get { return (string)this.GetValue("药品GSPGMP证书效期至"); } 
-			set { this.SetValue("药品GSPGMP证书效期至", value); } 
+			get { return (string)this.GetValue("产品GSPGMP证书效期至"); } 
+			set { this.SetValue("产品GSPGMP证书效期至", value); } 
 		}
 
 		public string 法人委托书
@@ -230,15 +230,15 @@ namespace DQS.Module.Views
 			this.Fields.Add("营业执照发证日期", AllFirstDealerPrintViewFields.营业执照发证日期);
 			this.Fields.Add("营业执照效期至", AllFirstDealerPrintViewFields.营业执照效期至);
 			this.Fields.Add("营业执照备注", AllFirstDealerPrintViewFields.营业执照备注);
-			this.Fields.Add("药品经营许可证", AllFirstDealerPrintViewFields.药品经营许可证);
-			this.Fields.Add("药品经营许可证编号", AllFirstDealerPrintViewFields.药品经营许可证编号);
-			this.Fields.Add("药品经营许可证发证机关", AllFirstDealerPrintViewFields.药品经营许可证发证机关);
-			this.Fields.Add("药品经营许可证发证日期", AllFirstDealerPrintViewFields.药品经营许可证发证日期);
-			this.Fields.Add("药品经营许可证效期至", AllFirstDealerPrintViewFields.药品经营许可证效期至);
-			this.Fields.Add("药品经营许可证备注", AllFirstDealerPrintViewFields.药品经营许可证备注);
-			this.Fields.Add("药品GSPGMP证书", AllFirstDealerPrintViewFields.药品GSPGMP证书);
-			this.Fields.Add("药品GSPGMP证书编号", AllFirstDealerPrintViewFields.药品GSPGMP证书编号);
-			this.Fields.Add("药品GSPGMP证书效期至", AllFirstDealerPrintViewFields.药品GSPGMP证书效期至);
+			this.Fields.Add("产品经营许可证", AllFirstDealerPrintViewFields.产品经营许可证);
+			this.Fields.Add("产品经营许可证编号", AllFirstDealerPrintViewFields.产品经营许可证编号);
+			this.Fields.Add("产品经营许可证发证机关", AllFirstDealerPrintViewFields.产品经营许可证发证机关);
+			this.Fields.Add("产品经营许可证发证日期", AllFirstDealerPrintViewFields.产品经营许可证发证日期);
+			this.Fields.Add("产品经营许可证效期至", AllFirstDealerPrintViewFields.产品经营许可证效期至);
+			this.Fields.Add("产品经营许可证备注", AllFirstDealerPrintViewFields.产品经营许可证备注);
+			this.Fields.Add("产品GSPGMP证书", AllFirstDealerPrintViewFields.产品GSPGMP证书);
+			this.Fields.Add("产品GSPGMP证书编号", AllFirstDealerPrintViewFields.产品GSPGMP证书编号);
+			this.Fields.Add("产品GSPGMP证书效期至", AllFirstDealerPrintViewFields.产品GSPGMP证书效期至);
 			this.Fields.Add("法人委托书", AllFirstDealerPrintViewFields.法人委托书);
 			this.Fields.Add("法人委托书编号vs姓名", AllFirstDealerPrintViewFields.法人委托书编号vs姓名);
 			this.Fields.Add("法人委托书发证机关vs身份证号", AllFirstDealerPrintViewFields.法人委托书发证机关vs身份证号);
@@ -326,49 +326,49 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllFirstDealerPrint", 13, "营业执照备注", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品经营许可证
+		public static EntityField 产品经营许可证
 		{
-			get { return new EntityField("vw_AllFirstDealerPrint", 14, "药品经营许可证", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstDealerPrint", 14, "产品经营许可证", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品经营许可证编号
+		public static EntityField 产品经营许可证编号
 		{
-			get { return new EntityField("vw_AllFirstDealerPrint", 15, "药品经营许可证编号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstDealerPrint", 15, "产品经营许可证编号", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品经营许可证发证机关
+		public static EntityField 产品经营许可证发证机关
 		{
-			get { return new EntityField("vw_AllFirstDealerPrint", 16, "药品经营许可证发证机关", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstDealerPrint", 16, "产品经营许可证发证机关", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品经营许可证发证日期
+		public static EntityField 产品经营许可证发证日期
 		{
-			get { return new EntityField("vw_AllFirstDealerPrint", 17, "药品经营许可证发证日期", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstDealerPrint", 17, "产品经营许可证发证日期", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品经营许可证效期至
+		public static EntityField 产品经营许可证效期至
 		{
-			get { return new EntityField("vw_AllFirstDealerPrint", 18, "药品经营许可证效期至", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstDealerPrint", 18, "产品经营许可证效期至", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品经营许可证备注
+		public static EntityField 产品经营许可证备注
 		{
-			get { return new EntityField("vw_AllFirstDealerPrint", 19, "药品经营许可证备注", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstDealerPrint", 19, "产品经营许可证备注", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品GSPGMP证书
+		public static EntityField 产品GSPGMP证书
 		{
-			get { return new EntityField("vw_AllFirstDealerPrint", 20, "药品GSPGMP证书", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstDealerPrint", 20, "产品GSPGMP证书", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品GSPGMP证书编号
+		public static EntityField 产品GSPGMP证书编号
 		{
-			get { return new EntityField("vw_AllFirstDealerPrint", 21, "药品GSPGMP证书编号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstDealerPrint", 21, "产品GSPGMP证书编号", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品GSPGMP证书效期至
+		public static EntityField 产品GSPGMP证书效期至
 		{
-			get { return new EntityField("vw_AllFirstDealerPrint", 22, "药品GSPGMP证书效期至", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstDealerPrint", 22, "产品GSPGMP证书效期至", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 法人委托书

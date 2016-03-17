@@ -88,5 +88,53 @@ namespace DQS.App
             }
         }
 
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            GridControl gc = new GridControl();
+
+            string name = "";
+
+            foreach (XtraTabPage page in this.xtcMain.TabPages)
+            {
+                if (page.Focus())
+                {
+                    name = page.Text;
+                    foreach (Control c in page.Controls)
+                    {
+                        if (c is StandardGrid)
+                        {
+                            gc = (GridControl)c;
+                        }
+                    }
+                }
+            }
+
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            saveFileDialog.Title = "导出Excel";
+
+            saveFileDialog.FileName = name;
+
+            saveFileDialog.Filter = "Excel文件(*.xls)|*.xls";
+
+            DialogResult dialogResult = saveFileDialog.ShowDialog(this);
+
+            if (dialogResult == DialogResult.OK)
+            {
+
+                DevExpress.XtraPrinting.XlsExportOptions options = new DevExpress.XtraPrinting.XlsExportOptions();
+
+                //gridControl1.ExportToXls(saveFileDialog.FileName, options);  
+
+                //gridControl.ExportToExcelOld(saveFileDialog.FileName);
+
+                gc.ExportToXls(saveFileDialog.FileName);
+
+                DevExpress.XtraEditors.XtraMessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }  
+        }
+
     }
 }

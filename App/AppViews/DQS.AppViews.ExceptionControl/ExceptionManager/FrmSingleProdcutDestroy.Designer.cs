@@ -384,7 +384,7 @@
             this.gpcButtom.Name = "gpcButtom";
             this.gpcButtom.Size = new System.Drawing.Size(1004, 449);
             this.gpcButtom.TabIndex = 2;
-            this.gpcButtom.Text = "药品明细";
+            this.gpcButtom.Text = "产品明细";
             // 
             // popupGrid
             // 

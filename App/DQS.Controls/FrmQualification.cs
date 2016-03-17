@@ -96,7 +96,7 @@ namespace DQS.Controls
                 DataTable defaultRecords = data.Clone();
                 if (this.m_TableName == "BFI_Product")
                 {
-                    DataTable requiredRecords = GlobalMethod.GetViewData(RequiredCertificatesViewName, "CertificateTypeName='药品证书'");
+                    DataTable requiredRecords = GlobalMethod.GetViewData(RequiredCertificatesViewName, "CertificateTypeName='产品证书'");
                     int i = 0;
                     foreach (DataRow item in requiredRecords.Rows)
                     {
@@ -109,9 +109,9 @@ namespace DQS.Controls
                     "开户信息"
                     "税务登记证"
                     "组织机构代码证"
-                    "药品生产许可证"
-                    "药品GMP证书"
-                    "药品注册证"
+                    "产品生产许可证"
+                    "产品GMP证书"
+                    "产品注册证"
                     "说明书"
                     "外包装"
                     "检验报告"*/
@@ -136,8 +136,8 @@ namespace DQS.Controls
                     if (industryStyle == "生产厂商")
                     {
                         /*//如果是生产企业
-                        药品生产许可证
-                        药品GMP证书
+                        产品生产许可证
+                        产品GMP证书
                         印章印模
                         随货同行单
                          */
@@ -177,8 +177,8 @@ namespace DQS.Controls
                         else
                         {
                             /*//如果是经营企业
-                        药品经营许可证
-                        药品GSP证书"*/
+                        产品经营许可证
+                        产品GSP证书"*/
                             certificateTypeName = "经营企业证书";
                         }
                         DataTable requiredRecords = GlobalMethod.GetViewData(RequiredCertificatesViewName,

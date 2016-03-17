@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DQS.Module.Entities;
 using DQS.Common;
+using ORMSCore;
 
 namespace DQS.AppViews.ExceptionControl.ExceptionManager
 {
@@ -32,10 +33,10 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
                 this.txtPopupProduct.Enabled = false;
                 this.txtLockedCode.Enabled = false;
-                rdgIsLockedBatch.Enabled = false;
+                //rdgIsLockedBatch.Enabled = false;
                 txtLockedRemark.Enabled = false;
-                txtPopBatch.Enabled = false;
-                txtLockedAmount.Enabled = false;
+                txtPopBatch.Enabled = true;
+                txtLockedAmount.Enabled = true;
                 this.CustomGetEntity(entity);
 
             }
@@ -45,7 +46,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                 this.txtLockedCode.Select(this.txtLockedCode.Text.Length, 0);
                 this.dteLockedDate.DateTime = DateTime.Now;
                 this.tmeLockedTime.Time = DateTime.Now;
-                SetLockedBatch(false);
+                SetLockedBatch(true);
                 SetUnLocked(false);
                 if (GlobalItem.g_CurrentEmployee != null)
                 {
@@ -78,13 +79,13 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
             if (!entity.IsNullField("ProductID"))
             {
                 this.txtPopupProduct.SetMemberValue(entity.ProductID);
-                this.txtProductName.Text = (this.txtPopupProduct.EditData as DataRow)["药品名称"].ToString();
-                this.txtProductSpec.Text = (this.txtPopupProduct.EditData as DataRow)["规格"].ToString();
+                this.txtProductName.Text = (this.txtPopupProduct.EditData as DataRow)["产品名称"].ToString();
+                this.txtProductSpec.Text = (this.txtPopupProduct.EditData as DataRow)["规格型号"].ToString();
                 this.txtProductUnit.Text = (this.txtPopupProduct.EditData as DataRow)["单位"].ToString();
-                this.txtPackageSpec.Text = (this.txtPopupProduct.EditData as DataRow)["包装规格"].ToString();
-                this.txtPhysicType.Text = (this.txtPopupProduct.EditData as DataRow)["剂型"].ToString();
-                this.txtAuthorizedNo.Text = (this.txtPopupProduct.EditData as DataRow)["批准文号"].ToString();
-                this.txtProductStyle.Text = (this.txtPopupProduct.EditData as DataRow)["药品类别"].ToString();
+                this.txtPackageSpec.Text = (this.txtPopupProduct.EditData as DataRow)["包装规格型号"].ToString();
+                //this.txtPhysicType.Text = (this.txtPopupProduct.EditData as DataRow)["剂型"].ToString();
+                this.txtAuthorizedNo.Text = (this.txtPopupProduct.EditData as DataRow)["注册证号"].ToString();
+                this.txtProductStyle.Text = (this.txtPopupProduct.EditData as DataRow)["产品类别"].ToString();
                 this.txtProducerName.Text = (this.txtPopupProduct.EditData as DataRow)["生产厂商"].ToString();
             }
 
@@ -137,6 +138,26 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
         /// <param name="entity">实体</param>
         protected virtual void CustomSetEntity(BUSProductLockedEntity entity)
         {
+
+            if (txtPopBatch.Tag != null)
+            {
+                entity.InStoreID = Convert.ToInt32(txtPopBatch.Tag);
+                BUSInStoreDetailEntity inStoreDetail = new BUSInStoreDetailEntity { InStoreID = entity.InStoreID };
+                inStoreDetail.Fetch();
+                if (!inStoreDetail.IsNullField("ProduceDate"))
+                {
+                    entity.ProduceDate = inStoreDetail.ProduceDate;
+                }
+                if (!inStoreDetail.IsNullField("ValidateDate"))
+                {
+                    entity.ValidateDate = inStoreDetail.ValidateDate;
+                }
+            }
+            else
+            {
+                entity.InStoreID = 0;
+            }
+
             if (this.txtPopupProduct.SelectedValue != null)
             {
                 entity.ProductID = Convert.ToInt32(this.txtPopupProduct.SelectedValue);
@@ -184,13 +205,13 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
         {
             if (this.txtPopupProduct.EditData != null)
             {
-                this.txtProductName.Text = (this.txtPopupProduct.EditData as DataRow)["药品名称"].ToString();
-                this.txtProductSpec.Text = (this.txtPopupProduct.EditData as DataRow)["规格"].ToString();
+                this.txtProductName.Text = (this.txtPopupProduct.EditData as DataRow)["产品名称"].ToString();
+                this.txtProductSpec.Text = (this.txtPopupProduct.EditData as DataRow)["规格型号"].ToString();
                 this.txtProductUnit.Text = (this.txtPopupProduct.EditData as DataRow)["单位"].ToString();
-                this.txtPackageSpec.Text = (this.txtPopupProduct.EditData as DataRow)["包装规格"].ToString();
-                this.txtPhysicType.Text = (this.txtPopupProduct.EditData as DataRow)["剂型"].ToString();
-                this.txtAuthorizedNo.Text = (this.txtPopupProduct.EditData as DataRow)["批准文号"].ToString();
-                this.txtProductStyle.Text = (this.txtPopupProduct.EditData as DataRow)["药品类别"].ToString();
+                this.txtPackageSpec.Text = (this.txtPopupProduct.EditData as DataRow)["包装规格型号"].ToString();
+                //this.txtPhysicType.Text = (this.txtPopupProduct.EditData as DataRow)["剂型"].ToString();
+                this.txtAuthorizedNo.Text = (this.txtPopupProduct.EditData as DataRow)["注册证号"].ToString();
+                this.txtProductStyle.Text = (this.txtPopupProduct.EditData as DataRow)["产品类别"].ToString();
                 this.txtProducerName.Text = (this.txtPopupProduct.EditData as DataRow)["生产厂商"].ToString();
 
                 this.txtPopBatch.Text = "";
@@ -201,15 +222,18 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                 this.rdgIsLockedBatch.Focus();
             }
         }
+        string ProduceDate = "";
+        string ValidateDate = "";
 
         private void txtPopBatch_PopupClosing(object sender, EventArgs e)
         {
             if (this.txtPopBatch.EditData != null)
             {
-               /* this.txtProduceDate.Text = (this.txtPopBatch.EditData as DataRow)["生产日期"].ToString();
-                this.txtValidateDate.Text = (this.txtPopBatch.EditData as DataRow)["有效期至"].ToString();
-*/
+                ProduceDate = (this.txtPopBatch.EditData as DataRow)["生产日期"].ToString();
+                ValidateDate = (this.txtPopBatch.EditData as DataRow)["有效期至"].ToString();
+
                 this.txtLockedAmount.Text = (this.txtPopBatch.EditData as DataRow)["库存数量"].ToString();
+                txtPopBatch.Tag = (this.txtPopBatch.EditData as DataRow)["入库ID"].ToString();
                 this.rdgIsUnLocked.Focus();
             }
         }
@@ -219,13 +243,13 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
             if (this.txtPopupProduct.SelectedValue == null)
             {
                 e.Cancel = true;
-                XtraMessageBox.Show("请先选择药品。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                XtraMessageBox.Show("请先选择产品。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 this.txtPopupProduct.Focus();
 
             }
             else
             {
-                this.txtPopBatch.Filter = string.Format("药品ID = {0} AND 锁定状态<>'已锁定'", this.txtPopupProduct.SelectedValue);
+                this.txtPopBatch.Filter = string.Format("产品ID = {0} AND 锁定状态<>'已锁定'", this.txtPopupProduct.SelectedValue);
             }
 
         }
@@ -248,6 +272,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
             {
                 if (entity.IsNew())
                 {
+                    if (!CheckProduct()) return;
+
                     entity.CreateDate = DateTime.Now;
                     entity.LastModifyDate = DateTime.Now;
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
@@ -262,6 +288,33 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
             }
 
             this.DialogResult = DialogResult.OK;
+        }
+
+        private bool CheckProduct()
+        {
+            if (rdgIsLockedBatch.SelectedIndex == 0)
+            {
+                EntityCollection<BUSProductLockedEntity> pl = new EntityCollection<BUSProductLockedEntity>();
+                pl.Fetch(BUSProductLockedEntityFields.ProductID == Convert.ToInt32(this.txtPopupProduct.SelectedValue)
+                    & BUSProductLockedEntityFields.IsUnLocked == false);
+                if (pl.Count > 0)
+                {
+                    XtraMessageBox.Show("该药品已锁定，不能重复锁定", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            else
+            {
+                EntityCollection<BUSProductLockedEntity> pl = new EntityCollection<BUSProductLockedEntity>();
+                pl.Fetch(BUSProductLockedEntityFields.InStoreID == Convert.ToInt32(this.txtPopBatch.Tag)
+                    & BUSProductLockedEntityFields.IsUnLocked == false);
+                if (pl.Count > 0)
+                {
+                    XtraMessageBox.Show("该药品已锁定，不能重复锁定", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            return true;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

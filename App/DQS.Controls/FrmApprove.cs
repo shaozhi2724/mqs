@@ -102,6 +102,12 @@ namespace DQS.Controls
             }
             else
             {
+                if (null != notification)
+                {
+                    notification.IsRead = true;
+                    notification.ReadTime = DateTime.Now;
+                    notification.Update();
+                }
                 //未全部审核通过，不可修改状态
                 approve.Update();
 
@@ -126,42 +132,58 @@ namespace DQS.Controls
 
             approve.ApproveID = this.m_AllApproveView.ApproveID;
             approve.Fetch();
-            //EntityCollection<ATCApproveEntity> approves = new EntityCollection<ATCApproveEntity>();
+            EntityCollection<ATCApproveEntity> approves = new EntityCollection<ATCApproveEntity>();
             //直接把单据作废
-            
-            BUSBillEntity Entity = new BUSBillEntity { BillCode = approve.BillCode };
-            Entity.Fetch();
-            ProcessApproveRejection(Entity);
-            approve.IsPass = false;
-            approve.ApprovalSuggestion = this.txtApprovalSuggestion.Text.Trim();
-            approve.ApprovalResult = this.txtApprovalResult.Text.Trim();
-            approve.ApprovalRemark = this.txtApprovalRemark.Text.Trim();
-            approve.Update();
-            this.DialogResult = DialogResult.Yes;
+
+            if (approve.DocumentCode == "PurchaseBackBill" || approve.DocumentCode == "PurchaseBill" || approve.DocumentCode == "SaleBackBill" || approve.DocumentCode == "SaleBill")
+            {
+                BUSBillEntity Entity = new BUSBillEntity { BillCode = approve.BillCode };
+                Entity.Fetch();
+                ProcessApproveRejection(Entity);
+                approve.IsPass = false;
+                approve.ApprovalSuggestion = this.txtApprovalSuggestion.Text.Trim();
+                approve.ApprovalResult = this.txtApprovalResult.Text.Trim();
+                approve.ApprovalRemark = this.txtApprovalRemark.Text.Trim();
+                approve.ApprovalDate = DateTime.Now;
+                approve.Update();
+            }
+
 
             //逐步往上反推
 
-            /*
-            PredicateExpression pe = new PredicateExpression();
-            pe.Add(ATCApproveEntityFields.InternalNo == approve.InternalNo);
-            pe.Add(ATCApproveEntityFields.BillCode == approve.BillCode);
-            pe.Add(ATCApproveEntityFields.ApproveOrder <= approve.ApproveOrder);
-            approves.Fetch(pe);
-            List<ATCApproveEntity> tempList = new List<ATCApproveEntity>();
-            foreach (ATCApproveEntity item in approves)
+            if (approve.DocumentCode == "FirstDealer" || approve.DocumentCode == "FirstProvider" || approve.DocumentCode == "FirstProduct")
             {
-                tempList.Add(item);
+                PredicateExpression pe = new PredicateExpression();
+                pe.Add(ATCApproveEntityFields.InternalNo == approve.InternalNo);
+                pe.Add(ATCApproveEntityFields.BillCode == approve.BillCode);
+                pe.Add(ATCApproveEntityFields.ApproveOrder <= approve.ApproveOrder);
+                approves.Fetch(pe);
+                List<ATCApproveEntity> tempList = new List<ATCApproveEntity>();
+                foreach (ATCApproveEntity item in approves)
+                {
+                    tempList.Add(item);
+                }
+                var previouseApproves = tempList.OrderByDescending(p => p.ApproveOrder).Take(2).ToList();
+                foreach (var entity in previouseApproves)
+                {
+                    ATCApproveEntity approveEntity = new ATCApproveEntity();
+
+                    approveEntity.ApproveID = entity.ApproveID;
+                    approveEntity.Fetch();
+
+                    approveEntity.IsPass = false;
+                    approveEntity.IsApprovaled = false;
+                    if (approveEntity.ApprovalUserID == GlobalItem.g_CurrentUser.UserID)
+                    {
+                        approveEntity.ApprovalSuggestion = txtApprovalSuggestion.Text;
+                        approveEntity.ApprovalResult = txtApprovalResult.Text;
+                        approveEntity.ApprovalRemark = txtApprovalRemark.Text;
+                        approveEntity.ApprovalDate = DateTime.Now;
+                    }
+                    approveEntity.Update();
+                }
             }
-            var previouseApproves = tempList.OrderByDescending(p => p.ApproveOrder).Take(2).ToList();
-            foreach (var entity in previouseApproves)
-            {
-                ATCApproveEntity approveEntity = new ATCApproveEntity { ApproveID = entity.ApproveID };
-                approveEntity.Fetch();
-                approveEntity.IsPass = false;
-                approveEntity.IsApprovaled = false;
-                approveEntity.Update();
-            }
-            */
+            this.DialogResult = DialogResult.No;
         }
 
         private void ProcessApproveRejection(BUSBillEntity billEntity)
@@ -179,6 +201,7 @@ namespace DQS.Controls
                 departmentID = employee.DepartmentID;
             }
             //将销售单减掉的业务库存加回来
+            /*
             string sql = @"
 UPDATE SD
     SET SD.Amount = SD.Amount + BD.Amount
@@ -190,6 +213,14 @@ WHERE BD.BillID='{0}' AND SD.DepartmentID='{1}'
 
 UPDATE dbo.BUS_Bill SET BillStatus=10,BillStatusName='未批准',ReceiveID=NULL,ReviewCode=NULL,AcceptID=NULL,AcceptCode=NULL,Reservation10='未批准' WHERE BillID='{0}'
 ";
+             */
+            string sql = @"
+
+DELETE BUS_OutStoreDetail WHERE BillID = '{0}'
+
+DELETE BUS_NEWStoreDetail WHERE SaleBillID = '{0}'
+
+UPDATE dbo.BUS_Bill SET BillStatus=10,BillStatusName='未批准',ReceiveID=NULL,ReviewCode=NULL,AcceptID=NULL,AcceptCode=NULL,Reservation10='未批准' WHERE BillID='{0}'";
             string sqltwo = @"
 UPDATE dbo.BUS_Bill SET BillStatus=10,BillStatusName='未批准',ReceiveID=NULL,ReviewCode=NULL,AcceptID=NULL,AcceptCode=NULL,Reservation10='未批准' WHERE BillID='{0}'
 ";
@@ -205,7 +236,7 @@ UPDATE dbo.BUS_Bill SET BillStatus=10,BillStatusName='未批准',ReceiveID=NULL,
                     //向数据表中插入记录的命令语句
                     if (billEntity.BillTypeName == "销售出货" || billEntity.BillTypeName == "采购退货")
                     {
-                        cmd.CommandText = string.Format(sql, billEntity.BillID, departmentID);
+                        cmd.CommandText = string.Format(sql, billEntity.BillID);
                     }
                     if (billEntity.BillTypeName == "采购进货" || billEntity.BillTypeName == "销售退货")
                     {

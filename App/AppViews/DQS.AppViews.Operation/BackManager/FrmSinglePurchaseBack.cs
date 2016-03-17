@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -13,13 +14,25 @@ using ORMSCore;
 using DQS.Common;
 using DevExpress.XtraLayout.Utils;
 using DQS.AppViews.Operation.Properties;
+using DQS.Module;
+using DQS.Module.Views;
 
 namespace DQS.AppViews.Operation.BackManager
 {
     public partial class FrmSinglePurchaseBack : DevExpress.XtraEditors.XtraForm
     {
         private int? m_id;
+        private List<string> _amountErrors;
+        List<SaleViewDetail> list = new List<SaleViewDetail>();
 
+        List<UpdateBillDetail> ubdlist = new List<UpdateBillDetail>();
+        List<UpdateBillDetail> updatelist = new List<UpdateBillDetail>();
+        List<SaleViewDetail> addlist = new List<SaleViewDetail>();
+        UpdateBillDetail ubd;
+        SaleViewDetail svd;
+
+
+        public string alter;
         private string dealerCode;
         public FrmSinglePurchaseBack()
         {
@@ -116,9 +129,383 @@ namespace DQS.AppViews.Operation.BackManager
             }
         }
 
-        public string alter;
+        private void LoadubdList(int BillID)
+        {
+            ubdlist.Clear();
+            string sql = @"SELECT DetailID,ProductID,BatchNo,Amount,UnitPrice,TotalPrice,TradePrice,RetailPrice FROM dbo.BUS_BillDetail WHERE BillID = " + BillID;
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                SqlDataAdapter sdad = new SqlDataAdapter(sql, conn);
+                DataSet ds = new DataSet();
+                conn.Open();
+                try
+                {
+                    sdad.Fill(ds, "Table");
+                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                    {
+                        ubd = new UpdateBillDetail();
+                        int DetailID = Convert.ToInt32(ds.Tables["Table"].Rows[i]["DetailID"]);
+                        int ProductID = Convert.ToInt32(ds.Tables["Table"].Rows[i]["ProductID"]);
+                        string BatchNo = ds.Tables["Table"].Rows[i]["BatchNo"].ToString();
+                        int Amount = Convert.ToInt32(ds.Tables["Table"].Rows[i]["Amount"]);
+                        double UnitPrice = Convert.ToDouble(ds.Tables["Table"].Rows[i]["UnitPrice"]);
+                        double TotalPrice = Convert.ToDouble(ds.Tables["Table"].Rows[i]["TotalPrice"]);
+                        //double TradePrice = Convert.ToDouble(ds.Tables["Table"].Rows[i]["TradePrice"]);
+                        //double RetailPrice = Convert.ToDouble(ds.Tables["Table"].Rows[i]["RetailPrice"]);
+                        ubd.DetailID = DetailID;
+                        ubd.ProductID = ProductID;
+                        ubd.BatchNo = BatchNo;
+                        ubd.Amount = Amount;
+                        ubd.UnitPrice = UnitPrice;
+                        ubd.TotalPrice = TotalPrice;
+                        //ubd.TradePrice = TradePrice;
+                        //ubd.RetailPrice = RetailPrice;
+                        ubdlist.Add(ubd);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message.ToString(), "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        private void UpdateNewDetail()
+        {
+            string sql;
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                conn.Open(); //连接数据库
+                try
+                {
+                    for (int i = 0; i < updatelist.Count; i++)
+                    {
+                        sql = "EXEC sp_UpdateBillDetail " + updatelist[i].DetailID + "," + updatelist[i].Amount + "," + updatelist[i].UnitPrice + "," + updatelist[i].TradePrice + "," + updatelist[i].RetailPrice;
+                        SqlCommand cmd = new SqlCommand(sql, conn);
+                        object ret = cmd.ExecuteScalar();
+                        if (Convert.ToInt32(ret) == 1)
+                        {
+                            BFIProductEntity product = new BFIProductEntity { ProductID = updatelist[i].ProductID };
+                            product.Fetch();
+                            XtraMessageBox.Show(string.Format("产品：{0}，批号：{1} 库存不足。", product.ProductName, updatelist[i].BatchNo), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.ToString(), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        private void delDetail()
+        {
+            string sql;
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                conn.Open(); //连接数据库
+                try
+                {
+                    for (int i = 0; i < ubdlist.Count; i++)
+                    {
+                        sql = "sp_DelDetail " + ubdlist[i].DetailID;
+                        SqlCommand cmd = new SqlCommand(sql, conn);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.ToString(), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        private void AddNewDetail()
+        {
+
+        }
+
+        private bool CheckModify(int BillID)
+        {
+            LoadubdList(BillID);
+            addlist.Clear();
+            updatelist.Clear();
+            int rowCount = this.popupGrid.PopupView.RowCount;
+            for (int i = 0; i < rowCount; i++)
+            {
+                ubd = new UpdateBillDetail();
+                svd = new SaleViewDetail();
+                object productID = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
+                if (productID != null && productID != DBNull.Value)
+                {
+                    int PID = Convert.ToInt32(popupGrid.PopupView.GetDataRow(i)["产品ID"]);
+                    string BatchNo = popupGrid.PopupView.GetDataRow(i)["批号"].ToString();
+                    DateTime ProduceDate = (DateTime)popupGrid.PopupView.GetDataRow(i)["生产日期"];
+                    DateTime ValidateDate = (DateTime)popupGrid.PopupView.GetDataRow(i)["有效期至"];
+                    int Amount = Convert.ToInt32(popupGrid.PopupView.GetDataRow(i)["数量"]);
+                    double UnitPrice = Convert.ToDouble(popupGrid.PopupView.GetDataRow(i)["单价"]);
+                    double TotalPrice = Convert.ToDouble(popupGrid.PopupView.GetDataRow(i)["金额"]);
+                    //double TradePrice = Convert.ToDouble(popupGrid.PopupView.GetDataRow(i)["批发价"]);
+                    //double RetailPrice = Convert.ToDouble(popupGrid.PopupView.GetDataRow(i)["零售价"]);
+                    object detailID = this.popupGrid.PopupView.GetRowCellValue(i, "DetailID");
+                    if (detailID != null && detailID != DBNull.Value)
+                    {
+                        int detID = Convert.ToInt32(popupGrid.PopupView.GetRowCellValue(i, "DetailID"));
+                        var data = ubdlist.Where(p => p.DetailID.Equals(detID)).ToList();
+                        ubd.DetailID = detID;
+                        ubd.ProductID = PID;
+                        ubd.BatchNo = BatchNo;
+                        ubd.Amount = Amount;
+                        ubd.UnitPrice = UnitPrice;
+                        //ubd.TradePrice = TradePrice;
+                        //ubd.RetailPrice = RetailPrice;
+                        if ((PID != data[0].ProductID) || (BatchNo != data[0].BatchNo))
+                        {
+                            //需要删除、新建
+                            int InStoreDetailID = Convert.ToInt32(popupGrid.PopupView.GetDataRow(i)["入库ID"]);
+                            if (!Check(i + 1, InStoreDetailID, PID, Amount, BatchNo)) return false;
+                            svd.InStoreDetailID = InStoreDetailID;
+                            svd.ProductID = PID;
+                            svd.BatchNo = BatchNo;
+                            svd.ProduceDate = ProduceDate;
+                            svd.ValidateDate = ValidateDate;
+                            svd.OutAmount = Amount;
+                            svd.UnitPrice = UnitPrice;
+                            svd.TotalPrice = TotalPrice;
+                            //svd.TradePrice = TradePrice;
+                            //svd.RetailPrice = RetailPrice;
+                            addlist.Add(svd);
+                        }
+                        else
+                        {
+                            ubdlist.RemoveAll(p => p.DetailID.Equals(detID));
+                            if (Amount != data[0].Amount)
+                            {
+                                //判断数量
+                                if (!CheckAmount(i + 1, detID, PID, Amount, BatchNo)) return false;
+                                ubd.NoAmount = Amount - data[0].Amount;
+                                updatelist.Add(ubd);
+                            }
+                            else
+                            {
+                                if (UnitPrice != data[0].UnitPrice)
+                                {
+                                    ubd.NoAmount = Amount - data[0].Amount;
+                                    updatelist.Add(ubd);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //新建判断
+                        int InStoreDetailID = Convert.ToInt32(popupGrid.PopupView.GetDataRow(i)["入库ID"]);
+
+                        if (!Check(i + 1, InStoreDetailID, PID, Amount, BatchNo)) return false;
+
+                        svd.InStoreDetailID = InStoreDetailID;
+                        svd.ProductID = PID;
+                        svd.BatchNo = BatchNo;
+                        svd.ProduceDate = ProduceDate;
+                        svd.ValidateDate = ValidateDate;
+                        svd.OutAmount = Amount;
+                        svd.UnitPrice = UnitPrice;
+                        svd.TotalPrice = TotalPrice;
+                        //svd.TradePrice = TradePrice;
+                        //svd.RetailPrice = RetailPrice;
+                        addlist.Add(svd);
+                    }
+                }
+            }
+            return true;
+        }
+
+        //新建判断
+        private bool Check(int RowNum, int InStoreID, int productID, int OutAmount, string BatchNo)
+        {
+            EntityCollection<BUSNEWStoreDetailEntity> esvds = new EntityCollection<BUSNEWStoreDetailEntity>();
+            esvds.Fetch(BUSNEWStoreDetailEntityFields.InStoreBillID == InStoreID);
+            var data = esvds.Cast<BUSNEWStoreDetailEntity>().Where(p => p.IsNullField("OutStoreBillID")).ToList();
+            if (data[0].InAmount < OutAmount)
+            {
+                BFIProductEntity bp = new BFIProductEntity { ProductID = productID };
+                bp.Fetch();
+                XtraMessageBox.Show(string.Format("第{0}行，产品-{1}-批号为-{2}-库存数量不足", RowNum, bp.ProductName, BatchNo), "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
+        //修改数量判断
+        private bool CheckAmount(int RowNum, int DetailID, int productID, int OutAmount, string BatchNo)
+        {
+            EntityCollection<BUSNEWStoreDetailEntity> bns = new EntityCollection<BUSNEWStoreDetailEntity>();
+            bns.Fetch(BUSNEWStoreDetailEntityFields.OutStoreBillID == DetailID);
+            var instore = bns.Cast<BUSNEWStoreDetailEntity>().Where(p => p.OutStoreBillID.Equals(DetailID)).ToList();
+            EntityCollection<BUSNEWStoreDetailEntity> esvds = new EntityCollection<BUSNEWStoreDetailEntity>();
+            esvds.Fetch(BUSNEWStoreDetailEntityFields.InStoreBillID == instore[0].InStoreBillID);
+            var data = esvds.Cast<BUSNEWStoreDetailEntity>().Where(p => p.IsNullField("OutStoreBillID")).ToList();
+            if ((data[0].InAmount + instore[0].OutAmount) < OutAmount)
+            {
+                BFIProductEntity bp = new BFIProductEntity { ProductID = productID };
+                bp.Fetch();
+                XtraMessageBox.Show(string.Format("第{0}行，产品-{1}-批号为-{2}-库存数量不足", RowNum, bp.ProductName, BatchNo), "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
+        //保存前检查库存是不是够开
+        private void CheckStoreDetail(int DepartmentID)
+        {
+            list.Clear();
+            int rowCount = this.popupGrid.PopupView.RowCount;
+            //EntityCollection<BUSNEWStoreDetailEntity> esvds = new EntityCollection<BUSNEWStoreDetailEntity>();
+            for (int i = 0; i < rowCount; i++)
+            {
+                svd = new SaleViewDetail();
+                object productID = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
+                if (productID != null && productID != DBNull.Value)
+                {
+                    int InStoreDetailID = Convert.ToInt32(popupGrid.PopupView.GetDataRow(i)["入库ID"]);
+                    int ProductID = Convert.ToInt32(popupGrid.PopupView.GetDataRow(i)["产品ID"]);
+                    string BatchNo = popupGrid.PopupView.GetDataRow(i)["批号"].ToString();
+                    //DateTime ProduceDate = (DateTime)popupGrid.PopupView.GetDataRow(i)["生产日期"];
+                    //DateTime ValidateDate = (DateTime)popupGrid.PopupView.GetDataRow(i)["有效期至"];
+                    //string SterilizationBatchNo = popupGrid.PopupView.GetDataRow(i)["灭菌批号"].ToString();
+                    //object sdate = popupGrid.PopupView.GetDataRow(i)["灭菌日期"];
+                    //DateTime SterilizationDate;
+                    //if (sdate != null && sdate != DBNull.Value)
+                    //{
+                    //    SterilizationDate = (DateTime)sdate;
+                    //}
+                    //else
+                    //{
+                    //    SterilizationDate = Convert.ToDateTime("1900-01-01");
+                    //}
+                    int Amount = Convert.ToInt32(popupGrid.PopupView.GetDataRow(i)["数量"]);
+                    double UnitPrice = Convert.ToDouble(popupGrid.PopupView.GetDataRow(i)["单价"]);
+                    double TotalPrice = Convert.ToDouble(popupGrid.PopupView.GetDataRow(i)["金额"]);
+                    svd.InStoreDetailID = InStoreDetailID;
+                    svd.ProductID = ProductID;
+                    svd.BatchNo = BatchNo;
+                    //svd.ProduceDate = ProduceDate;
+                    //svd.ValidateDate = ValidateDate;
+                    svd.OutAmount = Amount;
+                    svd.UnitPrice = UnitPrice;
+                    svd.TotalPrice = TotalPrice;
+                    svd.TradePrice = 0;
+                    svd.RetailPrice = 0;
+                    //svd.SterilizationBatchNo = SterilizationBatchNo;
+                    //svd.SterilizationDate = SterilizationDate;
+                    BFIProductEntity productEntity = new BFIProductEntity
+                    {
+                        ProductID = ProductID
+                    };
+                    productEntity.Fetch();
+                    if (!CheckNewStoreDetail(InStoreDetailID, Amount, BatchNo))
+                    {
+                        _amountErrors.Add(String.Format("第{0}行，{1} 批号为{2}库存不足。", i + 1, productEntity.ProductName, BatchNo));
+                    }
+                    svd.Reservation1 = productEntity.PurchaseTax;
+                    list.Add(svd);
+                }
+            }
+        }
+
+        private bool CheckNewStoreDetail(int InStoreID, int Amount, string BatchNo)
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                conn.Open(); //连接数据库
+                try
+                {
+                    int returnValue = 0;
+                    SqlCommand cmd = new SqlCommand("sp_CheckStoreDetail", conn);
+
+                    cmd.Parameters.Add(new SqlParameter("@InStoreBillID", InStoreID));
+                    cmd.Parameters.Add(new SqlParameter("@Amount", Amount));
+                    cmd.Parameters.Add(new SqlParameter("@return", SqlDbType.Int, 0, ParameterDirection.ReturnValue,
+                      true, 0, 0, string.Empty, DataRowVersion.Default, DBNull.Value));
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.ExecuteScalar();
+                    returnValue = (int)cmd.Parameters["@return"].Value;
+                    if (returnValue == 1)
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            return true;
+        }
+
+        private bool UpdateNewStoreDetail(int BillID, string BillCode)
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                conn.Open(); //连接数据库
+                //必须为SqlCommand指定数据库连接和登记的事务
+                try
+                {
+                    //string sql = "EXEC sp_InsertNewStoreDetail {0},'{1}'";
+                    //sql = String.Format(sql, BillID, BillCode);
+                    //SqlCommand cmd = new SqlCommand(sql, conn);
+                    //cmd.ExecuteNonQuery();
+
+                    int returnValue = 0;
+                    SqlCommand cmd = new SqlCommand("sp_InsertNewStoreDetail", conn);
+
+                    cmd.Parameters.Add(new SqlParameter("@BillID", BillID));
+                    cmd.Parameters.Add(new SqlParameter("@BillCode", BillCode));
+                    cmd.Parameters.Add(new SqlParameter("@return", SqlDbType.Int, 0, ParameterDirection.ReturnValue,
+                      true, 0, 0, string.Empty, DataRowVersion.Default, DBNull.Value));
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.ExecuteScalar();
+                    returnValue = (int)cmd.Parameters["@return"].Value;
+                    if (returnValue == 1)
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            return true;
+        }
         private void btnSave_Click(object sender, EventArgs e)
         {
+            _amountErrors = new List<string>();
             try
             {
                 if (!this.ftPanel.ValidateIsNullFields()) return;
@@ -398,38 +785,76 @@ WHERE BillID={1}
                             }
                             entity.LastModifyDate = DateTime.Now;
                             entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
+
+                            CheckBillModify(m_id.Value);
+
+
+                            //只要有一条库存错误信息，就不能保存销售单
+                            if (_amountErrors.Any())
+                            {
+                                string message = string.Join("\n", _amountErrors);
+                                XtraMessageBox.Show(message, "销售数据错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
                             entity.Update();
 
-                            //先删除
-                            BUSBillDetailEntity childToDelete = new BUSBillDetailEntity { BillID = m_id.Value };
-                            childToDelete.DeleteByCommonly();
-
-                            //后加
-                            foreach (EntityBase childEntity in children)
+                            if (Settings.Default.IsNewStoreDetail)
                             {
-                                BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
-                                child.BillID = m_id.Value;
-                                child.Save();
-                            }
-
-                            if (needUpdateStoreAmount)
-                            {
-                                ATCUserEntity userEntity = new ATCUserEntity { UserID = billCreateUserId };
-                                userEntity.Fetch();
-
-                                int billCreateEmployeeId = userEntity.EmployeeID;
-                                BFIEmployeeEntity employee = new BFIEmployeeEntity { EmployeeID = billCreateEmployeeId };
-                                employee.Fetch();
-
-                                if (!employee.IsNullField("DepartmentID"))
+                                entity.Fetch();
+                                //删除所有相关明细
+                                DelBill(entity.BillID);
+                                //新建明细
+                                InsertBillDetail(list, entity.BillID);
+                                //新库存
+                                if (!UpdateNewStoreDetail(entity.BillID, entity.BillCode))
                                 {
-                                    departmentID = employee.DepartmentID;
+                                    CheckStoreDetail(departmentID);
                                 }
-                                //更新库存
+
+
+                                //只要有一条库存错误信息，就不能保存销售单
+                                if (_amountErrors.Any())
+                                {
+                                    string message = string.Join("\n", _amountErrors);
+                                    XtraMessageBox.Show(message, "销售数据错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return;
+                                }
+
+                            }
+                            else
+                            {
+
+                                //先删除
+                                BUSBillDetailEntity childToDelete = new BUSBillDetailEntity { BillID = m_id.Value };
+                                childToDelete.DeleteByCommonly();
+
+                                //后加
                                 foreach (EntityBase childEntity in children)
                                 {
                                     BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
-                                    UpdateStoreDetail(child, departmentID);
+                                    child.BillID = m_id.Value;
+                                    child.Save();
+                                }
+
+                                if (needUpdateStoreAmount)
+                                {
+                                    ATCUserEntity userEntity = new ATCUserEntity { UserID = billCreateUserId };
+                                    userEntity.Fetch();
+
+                                    int billCreateEmployeeId = userEntity.EmployeeID;
+                                    BFIEmployeeEntity employee = new BFIEmployeeEntity { EmployeeID = billCreateEmployeeId };
+                                    employee.Fetch();
+
+                                    if (!employee.IsNullField("DepartmentID"))
+                                    {
+                                        departmentID = employee.DepartmentID;
+                                    }
+                                    //更新库存
+                                    foreach (EntityBase childEntity in children)
+                                    {
+                                        BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
+                                        UpdateStoreDetail(child, departmentID);
+                                    }
                                 }
                             }
                         }
@@ -442,7 +867,7 @@ WHERE BillID={1}
                     {
                         if (!this.ValidateSaleAmount()) return;//验证库存和销售数量
 
-                        if (!this.ValidateLockStatus()) return; //锁定药品不能退回
+                        if (!this.ValidateLockStatus()) return; //锁定产品不能退回
                         #region 新建
                         BFIEmployeeEntity employee = GlobalItem.g_CurrentEmployee;
                         if (null != employee
@@ -465,26 +890,58 @@ WHERE BillID={1}
                         entity.LastModifyDate = DateTime.Now;
                         entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
+
+                        if (Settings.Default.IsNewStoreDetail)
+                        {
+                            CheckStoreDetail(departmentID);
+                        }
+                        //只要有一条库存错误信息，就不能保存销售单
+                        if (_amountErrors.Any())
+                        {
+                            string message = string.Join("\n", _amountErrors);
+                            XtraMessageBox.Show(message, "销售数据错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                         entity.Save();
 
                         //查询出其ID
                         entity.Fetch();
 
-                        foreach (EntityBase childEntity in children)
+                        if (Settings.Default.IsNewStoreDetail)
                         {
-                            BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
-                            child.BillID = entity.BillID;
-                            child.Save();
+                            InsertBillDetail(list, entity.BillID);
+                            //新库存
+                            if (!UpdateNewStoreDetail(entity.BillID, entity.BillCode))
+                            {
+                                CheckStoreDetail(departmentID);
+                            }
                         }
-
-                        
-                        //更新库存
-                        foreach (EntityBase childEntity in children)
+                        else
                         {
-                            BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
-                            UpdateStoreDetail(child, departmentID);
+                            foreach (EntityBase childEntity in children)
+                            {
+                                BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
+                                child.BillID = entity.BillID;
+                                child.Save();
+                            }
+
+
+                            //更新库存
+                            foreach (EntityBase childEntity in children)
+                            {
+                                BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
+                                UpdateStoreDetail(child, departmentID);
+                            }
                         }
                         #endregion
+
+                        //只要有一条库存错误信息，就不能保存销售单
+                        if (_amountErrors.Any())
+                        {
+                            string message = string.Join("\n", _amountErrors);
+                            XtraMessageBox.Show(message, "销售数据错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
 
                         EntityCollection<ATCUserPageEntity> userPages = new EntityCollection<ATCUserPageEntity>();
                         PredicateExpression pe = new PredicateExpression();
@@ -562,6 +1019,201 @@ WHERE BillID={1}
             this.DialogResult = DialogResult.OK;
         }
 
+        private void DelBill(int BillID)
+        {
+            string sql = "EXEC sp_DelStoreDetail " + BillID;
+
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                conn.Open(); //连接数据库
+                try
+                {
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.ToString(), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        private void CheckBillModify(int BillID)
+        {
+            list.Clear();
+            LoadubdList(BillID);
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                conn.Open(); //连接数据库
+                //必须为SqlCommand指定数据库连接和登记的事务
+                try
+                {
+                    string sql = "";
+                    int rowCount = this.popupGrid.PopupView.RowCount;
+                    for (int i = 0; i < rowCount; i++)
+                    {
+                        svd = new SaleViewDetail();
+                        object productID = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
+                        if (productID != null && productID != DBNull.Value)
+                        {
+                            int ProductID = Convert.ToInt32(popupGrid.PopupView.GetDataRow(i)["产品ID"]);
+                            //DateTime ProduceDate = (DateTime)popupGrid.PopupView.GetDataRow(i)["生产日期"];
+                            //DateTime ValidateDate = (DateTime)popupGrid.PopupView.GetDataRow(i)["有效期至"];
+                            //string SterilizationBatchNo = popupGrid.PopupView.GetDataRow(i)["灭菌批号"].ToString();
+                            //object sdate = popupGrid.PopupView.GetDataRow(i)["灭菌日期"];
+                            //DateTime SterilizationDate;
+                            //if (sdate != null && sdate != DBNull.Value)
+                            //{
+                            //    SterilizationDate = (DateTime)sdate;
+                            //}
+                            //else
+                            //{
+                            //    SterilizationDate = Convert.ToDateTime("1900-01-01");
+                            //}
+                            double UnitPrice = Convert.ToDouble(popupGrid.PopupView.GetDataRow(i)["单价"]);
+                            double TotalPrice = Convert.ToDouble(popupGrid.PopupView.GetDataRow(i)["金额"]);
+                            double TradePrice = Convert.ToDouble(popupGrid.PopupView.GetDataRow(i)["批发价"]);
+                            double RetailPrice = Convert.ToDouble(popupGrid.PopupView.GetDataRow(i)["零售价"]);
+                            string Reservation1 = popupGrid.PopupView.GetDataRow(i)["销项税"].ToString();
+                            int InStoreID = Convert.ToInt32(popupGrid.PopupView.GetRowCellValue(i, "入库ID"));
+                            int Amount = Convert.ToInt32(popupGrid.PopupView.GetDataRow(i)["数量"]);
+                            string BatchNo = popupGrid.PopupView.GetDataRow(i)["批号"].ToString();
+
+                            BFIProductEntity productEntity = new BFIProductEntity
+                            {
+                                ProductID = Convert.ToInt32(productID)
+                            };
+                            productEntity.Fetch();
+
+                            var data = ubdlist.Where(p => p.InStoreID.Equals(InStoreID)).ToList();
+                            if (data.Count > 0)
+                            {
+                                sql = "SELECT dbo.fn_ModifyCheck({0},{1},{2})";
+                                sql = String.Format(sql, InStoreID, Amount, data[0].Amount);
+                                SqlCommand cmd = new SqlCommand(sql, conn);
+                                object result = cmd.ExecuteScalar();
+                                if (result.ToString() == "NO")
+                                {
+                                    _amountErrors.Add(String.Format("第{0}行，{1} 批号为{2}库存不足。", i + 1, productEntity.ProductName, BatchNo));
+                                }
+                                svd.InStoreDetailID = InStoreID;
+                                svd.ProductID = ProductID;
+                                svd.BatchNo = BatchNo;
+                                //svd.ProduceDate = ProduceDate;
+                                //svd.ValidateDate = ValidateDate;
+                                svd.OutAmount = Amount;
+                                svd.UnitPrice = UnitPrice;
+                                svd.TotalPrice = TotalPrice;
+                                svd.TradePrice = TradePrice;
+                                svd.RetailPrice = RetailPrice;
+                                //svd.SterilizationBatchNo = SterilizationBatchNo;
+                                //svd.SterilizationDate = SterilizationDate;
+                                svd.Reservation1 = Reservation1;
+                                list.Add(svd);
+                            }
+                            else
+                            {
+                                sql = "SELECT dbo.fn_Check({0},{1})";
+                                sql = String.Format(sql, InStoreID, Amount);
+                                SqlCommand cmd = new SqlCommand(sql, conn);
+                                object result = cmd.ExecuteScalar();
+                                if (result == "NO")
+                                {
+                                    _amountErrors.Add(String.Format("第{0}行，{1} 批号为{2}库存不足。", i + 1, productEntity.ProductName, BatchNo));
+                                }
+                                svd.InStoreDetailID = InStoreID;
+                                svd.ProductID = ProductID;
+                                svd.BatchNo = BatchNo;
+                                //svd.ProduceDate = ProduceDate;
+                                //svd.ValidateDate = ValidateDate;
+                                svd.OutAmount = Amount;
+                                svd.UnitPrice = UnitPrice;
+                                svd.TotalPrice = TotalPrice;
+                                svd.TradePrice = TradePrice;
+                                svd.RetailPrice = RetailPrice;
+                                //svd.SterilizationBatchNo = SterilizationBatchNo;
+                                //svd.SterilizationDate = SterilizationDate;
+                                svd.Reservation1 = Reservation1;
+                                list.Add(svd);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        private void InsertBillDetail(List<SaleViewDetail> list, int BillID)
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                conn.Open(); //连接数据库
+                //必须为SqlCommand指定数据库连接和登记的事务
+                try
+                {
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        string sql = "EXEC sp_InsertBillDetail {0},{1},{2},'{3}',{4},'{5}','{6}','{7}','{8}',{9},'{10}'";
+                        sql = String.Format(sql, list[i].InStoreDetailID,
+                            BillID,
+                            list[i].ProductID,
+                            list[i].BatchNo,
+                            list[i].OutAmount,
+                            list[i].UnitPrice,
+                            list[i].TotalPrice,
+                            list[i].TradePrice,
+                            list[i].RetailPrice,
+                            list[i].Reservation1,
+                            list[i].isPrint);
+                        SqlCommand cmd = new SqlCommand(sql, conn);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        private void UpdateOldStoreDetail(int productID, string batchNo, int department, int amount)
+        {
+            string sql = "UPDATE dbo.BUS_StoreDetail SET Amount = Amount - " + amount + " WHERE ProductID = " + productID + " AND BatchNo = '" + batchNo + "' AND DepartmentID = " + department;
+
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                conn.Open(); //连接数据库
+                try
+                {
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.ToString(), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -569,7 +1221,7 @@ WHERE BillID={1}
 
         private void popupGrid_PopupClosed(object sender, DQS.Controls.CommonCode.PopupFormClosedArgs e)
         {
-            string fieldName = "药品ID";
+            string fieldName = "产品ID";
             string batchNoFieldName = "批号";
             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
             {
@@ -581,7 +1233,7 @@ WHERE BillID={1}
                     {
                         if (fieldValue.ToString().Trim() == e.PopupRow[fieldName].ToString().Trim() && batchNoValue.ToString().Trim() == e.PopupRow[batchNoFieldName].ToString().Trim())
                         {
-                            XtraMessageBox.Show("药品已存在。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            XtraMessageBox.Show("产品已存在。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             this.popupGrid.PopupView.FocusedRowHandle = i;
                             e.Cancel = true;
                         }
@@ -603,7 +1255,9 @@ WHERE BillID={1}
         {
             if (!entity.IsNullField("DealerID"))
             {
-                this.txtDealerName2.Tag =entity.DealerID;
+                this.txtDealerName2.Tag = entity.DealerID;
+                this.txtDealerName.Tag = entity.DealerID;
+                this.txtDealerName.Text = entity.DealerName;
             }
             if (!entity.IsNullField("BusinessPerson"))
             {
@@ -696,10 +1350,10 @@ WHERE BillID={1}
             {
                 if (e.ActiveOperationColumn.PopupForm.Name == "Price")
                 {
-                    object priceID = this.popupGrid.PopupView.GetFocusedRowCellValue("药品ID");
+                    object priceID = this.popupGrid.PopupView.GetFocusedRowCellValue("产品ID");
                     if (priceID != null && priceID != DBNull.Value)
                     {
-                        e.ActiveOperationColumn.PopupForm.Filter = "[药品ID] = " + priceID;
+                        e.ActiveOperationColumn.PopupForm.Filter = "[产品ID] = " + priceID;
                     }
                 }
                 if (e.ActiveOperationColumn.PopupForm.Name == "Product")
@@ -743,21 +1397,34 @@ WHERE BillID={1}
             int rowCount = this.popupGrid.PopupView.RowCount;
             for (int i = 0; i < rowCount; i++)
             {
-                object totalAmout = this.popupGrid.PopupView.GetRowCellValue(i, "库存数量");
-                object allInAmout = this.popupGrid.PopupView.GetRowCellValue(i, "入库数量");
-                if (totalAmout != null && totalAmout != DBNull.Value)
+                object productID = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
+                if (productID != null && productID != DBNull.Value)
                 {
+                    object totalAmout = this.popupGrid.PopupView.GetRowCellValue(i, "库存数量");
+                    //if (Settings.Default.IsNewStoreDetail)
+                    //{
+                    //    int InStoreDetailID = Convert.ToInt32(popupGrid.PopupView.GetRowCellValue(i, "入库ID"));
+                    //    EntityCollection<BUSNEWStoreDetailEntity> esvds = new EntityCollection<BUSNEWStoreDetailEntity>();
+                    //    esvds.Fetch(BUSNEWStoreDetailEntityFields.InStoreBillID == InStoreDetailID);
+                    //    var data = esvds.Cast<BUSNEWStoreDetailEntity>().Where(p => p.IsNullField("OutStoreBillID")).ToList();
+                    //    totalAmout = data[0].InAmount;
+                    //}
+                    //else
+                    //{
+                    //    totalAmout = this.popupGrid.PopupView.GetRowCellValue(i, "库存数量");
+                    //}
+                    object allInAmout = this.popupGrid.PopupView.GetRowCellValue(i, "入库数量");
                     object saleAmount = this.popupGrid.PopupView.GetRowCellValue(i, "数量");
                     if (saleAmount != null && saleAmount != DBNull.Value)
                     {
                         if (Convert.ToInt32(saleAmount) > Convert.ToInt32(totalAmout))
                         {
-                            XtraMessageBox.Show(String.Format("表格中第{0}行药品的退货数量不能大于库存数量。", (i + 1)), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            XtraMessageBox.Show(String.Format("表格中第{0}行产品的退货数量不能大于库存数量。", (i + 1)), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return false;
                         }
                         if (Convert.ToInt32(saleAmount) > Convert.ToInt32(allInAmout))
                         {
-                            XtraMessageBox.Show(String.Format("表格中第{0}行药品的退货数量不能大于入库数量。", (i + 1)), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            XtraMessageBox.Show(String.Format("表格中第{0}行产品的退货数量不能大于入库数量。", (i + 1)), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return false;
                         }
                     }
@@ -767,7 +1434,7 @@ WHERE BillID={1}
         }
 
         /// <summary>
-        /// 验证药品锁定状态，已锁定药品不能开单
+        /// 验证产品锁定状态，已锁定产品不能开单
         /// </summary>
         /// <returns></returns>
         private bool ValidateLockStatus()
@@ -780,7 +1447,7 @@ WHERE BillID={1}
                 {
                     if (lockStatus.ToString() == "已锁定")
                     {
-                        XtraMessageBox.Show(String.Format("表格中第{0}行药品的已锁定。", (i + 1)), "系统提示", MessageBoxButtons.OK,
+                        XtraMessageBox.Show(String.Format("表格中第{0}行产品的已锁定。", (i + 1)), "系统提示", MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
                         return false;
                     }
@@ -862,8 +1529,8 @@ WHERE BillID={1}
             var gridview = this.popupGrid.MainView as GridView;
             if (gridview.RowCount > 0)
             {
-                int productID = (int)gridview.GetFocusedRowCellValue("药品ID");
-                string productName = gridview.GetFocusedRowCellValue("药品名称").ToString();
+                int productID = (int)gridview.GetFocusedRowCellValue("产品ID");
+                string productName = gridview.GetFocusedRowCellValue("产品名称").ToString();
                 string batchNo = gridview.GetFocusedRowCellValue("批号").ToString();
                 using (FrmStoreInRecord fsir=new FrmStoreInRecord(productID,productName,batchNo))
                 {
@@ -886,7 +1553,7 @@ WHERE BillID={1}
             }
             else
             {
-                XtraMessageBox.Show("请选择药品。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show("请选择产品。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

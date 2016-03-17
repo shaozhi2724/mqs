@@ -56,12 +56,12 @@ namespace DQS.AppViews.QualityDocument.ProductManager
         {
             if (this.txtProductCode.EditData != null)
             {
-                this.txtProductCode.Tag = (this.txtProductCode.EditData as DataRow)["药品ID"].ToString();
-                this.txtProductSpec.Text = (this.txtProductCode.EditData as DataRow)["规格"].ToString();
-                this.txtPackageSpec.Text = (this.txtProductCode.EditData as DataRow)["包装规格"].ToString();
-                this.txtAuthorizedNo.Text = (this.txtProductCode.EditData as DataRow)["批准文号"].ToString();
+                this.txtProductCode.Tag = (this.txtProductCode.EditData as DataRow)["产品ID"].ToString();
+                this.txtProductSpec.Text = (this.txtProductCode.EditData as DataRow)["规格型号"].ToString();
+                this.txtPackageSpec.Text = (this.txtProductCode.EditData as DataRow)["包装规格型号"].ToString();
+                this.txtAuthorizedNo.Text = (this.txtProductCode.EditData as DataRow)["注册证号"].ToString();
                 this.txtProducerName.Text = (this.txtProductCode.EditData as DataRow)["生产厂商"].ToString();
-                this.txtProductStyle.Text = (this.txtProductCode.EditData as DataRow)["药品类别"].ToString();
+                this.txtProductStyle.Text = (this.txtProductCode.EditData as DataRow)["产品类别"].ToString();
             }
         }
 
@@ -195,7 +195,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
             }
             if(string.IsNullOrWhiteSpace(txtProductCode.Text))
             {
-                XtraMessageBox.Show("请选择药品名称！", "系统数据校验提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show("请选择产品名称！", "系统数据校验提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             return true;

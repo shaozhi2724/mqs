@@ -60,7 +60,7 @@ namespace DQS.AppViews.OtherOperation.Finance
                     ds.Tables["Table"].Columns.Add("选择", System.Type.GetType("System.Boolean"));
 
                     gCBill.DataSource = ds.Tables["Table"];
-                    gVBill.BestFitColumns();
+                    //gVBill.BestFitColumns();
                     gVBill.OptionsView.ShowGroupPanel = false;
                     for (int i = 0; i < gVBill.Columns.Count; i++)
                     {
@@ -198,7 +198,7 @@ namespace DQS.AppViews.OtherOperation.Finance
                         {
                             gVDetails.SetRowCellValue(i, "选择", "False");
                             DetailList.Remove(Convert.ToInt32(gVDetails.GetDataRow(i)["DetailID"]));
-                            sumPrice(-Convert.ToDouble(gVDetails.GetDataRow(i)["金额"]));
+                            sumPrice(-Convert.ToDouble(gVDetails.GetDataRow(i)["金额"].ToString()));
                         }
                     }
                 }
@@ -213,7 +213,7 @@ namespace DQS.AppViews.OtherOperation.Finance
                         {
                             gVDetails.SetRowCellValue(i, "选择", "True");
                             DetailList.Add(Convert.ToInt32(gVDetails.GetDataRow(i)["DetailID"]));
-                            sumPrice(Convert.ToDouble(gVDetails.GetDataRow(i)["金额"]));
+                            sumPrice(Convert.ToDouble(gVDetails.GetDataRow(i)["金额"].ToString()));
                         }
                     }
                 }
@@ -235,13 +235,13 @@ namespace DQS.AppViews.OtherOperation.Finance
                 {
                     gVDetails.SetRowCellValue(gVDetails.FocusedRowHandle, "选择", "False");
                     DetailList.Remove(Convert.ToInt32(gVDetails.GetDataRow(gVDetails.FocusedRowHandle)["DetailID"]));
-                    sumPrice(-Convert.ToDouble(gVDetails.GetDataRow(gVDetails.FocusedRowHandle)["金额"]));
+                    sumPrice(-Convert.ToDouble(gVDetails.GetDataRow(gVDetails.FocusedRowHandle)["金额"].ToString()));
                 }
                 else
                 {
                     gVDetails.SetRowCellValue(gVDetails.FocusedRowHandle, "选择", "True");
                     DetailList.Add(Convert.ToInt32(gVDetails.GetDataRow(gVDetails.FocusedRowHandle)["DetailID"]));
-                    sumPrice(Convert.ToDouble(gVDetails.GetDataRow(gVDetails.FocusedRowHandle)["金额"]));
+                    sumPrice(Convert.ToDouble(gVDetails.GetDataRow(gVDetails.FocusedRowHandle)["金额"].ToString()));
                 }
             }
             string bvalue = gVBill.GetDataRow(gVBill.FocusedRowHandle)["选择"].ToString();
@@ -290,9 +290,9 @@ namespace DQS.AppViews.OtherOperation.Finance
         //文本框改变
         private void txtDealerCode_TextChanged(object sender, EventArgs e)
         {
-            GainData();
-            ReadBillList();
-            gVBill_FocusedRowChanged(null, null);
+            //GainData();
+            //ReadBillList();
+            //gVBill_FocusedRowChanged(null, null);
         }
 
         private void sumPrice(double Price)
@@ -306,7 +306,11 @@ namespace DQS.AppViews.OtherOperation.Finance
         {
             this.txtDealerCode.Text = "";
             this.txtBillCode.Text = "";
-            GainData();
+            BillList.Clear();
+            DetailList.Clear();
+            lblTotalPrice.Text = "0";
+            ReadBillList();
+            gVBill_FocusedRowChanged(null, null);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -338,6 +342,20 @@ namespace DQS.AppViews.OtherOperation.Finance
                     }
                 }
             }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            gCBill.DataSource = null;
+            GainData();
+            ReadBillList();
+            gVBill_FocusedRowChanged(null, null);
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            BillList.Clear();
+            DetailList.Clear();
         }
     }
 }

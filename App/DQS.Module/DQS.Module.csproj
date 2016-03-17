@@ -78,6 +78,7 @@
     <Compile Include="Entities\BFIElectronicLabelEntity.cs" />
     <Compile Include="Entities\BFIEmployeeEntity.cs" />
     <Compile Include="Entities\BFIEnterpriseAddressEntity.cs" />
+    <Compile Include="Entities\BFIEnterpriseAttachmentEntity.cs" />
     <Compile Include="Entities\BFIEnterpriseChangeHistoryEntity.cs" />
     <Compile Include="Entities\BFIEnterpriseEntity.cs" />
     <Compile Include="Entities\BFIEnterpriseLicenseLockHistoryEntity.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Entities\BUSAcceptDetailEntity.cs" />
     <Compile Include="Entities\BUSAcceptEntity.cs" />
     <Compile Include="Entities\BUSAdverseReactionEntity.cs" />
+    <Compile Include="Entities\BUSBeginInventoryEntity.cs" />
     <Compile Include="Entities\BUSBillChangeHistoryEntity.cs" />
     <Compile Include="Entities\BUSBillDetailChangeHistoryEntity.cs" />
     <Compile Include="Entities\BUSBillDetailEntity.cs" />
@@ -121,11 +123,14 @@
     <Compile Include="Entities\BUSEmployeeTrainPlanEntity.cs" />
     <Compile Include="Entities\BUSExceptionReportDetailEntity.cs" />
     <Compile Include="Entities\BUSExceptionReportEntity.cs" />
+    <Compile Include="Entities\BUSInStoreDetailEntity.cs" />
     <Compile Include="Entities\BUSInventoryDetailEntity.cs" />
     <Compile Include="Entities\BUSInventoryEntity.cs" />
     <Compile Include="Entities\BUSLockedBarCodeEntity.cs" />
+    <Compile Include="Entities\BUSNEWStoreDetailEntity.cs" />
     <Compile Include="Entities\BUSOnlyBillDetailEntity.cs" />
     <Compile Include="Entities\BUSOnlyBillEntity.cs" />
+    <Compile Include="Entities\BUSOutStoreDetailEntity.cs" />
     <Compile Include="Entities\BUSProdcutDestroyDetailEntity.cs" />
     <Compile Include="Entities\BUSProdcutDestroyEntity.cs" />
     <Compile Include="Entities\BUSProductLockedEntity.cs" />
@@ -160,6 +165,8 @@
     <Compile Include="Entities\BUSUnStoreDetailEntity.cs" />
     <Compile Include="Entities\SYSCategoryEntity.cs" />
     <Compile Include="Entities\SYSConfigureEntity.cs" />
+    <Compile Include="Entities\SYSDateDataLogEntity.cs" />
+    <Compile Include="Entities\SYSDateLogEntity.cs" />
     <Compile Include="Entities\SYSDbBackupEntity.cs" />
     <Compile Include="Entities\SYSDocumentEntity.cs" />
     <Compile Include="Entities\SYSFunctionEntity.cs" />
@@ -173,6 +180,9 @@
     <Compile Include="Procedures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelationType.cs" />
+    <Compile Include="SaleViewDetail.cs" />
+    <Compile Include="TakeOff.cs" />
+    <Compile Include="UpdateBillDetail.cs" />
     <Compile Include="Views\AllAcceptDetailView.cs" />
     <Compile Include="Views\AllAcceptView.cs" />
     <Compile Include="Views\AllAdverseReactionView.cs" />

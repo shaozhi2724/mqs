@@ -15,6 +15,7 @@ using DQS.Module.Entities;
 using ORMSCore;
 using System.Reflection;
 using DQS.Common;
+using DQS.Controls.Properties;
 
 namespace DQS.Controls
 {
@@ -44,6 +45,8 @@ namespace DQS.Controls
         private XmlDocument m_Document;
         private GridView gridPopupView;
         private DataTable m_EmptySource;
+
+        public int DealerID;
 
         /// <summary>
         /// OperationSettings 配置文件中的 OperationName
@@ -234,15 +237,88 @@ namespace DQS.Controls
                 {
                     if (this.OperationName == "Sale" && (col.PopupForm.ViewName == "vw_BusinessStoreDetailForSale" || col.PopupForm.ViewName == "vw_BusinessStoreDetailForOutSale"))
                     {
-                        ShowSingleProductSelectionPopupQuery(isPopupClosed, col);
-
+                        if (!Settings.Default.IsNewStoreDetail)
+                        {
+                            ShowSingleProductSelectionPopupQuery(isPopupClosed, col);
+                        }
+                        else
+                        {
+                            //新库存
+                            ShowSingleProductSelectionNew(isPopupClosed, col);
+                        }
                     }
                     else
                     {
-                        ShowSingleSelectionPopupQuery(isPopupClosed, col);
+                        if (this.OperationName == "PurchaseBack" && Settings.Default.IsNewStoreDetail)
+                        {
+                            //新库存
+                            ShowSingleProductSelectionNew(isPopupClosed, col);
+                        }
+                        else
+                        {
+                            ShowSingleSelectionPopupQuery(isPopupClosed, col);
+                        }
                     }
                 }
 
+            }
+        }
+
+        private void ShowSingleProductSelectionNew(bool isPopupClosed, OperationGridColumn col)
+        {
+            using (FrmNewStoreDetail frmnsd = new FrmNewStoreDetail())
+            {
+                frmnsd.Tag = this.Tag;
+                if (frmnsd.ShowDialog() == DialogResult.OK)
+                {
+                    DataRow row = frmnsd.EditRow;
+
+                    if (isPopupClosed) //双击开启的窗体有验证，可编辑的回车无验证
+                    {
+                        #region 窗体关闭后验证事件
+
+                        if (this.PopupClosed != null)
+                        {
+                            PopupFormClosedArgs args = new PopupFormClosedArgs(row);
+                            this.PopupClosed(this, args);
+                            if (args.Cancel)
+                            {
+                                //若事件关闭后处理结果为true，则直接退出
+                                return;
+                            }
+                        }
+
+                        #endregion
+                    }
+
+                    foreach (GridColumn gc in gridPopupView.Columns)
+                    {
+                        if (gc.Tag != null)
+                        {
+                            OperationGridColumn col2 = gc.Tag as OperationGridColumn;
+
+                            //使用相同窗体的赋值
+                            if (col2.PopupFormString == col.PopupFormString)
+                            {
+                                if (row[col2.PopupField] != null || row[col2.PopupField] != DBNull.Value)
+                                {
+                                    this.gridPopupView.SetFocusedRowCellValue(col2.ColumnName, row[col2.PopupField]);
+                                }
+                            }
+                        }
+
+                        if (gc.Caption == "数量")
+                        {
+                            //this.gridPopupView.SetFocusedRowCellValue(gc, row["零售价"]);
+                            gridPopupView.FocusedColumn = gc;
+                            gridPopupView.SelectCell(gc.ColumnHandle, gc);
+
+                        }
+
+                    }
+
+                    gridPopupView.BestFitColumns();
+                }
             }
         }
 
@@ -322,6 +398,10 @@ namespace DQS.Controls
 
         private void ShowSingleSelectionPopupQuery(bool isPopupClosed, OperationGridColumn col)
         {
+                if (col.PopupForm.ViewName == "vw_ProductForDealer")
+                {
+                    col.PopupForm.Filter = "([状态] is  null or [状态] = '正常') and [单位ID] = " + DealerID;
+                }
             using (FrmPopupQuery frmPopupQuery = new FrmPopupQuery(col.PopupForm.FormatQueryString,
                 col.PopupForm.ViewName,
                 col.PopupForm.PrimaryField,

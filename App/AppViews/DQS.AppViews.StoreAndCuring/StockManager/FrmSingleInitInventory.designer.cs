@@ -379,20 +379,20 @@
             // 
             this.txtProductCode.AlphabeticFiled = null;
             this.txtProductCode.EditData = null;
-            this.txtProductCode.Fields = "药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,单位,包装规格,剂型,药品类别,批准文号";
+            this.txtProductCode.Fields = "产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,单位,包装规格型号,产品类别,注册证号";
             this.txtProductCode.Filter = null;
-            this.txtProductCode.FormatQueryString = "[药品编号] LIKE \'%{0}%\' OR [药品名称] LIKE \'%{0}%\' OR [药品名称Spell] LIKE \'%{0}%\'";
+            this.txtProductCode.FormatQueryString = "[产品编号] LIKE \'%{0}%\' OR [产品名称] LIKE \'%{0}%\' OR [产品名称Spell] LIKE \'%{0}%\'";
             this.txtProductCode.IsIntegerOnly = false;
-            this.txtProductCode.IsNullString = "药品编号不能为空。";
+            this.txtProductCode.IsNullString = "产品编号不能为空。";
             this.txtProductCode.IsNullValidate = true;
             this.txtProductCode.IsTransferAlphabetic = false;
             this.txtProductCode.Location = new System.Drawing.Point(75, 12);
             this.txtProductCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtProductCode.MemberText = "药品编号";
-            this.txtProductCode.MemberValue = "药品ID";
+            this.txtProductCode.MemberText = "产品编号";
+            this.txtProductCode.MemberValue = "产品ID";
             this.txtProductCode.Name = "txtProductCode";
             this.txtProductCode.PageSize = 0;
-            this.txtProductCode.PrimaryField = "药品ID";
+            this.txtProductCode.PrimaryField = "产品ID";
             this.txtProductCode.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtProductCode.Properties.Appearance.Options.UseBackColor = true;
             this.txtProductCode.Properties.ReadOnly = true;
@@ -466,11 +466,11 @@
             // layProductSpec
             // 
             this.layProductSpec.Control = this.txtProductSpec;
-            this.layProductSpec.CustomizationFormText = "规格";
+            this.layProductSpec.CustomizationFormText = "规格型号";
             this.layProductSpec.Location = new System.Drawing.Point(0, 29);
             this.layProductSpec.Name = "layProductSpec";
             this.layProductSpec.Size = new System.Drawing.Size(308, 29);
-            this.layProductSpec.Text = "规格";
+            this.layProductSpec.Text = "规格型号";
             this.layProductSpec.TextSize = new System.Drawing.Size(60, 18);
             // 
             // layProductUnit
@@ -496,31 +496,31 @@
             // layProductStyle
             // 
             this.layProductStyle.Control = this.txtProductStyle;
-            this.layProductStyle.CustomizationFormText = "药品类别";
+            this.layProductStyle.CustomizationFormText = "产品类别";
             this.layProductStyle.Location = new System.Drawing.Point(308, 58);
             this.layProductStyle.Name = "layProductStyle";
             this.layProductStyle.Size = new System.Drawing.Size(309, 29);
-            this.layProductStyle.Text = "药品类别";
+            this.layProductStyle.Text = "产品类别";
             this.layProductStyle.TextSize = new System.Drawing.Size(60, 18);
             // 
             // layPackageSpec
             // 
             this.layPackageSpec.Control = this.txtPackageSpec;
-            this.layPackageSpec.CustomizationFormText = "包装规格";
+            this.layPackageSpec.CustomizationFormText = "包装规格型号";
             this.layPackageSpec.Location = new System.Drawing.Point(0, 87);
             this.layPackageSpec.Name = "layPackageSpec";
             this.layPackageSpec.Size = new System.Drawing.Size(308, 29);
-            this.layPackageSpec.Text = "包装规格";
+            this.layPackageSpec.Text = "包装规格型号";
             this.layPackageSpec.TextSize = new System.Drawing.Size(60, 18);
             // 
             // layAuthorizedNo
             // 
             this.layAuthorizedNo.Control = this.txtAuthorizedNo;
-            this.layAuthorizedNo.CustomizationFormText = "批准文号";
+            this.layAuthorizedNo.CustomizationFormText = "注册证号";
             this.layAuthorizedNo.Location = new System.Drawing.Point(308, 87);
             this.layAuthorizedNo.Name = "layAuthorizedNo";
             this.layAuthorizedNo.Size = new System.Drawing.Size(309, 29);
-            this.layAuthorizedNo.Text = "批准文号";
+            this.layAuthorizedNo.Text = "注册证号";
             this.layAuthorizedNo.TextSize = new System.Drawing.Size(60, 18);
             // 
             // layProducerName
@@ -536,21 +536,21 @@
             // layProductCode
             // 
             this.layProductCode.Control = this.txtProductCode;
-            this.layProductCode.CustomizationFormText = "药品编号";
+            this.layProductCode.CustomizationFormText = "产品编号";
             this.layProductCode.Location = new System.Drawing.Point(0, 0);
             this.layProductCode.Name = "layProductCode";
             this.layProductCode.Size = new System.Drawing.Size(308, 29);
-            this.layProductCode.Text = "药品编号";
+            this.layProductCode.Text = "产品编号";
             this.layProductCode.TextSize = new System.Drawing.Size(60, 18);
             // 
             // layProductName
             // 
             this.layProductName.Control = this.txtProductName;
-            this.layProductName.CustomizationFormText = "药品名称";
+            this.layProductName.CustomizationFormText = "产品名称";
             this.layProductName.Location = new System.Drawing.Point(308, 0);
             this.layProductName.Name = "layProductName";
             this.layProductName.Size = new System.Drawing.Size(309, 29);
-            this.layProductName.Text = "药品名称";
+            this.layProductName.Text = "产品名称";
             this.layProductName.TextSize = new System.Drawing.Size(60, 18);
             // 
             // layBatchNo

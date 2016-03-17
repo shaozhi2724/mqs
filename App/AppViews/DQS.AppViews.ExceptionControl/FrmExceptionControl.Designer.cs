@@ -45,19 +45,19 @@
             this.tbtnProdcutDestroy.Appearance.Options.UseForeColor = true;
             this.tbtnProdcutDestroy.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
             this.tbtnProdcutDestroy.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tbtnProdcutDestroy.Image = global::DQS.AppViews.ExceptionControl.Properties.Resources.药品销毁处理;
+            this.tbtnProdcutDestroy.Image = global::DQS.AppViews.ExceptionControl.Properties.Resources.产品销毁处理;
             this.tbtnProdcutDestroy.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.tbtnProdcutDestroy.Location = new System.Drawing.Point(614, 70);
             this.tbtnProdcutDestroy.MenuCode = "ProdcutDestroy";
             this.tbtnProdcutDestroy.MenuFullClass = "DQS.AppViews.ExceptionControl.ExceptionManager.FrmProdcutDestroy, DQS.AppViews.Ex" +
                 "ceptionControl";
-            this.tbtnProdcutDestroy.MenuName = "药品销毁处理";
-            this.tbtnProdcutDestroy.MouseEnterImage = global::DQS.AppViews.ExceptionControl.Properties.Resources.销毁药品处理MouseEnter;
+            this.tbtnProdcutDestroy.MenuName = "产品销毁处理";
+            this.tbtnProdcutDestroy.MouseEnterImage = global::DQS.AppViews.ExceptionControl.Properties.Resources.销毁产品处理MouseEnter;
             this.tbtnProdcutDestroy.Name = "tbtnProdcutDestroy";
             this.tbtnProdcutDestroy.Size = new System.Drawing.Size(132, 123);
             this.tbtnProdcutDestroy.TabIndex = 3;
             this.tbtnProdcutDestroy.TabStop = false;
-            this.tbtnProdcutDestroy.Text = "药品销毁处理";
+            this.tbtnProdcutDestroy.Text = "产品销毁处理";
             // 
             // tbtnProductUnqualified
             // 
@@ -70,19 +70,19 @@
             this.tbtnProductUnqualified.Appearance.Options.UseForeColor = true;
             this.tbtnProductUnqualified.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
             this.tbtnProductUnqualified.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tbtnProductUnqualified.Image = global::DQS.AppViews.ExceptionControl.Properties.Resources.不合格药品处理;
+            this.tbtnProductUnqualified.Image = global::DQS.AppViews.ExceptionControl.Properties.Resources.不合格产品处理;
             this.tbtnProductUnqualified.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.tbtnProductUnqualified.Location = new System.Drawing.Point(435, 70);
             this.tbtnProductUnqualified.MenuCode = "ProductUnqualified";
             this.tbtnProductUnqualified.MenuFullClass = "DQS.AppViews.ExceptionControl.ExceptionManager.FrmProductUnqualified, DQS.AppView" +
                 "s.ExceptionControl";
-            this.tbtnProductUnqualified.MenuName = "不合格药品处理";
-            this.tbtnProductUnqualified.MouseEnterImage = global::DQS.AppViews.ExceptionControl.Properties.Resources.不合格药品处理MouseEnter;
+            this.tbtnProductUnqualified.MenuName = "不合格产品处理";
+            this.tbtnProductUnqualified.MouseEnterImage = global::DQS.AppViews.ExceptionControl.Properties.Resources.不合格产品处理MouseEnter;
             this.tbtnProductUnqualified.Name = "tbtnProductUnqualified";
             this.tbtnProductUnqualified.Size = new System.Drawing.Size(132, 123);
             this.tbtnProductUnqualified.TabIndex = 2;
             this.tbtnProductUnqualified.TabStop = false;
-            this.tbtnProductUnqualified.Text = "不合格药品处理";
+            this.tbtnProductUnqualified.Text = "不合格产品处理";
             // 
             // tbtnExceptionReport
             // 
@@ -120,19 +120,19 @@
             this.tbtnProductLocked.Appearance.Options.UseForeColor = true;
             this.tbtnProductLocked.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
             this.tbtnProductLocked.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tbtnProductLocked.Image = global::DQS.AppViews.ExceptionControl.Properties.Resources.药品锁定;
+            this.tbtnProductLocked.Image = global::DQS.AppViews.ExceptionControl.Properties.Resources.产品锁定;
             this.tbtnProductLocked.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.tbtnProductLocked.Location = new System.Drawing.Point(77, 70);
             this.tbtnProductLocked.MenuCode = "ProductLocked";
             this.tbtnProductLocked.MenuFullClass = "DQS.AppViews.ExceptionControl.ExceptionManager.FrmProductLocked, DQS.AppViews.Exc" +
                 "eptionControl";
-            this.tbtnProductLocked.MenuName = "药品锁定";
-            this.tbtnProductLocked.MouseEnterImage = global::DQS.AppViews.ExceptionControl.Properties.Resources.药品锁定MouseEnter;
+            this.tbtnProductLocked.MenuName = "产品锁定";
+            this.tbtnProductLocked.MouseEnterImage = global::DQS.AppViews.ExceptionControl.Properties.Resources.产品锁定MouseEnter;
             this.tbtnProductLocked.Name = "tbtnProductLocked";
             this.tbtnProductLocked.Size = new System.Drawing.Size(132, 123);
             this.tbtnProductLocked.TabIndex = 0;
             this.tbtnProductLocked.TabStop = false;
-            this.tbtnProductLocked.Text = "药品锁定";
+            this.tbtnProductLocked.Text = "产品锁定";
             // 
             // FrmExceptionControl
             // 

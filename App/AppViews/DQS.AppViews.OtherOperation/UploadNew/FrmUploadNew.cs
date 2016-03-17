@@ -28,9 +28,9 @@ namespace DQS.AppViews.OtherOperation.UploadNew
             this.gridView.OptionsBehavior.Editable = false;
             this.gridView.BestFitColumns();
             string sql = @"
-SELECT ProductCode AS [企业药品编码],AuthorizedNo AS [批准文号/注册证号],
-ProductName AS [药品名称],TradeName AS [商品名],ProducerName AS [生产厂商],
-ProductSpec AS [药品规格],PackageSpec AS [包装规格],ProductUnit AS [企业计量单位],
+SELECT ProductCode AS [企业产品编码],AuthorizedNo AS [注册证号],
+ProductName AS [产品名称],TradeName AS [商品名],ProducerName AS [生产厂商],
+ProductSpec AS [产品规格],PackageSpec AS [包装规格],ProductUnit AS [企业计量单位],
 PhysicType AS [剂型] 
 FROM dbo.BFI_Product";
             this.gridControl.DataSource = GetDataBySQL(sql);
@@ -45,9 +45,9 @@ FROM dbo.BFI_Product";
                 XtraMessageBox.Show("请选择日期。","系统提示",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
             string sql = @"
-SELECT ProductCode AS [企业药品编码],AuthorizedNo AS [批准文号/注册证号],
-ProductName AS [药品名称],TradeName AS [商品名],ProducerName AS [生产厂商],
-ProductSpec AS [药品规格],PackageSpec AS [包装规格],ProductUnit AS [企业计量单位],
+SELECT ProductCode AS [企业产品编码],AuthorizedNo AS [注册证号],
+ProductName AS [产品名称],TradeName AS [商品名],ProducerName AS [生产厂商],
+ProductSpec AS [产品规格],PackageSpec AS [包装规格],ProductUnit AS [企业计量单位],
 PhysicType AS [剂型] 
 FROM dbo.BFI_Product WHERE (ProductName LIKE '%" + this.txtName.Text + "%' OR ProductSpell LIKE '%" + this.txtName.Text + "%') AND (CreateDate BETWEEN '" + dateStart + "' AND '" + dateEnd + "')";
 
@@ -94,7 +94,7 @@ FROM dbo.BFI_Product WHERE (ProductName LIKE '%" + this.txtName.Text + "%' OR Pr
             DataTable dt = new DataTable();
             StringBuilder sb = new StringBuilder();
             //设置列表头   
-            sb.Append("企业药品编码	批准文号/注册证号	药品名称	商品名	生产厂商	药品规格	包装规格	企业计量单位	剂型");
+            sb.Append("企业产品编码	注册证号	产品名称	商品名	生产厂商	产品规格	包装规格	企业计量单位	剂型");
             
             sb.Append(System.Environment.NewLine);
 

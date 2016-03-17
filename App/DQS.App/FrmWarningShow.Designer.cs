@@ -41,6 +41,13 @@
             this.gridQualification = new DQS.Controls.StandardGrid();
             this.xtbTransport = new DevExpress.XtraTab.XtraTabPage();
             this.gridTransport = new DQS.Controls.StandardGrid();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
+            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.xtbProviderQualificationWaning = new DevExpress.XtraTab.XtraTabPage();
+            this.xtbProductQualificationWaning = new DevExpress.XtraTab.XtraTabPage();
+            this.gridProduct = new DQS.Controls.StandardGrid();
+            this.gridProvider = new DQS.Controls.StandardGrid();
             ((System.ComponentModel.ISupportInitialize)(this.xtcMain)).BeginInit();
             this.xtcMain.SuspendLayout();
             this.xtbBatchWaning.SuspendLayout();
@@ -55,15 +62,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridQualification)).BeginInit();
             this.xtbTransport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridTransport)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
+            this.panelControl2.SuspendLayout();
+            this.xtbProviderQualificationWaning.SuspendLayout();
+            this.xtbProductQualificationWaning.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridProduct)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // xtcMain
             // 
             this.xtcMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtcMain.Location = new System.Drawing.Point(0, 0);
+            this.xtcMain.Location = new System.Drawing.Point(2, 2);
             this.xtcMain.Name = "xtcMain";
             this.xtcMain.SelectedTabPage = this.xtbBatchWaning;
-            this.xtcMain.Size = new System.Drawing.Size(1065, 576);
+            this.xtcMain.Size = new System.Drawing.Size(1061, 538);
             this.xtcMain.TabIndex = 0;
             this.xtcMain.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtbLicenseLockWarning,
@@ -71,14 +86,16 @@
             this.xtbBatchWaning,
             this.xtbLockWaning,
             this.xtbQualificationWaning,
+            this.xtbProviderQualificationWaning,
+            this.xtbProductQualificationWaning,
             this.xtbTransport});
             // 
             // xtbBatchWaning
             // 
             this.xtbBatchWaning.Controls.Add(this.gridBatch);
             this.xtbBatchWaning.Name = "xtbBatchWaning";
-            this.xtbBatchWaning.Size = new System.Drawing.Size(1058, 546);
-            this.xtbBatchWaning.Text = "药品效期预警";
+            this.xtbBatchWaning.Size = new System.Drawing.Size(1054, 508);
+            this.xtbBatchWaning.Text = "产品效期预警";
             // 
             // gridBatch
             // 
@@ -86,7 +103,7 @@
             this.gridBatch.Filter = null;
             this.gridBatch.Location = new System.Drawing.Point(0, 0);
             this.gridBatch.Name = "gridBatch";
-            this.gridBatch.Size = new System.Drawing.Size(1058, 546);
+            this.gridBatch.Size = new System.Drawing.Size(1054, 508);
             this.gridBatch.TabIndex = 0;
             this.gridBatch.ViewName = null;
             // 
@@ -95,8 +112,8 @@
             this.xtbLicenseLockWarning.Controls.Add(this.gridLicenseLock);
             this.xtbLicenseLockWarning.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.xtbLicenseLockWarning.Name = "xtbLicenseLockWarning";
-            this.xtbLicenseLockWarning.Size = new System.Drawing.Size(1058, 546);
-            this.xtbLicenseLockWarning.Text = "本企业GSP证书到期日锁定记录";
+            this.xtbLicenseLockWarning.Size = new System.Drawing.Size(1054, 508);
+            this.xtbLicenseLockWarning.Text = "本企业营业执照到期日锁定记录";
             // 
             // gridLicenseLock
             // 
@@ -104,7 +121,7 @@
             this.gridLicenseLock.Filter = null;
             this.gridLicenseLock.Location = new System.Drawing.Point(0, 0);
             this.gridLicenseLock.Name = "gridLicenseLock";
-            this.gridLicenseLock.Size = new System.Drawing.Size(1058, 546);
+            this.gridLicenseLock.Size = new System.Drawing.Size(1054, 508);
             this.gridLicenseLock.TabIndex = 2;
             this.gridLicenseLock.ViewName = null;
             // 
@@ -113,8 +130,8 @@
             this.xtbTradeLicenseLockWarning.Controls.Add(this.gridTradeLicenseLock);
             this.xtbTradeLicenseLockWarning.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.xtbTradeLicenseLockWarning.Name = "xtbTradeLicenseLockWarning";
-            this.xtbTradeLicenseLockWarning.Size = new System.Drawing.Size(1058, 546);
-            this.xtbTradeLicenseLockWarning.Text = "本企业药品经营许可证到期日锁定记录";
+            this.xtbTradeLicenseLockWarning.Size = new System.Drawing.Size(1054, 508);
+            this.xtbTradeLicenseLockWarning.Text = "本企业经营许可证到期日锁定记录";
             // 
             // gridTradeLicenseLock
             // 
@@ -122,7 +139,7 @@
             this.gridTradeLicenseLock.Filter = null;
             this.gridTradeLicenseLock.Location = new System.Drawing.Point(0, 0);
             this.gridTradeLicenseLock.Name = "gridTradeLicenseLock";
-            this.gridTradeLicenseLock.Size = new System.Drawing.Size(1058, 546);
+            this.gridTradeLicenseLock.Size = new System.Drawing.Size(1054, 508);
             this.gridTradeLicenseLock.TabIndex = 3;
             this.gridTradeLicenseLock.ViewName = null;
             // 
@@ -130,8 +147,8 @@
             // 
             this.xtbLockWaning.Controls.Add(this.gridLock);
             this.xtbLockWaning.Name = "xtbLockWaning";
-            this.xtbLockWaning.Size = new System.Drawing.Size(1058, 546);
-            this.xtbLockWaning.Text = "药品锁定预警";
+            this.xtbLockWaning.Size = new System.Drawing.Size(1054, 508);
+            this.xtbLockWaning.Text = "产品锁定预警";
             // 
             // gridLock
             // 
@@ -139,7 +156,7 @@
             this.gridLock.Filter = null;
             this.gridLock.Location = new System.Drawing.Point(0, 0);
             this.gridLock.Name = "gridLock";
-            this.gridLock.Size = new System.Drawing.Size(1058, 546);
+            this.gridLock.Size = new System.Drawing.Size(1054, 508);
             this.gridLock.TabIndex = 1;
             this.gridLock.ViewName = null;
             // 
@@ -147,8 +164,8 @@
             // 
             this.xtbQualificationWaning.Controls.Add(this.gridQualification);
             this.xtbQualificationWaning.Name = "xtbQualificationWaning";
-            this.xtbQualificationWaning.Size = new System.Drawing.Size(1058, 546);
-            this.xtbQualificationWaning.Text = "电子档案到期预警";
+            this.xtbQualificationWaning.Size = new System.Drawing.Size(1054, 508);
+            this.xtbQualificationWaning.Text = "供应商电子档案到期预警";
             // 
             // gridQualification
             // 
@@ -156,7 +173,7 @@
             this.gridQualification.Filter = null;
             this.gridQualification.Location = new System.Drawing.Point(0, 0);
             this.gridQualification.Name = "gridQualification";
-            this.gridQualification.Size = new System.Drawing.Size(1058, 546);
+            this.gridQualification.Size = new System.Drawing.Size(1054, 508);
             this.gridQualification.TabIndex = 2;
             this.gridQualification.ViewName = null;
             // 
@@ -164,7 +181,7 @@
             // 
             this.xtbTransport.Controls.Add(this.gridTransport);
             this.xtbTransport.Name = "xtbTransport";
-            this.xtbTransport.Size = new System.Drawing.Size(1058, 546);
+            this.xtbTransport.Size = new System.Drawing.Size(1054, 508);
             this.xtbTransport.Text = "运输时限预警";
             // 
             // gridTransport
@@ -173,16 +190,78 @@
             this.gridTransport.Filter = null;
             this.gridTransport.Location = new System.Drawing.Point(0, 0);
             this.gridTransport.Name = "gridTransport";
-            this.gridTransport.Size = new System.Drawing.Size(1058, 546);
+            this.gridTransport.Size = new System.Drawing.Size(1054, 508);
             this.gridTransport.TabIndex = 3;
             this.gridTransport.ViewName = null;
+            // 
+            // panelControl1
+            // 
+            this.panelControl1.Controls.Add(this.btnExport);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelControl1.Location = new System.Drawing.Point(0, 0);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(1065, 34);
+            this.panelControl1.TabIndex = 0;
+            // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(12, 5);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(75, 23);
+            this.btnExport.TabIndex = 0;
+            this.btnExport.Text = "导出";
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // panelControl2
+            // 
+            this.panelControl2.Controls.Add(this.xtcMain);
+            this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl2.Location = new System.Drawing.Point(0, 34);
+            this.panelControl2.Name = "panelControl2";
+            this.panelControl2.Size = new System.Drawing.Size(1065, 542);
+            this.panelControl2.TabIndex = 1;
+            // 
+            // xtbProviderQualificationWaning
+            // 
+            this.xtbProviderQualificationWaning.Controls.Add(this.gridProvider);
+            this.xtbProviderQualificationWaning.Name = "xtbProviderQualificationWaning";
+            this.xtbProviderQualificationWaning.Size = new System.Drawing.Size(1054, 508);
+            this.xtbProviderQualificationWaning.Text = "客户电子档案到期预警";
+            // 
+            // xtbProductQualificationWaning
+            // 
+            this.xtbProductQualificationWaning.Controls.Add(this.gridProduct);
+            this.xtbProductQualificationWaning.Name = "xtbProductQualificationWaning";
+            this.xtbProductQualificationWaning.Size = new System.Drawing.Size(1054, 508);
+            this.xtbProductQualificationWaning.Text = "药品电子档案到期预警";
+            // 
+            // gridProduct
+            // 
+            this.gridProduct.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridProduct.Filter = null;
+            this.gridProduct.Location = new System.Drawing.Point(0, 0);
+            this.gridProduct.Name = "gridProduct";
+            this.gridProduct.Size = new System.Drawing.Size(1054, 508);
+            this.gridProduct.TabIndex = 4;
+            this.gridProduct.ViewName = null;
+            // 
+            // gridProvider
+            // 
+            this.gridProvider.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridProvider.Filter = null;
+            this.gridProvider.Location = new System.Drawing.Point(0, 0);
+            this.gridProvider.Name = "gridProvider";
+            this.gridProvider.Size = new System.Drawing.Size(1054, 508);
+            this.gridProvider.TabIndex = 4;
+            this.gridProvider.ViewName = null;
             // 
             // FrmWarningShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1065, 576);
-            this.Controls.Add(this.xtcMain);
+            this.Controls.Add(this.panelControl2);
+            this.Controls.Add(this.panelControl1);
             this.Name = "FrmWarningShow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "预警信息";
@@ -202,6 +281,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridQualification)).EndInit();
             this.xtbTransport.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridTransport)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
+            this.panelControl2.ResumeLayout(false);
+            this.xtbProviderQualificationWaning.ResumeLayout(false);
+            this.xtbProductQualificationWaning.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridProduct)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -221,5 +308,12 @@
         private Controls.StandardGrid gridTradeLicenseLock;
         private DevExpress.XtraTab.XtraTabPage xtbTransport;
         private Controls.StandardGrid gridTransport;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private DevExpress.XtraEditors.SimpleButton btnExport;
+        private DevExpress.XtraEditors.PanelControl panelControl2;
+        private DevExpress.XtraTab.XtraTabPage xtbProviderQualificationWaning;
+        private Controls.StandardGrid gridProvider;
+        private DevExpress.XtraTab.XtraTabPage xtbProductQualificationWaning;
+        private Controls.StandardGrid gridProduct;
     }
 }

@@ -136,6 +136,18 @@
     <Compile Include="BackManager\FrmStoreInRecord.Designer.cs">
       <DependentUpon>FrmStoreInRecord.cs</DependentUpon>
     </Compile>
+    <Compile Include="CheckTakeOff\FrmCheckTakeOff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckTakeOff\FrmCheckTakeOff.Designer.cs">
+      <DependentUpon>FrmCheckTakeOff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckTakeOff\FrmSingleCheckTakeOff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckTakeOff\FrmSingleCheckTakeOff.Designer.cs">
+      <DependentUpon>FrmSingleCheckTakeOff.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmAlter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -261,6 +273,7 @@
     <Compile Include="PurchaseAndSaleManager\FrmSingleSale.Designer.cs">
       <DependentUpon>FrmSingleSale.cs</DependentUpon>
     </Compile>
+    <Compile Include="PurchaseAndSaleManager\GetDepartment.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BackManager\FrmPurchaseBack.resx">
@@ -289,6 +302,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BackManager\FrmStoreInRecord.resx">
       <DependentUpon>FrmStoreInRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckTakeOff\FrmCheckTakeOff.resx">
+      <DependentUpon>FrmCheckTakeOff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckTakeOff\FrmSingleCheckTakeOff.resx">
+      <DependentUpon>FrmSingleCheckTakeOff.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAlter.resx">
       <DependentUpon>FrmAlter.cs</DependentUpon>

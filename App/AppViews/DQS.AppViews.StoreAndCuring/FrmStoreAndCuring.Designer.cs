@@ -143,18 +143,18 @@
             this.tbtnProductQuery.Appearance.Options.UseForeColor = true;
             this.tbtnProductQuery.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
             this.tbtnProductQuery.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tbtnProductQuery.Image = global::DQS.AppViews.StoreAndCuring.Properties.Resources.在库药品查询;
+            this.tbtnProductQuery.Image = global::DQS.AppViews.StoreAndCuring.Properties.Resources.在库产品查询;
             this.tbtnProductQuery.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.tbtnProductQuery.Location = new System.Drawing.Point(256, 70);
             this.tbtnProductQuery.MenuCode = "ProductQuery";
             this.tbtnProductQuery.MenuFullClass = "DQS.AppViews.StoreAndCuring.StockManager.FrmProductQuery, DQS.AppViews.StoreAndCu" +
                 "ring";
-            this.tbtnProductQuery.MenuName = "在库药品查询";
-            this.tbtnProductQuery.MouseEnterImage = global::DQS.AppViews.StoreAndCuring.Properties.Resources.在库药品查询MouseEnter;
+            this.tbtnProductQuery.MenuName = "在库产品查询";
+            this.tbtnProductQuery.MouseEnterImage = global::DQS.AppViews.StoreAndCuring.Properties.Resources.在库产品查询MouseEnter;
             this.tbtnProductQuery.Name = "tbtnProductQuery";
             this.tbtnProductQuery.Size = new System.Drawing.Size(132, 123);
             this.tbtnProductQuery.TabIndex = 1;
-            this.tbtnProductQuery.Text = "在库药品查询";
+            this.tbtnProductQuery.Text = "在库产品查询";
             // 
             // tbtnStockDetail
             // 

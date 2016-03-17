@@ -143,7 +143,7 @@
             this.trlLogs.AppendNode(new object[] {
             "盘点单"}, 16);
             this.trlLogs.AppendNode(new object[] {
-            "药品锁定单"}, 16);
+            "产品锁定单"}, 16);
             this.trlLogs.AppendNode(new object[] {
             "系统日志"}, 0);
             this.trlLogs.AppendNode(new object[] {

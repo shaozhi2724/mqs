@@ -44,22 +44,25 @@ SELECT BusinessBillID AS [ID] ,
           DealerSpell AS [往来单位简拼] ,
           DealerType AS [往来单位类型] ,
           OperateDate AS [操作时间] 
-FROM dbo.FIN_PaymentOnPassage WHERE (DealerCode LIKE '%" + txtDealerCode.Text.Trim() + "%' OR DealerName LIKE '%" + txtDealerCode.Text.Trim() + "%' OR DealerSpell LIKE '%" + txtDealerCode.Text.Trim() + "%') AND (BusinessBillCode LIKE '%" + txtBillCode.Text.Trim() + "%') AND (BusinessPerson LIKE '%" + txtBusinessPerson.Text.Trim() + "%' OR dbo.fn_GetPy(BusinessPerson) LIKE '%" + txtBusinessPerson.Text.Trim() + "%')";
+FROM dbo.FIN_PaymentOnPassage WHERE (DealerCode LIKE '%" + txtDealerCode.Text.Trim() + "%' OR DealerName LIKE '%" + txtDealerCode.Text.Trim() + "%' OR DealerSpell LIKE '%" + txtDealerCode.Text.Trim() + "%') AND (BusinessBillCode LIKE '%" + txtBillCode.Text.Trim() + "%') AND (BusinessPerson LIKE '%" + txtBusinessPerson.Text.Trim() + "%' OR dbo.fn_GetPy(BusinessPerson) LIKE '%" + txtBusinessPerson.Text.Trim() + "%') AND (OperateDate BETWEEN '" + deStartDate.Text.Trim() + " 00:00:00' AND '" + deEndDate.Text.Trim() + " 23:59:59')";
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 try
                 {
                     sda.Fill(ds, "Table");
-                    decimal Price = 0;
-                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
-                    {
-                        Price += Convert.ToDecimal(ds.Tables["Table"].Rows[i]["总金额"]);
-                    }
-                    lblTotalPrice.Text = Price.ToString();
+                    //decimal Price = 0;
+                    //for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                    //{
+                    //    Price += Convert.ToDecimal(ds.Tables["Table"].Rows[i]["总金额"]);
+                    //}
+                    //lblTotalPrice.Text = Price.ToString();
                     gridControl.DataSource = ds.Tables["Table"];
                     gridView.OptionsView.ColumnAutoWidth = false;
                     gridView.BestFitColumns();
                     gridView.OptionsView.ShowGroupPanel = false;
+
+                    gridView.Columns["总金额"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                    gridView.Columns["总金额"].SummaryItem.DisplayFormat = "合计: {0}";
 
                     for (int i = 0; i < gridView.Columns.Count; i++)
                     {
@@ -105,8 +108,10 @@ FROM dbo.FIN_PaymentOnPassage WHERE (DealerCode LIKE '%" + txtDealerCode.Text.Tr
 
         private void FrmPaymentOnPassage_Load(object sender, EventArgs e)
         {
+            deStartDate.Text = DateTime.Today.ToString("d");
+            deEndDate.Text = DateTime.Today.ToString("d");
             LastInventoryDate();
-            gridLoad();
+            //gridLoad();
         }
 
         private void btnDel_Click(object sender, EventArgs e)
@@ -147,7 +152,7 @@ DELETE FIN_PaymentOnPassageDetail WHERE BusinessBillID = '{0}'
         }
         private void txt_TextChanged(object sender, EventArgs e)
         {
-            gridLoad();
+            //gridLoad();
         }
 
         private void gridView_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
@@ -203,6 +208,11 @@ DELETE FIN_PaymentOnPassageDetail WHERE BusinessBillID = '{0}'
                 DevExpress.XtraEditors.XtraMessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            gridLoad();
         }
     }
 }

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过下列属性集
 // 控制。更改这些属性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("DQS药品经营质量管理系统")]
+[assembly: AssemblyTitle("MQS产品经营质量管理系统")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("北京博科智信科技有限公司")]
-[assembly: AssemblyProduct("DQS药品经营质量管理系统")]
+[assembly: AssemblyProduct("MQS产品经营质量管理系统")]
 [assembly: AssemblyCopyright("Copyright © bokesys 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // 可以指定所有这些值，也可以使用“内部版本号”和“修订号”的默认值，
 // 方法是按如下所示使用“*”:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.1.1.0")]
-[assembly: AssemblyFileVersion("1.1.1.0")]
+[assembly: AssemblyVersion("1.1.1.3")]
+[assembly: AssemblyFileVersion("1.1.1.3")]

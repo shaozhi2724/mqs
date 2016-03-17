@@ -25,15 +25,15 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
         protected override void CustomModify()
         {
             object cycleCode = this.gvData.GetFocusedRowCellValue("周期编码");
-            object productID = this.gvData.GetFocusedRowCellValue("药品ID");
-            object productCode = this.gvData.GetFocusedRowCellValue("药品编号");
-            object productName = this.gvData.GetFocusedRowCellValue("药品名称");
-            object productSpec = this.gvData.GetFocusedRowCellValue("规格");
+            object productID = this.gvData.GetFocusedRowCellValue("产品ID");
+            object productCode = this.gvData.GetFocusedRowCellValue("产品编号");
+            object productName = this.gvData.GetFocusedRowCellValue("产品名称");
+            object productSpec = this.gvData.GetFocusedRowCellValue("规格型号");
             object productUnit = this.gvData.GetFocusedRowCellValue("单位");
-            object packageSpec = this.gvData.GetFocusedRowCellValue("包装规格");
+            object packageSpec = this.gvData.GetFocusedRowCellValue("包装规格型号");
             object physicType = this.gvData.GetFocusedRowCellValue("剂型");
-            object productStyle = this.gvData.GetFocusedRowCellValue("药品类别");
-            object authorizedNo = this.gvData.GetFocusedRowCellValue("批准文号");
+            object productStyle = this.gvData.GetFocusedRowCellValue("产品类别");
+            object authorizedNo = this.gvData.GetFocusedRowCellValue("注册证号");
             object producerName = this.gvData.GetFocusedRowCellValue("生产厂商");
 
             using (FrmSingleCuringCycle frmSingleCuringCycle = new FrmSingleCuringCycle(cycleCode, productID))
@@ -94,15 +94,15 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
         protected override void CustomModify(bool isView)
         {
             object cycleCode = this.gvData.GetFocusedRowCellValue("周期编码");
-            object productID = this.gvData.GetFocusedRowCellValue("药品ID");
-            object productCode = this.gvData.GetFocusedRowCellValue("药品编号");
-            object productName = this.gvData.GetFocusedRowCellValue("药品名称");
-            object productSpec = this.gvData.GetFocusedRowCellValue("规格");
+            object productID = this.gvData.GetFocusedRowCellValue("产品ID");
+            object productCode = this.gvData.GetFocusedRowCellValue("产品编号");
+            object productName = this.gvData.GetFocusedRowCellValue("产品名称");
+            object productSpec = this.gvData.GetFocusedRowCellValue("规格型号");
             object productUnit = this.gvData.GetFocusedRowCellValue("单位");
-            object packageSpec = this.gvData.GetFocusedRowCellValue("包装规格");
+            object packageSpec = this.gvData.GetFocusedRowCellValue("包装规格型号");
             object physicType = this.gvData.GetFocusedRowCellValue("剂型");
-            object productStyle = this.gvData.GetFocusedRowCellValue("药品类别");
-            object authorizedNo = this.gvData.GetFocusedRowCellValue("批准文号");
+            object productStyle = this.gvData.GetFocusedRowCellValue("产品类别");
+            object authorizedNo = this.gvData.GetFocusedRowCellValue("注册证号");
             object producerName = this.gvData.GetFocusedRowCellValue("生产厂商");
 
             using (FrmSingleCuringCycle frmSingleCuringCycle = new FrmSingleCuringCycle(cycleCode, productID))

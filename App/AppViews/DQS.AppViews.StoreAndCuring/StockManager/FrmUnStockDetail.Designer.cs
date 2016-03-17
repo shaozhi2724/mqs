@@ -97,7 +97,7 @@
             // 
             // txtProductCode
             // 
-            this.txtProductCode.FormatQueryString = "[药品编号] LIKE \'%{0}%\'";
+            this.txtProductCode.FormatQueryString = "[产品编号] LIKE \'%{0}%\'";
             this.txtProductCode.Location = new System.Drawing.Point(64, 12);
             this.txtProductCode.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtProductCode.Name = "txtProductCode";
@@ -108,11 +108,11 @@
             // layProductCode
             // 
             this.layProductCode.Control = this.txtProductCode;
-            this.layProductCode.CustomizationFormText = "药品编号";
+            this.layProductCode.CustomizationFormText = "产品编号";
             this.layProductCode.Location = new System.Drawing.Point(0, 0);
             this.layProductCode.Name = "layProductCode";
             this.layProductCode.Size = new System.Drawing.Size(197, 35);
-            this.layProductCode.Text = "药品编号";
+            this.layProductCode.Text = "产品编号";
             this.layProductCode.TextSize = new System.Drawing.Size(48, 14);
             // 
             // txtProducerName
@@ -157,7 +157,7 @@
             // 
             // txtProductName
             // 
-            this.txtProductName.FormatQueryString = "[药品名称] LIKE \'%{0}%\' OR [药品名称Spell] LIKE \'%{0}%\'";
+            this.txtProductName.FormatQueryString = "[产品名称] LIKE \'%{0}%\' OR [产品名称Spell] LIKE \'%{0}%\'";
             this.txtProductName.Location = new System.Drawing.Point(261, 12);
             this.txtProductName.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtProductName.Name = "txtProductName";
@@ -168,11 +168,11 @@
             // layProductName
             // 
             this.layProductName.Control = this.txtProductName;
-            this.layProductName.CustomizationFormText = "药品名称";
+            this.layProductName.CustomizationFormText = "产品名称";
             this.layProductName.Location = new System.Drawing.Point(197, 0);
             this.layProductName.Name = "layProductName";
             this.layProductName.Size = new System.Drawing.Size(198, 35);
-            this.layProductName.Text = "药品名称";
+            this.layProductName.Text = "产品名称";
             this.layProductName.TextSize = new System.Drawing.Size(48, 14);
             // 
             // FrmUnStockDetail

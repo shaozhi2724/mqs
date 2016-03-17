@@ -35,7 +35,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
             report.Dictionary.Databases["DQS"] = new StiSqlDatabase("DQS",
                 ConfigurationManager.ConnectionStrings["DbConnectStrings"].ConnectionString);
             report.Save(reportFile);
-            report["药品名称"] = txtProductName.Text.Trim();
+            report["产品名称"] = txtProductName.Text.Trim();
             report["生产厂商"] = txtProducerName.Text.Trim();
             report["开始日期"] = dteStart.Text;
             report["结束日期"] = dteEnd.Text;

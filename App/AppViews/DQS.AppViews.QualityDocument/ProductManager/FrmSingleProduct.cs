@@ -30,6 +30,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
             this.cbxPhysicType.InitSource();
             this.cbxStockCondition.InitSource();
             this.cbxProductStyle.InitSource();
+            this.cboPurchaseTax.InitSource();
+            this.cboSaleTax.InitSource();
             this.cbxProductCycleStyle.InitSource();
             cbxIsForeignDrug.Checked = false;
             if (this.Tag != null)
@@ -142,6 +144,18 @@ WHERE UP.ProductID = {0}", productID);
                 cbxProductStyle.Focus();
                 return;
             }
+            if (null == cboPurchaseTax.SelectedValue)
+            {
+                XtraMessageBox.Show(cboPurchaseTax.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                cboPurchaseTax.Focus();
+                return;
+            }
+            if (null == cboSaleTax.SelectedValue)
+            {
+                XtraMessageBox.Show(cboSaleTax.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                cboSaleTax.Focus();
+                return;
+            }
             if (null == cbxStockCondition.SelectedValue)
             {
                 XtraMessageBox.Show(cbxStockCondition.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -188,7 +202,7 @@ WHERE UP.ProductID = {0}", productID);
                 }
                 else
                 {
-                    XtraMessageBox.Show("药品编号已存在。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    XtraMessageBox.Show("产品编号已存在。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
             }
@@ -215,6 +229,16 @@ WHERE UP.ProductID = {0}", productID);
             if (!entity.IsNullField("ProductStyleID"))
             {
                 this.cbxProductStyle.SelectedValue = entity.ProductStyleID;
+            }
+
+            if (!entity.IsNullField("PurchaseTaxID"))
+            {
+                this.cboPurchaseTax.SelectedValue = entity.PurchaseTaxID;
+            }
+
+            if (!entity.IsNullField("SaleTaxID"))
+            {
+                this.cboSaleTax.SelectedValue = entity.SaleTaxID;
             }
 
             if (!entity.IsNullField("StockCondition"))
@@ -298,6 +322,16 @@ WHERE UP.ProductID = {0}", productID);
             {
                 entity.ProductStyleID = Convert.ToInt32(this.cbxProductStyle.SelectedValue);
                 entity.ProductStyle = this.cbxProductStyle.Text.Trim();
+            }
+            if (this.cboPurchaseTax.SelectedValue != null)
+            {
+                entity.PurchaseTaxID = Convert.ToInt32(this.cboPurchaseTax.SelectedValue);
+                entity.PurchaseTax = this.cboPurchaseTax.Text.Trim();
+            }
+            if (this.cboSaleTax.SelectedValue != null)
+            {
+                entity.SaleTaxID = Convert.ToInt32(this.cboSaleTax.SelectedValue);
+                entity.SaleTax = this.cboSaleTax.Text.Trim();
             }
             entity.IsUseToChildren = chkBoxUseDescription.Items[0].CheckState == CheckState.Checked ? true : false;
             entity.IsUseToOldPeople = chkBoxUseDescription.Items[1].CheckState == CheckState.Checked ? true : false;

@@ -265,10 +265,10 @@ namespace DQS.AppViews.QualityControl.UserManager
         private void barBtnNew_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             int pageSize = 10000;
-            string formatQueryString = "[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'";
+            string formatQueryString = "[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'";
             string viewName = "vw_AllUserProduct";
-            string primaryField = "药品ID";
-            string fields = "药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,包装规格,包装比例,批准文号,贮藏条件,剂型,药品类别,单位,归属人";
+            string primaryField = "产品ID";
+            string fields = "产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,归属人";
             string filter = "([状态] IS NULL OR [状态] = '正常') AND ([归属人] = '未关联')";
             //List<int> selectedProductIDs = new List<int>();
             /*
@@ -278,17 +278,17 @@ namespace DQS.AppViews.QualityControl.UserManager
                 EnumerableRowCollection<DataRow> enumerableRowCollection = dataSource.AsEnumerable();
                 if (enumerableRowCollection.Any())
                 {
-                    selectedProductIDs = enumerableRowCollection.Select(p => Convert.ToInt32(p["药品ID"])).ToList();
+                    selectedProductIDs = enumerableRowCollection.Select(p => Convert.ToInt32(p["产品ID"])).ToList();
                 }
             }
             if (selectedProductIDs.Any())
             {
                 string productsFilter = string.Join(",", selectedProductIDs);
-                filter += string.Format(" AND ([药品ID] NOT IN ({0}))", productsFilter);
+                filter += string.Format(" AND ([产品ID] NOT IN ({0}))", productsFilter);
                 //filter += string.Format(" AND ([归属人] = '未关联' )");
             }
             */
-            using (FrmPopupQueryMultiple frmPopupQueryMultiple = new FrmPopupQueryMultiple(formatQueryString, viewName, primaryField, fields, filter, pageSize, "药品类别"))
+            using (FrmPopupQueryMultiple frmPopupQueryMultiple = new FrmPopupQueryMultiple(formatQueryString, viewName, primaryField, fields, filter, pageSize, "产品类别"))
             {
                 DialogResult result = frmPopupQueryMultiple.ShowDialog();
                 if (result == DialogResult.OK)
@@ -311,13 +311,13 @@ namespace DQS.AppViews.QualityControl.UserManager
 
                 if (selectedRows.Length > 0)
                 {
-                    DialogResult result = XtraMessageBox.Show("确定要删除选中的药品授权吗？", "警告", MessageBoxButtons.OKCancel,MessageBoxIcon.Question);
+                    DialogResult result = XtraMessageBox.Show("确定要删除选中的产品授权吗？", "警告", MessageBoxButtons.OKCancel,MessageBoxIcon.Question);
                     if (result == DialogResult.OK)
                     {
                         foreach (var rowIndex in selectedRows)
                         {
                             DataRow selectedRow = gridView.GetDataRow(rowIndex);
-                            deletedProductGrants.Add(Convert.ToInt32(selectedRow["药品ID"]));
+                            deletedProductGrants.Add(Convert.ToInt32(selectedRow["产品ID"]));
                         }
 
                         string deleteSql = "DELETE.[dbo].[ATC_UserProduct] WHERE UserID='{0}' AND [ProductID] IN({1}) AND IsBelong = 1";
@@ -351,7 +351,7 @@ namespace DQS.AppViews.QualityControl.UserManager
                 }
                 else
                 {
-                    XtraMessageBox.Show("请选择要删除的药品授权。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    XtraMessageBox.Show("请选择要删除的产品授权。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
             }
@@ -362,9 +362,9 @@ namespace DQS.AppViews.QualityControl.UserManager
             string sql = string.Format(@"SELECT
     UserProductID AS [授权ID],
     ProductCategoryID AS [类别ID],
-    ProductCategoryName AS [药品类别],
-    up.ProductID AS [药品ID],
-    p.ProductName AS [药品名称],
+    ProductCategoryName AS [产品类别],
+    up.ProductID AS [产品ID],
+    p.ProductName AS [产品名称],
     p.PackageSpec AS [包装规格],
     p.ProducerName AS [生产厂家]
 FROM
@@ -395,7 +395,7 @@ ORDER BY ProductCategoryID,up.ProductID", m_id.HasValue ? m_id.Value : Guid.Empt
                 gridView.OptionsView.RowAutoHeight = true;
                 gridView.OptionsView.ShowGroupPanel = true;
                 gridView.OptionsView.ShowGroupedColumns = true;
-                gridView.Columns["药品类别"].GroupIndex = 0;
+                gridView.Columns["产品类别"].GroupIndex = 0;
                 gridView.ExpandAllGroups();
                 gridView.BestFitColumns();
             }
@@ -434,16 +434,16 @@ ORDER BY ProductCategoryID,up.ProductID", m_id.HasValue ? m_id.Value : Guid.Empt
             {
                 if (null ==
                     enumerableRowCollection.FirstOrDefault(
-                        p => Convert.ToInt32(p["药品ID"]) == Convert.ToInt32(dataRow["药品ID"])))
+                        p => Convert.ToInt32(p["产品ID"]) == Convert.ToInt32(dataRow["产品ID"])))
                 {
                     var newRow = dataSource.NewRow();
-                    newRow["类别ID"] = productStyles.SingleOrDefault(p => p.Value == dataRow["药品类别"].ToString()).Key;
-                    newRow["药品类别"] = dataRow["药品类别"];
-                    newRow["药品ID"] = dataRow["药品ID"];
-                    newRow["药品名称"] = dataRow["药品名称"];
-                    newRow["包装规格"] = dataRow["包装规格"];
+                    newRow["类别ID"] = productStyles.SingleOrDefault(p => p.Value == dataRow["产品类别"].ToString()).Key;
+                    newRow["产品类别"] = dataRow["产品类别"];
+                    newRow["产品ID"] = dataRow["产品ID"];
+                    newRow["产品名称"] = dataRow["产品名称"];
+                    newRow["包装规格型号"] = dataRow["包装规格型号"];
                     newRow["生产厂家"] = dataRow["生产厂商"];
-                    selectedProductIDs.Add(Convert.ToInt32(dataRow["药品ID"]));
+                    selectedProductIDs.Add(Convert.ToInt32(dataRow["产品ID"]));
                     dataSource.Rows.Add(newRow);
                     
                 }
@@ -462,7 +462,7 @@ ORDER BY ProductCategoryID,up.ProductID", m_id.HasValue ? m_id.Value : Guid.Empt
                 gridView.OptionsView.RowAutoHeight = true;
                 gridView.OptionsView.ShowGroupPanel = true;
                 gridView.OptionsView.ShowGroupedColumns = true;
-                gridView.Columns["药品类别"].GroupIndex = 0;
+                gridView.Columns["产品类别"].GroupIndex = 0;
                 gridView.ExpandAllGroups();
                 gridView.BestFitColumns();
             }
@@ -486,7 +486,7 @@ VALUES");
                 {
                     insertSql.AppendFormat("{0}('{1}','{2}',{3},'{4}',{5},'{6}',1),",
                         Environment.NewLine, userID, userName, Convert.ToInt32(dataRow["类别ID"]),
-                        dataRow["药品类别"].ToString(), Convert.ToInt32(dataRow["药品ID"]), dataRow["药品名称"].ToString());
+                        dataRow["产品类别"].ToString(), Convert.ToInt32(dataRow["产品ID"]), dataRow["产品名称"].ToString());
                 }
                 string sql = insertSql.ToString();
                 if (sql.EndsWith(","))
@@ -524,18 +524,18 @@ VALUES");
         private void barBtnNewShould_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             int pageSize = 10000;
-            string formatQueryString = "[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'";
+            string formatQueryString = "[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'";
             string viewName = "vw_AllUserProduct";
-            string primaryField = "药品ID";
-            string fields = "药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,包装规格,包装比例,批准文号,贮藏条件,剂型,药品类别,单位,归属人";
-            string filter = "([状态] IS NULL OR [状态] = '正常') AND ([归属人] != '未关联' AND [归属人] != '" + txtPopupEmployee.Text.Trim() + "' AND NOT EXISTS(SELECT * FROM ATC_UserProduct WHERE [药品ID]=ProductID AND UserName = '" + txtUserName.Text.Trim() + "'))";
+            string primaryField = "产品ID";
+            string fields = "产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,归属人";
+            string filter = "([状态] IS NULL OR [状态] = '正常') AND ([归属人] != '未关联' AND [归属人] != '" + txtPopupEmployee.Text.Trim() + "' AND NOT EXISTS(SELECT * FROM ATC_UserProduct WHERE [产品ID]=ProductID AND UserName = '" + txtUserName.Text.Trim() + "'))";
 
             filter += string.Format("");
             /*
             if (ProductIDs.Any())
             {
                 string productsFilter = string.Join(",", ProductIDs);
-                filter += string.Format(" AND ([药品ID] NOT IN ({0}))", productsFilter);
+                filter += string.Format(" AND ([产品ID] NOT IN ({0}))", productsFilter);
             }
             else
             */
@@ -546,18 +546,18 @@ VALUES");
                     EnumerableRowCollection<DataRow> enumerableRowCollection = dataSource.AsEnumerable();
                     if (enumerableRowCollection.Any())
                     {
-                        ProductIDs = enumerableRowCollection.Select(p => Convert.ToInt32(p["药品ID"])).ToList();
+                        ProductIDs = enumerableRowCollection.Select(p => Convert.ToInt32(p["产品ID"])).ToList();
                     }
                 }
                 /*
                 if (ProductIDs.Any())
                 {
                     string productsFilter = string.Join(",", ProductIDs);
-                    filter += string.Format(" AND ([药品ID] NOT IN ({0}))", productsFilter);
+                    filter += string.Format(" AND ([产品ID] NOT IN ({0}))", productsFilter);
                 }
                 */
             }
-            using (FrmPopupQueryMultiple frmPopupQueryMultiple = new FrmPopupQueryMultiple(formatQueryString, viewName, primaryField, fields, filter, pageSize, "药品类别"))
+            using (FrmPopupQueryMultiple frmPopupQueryMultiple = new FrmPopupQueryMultiple(formatQueryString, viewName, primaryField, fields, filter, pageSize, "产品类别"))
             {
                 DialogResult result = frmPopupQueryMultiple.ShowDialog();
                 if (result == DialogResult.OK)
@@ -574,9 +574,9 @@ VALUES");
             string sql = string.Format(@"SELECT
     UserProductID AS [授权ID],
     ProductCategoryID AS [类别ID],
-    ProductCategoryName AS [药品类别],
-    up.ProductID AS [药品ID],
-    p.ProductName AS [药品名称],
+    ProductCategoryName AS [产品类别],
+    up.ProductID AS [产品ID],
+    p.ProductName AS [产品名称],
     p.PackageSpec AS [包装规格],
     p.ProducerName AS [生产厂家],
     (SELECT aup.UserName FROM dbo.ATC_UserProduct aup WHERE aup.ProductID = up.ProductID AND aup.IsBelong = 1) AS [归属人]
@@ -608,7 +608,7 @@ ORDER BY ProductCategoryID,up.ProductID", m_id.HasValue ? m_id.Value : Guid.Empt
                 gridView.OptionsView.RowAutoHeight = true;
                 gridView.OptionsView.ShowGroupPanel = true;
                 gridView.OptionsView.ShowGroupedColumns = true;
-                gridView.Columns["药品类别"].GroupIndex = 0;
+                gridView.Columns["产品类别"].GroupIndex = 0;
                 gridView.ExpandAllGroups();
                 gridView.BestFitColumns();
             }
@@ -646,17 +646,17 @@ ORDER BY ProductCategoryID,up.ProductID", m_id.HasValue ? m_id.Value : Guid.Empt
             {
                 if (null ==
                     enumerableRowCollection.FirstOrDefault(
-                        p => Convert.ToInt32(p["药品ID"]) == Convert.ToInt32(dataRow["药品ID"])))
+                        p => Convert.ToInt32(p["产品ID"]) == Convert.ToInt32(dataRow["产品ID"])))
                 {
                     var newRow = dataSource.NewRow();
-                    newRow["类别ID"] = productStyles.SingleOrDefault(p => p.Value == dataRow["药品类别"].ToString()).Key;
-                    newRow["药品类别"] = dataRow["药品类别"];
-                    newRow["药品ID"] = dataRow["药品ID"];
-                    newRow["药品名称"] = dataRow["药品名称"];
-                    newRow["包装规格"] = dataRow["包装规格"];
+                    newRow["类别ID"] = productStyles.SingleOrDefault(p => p.Value == dataRow["产品类别"].ToString()).Key;
+                    newRow["产品类别"] = dataRow["产品类别"];
+                    newRow["产品ID"] = dataRow["产品ID"];
+                    newRow["产品名称"] = dataRow["产品名称"];
+                    newRow["包装规格型号"] = dataRow["包装规格型号"];
                     newRow["生产厂家"] = dataRow["生产厂商"];
                     newRow["归属人"] = dataRow["归属人"];
-                    ProductIDs.Add(Convert.ToInt32(dataRow["药品ID"]));
+                    ProductIDs.Add(Convert.ToInt32(dataRow["产品ID"]));
                     dataSource.Rows.Add(newRow);
 
                 }
@@ -675,7 +675,7 @@ ORDER BY ProductCategoryID,up.ProductID", m_id.HasValue ? m_id.Value : Guid.Empt
                 gridView.OptionsView.RowAutoHeight = true;
                 gridView.OptionsView.ShowGroupPanel = true;
                 gridView.OptionsView.ShowGroupedColumns = true;
-                gridView.Columns["药品类别"].GroupIndex = 0;
+                gridView.Columns["产品类别"].GroupIndex = 0;
                 gridView.ExpandAllGroups();
                 gridView.BestFitColumns();
             }
@@ -699,7 +699,7 @@ VALUES");
                 {
                     insertSql.AppendFormat("{0}('{1}','{2}',{3},'{4}',{5},'{6}',2),",
                         Environment.NewLine, userID, userName, Convert.ToInt32(dataRow["类别ID"]),
-                        dataRow["药品类别"].ToString(), Convert.ToInt32(dataRow["药品ID"]), dataRow["药品名称"].ToString());
+                        dataRow["产品类别"].ToString(), Convert.ToInt32(dataRow["产品ID"]), dataRow["产品名称"].ToString());
                 }
                 string sql = insertSql.ToString();
                 if (sql.EndsWith(","))
@@ -743,14 +743,14 @@ VALUES");
 
                 if (selectedRows.Length > 0)
                 {
-                    DialogResult result = XtraMessageBox.Show("确定要删除选中的药品授权吗？", "警告", MessageBoxButtons.OKCancel,
+                    DialogResult result = XtraMessageBox.Show("确定要删除选中的产品授权吗？", "警告", MessageBoxButtons.OKCancel,
                         MessageBoxIcon.Question);
                     if (result == DialogResult.OK)
                     {
                         foreach (var rowIndex in selectedRows)
                         {
                             DataRow selectedRow = gridView.GetDataRow(rowIndex);
-                            deletedProductGrants.Add(Convert.ToInt32(selectedRow["药品ID"]));
+                            deletedProductGrants.Add(Convert.ToInt32(selectedRow["产品ID"]));
                         }
 
                         string deleteSql = "DELETE.[dbo].[ATC_UserProduct] WHERE UserID='{0}' AND [ProductID] IN({1}) AND IsBelong = 2";
@@ -784,7 +784,7 @@ VALUES");
                 }
                 else
                 {
-                    XtraMessageBox.Show("请选择要删除的可经营药品授权。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    XtraMessageBox.Show("请选择要删除的可经营产品授权。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
             }

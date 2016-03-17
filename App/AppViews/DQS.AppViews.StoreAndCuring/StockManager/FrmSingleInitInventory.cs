@@ -407,13 +407,13 @@ WHERE StoreDetailID={0}
         {
             if (this.txtProductCode.EditData != null)
             {
-                this.txtProductName.Text = (this.txtProductCode.EditData as DataRow)["药品名称"].ToString();
-                this.txtProductSpec.Text = (this.txtProductCode.EditData as DataRow)["规格"].ToString();
+                this.txtProductName.Text = (this.txtProductCode.EditData as DataRow)["产品名称"].ToString();
+                this.txtProductSpec.Text = (this.txtProductCode.EditData as DataRow)["规格型号"].ToString();
                 this.txtProductUnit.Text = (this.txtProductCode.EditData as DataRow)["单位"].ToString();
-                this.txtPackageSpec.Text = (this.txtProductCode.EditData as DataRow)["包装规格"].ToString();
+                this.txtPackageSpec.Text = (this.txtProductCode.EditData as DataRow)["包装规格型号"].ToString();
                 this.txtPhysicType.Text = (this.txtProductCode.EditData as DataRow)["剂型"].ToString();
-                this.txtAuthorizedNo.Text = (this.txtProductCode.EditData as DataRow)["批准文号"].ToString();
-                this.txtProductStyle.Text = (this.txtProductCode.EditData as DataRow)["药品类别"].ToString();
+                this.txtAuthorizedNo.Text = (this.txtProductCode.EditData as DataRow)["注册证号"].ToString();
+                this.txtProductStyle.Text = (this.txtProductCode.EditData as DataRow)["产品类别"].ToString();
                 this.txtProducerName.Text = (this.txtProductCode.EditData as DataRow)["生产厂商"].ToString();
 
                 this.txtBatchNo.Focus();

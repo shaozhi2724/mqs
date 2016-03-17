@@ -127,6 +127,12 @@ namespace DQS.AppViews.Operation.BackManager
             object id = this.gvData.GetFocusedRowCellValue("退货单ID");
             if (id != null && id != DBNull.Value)
             {
+                string statusName = gvData.GetFocusedRowCellValue("状态").ToString();
+                if (statusName == "未批准")
+                {
+                    XtraMessageBox.Show("该单据已作废，不允许再次审批", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 DialogResult dr = base.BaseApprove();
                 if (dr == DialogResult.Yes)
                 {

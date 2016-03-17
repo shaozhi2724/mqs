@@ -655,7 +655,7 @@
             this.btnProductQualification.Name = "btnProductQualification";
             this.btnProductQualification.Size = new System.Drawing.Size(129, 23);
             this.btnProductQualification.TabIndex = 3;
-            this.btnProductQualification.Text = "药品电子档案(&A)";
+            this.btnProductQualification.Text = "产品电子档案(&A)";
             this.btnProductQualification.Click += new System.EventHandler(this.btnProductQualification_Click);
             // 
             // btnCancel

@@ -10,6 +10,8 @@ using DevExpress.XtraEditors;
 using DQS.Module.Entities;
 using DQS.Common;
 using ORMSCore;
+using System.Data.SqlClient;
+using DQS.AppViews.WarehouseIn.Properties;
 
 namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 {
@@ -134,7 +136,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         List<BUSProductPurchasePriceEntity> productPrices = new List<BUSProductPurchasePriceEntity>();
                         for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
                         {
-                            object productID = this.popupGrid.PopupView.GetRowCellValue(i, "药品ID");
+                            object productID = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
                             object batchNo = this.popupGrid.PopupView.GetRowCellValue(i, "批号");
                             object unitPrice = this.popupGrid.PopupView.GetRowCellValue(i, "单价");
                             productPrices.Add(new BUSProductPurchasePriceEntity
@@ -170,9 +172,13 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
                             #endregion
 
-
-                            //更新库存
-                            UpdateStoreDetail(child, storeDetailBelongDepartmentId, productPrice.PurchasePrice);
+                                //更新旧库存表
+                            //UpdateStoreDetail(child, storeDetailBelongDepartmentId, productPrice.PurchasePrice);
+                        }
+                        if (Settings.Default.IsNewStoreDetail)
+                        {
+                            //新库存
+                            UpdateNewStoreDetail(entity.StoreID, entity.StoreCode, storeDetailBelongDepartmentId);
                         }
                         #endregion
 
@@ -293,7 +299,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
             {
                 object amount = this.popupGrid.PopupView.GetRowCellValue(i, "验收数量");
-                object productCode = this.popupGrid.PopupView.GetRowCellValue(i, "药品编号");
+                object productCode = this.popupGrid.PopupView.GetRowCellValue(i, "产品编号");
 
                 if (amount != null && amount != DBNull.Value)
                 {
@@ -301,7 +307,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     int totalAmount = 0, totalStockInAmount = 0;
                     for (int j = 0; j < this.popupGrid.PopupView.RowCount; j++)
                     {
-                        object productCode2 = this.popupGrid.PopupView.GetRowCellValue(j, "药品编号");//同一药品比较
+                        object productCode2 = this.popupGrid.PopupView.GetRowCellValue(j, "产品编号");//同一产品比较
                         if (productCode.ToString().Trim() == productCode2.ToString().Trim())
                         {
                             object billAmount = this.popupGrid.PopupView.GetRowCellValue(j, "验收数量");
@@ -319,7 +325,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
                     if (totalAmount != totalStockInAmount)
                     {
-                        XtraMessageBox.Show(String.Format("入库时，药品‘{0}’的总体入库数量和验收数量不符。", productCode), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        XtraMessageBox.Show(String.Format("入库时，产品‘{0}’的总体入库数量和验收数量不符。", productCode), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return false;
                     }
                 }
@@ -346,6 +352,12 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 storeDetail.DepartmentID = storeDetailBelongDepartmentId;
                 storeDetail.ProduceDate = billDetail.ProduceDate;
                 storeDetail.ValidateDate = billDetail.ValidateDate;
+                storeDetail.SterilizationBatchNo = billDetail.SterilizationBatchNo;
+
+                if (!billDetail.IsNullField("SterilizationDate") && billDetail.SterilizationDate.ToString() != DBNull.Value.ToString())
+                {
+                    storeDetail.SterilizationDate = billDetail.SterilizationDate;
+                }
                 storeDetail.Amount = billDetail.Amount;
                 storeDetail.CreateDate = DateTime.Now;
                 storeDetail.LastModifyDate = DateTime.Now;
@@ -396,8 +408,37 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     storeDetail.TotalPrice = storeDetail.Price * (storeDetail.Amount + billDetail.Amount);
                 }
                 */
+                if (storeDetail.Amount == 0)
+                {
+                    storeDetail.CreateDate = DateTime.Now;
+                    storeDetail.LastCuringDate = DateTime.Now;
+                }
                 storeDetail.Amount = storeDetail.Amount + billDetail.Amount;
                 storeDetail.Update();
+            }
+        }
+
+        private void UpdateNewStoreDetail(int StoreID,string StoreCode,int DepartmentID)
+        {
+            string sql = @"EXEC sp_InsertBusInStoreDetail {0},{1},{2}";
+            sql = string.Format(sql, StoreID, StoreCode, DepartmentID);
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                conn.Open(); //连接数据库
+                //必须为SqlCommand指定数据库连接和登记的事务
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
             }
         }
 

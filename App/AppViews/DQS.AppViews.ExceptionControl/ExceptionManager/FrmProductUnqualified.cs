@@ -10,6 +10,8 @@ using DQS.Common;
 using DQS.Controls;
 using DQS.Module.Entities;
 using ORMSCore;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace DQS.AppViews.ExceptionControl.ExceptionManager
 {
@@ -73,7 +75,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
             object id = gvData.GetFocusedRowCellValue("记录ID");
             if (id != null)
             {
-                base.SinglePrint("不合格药品处理", (int)id);
+                base.SinglePrint("不合格产品处理", (int)id);
             }
 
             //base.CustomPrint();
@@ -105,44 +107,38 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
             EntityCollection<BUSProductUnqualifiedDetailEntity> details = new EntityCollection<BUSProductUnqualifiedDetailEntity>();
             details.Fetch(BUSProductUnqualifiedDetailEntityFields.UnqualifiedID == entity.UnqualifiedID);
-            foreach (BUSProductUnqualifiedDetailEntity unqualifiedDetail in details)
+
+            if (entity.IsCutAmount)
             {
-                if (entity.IsCutAmount)
+                int result = 0;
+                string sql = @"EXEC sp_InsertNewStoreDetailForUnqualified '{0}','{1}','{2}'";
+                sql = string.Format(sql, entity.UnqualifiedCode, entity.CreateDate, GlobalItem.g_CurrentEmployee.EmployeeName);
+                using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
                 {
-
-                    EntityCollection<BUSStoreDetailEntity> storeDetails = new EntityCollection<BUSStoreDetailEntity>();
-                    storeDetails.Fetch(BUSStoreDetailEntityFields.ProductID == unqualifiedDetail.ProductID
-                        & BUSStoreDetailEntityFields.BatchNo == unqualifiedDetail.BatchNo
-                        & BUSStoreDetailEntityFields.DepartmentID == storeDetailBelongDepartmentId);
-                    //BUSStoreDetailEntity storeDetail = new BUSStoreDetailEntity
-                    //{
-                    //    ProductID = unqualifiedDetail.ProductID,
-                    //    BatchNo = unqualifiedDetail.BatchNo
-                    //};
-
-                    //更新库存
-                    foreach (BUSStoreDetailEntity storeDetail in storeDetails)
+                    conn.Open(); //连接数据库
+                    //必须为SqlCommand指定数据库连接和登记的事务
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    try
                     {
-                        storeDetail.LastModifyDate = DateTime.Now;
-                        storeDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
-                        if (storeDetail.IsNullField("Amount"))
+                        result = Convert.ToInt32(cmd.ExecuteScalar());
+                        if (result == 1)
                         {
-                            XtraMessageBox.Show(
-                                String.Format("审批失败！\nID号为{0}的产品没有批号为{1}库存信息。", unqualifiedDetail.ProductID,
-                                    unqualifiedDetail.BatchNo), "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            XtraMessageBox.Show("明细中有药品库存不够，请检查。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
-                        storeDetail.Amount = storeDetail.Amount - unqualifiedDetail.Amount;
-                        if (storeDetail.Amount < 0)
-                        {
-                            XtraMessageBox.Show(String.Format("审批失败！\nID号为{0}的产品库存不足。", unqualifiedDetail.ProductID),
-                                "警告",
-                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-                        storeDetail.Update();
+                    }
+                    catch (Exception ex)
+                    {
+                        XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        conn.Close();
                     }
                 }
+            }
+            foreach (BUSProductUnqualifiedDetailEntity unqualifiedDetail in details)
+            {
 
                 BUSUnqualifiedStoreDetailEntity unqualifiedStoreDetail = new BUSUnqualifiedStoreDetailEntity
                 {
@@ -157,8 +153,14 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                                                  unqualifiedDetail.BatchNo))
                 {
                     //新建不合格品库存
-                    unqualifiedStoreDetail.ProduceDate = unqualifiedDetail.ProduceDate;
-                    unqualifiedStoreDetail.ValidateDate = unqualifiedDetail.ValidateDate;
+                    if (!unqualifiedDetail.IsNullField("ProduceDate"))
+                    {
+                        unqualifiedStoreDetail.ProduceDate = unqualifiedDetail.ProduceDate;
+                    }
+                    if (!unqualifiedDetail.IsNullField("ValidateDate"))
+                    {
+                        unqualifiedStoreDetail.ValidateDate = unqualifiedDetail.ValidateDate;
+                    }
                     unqualifiedStoreDetail.Amount = unqualifiedDetail.Amount;
                     unqualifiedStoreDetail.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     unqualifiedStoreDetail.CreateDate = DateTime.Now;

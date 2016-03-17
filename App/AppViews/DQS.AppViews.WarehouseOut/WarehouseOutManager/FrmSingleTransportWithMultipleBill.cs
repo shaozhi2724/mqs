@@ -152,6 +152,15 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
         {
             if (!this.ftPanel.ValidateIsNullFields()) return;
 
+            if (dteArriveTime.Text.Trim() != "")
+            {
+                if (Convert.ToDateTime(dteStartTime.Text.Trim()) > Convert.ToDateTime(dteArriveTime.Text.Trim()))
+                {
+                    XtraMessageBox.Show("到达日期不能在启运日期前，请重新填写。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+            }
+
             if (string.IsNullOrWhiteSpace(txtTransportType.Text))
             {
                 XtraMessageBox.Show(txtTransportType.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

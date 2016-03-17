@@ -582,8 +582,8 @@ WHERE BillID={1}
 
             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
             {
-                var productID = this.popupGrid.PopupView.GetRowCellValue(i, "药品ID");
-                var productName = this.popupGrid.PopupView.GetRowCellValue(i, "药品名称");
+                var productID = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
+                var productName = this.popupGrid.PopupView.GetRowCellValue(i, "产品名称");
                 var batchNo = this.popupGrid.PopupView.GetRowCellValue(i, "批号");
                 object amount = this.popupGrid.PopupView.GetRowCellValue(i, "数量");
                 object reviewAmount = this.popupGrid.PopupView.GetRowCellValue(i, "复核数量");
@@ -593,14 +593,14 @@ WHERE BillID={1}
                     //退货货数 <= 0， 错误
                     if ((int) amount <= 0)
                     {
-                        XtraMessageBox.Show(String.Format("药品‘{0}’（批号:‘{1}’）的退货数量不符合规则。", productName, batchNo), "提示",
+                        XtraMessageBox.Show(String.Format("产品‘{0}’（批号:‘{1}’）的退货数量不符合规则。", productName, batchNo), "提示",
                             MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return false;
                     }
                     //退货货数 > 订单复核数， 错误
                     if ((int) amount > (int) reviewAmount)
                     {
-                        XtraMessageBox.Show(String.Format("药品‘{0}’（批号:‘{1}’）的退货数量不能多于订单复核数量。", productName, batchNo),
+                        XtraMessageBox.Show(String.Format("产品‘{0}’（批号:‘{1}’）的退货数量不能多于订单复核数量。", productName, batchNo),
                             "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return false;
                     }
@@ -631,7 +631,7 @@ WHERE BillID={1}
                             {
                                 returnCount = 0;
                             }
-                            XtraMessageBox.Show(String.Format("药品‘{0}’（批号:‘{1}’）的总退货数量不能多于订单数量。\n订单数量: {2}\n已退货数量:{3}\n还可退货数量:{4}",
+                            XtraMessageBox.Show(String.Format("产品‘{0}’（批号:‘{1}’）的总退货数量不能多于订单数量。\n订单数量: {2}\n已退货数量:{3}\n还可退货数量:{4}",
                                 productName, batchNo, totalReviewCount, totalBackCount, returnCount),
                             "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return false;
@@ -650,7 +650,7 @@ WHERE BillID={1}
 
         private void popupGrid_PopupClosed(object sender, DQS.Controls.CommonCode.PopupFormClosedArgs e)
         {
-            string fieldName = "药品ID";
+            string fieldName = "产品ID";
             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
             {
                 object fieldValue = this.popupGrid.PopupView.GetRowCellValue(i, fieldName);
@@ -660,7 +660,7 @@ WHERE BillID={1}
                     {
                         if (fieldValue.ToString().Trim() == e.PopupRow[fieldName].ToString().Trim())
                         {
-                            XtraMessageBox.Show("药品已存在。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            XtraMessageBox.Show("产品已存在。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             this.popupGrid.PopupView.FocusedRowHandle = i;
                             e.Cancel = true;
                         }
@@ -712,6 +712,15 @@ WHERE BillID={1}
         /// <param name="entity">实体</param>
         protected virtual void CustomSetEntity(BUSBillEntity entity)
         {
+            //保存部门
+            BUSBillEntity b = new BUSBillEntity { BillCode = txtSaleBillCode.Text };
+            b.Fetch();
+            if (b.DepartmentID != 0)
+            {
+                entity.DepartmentID = b.DepartmentID;
+                entity.Operator = b.Operator;
+            }
+
 
             if (this.txtDealerName.SelectedValue != null)
             {
@@ -743,10 +752,10 @@ WHERE BillID={1}
             {
                 if (e.ActiveOperationColumn.PopupForm.Name == "Price")
                 {
-                    object priceID = this.popupGrid.PopupView.GetFocusedRowCellValue("药品ID");
+                    object priceID = this.popupGrid.PopupView.GetFocusedRowCellValue("产品ID");
                     if (priceID != null && priceID != DBNull.Value)
                     {
-                        e.ActiveOperationColumn.PopupForm.Filter = "[药品ID] = " + priceID;
+                        e.ActiveOperationColumn.PopupForm.Filter = "[产品ID] = " + priceID;
                     }
                 }
             }
@@ -758,13 +767,13 @@ WHERE BillID={1}
             {
                 object dealerName = this.txtDealerName.Text;
                 object dealerID = (this.txtDealerName.EditData as DataRow)["单位ID"];
-                object productName = this.popupGrid.PopupView.GetFocusedRowCellValue("药品名称");
+                object productName = this.popupGrid.PopupView.GetFocusedRowCellValue("产品名称");
                 object batchNo = this.popupGrid.PopupView.GetFocusedRowCellValue("批号");
                 if (productName != null && productName != DBNull.Value && batchNo != null && batchNo != DBNull.Value)
                 {
-                    object productID = this.popupGrid.PopupView.GetFocusedRowCellValue("药品ID");
-                    object productSpec = this.popupGrid.PopupView.GetFocusedRowCellValue("规格");
-                    object packageSpec = this.popupGrid.PopupView.GetFocusedRowCellValue("包装规格");
+                    object productID = this.popupGrid.PopupView.GetFocusedRowCellValue("产品ID");
+                    object productSpec = this.popupGrid.PopupView.GetFocusedRowCellValue("规格型号");
+                    object packageSpec = this.popupGrid.PopupView.GetFocusedRowCellValue("包装规格型号");
                     object producerName = this.popupGrid.PopupView.GetFocusedRowCellValue("生产厂商");
                     object produceDate = this.popupGrid.PopupView.GetFocusedRowCellValue("生产日期");
                     object validateDate = this.popupGrid.PopupView.GetFocusedRowCellValue("有效期至");
@@ -933,6 +942,7 @@ WHERE BillID={1}
         private void BindSelectedReviewDetails(FrmReviewRecordQuery doc)
         {
             txtDealerName.Tag = doc.DealerID;
+            txtDealerName.SetMemberValue(doc.DealerID);
             txtDealerName.Text = doc.DealerName;
             txtSaleBillCode.Text = doc.SaleBillCode;
             txtReviewCode.Text = doc.ReviewCode;
@@ -952,7 +962,7 @@ WHERE BillID={1}
                 {
                     foreach (GridColumn col in popupGrid.PopupView.Columns)
                     {
-                        if (!col.Visible && col.Caption != "药品ID")
+                        if (!col.Visible && col.Caption != "产品ID")
                         {
                             continue;
                         }

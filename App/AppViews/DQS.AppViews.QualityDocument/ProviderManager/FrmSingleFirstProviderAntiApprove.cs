@@ -156,7 +156,7 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
 
                 layBusinessRange.Text = "经营范围";
                 layBusinessRange.CustomizationFormText = "经营范围";
-                gpcRight.Text = "药品类别清单";
+                gpcRight.Text = "产品类别清单";
                 EntityCollection<SYSCategoryEntity> categories = new EntityCollection<SYSCategoryEntity>();
                 categories.Fetch(SYSCategoryEntityFields.CategoryCode == "ProductStyle");
 
@@ -646,8 +646,8 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                 if (industryStyle == "生产厂商")
                 {
                     /*//如果是生产企业
-                        药品生产许可证
-                        药品GMP证书
+                        产品生产许可证
+                        产品GMP证书
                         印章印模
                         随货同行单
                          */
@@ -687,8 +687,8 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                     else
                     {
                         /*//如果是经营企业
-                        药品经营许可证
-                        药品GSP证书"*/
+                        产品经营许可证
+                        产品GSP证书"*/
                         certificateTypeName = "经营企业证书";
                     }
                     DataTable requiredRecords = GlobalMethod.GetViewData(RequiredCertificatesViewName,

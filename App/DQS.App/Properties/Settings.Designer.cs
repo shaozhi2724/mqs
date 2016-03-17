@@ -43,5 +43,23 @@ namespace DQS.App.Properties {
                 this["AutoCheckForUpdate"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("587DCC16")]
+        public string PID_Rockey {
+            get {
+                return ((string)(this["PID_Rockey"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("FFFFFFFFFFFFFFFF")]
+        public string PIN_Rockey {
+            get {
+                return ((string)(this["PIN_Rockey"]));
+            }
+        }
     }
 }

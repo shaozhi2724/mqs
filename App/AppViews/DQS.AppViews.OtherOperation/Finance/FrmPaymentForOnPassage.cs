@@ -186,7 +186,7 @@ namespace DQS.AppViews.OtherOperation.Finance
 	fm.StoreInPerson AS [入库人],
 	fm.StoreInDate AS [入库日期],
 	onp.BusinessBillDetailID AS [DetailID],
-	onp.ProductName AS [药品名称],
+	onp.ProductName AS [产品名称],
 	onp.BatchNo AS [批号],
 	onp.Amount AS [数量],
 	onp.TotalPrice AS [金额],

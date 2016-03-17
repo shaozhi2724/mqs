@@ -506,11 +506,11 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.txtProductList;
-            this.layoutControlItem1.CustomizationFormText = "咨询的药品";
+            this.layoutControlItem1.CustomizationFormText = "咨询的产品";
             this.layoutControlItem1.Location = new System.Drawing.Point(318, 116);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Size = new System.Drawing.Size(319, 29);
-            this.layoutControlItem1.Text = "咨询的药品";
+            this.layoutControlItem1.Text = "咨询的产品";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(105, 20);
             // 
             // ftPanel

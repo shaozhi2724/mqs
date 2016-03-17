@@ -57,19 +57,19 @@
             this.tbtnProductInfo.Appearance.Options.UseForeColor = true;
             this.tbtnProductInfo.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
             this.tbtnProductInfo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tbtnProductInfo.Image = global::DQS.AppViews.QualityDocument.Properties.Resources.药品档案;
+            this.tbtnProductInfo.Image = global::DQS.AppViews.QualityDocument.Properties.Resources.产品档案;
             this.tbtnProductInfo.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.tbtnProductInfo.Location = new System.Drawing.Point(278, 15);
             this.tbtnProductInfo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbtnProductInfo.MenuCode = "ProductInfo";
             this.tbtnProductInfo.MenuFullClass = "DQS.AppViews.QualityDocument.ProductManager.FrmProductInfo,DQS.AppViews.QualityDo" +
     "cument";
-            this.tbtnProductInfo.MenuName = "药品档案";
-            this.tbtnProductInfo.MouseEnterImage = global::DQS.AppViews.QualityDocument.Properties.Resources.药品档案MouseEnter;
+            this.tbtnProductInfo.MenuName = "产品档案";
+            this.tbtnProductInfo.MouseEnterImage = global::DQS.AppViews.QualityDocument.Properties.Resources.产品档案MouseEnter;
             this.tbtnProductInfo.Name = "tbtnProductInfo";
             this.tbtnProductInfo.Size = new System.Drawing.Size(118, 126);
             this.tbtnProductInfo.TabIndex = 0;
-            this.tbtnProductInfo.Text = "药品档案";
+            this.tbtnProductInfo.Text = "产品档案";
             // 
             // tbtnPriceStyle
             // 
@@ -259,19 +259,19 @@
             this.tbtnProductStructure.Appearance.Options.UseForeColor = true;
             this.tbtnProductStructure.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
             this.tbtnProductStructure.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tbtnProductStructure.Image = global::DQS.AppViews.QualityDocument.Properties.Resources.药品存放位置;
+            this.tbtnProductStructure.Image = global::DQS.AppViews.QualityDocument.Properties.Resources.产品存放位置;
             this.tbtnProductStructure.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.tbtnProductStructure.Location = new System.Drawing.Point(775, 176);
             this.tbtnProductStructure.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbtnProductStructure.MenuCode = "ProductStructure";
             this.tbtnProductStructure.MenuFullClass = "DQS.AppViews.QualityDocument.StoreManager.FrmProductStructure, DQS.AppViews.Quali" +
     "tyDocument";
-            this.tbtnProductStructure.MenuName = "药品存放位置";
-            this.tbtnProductStructure.MouseEnterImage = global::DQS.AppViews.QualityDocument.Properties.Resources.药品存放位置MouseEnter;
+            this.tbtnProductStructure.MenuName = "产品存放位置";
+            this.tbtnProductStructure.MouseEnterImage = global::DQS.AppViews.QualityDocument.Properties.Resources.产品存放位置MouseEnter;
             this.tbtnProductStructure.Name = "tbtnProductStructure";
             this.tbtnProductStructure.Size = new System.Drawing.Size(118, 126);
             this.tbtnProductStructure.TabIndex = 8;
-            this.tbtnProductStructure.Text = "药品存放位置";
+            this.tbtnProductStructure.Text = "产品存放位置";
             this.tbtnProductStructure.Visible = false;
             // 
             // tbtnDealerInfo
@@ -335,19 +335,19 @@
             this.tbtnFirstProductInfo.Appearance.Options.UseForeColor = true;
             this.tbtnFirstProductInfo.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
             this.tbtnFirstProductInfo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tbtnFirstProductInfo.Image = global::DQS.AppViews.QualityDocument.Properties.Resources.首营药品;
+            this.tbtnFirstProductInfo.Image = global::DQS.AppViews.QualityDocument.Properties.Resources.首营产品;
             this.tbtnFirstProductInfo.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.tbtnFirstProductInfo.Location = new System.Drawing.Point(98, 15);
             this.tbtnFirstProductInfo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbtnFirstProductInfo.MenuCode = "FirstProductInfo";
             this.tbtnFirstProductInfo.MenuFullClass = "DQS.AppViews.QualityDocument.ProductManager.FrmFirstProductInfo,DQS.AppViews.Qual" +
     "ityDocument";
-            this.tbtnFirstProductInfo.MenuName = "首营药品";
-            this.tbtnFirstProductInfo.MouseEnterImage = global::DQS.AppViews.QualityDocument.Properties.Resources.首营药品MouseEnter;
+            this.tbtnFirstProductInfo.MenuName = "首营产品";
+            this.tbtnFirstProductInfo.MouseEnterImage = global::DQS.AppViews.QualityDocument.Properties.Resources.首营产品MouseEnter;
             this.tbtnFirstProductInfo.Name = "tbtnFirstProductInfo";
             this.tbtnFirstProductInfo.Size = new System.Drawing.Size(118, 126);
             this.tbtnFirstProductInfo.TabIndex = 12;
-            this.tbtnFirstProductInfo.Text = "首营药品";
+            this.tbtnFirstProductInfo.Text = "首营产品";
             // 
             // tbtnFirstDealerInfo
             // 

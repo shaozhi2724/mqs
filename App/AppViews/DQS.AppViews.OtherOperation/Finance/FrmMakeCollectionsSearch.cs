@@ -82,23 +82,19 @@ namespace DQS.AppViews.OtherOperation.Finance
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 string sqlBill = @"EXEC fn_ShowMakeCollectionsSearch '{0}','{1}','{2}','{3}'";
-
                 sqlBill = String.Format(sqlBill, txtDealerCode.Text.Trim(), txtBillCode.Text.Trim(),deStartDate.Text.Trim(),deEndDate.Text.Trim());
                 SqlDataAdapter sda = new SqlDataAdapter(sqlBill, conn);
                 DataSet ds = new DataSet();
                 try
                 {
                     sda.Fill(ds, "TableBill");
-                    decimal Price = 0;
-                    for (int i = 0; i < ds.Tables["TableBill"].Rows.Count; i++)
-                    {
-                        Price += Convert.ToDecimal(ds.Tables["TableBill"].Rows[i]["总金额"]);
-                    }
-                    lblTotalPrice.Text = Price.ToString();
                     gridControl.DataSource = ds.Tables["TableBill"];
                     gridView.OptionsView.ColumnAutoWidth = false;
                     gridView.BestFitColumns();
                     gridView.OptionsView.ShowGroupPanel = false;
+
+                    gridView.Columns["总金额"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                    gridView.Columns["总金额"].SummaryItem.DisplayFormat = "合计: {0}";
 
                     for (int i = 0; i < gridView.Columns.Count; i++)
                     {
@@ -123,7 +119,21 @@ namespace DQS.AppViews.OtherOperation.Finance
 
         private void txtChanged(object sender, EventArgs e)
         {
-            gridLoad();
+            //gridLoad();
+        }
+
+        private void gridView_DoubleClick(object sender, EventArgs e)
+        {
+            if (gridView.RowCount == 0)
+            {
+                return;
+            }
+            string sql = @"EXEC sp_MakeCollectionsSearchDetail'" + gridView.GetDataRow(gridView.FocusedRowHandle)["单据编号"].ToString() + "'";
+            using (FrmDetails fs = new FrmDetails())
+            {
+                fs.sqlConditions = sql;
+                DialogResult dr = fs.ShowDialog();
+            }
         }
     }
 }

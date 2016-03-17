@@ -43,6 +43,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
             this.cbxPhysicType.InitSource();
             this.cbxStockCondition.InitSource();
             this.cbxProductStyle.InitSource();
+            this.cboPurchaseTax.InitSource();
+            this.cboSaleTax.InitSource();
             this.cbxProductCycleStyle.InitSource();
             this.cbxIsForeignDrug.Checked = false;
             if (this.Tag != null)
@@ -161,6 +163,18 @@ WHERE UP.ProductID = {0}", productID);
                 cbxProductStyle.Focus();
                 return;
             }
+            if (null == cboPurchaseTax.SelectedValue)
+            {
+                XtraMessageBox.Show(cboPurchaseTax.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                cboPurchaseTax.Focus();
+                return;
+            }
+            if (null == cboSaleTax.SelectedValue)
+            {
+                XtraMessageBox.Show(cboSaleTax.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                cboSaleTax.Focus();
+                return;
+            }
             if (null == cbxStockCondition.SelectedValue)
             {
                 XtraMessageBox.Show(cbxStockCondition.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -209,6 +223,10 @@ WHERE UP.ProductID = {0}", productID);
                 needComparedFields.Add("ProductStyleID", layControl.GetItemByControl(cbxProductStyle).Text);
                 needComparedFields.Add("PhysicType", layControl.GetItemByControl(cbxPhysicType).Text);
                 needComparedFields.Add("ProductStyle", layControl.GetItemByControl(cbxProductStyle).Text);
+                needComparedFields.Add("PurchaseTaxID", layControl.GetItemByControl(cboPurchaseTax).Text);
+                needComparedFields.Add("PurchaseTax", layControl.GetItemByControl(cboPurchaseTax).Text);
+                needComparedFields.Add("SaleTaxID", layControl.GetItemByControl(cboSaleTax).Text);
+                needComparedFields.Add("SaleTax", layControl.GetItemByControl(cboSaleTax).Text);
                 needComparedFields.Add("StockCondition", layControl.GetItemByControl(cbxStockCondition).Text);
                 needComparedFields.Add("CycleType", layControl.GetItemByControl(cbxProductCycleStyle).Text);
                 needComparedFields.Add("IsUseToChildren",
@@ -226,6 +244,10 @@ WHERE UP.ProductID = {0}", productID);
                 needComparedControls.Add("ProductStyleID", cbxProductStyle.Name);
                 needComparedControls.Add("PhysicType", cbxPhysicType.Name);
                 needComparedControls.Add("ProductStyle", cbxProductStyle.Name);
+                needComparedControls.Add("PurchaseTaxID", cboPurchaseTax.Name);
+                needComparedControls.Add("PurchaseTax", cboPurchaseTax.Name);
+                needComparedControls.Add("SaleTaxID", cboSaleTax.Name);
+                needComparedControls.Add("SaleTax", cboSaleTax.Name);
                 needComparedControls.Add("StockCondition", cbxStockCondition.Name);
                 needComparedControls.Add("CycleType", cbxProductCycleStyle.Name);
                 needComparedControls.Add("IsUseToChildren", chkBoxUseDescription.Name);
@@ -254,7 +276,7 @@ WHERE UP.ProductID = {0}", productID);
                         {
                             AntiApproveID = antiApproveID
                         };
-                        antiApproveEntity.AntiApproveTitle = string.Format("{0} 于 {1} 申请变更首营药品信息",
+                        antiApproveEntity.AntiApproveTitle = string.Format("{0} 于 {1} 申请变更首营产品信息",
                             requestPerson, DateTime.Now.ToString("yyyy年M月d日 HH时m分"));
                         antiApproveEntity.DocumentCode = "FirstProduct";
                         antiApproveEntity.AntiApproveItemID = oldEntity.ProductID;
@@ -499,6 +521,16 @@ WHERE UP.ProductID = {0}", productID);
                 this.cbxProductStyle.SelectedValue = entity.ProductStyleID;
             }
 
+            if (!entity.IsNullField("PurchaseTaxID"))
+            {
+                this.cboPurchaseTax.SelectedValue = entity.PurchaseTaxID;
+            }
+
+            if (!entity.IsNullField("SaleTaxID"))
+            {
+                this.cboSaleTax.SelectedValue = entity.SaleTaxID;
+            }
+
             if (!entity.IsNullField("StockCondition"))
             {
                 this.cbxStockCondition.Text = entity.StockCondition;
@@ -566,6 +598,16 @@ WHERE UP.ProductID = {0}", productID);
                 entity.ProductStyleID = Convert.ToInt32(this.cbxProductStyle.SelectedValue);
                 entity.ProductStyle = this.cbxProductStyle.Text.Trim();
             }
+            if (this.cboPurchaseTax.SelectedValue != null)
+            {
+                entity.PurchaseTaxID = Convert.ToInt32(this.cboPurchaseTax.SelectedValue);
+                entity.PurchaseTax = this.cboPurchaseTax.Text.Trim();
+            }
+            if (this.cboSaleTax.SelectedValue != null)
+            {
+                entity.SaleTaxID = Convert.ToInt32(this.cboSaleTax.SelectedValue);
+                entity.SaleTax = this.cboSaleTax.Text.Trim();
+            }
             if (this.cbxProductCycleStyle.SelectedValue != null)
             {
                 entity.CycleType = this.cbxProductCycleStyle.Text;
@@ -602,7 +644,7 @@ WHERE UP.ProductID = {0}", productID);
                     法人委托书*/
                 if (tableName == "BFI_Product")
                 {
-                    DataTable requiredRecords = GlobalMethod.GetViewData(RequiredCertificatesViewName, "CertificateTypeName='药品证书'");
+                    DataTable requiredRecords = GlobalMethod.GetViewData(RequiredCertificatesViewName, "CertificateTypeName='产品证书'");
                     int i = 0;
                     foreach (DataRow item in requiredRecords.Rows)
                     {
@@ -615,9 +657,9 @@ WHERE UP.ProductID = {0}", productID);
                     "开户信息"
                     "税务登记证"
                     "组织机构代码证"
-                    "药品生产许可证"
-                    "药品GMP证书"
-                    "药品注册证"
+                    "产品生产许可证"
+                    "产品GMP证书"
+                    "产品注册证"
                     "说明书"
                     "外包装"
                     "检验报告"*/

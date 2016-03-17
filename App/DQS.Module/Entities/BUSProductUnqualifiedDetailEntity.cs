@@ -62,6 +62,12 @@ namespace DQS.Module.Entities
 			set { this.SetValue("DetailCause", value); } 
 		}
 
+        public int InStoreID
+		{
+            get { return (int)this.GetValue("InStoreID"); }
+            set { this.SetValue("InStoreID", value); } 
+		}
+
 		public Guid CreateUserID
 		{
 			get { return (Guid)this.GetValue("CreateUserID"); } 
@@ -164,6 +170,7 @@ namespace DQS.Module.Entities
 			this.Fields.Add("ValidateDate", BUSProductUnqualifiedDetailEntityFields.ValidateDate);
 			this.Fields.Add("Amount", BUSProductUnqualifiedDetailEntityFields.Amount);
 			this.Fields.Add("DetailCause", BUSProductUnqualifiedDetailEntityFields.DetailCause);
+            this.Fields.Add("InStoreID", BUSProductUnqualifiedDetailEntityFields.InStoreID);
 			this.Fields.Add("CreateUserID", BUSProductUnqualifiedDetailEntityFields.CreateUserID);
 			this.Fields.Add("CreateDate", BUSProductUnqualifiedDetailEntityFields.CreateDate);
 			this.Fields.Add("LastModifyUserID", BUSProductUnqualifiedDetailEntityFields.LastModifyUserID);
@@ -226,79 +233,84 @@ namespace DQS.Module.Entities
 			get { return new EntityField("BUS_ProductUnqualifiedDetail", 7, "DetailCause", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
+        public static EntityField InStoreID
+        {
+            get { return new EntityField("BUS_ProductUnqualifiedDetail", 8, "InStoreID", SqlDbType.Int, false, false, false, true); }
+        }
+
 		public static EntityField CreateUserID
 		{
-			get { return new EntityField("BUS_ProductUnqualifiedDetail", 8, "CreateUserID", SqlDbType.UniqueIdentifier, false, false, false, true); }
+			get { return new EntityField("BUS_ProductUnqualifiedDetail", 9, "CreateUserID", SqlDbType.UniqueIdentifier, false, false, false, true); }
 		}
 
 		public static EntityField CreateDate
 		{
-			get { return new EntityField("BUS_ProductUnqualifiedDetail", 9, "CreateDate", SqlDbType.DateTime, false, false, false, true); }
+			get { return new EntityField("BUS_ProductUnqualifiedDetail", 10, "CreateDate", SqlDbType.DateTime, false, false, false, true); }
 		}
 
 		public static EntityField LastModifyUserID
 		{
-			get { return new EntityField("BUS_ProductUnqualifiedDetail", 10, "LastModifyUserID", SqlDbType.UniqueIdentifier, false, false, false, true); }
+			get { return new EntityField("BUS_ProductUnqualifiedDetail", 11, "LastModifyUserID", SqlDbType.UniqueIdentifier, false, false, false, true); }
 		}
 
 		public static EntityField LastModifyDate
 		{
-			get { return new EntityField("BUS_ProductUnqualifiedDetail", 11, "LastModifyDate", SqlDbType.DateTime, false, false, false, true); }
+			get { return new EntityField("BUS_ProductUnqualifiedDetail", 12, "LastModifyDate", SqlDbType.DateTime, false, false, false, true); }
 		}
 
 		public static EntityField DetailRemark
 		{
-			get { return new EntityField("BUS_ProductUnqualifiedDetail", 12, "DetailRemark", SqlDbType.VarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductUnqualifiedDetail", 13, "DetailRemark", SqlDbType.VarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation1
 		{
-			get { return new EntityField("BUS_ProductUnqualifiedDetail", 13, "Reservation1", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductUnqualifiedDetail", 14, "Reservation1", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation2
 		{
-			get { return new EntityField("BUS_ProductUnqualifiedDetail", 14, "Reservation2", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductUnqualifiedDetail", 15, "Reservation2", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation3
 		{
-			get { return new EntityField("BUS_ProductUnqualifiedDetail", 15, "Reservation3", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductUnqualifiedDetail", 16, "Reservation3", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation4
 		{
-			get { return new EntityField("BUS_ProductUnqualifiedDetail", 16, "Reservation4", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductUnqualifiedDetail", 17, "Reservation4", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation5
 		{
-			get { return new EntityField("BUS_ProductUnqualifiedDetail", 17, "Reservation5", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductUnqualifiedDetail", 18, "Reservation5", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation6
 		{
-			get { return new EntityField("BUS_ProductUnqualifiedDetail", 18, "Reservation6", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductUnqualifiedDetail", 19, "Reservation6", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation7
 		{
-			get { return new EntityField("BUS_ProductUnqualifiedDetail", 19, "Reservation7", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductUnqualifiedDetail", 20, "Reservation7", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation8
 		{
-			get { return new EntityField("BUS_ProductUnqualifiedDetail", 20, "Reservation8", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductUnqualifiedDetail", 21, "Reservation8", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation9
 		{
-			get { return new EntityField("BUS_ProductUnqualifiedDetail", 21, "Reservation9", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductUnqualifiedDetail", 22, "Reservation9", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation10
 		{
-			get { return new EntityField("BUS_ProductUnqualifiedDetail", 22, "Reservation10", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductUnqualifiedDetail", 23, "Reservation10", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 	}
@@ -324,6 +336,8 @@ namespace DQS.Module.Entities
 		Amount,
 
 		DetailCause,
+
+        InStoreID,
 
 		CreateUserID,
 

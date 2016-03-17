@@ -280,7 +280,7 @@
             this.gpcRight.Name = "gpcRight";
             this.gpcRight.Size = new System.Drawing.Size(907, 169);
             this.gpcRight.TabIndex = 4;
-            this.gpcRight.Text = "药品类别清单";
+            this.gpcRight.Text = "产品类别清单";
             // 
             // chklbcProductStyle
             // 

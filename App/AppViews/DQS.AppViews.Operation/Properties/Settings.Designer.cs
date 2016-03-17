@@ -94,5 +94,17 @@ namespace DQS.AppViews.Operation.Properties {
                 this["IsUseDepartment"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsNewStoreDetail {
+            get {
+                return ((bool)(this["IsNewStoreDetail"]));
+            }
+            set {
+                this["IsNewStoreDetail"] = value;
+            }
+        }
     }
 }

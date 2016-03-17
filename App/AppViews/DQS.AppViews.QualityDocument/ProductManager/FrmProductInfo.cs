@@ -41,7 +41,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         protected override void CustomQualification()
         {
-            object id = gvData.GetFocusedRowCellValue("药品ID");
+            object id = gvData.GetFocusedRowCellValue("产品ID");
             if (id != null)
             {
                 using (FrmQualification frmQualification = new FrmQualification(Convert.ToInt32(id), "BFI_Product", "ProductID", "ProductCertificate"))

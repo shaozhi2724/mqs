@@ -43,6 +43,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
             this.cbxPhysicType.InitSource();
             this.cbxStockCondition.InitSource();
             this.cbxProductStyle.InitSource();
+            this.cboPurchaseTax.InitSource();
+            this.cboSaleTax.InitSource();
             this.cbxProductCycleStyle.InitSource();
             this.cbxIsForeignDrug.Checked = false;
             if (this.Tag != null)
@@ -161,6 +163,16 @@ WHERE UP.ProductID = {0}", productID);
                 this.cbxProductStyle.SelectedValue = entity.ProductStyleID;
             }
 
+            if (!entity.IsNullField("PurchaseTaxID"))
+            {
+                this.cboPurchaseTax.SelectedValue = entity.PurchaseTaxID;
+            }
+
+            if (!entity.IsNullField("SaleTaxID"))
+            {
+                this.cboSaleTax.SelectedValue = entity.SaleTaxID;
+            }
+
             if (!entity.IsNullField("StockCondition"))
             {
                 this.cbxStockCondition.Text = entity.StockCondition;
@@ -243,8 +255,8 @@ WHERE UP.ProductID = {0}", productID);
                 if (industryStyle == "生产厂商")
                 {
                     /*//如果是生产企业
-                        药品生产许可证
-                        药品GMP证书
+                        产品生产许可证
+                        产品GMP证书
                         印章印模
                         随货同行单
                          */
@@ -284,8 +296,8 @@ WHERE UP.ProductID = {0}", productID);
                     else
                     {
                         /*//如果是经营企业
-                        药品经营许可证
-                        药品GSP证书"*/
+                        产品经营许可证
+                        产品GSP证书"*/
                         certificateTypeName = "经营企业证书";
                     }
                     DataTable requiredRecords = GlobalMethod.GetViewData(RequiredCertificatesViewName,

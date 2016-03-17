@@ -47,12 +47,12 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
         /// </summary>
         private void BindAttachment()
         {
-            object productid = this.gridAcceptDetailControl.GridViewData.GetFocusedRowCellValue("药品ID");
+            object productid = this.gridAcceptDetailControl.GridViewData.GetFocusedRowCellValue("产品ID");
             object batchno = this.gridAcceptDetailControl.GridViewData.GetFocusedRowCellValue("批号");
             if (m_Id > 0 && productid != null && productid != DBNull.Value
                 && batchno != null && batchno != DBNull.Value)
             {
-                this.gridAttachmentControl.Filter = string.Format("验收ID = {0} AND 药品ID={1} AND 批号='{2}'", m_Id, Convert.ToInt32(productid), Convert.ToString(batchno));
+                this.gridAttachmentControl.Filter = string.Format("验收ID = {0} AND 产品ID={1} AND 批号='{2}'", m_Id, Convert.ToInt32(productid), Convert.ToString(batchno));
                 this.gridAttachmentControl.InitGrid();
             }
         }
@@ -63,7 +63,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
         }
         private void barBtnUpAttachment_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            object productid = this.gridAcceptDetailControl.GridViewData.GetFocusedRowCellValue("药品ID");
+            object productid = this.gridAcceptDetailControl.GridViewData.GetFocusedRowCellValue("产品ID");
             object batchno = this.gridAcceptDetailControl.GridViewData.GetFocusedRowCellValue("批号");
             if (m_Id > 0 && productid != null && productid != DBNull.Value
                 && batchno != null && batchno != DBNull.Value)

@@ -48,6 +48,7 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.gCDetails = new DevExpress.XtraGrid.GridControl();
             this.gVDetails = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gCBill)).BeginInit();
@@ -75,14 +76,14 @@
             this.panelControl2.Controls.Add(this.labelControl10);
             this.panelControl2.Location = new System.Drawing.Point(3, 422);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(875, 56);
+            this.panelControl2.Size = new System.Drawing.Size(944, 56);
             this.panelControl2.TabIndex = 11;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(766, 16);
+            this.btnCancel.Location = new System.Drawing.Point(835, 16);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(87, 27);
             this.btnCancel.TabIndex = 0;
@@ -91,7 +92,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(627, 16);
+            this.btnSave.Location = new System.Drawing.Point(696, 16);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(87, 27);
             this.btnSave.TabIndex = 0;
@@ -124,7 +125,7 @@
             this.gCBill.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1,
             this.repositoryItemCheckEdit1});
-            this.gCBill.Size = new System.Drawing.Size(875, 219);
+            this.gCBill.Size = new System.Drawing.Size(944, 219);
             this.gCBill.TabIndex = 10;
             this.gCBill.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gVBill});
@@ -156,6 +157,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelControl1.Controls.Add(this.ceAll);
             this.panelControl1.Controls.Add(this.deStartDate);
+            this.panelControl1.Controls.Add(this.btnSearch);
             this.panelControl1.Controls.Add(this.btnReSet);
             this.panelControl1.Controls.Add(this.txtBillCode);
             this.panelControl1.Controls.Add(this.txtDealerCode);
@@ -164,13 +166,13 @@
             this.panelControl1.Controls.Add(this.labelControl1);
             this.panelControl1.Location = new System.Drawing.Point(3, 3);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(875, 58);
+            this.panelControl1.Size = new System.Drawing.Size(944, 58);
             this.panelControl1.TabIndex = 9;
             // 
             // ceAll
             // 
             this.ceAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ceAll.Location = new System.Drawing.Point(803, 20);
+            this.ceAll.Location = new System.Drawing.Point(872, 20);
             this.ceAll.Name = "ceAll";
             this.ceAll.Properties.Caption = "全选";
             this.ceAll.Size = new System.Drawing.Size(50, 19);
@@ -193,13 +195,11 @@
             // 
             // btnReSet
             // 
-            this.btnReSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReSet.Location = new System.Drawing.Point(680, 16);
+            this.btnReSet.Location = new System.Drawing.Point(749, 16);
             this.btnReSet.Name = "btnReSet";
             this.btnReSet.Size = new System.Drawing.Size(87, 27);
             this.btnReSet.TabIndex = 0;
             this.btnReSet.Text = "重置";
-            this.btnReSet.Visible = false;
             this.btnReSet.Click += new System.EventHandler(this.btnReSet_Click);
             // 
             // txtBillCode
@@ -250,7 +250,7 @@
             this.gCDetails.Location = new System.Drawing.Point(3, 284);
             this.gCDetails.MainView = this.gVDetails;
             this.gCDetails.Name = "gCDetails";
-            this.gCDetails.Size = new System.Drawing.Size(875, 136);
+            this.gCDetails.Size = new System.Drawing.Size(944, 136);
             this.gCDetails.TabIndex = 12;
             this.gCDetails.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gVDetails});
@@ -263,11 +263,20 @@
             this.gVDetails.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gVDetails_CustomDrawRowIndicator);
             this.gVDetails.Click += new System.EventHandler(this.gVDetails_Click);
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(656, 16);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(87, 27);
+            this.btnSearch.TabIndex = 0;
+            this.btnSearch.Text = "查询";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // FrmChooseBill
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(882, 482);
+            this.ClientSize = new System.Drawing.Size(951, 482);
             this.Controls.Add(this.gCDetails);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.gCBill);
@@ -321,5 +330,6 @@
         private DevExpress.XtraEditors.LabelControl lblTotalPrice;
         private DevExpress.XtraEditors.SimpleButton btnReSet;
         private DevExpress.XtraEditors.CheckEdit ceAll;
+        private DevExpress.XtraEditors.SimpleButton btnSearch;
     }
 }

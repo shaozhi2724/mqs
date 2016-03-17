@@ -341,7 +341,7 @@
             this.gpcBusinessRange.Name = "gpcBusinessRange";
             this.gpcBusinessRange.Size = new System.Drawing.Size(839, 157);
             this.gpcBusinessRange.TabIndex = 5;
-            this.gpcBusinessRange.Text = "药品类别清单";
+            this.gpcBusinessRange.Text = "产品类别清单";
             // 
             // chklbcProductStyle
             // 

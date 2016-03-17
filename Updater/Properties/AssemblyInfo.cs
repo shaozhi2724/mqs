@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("DQS药品经营质量管理系统升级程序")]
+[assembly: AssemblyTitle("DQS产品经营质量管理系统升级程序")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("北京博科智信科技有限公司")]
-[assembly: AssemblyProduct("DQS药品经营质量管理系统升级程序")]
+[assembly: AssemblyProduct("DQS产品经营质量管理系统升级程序")]
 [assembly: AssemblyCopyright("Copyright © bokesys 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

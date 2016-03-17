@@ -14,28 +14,28 @@ namespace DQS.Module.Views
 {
 	public class AllProductView : ViewBase
 	{
-		public int 药品ID
+		public int 产品ID
 		{
-			get { return (int)this.GetValue("药品ID"); } 
-			set { this.SetValue("药品ID", value); } 
+			get { return (int)this.GetValue("产品ID"); } 
+			set { this.SetValue("产品ID", value); } 
 		}
 
-		public string 药品编号
+		public string 产品编号
 		{
-			get { return (string)this.GetValue("药品编号"); } 
-			set { this.SetValue("药品编号", value); } 
+			get { return (string)this.GetValue("产品编号"); } 
+			set { this.SetValue("产品编号", value); } 
 		}
 
-		public string 药品名称
+		public string 产品名称
 		{
-			get { return (string)this.GetValue("药品名称"); } 
-			set { this.SetValue("药品名称", value); } 
+			get { return (string)this.GetValue("产品名称"); } 
+			set { this.SetValue("产品名称", value); } 
 		}
 
-		public string 药品名称Spell
+		public string 产品名称Spell
 		{
-			get { return (string)this.GetValue("药品名称Spell"); } 
-			set { this.SetValue("药品名称Spell", value); } 
+			get { return (string)this.GetValue("产品名称Spell"); } 
+			set { this.SetValue("产品名称Spell", value); } 
 		}
 
 		public string 通用名称
@@ -68,10 +68,10 @@ namespace DQS.Module.Views
 			set { this.SetValue("商品条码", value); } 
 		}
 
-		public string 规格
+		public string 规格型号
 		{
-			get { return (string)this.GetValue("规格"); } 
-			set { this.SetValue("规格", value); } 
+			get { return (string)this.GetValue("规格型号"); } 
+			set { this.SetValue("规格型号", value); } 
 		}
 
 		public string 单位
@@ -82,8 +82,8 @@ namespace DQS.Module.Views
 
 		public string 包装规格
 		{
-			get { return (string)this.GetValue("包装规格"); } 
-			set { this.SetValue("包装规格", value); } 
+			get { return (string)this.GetValue("包装规格型号"); } 
+			set { this.SetValue("包装规格型号", value); } 
 		}
 
 		public string 剂型
@@ -92,16 +92,16 @@ namespace DQS.Module.Views
 			set { this.SetValue("剂型", value); } 
 		}
 
-		public string 药品类别
+		public string 产品类别
 		{
-			get { return (string)this.GetValue("药品类别"); } 
-			set { this.SetValue("药品类别", value); } 
+			get { return (string)this.GetValue("产品类别"); } 
+			set { this.SetValue("产品类别", value); } 
 		}
 
-		public string 批准文号
+		public string 注册证号
 		{
-			get { return (string)this.GetValue("批准文号"); } 
-			set { this.SetValue("批准文号", value); } 
+			get { return (string)this.GetValue("注册证号"); } 
+			set { this.SetValue("注册证号", value); } 
 		}
 
 		public string 生产厂商
@@ -158,10 +158,10 @@ namespace DQS.Module.Views
 			set { this.SetValue("联系人电话", value); } 
 		}
 
-		public bool 是否是电子监管药品
+		public bool 是否是电子监管产品
 		{
-			get { return (bool)this.GetValue("是否是电子监管药品"); } 
-			set { this.SetValue("是否是电子监管药品", value); } 
+			get { return (bool)this.GetValue("是否是电子监管产品"); } 
+			set { this.SetValue("是否是电子监管产品", value); } 
 		}
 
 		public string 监管标识条码
@@ -290,10 +290,10 @@ namespace DQS.Module.Views
 			set { this.SetValue("执行标准", value); } 
 		}
 
-		public string 注册证号
+		public string 注册商标
 		{
-			get { return (string)this.GetValue("注册证号"); } 
-			set { this.SetValue("注册证号", value); } 
+            get { return (string)this.GetValue("注册商标"); }
+            set { this.SetValue("注册商标", value); } 
 		}
 
 		public string 说明书内容
@@ -356,31 +356,31 @@ namespace DQS.Module.Views
 			set { this.SetValue("最后修改时间", value); } 
 		}
 
-		public string 药品备注
+		public string 产品备注
 		{
-			get { return (string)this.GetValue("药品备注"); } 
-			set { this.SetValue("药品备注", value); } 
+			get { return (string)this.GetValue("产品备注"); } 
+			set { this.SetValue("产品备注", value); } 
 		}
 
 		public AllProductView()
 		{
 			this.ViewName = "vw_AllProduct";
 			this.Fields = new Dictionary<string, EntityField>();
-			this.Fields.Add("药品ID", AllProductViewFields.药品ID);
-			this.Fields.Add("药品编号", AllProductViewFields.药品编号);
-			this.Fields.Add("药品名称", AllProductViewFields.药品名称);
-			this.Fields.Add("药品名称Spell", AllProductViewFields.药品名称Spell);
+			this.Fields.Add("产品ID", AllProductViewFields.产品ID);
+			this.Fields.Add("产品编号", AllProductViewFields.产品编号);
+			this.Fields.Add("产品名称", AllProductViewFields.产品名称);
+			this.Fields.Add("产品名称Spell", AllProductViewFields.产品名称Spell);
 			this.Fields.Add("通用名称", AllProductViewFields.通用名称);
 			this.Fields.Add("商品名称", AllProductViewFields.商品名称);
 			this.Fields.Add("英文名称", AllProductViewFields.英文名称);
 			this.Fields.Add("汉语拼音", AllProductViewFields.汉语拼音);
 			this.Fields.Add("商品条码", AllProductViewFields.商品条码);
-			this.Fields.Add("规格", AllProductViewFields.规格);
+			this.Fields.Add("规格型号", AllProductViewFields.规格型号);
 			this.Fields.Add("单位", AllProductViewFields.单位);
-			this.Fields.Add("包装规格", AllProductViewFields.包装规格);
+			this.Fields.Add("包装规格型号", AllProductViewFields.包装规格);
 			this.Fields.Add("剂型", AllProductViewFields.剂型);
-			this.Fields.Add("药品类别", AllProductViewFields.药品类别);
-			this.Fields.Add("批准文号", AllProductViewFields.批准文号);
+			this.Fields.Add("产品类别", AllProductViewFields.产品类别);
+			this.Fields.Add("注册证号", AllProductViewFields.注册证号);
 			this.Fields.Add("生产厂商", AllProductViewFields.生产厂商);
 			this.Fields.Add("厂商Spell", AllProductViewFields.厂商Spell);
 			this.Fields.Add("生产地址", AllProductViewFields.生产地址);
@@ -390,7 +390,7 @@ namespace DQS.Module.Views
 			this.Fields.Add("联系人", AllProductViewFields.联系人);
 			this.Fields.Add("联系人Spell", AllProductViewFields.联系人Spell);
 			this.Fields.Add("联系人电话", AllProductViewFields.联系人电话);
-			this.Fields.Add("是否是电子监管药品", AllProductViewFields.是否是电子监管药品);
+			this.Fields.Add("是否是电子监管产品", AllProductViewFields.是否是电子监管产品);
 			this.Fields.Add("监管标识条码", AllProductViewFields.监管标识条码);
 			this.Fields.Add("库存下限预警数量", AllProductViewFields.库存下限预警数量);
 			this.Fields.Add("批号提前预警天数", AllProductViewFields.批号提前预警天数);
@@ -423,7 +423,7 @@ namespace DQS.Module.Views
 			this.Fields.Add("创建日期", AllProductViewFields.创建日期);
 			this.Fields.Add("最后修改人", AllProductViewFields.最后修改人);
 			this.Fields.Add("最后修改时间", AllProductViewFields.最后修改时间);
-			this.Fields.Add("药品备注", AllProductViewFields.药品备注);
+			this.Fields.Add("产品备注", AllProductViewFields.产品备注);
 		}
 	}
 
@@ -431,24 +431,24 @@ namespace DQS.Module.Views
 
 	public class AllProductViewFields
 	{
-		public static EntityField 药品ID
+		public static EntityField 产品ID
 		{
-			get { return new EntityField("vw_AllProduct", 0, "药品ID", SqlDbType.Int); }
+			get { return new EntityField("vw_AllProduct", 0, "产品ID", SqlDbType.Int); }
 		}
 
-		public static EntityField 药品编号
+		public static EntityField 产品编号
 		{
-			get { return new EntityField("vw_AllProduct", 1, "药品编号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProduct", 1, "产品编号", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品名称
+		public static EntityField 产品名称
 		{
-			get { return new EntityField("vw_AllProduct", 2, "药品名称", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProduct", 2, "产品名称", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品名称Spell
+		public static EntityField 产品名称Spell
 		{
-			get { return new EntityField("vw_AllProduct", 3, "药品名称Spell", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProduct", 3, "产品名称Spell", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 通用名称
@@ -476,9 +476,9 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllProduct", 8, "商品条码", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 规格
+		public static EntityField 规格型号
 		{
-			get { return new EntityField("vw_AllProduct", 9, "规格", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProduct", 9, "规格型号", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 单位
@@ -488,7 +488,7 @@ namespace DQS.Module.Views
 
 		public static EntityField 包装规格
 		{
-			get { return new EntityField("vw_AllProduct", 11, "包装规格", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProduct", 11, "包装规格型号", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 剂型
@@ -496,14 +496,14 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllProduct", 12, "剂型", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品类别
+		public static EntityField 产品类别
 		{
-			get { return new EntityField("vw_AllProduct", 13, "药品类别", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProduct", 13, "产品类别", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 批准文号
+		public static EntityField 注册证号
 		{
-			get { return new EntityField("vw_AllProduct", 14, "批准文号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProduct", 14, "注册证号", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 生产厂商
@@ -551,9 +551,9 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllProduct", 23, "联系人电话", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 是否是电子监管药品
+		public static EntityField 是否是电子监管产品
 		{
-			get { return new EntityField("vw_AllProduct", 24, "是否是电子监管药品", SqlDbType.Bit); }
+			get { return new EntityField("vw_AllProduct", 24, "是否是电子监管产品", SqlDbType.Bit); }
 		}
 
 		public static EntityField 监管标识条码
@@ -661,9 +661,9 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllProduct", 45, "执行标准", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 注册证号
+		public static EntityField 注册商标
 		{
-			get { return new EntityField("vw_AllProduct", 46, "注册证号", SqlDbType.NVarChar); }
+            get { return new EntityField("vw_AllProduct", 46, "注册商标", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 说明书内容
@@ -716,9 +716,9 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllProduct", 56, "最后修改时间", SqlDbType.DateTime); }
 		}
 
-		public static EntityField 药品备注
+		public static EntityField 产品备注
 		{
-			get { return new EntityField("vw_AllProduct", 57, "药品备注", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProduct", 57, "产品备注", SqlDbType.NVarChar); }
 		}
 
 	}

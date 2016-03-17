@@ -74,22 +74,22 @@ namespace DQS.Module.Views
 			set { this.SetValue("接线员Spell", value); } 
 		}
 
-		public string 药品编号
+		public string 产品编号
 		{
-			get { return (string)this.GetValue("药品编号"); } 
-			set { this.SetValue("药品编号", value); } 
+			get { return (string)this.GetValue("产品编号"); } 
+			set { this.SetValue("产品编号", value); } 
 		}
 
-		public string 药品名称
+		public string 产品名称
 		{
-			get { return (string)this.GetValue("药品名称"); } 
-			set { this.SetValue("药品名称", value); } 
+			get { return (string)this.GetValue("产品名称"); } 
+			set { this.SetValue("产品名称", value); } 
 		}
 
-		public string 规格
+		public string 规格型号
 		{
-			get { return (string)this.GetValue("规格"); } 
-			set { this.SetValue("规格", value); } 
+			get { return (string)this.GetValue("规格型号"); } 
+			set { this.SetValue("规格型号", value); } 
 		}
 
 		public string 生产厂商
@@ -98,10 +98,10 @@ namespace DQS.Module.Views
 			set { this.SetValue("生产厂商", value); } 
 		}
 
-		public string 批准文号
+		public string 注册证号
 		{
-			get { return (string)this.GetValue("批准文号"); } 
-			set { this.SetValue("批准文号", value); } 
+			get { return (string)this.GetValue("注册证号"); } 
+			set { this.SetValue("注册证号", value); } 
 		}
 
 		public string 批号
@@ -190,11 +190,11 @@ namespace DQS.Module.Views
 			this.Fields.Add("使用人所在医院", AllAdverseReactionViewFields.使用人所在医院);
 			this.Fields.Add("接线员", AllAdverseReactionViewFields.接线员);
 			this.Fields.Add("接线员Spell", AllAdverseReactionViewFields.接线员Spell);
-			this.Fields.Add("药品编号", AllAdverseReactionViewFields.药品编号);
-			this.Fields.Add("药品名称", AllAdverseReactionViewFields.药品名称);
-			this.Fields.Add("规格", AllAdverseReactionViewFields.规格);
+			this.Fields.Add("产品编号", AllAdverseReactionViewFields.产品编号);
+			this.Fields.Add("产品名称", AllAdverseReactionViewFields.产品名称);
+			this.Fields.Add("规格型号", AllAdverseReactionViewFields.规格型号);
 			this.Fields.Add("生产厂商", AllAdverseReactionViewFields.生产厂商);
-			this.Fields.Add("批准文号", AllAdverseReactionViewFields.批准文号);
+			this.Fields.Add("注册证号", AllAdverseReactionViewFields.注册证号);
 			this.Fields.Add("批号", AllAdverseReactionViewFields.批号);
 			this.Fields.Add("不良反应症状", AllAdverseReactionViewFields.不良反应症状);
 			this.Fields.Add("调查情况", AllAdverseReactionViewFields.调查情况);
@@ -264,19 +264,19 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllAdverseReaction", 9, "接线员Spell", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品编号
+		public static EntityField 产品编号
 		{
-			get { return new EntityField("vw_AllAdverseReaction", 10, "药品编号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllAdverseReaction", 10, "产品编号", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品名称
+		public static EntityField 产品名称
 		{
-			get { return new EntityField("vw_AllAdverseReaction", 11, "药品名称", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllAdverseReaction", 11, "产品名称", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 规格
+		public static EntityField 规格型号
 		{
-			get { return new EntityField("vw_AllAdverseReaction", 12, "规格", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllAdverseReaction", 12, "规格型号", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 生产厂商
@@ -284,9 +284,9 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllAdverseReaction", 13, "生产厂商", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 批准文号
+		public static EntityField 注册证号
 		{
-			get { return new EntityField("vw_AllAdverseReaction", 14, "批准文号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllAdverseReaction", 14, "注册证号", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 批号

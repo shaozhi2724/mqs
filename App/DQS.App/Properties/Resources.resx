@@ -130,7 +130,7 @@
   <data name="不合格品汇总统计" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\不合格品汇总统计.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="不合格药品处理" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="不合格产品处理" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\不合格药品处理.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="业务管理Moudle" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -187,7 +187,7 @@
   <data name="功能权限控制" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\功能权限控制.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="在库药品查询" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="在库产品查询" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\在库药品查询.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="存储单位设定" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -241,9 +241,6 @@
   <data name="登录" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\登录.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="登录背景" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\登录背景.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="登录背景2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\登录背景2.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -265,19 +262,19 @@
   <data name="职工培训计划" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\职工培训计划.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="药品不良反应记录" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="产品不良反应记录" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\药品不良反应记录.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="药品信息" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="产品信息" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\药品信息.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="药品存放位置" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="产品存放位置" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\药品存放位置.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="药品销毁处理" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="产品销毁处理" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\药品销毁处理.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="药品锁定" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="产品锁定" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\药品锁定.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="角色管理" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -337,10 +334,19 @@
   <data name="首营单位" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\首营单位.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="首营药品" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="首营产品" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\首营药品.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="验收单管理" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\验收单管理.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="登录背景" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\登录背景.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="jd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

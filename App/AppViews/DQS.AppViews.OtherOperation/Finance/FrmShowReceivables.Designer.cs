@@ -187,6 +187,7 @@
             this.lblTotalPrice.Name = "lblTotalPrice";
             this.lblTotalPrice.Size = new System.Drawing.Size(0, 14);
             this.lblTotalPrice.TabIndex = 6;
+            this.lblTotalPrice.Visible = false;
             // 
             // labelControl8
             // 
@@ -195,6 +196,7 @@
             this.labelControl8.Size = new System.Drawing.Size(60, 14);
             this.labelControl8.TabIndex = 7;
             this.labelControl8.Text = "查询总计：";
+            this.labelControl8.Visible = false;
             // 
             // deEndDate
             // 
@@ -319,6 +321,7 @@
             this.gridView.GridControl = this.gridControl;
             this.gridView.IndicatorWidth = 40;
             this.gridView.Name = "gridView";
+            this.gridView.OptionsView.ShowFooter = true;
             this.gridView.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
             this.gridView.DoubleClick += new System.EventHandler(this.gridView_DoubleClick);
             // 

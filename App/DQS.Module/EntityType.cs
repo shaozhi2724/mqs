@@ -211,13 +211,30 @@ namespace DQS.Module
         {
             get { return new BUSBillEntity(); }
         }
+
         public static EntityBase BUSOnlyBillEntity
         {
             get { return new BUSOnlyBillEntity(); }
         }
+
         public static EntityBase BUSOnlyBillDetailEntity
         {
             get { return new BUSOnlyBillDetailEntity(); }
+        }
+
+        public static EntityBase BUSInStoreDetailEntity
+        {
+            get { return new BUSInStoreDetailEntity(); }
+        }
+
+        public static EntityBase BUSOutStoreDetailEntity
+        {
+            get { return new BUSOutStoreDetailEntity(); }
+        }
+
+        public static EntityBase BUSNEWStoreDetailEntity
+        {
+            get { return new BUSNEWStoreDetailEntity(); }
         }
 
         public static EntityBase BUSBillChangeHistoryEntity
@@ -479,6 +496,11 @@ namespace DQS.Module
         {
             get { return new WMSRegulatoryCodeEntity(); }
         }
+
+        public static EntityBase BUSBeginInventoryEntity
+        {
+            get { return new BUSBeginInventoryEntity(); }
+        }
     }
 
     #region EntityType2
@@ -672,6 +694,8 @@ namespace DQS.Module
         SYSPageFunctionEntity,
 
         WMSRegulatoryCodeEntity,
+
+        BUSBeginInventoryEntity
 
     }
 

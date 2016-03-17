@@ -440,6 +440,36 @@ namespace DQS.Module.Entities
 			set { this.SetValue("Reservation10", value); } 
 		}
 
+		public string Reservation11
+		{
+            get { return (string)this.GetValue("Reservation11"); }
+            set { this.SetValue("Reservation11", value); } 
+		}
+
+		public string Reservation12
+		{
+            get { return (string)this.GetValue("Reservation12"); }
+            set { this.SetValue("Reservation12", value); } 
+		}
+
+		public string Reservation13
+		{
+            get { return (string)this.GetValue("Reservation13"); }
+            set { this.SetValue("Reservation13", value); } 
+		}
+
+		public string Reservation14
+		{
+            get { return (string)this.GetValue("Reservation14"); }
+            set { this.SetValue("Reservation14", value); } 
+		}
+
+		public string Reservation15
+		{
+            get { return (string)this.GetValue("Reservation15"); }
+            set { this.SetValue("Reservation15", value); } 
+		}
+
 		public BUSBillEntity()
 		{
 			this.TableName = "BUS_Bill";
@@ -513,6 +543,11 @@ namespace DQS.Module.Entities
 			this.Fields.Add("Reservation8", BUSBillEntityFields.Reservation8);
 			this.Fields.Add("Reservation9", BUSBillEntityFields.Reservation9);
 			this.Fields.Add("Reservation10", BUSBillEntityFields.Reservation10);
+			this.Fields.Add("Reservation11", BUSBillEntityFields.Reservation11);
+			this.Fields.Add("Reservation12", BUSBillEntityFields.Reservation12);
+			this.Fields.Add("Reservation13", BUSBillEntityFields.Reservation13);
+			this.Fields.Add("Reservation14", BUSBillEntityFields.Reservation14);
+            this.Fields.Add("Reservation15", BUSBillEntityFields.Reservation15);
 		}
 	}
 
@@ -871,6 +906,31 @@ namespace DQS.Module.Entities
 			get { return new EntityField("BUS_Bill", 68, "Reservation10", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
+        public static EntityField Reservation11
+        {
+            get { return new EntityField("BUS_Bill", 69, "Reservation11", SqlDbType.NVarChar, false, false, false, true); }
+        }
+
+        public static EntityField Reservation12
+        {
+            get { return new EntityField("BUS_Bill", 70, "Reservation12", SqlDbType.NVarChar, false, false, false, true); }
+        }
+
+        public static EntityField Reservation13
+        {
+            get { return new EntityField("BUS_Bill", 71, "Reservation13", SqlDbType.NVarChar, false, false, false, true); }
+        }
+
+        public static EntityField Reservation14
+        {
+            get { return new EntityField("BUS_Bill", 72, "Reservation14", SqlDbType.NVarChar, false, false, false, true); }
+        }
+
+        public static EntityField Reservation15
+        {
+            get { return new EntityField("BUS_Bill", 73, "Reservation15", SqlDbType.NVarChar, false, false, false, true); }
+        }
+
 	}
 
 	#endregion
@@ -1017,6 +1077,15 @@ namespace DQS.Module.Entities
 
 		Reservation10,
 
+		Reservation11,
+
+		Reservation12,
+
+		Reservation13,
+
+		Reservation14,
+
+		Reservation15,
 	}
 
 	#endregion

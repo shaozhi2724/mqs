@@ -78,6 +78,7 @@
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.meAlter);
             this.Name = "FrmAlter";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "修改原因";
             ((System.ComponentModel.ISupportInitialize)(this.meAlter.Properties)).EndInit();

@@ -114,11 +114,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="StatManager\FrmChooseSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmChooseSearch.Designer.cs">
+      <DependentUpon>FrmChooseSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="StatManager\FrmGridViewer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="StatManager\FrmGridViewer.Designer.cs">
       <DependentUpon>FrmGridViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmNewGridViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmNewGridViewer.Designer.cs">
+      <DependentUpon>FrmNewGridViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="StatManager\FrmPastProductStoreDeatils.cs">
       <SubType>Form</SubType>
@@ -216,6 +228,10 @@
     <Compile Include="StatManager\FrmSummaryUnqualified.Designer.cs">
       <DependentUpon>FrmSummaryUnqualified.cs</DependentUpon>
     </Compile>
+    <Compile Include="StatManager\GetPY.cs" />
+    <Compile Include="StatManager\Text.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FrmStatReport.resx">
@@ -225,8 +241,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmChooseSearch.resx">
+      <DependentUpon>FrmChooseSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StatManager\FrmGridViewer.resx">
       <DependentUpon>FrmGridViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmNewGridViewer.resx">
+      <DependentUpon>FrmNewGridViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StatManager\FrmPastProductStoreDeatils.resx">
       <DependentUpon>FrmPastProductStoreDeatils.cs</DependentUpon>

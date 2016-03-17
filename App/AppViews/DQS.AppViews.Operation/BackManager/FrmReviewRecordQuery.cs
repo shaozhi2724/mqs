@@ -119,7 +119,7 @@ namespace DQS.AppViews.Operation.BackManager
                 DataTable data = GlobalMethod.GetReviewDetialByProduct(reviewCode.ToString());
                 this.gvDetails.DataSource = data;
                 var gridView = gvDetails.MainView as GridView;
-                gridView.Columns["药品ID"].VisibleIndex = -1;
+                gridView.Columns["产品ID"].VisibleIndex = -1;
                 gridView.BestFitColumns();
             }
         }
@@ -238,7 +238,7 @@ namespace DQS.AppViews.Operation.BackManager
             var rowIndexes = gvData.GetSelectedRows().Where(p => p >= 0).ToArray();
             if(rowIndexes.Length == 0)
             {
-                XtraMessageBox.Show("请选择要退回的药品明细！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show("请选择要退回的产品明细！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             List<DataRow> rows = new List<DataRow>();

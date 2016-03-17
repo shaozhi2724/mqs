@@ -96,6 +96,8 @@ namespace DQS.AppViews.OtherOperation.BillPriceManager
                 this.CustomSetEntity(entity);
                 if (entity.IsNew(BUSBillPriceHistoryEntityFields.BillPriceHistoryCode == entity.BillPriceHistoryCode))
                 {
+                    entity.BillStatus = 1;
+                    entity.BillStatusName = "已下单";
                     entity.Save();
                 }
                 else
@@ -117,8 +119,6 @@ namespace DQS.AppViews.OtherOperation.BillPriceManager
 
                     child.CreateDate = DateTime.Now;
                     child.CreateUserName = GlobalItem.g_CurrentEmployee != null ? GlobalItem.g_CurrentEmployee.EmployeeName : GlobalItem.g_CurrentUser.UserName;
-                    entity.BillStatus = 1;
-                    entity.BillStatusName = "已下单";
                     child.Save();
                 }
 
@@ -126,7 +126,7 @@ namespace DQS.AppViews.OtherOperation.BillPriceManager
                 EntityCollection<ATCUserPageEntity> userPages = new EntityCollection<ATCUserPageEntity>();
                 PredicateExpression pe = new PredicateExpression();
                 pe.Add(ATCUserPageEntityFields.UserID == GlobalItem.g_CurrentUser.UserID);
-                pe.Add(ATCUserPageEntityFields.DocumentCode == "PurchaseBillPrice");
+                pe.Add(ATCUserPageEntityFields.DocumentCode == "PurchaseBackBillPrice");
                 DataTable data = userPages.FetchTable(pe);
 
                 if (data.Rows.Count > 0)
@@ -137,7 +137,7 @@ namespace DQS.AppViews.OtherOperation.BillPriceManager
 
                     ATCApproveEntity approveEntity = new ATCApproveEntity();
                     approveEntity.InternalNo = entity.BillPriceHistoryCode;
-                    approveEntity.DocumentCode = "PurchaseBillPrice";
+                    approveEntity.DocumentCode = "PurchaseBackBillPrice";
                     approveEntity.BillCode = entity.BillPriceHistoryCode;
                     approveEntity.ApproveTitle = string.Format("采购退货调价(正常)，编号：{0}", entity.BillPriceHistoryCode);
                     approveEntity.ApprovalContent = String.Format("采购退货调价(正常) {0} 申请审批。", entity.BillPriceHistoryCode);

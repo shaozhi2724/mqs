@@ -24,11 +24,14 @@ namespace DQS.AppViews.OtherOperation.Finance
 
         private void FrmShowPaymentBill_Load(object sender, EventArgs e)
         {
-            gridLoad();
+            deStartDate.Text = DateTime.Today.ToString("d");
+            deEndDate.Text = DateTime.Today.ToString("d");
+            //gridLoad();
         }
 
         private void gridLoad()
         {
+            sqlSearch = " AND (BillingDate BETWEEN '" + deStartDate.Text.Trim() + " 00:00:00' AND '" + deEndDate.Text.Trim() + " 23:59:59')";
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 string sql = @"SELECT 
@@ -78,7 +81,7 @@ namespace DQS.AppViews.OtherOperation.Finance
 
         private void txtChanged(object sender, EventArgs e)
         {
-            gridLoad();
+            //gridLoad();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -135,18 +138,26 @@ DELETE dbo.FIN_PaymentBillDetail WHERE {0}";
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            sqlSearch = " AND (md.BusinessBillDate BETWEEN '" + deStartDate.Text.Trim() + " 00:00:00' AND '" + deEndDate.Text.Trim() + " 23:59:59')";
             gridLoad();
         }
 
         private void btnReSet_Click(object sender, EventArgs e)
         {
-            sqlSearch = "";
             txtBillCode.Text = "";
             txtDealerCode.Text = "";
             txtBillingCode.Text = "";
             txtVoucherCode.Text = "";
             gridLoad();
+        }
+
+        private void gridView_DoubleClick(object sender, EventArgs e)
+        {
+            string sql = @"EXEC sp_PaymentBillDetail '" + gridView.GetDataRow(gridView.FocusedRowHandle)["自动生成单号"].ToString() + "'";
+            using (FrmDetails fs = new FrmDetails())
+            {
+                fs.sqlConditions = sql;
+                DialogResult dr = fs.ShowDialog();
+            }
         }
     }
 }

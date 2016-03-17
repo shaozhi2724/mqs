@@ -34,12 +34,12 @@
             this.lblPassword = new DevExpress.XtraEditors.LabelControl();
             this.btnLogin = new DevExpress.XtraEditors.SimpleButton();
             this.btnClose = new DevExpress.XtraEditors.SimpleButton();
-            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.txtPassword = new DQS.Controls.TextBoxEx();
             this.txtUserCode = new DQS.Controls.TextBoxEx();
             this.lblUserError = new DevExpress.XtraEditors.LabelControl();
             this.lblPasswordError = new DevExpress.XtraEditors.LabelControl();
             this.btnDbConnect = new DevExpress.XtraEditors.SimpleButton();
+            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUserCode.Properties)).BeginInit();
             this.SuspendLayout();
@@ -50,7 +50,8 @@
             this.lblUserCode.Appearance.ForeColor = System.Drawing.Color.White;
             this.lblUserCode.Appearance.Options.UseFont = true;
             this.lblUserCode.Appearance.Options.UseForeColor = true;
-            this.lblUserCode.Location = new System.Drawing.Point(512, 138);
+            this.lblUserCode.Location = new System.Drawing.Point(512, 115);
+            this.lblUserCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lblUserCode.Name = "lblUserCode";
             this.lblUserCode.Size = new System.Drawing.Size(46, 17);
             this.lblUserCode.TabIndex = 0;
@@ -62,7 +63,8 @@
             this.lblPassword.Appearance.ForeColor = System.Drawing.Color.White;
             this.lblPassword.Appearance.Options.UseFont = true;
             this.lblPassword.Appearance.Options.UseForeColor = true;
-            this.lblPassword.Location = new System.Drawing.Point(512, 193);
+            this.lblPassword.Location = new System.Drawing.Point(512, 181);
+            this.lblPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(45, 17);
             this.lblPassword.TabIndex = 2;
@@ -72,9 +74,10 @@
             // 
             this.btnLogin.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.Appearance.Options.UseFont = true;
-            this.btnLogin.Location = new System.Drawing.Point(507, 252);
+            this.btnLogin.Location = new System.Drawing.Point(507, 253);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnLogin.Size = new System.Drawing.Size(75, 28);
             this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "登录(&L)";
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -84,16 +87,13 @@
             this.btnClose.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Appearance.Options.UseFont = true;
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(690, 252);
+            this.btnClose.Location = new System.Drawing.Point(690, 253);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.Size = new System.Drawing.Size(75, 28);
             this.btnClose.TabIndex = 4;
             this.btnClose.Text = "关闭(&C)";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // defaultLookAndFeel
-            // 
-            this.defaultLookAndFeel.LookAndFeel.SkinName = "McSkin";
             // 
             // txtPassword
             // 
@@ -102,7 +102,8 @@
             this.txtPassword.IsNullString = null;
             this.txtPassword.IsNullValidate = false;
             this.txtPassword.IsTransferAlphabetic = false;
-            this.txtPassword.Location = new System.Drawing.Point(577, 190);
+            this.txtPassword.Location = new System.Drawing.Point(577, 178);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Properties.PasswordChar = '●';
             this.txtPassword.Size = new System.Drawing.Size(188, 21);
@@ -116,7 +117,8 @@
             this.txtUserCode.IsNullString = null;
             this.txtUserCode.IsNullValidate = false;
             this.txtUserCode.IsTransferAlphabetic = false;
-            this.txtUserCode.Location = new System.Drawing.Point(577, 135);
+            this.txtUserCode.Location = new System.Drawing.Point(577, 111);
+            this.txtUserCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtUserCode.Name = "txtUserCode";
             this.txtUserCode.Size = new System.Drawing.Size(188, 21);
             this.txtUserCode.TabIndex = 1;
@@ -128,7 +130,8 @@
             this.lblUserError.Appearance.ForeColor = System.Drawing.Color.Red;
             this.lblUserError.Appearance.Options.UseFont = true;
             this.lblUserError.Appearance.Options.UseForeColor = true;
-            this.lblUserError.Location = new System.Drawing.Point(577, 162);
+            this.lblUserError.Location = new System.Drawing.Point(577, 144);
+            this.lblUserError.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lblUserError.Name = "lblUserError";
             this.lblUserError.Size = new System.Drawing.Size(97, 17);
             this.lblUserError.TabIndex = 5;
@@ -140,7 +143,8 @@
             this.lblPasswordError.Appearance.ForeColor = System.Drawing.Color.Red;
             this.lblPasswordError.Appearance.Options.UseFont = true;
             this.lblPasswordError.Appearance.Options.UseForeColor = true;
-            this.lblPasswordError.Location = new System.Drawing.Point(577, 217);
+            this.lblPasswordError.Location = new System.Drawing.Point(577, 211);
+            this.lblPasswordError.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lblPasswordError.Name = "lblPasswordError";
             this.lblPasswordError.Size = new System.Drawing.Size(126, 17);
             this.lblPasswordError.TabIndex = 5;
@@ -151,22 +155,30 @@
             this.btnDbConnect.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDbConnect.Appearance.Options.UseFont = true;
             this.btnDbConnect.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnDbConnect.Location = new System.Drawing.Point(591, 252);
+            this.btnDbConnect.Location = new System.Drawing.Point(591, 253);
+            this.btnDbConnect.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDbConnect.Name = "btnDbConnect";
-            this.btnDbConnect.Size = new System.Drawing.Size(90, 23);
+            this.btnDbConnect.Size = new System.Drawing.Size(90, 28);
             this.btnDbConnect.TabIndex = 6;
             this.btnDbConnect.Text = "数据库连接(&T)";
             this.btnDbConnect.Click += new System.EventHandler(this.btnDbConnect_Click);
             // 
+            // defaultLookAndFeel
+            // 
+            this.defaultLookAndFeel.LookAndFeel.SkinName = "McSkin";
+            // 
             // FrmLogin
             // 
             this.AcceptButton = this.btnLogin;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Appearance.Options.UseFont = true;
+            this.Appearance.Options.UseImage = true;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayoutStore = System.Windows.Forms.ImageLayout.Tile;
-            this.BackgroundImageStore = global::DQS.App.Properties.Resources.登录背景2;
+            this.BackgroundImageStore = global::DQS.App.Properties.Resources.登录背景;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(812, 377);
+            this.ClientSize = new System.Drawing.Size(812, 380);
             this.Controls.Add(this.btnDbConnect);
             this.Controls.Add(this.lblPasswordError);
             this.Controls.Add(this.lblUserError);
@@ -176,9 +188,11 @@
             this.Controls.Add(this.txtUserCode);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUserCode);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.LookAndFeel.SkinName = "Black";
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmLogin";
@@ -201,10 +215,10 @@
         private DQS.Controls.TextBoxEx txtPassword;
         private DevExpress.XtraEditors.SimpleButton btnLogin;
         private DevExpress.XtraEditors.SimpleButton btnClose;
-        private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
         private DevExpress.XtraEditors.LabelControl lblUserError;
         private DevExpress.XtraEditors.LabelControl lblPasswordError;
         private DevExpress.XtraEditors.SimpleButton btnDbConnect;
+        private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
     }
 }
 

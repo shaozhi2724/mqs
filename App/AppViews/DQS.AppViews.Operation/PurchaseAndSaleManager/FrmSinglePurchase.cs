@@ -19,6 +19,10 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
     {
         private int? m_id;
 
+        List<GetDepartment> departments = new List<GetDepartment>();
+
+        GetDepartment department = new GetDepartment();
+
         public FrmSinglePurchase()
         {
             InitializeComponent();
@@ -30,6 +34,12 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
             this.cbxPaymentType.InitSource();
             this.popupGrid.InitGrid();
             this.popupGrid.PopupView.KeyDown += PopupView_KeyDown;
+
+            if (Settings.Default.IsUseDepartment)
+            {
+                this.layDepartment.Visibility = LayoutVisibility.Always;
+                LoadDepartment();
+            }
 
             if (this.Tag != null)
             {
@@ -89,6 +99,7 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
             }
             else
             {
+                this.txtBillDate.Text = DateTime.Now.ToString("F");
                 this.txtBillCode.Text = GlobalMethod.GenPurchaseBillCode("JH");
                 this.txtBillCode.Select(this.txtBillCode.Text.Length, 0);
 
@@ -99,6 +110,37 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                 
             }
 
+        }
+
+        private void LoadDepartment()
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                string sqlBill = @"SELECT DepartmentID,DepartmentName FROM dbo.BFI_Department WHERE DepartmentName LIKE '%业务%'";
+
+                SqlDataAdapter sdad = new SqlDataAdapter(sqlBill, conn);
+                DataSet ds = new DataSet();
+                try
+                {
+                    sdad.Fill(ds, "Table");
+                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                    {
+                        department = new GetDepartment();
+                        department.departmentID = Convert.ToInt32(ds.Tables["Table"].Rows[i]["DepartmentID"]);
+                        department.departmentName = ds.Tables["Table"].Rows[i]["DepartmentName"].ToString();
+                        departments.Add(department);
+                        cboDepartment.Properties.Items.Add(department.departmentName);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.ToString(), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
 
         public string alter;
@@ -398,8 +440,17 @@ WHERE BillID={1}
                     {
                         if (!this.ValidateEnterpriseRange()) return;//验证本企业的经营范围
                         if (!this.ValidateDealerQualification()) return;//验证供货商的电子档案
-                        if (!this.ValidateProductQualification()) return;//验证所有药品的电子档案
+                        if (!this.ValidateProductQualification()) return;//验证所有产品的电子档案
                         if (!this.ValidateDealerRange()) return;//验证供货商经营范围
+
+                        if (Settings.Default.IsUseDepartment)
+                        {
+                            if (cboDepartment.Text == "")
+                            {
+                                XtraMessageBox.Show("选择项部门不能为空。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                        }
 
                         entity.IsBillIn = true;//入库订单
                         entity.BillTypeID = 1;
@@ -514,7 +565,7 @@ WHERE BillID={1}
 
         private void popupGrid_PopupClosed(object sender, DQS.Controls.CommonCode.PopupFormClosedArgs e)
         {
-            string fieldName = "药品ID";
+            string fieldName = "产品ID";
             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
             {
                 object fieldValue = this.popupGrid.PopupView.GetRowCellValue(i, fieldName);
@@ -524,7 +575,7 @@ WHERE BillID={1}
                     {
                         if (fieldValue.ToString().Trim() == e.PopupRow[fieldName].ToString().Trim())
                         {
-                            XtraMessageBox.Show("药品已存在。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            XtraMessageBox.Show("产品已存在。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             this.popupGrid.PopupView.FocusedRowHandle = i;
                             e.Cancel = true;
                         }
@@ -538,7 +589,7 @@ WHERE BillID={1}
                 if (null != dealer && !dealer.IsNull("单位ID"))
                 {
                     int dealerID = int.Parse(dealer["单位ID"].ToString());
-                    int productID = int.Parse(e.PopupRow["药品ID"].ToString());
+                    int productID = int.Parse(e.PopupRow["产品ID"].ToString());
                     EntityCollection<BUSProductPurchasePriceEntity> purchasePriceEntities = new EntityCollection<BUSProductPurchasePriceEntity>();
                     purchasePriceEntities.Fetch(BUSProductPurchasePriceEntityFields.DealerID == dealerID &
                                           BUSProductPurchasePriceEntityFields.ProductID == productID);
@@ -573,6 +624,19 @@ WHERE BillID={1}
         /// <param name="entity">实体</param>
         protected virtual void CustomGetEntity(BUSBillEntity entity)
         {
+            if (Settings.Default.IsUseDepartment)
+            {
+                if (!entity.IsNullField("DepartmentID"))
+                {
+                    foreach (GetDepartment depart in departments)
+                    {
+                        if (depart.departmentID == entity.DepartmentID)
+                        {
+                            cboDepartment.Text = depart.departmentName;
+                        }
+                    }
+                }
+            }
             if (!entity.IsNullField("DealerID"))
             {
                 this.txtDealerName.SetMemberValue(entity.DealerID);
@@ -615,6 +679,19 @@ WHERE BillID={1}
         /// <param name="entity">实体</param>
         protected virtual void CustomSetEntity(BUSBillEntity entity)
         {
+            if (Settings.Default.IsUseDepartment)
+            {
+                if (cboDepartment.Text != "")
+                {
+                    foreach (GetDepartment depart in departments)
+                    {
+                        if (depart.departmentName == cboDepartment.Text)
+                        {
+                            entity.DepartmentID = depart.departmentID;
+                        }
+                    }
+                }
+            }
             if (this.txtDealerName.SelectedValue != null)
             {
                 entity.DealerID = Convert.ToInt32(this.txtDealerName.SelectedValue);
@@ -652,14 +729,18 @@ WHERE BillID={1}
 
         private void popupGrid_BeforePopupFormShow(object sender, DQS.Controls.CommonCode.BeforePopupFormShowArgs e)
         {
+            if (!this.ValidateDealerQualification())
+            {
+                e.Cancel = true;
+            }
             if (e.ActiveOperationColumn.PopupForm != null)
             {
                 if (e.ActiveOperationColumn.PopupForm.Name == "Price")
                 {
-                    object priceID = this.popupGrid.PopupView.GetFocusedRowCellValue("药品ID");
+                    object priceID = this.popupGrid.PopupView.GetFocusedRowCellValue("产品ID");
                     if (priceID != null && priceID != DBNull.Value)
                     {
-                        e.ActiveOperationColumn.PopupForm.Filter = "[药品ID] = " + priceID;
+                        e.ActiveOperationColumn.PopupForm.Filter = "[产品ID] = " + priceID;
                     }
                 }
             }
@@ -712,7 +793,7 @@ WHERE BillID={1}
                             int rowCount = this.popupGrid.PopupView.RowCount;
                             for (int i = 0; i < rowCount; i++)
                             {
-                                object productStyle = this.popupGrid.PopupView.GetRowCellValue(i, "药品类别");
+                                object productStyle = this.popupGrid.PopupView.GetRowCellValue(i, "产品类别");
                                 bool isHava = false;
                                 if (productStyle != null && productStyle != DBNull.Value)
                                 {
@@ -720,7 +801,7 @@ WHERE BillID={1}
                                     if (!isHava) //不存在则超经营范围
                                     {
                                         XtraMessageBox.Show(
-                                            String.Format("表格中第{0}行药品的类别超出“{1}”的经营或诊疗范围，无法生成订单，请修改！", (i + 1),
+                                            String.Format("表格中第{0}行产品的类别超出“{1}”的经营或诊疗范围，无法生成订单，请修改！", (i + 1),
                                                 this.txtDealerName.Text), "系统提示", MessageBoxButtons.OK,
                                             MessageBoxIcon.Information);
                                         return false;
@@ -738,7 +819,7 @@ WHERE BillID={1}
                         int rowCount = this.popupGrid.PopupView.RowCount;
                         for (int i = 0; i < rowCount; i++)
                         {
-                            object productStyle = this.popupGrid.PopupView.GetRowCellValue(i, "药品类别");
+                            object productStyle = this.popupGrid.PopupView.GetRowCellValue(i, "产品类别");
                             if (productStyle != null && productStyle != DBNull.Value)
                             {
                                 bool isHava = false;
@@ -754,7 +835,7 @@ WHERE BillID={1}
                                 if (!isHava) //不存在则超经营范围
                                 {
                                     XtraMessageBox.Show(
-                                        String.Format("表格中第{0}行药品的类别超出供货商“{1}”的经营范围，无法生成订单，请修改！", (i + 1),
+                                        String.Format("表格中第{0}行产品的类别超出供货商“{1}”的经营范围，无法生成订单，请修改！", (i + 1),
                                             this.txtDealerName.Text), "系统提示", MessageBoxButtons.OK,
                                         MessageBoxIcon.Information);
                                     return false;
@@ -806,12 +887,12 @@ WHERE BillID={1}
         }
 
         /// <summary>
-        /// 验证药品的电子档案
+        /// 验证产品的电子档案
         /// </summary>
         /// <returns></returns>
         private bool ValidateProductQualification()
         {
-            //获取所有药品的过期证书
+            //获取所有产品的过期证书
             ViewCollection<AllQualificationView> qualifications = new ViewCollection<AllQualificationView>();
 
             PredicateExpression pe = new PredicateExpression();
@@ -822,7 +903,7 @@ WHERE BillID={1}
             int rowCount = this.popupGrid.PopupView.RowCount;
             for (int i = 0; i < rowCount; i++)
             {
-                object id = this.popupGrid.PopupView.GetRowCellValue(i, "药品ID");
+                object id = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
                 if (id != null && id != DBNull.Value)
                 {
                     bool isHava = false;
@@ -835,9 +916,9 @@ WHERE BillID={1}
                         }
                     }
 
-                    if (isHava)//存在则药品过期
+                    if (isHava)//存在则产品过期
                     {
-                        XtraMessageBox.Show(String.Format("表格中第{0}行药品的电子档案存在已过期档案，无法生成订单，请修改！", (i + 1)), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(String.Format("表格中第{0}行产品的电子档案存在已过期档案，无法生成订单，请修改！", (i + 1)), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
                 }
@@ -861,7 +942,7 @@ WHERE BillID={1}
                 int rowCount = this.popupGrid.PopupView.RowCount;
                 for (int i = 0; i < rowCount; i++)
                 {
-                    object productStyle = this.popupGrid.PopupView.GetRowCellValue(i, "药品类别");
+                    object productStyle = this.popupGrid.PopupView.GetRowCellValue(i, "产品类别");
                     if (productStyle != null && productStyle != DBNull.Value)
                     {
                         bool isHava = false;
@@ -876,7 +957,7 @@ WHERE BillID={1}
 
                         if (!isHava)//不存在则超经营范围
                         {
-                            XtraMessageBox.Show(String.Format("表格中第{0}行药品的类别超出本企业的经营范围，无法生成订单，请修改！", (i + 1)), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            XtraMessageBox.Show(String.Format("表格中第{0}行产品的类别超出本企业的经营范围，无法生成订单，请修改！", (i + 1)), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return false;
                         }
                     }
@@ -979,6 +1060,61 @@ WHERE BillID={1}
                 }
             }
             return true;
+        }
+
+        private void txtDealerName_PopupClosing(object sender, EventArgs e)
+        {
+            if (this.txtDealerName.EditData != null)
+            {
+                var dataRow = (this.txtDealerName.EditData as DataRow);
+                if (null != dataRow)
+                {
+                    int dealerID = Convert.ToInt32(dataRow["单位ID"]);
+                    BFIDealerEntity dealer = new BFIDealerEntity
+                    {
+                        DealerID = dealerID
+                    };
+                    dealer.Fetch();
+                    this.txtDealerAddress.Text = dataRow["通讯地址"].ToString();
+                    popupGrid.Tag = dataRow["单位名称"].ToString();
+                    popupGrid.DealerID = dealerID;
+                    BandSaleMan(dealerID);
+                }
+            }
+            if (!this.ValidateDealerQualification()) return;
+        }
+
+        private void BandSaleMan(int dealerID)
+        {
+            string sql = "SELECT TOP 1 SalesmanName,MobilePhone FROM dbo.BFI_Salesman WHERE DealerID = " + dealerID;
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                conn.Open(); //连接数据库
+                SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
+                DataSet ds = new DataSet();
+                try
+                {
+                    sda.Fill(ds, "TableBill");
+                    if (ds.Tables["TableBill"].Rows.Count > 0)
+                    {
+                        txtBusinessPerson.Text = ds.Tables["TableBill"].Rows[0]["SalesmanName"].ToString();
+                        txtBusinessPhone.Text = ds.Tables["TableBill"].Rows[0]["MobilePhone"].ToString();
+                    }
+                    else
+                    {
+                        txtBusinessPerson.Text = "";
+                        txtBusinessPhone.Text = "";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
     }
 }

@@ -117,18 +117,18 @@
             this.tbtnAdverseReaction.Appearance.Options.UseForeColor = true;
             this.tbtnAdverseReaction.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
             this.tbtnAdverseReaction.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tbtnAdverseReaction.Image = global::DQS.AppViews.OtherOperation.Properties.Resources.药品不良反应记录;
+            this.tbtnAdverseReaction.Image = global::DQS.AppViews.OtherOperation.Properties.Resources.产品不良反应记录;
             this.tbtnAdverseReaction.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.tbtnAdverseReaction.Location = new System.Drawing.Point(614, 70);
             this.tbtnAdverseReaction.MenuCode = "AdverseReaction";
             this.tbtnAdverseReaction.MenuFullClass = "DQS.AppViews.OtherOperation.OtherManager.FrmAdverseReaction, DQS.AppViews.OtherOp" +
                 "eration";
-            this.tbtnAdverseReaction.MenuName = "药品不良反应记录";
-            this.tbtnAdverseReaction.MouseEnterImage = global::DQS.AppViews.OtherOperation.Properties.Resources.药品不良反应记录MouseEnter;
+            this.tbtnAdverseReaction.MenuName = "产品不良反应记录";
+            this.tbtnAdverseReaction.MouseEnterImage = global::DQS.AppViews.OtherOperation.Properties.Resources.产品不良反应记录MouseEnter;
             this.tbtnAdverseReaction.Name = "tbtnAdverseReaction";
             this.tbtnAdverseReaction.Size = new System.Drawing.Size(139, 123);
             this.tbtnAdverseReaction.TabIndex = 3;
-            this.tbtnAdverseReaction.Text = "药品不良反应记录";
+            this.tbtnAdverseReaction.Text = "产品不良反应记录";
             // 
             // FrmOtherOperation
             // 

@@ -1,6 +1,8 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
+using DevExpress.XtraLayout;
 using DQS.Common;
+using DQS.Controls;
 using DQS.Module.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,6 +10,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -79,16 +82,16 @@ namespace DQS.AppViews.StatReport.StatManager
                     if (sysPage.Reservation1 == "1")
                     {
                         lblStartDate.Visible = true;
-                        lblEndDate.Visible = true;
                         deStartDate.Visible = true;
+                        lblEndDate.Visible = true;
                         deEndDate.Visible = true;
                         sql = "exec " + sysPage.DbViewName + " '" + deStartDate.DateTime.ToString("d") + "','" + deEndDate.DateTime.ToString("d") + "'";
                     }
                     else
                     {
                         lblStartDate.Visible = false;
-                        lblEndDate.Visible = false;
                         deStartDate.Visible = false;
+                        lblEndDate.Visible = false;
                         deEndDate.Visible = false;
                         sql = "exec " + sysPage.DbViewName;
                     }
@@ -156,6 +159,63 @@ namespace DQS.AppViews.StatReport.StatManager
         {
             if (e.Info.IsRowIndicator && e.RowHandle >= 0)
                 e.Info.DisplayText = (e.RowHandle + 1).ToString();
+        }
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+
+            object id = gridView.GetFocusedRowCellValue("MakeCollectionsBillID");
+            if (id != null)
+            {
+                string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "发票清单.mrt");
+                if (File.Exists(fileName))
+                {
+                    PrintPreviewForm printPreview = new PrintPreviewForm(fileName, Convert.ToInt32(id));
+                    printPreview.ShowDialog(this);
+                }
+                else
+                {
+                    XtraMessageBox.Show("找不到文件。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnChooseSearch_Click(object sender, EventArgs e)
+        {
+            string py;
+
+            string pageName = this.Tag.ToString();
+            //设置数据
+            sysPage = GlobalMethod.GetFormPage(pageName);
+
+            if (sysPage.Reservation3 != "")
+            {
+                if (sysPage.Reservation3.Contains(","))
+                {
+                    string s = sysPage.Reservation3;
+                    string[] sArray = s.Split(',');
+                    foreach (string i in sArray)
+                    {
+                        GetPY gp = new GetPY();
+                        py = gp.GetPYString(i.ToString());
+                        
+                        //gridView.Columns[i.ToString()].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                        //gridView.Columns[i.ToString()].SummaryItem.DisplayFormat = i.ToString() + "合计: {0}";
+                    }
+                }
+                else
+                {
+                    gridView.Columns[sysPage.Reservation2].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                    gridView.Columns[sysPage.Reservation2].SummaryItem.DisplayFormat = sysPage.Reservation2 + "合计: {0}";
+                }
+            }
+            using (FrmChooseSearch fcs = new FrmChooseSearch())
+            {
+                DialogResult dr = fcs.ShowDialog();
+                if (dr == DialogResult.Yes)
+                {
+                    
+                }
+            }
         }
     }
 }

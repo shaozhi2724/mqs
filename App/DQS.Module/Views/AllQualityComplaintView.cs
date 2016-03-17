@@ -68,28 +68,28 @@ namespace DQS.Module.Views
 			set { this.SetValue("操作员", value); } 
 		}
 
-		public string 药品编号
+		public string 产品编号
 		{
-			get { return (string)this.GetValue("药品编号"); } 
-			set { this.SetValue("药品编号", value); } 
+			get { return (string)this.GetValue("产品编号"); } 
+			set { this.SetValue("产品编号", value); } 
 		}
 
-		public string 药品名称
+		public string 产品名称
 		{
-			get { return (string)this.GetValue("药品名称"); } 
-			set { this.SetValue("药品名称", value); } 
+			get { return (string)this.GetValue("产品名称"); } 
+			set { this.SetValue("产品名称", value); } 
 		}
 
-		public string 药品名称Spell
+		public string 产品名称Spell
 		{
-			get { return (string)this.GetValue("药品名称Spell"); } 
-			set { this.SetValue("药品名称Spell", value); } 
+			get { return (string)this.GetValue("产品名称Spell"); } 
+			set { this.SetValue("产品名称Spell", value); } 
 		}
 
-		public string 规格
+		public string 规格型号
 		{
-			get { return (string)this.GetValue("规格"); } 
-			set { this.SetValue("规格", value); } 
+			get { return (string)this.GetValue("规格型号"); } 
+			set { this.SetValue("规格型号", value); } 
 		}
 
 		public string 生产厂商
@@ -98,10 +98,10 @@ namespace DQS.Module.Views
 			set { this.SetValue("生产厂商", value); } 
 		}
 
-		public string 批准文号
+		public string 注册证号
 		{
-			get { return (string)this.GetValue("批准文号"); } 
-			set { this.SetValue("批准文号", value); } 
+			get { return (string)this.GetValue("注册证号"); } 
+			set { this.SetValue("注册证号", value); } 
 		}
 
 		public string 批号
@@ -195,12 +195,12 @@ namespace DQS.Module.Views
 			this.Fields.Add("投诉方式", AllQualityComplaintViewFields.投诉方式);
 			this.Fields.Add("投诉时间", AllQualityComplaintViewFields.投诉时间);
 			this.Fields.Add("操作员", AllQualityComplaintViewFields.操作员);
-			this.Fields.Add("药品编号", AllQualityComplaintViewFields.药品编号);
-			this.Fields.Add("药品名称", AllQualityComplaintViewFields.药品名称);
-			this.Fields.Add("药品名称Spell", AllQualityComplaintViewFields.药品名称Spell);
-			this.Fields.Add("规格", AllQualityComplaintViewFields.规格);
+			this.Fields.Add("产品编号", AllQualityComplaintViewFields.产品编号);
+			this.Fields.Add("产品名称", AllQualityComplaintViewFields.产品名称);
+			this.Fields.Add("产品名称Spell", AllQualityComplaintViewFields.产品名称Spell);
+			this.Fields.Add("规格型号", AllQualityComplaintViewFields.规格型号);
 			this.Fields.Add("生产厂商", AllQualityComplaintViewFields.生产厂商);
-			this.Fields.Add("批准文号", AllQualityComplaintViewFields.批准文号);
+			this.Fields.Add("注册证号", AllQualityComplaintViewFields.注册证号);
 			this.Fields.Add("批号", AllQualityComplaintViewFields.批号);
 			this.Fields.Add("数量", AllQualityComplaintViewFields.数量);
 			this.Fields.Add("投诉内容", AllQualityComplaintViewFields.投诉内容);
@@ -266,24 +266,24 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllQualityComplaint", 8, "操作员", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品编号
+		public static EntityField 产品编号
 		{
-			get { return new EntityField("vw_AllQualityComplaint", 9, "药品编号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllQualityComplaint", 9, "产品编号", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品名称
+		public static EntityField 产品名称
 		{
-			get { return new EntityField("vw_AllQualityComplaint", 10, "药品名称", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllQualityComplaint", 10, "产品名称", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品名称Spell
+		public static EntityField 产品名称Spell
 		{
-			get { return new EntityField("vw_AllQualityComplaint", 11, "药品名称Spell", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllQualityComplaint", 11, "产品名称Spell", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 规格
+		public static EntityField 规格型号
 		{
-			get { return new EntityField("vw_AllQualityComplaint", 12, "规格", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllQualityComplaint", 12, "规格型号", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 生产厂商
@@ -291,9 +291,9 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllQualityComplaint", 13, "生产厂商", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 批准文号
+		public static EntityField 注册证号
 		{
-			get { return new EntityField("vw_AllQualityComplaint", 14, "批准文号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllQualityComplaint", 14, "注册证号", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 批号

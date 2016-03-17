@@ -134,7 +134,7 @@
             this.gpcRight.Name = "gpcRight";
             this.gpcRight.Size = new System.Drawing.Size(511, 482);
             this.gpcRight.TabIndex = 3;
-            this.gpcRight.Text = "药品类别清单";
+            this.gpcRight.Text = "产品类别清单";
             // 
             // chklbcProductStyle
             // 

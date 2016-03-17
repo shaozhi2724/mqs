@@ -57,49 +57,55 @@ namespace DQS.AppViews.OtherOperation.Finance
         private void FrmMakeCollectionsOnPassage_Load(object sender, EventArgs e)
         {
             //this.btnInventory.Visible = IsInventory();
-            //deStartDate.Text = DateTime.Today.ToString("d");
-            //deEndDate.Text = DateTime.Today.ToString("d");
+            deStartDate.Text = DateTime.Today.ToString("d");
+            deEndDate.Text = DateTime.Today.ToString("d");
             LastInventoryDate();
-            gridLoad();
+            //gridLoad();
         }
 
         private void gridLoad()
         {
+            //sqlSearch = " AND (OperateDate BETWEEN '" + deStartDate.Text.Trim() + " 00:00:00' AND '" + deEndDate.Text.Trim() + " 23:59:59')";
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sql = @"
-SELECT BusinessBillID AS [ID] ,
-          BusinessBillCode AS [单据编号] ,
-          DealerName AS [往来单位名称] ,
-          TotalPrice AS [总金额] ,
-          (SELECT SUM((UnitPrice-PurchaasePrice)*Amount) FROM dbo.FIN_MakeCollectionsOnPassageDetail mo WHERE mo.BusinessBillID = m.BusinessBillID) AS [利润],
-          OperatePerson AS [开票员] ,
-          BusinessPerson AS [业务员] ,
-          BusinessBillDate AS [下单日期] ,
-          DealerCode AS [往来单位编码] ,
-          DealerSpell AS [往来单位简拼] ,
-          DealerType AS [往来单位类型] ,
-          StoreOutPerson AS [出库员] ,
-          StoreOutDate AS [出库日期] ,
-          OperateDate AS [操作时间] 
-FROM FIN_MakeCollectionsOnPassage m WHERE (DealerCode LIKE '%" + txtDealerCode.Text.Trim() + "%' OR DealerName LIKE '%" + txtDealerCode.Text.Trim() + "%' OR DealerSpell LIKE '%" + txtDealerCode.Text.Trim() + "%') AND (BusinessBillCode LIKE '%" + txtBillCode.Text.Trim() + "%') AND (BusinessPerson LIKE '%" + txtBusinessPerson.Text.Trim() + "%' OR dbo.fn_GetPy(BusinessPerson) LIKE '%" + txtBusinessPerson.Text.Trim() + "%')" + sqlSearch;
+                string sql = @"EXEC sp_ShowMakeCollectionsOnPassage '{0}','{1}','{2}','{3}','{4}'";
+                sql = string.Format(sql, deStartDate.Text.Trim(), deEndDate.Text.Trim(), txtDealerCode.Text.Trim(), txtBillCode.Text.Trim(), txtBusinessPerson.Text.Trim());
+//SELECT BusinessBillID AS [ID] ,
+//          BusinessBillCode AS [单据编号] ,
+//          DealerName AS [往来单位名称] ,
+//          TotalPrice AS [总金额] ,
+//          (SELECT SUM((UnitPrice-PurchaasePrice)*Amount) FROM dbo.FIN_MakeCollectionsOnPassageDetail mo WHERE mo.BusinessBillID = m.BusinessBillID) AS [利润],
+//          OperatePerson AS [开票员] ,
+//          BusinessPerson AS [业务员] ,
+//DepartmentName as [部门],
+//          BusinessBillDate AS [下单日期] ,
+//          DealerCode AS [往来单位编码] ,
+//          DealerSpell AS [往来单位简拼] ,
+//          DealerType AS [往来单位类型] ,
+//          StoreOutPerson AS [出库员] ,
+//          StoreOutDate AS [出库日期] ,
+//          OperateDate AS [操作时间] 
+//FROM FIN_MakeCollectionsOnPassage m WHERE (DealerCode LIKE '%" + txtDealerCode.Text.Trim() + "%' OR DealerName LIKE '%" + txtDealerCode.Text.Trim() + "%' OR DealerSpell LIKE '%" + txtDealerCode.Text.Trim() + "%') AND (BusinessBillCode LIKE '%" + txtBillCode.Text.Trim() + "%') AND (BusinessPerson LIKE '%" + txtBusinessPerson.Text.Trim() + "%' OR dbo.fn_GetPy(BusinessPerson) LIKE '%" + txtBusinessPerson.Text.Trim() + "%')" + sqlSearch;
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 try
                 {
                     sda.Fill(ds, "Table");
-                    decimal Price = 0;
-                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
-                    {
-                        Price += Convert.ToDecimal(ds.Tables["Table"].Rows[i]["总金额"]);
-                    }
-                    lblTotalPrice.Text = Price.ToString();
+                    //decimal Price = 0;
+                    //for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                    //{
+                    //    Price += Convert.ToDecimal(ds.Tables["Table"].Rows[i]["总金额"]);
+                    //}
+                    //lblTotalPrice.Text = Price.ToString();
 
                     gridControl.DataSource = ds.Tables["Table"];
-                    gridView.Columns["总金额"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
                     gridView.OptionsView.ColumnAutoWidth = false;
                     gridView.BestFitColumns();
                     gridView.OptionsView.ShowGroupPanel = false;
+
+                    gridView.Columns["总金额"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                    gridView.Columns["总金额"].SummaryItem.DisplayFormat = "合计: {0}";
+
                     for (int i = 0; i < gridView.Columns.Count; i++)
                     {
                         string ColumnName = gridView.Columns[i].ToString();
@@ -129,7 +135,7 @@ FROM FIN_MakeCollectionsOnPassage m WHERE (DealerCode LIKE '%" + txtDealerCode.T
 
         private void txt_TextChanged(object sender, EventArgs e)
         {
-            gridLoad();
+            //gridLoad();
         }
 
         private void btnDel_Click(object sender, EventArgs e)
@@ -261,7 +267,6 @@ DELETE FIN_MakeCollectionsOnPassageDetail WHERE BusinessBillID = '{0}'
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            sqlSearch = " AND (BusinessBillDate BETWEEN '" + deStartDate.Text.Trim() + " 00:00:00' AND '" + deEndDate.Text.Trim() + " 23:59:59')";
             gridLoad();
         }
     }

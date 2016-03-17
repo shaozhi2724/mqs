@@ -31,7 +31,12 @@
             this.gridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.deEndDate = new DevExpress.XtraEditors.DateEdit();
+            this.deStartDate = new DevExpress.XtraEditors.DateEdit();
+            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.lblTotalPrice = new DevExpress.XtraEditors.LabelControl();
+            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.btnReSet = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.txtDealerCode = new DevExpress.XtraEditors.TextEdit();
@@ -48,6 +53,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deStartDate.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deStartDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealerCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVoucherCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPaymentCode.Properties)).BeginInit();
@@ -73,13 +82,20 @@
             this.gridView.GridControl = this.gridControl;
             this.gridView.IndicatorWidth = 40;
             this.gridView.Name = "gridView";
+            this.gridView.OptionsView.ShowFooter = true;
             this.gridView.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
+            this.gridView.DoubleClick += new System.EventHandler(this.gridView_DoubleClick);
             // 
             // panelControl2
             // 
             this.panelControl2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelControl2.Controls.Add(this.deEndDate);
+            this.panelControl2.Controls.Add(this.deStartDate);
+            this.panelControl2.Controls.Add(this.labelControl5);
+            this.panelControl2.Controls.Add(this.labelControl4);
             this.panelControl2.Controls.Add(this.lblTotalPrice);
+            this.panelControl2.Controls.Add(this.btnSearch);
             this.panelControl2.Controls.Add(this.btnReSet);
             this.panelControl2.Controls.Add(this.labelControl8);
             this.panelControl2.Controls.Add(this.txtDealerCode);
@@ -93,16 +109,66 @@
             this.panelControl2.Size = new System.Drawing.Size(888, 66);
             this.panelControl2.TabIndex = 17;
             // 
+            // deEndDate
+            // 
+            this.deEndDate.EditValue = null;
+            this.deEndDate.Location = new System.Drawing.Point(648, 11);
+            this.deEndDate.Name = "deEndDate";
+            this.deEndDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deEndDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.deEndDate.Size = new System.Drawing.Size(107, 21);
+            this.deEndDate.TabIndex = 14;
+            // 
+            // deStartDate
+            // 
+            this.deStartDate.EditValue = null;
+            this.deStartDate.Location = new System.Drawing.Point(469, 11);
+            this.deStartDate.Name = "deStartDate";
+            this.deStartDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deStartDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.deStartDate.Size = new System.Drawing.Size(107, 21);
+            this.deStartDate.TabIndex = 15;
+            // 
+            // labelControl5
+            // 
+            this.labelControl5.Location = new System.Drawing.Point(582, 14);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(60, 14);
+            this.labelControl5.TabIndex = 12;
+            this.labelControl5.Text = "结束日期：";
+            // 
+            // labelControl4
+            // 
+            this.labelControl4.Location = new System.Drawing.Point(403, 14);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(60, 14);
+            this.labelControl4.TabIndex = 13;
+            this.labelControl4.Text = "开始日期：";
+            // 
             // lblTotalPrice
             // 
             this.lblTotalPrice.Location = new System.Drawing.Point(474, 40);
             this.lblTotalPrice.Name = "lblTotalPrice";
             this.lblTotalPrice.Size = new System.Drawing.Size(0, 14);
             this.lblTotalPrice.TabIndex = 10;
+            this.lblTotalPrice.Visible = false;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(582, 35);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(79, 27);
+            this.btnSearch.TabIndex = 0;
+            this.btnSearch.Text = "查询";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnReSet
             // 
-            this.btnReSet.Location = new System.Drawing.Point(640, 34);
+            this.btnReSet.Location = new System.Drawing.Point(676, 35);
             this.btnReSet.Name = "btnReSet";
             this.btnReSet.Size = new System.Drawing.Size(79, 27);
             this.btnReSet.TabIndex = 0;
@@ -116,6 +182,7 @@
             this.labelControl8.Size = new System.Drawing.Size(60, 14);
             this.labelControl8.TabIndex = 11;
             this.labelControl8.Text = "付款总计：";
+            this.labelControl8.Visible = false;
             // 
             // txtDealerCode
             // 
@@ -221,6 +288,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             this.panelControl2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deStartDate.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deStartDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealerCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVoucherCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPaymentCode.Properties)).EndInit();
@@ -248,5 +319,10 @@
         private DevExpress.XtraEditors.LabelControl lblTotalPrice;
         private DevExpress.XtraEditors.LabelControl labelControl8;
         private DevExpress.XtraEditors.SimpleButton btnExport;
+        private DevExpress.XtraEditors.DateEdit deEndDate;
+        private DevExpress.XtraEditors.DateEdit deStartDate;
+        private DevExpress.XtraEditors.LabelControl labelControl5;
+        private DevExpress.XtraEditors.LabelControl labelControl4;
+        private DevExpress.XtraEditors.SimpleButton btnSearch;
     }
 }

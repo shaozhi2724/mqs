@@ -98,20 +98,17 @@
             this.pnlButtom.Controls.Add(this.btnOK);
             this.pnlButtom.Controls.Add(this.btnClose);
             this.pnlButtom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtom.Location = new System.Drawing.Point(0, 581);
-            this.pnlButtom.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pnlButtom.Location = new System.Drawing.Point(0, 452);
             this.pnlButtom.Name = "pnlButtom";
-            this.pnlButtom.Size = new System.Drawing.Size(784, 58);
+            this.pnlButtom.Size = new System.Drawing.Size(686, 45);
             this.pnlButtom.TabIndex = 0;
             // 
             // btnDeny
             // 
             this.btnDeny.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeny.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnDeny.Location = new System.Drawing.Point(541, 12);
-            this.btnDeny.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDeny.Location = new System.Drawing.Point(473, 9);
             this.btnDeny.Name = "btnDeny";
-            this.btnDeny.Size = new System.Drawing.Size(86, 31);
+            this.btnDeny.Size = new System.Drawing.Size(75, 24);
             this.btnDeny.TabIndex = 3;
             this.btnDeny.Text = "不批准(&U)";
             this.btnDeny.Click += new System.EventHandler(this.btnDeny_Click);
@@ -119,11 +116,9 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnOK.Location = new System.Drawing.Point(426, 12);
-            this.btnOK.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnOK.Location = new System.Drawing.Point(373, 9);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(86, 31);
+            this.btnOK.Size = new System.Drawing.Size(75, 24);
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "批准(&A)";
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -132,10 +127,9 @@
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(674, 12);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnClose.Location = new System.Drawing.Point(590, 9);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(86, 31);
+            this.btnClose.Size = new System.Drawing.Size(75, 24);
             this.btnClose.TabIndex = 4;
             this.btnClose.Text = "关闭(&C)";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -145,9 +139,8 @@
             this.gpcTop.Controls.Add(this.layControl);
             this.gpcTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.gpcTop.Location = new System.Drawing.Point(0, 0);
-            this.gpcTop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gpcTop.Name = "gpcTop";
-            this.gpcTop.Size = new System.Drawing.Size(784, 292);
+            this.gpcTop.Size = new System.Drawing.Size(686, 227);
             this.gpcTop.TabIndex = 1;
             this.gpcTop.Text = "申请信息";
             // 
@@ -161,88 +154,80 @@
             this.layControl.Controls.Add(this.txtApproveTitle);
             this.layControl.Controls.Add(this.txtApproveCode);
             this.layControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layControl.Location = new System.Drawing.Point(2, 27);
-            this.layControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.layControl.Location = new System.Drawing.Point(2, 23);
             this.layControl.Name = "layControl";
             this.layControl.OptionsView.DrawItemBorders = true;
             this.layControl.Root = this.layControlGroup;
-            this.layControl.Size = new System.Drawing.Size(780, 263);
+            this.layControl.Size = new System.Drawing.Size(682, 202);
             this.layControl.TabIndex = 0;
             this.layControl.Text = "审批信息";
             // 
             // txtIsPass
             // 
-            this.txtIsPass.Location = new System.Drawing.Point(455, 228);
-            this.txtIsPass.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtIsPass.Location = new System.Drawing.Point(394, 171);
             this.txtIsPass.Name = "txtIsPass";
             this.txtIsPass.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.txtIsPass.Properties.ReadOnly = true;
-            this.txtIsPass.Size = new System.Drawing.Size(313, 23);
+            this.txtIsPass.Size = new System.Drawing.Size(276, 19);
             this.txtIsPass.StyleController = this.layControl;
             this.txtIsPass.TabIndex = 10;
             // 
             // txtIsWhole
             // 
-            this.txtIsWhole.Location = new System.Drawing.Point(75, 228);
-            this.txtIsWhole.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtIsWhole.Location = new System.Drawing.Point(63, 171);
             this.txtIsWhole.Name = "txtIsWhole";
             this.txtIsWhole.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.txtIsWhole.Properties.ReadOnly = true;
-            this.txtIsWhole.Size = new System.Drawing.Size(313, 23);
+            this.txtIsWhole.Size = new System.Drawing.Size(276, 19);
             this.txtIsWhole.StyleController = this.layControl;
             this.txtIsWhole.TabIndex = 9;
             // 
             // txtCreateDate
             // 
-            this.txtCreateDate.Location = new System.Drawing.Point(75, 201);
-            this.txtCreateDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCreateDate.Location = new System.Drawing.Point(63, 148);
             this.txtCreateDate.Name = "txtCreateDate";
             this.txtCreateDate.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.txtCreateDate.Properties.ReadOnly = true;
-            this.txtCreateDate.Size = new System.Drawing.Size(693, 23);
+            this.txtCreateDate.Size = new System.Drawing.Size(607, 19);
             this.txtCreateDate.StyleController = this.layControl;
             this.txtCreateDate.TabIndex = 8;
             // 
             // txtCreateUser
             // 
-            this.txtCreateUser.Location = new System.Drawing.Point(75, 174);
-            this.txtCreateUser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCreateUser.Location = new System.Drawing.Point(63, 125);
             this.txtCreateUser.Name = "txtCreateUser";
             this.txtCreateUser.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.txtCreateUser.Properties.ReadOnly = true;
-            this.txtCreateUser.Size = new System.Drawing.Size(693, 23);
+            this.txtCreateUser.Size = new System.Drawing.Size(607, 19);
             this.txtCreateUser.StyleController = this.layControl;
             this.txtCreateUser.TabIndex = 7;
             // 
             // txtApprovalContent
             // 
-            this.txtApprovalContent.Location = new System.Drawing.Point(75, 66);
-            this.txtApprovalContent.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtApprovalContent.Location = new System.Drawing.Point(63, 58);
             this.txtApprovalContent.Name = "txtApprovalContent";
             this.txtApprovalContent.Properties.ReadOnly = true;
-            this.txtApprovalContent.Size = new System.Drawing.Size(693, 104);
+            this.txtApprovalContent.Size = new System.Drawing.Size(607, 63);
             this.txtApprovalContent.StyleController = this.layControl;
             this.txtApprovalContent.TabIndex = 6;
             // 
             // txtApproveTitle
             // 
-            this.txtApproveTitle.Location = new System.Drawing.Point(75, 39);
-            this.txtApproveTitle.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtApproveTitle.Location = new System.Drawing.Point(63, 35);
             this.txtApproveTitle.Name = "txtApproveTitle";
             this.txtApproveTitle.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.txtApproveTitle.Properties.ReadOnly = true;
-            this.txtApproveTitle.Size = new System.Drawing.Size(693, 23);
+            this.txtApproveTitle.Size = new System.Drawing.Size(607, 19);
             this.txtApproveTitle.StyleController = this.layControl;
             this.txtApproveTitle.TabIndex = 5;
             // 
             // txtApproveCode
             // 
-            this.txtApproveCode.Location = new System.Drawing.Point(75, 12);
-            this.txtApproveCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtApproveCode.Location = new System.Drawing.Point(63, 12);
             this.txtApproveCode.Name = "txtApproveCode";
             this.txtApproveCode.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.txtApproveCode.Properties.ReadOnly = true;
-            this.txtApproveCode.Size = new System.Drawing.Size(693, 23);
+            this.txtApproveCode.Size = new System.Drawing.Size(607, 19);
             this.txtApproveCode.StyleController = this.layControl;
             this.txtApproveCode.TabIndex = 4;
             // 
@@ -261,7 +246,7 @@
             this.layIsPass});
             this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
-            this.layControlGroup.Size = new System.Drawing.Size(780, 263);
+            this.layControlGroup.Size = new System.Drawing.Size(682, 202);
             this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layControlGroup.Text = "申请信息";
             this.layControlGroup.TextVisible = false;
@@ -272,78 +257,77 @@
             this.layApproveCode.CustomizationFormText = "编号";
             this.layApproveCode.Location = new System.Drawing.Point(0, 0);
             this.layApproveCode.Name = "layApproveCode";
-            this.layApproveCode.Size = new System.Drawing.Size(760, 27);
+            this.layApproveCode.Size = new System.Drawing.Size(662, 23);
             this.layApproveCode.Text = "编号";
-            this.layApproveCode.TextSize = new System.Drawing.Size(60, 18);
+            this.layApproveCode.TextSize = new System.Drawing.Size(48, 14);
             // 
             // layApproveTitle
             // 
             this.layApproveTitle.Control = this.txtApproveTitle;
             this.layApproveTitle.CustomizationFormText = "标题";
-            this.layApproveTitle.Location = new System.Drawing.Point(0, 27);
+            this.layApproveTitle.Location = new System.Drawing.Point(0, 23);
             this.layApproveTitle.Name = "layApproveTitle";
-            this.layApproveTitle.Size = new System.Drawing.Size(760, 27);
+            this.layApproveTitle.Size = new System.Drawing.Size(662, 23);
             this.layApproveTitle.Text = "标题";
-            this.layApproveTitle.TextSize = new System.Drawing.Size(60, 18);
+            this.layApproveTitle.TextSize = new System.Drawing.Size(48, 14);
             // 
             // layApprovalContent
             // 
             this.layApprovalContent.Control = this.txtApprovalContent;
             this.layApprovalContent.CustomizationFormText = "内容";
-            this.layApprovalContent.Location = new System.Drawing.Point(0, 54);
+            this.layApprovalContent.Location = new System.Drawing.Point(0, 46);
             this.layApprovalContent.Name = "layApprovalContent";
-            this.layApprovalContent.Size = new System.Drawing.Size(760, 108);
+            this.layApprovalContent.Size = new System.Drawing.Size(662, 67);
             this.layApprovalContent.Text = "内容";
-            this.layApprovalContent.TextSize = new System.Drawing.Size(60, 18);
+            this.layApprovalContent.TextSize = new System.Drawing.Size(48, 14);
             // 
             // layCreateUser
             // 
             this.layCreateUser.Control = this.txtCreateUser;
             this.layCreateUser.CustomizationFormText = "申请人";
-            this.layCreateUser.Location = new System.Drawing.Point(0, 162);
+            this.layCreateUser.Location = new System.Drawing.Point(0, 113);
             this.layCreateUser.Name = "layCreateUser";
-            this.layCreateUser.Size = new System.Drawing.Size(760, 27);
+            this.layCreateUser.Size = new System.Drawing.Size(662, 23);
             this.layCreateUser.Text = "申请人";
-            this.layCreateUser.TextSize = new System.Drawing.Size(60, 18);
+            this.layCreateUser.TextSize = new System.Drawing.Size(48, 14);
             // 
             // layCreateDate
             // 
             this.layCreateDate.Control = this.txtCreateDate;
             this.layCreateDate.CustomizationFormText = "申请时间";
-            this.layCreateDate.Location = new System.Drawing.Point(0, 189);
+            this.layCreateDate.Location = new System.Drawing.Point(0, 136);
             this.layCreateDate.Name = "layCreateDate";
-            this.layCreateDate.Size = new System.Drawing.Size(760, 27);
+            this.layCreateDate.Size = new System.Drawing.Size(662, 23);
             this.layCreateDate.Text = "申请时间";
-            this.layCreateDate.TextSize = new System.Drawing.Size(60, 18);
+            this.layCreateDate.TextSize = new System.Drawing.Size(48, 14);
             // 
             // layIsWhole
             // 
             this.layIsWhole.Control = this.txtIsWhole;
             this.layIsWhole.CustomizationFormText = "审批类型";
-            this.layIsWhole.Location = new System.Drawing.Point(0, 216);
+            this.layIsWhole.Location = new System.Drawing.Point(0, 159);
             this.layIsWhole.Name = "layIsWhole";
-            this.layIsWhole.Size = new System.Drawing.Size(380, 27);
+            this.layIsWhole.Size = new System.Drawing.Size(331, 23);
             this.layIsWhole.Text = "审批类型";
-            this.layIsWhole.TextSize = new System.Drawing.Size(60, 18);
+            this.layIsWhole.TextSize = new System.Drawing.Size(48, 14);
             // 
             // layIsPass
             // 
             this.layIsPass.Control = this.txtIsPass;
             this.layIsPass.CustomizationFormText = "状态";
-            this.layIsPass.Location = new System.Drawing.Point(380, 216);
+            this.layIsPass.Location = new System.Drawing.Point(331, 159);
             this.layIsPass.Name = "layIsPass";
-            this.layIsPass.Size = new System.Drawing.Size(380, 27);
+            this.layIsPass.Size = new System.Drawing.Size(331, 23);
             this.layIsPass.Text = "状态";
-            this.layIsPass.TextSize = new System.Drawing.Size(60, 18);
+            this.layIsPass.TextSize = new System.Drawing.Size(48, 14);
             // 
             // gpcCenter
             // 
             this.gpcCenter.Controls.Add(this.layControl1);
             this.gpcCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gpcCenter.Location = new System.Drawing.Point(0, 292);
-            this.gpcCenter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gpcCenter.Location = new System.Drawing.Point(0, 227);
             this.gpcCenter.Name = "gpcCenter";
-            this.gpcCenter.Size = new System.Drawing.Size(784, 289);
+            this.gpcCenter.Size = new System.Drawing.Size(686, 225);
             this.gpcCenter.TabIndex = 2;
             this.gpcCenter.Text = "审批信息";
             // 
@@ -353,38 +337,34 @@
             this.layControl1.Controls.Add(this.txtApprovalResult);
             this.layControl1.Controls.Add(this.txtApprovalSuggestion);
             this.layControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layControl1.Location = new System.Drawing.Point(2, 27);
-            this.layControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.layControl1.Location = new System.Drawing.Point(2, 23);
             this.layControl1.Name = "layControl1";
             this.layControl1.Root = this.layoutControlGroup1;
-            this.layControl1.Size = new System.Drawing.Size(780, 260);
+            this.layControl1.Size = new System.Drawing.Size(682, 200);
             this.layControl1.TabIndex = 0;
             this.layControl1.Text = "layoutControl1";
             // 
             // txtApprovalRemark
             // 
-            this.txtApprovalRemark.Location = new System.Drawing.Point(75, 192);
-            this.txtApprovalRemark.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtApprovalRemark.Location = new System.Drawing.Point(63, 147);
             this.txtApprovalRemark.Name = "txtApprovalRemark";
-            this.txtApprovalRemark.Size = new System.Drawing.Size(693, 56);
+            this.txtApprovalRemark.Size = new System.Drawing.Size(607, 41);
             this.txtApprovalRemark.StyleController = this.layControl1;
             this.txtApprovalRemark.TabIndex = 6;
             // 
             // txtApprovalResult
             // 
-            this.txtApprovalResult.Location = new System.Drawing.Point(75, 132);
-            this.txtApprovalResult.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtApprovalResult.Location = new System.Drawing.Point(63, 102);
             this.txtApprovalResult.Name = "txtApprovalResult";
-            this.txtApprovalResult.Size = new System.Drawing.Size(693, 56);
+            this.txtApprovalResult.Size = new System.Drawing.Size(607, 41);
             this.txtApprovalResult.StyleController = this.layControl1;
             this.txtApprovalResult.TabIndex = 5;
             // 
             // txtApprovalSuggestion
             // 
-            this.txtApprovalSuggestion.Location = new System.Drawing.Point(75, 12);
-            this.txtApprovalSuggestion.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtApprovalSuggestion.Location = new System.Drawing.Point(63, 12);
             this.txtApprovalSuggestion.Name = "txtApprovalSuggestion";
-            this.txtApprovalSuggestion.Size = new System.Drawing.Size(693, 116);
+            this.txtApprovalSuggestion.Size = new System.Drawing.Size(607, 86);
             this.txtApprovalSuggestion.StyleController = this.layControl1;
             this.txtApprovalSuggestion.TabIndex = 4;
             // 
@@ -399,7 +379,7 @@
             this.layoutControlItem3});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(780, 260);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(682, 200);
             this.layoutControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Text = "审批信息";
             this.layoutControlGroup1.TextVisible = false;
@@ -410,39 +390,38 @@
             this.layoutControlItem1.CustomizationFormText = "审批意见";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(760, 120);
+            this.layoutControlItem1.Size = new System.Drawing.Size(662, 90);
             this.layoutControlItem1.Text = "审批意见";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(60, 18);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(48, 14);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.txtApprovalResult;
             this.layoutControlItem2.CustomizationFormText = "审批结果";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 120);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 90);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(760, 60);
+            this.layoutControlItem2.Size = new System.Drawing.Size(662, 45);
             this.layoutControlItem2.Text = "审批结果";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(60, 18);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(48, 14);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.txtApprovalRemark;
             this.layoutControlItem3.CustomizationFormText = "备注";
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 180);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 135);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(760, 60);
+            this.layoutControlItem3.Size = new System.Drawing.Size(662, 45);
             this.layoutControlItem3.Text = "备注";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(60, 18);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(48, 14);
             // 
             // FrmApprove
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 639);
+            this.ClientSize = new System.Drawing.Size(686, 497);
             this.Controls.Add(this.gpcCenter);
             this.Controls.Add(this.gpcTop);
             this.Controls.Add(this.pnlButtom);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmApprove";

@@ -28,7 +28,7 @@ namespace DQS.AppViews.OtherOperation.Finance
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sqlBill = @"SELECT d.*,d.期初+d.本期应付-d.本期实付 AS [余额] FROM (
+                string sqlBill = @"SELECT d.*,CONVERT(DECIMAL(18,3),d.期初)+CONVERT(DECIMAL(18,3),d.本期应付)-CONVERT(DECIMAL(18,3),d.本期实付) AS [余额] FROM (
 SELECT a.DealerCode AS [编号],a.DealerName AS [供应商名称],a.DealerSpell AS [供应商简拼],a.ThisInventoryPayables AS [期初],ISNULL(b.TotalPrice,0) AS [本期应付],ISNULL(c.TotalPrice,0) AS [本期实付] FROM
 (SELECT DealerCode,DealerName,DealerSpell,ThisInventoryPayables FROM dbo.FIN_InventoryDetail WHERE DealerType = '供应商') a
 FULL JOIN 

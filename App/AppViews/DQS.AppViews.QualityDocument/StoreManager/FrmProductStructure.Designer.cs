@@ -179,13 +179,13 @@
             this.lblUnionName.Name = "lblUnionName";
             this.lblUnionName.Size = new System.Drawing.Size(130, 14);
             this.lblUnionName.TabIndex = 0;
-            this.lblUnionName.Text = "药品或存储单位名称(&U):";
+            this.lblUnionName.Text = "产品或存储单位名称(&U):";
             // 
             // txtUnionQuery
             // 
             this.txtUnionQuery.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtUnionQuery.FormatQueryString = "[药品名称] LIKE \'%{0}%\' OR [药品名称Spell] LIKE \'%{0}%\'  OR [存储名称] LIKE \'%{0}%\' OR [存储名称S" +
+            this.txtUnionQuery.FormatQueryString = "[产品名称] LIKE \'%{0}%\' OR [产品名称Spell] LIKE \'%{0}%\'  OR [存储名称] LIKE \'%{0}%\' OR [存储名称S" +
                 "pell] LIKE \'%{0}%\' ";
             this.txtUnionQuery.Location = new System.Drawing.Point(148, 13);
             this.txtUnionQuery.Name = "txtUnionQuery";
@@ -357,7 +357,7 @@
             this.gpcLeft.Name = "gpcLeft";
             this.gpcLeft.Size = new System.Drawing.Size(417, 242);
             this.gpcLeft.TabIndex = 0;
-            this.gpcLeft.Text = "药品列表";
+            this.gpcLeft.Text = "产品列表";
             // 
             // gvControlProduct
             // 
@@ -405,7 +405,7 @@
             this.pageNavigatorProduct.PageCount = 0;
             this.pageNavigatorProduct.PageIndex = 0;
             this.pageNavigatorProduct.PageSize = 50;
-            this.pageNavigatorProduct.PrimaryField = "药品ID";
+            this.pageNavigatorProduct.PrimaryField = "产品ID";
             this.pageNavigatorProduct.RecordCount = 0;
             this.pageNavigatorProduct.Size = new System.Drawing.Size(413, 40);
             this.pageNavigatorProduct.SortField = "";
@@ -440,13 +440,13 @@
             this.lblProductName.Name = "lblProductName";
             this.lblProductName.Size = new System.Drawing.Size(58, 14);
             this.lblProductName.TabIndex = 0;
-            this.lblProductName.Text = "药品名(&U):";
+            this.lblProductName.Text = "产品名(&U):";
             // 
             // txtProductName
             // 
             this.txtProductName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtProductName.FormatQueryString = "[药品名称] LIKE \'%{0}%\' OR [药品名称Spell] LIKE \'%{0}%\' ";
+            this.txtProductName.FormatQueryString = "[产品名称] LIKE \'%{0}%\' OR [产品名称Spell] LIKE \'%{0}%\' ";
             this.txtProductName.Location = new System.Drawing.Point(74, 12);
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.Size = new System.Drawing.Size(187, 21);

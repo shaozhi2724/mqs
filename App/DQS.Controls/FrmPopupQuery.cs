@@ -7,6 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid;
+using DQS.Module.Entities;
 
 namespace DQS.Controls
 {
@@ -21,6 +23,8 @@ namespace DQS.Controls
 
         private string _defaultFilter;
         public string GroupColumn { get; set; }
+
+        bool vw = false;
         public FrmPopupQuery()
         {
             InitializeComponent();
@@ -41,6 +45,10 @@ namespace DQS.Controls
             this.pageNavigator.PageSize = popupBox.PageSize == 0 ? 100 : popupBox.PageSize;
 
             _defaultFilter = pageNavigator.Filter;
+            if (this.pageNavigator.ViewName == "vw_AllDealer" || this.pageNavigator.ViewName == "vw_AllProvider")
+            {
+                vw = true;
+            }
         }
 
         public FrmPopupQuery(string formatQueryString, string viewName, string primaryField, string fields, string filter, int pageSize)
@@ -55,12 +63,50 @@ namespace DQS.Controls
             this.pageNavigator.Filter = string.IsNullOrEmpty(filter) ? "" : filter;
             this.pageNavigator.PageSize = pageSize == 0 ? 100 : pageSize;
             _defaultFilter = pageNavigator.Filter;
+
+            if (viewName == "vw_AllDealer" || viewName == "vw_AllProvider")
+            {
+                vw = true;
+            }
         }
 
         private void FrmPopupQuery_Load(object sender, EventArgs e)
         {
+            if (pageNavigator.ViewName == "vw_ProductDealer")
+            {
+                string DealerName = this.Tag.ToString();
+                pageNavigator.Filter = "(" + pageNavigator.Filter + ")";
+                pageNavigator.DefaultFilter = "([供应商] = '" + DealerName + "')";
+            }
             this.pageNavigator.ShowData();
             ShowGroup();
+
+            if (vw)
+            {
+
+            #region 过期高亮显示
+
+                GridView grid = this.pageNavigator.GridControl.Views[0] as GridView;
+                StyleFormatCondition sfcBatchWarning = new StyleFormatCondition();
+                sfcBatchWarning.Appearance.BackColor = Color.Yellow;
+                sfcBatchWarning.Appearance.Options.UseBackColor = true;
+                sfcBatchWarning.ApplyToRow = true;
+                sfcBatchWarning.Column = grid.Columns["过期状态"];
+                sfcBatchWarning.Condition = FormatConditionEnum.Equal;
+                sfcBatchWarning.Value1 = "即将过期";
+
+                StyleFormatCondition sfcBatchLose = new StyleFormatCondition();
+                sfcBatchLose.Appearance.BackColor = Color.Red;
+                sfcBatchLose.Appearance.Options.UseBackColor = true;
+                sfcBatchLose.ApplyToRow = true;
+                sfcBatchLose.Column = grid.Columns["过期状态"];
+                sfcBatchLose.Condition = FormatConditionEnum.Equal;
+                sfcBatchLose.Value1 = "已过期";
+
+                grid.FormatConditions.AddRange(new DevExpress.XtraGrid.StyleFormatCondition[] { sfcBatchWarning, sfcBatchLose });
+            #endregion
+
+            }
         }
 
 

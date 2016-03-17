@@ -162,7 +162,7 @@
             // 
             this.layControlGroup.AppearanceItemCaption.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.layControlGroup.AppearanceItemCaption.Options.UseFont = true;
-            this.layControlGroup.CustomizationFormText = "药品信息变更";
+            this.layControlGroup.CustomizationFormText = "产品信息变更";
             this.layControlGroup.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.layControlGroup.GroupBordersVisible = false;
             this.layControlGroup.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
@@ -174,17 +174,17 @@
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(978, 80);
             this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layControlGroup.Text = "药品信息变更";
+            this.layControlGroup.Text = "产品信息变更";
             this.layControlGroup.TextVisible = false;
             // 
             // layProductName
             // 
             this.layProductName.Control = this.txtProductName;
-            this.layProductName.CustomizationFormText = "药品名称";
+            this.layProductName.CustomizationFormText = "产品名称";
             this.layProductName.Location = new System.Drawing.Point(0, 0);
             this.layProductName.Name = "layProductName";
             this.layProductName.Size = new System.Drawing.Size(469, 29);
-            this.layProductName.Text = "药品名称";
+            this.layProductName.Text = "产品名称";
             this.layProductName.TextSize = new System.Drawing.Size(60, 20);
             // 
             // layRequestPerson
@@ -200,11 +200,11 @@
             // layProductCode
             // 
             this.layProductCode.Control = this.txtProductCode;
-            this.layProductCode.CustomizationFormText = "药品编号";
+            this.layProductCode.CustomizationFormText = "产品编号";
             this.layProductCode.Location = new System.Drawing.Point(469, 0);
             this.layProductCode.Name = "layProductCode";
             this.layProductCode.Size = new System.Drawing.Size(489, 29);
-            this.layProductCode.Text = "药品编号";
+            this.layProductCode.Text = "产品编号";
             this.layProductCode.TextSize = new System.Drawing.Size(60, 20);
             // 
             // layCreateDate
@@ -359,7 +359,7 @@
             this.Name = "FrmSingleFirstProductChange";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "药品信息变更明细";
+            this.Text = "产品信息变更明细";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmSingleFirstProductChange_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).EndInit();

@@ -172,7 +172,7 @@ namespace DQS.AppViews.Operation.OnlyBackManager
 
 
         /// <summary>
-        /// 验证药品中是否有含黄麻碱的药品
+        /// 验证产品中是否有含黄麻碱的产品
         /// </summary>
         /// <returns></returns>
         private bool ProductStyle()
@@ -181,7 +181,7 @@ namespace DQS.AppViews.Operation.OnlyBackManager
             int rowCount = this.popupGrid.PopupView.RowCount;
             for (int i = 0; i < rowCount; i++)
             {
-                object productstyle = this.popupGrid.PopupView.GetRowCellValue(i, "药品类别");
+                object productstyle = this.popupGrid.PopupView.GetRowCellValue(i, "产品类别");
 
                 if (productstyle != null && productstyle != DBNull.Value)
                 {
@@ -189,7 +189,7 @@ namespace DQS.AppViews.Operation.OnlyBackManager
                     {
                         if (this.cbxPaymentType.Text.Trim() == "现金")
                         {
-                            XtraMessageBox.Show(String.Format("表格中第{0}行的药品是" + productstyle.ToString() + "药品，不能使用现金交易，无法生成订单，请修改！", (i + 1)), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            XtraMessageBox.Show(String.Format("表格中第{0}行的产品是" + productstyle.ToString() + "产品，不能使用现金交易，无法生成订单，请修改！", (i + 1)), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return false;
                         }
                     }
@@ -398,7 +398,7 @@ namespace DQS.AppViews.Operation.OnlyBackManager
                         if (!this.ValidateBatchDate()) return;
                         if (!this.ValidateValidDate()) return;
                         if (!this.ValidateLockStatus()) return;
-                        //新添加，验证特殊药品数量不能超过
+                        //新添加，验证特殊产品数量不能超过
                         if (!this.Amount()) return;
                         if (!this.MonthAmount()) return;
                         */
@@ -484,7 +484,7 @@ namespace DQS.AppViews.Operation.OnlyBackManager
                                 notification.TargetID = entity.BillID;
                                 notification.TargetCode = entity.BillCode;
                                 notification.ApproveCode = approveCode;
-                                notification.Message = string.Format("{0} 于 {1} 申请药品直调订单（单号 {2}）。请您审批。", userName,
+                                notification.Message = string.Format("{0} 于 {1} 申请产品直调订单（单号 {2}）。请您审批。", userName,
                                     DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.BillCode);
                                 notification.OwnerUserID = approvalUserId;
                                 notification.Save();

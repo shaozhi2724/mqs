@@ -36,7 +36,9 @@ namespace DQS.AppViews.OtherOperation.Finance
 
         private void FrmShowPaymentForOnPassage_Load(object sender, EventArgs e)
         {
-            gridLoad();
+            deStartDate.Text = DateTime.Today.ToString("d");
+            deEndDate.Text = DateTime.Today.ToString("d");
+            //gridLoad();
         }
 
         private void gridLoad()
@@ -44,31 +46,27 @@ namespace DQS.AppViews.OtherOperation.Finance
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 string sqlBill = @"SELECT DISTINCT m.PaymentID,m.PaymentCode AS [付款单号],m.VoucherCode AS [凭证号],m.PaymentPerson AS [付款人],m.OperateDate AS [付款日期],m.DealerName AS [往来单位名称],m.PaymentType AS [付款方式],TotalPrice AS [总金额],m.DealerCode AS [往来单位编号],m.DealerSpell AS [往来单位简拼]
-FROM dbo.FIN_Payment m WHERE (m.DealerCode LIKE '%{0}%' OR m.DealerName LIKE '%{0}%' OR m.DealerSpell LIKE '%{0}%') AND (m.PaymentCode LIKE '%{1}%') AND (m.VoucherCode LIKE '%{2}%')";
-                //                string sql = @"SELECT md.BusinessBillCode AS [单据编号],md.DealerName AS [往来单位名称],md.ProductName AS [药品名称],md.BatchNo AS [批号],md.UnitPrice AS [单价],md.Amount AS [数量],md.TotalPrice AS [金额]
-                //FROM dbo.FIN_Payment m
-                //INNER JOIN dbo.FIN_PaymentDetail md ON m.PaymentCode = md.PaymentCode";
+FROM dbo.FIN_Payment m WHERE (m.DealerCode LIKE '%{0}%' OR m.DealerName LIKE '%{0}%' OR m.DealerSpell LIKE '%{0}%') AND (m.PaymentCode LIKE '%{1}%') AND (m.VoucherCode LIKE '%{2}%') AND (m.OperateDate BETWEEN '" + deStartDate.Text.Trim() + " 00:00:00' AND '" + deEndDate.Text.Trim() + " 23:59:59')";
 
                 sqlBill = String.Format(sqlBill, txtDealerCode.Text.Trim(), txtPaymentCode.Text.Trim(), txtVoucherCode.Text.Trim());
-                //SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 SqlDataAdapter sdad = new SqlDataAdapter(sqlBill, conn);
                 DataSet ds = new DataSet();
                 try
                 {
-                    //sda.Fill(ds, "Table");
                     sdad.Fill(ds, "TableBill");
-                    //DataRelation dr = new DataRelation("单据明细", ds.Tables["TableBill"].Columns["单据编号"], ds.Tables["Table"].Columns["单据编号"], false);
-                    //ds.Relations.Add(dr);
-                    decimal Price = 0;
-                    for (int i = 0; i < ds.Tables["TableBill"].Rows.Count; i++)
-                    {
-                        Price += Convert.ToDecimal(ds.Tables["TableBill"].Rows[i]["总金额"]);
-                    }
-                    lblTotalPrice.Text = Price.ToString();
+                    //decimal Price = 0;
+                    //for (int i = 0; i < ds.Tables["TableBill"].Rows.Count; i++)
+                    //{
+                    //    Price += Convert.ToDecimal(ds.Tables["TableBill"].Rows[i]["总金额"]);
+                    //}
+                    //lblTotalPrice.Text = Price.ToString();
                     gridControl.DataSource = ds.Tables["TableBill"];
                     gridView.OptionsView.ColumnAutoWidth = false;
                     gridView.BestFitColumns();
                     gridView.OptionsView.ShowGroupPanel = false;
+
+                    gridView.Columns["总金额"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                    gridView.Columns["总金额"].SummaryItem.DisplayFormat = "合计: {0}";
 
                     for (int i = 0; i < gridView.Columns.Count; i++)
                     {
@@ -93,7 +91,7 @@ FROM dbo.FIN_Payment m WHERE (m.DealerCode LIKE '%{0}%' OR m.DealerName LIKE '%{
 
         private void txtChanged(object sender, EventArgs e)
         {
-            gridLoad();
+            //gridLoad();
         }
 
         private void btnDel_Click(object sender, EventArgs e)
@@ -143,7 +141,6 @@ DELETE dbo.FIN_PaymentDetail WHERE {0}";
 
         private void btnReSet_Click(object sender, EventArgs e)
         {
-            sqlSearch = "";
             txtDealerCode.Text = "";
             txtPaymentCode.Text = "";
             txtVoucherCode.Text = "";
@@ -179,6 +176,22 @@ DELETE dbo.FIN_PaymentDetail WHERE {0}";
                 DevExpress.XtraEditors.XtraMessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
+        }
+
+        private void gridView_DoubleClick(object sender, EventArgs e)
+        {
+            string sql = @"SELECT pbd.BusinessBillCode AS [单号],pbd.DealerCode AS [单位编号],pbd.DealerName AS [单位名称],pbd.ProductName AS [名称],pbd.ProductSpec AS [规格],pbd.PackageSpec AS [包装规格],pbd.ProducerName AS [生产厂商],pbd.ProductStyle AS [类别],pbd.PhysicType AS [剂型],pbd.BatchNo AS [批号],pbd.Amount AS [数量],pbd.UnitPrice AS [单价],pbd.TotalPrice AS [金额] FROM dbo.FIN_PaymentDetail pbd
+WHERE pbd.PaymentCode = '" + gridView.GetDataRow(gridView.FocusedRowHandle)["付款单号"].ToString() + "'";
+            using (FrmDetails fs = new FrmDetails())
+            {
+                fs.sqlConditions = sql;
+                DialogResult dr = fs.ShowDialog();
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            gridLoad();
         }
     }
 }

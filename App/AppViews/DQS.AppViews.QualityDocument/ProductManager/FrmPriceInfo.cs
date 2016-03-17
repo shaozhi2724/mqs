@@ -36,7 +36,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         protected override void CustomModify()
         {
-            object productID = gvData.GetFocusedRowCellValue("药品ID");
+            object productID = gvData.GetFocusedRowCellValue("产品ID");
             if (productID != null)
             {
                 using (FrmSinglePrice2 frmSinglePrice = new FrmSinglePrice2(Convert.ToInt32(productID)))
@@ -50,7 +50,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
         }
         protected override void CustomModify(bool isView)
         {
-            object productID = gvData.GetFocusedRowCellValue("药品ID");
+            object productID = gvData.GetFocusedRowCellValue("产品ID");
             if (productID != null)
             {
                 using (FrmSinglePrice2 frmSinglePrice = new FrmSinglePrice2(Convert.ToInt32(productID)))
@@ -65,10 +65,10 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         protected override void CustomDelete()
         {
-            object productID = gvData.GetFocusedRowCellValue("药品ID");
+            object productID = gvData.GetFocusedRowCellValue("产品ID");
             if (productID != null)
             {
-                DialogResult result = XtraMessageBox.Show("确定要删除该药品的所有价格信息吗？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                DialogResult result = XtraMessageBox.Show("确定要删除该产品的所有价格信息吗？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.OK)
                 {
                     BFIProductPriceEntity entity = new BFIProductPriceEntity { ProductID = Convert.ToInt32(productID) };

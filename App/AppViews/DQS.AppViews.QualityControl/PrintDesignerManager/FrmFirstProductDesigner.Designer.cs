@@ -53,7 +53,7 @@
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Name = "FrmFirstProductDesigner";
             this.OperationName = "FirstProduct";
-            this.ReportName = "首营药品";
+            this.ReportName = "首营产品";
             this.Text = "FrmFirstProductDesigner";
             this.Load += new System.EventHandler(this.FrmFirstProductDesigner_Load);
             ((System.ComponentModel.ISupportInitialize)(this.toolBarPanel)).EndInit();

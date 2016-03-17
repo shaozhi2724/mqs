@@ -62,6 +62,8 @@
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtReservation2 = new DQS.Controls.BUSDeclinedEntityTextBox();
+            this.layReservation2 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
             this.ftPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
@@ -97,6 +99,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReservation2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layReservation2)).BeginInit();
             this.SuspendLayout();
             // 
             // ftPanel
@@ -104,14 +108,14 @@
             this.ftPanel.Controls.Add(this.layControl);
             this.ftPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.ftPanel.Location = new System.Drawing.Point(0, 0);
-            this.ftPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ftPanel.Name = "ftPanel";
-            this.ftPanel.Size = new System.Drawing.Size(997, 192);
+            this.ftPanel.Size = new System.Drawing.Size(872, 149);
             this.ftPanel.TabIndex = 0;
             this.ftPanel.TypeOfEntity = DQS.Module.EntityType2.ATCApproveEntity;
             // 
             // layControl
             // 
+            this.layControl.Controls.Add(this.txtReservation2);
             this.layControl.Controls.Add(this.txtDeclinedReason);
             this.layControl.Controls.Add(this.txtBillCode);
             this.layControl.Controls.Add(this.txtDeclinedRemark);
@@ -122,10 +126,9 @@
             this.layControl.Controls.Add(this.txtDealerName);
             this.layControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layControl.Location = new System.Drawing.Point(2, 2);
-            this.layControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.layControl.Name = "layControl";
             this.layControl.Root = this.layControlGroup;
-            this.layControl.Size = new System.Drawing.Size(993, 188);
+            this.layControl.Size = new System.Drawing.Size(868, 145);
             this.layControl.TabIndex = 0;
             this.layControl.Text = "layControl";
             // 
@@ -137,10 +140,9 @@
             this.txtDeclinedReason.IsNullString = null;
             this.txtDeclinedReason.IsNullValidate = true;
             this.txtDeclinedReason.IsTransferAlphabetic = false;
-            this.txtDeclinedReason.Location = new System.Drawing.Point(75, 128);
-            this.txtDeclinedReason.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDeclinedReason.Location = new System.Drawing.Point(487, 87);
             this.txtDeclinedReason.Name = "txtDeclinedReason";
-            this.txtDeclinedReason.Size = new System.Drawing.Size(906, 25);
+            this.txtDeclinedReason.Size = new System.Drawing.Size(369, 21);
             this.txtDeclinedReason.StyleController = this.layControl;
             this.txtDeclinedReason.TabIndex = 0;
             // 
@@ -153,11 +155,10 @@
             this.txtBillCode.IsNullString = "订单编号不能为空。";
             this.txtBillCode.IsNullValidate = true;
             this.txtBillCode.IsTransferAlphabetic = false;
-            this.txtBillCode.Location = new System.Drawing.Point(75, 41);
-            this.txtBillCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtBillCode.Location = new System.Drawing.Point(63, 37);
             this.txtBillCode.Name = "txtBillCode";
             this.txtBillCode.Properties.ReadOnly = true;
-            this.txtBillCode.Size = new System.Drawing.Size(419, 25);
+            this.txtBillCode.Size = new System.Drawing.Size(369, 21);
             this.txtBillCode.StyleController = this.layControl;
             this.txtBillCode.TabIndex = 3;
             // 
@@ -170,11 +171,10 @@
             this.txtDeclinedRemark.IsNullString = null;
             this.txtDeclinedRemark.IsNullValidate = false;
             this.txtDeclinedRemark.IsTransferAlphabetic = false;
-            this.txtDeclinedRemark.Location = new System.Drawing.Point(75, 99);
-            this.txtDeclinedRemark.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDeclinedRemark.Location = new System.Drawing.Point(63, 87);
             this.txtDeclinedRemark.Name = "txtDeclinedRemark";
             this.txtDeclinedRemark.Properties.ReadOnly = true;
-            this.txtDeclinedRemark.Size = new System.Drawing.Size(906, 25);
+            this.txtDeclinedRemark.Size = new System.Drawing.Size(369, 21);
             this.txtDeclinedRemark.StyleController = this.layControl;
             this.txtDeclinedRemark.TabIndex = 7;
             // 
@@ -187,11 +187,10 @@
             this.txtDeclinedType.IsNullString = null;
             this.txtDeclinedType.IsNullValidate = false;
             this.txtDeclinedType.IsTransferAlphabetic = false;
-            this.txtDeclinedType.Location = new System.Drawing.Point(75, 70);
-            this.txtDeclinedType.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDeclinedType.Location = new System.Drawing.Point(63, 62);
             this.txtDeclinedType.Name = "txtDeclinedType";
             this.txtDeclinedType.Properties.ReadOnly = true;
-            this.txtDeclinedType.Size = new System.Drawing.Size(419, 25);
+            this.txtDeclinedType.Size = new System.Drawing.Size(369, 21);
             this.txtDeclinedType.StyleController = this.layControl;
             this.txtDeclinedType.TabIndex = 5;
             // 
@@ -204,11 +203,10 @@
             this.txtDeclinedCode.IsNullString = null;
             this.txtDeclinedCode.IsNullValidate = false;
             this.txtDeclinedCode.IsTransferAlphabetic = false;
-            this.txtDeclinedCode.Location = new System.Drawing.Point(75, 12);
-            this.txtDeclinedCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDeclinedCode.Location = new System.Drawing.Point(63, 12);
             this.txtDeclinedCode.Name = "txtDeclinedCode";
             this.txtDeclinedCode.Properties.ReadOnly = true;
-            this.txtDeclinedCode.Size = new System.Drawing.Size(419, 25);
+            this.txtDeclinedCode.Size = new System.Drawing.Size(369, 21);
             this.txtDeclinedCode.StyleController = this.layControl;
             this.txtDeclinedCode.TabIndex = 1;
             // 
@@ -221,11 +219,10 @@
             this.txtBillTypeName.IsNullString = null;
             this.txtBillTypeName.IsNullValidate = false;
             this.txtBillTypeName.IsTransferAlphabetic = true;
-            this.txtBillTypeName.Location = new System.Drawing.Point(561, 41);
-            this.txtBillTypeName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtBillTypeName.Location = new System.Drawing.Point(487, 37);
             this.txtBillTypeName.Name = "txtBillTypeName";
             this.txtBillTypeName.Properties.ReadOnly = true;
-            this.txtBillTypeName.Size = new System.Drawing.Size(420, 25);
+            this.txtBillTypeName.Size = new System.Drawing.Size(369, 21);
             this.txtBillTypeName.StyleController = this.layControl;
             this.txtBillTypeName.TabIndex = 4;
             // 
@@ -238,11 +235,10 @@
             this.txtDeclinedPerson.IsNullString = null;
             this.txtDeclinedPerson.IsNullValidate = false;
             this.txtDeclinedPerson.IsTransferAlphabetic = true;
-            this.txtDeclinedPerson.Location = new System.Drawing.Point(561, 12);
-            this.txtDeclinedPerson.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDeclinedPerson.Location = new System.Drawing.Point(487, 12);
             this.txtDeclinedPerson.Name = "txtDeclinedPerson";
             this.txtDeclinedPerson.Properties.ReadOnly = true;
-            this.txtDeclinedPerson.Size = new System.Drawing.Size(420, 25);
+            this.txtDeclinedPerson.Size = new System.Drawing.Size(369, 21);
             this.txtDeclinedPerson.StyleController = this.layControl;
             this.txtDeclinedPerson.TabIndex = 2;
             // 
@@ -255,11 +251,10 @@
             this.txtDealerName.IsNullString = null;
             this.txtDealerName.IsNullValidate = false;
             this.txtDealerName.IsTransferAlphabetic = false;
-            this.txtDealerName.Location = new System.Drawing.Point(561, 70);
-            this.txtDealerName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDealerName.Location = new System.Drawing.Point(487, 62);
             this.txtDealerName.Name = "txtDealerName";
             this.txtDealerName.Properties.ReadOnly = true;
-            this.txtDealerName.Size = new System.Drawing.Size(420, 25);
+            this.txtDealerName.Size = new System.Drawing.Size(369, 21);
             this.txtDealerName.StyleController = this.layControl;
             this.txtDealerName.TabIndex = 6;
             // 
@@ -278,10 +273,11 @@
             this.layDealerName,
             this.layBillTypeName,
             this.layDeclinedPerson,
-            this.layDeclinedReason});
+            this.layDeclinedReason,
+            this.layReservation2});
             this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
-            this.layControlGroup.Size = new System.Drawing.Size(993, 188);
+            this.layControlGroup.Size = new System.Drawing.Size(868, 145);
             this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layControlGroup.Text = "拒收单";
             this.layControlGroup.TextVisible = false;
@@ -292,79 +288,79 @@
             this.layDeclinedCode.CustomizationFormText = "拒收单号";
             this.layDeclinedCode.Location = new System.Drawing.Point(0, 0);
             this.layDeclinedCode.Name = "layDeclinedCode";
-            this.layDeclinedCode.Size = new System.Drawing.Size(486, 29);
+            this.layDeclinedCode.Size = new System.Drawing.Size(424, 25);
             this.layDeclinedCode.Text = "拒收单号";
-            this.layDeclinedCode.TextSize = new System.Drawing.Size(60, 20);
+            this.layDeclinedCode.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layDeclinedRemark
             // 
             this.layDeclinedRemark.Control = this.txtDeclinedRemark;
             this.layDeclinedRemark.CustomizationFormText = "备注";
-            this.layDeclinedRemark.Location = new System.Drawing.Point(0, 87);
+            this.layDeclinedRemark.Location = new System.Drawing.Point(0, 75);
             this.layDeclinedRemark.Name = "layDeclinedRemark";
-            this.layDeclinedRemark.Size = new System.Drawing.Size(973, 29);
+            this.layDeclinedRemark.Size = new System.Drawing.Size(424, 25);
             this.layDeclinedRemark.Text = "备注";
-            this.layDeclinedRemark.TextSize = new System.Drawing.Size(60, 20);
+            this.layDeclinedRemark.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layBillCode
             // 
             this.layBillCode.Control = this.txtBillCode;
             this.layBillCode.CustomizationFormText = "订单编号";
-            this.layBillCode.Location = new System.Drawing.Point(0, 29);
+            this.layBillCode.Location = new System.Drawing.Point(0, 25);
             this.layBillCode.Name = "layBillCode";
-            this.layBillCode.Size = new System.Drawing.Size(486, 29);
+            this.layBillCode.Size = new System.Drawing.Size(424, 25);
             this.layBillCode.Text = "订单编号";
-            this.layBillCode.TextSize = new System.Drawing.Size(60, 20);
+            this.layBillCode.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layDeclinedType
             // 
             this.layDeclinedType.Control = this.txtDeclinedType;
             this.layDeclinedType.CustomizationFormText = "拒收类型";
-            this.layDeclinedType.Location = new System.Drawing.Point(0, 58);
+            this.layDeclinedType.Location = new System.Drawing.Point(0, 50);
             this.layDeclinedType.Name = "layDeclinedType";
-            this.layDeclinedType.Size = new System.Drawing.Size(486, 29);
+            this.layDeclinedType.Size = new System.Drawing.Size(424, 25);
             this.layDeclinedType.Text = "拒收类型";
-            this.layDeclinedType.TextSize = new System.Drawing.Size(60, 20);
+            this.layDeclinedType.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layDealerName
             // 
             this.layDealerName.Control = this.txtDealerName;
             this.layDealerName.CustomizationFormText = "往来单位";
-            this.layDealerName.Location = new System.Drawing.Point(486, 58);
+            this.layDealerName.Location = new System.Drawing.Point(424, 50);
             this.layDealerName.Name = "layDealerName";
-            this.layDealerName.Size = new System.Drawing.Size(487, 29);
+            this.layDealerName.Size = new System.Drawing.Size(424, 25);
             this.layDealerName.Text = "往来单位";
-            this.layDealerName.TextSize = new System.Drawing.Size(60, 20);
+            this.layDealerName.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layBillTypeName
             // 
             this.layBillTypeName.Control = this.txtBillTypeName;
             this.layBillTypeName.CustomizationFormText = "订单类型";
-            this.layBillTypeName.Location = new System.Drawing.Point(486, 29);
+            this.layBillTypeName.Location = new System.Drawing.Point(424, 25);
             this.layBillTypeName.Name = "layBillTypeName";
-            this.layBillTypeName.Size = new System.Drawing.Size(487, 29);
+            this.layBillTypeName.Size = new System.Drawing.Size(424, 25);
             this.layBillTypeName.Text = "订单类型";
-            this.layBillTypeName.TextSize = new System.Drawing.Size(60, 20);
+            this.layBillTypeName.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layDeclinedPerson
             // 
             this.layDeclinedPerson.Control = this.txtDeclinedPerson;
             this.layDeclinedPerson.CustomizationFormText = "拒收人";
-            this.layDeclinedPerson.Location = new System.Drawing.Point(486, 0);
+            this.layDeclinedPerson.Location = new System.Drawing.Point(424, 0);
             this.layDeclinedPerson.Name = "layDeclinedPerson";
-            this.layDeclinedPerson.Size = new System.Drawing.Size(487, 29);
+            this.layDeclinedPerson.Size = new System.Drawing.Size(424, 25);
             this.layDeclinedPerson.Text = "拒收人";
-            this.layDeclinedPerson.TextSize = new System.Drawing.Size(60, 20);
+            this.layDeclinedPerson.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layDeclinedReason
             // 
             this.layDeclinedReason.Control = this.txtDeclinedReason;
             this.layDeclinedReason.CustomizationFormText = "拒收原因";
-            this.layDeclinedReason.Location = new System.Drawing.Point(0, 116);
+            this.layDeclinedReason.Location = new System.Drawing.Point(424, 75);
             this.layDeclinedReason.Name = "layDeclinedReason";
-            this.layDeclinedReason.Size = new System.Drawing.Size(973, 52);
+            this.layDeclinedReason.Size = new System.Drawing.Size(424, 25);
             this.layDeclinedReason.Text = "拒收原因";
-            this.layDeclinedReason.TextSize = new System.Drawing.Size(60, 20);
+            this.layDeclinedReason.TextSize = new System.Drawing.Size(48, 17);
             // 
             // pnlAction
             // 
@@ -372,10 +368,9 @@
             this.pnlAction.Controls.Add(this.btnCancel);
             this.pnlAction.Controls.Add(this.btnSave);
             this.pnlAction.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlAction.Location = new System.Drawing.Point(0, 621);
-            this.pnlAction.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pnlAction.Location = new System.Drawing.Point(0, 483);
             this.pnlAction.Name = "pnlAction";
-            this.pnlAction.Size = new System.Drawing.Size(997, 62);
+            this.pnlAction.Size = new System.Drawing.Size(872, 48);
             this.pnlAction.TabIndex = 1;
             // 
             // btnPrint
@@ -383,12 +378,11 @@
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrint.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrint.Appearance.Options.UseFont = true;
-            this.btnPrint.Location = new System.Drawing.Point(549, 17);
-            this.btnPrint.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnPrint.Location = new System.Drawing.Point(480, 13);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.OperationName = "Declined";
             this.btnPrint.ReportName = "拒收单";
-            this.btnPrint.Size = new System.Drawing.Size(86, 30);
+            this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 5;
             this.btnPrint.Text = "打印(&P)";
             // 
@@ -398,10 +392,9 @@
             this.btnCancel.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Appearance.Options.UseFont = true;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(895, 17);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCancel.Location = new System.Drawing.Point(783, 13);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(86, 30);
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "取消(&C)";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -411,10 +404,9 @@
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Appearance.Options.UseFont = true;
-            this.btnSave.Location = new System.Drawing.Point(775, 17);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnSave.Location = new System.Drawing.Point(678, 13);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(86, 30);
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "保存(&S)";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -425,23 +417,20 @@
             this.gpcButtom.AppearanceCaption.Options.UseFont = true;
             this.gpcButtom.Controls.Add(this.popupGrid);
             this.gpcButtom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gpcButtom.Location = new System.Drawing.Point(0, 192);
-            this.gpcButtom.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gpcButtom.Location = new System.Drawing.Point(0, 149);
             this.gpcButtom.Name = "gpcButtom";
-            this.gpcButtom.Size = new System.Drawing.Size(997, 429);
+            this.gpcButtom.Size = new System.Drawing.Size(872, 334);
             this.gpcButtom.TabIndex = 2;
             this.gpcButtom.Text = "拒收单明细";
             // 
             // popupGrid
             // 
             this.popupGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.popupGrid.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.popupGrid.IsCalculatePrice = false;
-            this.popupGrid.Location = new System.Drawing.Point(2, 28);
-            this.popupGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.popupGrid.Location = new System.Drawing.Point(2, 25);
             this.popupGrid.Name = "popupGrid";
             this.popupGrid.OperationName = "Declined";
-            this.popupGrid.Size = new System.Drawing.Size(993, 399);
+            this.popupGrid.Size = new System.Drawing.Size(868, 307);
             this.popupGrid.TabIndex = 2;
             // 
             // layoutControlItem1
@@ -543,15 +532,38 @@
             this.layoutControlItem9.TextSize = new System.Drawing.Size(60, 20);
             this.layoutControlItem9.TextToControlDistance = 5;
             // 
+            // txtReservation2
+            // 
+            this.txtReservation2.AlphabeticFiled = null;
+            this.txtReservation2.EntityField = DQS.Module.Entities.BUSDeclinedEntityFields2.Reservation2;
+            this.txtReservation2.IsIntegerOnly = false;
+            this.txtReservation2.IsNullString = null;
+            this.txtReservation2.IsNullValidate = true;
+            this.txtReservation2.IsTransferAlphabetic = false;
+            this.txtReservation2.Location = new System.Drawing.Point(63, 112);
+            this.txtReservation2.Name = "txtReservation2";
+            this.txtReservation2.Size = new System.Drawing.Size(793, 21);
+            this.txtReservation2.StyleController = this.layControl;
+            this.txtReservation2.TabIndex = 6;
+            // 
+            // layReservation2
+            // 
+            this.layReservation2.Control = this.txtReservation2;
+            this.layReservation2.CustomizationFormText = "处理方式";
+            this.layReservation2.Location = new System.Drawing.Point(0, 100);
+            this.layReservation2.Name = "layReservation2";
+            this.layReservation2.Size = new System.Drawing.Size(848, 25);
+            this.layReservation2.Text = "处理方式";
+            this.layReservation2.TextSize = new System.Drawing.Size(48, 17);
+            // 
             // FrmSingleDeclined
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(997, 683);
+            this.ClientSize = new System.Drawing.Size(872, 531);
             this.Controls.Add(this.gpcButtom);
             this.Controls.Add(this.pnlAction);
             this.Controls.Add(this.ftPanel);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimizeBox = false;
             this.Name = "FrmSingleDeclined";
             this.ShowInTaskbar = false;
@@ -594,6 +606,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReservation2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layReservation2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -634,6 +648,8 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
+        private Controls.BUSDeclinedEntityTextBox txtReservation2;
+        private DevExpress.XtraLayout.LayoutControlItem layReservation2;
 
     }
 }

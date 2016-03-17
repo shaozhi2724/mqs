@@ -31,6 +31,8 @@
             this.gridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.lblTotalPrice = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.deEndDate = new DevExpress.XtraEditors.DateEdit();
             this.deStartDate = new DevExpress.XtraEditors.DateEdit();
             this.txtDealerCode = new DevExpress.XtraEditors.TextEdit();
@@ -44,14 +46,12 @@
             this.txtPayablesCode = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.btnReSet = new DevExpress.XtraEditors.SimpleButton();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.btnDel = new DevExpress.XtraEditors.SimpleButton();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
-            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
-            this.lblTotalPrice = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
@@ -86,7 +86,9 @@
             this.gridView.GridControl = this.gridControl;
             this.gridView.IndicatorWidth = 40;
             this.gridView.Name = "gridView";
+            this.gridView.OptionsView.ShowFooter = true;
             this.gridView.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
+            this.gridView.DoubleClick += new System.EventHandler(this.gridView_DoubleClick);
             // 
             // panelControl2
             // 
@@ -110,6 +112,23 @@
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(878, 66);
             this.panelControl2.TabIndex = 14;
+            // 
+            // lblTotalPrice
+            // 
+            this.lblTotalPrice.Location = new System.Drawing.Point(678, 40);
+            this.lblTotalPrice.Name = "lblTotalPrice";
+            this.lblTotalPrice.Size = new System.Drawing.Size(0, 14);
+            this.lblTotalPrice.TabIndex = 8;
+            this.lblTotalPrice.Visible = false;
+            // 
+            // labelControl8
+            // 
+            this.labelControl8.Location = new System.Drawing.Point(607, 40);
+            this.labelControl8.Name = "labelControl8";
+            this.labelControl8.Size = new System.Drawing.Size(60, 14);
+            this.labelControl8.TabIndex = 9;
+            this.labelControl8.Text = "查询总计：";
+            this.labelControl8.Visible = false;
             // 
             // deEndDate
             // 
@@ -231,6 +250,15 @@
             this.panelControl1.Size = new System.Drawing.Size(878, 50);
             this.panelControl1.TabIndex = 13;
             // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(428, 11);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(79, 27);
+            this.btnExport.TabIndex = 1;
+            this.btnExport.Text = "导出";
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // btnReSet
             // 
             this.btnReSet.Location = new System.Drawing.Point(318, 11);
@@ -276,30 +304,6 @@
             this.labelControl7.Size = new System.Drawing.Size(276, 14);
             this.labelControl7.TabIndex = 0;
             this.labelControl7.Text = "（日期默认为空，按日期查请点击查询，否则重置）";
-            // 
-            // btnExport
-            // 
-            this.btnExport.Location = new System.Drawing.Point(428, 11);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(79, 27);
-            this.btnExport.TabIndex = 1;
-            this.btnExport.Text = "导出";
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
-            // 
-            // lblTotalPrice
-            // 
-            this.lblTotalPrice.Location = new System.Drawing.Point(678, 40);
-            this.lblTotalPrice.Name = "lblTotalPrice";
-            this.lblTotalPrice.Size = new System.Drawing.Size(0, 14);
-            this.lblTotalPrice.TabIndex = 8;
-            // 
-            // labelControl8
-            // 
-            this.labelControl8.Location = new System.Drawing.Point(607, 40);
-            this.labelControl8.Name = "labelControl8";
-            this.labelControl8.Size = new System.Drawing.Size(60, 14);
-            this.labelControl8.TabIndex = 9;
-            this.labelControl8.Text = "查询总计：";
             // 
             // FrmShowPayables
             // 

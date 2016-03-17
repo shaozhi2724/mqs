@@ -365,10 +365,10 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Delete)});
             this.cbxProduct.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ProductID", "药品ID", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ProductName", "药品名称"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ProductSpec", "规格"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("PackageSpec", "包装规格")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ProductID", "产品ID", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ProductName", "产品名称"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ProductSpec", "规格型号"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("PackageSpec", "包装规格型号")});
             this.cbxProduct.Properties.DisplayMember = "ProductName";
             this.cbxProduct.Properties.ImmediatePopup = true;
             this.cbxProduct.Properties.NullText = "";
@@ -510,21 +510,21 @@
             // layProduct
             // 
             this.layProduct.Control = this.cbxProduct;
-            this.layProduct.CustomizationFormText = "药品";
+            this.layProduct.CustomizationFormText = "产品";
             this.layProduct.Location = new System.Drawing.Point(0, 87);
             this.layProduct.Name = "layProduct";
             this.layProduct.Size = new System.Drawing.Size(708, 29);
-            this.layProduct.Text = "药品";
+            this.layProduct.Text = "产品";
             this.layProduct.TextSize = new System.Drawing.Size(105, 20);
             // 
             // layProductCategory
             // 
             this.layProductCategory.Control = this.cbxProductCategory;
-            this.layProductCategory.CustomizationFormText = "药品类型";
+            this.layProductCategory.CustomizationFormText = "产品类型";
             this.layProductCategory.Location = new System.Drawing.Point(0, 58);
             this.layProductCategory.Name = "layProductCategory";
             this.layProductCategory.Size = new System.Drawing.Size(708, 29);
-            this.layProductCategory.Text = "药品类型";
+            this.layProductCategory.Text = "产品类型";
             this.layProductCategory.TextSize = new System.Drawing.Size(105, 20);
             // 
             // FrmSinglePurchasePriceItem

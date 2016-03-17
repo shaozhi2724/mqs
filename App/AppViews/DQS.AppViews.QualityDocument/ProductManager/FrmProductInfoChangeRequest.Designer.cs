@@ -125,7 +125,7 @@
             // 
             // txtProductName
             // 
-            this.txtProductName.FormatQueryString = "[药品名称] LIKE \'%{0}%\'";
+            this.txtProductName.FormatQueryString = "[产品名称] LIKE \'%{0}%\'";
             this.txtProductName.Location = new System.Drawing.Point(238, 12);
             this.txtProductName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtProductName.Name = "txtProductName";
@@ -150,7 +150,7 @@
             // 
             // txtProductCode
             // 
-            this.txtProductCode.FormatQueryString = "[药品编号] LIKE \'%{0}%\' ";
+            this.txtProductCode.FormatQueryString = "[产品编号] LIKE \'%{0}%\' ";
             this.txtProductCode.Location = new System.Drawing.Point(90, 12);
             this.txtProductCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtProductCode.Name = "txtProductCode";
@@ -181,11 +181,11 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.txtProductCode;
-            this.layoutControlItem1.CustomizationFormText = "药品编号";
+            this.layoutControlItem1.CustomizationFormText = "产品编号";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Size = new System.Drawing.Size(148, 49);
-            this.layoutControlItem1.Text = "药品编号";
+            this.layoutControlItem1.Text = "产品编号";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(75, 20);
             // 
             // layoutControlItem2
@@ -201,11 +201,11 @@
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.txtProductName;
-            this.layoutControlItem3.CustomizationFormText = "药品名称";
+            this.layoutControlItem3.CustomizationFormText = "产品名称";
             this.layoutControlItem3.Location = new System.Drawing.Point(148, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Size = new System.Drawing.Size(245, 49);
-            this.layoutControlItem3.Text = "药品名称";
+            this.layoutControlItem3.Text = "产品名称";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(75, 20);
             // 
             // layoutControlItem4

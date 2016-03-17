@@ -44,6 +44,18 @@ namespace DQS.Module.Entities
 			set { this.SetValue("ValidateDate", value); } 
 		}
 
+        public string SterilizationBatchNo
+		{
+            get { return (string)this.GetValue("SterilizationBatchNo"); }
+            set { this.SetValue("SterilizationBatchNo", value); } 
+		}
+
+        public DateTime SterilizationDate
+		{
+            get { return (DateTime)this.GetValue("SterilizationDate"); }
+            set { this.SetValue("SterilizationDate", value); } 
+		}
+
 		public int Amount
 		{
 			get { return (int)this.GetValue("Amount"); } 
@@ -195,6 +207,8 @@ namespace DQS.Module.Entities
 			this.Fields.Add("BatchNo", BUSStoreDetailEntityFields.BatchNo);
 			this.Fields.Add("ProduceDate", BUSStoreDetailEntityFields.ProduceDate);
 			this.Fields.Add("ValidateDate", BUSStoreDetailEntityFields.ValidateDate);
+            this.Fields.Add("SterilizationBatchNo", BUSStoreDetailEntityFields.SterilizationBatchNo);
+            this.Fields.Add("SterilizationDate", BUSStoreDetailEntityFields.SterilizationDate);
 			this.Fields.Add("Amount", BUSStoreDetailEntityFields.Amount);
             this.Fields.Add("Price", BUSStoreDetailEntityFields.Price);
             this.Fields.Add("TotalPrice", BUSStoreDetailEntityFields.TotalPrice);
@@ -252,123 +266,133 @@ namespace DQS.Module.Entities
 			get { return new EntityField("BUS_StoreDetail", 4, "ValidateDate", SqlDbType.DateTime, false, false, false, true); }
 		}
 
+        public static EntityField SterilizationBatchNo
+		{
+            get { return new EntityField("BUS_StoreDetail", 5, "SterilizationBatchNo", SqlDbType.NVarChar, false, false, false, true); }
+		}
+
+        public static EntityField SterilizationDate
+		{
+            get { return new EntityField("BUS_StoreDetail", 6, "SterilizationDate", SqlDbType.DateTime, false, false, false, true); }
+		}
+
 		public static EntityField Amount
 		{
-			get { return new EntityField("BUS_StoreDetail", 5, "Amount", SqlDbType.Int, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 7, "Amount", SqlDbType.Int, false, false, false, true); }
 		}
 
 		public static EntityField Price
 		{
-            get { return new EntityField("BUS_StoreDetail", 6, "Price", SqlDbType.Float, false, false, false, true); }
+            get { return new EntityField("BUS_StoreDetail", 8, "Price", SqlDbType.Float, false, false, false, true); }
 		}
 
 		public static EntityField TotalPrice
 		{
-            get { return new EntityField("BUS_StoreDetail", 7, "TotalPrice", SqlDbType.Float, false, false, false, true); }
+            get { return new EntityField("BUS_StoreDetail", 9, "TotalPrice", SqlDbType.Float, false, false, false, true); }
 		}
 
 		public static EntityField CreateStoreID
 		{
-			get { return new EntityField("BUS_StoreDetail", 8, "CreateStoreID", SqlDbType.Int, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 10, "CreateStoreID", SqlDbType.Int, false, false, false, true); }
 		}
 
 		public static EntityField CreateStoreCode
 		{
-			get { return new EntityField("BUS_StoreDetail", 9, "CreateStoreCode", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 11, "CreateStoreCode", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField LastStoreID
 		{
-			get { return new EntityField("BUS_StoreDetail", 10, "LastStoreID", SqlDbType.Int, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 12, "LastStoreID", SqlDbType.Int, false, false, false, true); }
 		}
 
 		public static EntityField LastStoreCode
 		{
-			get { return new EntityField("BUS_StoreDetail", 11, "LastStoreCode", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 13, "LastStoreCode", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField LastCuringDate
 		{
-			get { return new EntityField("BUS_StoreDetail", 12, "LastCuringDate", SqlDbType.DateTime, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 14, "LastCuringDate", SqlDbType.DateTime, false, false, false, true); }
 		}
 
 		public static EntityField CreateUserID
 		{
-			get { return new EntityField("BUS_StoreDetail", 13, "CreateUserID", SqlDbType.UniqueIdentifier, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 15, "CreateUserID", SqlDbType.UniqueIdentifier, false, false, false, true); }
 		}
 
 		public static EntityField CreateDate
 		{
-			get { return new EntityField("BUS_StoreDetail", 14, "CreateDate", SqlDbType.DateTime, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 16, "CreateDate", SqlDbType.DateTime, false, false, false, true); }
 		}
 
 		public static EntityField LastModifyUserID
 		{
-			get { return new EntityField("BUS_StoreDetail", 15, "LastModifyUserID", SqlDbType.UniqueIdentifier, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 17, "LastModifyUserID", SqlDbType.UniqueIdentifier, false, false, false, true); }
 		}
 
 		public static EntityField LastModifyDate
 		{
-			get { return new EntityField("BUS_StoreDetail", 16, "LastModifyDate", SqlDbType.DateTime, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 18, "LastModifyDate", SqlDbType.DateTime, false, false, false, true); }
 		}
 
 		public static EntityField DetailRemark
 		{
-			get { return new EntityField("BUS_StoreDetail", 17, "DetailRemark", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 19, "DetailRemark", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
         public static EntityField DepartmentID
         {
-            get { return new EntityField("BUS_StoreDetail", 18, "DepartmentID", SqlDbType.Int, false, false, false, true); }
+            get { return new EntityField("BUS_StoreDetail", 20, "DepartmentID", SqlDbType.Int, false, false, false, true); }
         }
 		public static EntityField Reservation1
 		{
-			get { return new EntityField("BUS_StoreDetail", 19, "Reservation1", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 21, "Reservation1", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation2
 		{
-			get { return new EntityField("BUS_StoreDetail", 20, "Reservation2", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 22, "Reservation2", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation3
 		{
-			get { return new EntityField("BUS_StoreDetail", 21, "Reservation3", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 23, "Reservation3", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation4
 		{
-			get { return new EntityField("BUS_StoreDetail", 22, "Reservation4", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 24, "Reservation4", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation5
 		{
-			get { return new EntityField("BUS_StoreDetail", 23, "Reservation5", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 25, "Reservation5", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation6
 		{
-			get { return new EntityField("BUS_StoreDetail", 24, "Reservation6", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 26, "Reservation6", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation7
 		{
-			get { return new EntityField("BUS_StoreDetail", 25, "Reservation7", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 27, "Reservation7", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation8
 		{
-			get { return new EntityField("BUS_StoreDetail", 26, "Reservation8", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 28, "Reservation8", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation9
 		{
-			get { return new EntityField("BUS_StoreDetail", 27, "Reservation9", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 29, "Reservation9", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation10
 		{
-			get { return new EntityField("BUS_StoreDetail", 28, "Reservation10", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_StoreDetail", 30, "Reservation10", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 	}
@@ -388,6 +412,10 @@ namespace DQS.Module.Entities
 		ProduceDate,
 
 		ValidateDate,
+        
+        SterilizationBatchNo,
+        
+        SterilizationDate,
 
 		Amount,
 

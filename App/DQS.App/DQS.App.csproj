@@ -41,7 +41,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;SenseLockLicense1</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;SoftFileLicense</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
@@ -190,6 +190,8 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -258,10 +260,17 @@
       <DependentUpon>FrmWarningShow.cs</DependentUpon>
     </Compile>
     <Compile Include="Licenser\DQSLicenseManager.cs" />
+    <Compile Include="Licenser\RockeyLicenseManager.cs" />
     <Compile Include="Licenser\SenseLockKeyManager.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\MQSKeyServices\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="UpdateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -327,107 +336,61 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Content Include="养护计划查询.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="Rockey1S.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="养护记录.mrt">
+    <None Include="Service References\MQSKeyServices\configuration91.svcinfo" />
+    <None Include="Service References\MQSKeyServices\configuration.svcinfo" />
+    <None Include="Service References\MQSKeyServices\DQS.App.MQSKeyServices.ClientKeyInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MQSKeyServices\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\登录背景.png" />
+    <None Include="Resources\jd.png" />
+    <None Include="Resources\sp.png" />
+    <None Include="上架单.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="历史商品库存明细表.mrt">
+    </None>
+    <None Include="拒收单.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="拒收单管理.mrt">
+    </None>
+    <None Include="拣货单.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="运输记录.mrt">
+    </None>
+    <None Include="收货单.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="采购单.mrt">
+    </None>
+    <None Include="运输单.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="销售单.mrt">
+    </None>
+    <None Include="采购单.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="首营客户.mrt">
+    </None>
+    <None Include="采购退货单.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="首营经销商.mrt">
+    </None>
+    <None Include="销售单.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="首营药品.mrt">
+    </None>
+    <None Include="销售退货单.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="验收单.mrt">
+    </None>
+    <None Include="首营产品.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="上架单.mrt">
+    </None>
+    <None Include="首营客户.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="不合格品入库记录查询.mrt">
+    </None>
+    <None Include="首营经销商.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="不合格品养护记录查询.mrt">
+    </None>
+    <None Include="验收单.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="付款汇总.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="企业证书预警记录查询.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="入库记录查询.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="养护记录查询.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="出库记录查询.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="复核记录查询.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="拒收记录查询.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="收款汇总.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="收货记录查询.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="运输记录查询.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="近效期药品催销查询.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="采购汇总.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="采购记录查询.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="采购退回记录查询.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="销售汇总.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="销售记录查询.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="销售退回记录查询.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="销毁记录查询.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="验收记录查询.mrt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="在库不合格品处理记录查询.mrt" />
-    <None Include="验收不合格品直接入库记录.mrt" />
+    </None>
+    <None Include="Service References\MQSKeyServices\MQSKeyService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AppViews\DQS.AppViews.ExceptionControl\DQS.AppViews.ExceptionControl.csproj">
@@ -510,9 +473,7 @@
     <None Include="Resources\其他业务Moudle.png" />
     <None Include="Resources\储存及保养Moudle.png" />
     <None Include="Resources\出库管理Moudle.png" />
-    <None Include="Resources\登录背景2.jpg" />
     <None Include="Resources\标题2.png" />
-    <None Include="Resources\登录背景.jpg" />
     <None Include="Resources\top.png" />
     <None Include="Resources\标题.png" />
     <None Include="Resources\登录.jpg" />
@@ -592,6 +553,12 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\MQSKeyServices\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

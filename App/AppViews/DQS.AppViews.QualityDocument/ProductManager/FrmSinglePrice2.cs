@@ -543,7 +543,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                 }
                 else
                 {
-                    XtraMessageBox.Show("该药品的价格信息已存在。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    XtraMessageBox.Show("该产品的价格信息已存在。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
             }

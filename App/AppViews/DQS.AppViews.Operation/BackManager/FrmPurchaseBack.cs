@@ -12,6 +12,7 @@ using DQS.Common;
 using DQS.Controls;
 using DQS.Module.Entities;
 using ORMSCore;
+using DQS.AppViews.Operation.Properties;
 
 namespace DQS.AppViews.Operation.BackManager
 {
@@ -57,16 +58,19 @@ namespace DQS.AppViews.Operation.BackManager
                         departmentID = employee.DepartmentID;
                     }
                     string sql = @"
-UPDATE SD
-    SET SD.Amount = SD.Amount + BD.Amount
-FROM dbo.BUS_BillDetail AS BD
-LEFT JOIN dbo.BUS_StoreDetail AS SD
-ON BD.ProductID = SD.ProductID
-AND BD.BatchNo = SD.BatchNo
-WHERE BD.BillID='{0}' AND SD.DepartmentID='{1}'
-
 UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,ReviewCode=NULL,AcceptID=NULL,AcceptCode=NULL,Reservation10='修改' WHERE BillID='{0}'
 ";
+//                    string sql = @"
+//UPDATE SD
+//    SET SD.Amount = SD.Amount + BD.Amount
+//FROM dbo.BUS_BillDetail AS BD
+//LEFT JOIN dbo.BUS_StoreDetail AS SD
+//ON BD.ProductID = SD.ProductID
+//AND BD.BatchNo = SD.BatchNo
+//WHERE BD.BillID='{0}' AND SD.DepartmentID='{1}'
+//
+//UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,ReviewCode=NULL,AcceptID=NULL,AcceptCode=NULL,Reservation10='修改' WHERE BillID='{0}'
+//";
                     using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
                     {
                         conn.Open();//连接数据库
@@ -77,7 +81,7 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
                         try
                         {
                             //向数据表中插入记录的命令语句
-                            cmd.CommandText = string.Format(sql, entity.BillID, departmentID);
+                            cmd.CommandText = string.Format(sql, entity.BillID);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();//提交事务
                         }
@@ -133,8 +137,10 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
                     {
                         if (DialogResult.Yes == fr.ShowDialog())
                         {
-                            //将销售单减掉的业务库存加回来
-                            string sql = @"
+                            if (!Settings.Default.IsNewStoreDetail)
+                            {
+                                //将销售单减掉的业务库存加回来
+                                string sql = @"
 UPDATE SD
     SET SD.Amount = SD.Amount + BD.Amount
 FROM dbo.BUS_BillDetail AS BD
@@ -146,32 +152,69 @@ WHERE BD.BillID='{0}'
 
 UPDATE dbo.BUS_Bill SET BillStatus=9,BillStatusName='已删除',LastModifyDate=GETDATE(),LastModifyUserID='{1}',Reservation5='已删除。操作员：'+(SELECT UserName FROM dbo.ATC_User WHERE UserID = '{1}')+'于'+CONVERT(varchar(100), GETDATE(), 20)+'删除，删除原因为：'+'{2}' WHERE BillID='{0}'
 ";
-                            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
-                            {
-                                conn.Open(); //连接数据库
-                                //开始一个本地事务
-                                SqlTransaction transaction = conn.BeginTransaction("PBDeletionTransaction");
-                                //必须为SqlCommand指定数据库连接和登记的事务
-                                SqlCommand cmd = new SqlCommand("", conn, transaction);
-                                try
+                                using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
                                 {
-                                    //向数据表中插入记录的命令语句
-                                    cmd.CommandText = string.Format(sql, entity.BillID, GlobalItem.g_CurrentUser.UserID, reason);
-                                    cmd.ExecuteNonQuery();
-                                    transaction.Commit(); //提交事务
-                                }
-                                catch (Exception ex)
-                                {
+                                    conn.Open(); //连接数据库
+                                    //开始一个本地事务
+                                    SqlTransaction transaction = conn.BeginTransaction("PBDeletionTransaction");
+                                    //必须为SqlCommand指定数据库连接和登记的事务
+                                    SqlCommand cmd = new SqlCommand("", conn, transaction);
                                     try
                                     {
-                                        transaction.Rollback(); //回滚事务
+                                        //向数据表中插入记录的命令语句
+                                        cmd.CommandText = string.Format(sql, entity.BillID, GlobalItem.g_CurrentUser.UserID, reason);
+                                        cmd.ExecuteNonQuery();
+                                        transaction.Commit(); //提交事务
                                     }
-                                    catch (Exception ex2)
+                                    catch (Exception ex)
                                     {
+                                        try
+                                        {
+                                            transaction.Rollback(); //回滚事务
+                                        }
+                                        catch (Exception ex2)
+                                        {
+                                        }
                                     }
                                 }
+                                this.pageNavigator.ShowData();
                             }
-                            this.pageNavigator.ShowData();
+                            else
+                            {
+                                //将销售单减掉的业务库存加回来
+                                string sql = @"SELECT DetailID FROM dbo.BUS_BillDetail WHERE BillID = " + entity.BillID;
+                                string Updatesql = @"
+UPDATE dbo.BUS_Bill SET BillStatus=9,BillStatusName='已删除',LastModifyDate=GETDATE(),LastModifyUserID='{1}',Reservation5='已删除。操作员：'+(SELECT UserName FROM dbo.ATC_User WHERE UserID = '{1}')+'于'+CONVERT(varchar(100), GETDATE(), 20)+'删除，删除原因为：'+'{2}' WHERE BillID='{0}'";
+                                string DelNewsql = "EXEC sp_NewStoreDetailDeleteBill ";
+                                using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                                {
+                                    SqlDataAdapter sdad = new SqlDataAdapter(sql, conn);
+                                    DataSet ds = new DataSet();
+                                    conn.Open();
+                                    try
+                                    {
+                                        Updatesql = string.Format(Updatesql, entity.BillID, GlobalItem.g_CurrentUser.UserID, reason);
+                                        SqlCommand Bcommand = new SqlCommand(Updatesql, conn);
+                                        Bcommand.ExecuteNonQuery();
+                                        sdad.Fill(ds, "Table");
+                                        for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                                        {
+                                            int DetailID = Convert.ToInt32(ds.Tables["Table"].Rows[i]["DetailID"]);
+                                            SqlCommand comm = new SqlCommand(DelNewsql + DetailID.ToString(), conn);
+                                            comm.ExecuteNonQuery();
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        XtraMessageBox.Show(ex.Message.ToString(), "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                    finally
+                                    {
+                                        conn.Close();
+                                    }
+                                }
+                                this.pageNavigator.ShowData();
+                            }
                         }
                     }
                 }
@@ -183,6 +226,12 @@ UPDATE dbo.BUS_Bill SET BillStatus=9,BillStatusName='已删除',LastModifyDate=G
             object id = this.gvData.GetFocusedRowCellValue("退货单ID");
             if (id != null && id != DBNull.Value)
             {
+                string statusName = gvData.GetFocusedRowCellValue("状态").ToString();
+                if (statusName == "未批准")
+                {
+                    XtraMessageBox.Show("该单据已作废，不允许再次审批", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 DialogResult dr = base.BaseApprove();
                 if (dr == DialogResult.Yes)
                 {
@@ -249,14 +298,6 @@ UPDATE dbo.BUS_Bill SET BillStatus=9,BillStatusName='已删除',LastModifyDate=G
             }
             //将销售单减掉的业务库存加回来
             string sql = @"
-UPDATE SD
-    SET SD.Amount = SD.Amount + BD.Amount
-FROM dbo.BUS_BillDetail AS BD
-LEFT JOIN dbo.BUS_StoreDetail AS SD
-ON BD.ProductID = SD.ProductID
-AND BD.BatchNo = SD.BatchNo
-WHERE BD.BillID='{0}' AND SD.DepartmentID='{1}'
-
 UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,ReviewCode=NULL,AcceptID=NULL,AcceptCode=NULL,Reservation10='反审批' WHERE BillID='{0}'
 ";
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))

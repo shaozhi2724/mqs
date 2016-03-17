@@ -71,7 +71,7 @@ namespace DQS.AppViews.QualityControl.AuthorityManager
 
                 foreach (DataRow row in data.Rows)
                 {
-                    this.lbcPage.Items.Add(new ListDataRowItem(row, row["PageName"].ToString()));
+                    this.lbcPage.Items.Add(new ListDataRowItem(row, " "+row["PageName"].ToString()));
                 }
             }
         }

@@ -124,6 +124,31 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
             if (!this.ftPanel.ValidateIsNullFields()) return;
             BUSCuringRecordEntity entity = this.ftPanel.GetEntity() as BUSCuringRecordEntity;
 
+            if (txtCheckItem.Text == "")
+            {
+                XtraMessageBox.Show("检查项目不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtCheckItem.Focus();
+                return;
+            }
+            if (txtQualityCondition.Text == "")
+            {
+                XtraMessageBox.Show("质量状况不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtQualityCondition.Focus();
+                return;
+            }
+            if (txtCuringMeasure.Text == "")
+            {
+                XtraMessageBox.Show("养护措施不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtCuringMeasure.Focus();
+                return;
+            }
+            if (txtCuringResult.Text == "")
+            {
+                XtraMessageBox.Show("处理结果不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtCuringResult.Focus();
+                return;
+            }
+
             entity.ProductID = Convert.ToInt32(this.m_ProductID);
             entity.BatchNo = txtBatchNo.Text.Trim();
             entity.CheckDate = DateTime.Now;
@@ -177,16 +202,16 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
 
         public static void UpdateStoreDetail(BUSCuringRecordEntity curingRecord)
         {
-            EntityCollection<BUSStoreDetailEntity> entities = new EntityCollection<BUSStoreDetailEntity>();
-            entities.Fetch(BUSStoreDetailEntityFields.ProductID == curingRecord.ProductID & BUSStoreDetailEntityFields.BatchNo == curingRecord.BatchNo);
 
-            foreach (BUSStoreDetailEntity entity in entities)
+            BUSInStoreDetailEntity InStoreDetails = new BUSInStoreDetailEntity
             {
+                InStoreID = curingRecord.InStoreID
+            };
+            InStoreDetails.Fetch();
 
-                entity.LastCuringDate = DateTime.Now;
+            InStoreDetails.CuringDate = DateTime.Now;
 
-                entity.Update();
-            }
+            InStoreDetails.Update();
 
         }
     }

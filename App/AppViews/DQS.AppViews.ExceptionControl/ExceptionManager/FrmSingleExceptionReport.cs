@@ -29,6 +29,10 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
             if (this.Tag != null)
             {
+                this.cboResult.Properties.Items.Add("无");
+                this.cboResult.Properties.Items.Add("解锁");
+                this.cboResult.SelectedItem = "解锁";
+
                 this.m_id = Convert.ToInt32(this.Tag);
 
                 BUSExceptionReportEntity entity = new BUSExceptionReportEntity { ExceptionID = m_id.Value };
@@ -171,11 +175,11 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
         private void popupGrid_PopupClosed(object sender, DQS.Controls.CommonCode.PopupFormClosedArgs e)
         {
-            string fieldName = "药品ID";
+            string fieldName = "产品ID";
             string fieldName2 = "批号";
             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
             {
-                object fieldValue = this.popupGrid.PopupView.GetRowCellValue(i, "药品ID");
+                object fieldValue = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
                 object fieldValue2 = this.popupGrid.PopupView.GetRowCellValue(i, fieldName2);
                 if (fieldValue != null && fieldValue != DBNull.Value)
                 {
@@ -183,7 +187,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                     {
                         if (fieldValue.ToString().Trim() == e.PopupRow[fieldName].ToString().Trim() && fieldValue2.ToString().Trim() == e.PopupRow[fieldName2].ToString().Trim())
                         {
-                            XtraMessageBox.Show("该批号药品已存在。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            XtraMessageBox.Show("该批号产品已存在。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             this.popupGrid.PopupView.FocusedRowHandle = i;
                             e.Cancel = true;
                         }

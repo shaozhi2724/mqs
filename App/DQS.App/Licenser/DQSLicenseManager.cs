@@ -12,12 +12,10 @@ namespace DQS.App.Licenser
     {
         /// <summary>
         /// 枚举注册文件，注册类型包含:
-        /// Demo - 演示版. 不检测计算机ID
         /// NodeLocked - 特定节点注册
         /// </summary>
         public enum LicenseType
         {
-            Demo,
             NodeLocked
         }
 
@@ -92,7 +90,7 @@ namespace DQS.App.Licenser
             {
                 if (bThrow)
                 {
-                    throw (new LicenseException("DQS注册信息不匹配"));
+                    throw (new LicenseException("MQS注册信息不匹配"));
                 }
                 return false;
             }
@@ -103,7 +101,7 @@ namespace DQS.App.Licenser
                 {
                     if (bThrow)
                     {
-                        throw (new LicenseException("DQS已被注册至另一台计算机"));
+                        throw (new LicenseException("MQS已被注册至另一台计算机"));
                     }
                     return false;
                 }
@@ -119,7 +117,7 @@ namespace DQS.App.Licenser
                         {
                             if (bThrow)
                             {
-                                throw (new LicenseException("DQS已过期"));
+                                throw (new LicenseException("MQS已过期"));
                             }
                             return false;
                         }
@@ -141,15 +139,15 @@ namespace DQS.App.Licenser
             xdoc.Load(licensePath);
             LicenseInfo licenseInformation;
             licenseInformation.kind =
-                (LicenseType) Enum.Parse(
-                    typeof (LicenseType),
+                (LicenseType)Enum.Parse(
+                    typeof(LicenseType),
                     xdoc.DocumentElement["LicenseType"].InnerText,
                     true);
             licenseInformation.computerID = xdoc.DocumentElement["ComputerId"].InnerText;
             licenseInformation.passCode = passCode;
             int nFeatures = xdoc.DocumentElement["Features"].GetElementsByTagName("Feature").Count;
             licenseInformation.features = new FeatureInfo[nFeatures];
-            XmlElement elem = (XmlElement) xdoc.DocumentElement["Features"].FirstChild;
+            XmlElement elem = (XmlElement)xdoc.DocumentElement["Features"].FirstChild;
             for (int i = 0; i < nFeatures; i++)
             {
                 licenseInformation.features[i].featureName = elem.Attributes["Name"].Value;
@@ -161,7 +159,7 @@ namespace DQS.App.Licenser
                         XmlConvert.ToDateTime(
                             elem.Attributes["Expiration"].Value, XmlDateTimeSerializationMode.Local);
                 }
-                elem = (XmlElement) elem.NextSibling;
+                elem = (XmlElement)elem.NextSibling;
             }
             signature = xdoc.DocumentElement["Signature"].InnerText;
             return licenseInformation;
@@ -174,7 +172,7 @@ namespace DQS.App.Licenser
 
             MemoryStream ms = new MemoryStream();
             BinaryWriter bw = new BinaryWriter(ms);
-            bw.Write((int) licenseInformation.kind);
+            bw.Write((int)licenseInformation.kind);
             if (licenseInformation.kind == LicenseType.NodeLocked)
             {
                 bw.Write(licenseInformation.computerID);
@@ -190,7 +188,7 @@ namespace DQS.App.Licenser
                 }
                 bw.Write(feature.maxCount);
             }
-            int nLen = (int) ms.Position + 1;
+            int nLen = (int)ms.Position + 1;
             bw.Close();
             ms.Close();
             data = ms.GetBuffer();
@@ -225,12 +223,14 @@ namespace DQS.App.Licenser
             {
                 if (string.IsNullOrEmpty(computerID))
                 {
-                    computerID = GetHash("CPU >> " + CpuId()
+                    /*computerID = GetHash("CPU >> " + CpuId()
                                          + "\nBIOS >> " + BiosId()
                                          + "\nBASE >> " + BaseId()
                                          + "\nDISK >> " + DiskId()
                                          + "\nVIDEO >> " + VideoId()
-                                         + "\nMAC >> " + MacId());
+                                         + "\nMAC >> " + MacId());*/
+                    computerID = GetHash("BIOS >> " + BiosId()
+                                         + "\nBASE >> " + BaseId());
                 }
                 return computerID;
             }
@@ -250,12 +250,12 @@ namespace DQS.App.Licenser
                 {
                     byte b = bt[i];
                     int n, n1, n2;
-                    n = (int) b;
+                    n = (int)b;
                     n1 = n & 15;
                     n2 = (n >> 4) & 15;
                     if (n2 > 9)
                     {
-                        s += ((char) (n2 - 10 + (int) 'A')).ToString();
+                        s += ((char)(n2 - 10 + (int)'A')).ToString();
                     }
                     else
                     {
@@ -263,13 +263,13 @@ namespace DQS.App.Licenser
                     }
                     if (n1 > 9)
                     {
-                        s += ((char) (n1 - 10 + (int) 'A')).ToString();
+                        s += ((char)(n1 - 10 + (int)'A')).ToString();
                     }
                     else
                     {
                         s += n1.ToString();
                     }
-                    if ((i + 1) != bt.Length && (i + 1)%2 == 0)
+                    if ((i + 1) != bt.Length && (i + 1) % 2 == 0)
                     {
                         s += "-";
                     }

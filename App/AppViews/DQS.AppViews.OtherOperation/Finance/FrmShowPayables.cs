@@ -36,6 +36,7 @@ namespace DQS.AppViews.OtherOperation.Finance
 
         private void gridLoad()
         {
+            sqlSearch = " AND (OperateDate BETWEEN '" + deStartDate.Text.Trim() + " 00:00:00' AND '" + deEndDate.Text.Trim() + " 23:59:59')";
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 string sql = @"SELECT PayablesID,PayablesCode AS [应付编号],VoucherCode AS [凭证号],BusinessBillID AS [StoreID],BusinessBillCode AS [单据编号],DealerCode AS [往来单位编码],DealerName AS [往来单位名称],DealerSpell AS [往来单位简拼],DealerType AS [往来单位类型],OperatePerson AS [开票员],BusinessPerson AS [业务员],BusinessBillDate AS [下单日期],StoreInPerson AS [入库员],StoreInDate AS [入库日期],TotalPrice AS [总金额],OperateDate AS [应付日期]
@@ -46,16 +47,19 @@ FROM dbo.FIN_Payables WHERE (DealerCode LIKE '%{0}%' OR DealerName LIKE '%{0}%' 
                 try
                 {
                     sda.Fill(ds, "Table");
-                    decimal Price = 0;
-                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
-                    {
-                        Price += Convert.ToDecimal(ds.Tables["Table"].Rows[i]["总金额"]);
-                    }
-                    lblTotalPrice.Text = Price.ToString();
+                    //decimal Price = 0;
+                    //for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                    //{
+                    //    Price += Convert.ToDecimal(ds.Tables["Table"].Rows[i]["总金额"]);
+                    //}
+                    //lblTotalPrice.Text = Price.ToString();
                     gridControl.DataSource = ds.Tables["Table"];
                     gridView.OptionsView.ColumnAutoWidth = false;
                     gridView.BestFitColumns();
                     gridView.OptionsView.ShowGroupPanel = false;
+
+                    gridView.Columns["总金额"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                    gridView.Columns["总金额"].SummaryItem.DisplayFormat = "合计: {0}";
 
                     for (int i = 0; i < gridView.Columns.Count; i++)
                     {
@@ -125,13 +129,11 @@ DELETE dbo.FIN_PayablesDetail WHERE {0}";
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            sqlSearch = " AND (BusinessBillDate BETWEEN '" + deStartDate.Text.Trim() + " 00:00:00' AND '" + deEndDate.Text.Trim() + " 23:59:59')";
             gridLoad();
         }
 
         private void btnReSet_Click(object sender, EventArgs e)
         {
-            sqlSearch = "";
             txtBillCode.Text = "";
             txtDealerCode.Text = "";
             txtPayablesCode.Text = "";
@@ -140,12 +142,14 @@ DELETE dbo.FIN_PayablesDetail WHERE {0}";
         }
         private void txtChanged(object sender, EventArgs e)
         {
-            gridLoad();
+            //gridLoad();
         }
 
         private void FrmShowPayables_Load(object sender, EventArgs e)
         {
-            gridLoad();
+            deStartDate.Text = DateTime.Today.ToString("d");
+            deEndDate.Text = DateTime.Today.ToString("d");
+            //gridLoad();
         }
 
         private void btnExport_Click(object sender, EventArgs e)
@@ -170,6 +174,17 @@ DELETE dbo.FIN_PayablesDetail WHERE {0}";
 
                 DevExpress.XtraEditors.XtraMessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            }
+        }
+
+        private void gridView_DoubleClick(object sender, EventArgs e)
+        {
+            string sql = @"SELECT pbd.BusinessBillCode AS [单号],pbd.DealerCode AS [单位编号],pbd.DealerName AS [单位名称],pbd.ProductName AS [名称],pbd.ProductSpec AS [规格],pbd.PackageSpec AS [包装规格],pbd.ProducerName AS [生产厂商],pbd.ProductStyle AS [类别],pbd.PhysicType AS [剂型],pbd.BatchNo AS [批号],pbd.Amount AS [数量],pbd.UnitPrice AS [单价],pbd.TotalPrice AS [金额] FROM dbo.FIN_PayablesDetail pbd
+WHERE pbd.PayablesCode = '" + gridView.GetDataRow(gridView.FocusedRowHandle)["应付编号"].ToString() + "'";
+            using (FrmDetails fs = new FrmDetails())
+            {
+                fs.sqlConditions = sql;
+                DialogResult dr = fs.ShowDialog();
             }
         }
     }

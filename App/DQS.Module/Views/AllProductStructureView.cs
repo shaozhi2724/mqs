@@ -26,10 +26,10 @@ namespace DQS.Module.Views
 			set { this.SetValue("存储ID", value); } 
 		}
 
-		public string 药品编号
+		public string 产品编号
 		{
-			get { return (string)this.GetValue("药品编号"); } 
-			set { this.SetValue("药品编号", value); } 
+			get { return (string)this.GetValue("产品编号"); } 
+			set { this.SetValue("产品编号", value); } 
 		}
 
 		public string 存储编号
@@ -38,10 +38,10 @@ namespace DQS.Module.Views
 			set { this.SetValue("存储编号", value); } 
 		}
 
-		public string 药品名称
+		public string 产品名称
 		{
-			get { return (string)this.GetValue("药品名称"); } 
-			set { this.SetValue("药品名称", value); } 
+			get { return (string)this.GetValue("产品名称"); } 
+			set { this.SetValue("产品名称", value); } 
 		}
 
 		public string 存储名称
@@ -50,10 +50,10 @@ namespace DQS.Module.Views
 			set { this.SetValue("存储名称", value); } 
 		}
 
-		public string 药品名称Spell
+		public string 产品名称Spell
 		{
-			get { return (string)this.GetValue("药品名称Spell"); } 
-			set { this.SetValue("药品名称Spell", value); } 
+			get { return (string)this.GetValue("产品名称Spell"); } 
+			set { this.SetValue("产品名称Spell", value); } 
 		}
 
 		public string 存储名称Spell
@@ -68,10 +68,10 @@ namespace DQS.Module.Views
 			set { this.SetValue("存储位置", value); } 
 		}
 
-		public string 规格
+		public string 规格型号
 		{
-			get { return (string)this.GetValue("规格"); } 
-			set { this.SetValue("规格", value); } 
+			get { return (string)this.GetValue("规格型号"); } 
+			set { this.SetValue("规格型号", value); } 
 		}
 
 		public string 剂型
@@ -80,16 +80,16 @@ namespace DQS.Module.Views
 			set { this.SetValue("剂型", value); } 
 		}
 
-		public string 药品类别
+		public string 产品类别
 		{
-			get { return (string)this.GetValue("药品类别"); } 
-			set { this.SetValue("药品类别", value); } 
+			get { return (string)this.GetValue("产品类别"); } 
+			set { this.SetValue("产品类别", value); } 
 		}
 
-		public string 批准文号
+		public string 注册证号
 		{
-			get { return (string)this.GetValue("批准文号"); } 
-			set { this.SetValue("批准文号", value); } 
+			get { return (string)this.GetValue("注册证号"); } 
+			set { this.SetValue("注册证号", value); } 
 		}
 
 		public string 生产厂商
@@ -116,17 +116,17 @@ namespace DQS.Module.Views
 			this.Fields = new Dictionary<string, EntityField>();
 			this.Fields.Add("产品ID", AllProductStructureViewFields.产品ID);
 			this.Fields.Add("存储ID", AllProductStructureViewFields.存储ID);
-			this.Fields.Add("药品编号", AllProductStructureViewFields.药品编号);
+			this.Fields.Add("产品编号", AllProductStructureViewFields.产品编号);
 			this.Fields.Add("存储编号", AllProductStructureViewFields.存储编号);
-			this.Fields.Add("药品名称", AllProductStructureViewFields.药品名称);
+			this.Fields.Add("产品名称", AllProductStructureViewFields.产品名称);
 			this.Fields.Add("存储名称", AllProductStructureViewFields.存储名称);
-			this.Fields.Add("药品名称Spell", AllProductStructureViewFields.药品名称Spell);
+			this.Fields.Add("产品名称Spell", AllProductStructureViewFields.产品名称Spell);
 			this.Fields.Add("存储名称Spell", AllProductStructureViewFields.存储名称Spell);
 			this.Fields.Add("存储位置", AllProductStructureViewFields.存储位置);
-			this.Fields.Add("规格", AllProductStructureViewFields.规格);
+			this.Fields.Add("规格型号", AllProductStructureViewFields.规格型号);
 			this.Fields.Add("剂型", AllProductStructureViewFields.剂型);
-			this.Fields.Add("药品类别", AllProductStructureViewFields.药品类别);
-			this.Fields.Add("批准文号", AllProductStructureViewFields.批准文号);
+			this.Fields.Add("产品类别", AllProductStructureViewFields.产品类别);
+			this.Fields.Add("注册证号", AllProductStructureViewFields.注册证号);
 			this.Fields.Add("生产厂商", AllProductStructureViewFields.生产厂商);
 			this.Fields.Add("所属仓库", AllProductStructureViewFields.所属仓库);
 			this.Fields.Add("存储类型", AllProductStructureViewFields.存储类型);
@@ -147,9 +147,9 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllProductStructure", 1, "存储ID", SqlDbType.Int); }
 		}
 
-		public static EntityField 药品编号
+		public static EntityField 产品编号
 		{
-			get { return new EntityField("vw_AllProductStructure", 2, "药品编号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProductStructure", 2, "产品编号", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 存储编号
@@ -157,9 +157,9 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllProductStructure", 3, "存储编号", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品名称
+		public static EntityField 产品名称
 		{
-			get { return new EntityField("vw_AllProductStructure", 4, "药品名称", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProductStructure", 4, "产品名称", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 存储名称
@@ -167,9 +167,9 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllProductStructure", 5, "存储名称", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品名称Spell
+		public static EntityField 产品名称Spell
 		{
-			get { return new EntityField("vw_AllProductStructure", 6, "药品名称Spell", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProductStructure", 6, "产品名称Spell", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 存储名称Spell
@@ -182,9 +182,9 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllProductStructure", 8, "存储位置", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 规格
+		public static EntityField 规格型号
 		{
-			get { return new EntityField("vw_AllProductStructure", 9, "规格", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProductStructure", 9, "规格型号", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 剂型
@@ -192,14 +192,14 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllProductStructure", 10, "剂型", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品类别
+		public static EntityField 产品类别
 		{
-			get { return new EntityField("vw_AllProductStructure", 11, "药品类别", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProductStructure", 11, "产品类别", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 批准文号
+		public static EntityField 注册证号
 		{
-			get { return new EntityField("vw_AllProductStructure", 12, "批准文号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProductStructure", 12, "注册证号", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 生产厂商

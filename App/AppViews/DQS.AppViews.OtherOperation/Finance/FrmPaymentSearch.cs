@@ -26,8 +26,7 @@ namespace DQS.AppViews.OtherOperation.Finance
         {
             deStartDate.Text = DateTime.Today.ToString("d");
             deEndDate.Text = DateTime.Today.ToString("d");
-            sqlSearch = " AND (sb.StoreDate BETWEEN '" + deStartDate.Text.Trim() + " 00:00:00' AND '" + deEndDate.Text.Trim() + " 23:59:59')";
-            gridLoad();
+            //gridLoad();
         }
 
         private void gridView_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
@@ -63,13 +62,11 @@ namespace DQS.AppViews.OtherOperation.Finance
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            sqlSearch = " AND (sb.StoreDate BETWEEN '" + deStartDate.Text.Trim() + " 00:00:00' AND '" + deEndDate.Text.Trim() + " 23:59:59')";
             gridLoad();
         }
 
         private void btnReSet_Click(object sender, EventArgs e)
         {
-            sqlSearch = "";
             txtBillCode.Text = "";
             txtDealerCode.Text = "";
             deStartDate.Text = DateTime.Today.ToString("d");
@@ -79,6 +76,7 @@ namespace DQS.AppViews.OtherOperation.Finance
 
         private void gridLoad()
         {
+            sqlSearch = " AND (sb.StoreDate BETWEEN '" + deStartDate.Text.Trim() + " 00:00:00' AND '" + deEndDate.Text.Trim() + " 23:59:59')";
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 string sqlBill = @"SELECT 
@@ -105,7 +103,7 @@ FROM dbo.BUS_StoreBill sb
 WHERE sb.StoreTypeName IN ('采购进货','采购退货') AND (d.DealerCode LIKE '%{0}%' OR d.DealerName LIKE '%{0}%' OR d.DealerSpell LIKE '%{0}%') AND (sb.StoreCode LIKE '%{1}%')" + sqlSearch;
                 string sql = @"SELECT 
 	sb.StoreCode AS [单据编号],
-	p.ProductName AS [药品名称],
+	p.ProductName AS [产品名称],
 	sbd.BatchNo AS [批号],
 	CASE sb.StoreTypeName 
 		WHEN '采购进货' THEN sbd.Amount 
@@ -121,7 +119,7 @@ WHERE sb.StoreTypeName IN ('采购进货','采购退货') AND (d.DealerCode LIKE
 	p.ProductStyle AS [类别],
 	p.PhysicType AS [剂型],
 	p.ProducerName AS [生产厂商],
-	p.AuthorizedNo AS [批准文号],
+	p.AuthorizedNo AS [注册证号],
 	sbd.ProduceDate AS [生产日期],
 	sbd.ValidateDate AS [有效期],
 	p.PackageSpec AS [包装规格]
@@ -141,16 +139,19 @@ FROM dbo.BUS_StoreBillDetail sbd
                     sdad.Fill(ds, "TableBill");
                     DataRelation dr = new DataRelation("单据明细", ds.Tables["TableBill"].Columns["单据编号"], ds.Tables["Table"].Columns["单据编号"], false);
                     ds.Relations.Add(dr);
-                    decimal Price = 0;
-                    for (int i = 0; i < ds.Tables["TableBill"].Rows.Count; i++)
-                    {
-                        Price += Convert.ToDecimal(ds.Tables["TableBill"].Rows[i]["总金额"]);
-                    }
-                    lblTotalPrice.Text = Price.ToString();
+                    //decimal Price = 0;
+                    //for (int i = 0; i < ds.Tables["TableBill"].Rows.Count; i++)
+                    //{
+                    //    Price += Convert.ToDecimal(ds.Tables["TableBill"].Rows[i]["总金额"]);
+                    //}
+                    //lblTotalPrice.Text = Price.ToString();
                     gridControl.DataSource = ds.Tables["TableBill"];
                     gridView.OptionsView.ColumnAutoWidth = false;
                     gridView.BestFitColumns();
                     gridView.OptionsView.ShowGroupPanel = false;
+
+                    gridView.Columns["总金额"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                    gridView.Columns["总金额"].SummaryItem.DisplayFormat = "合计: {0}";
 
                     for (int i = 0; i < gridView.Columns.Count; i++)
                     {

@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.gridControl = new DevExpress.XtraGrid.GridControl();
-            this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
+            this.lblTotalPrice = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
+            this.btnReSet = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.deEndDate = new DevExpress.XtraEditors.DateEdit();
             this.deStartDate = new DevExpress.XtraEditors.DateEdit();
             this.txtDealerCode = new DevExpress.XtraEditors.TextEdit();
@@ -40,20 +41,19 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.txtBillCode = new DevExpress.XtraEditors.TextEdit();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
-            this.btnReSet = new DevExpress.XtraEditors.SimpleButton();
-            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
-            this.lblTotalPrice = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
+            this.gridControl = new DevExpress.XtraGrid.GridControl();
+            this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deStartDate.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deStartDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealerCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBillCode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -78,34 +78,40 @@
             this.panelControl1.Size = new System.Drawing.Size(830, 75);
             this.panelControl1.TabIndex = 0;
             // 
-            // gridControl
+            // lblTotalPrice
             // 
-            this.gridControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridControl.Location = new System.Drawing.Point(3, 80);
-            this.gridControl.MainView = this.gridView;
-            this.gridControl.Name = "gridControl";
-            this.gridControl.Size = new System.Drawing.Size(830, 356);
-            this.gridControl.TabIndex = 1;
-            this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView});
+            this.lblTotalPrice.Location = new System.Drawing.Point(682, 14);
+            this.lblTotalPrice.Name = "lblTotalPrice";
+            this.lblTotalPrice.Size = new System.Drawing.Size(0, 14);
+            this.lblTotalPrice.TabIndex = 14;
+            this.lblTotalPrice.Visible = false;
             // 
-            // gridView
+            // labelControl8
             // 
-            this.gridView.GridControl = this.gridControl;
-            this.gridView.IndicatorWidth = 40;
-            this.gridView.Name = "gridView";
-            this.gridView.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
+            this.labelControl8.Location = new System.Drawing.Point(611, 14);
+            this.labelControl8.Name = "labelControl8";
+            this.labelControl8.Size = new System.Drawing.Size(60, 14);
+            this.labelControl8.TabIndex = 15;
+            this.labelControl8.Text = "查询总计：";
+            this.labelControl8.Visible = false;
             // 
-            // btnExport
+            // btnReSet
             // 
-            this.btnExport.Location = new System.Drawing.Point(611, 39);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(79, 27);
-            this.btnExport.TabIndex = 3;
-            this.btnExport.Text = "导出";
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            this.btnReSet.Location = new System.Drawing.Point(508, 39);
+            this.btnReSet.Name = "btnReSet";
+            this.btnReSet.Size = new System.Drawing.Size(79, 27);
+            this.btnReSet.TabIndex = 12;
+            this.btnReSet.Text = "重置";
+            this.btnReSet.Click += new System.EventHandler(this.btnReSet_Click);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(405, 39);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(79, 27);
+            this.btnSearch.TabIndex = 13;
+            this.btnSearch.Text = "查询";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // deEndDate
             // 
@@ -180,38 +186,36 @@
             this.labelControl6.TabIndex = 7;
             this.labelControl6.Text = "单据编号：";
             // 
-            // btnReSet
+            // btnExport
             // 
-            this.btnReSet.Location = new System.Drawing.Point(508, 39);
-            this.btnReSet.Name = "btnReSet";
-            this.btnReSet.Size = new System.Drawing.Size(79, 27);
-            this.btnReSet.TabIndex = 12;
-            this.btnReSet.Text = "重置";
-            this.btnReSet.Click += new System.EventHandler(this.btnReSet_Click);
+            this.btnExport.Location = new System.Drawing.Point(611, 39);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(79, 27);
+            this.btnExport.TabIndex = 3;
+            this.btnExport.Text = "导出";
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
-            // btnSearch
+            // gridControl
             // 
-            this.btnSearch.Location = new System.Drawing.Point(405, 39);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(79, 27);
-            this.btnSearch.TabIndex = 13;
-            this.btnSearch.Text = "查询";
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.gridControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridControl.Location = new System.Drawing.Point(3, 80);
+            this.gridControl.MainView = this.gridView;
+            this.gridControl.Name = "gridControl";
+            this.gridControl.Size = new System.Drawing.Size(830, 356);
+            this.gridControl.TabIndex = 1;
+            this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView});
             // 
-            // lblTotalPrice
+            // gridView
             // 
-            this.lblTotalPrice.Location = new System.Drawing.Point(682, 14);
-            this.lblTotalPrice.Name = "lblTotalPrice";
-            this.lblTotalPrice.Size = new System.Drawing.Size(0, 14);
-            this.lblTotalPrice.TabIndex = 14;
-            // 
-            // labelControl8
-            // 
-            this.labelControl8.Location = new System.Drawing.Point(611, 14);
-            this.labelControl8.Name = "labelControl8";
-            this.labelControl8.Size = new System.Drawing.Size(60, 14);
-            this.labelControl8.TabIndex = 15;
-            this.labelControl8.Text = "查询总计：";
+            this.gridView.GridControl = this.gridControl;
+            this.gridView.IndicatorWidth = 40;
+            this.gridView.Name = "gridView";
+            this.gridView.OptionsView.ShowFooter = true;
+            this.gridView.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
+            this.gridView.DoubleClick += new System.EventHandler(this.gridView_DoubleClick);
             // 
             // FrmMakeCollectionsSearch
             // 
@@ -227,14 +231,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deStartDate.Properties.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deStartDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealerCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBillCode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             this.ResumeLayout(false);
 
         }

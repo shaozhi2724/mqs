@@ -197,8 +197,8 @@ namespace DQS.Controls
         {
             if (e.FocusedRowHandle != e.PrevFocusedRowHandle)
             {
-                object productID = this.gvData.GetRowCellValue(e.FocusedRowHandle, "药品ID");
-                object productName = this.gvData.GetRowCellValue(e.FocusedRowHandle, "药品名称");
+                object productID = this.gvData.GetRowCellValue(e.FocusedRowHandle, "产品ID");
+                object productName = this.gvData.GetRowCellValue(e.FocusedRowHandle, "产品名称");
                 object batchNo = this.gvData.GetRowCellValue(e.FocusedRowHandle, "批号");
                 if (null != productID && null != batchNo)
                 {

@@ -50,16 +50,15 @@
             this.txtAuthorizedNo = new DQS.Controls.TextBoxEx();
             this.txtPackageSpec = new DQS.Controls.TextBoxEx();
             this.txtProductStyle = new DQS.Controls.TextBoxEx();
-            this.txtPhysicType = new DQS.Controls.TextBoxEx();
             this.txtProductUnit = new DQS.Controls.TextBoxEx();
             this.txtProductSpec = new DQS.Controls.TextBoxEx();
             this.txtProductName = new DQS.Controls.TextBoxEx();
+            this.txtLockedAmount = new DQS.Controls.BUSProductLockedEntityTextBox();
             this.layControlGroup = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layControlGroupProduct = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layProducerName = new DevExpress.XtraLayout.LayoutControlItem();
             this.layPackageSpec = new DevExpress.XtraLayout.LayoutControlItem();
             this.layAuthorizedNo = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layPhysicType = new DevExpress.XtraLayout.LayoutControlItem();
             this.layProductStyle = new DevExpress.XtraLayout.LayoutControlItem();
             this.layProductSpec = new DevExpress.XtraLayout.LayoutControlItem();
             this.layProductUnit = new DevExpress.XtraLayout.LayoutControlItem();
@@ -76,12 +75,11 @@
             this.layDealResult = new DevExpress.XtraLayout.LayoutControlItem();
             this.layLockedDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.layLockedTime = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.layLockedRemark = new DevExpress.XtraLayout.LayoutControlItem();
             this.layControlGroupBatch = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layPopBatch = new DevExpress.XtraLayout.LayoutControlItem();
             this.layLockedAmount = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtLockedAmount = new DQS.Controls.BUSProductLockedEntityTextBox();
-            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.layLockedRemark = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.pnOperating)).BeginInit();
             this.pnOperating.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
@@ -107,16 +105,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtAuthorizedNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPackageSpec.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductStyle.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPhysicType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductUnit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductSpec.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtLockedAmount.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layControlGroup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layControlGroupProduct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProducerName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layPackageSpec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layAuthorizedNo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layPhysicType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductStyle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductSpec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductUnit)).BeginInit();
@@ -133,12 +130,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layDealResult)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layLockedDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layLockedTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layLockedRemark)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layControlGroupBatch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layPopBatch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layLockedAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtLockedAmount.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layLockedRemark)).BeginInit();
             this.SuspendLayout();
             // 
             // pnOperating
@@ -207,7 +203,6 @@
             this.layControl.Controls.Add(this.txtAuthorizedNo);
             this.layControl.Controls.Add(this.txtPackageSpec);
             this.layControl.Controls.Add(this.txtProductStyle);
-            this.layControl.Controls.Add(this.txtPhysicType);
             this.layControl.Controls.Add(this.txtProductUnit);
             this.layControl.Controls.Add(this.txtProductSpec);
             this.layControl.Controls.Add(this.txtProductName);
@@ -228,9 +223,9 @@
             this.txtLockedCode.IsNullString = "锁定编号不能为空。";
             this.txtLockedCode.IsNullValidate = true;
             this.txtLockedCode.IsTransferAlphabetic = false;
-            this.txtLockedCode.Location = new System.Drawing.Point(63, 12);
+            this.txtLockedCode.Location = new System.Drawing.Point(87, 12);
             this.txtLockedCode.Name = "txtLockedCode";
-            this.txtLockedCode.Size = new System.Drawing.Size(318, 21);
+            this.txtLockedCode.Size = new System.Drawing.Size(294, 21);
             this.txtLockedCode.StyleController = this.layControl;
             this.txtLockedCode.TabIndex = 0;
             // 
@@ -238,7 +233,7 @@
             // 
             this.txtPopBatch.AlphabeticFiled = null;
             this.txtPopBatch.EditData = null;
-            this.txtPopBatch.Fields = "药品ID,批号,生产日期,有效期至,库存数量";
+            this.txtPopBatch.Fields = "产品ID,入库ID,批号,生产日期,有效期至,库存数量";
             this.txtPopBatch.Filter = "";
             this.txtPopBatch.FormatQueryString = "[批号] LIKE \'%{0}%\'";
             this.txtPopBatch.GroupColumn = null;
@@ -246,19 +241,19 @@
             this.txtPopBatch.IsNullString = "";
             this.txtPopBatch.IsNullValidate = false;
             this.txtPopBatch.IsTransferAlphabetic = false;
-            this.txtPopBatch.Location = new System.Drawing.Point(75, 323);
+            this.txtPopBatch.Location = new System.Drawing.Point(99, 323);
             this.txtPopBatch.MemberText = "批号";
             this.txtPopBatch.MemberValue = "批号";
             this.txtPopBatch.Name = "txtPopBatch";
             this.txtPopBatch.PageSize = 0;
-            this.txtPopBatch.PrimaryField = "药品ID";
+            this.txtPopBatch.PrimaryField = "产品ID";
             this.txtPopBatch.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtPopBatch.Properties.Appearance.Options.UseBackColor = true;
             this.txtPopBatch.Properties.ReadOnly = true;
-            this.txtPopBatch.Size = new System.Drawing.Size(307, 21);
+            this.txtPopBatch.Size = new System.Drawing.Size(283, 21);
             this.txtPopBatch.StyleController = this.layControl;
             this.txtPopBatch.TabIndex = 15;
-            this.txtPopBatch.ViewName = "vw_StoreDetail";
+            this.txtPopBatch.ViewName = "vw_StoreDetailForLockDetail";
             this.txtPopBatch.PopupClosing += new DQS.Controls.TextBoxPopupEx.OnPopupClosingDelegate(this.txtPopBatch_PopupClosing);
             this.txtPopBatch.BeforePopupShow += new DQS.Controls.TextBoxPopupEx.OnBeforePopupShowEventHandler(this.txtPopBatch_BeforePopupShow);
             // 
@@ -266,92 +261,92 @@
             // 
             this.txtPopupProduct.AlphabeticFiled = null;
             this.txtPopupProduct.EditData = null;
-            this.txtPopupProduct.Fields = "药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,单位,包装规格,剂型,药品类别,批准文号";
+            this.txtPopupProduct.Fields = "产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,单位,包装规格型号,产品类别,注册证号,锁定状态";
             this.txtPopupProduct.Filter = "锁定状态<>\'已锁定\'";
-            this.txtPopupProduct.FormatQueryString = "[药品编号] LIKE \'%{0}%\' OR [药品名称] LIKE \'%{0}%\' OR [药品名称Spell] LIKE \'%{0}%\'";
+            this.txtPopupProduct.FormatQueryString = "[产品编号] LIKE \'%{0}%\' OR [产品名称] LIKE \'%{0}%\' OR [产品名称Spell] LIKE \'%{0}%\'";
             this.txtPopupProduct.GroupColumn = null;
             this.txtPopupProduct.IsIntegerOnly = false;
-            this.txtPopupProduct.IsNullString = "药品编号不能为空。";
+            this.txtPopupProduct.IsNullString = "产品编号不能为空。";
             this.txtPopupProduct.IsNullValidate = true;
             this.txtPopupProduct.IsTransferAlphabetic = false;
-            this.txtPopupProduct.Location = new System.Drawing.Point(75, 120);
-            this.txtPopupProduct.MemberText = "药品编号";
-            this.txtPopupProduct.MemberValue = "药品ID";
+            this.txtPopupProduct.Location = new System.Drawing.Point(99, 120);
+            this.txtPopupProduct.MemberText = "产品编号";
+            this.txtPopupProduct.MemberValue = "产品ID";
             this.txtPopupProduct.Name = "txtPopupProduct";
             this.txtPopupProduct.PageSize = 0;
-            this.txtPopupProduct.PrimaryField = "药品ID";
+            this.txtPopupProduct.PrimaryField = "产品ID";
             this.txtPopupProduct.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtPopupProduct.Properties.Appearance.Options.UseBackColor = true;
             this.txtPopupProduct.Properties.ReadOnly = true;
-            this.txtPopupProduct.Size = new System.Drawing.Size(307, 21);
+            this.txtPopupProduct.Size = new System.Drawing.Size(283, 21);
             this.txtPopupProduct.StyleController = this.layControl;
             this.txtPopupProduct.TabIndex = 5;
-            this.txtPopupProduct.ViewName = "vw_StoreDetail";
+            this.txtPopupProduct.ViewName = "vw_StoreDetailForLock";
             this.txtPopupProduct.PopupClosing += new DQS.Controls.TextBoxPopupEx.OnPopupClosingDelegate(this.txtPopupProduct_PopupClosing);
             // 
             // dteUnLockedDate
             // 
             this.dteUnLockedDate.EditValue = null;
-            this.dteUnLockedDate.Location = new System.Drawing.Point(291, 360);
+            this.dteUnLockedDate.Location = new System.Drawing.Point(315, 360);
             this.dteUnLockedDate.Name = "dteUnLockedDate";
             this.dteUnLockedDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dteUnLockedDate.Properties.ReadOnly = true;
             this.dteUnLockedDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dteUnLockedDate.Size = new System.Drawing.Size(207, 21);
+            this.dteUnLockedDate.Size = new System.Drawing.Size(183, 21);
             this.dteUnLockedDate.StyleController = this.layControl;
             this.dteUnLockedDate.TabIndex = 20;
             // 
             // tmeUnLockedTime
             // 
             this.tmeUnLockedTime.EditValue = new System.DateTime(2013, 10, 30, 0, 0, 0, 0);
-            this.tmeUnLockedTime.Location = new System.Drawing.Point(553, 360);
+            this.tmeUnLockedTime.Location = new System.Drawing.Point(577, 360);
             this.tmeUnLockedTime.Name = "tmeUnLockedTime";
             this.tmeUnLockedTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.tmeUnLockedTime.Properties.ReadOnly = true;
-            this.tmeUnLockedTime.Size = new System.Drawing.Size(203, 21);
+            this.tmeUnLockedTime.Size = new System.Drawing.Size(179, 21);
             this.tmeUnLockedTime.StyleController = this.layControl;
             this.tmeUnLockedTime.TabIndex = 21;
             // 
             // tmeLockedTime
             // 
             this.tmeLockedTime.EditValue = new System.DateTime(2013, 10, 30, 0, 0, 0, 0);
-            this.tmeLockedTime.Location = new System.Drawing.Point(437, 37);
+            this.tmeLockedTime.Location = new System.Drawing.Point(461, 37);
             this.tmeLockedTime.Name = "tmeLockedTime";
             this.tmeLockedTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.tmeLockedTime.Properties.ReadOnly = true;
-            this.tmeLockedTime.Size = new System.Drawing.Size(319, 21);
+            this.tmeLockedTime.Size = new System.Drawing.Size(295, 21);
             this.tmeLockedTime.StyleController = this.layControl;
             this.tmeLockedTime.TabIndex = 3;
             // 
             // dteLockedDate
             // 
             this.dteLockedDate.EditValue = null;
-            this.dteLockedDate.Location = new System.Drawing.Point(63, 37);
+            this.dteLockedDate.Location = new System.Drawing.Point(87, 37);
             this.dteLockedDate.Name = "dteLockedDate";
             this.dteLockedDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dteLockedDate.Properties.ReadOnly = true;
             this.dteLockedDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dteLockedDate.Size = new System.Drawing.Size(319, 21);
+            this.dteLockedDate.Size = new System.Drawing.Size(295, 21);
             this.dteLockedDate.StyleController = this.layControl;
             this.dteLockedDate.TabIndex = 2;
             // 
             // rdgIsUnLocked
             // 
             this.rdgIsUnLocked.EditValue = false;
-            this.rdgIsUnLocked.Location = new System.Drawing.Point(63, 360);
+            this.rdgIsUnLocked.Location = new System.Drawing.Point(87, 360);
             this.rdgIsUnLocked.Name = "rdgIsUnLocked";
             this.rdgIsUnLocked.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.rdgIsUnLocked.Properties.Appearance.Options.UseBackColor = true;
             this.rdgIsUnLocked.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem(false, "否"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(true, "是")});
-            this.rdgIsUnLocked.Size = new System.Drawing.Size(173, 25);
+            this.rdgIsUnLocked.Size = new System.Drawing.Size(149, 25);
             this.rdgIsUnLocked.StyleController = this.layControl;
             this.rdgIsUnLocked.TabIndex = 19;
             this.rdgIsUnLocked.SelectedIndexChanged += new System.EventHandler(this.rdgIsUnLocked_SelectedIndexChanged);
@@ -364,9 +359,9 @@
             this.txtLockedRemark.IsNullString = null;
             this.txtLockedRemark.IsNullValidate = false;
             this.txtLockedRemark.IsTransferAlphabetic = false;
-            this.txtLockedRemark.Location = new System.Drawing.Point(63, 62);
+            this.txtLockedRemark.Location = new System.Drawing.Point(87, 62);
             this.txtLockedRemark.Name = "txtLockedRemark";
-            this.txtLockedRemark.Size = new System.Drawing.Size(693, 21);
+            this.txtLockedRemark.Size = new System.Drawing.Size(669, 21);
             this.txtLockedRemark.StyleController = this.layControl;
             this.txtLockedRemark.TabIndex = 4;
             // 
@@ -378,15 +373,15 @@
             this.txtDealResult.IsNullString = null;
             this.txtDealResult.IsNullValidate = false;
             this.txtDealResult.IsTransferAlphabetic = false;
-            this.txtDealResult.Location = new System.Drawing.Point(436, 422);
+            this.txtDealResult.Location = new System.Drawing.Point(460, 422);
             this.txtDealResult.Name = "txtDealResult";
-            this.txtDealResult.Size = new System.Drawing.Size(308, 21);
+            this.txtDealResult.Size = new System.Drawing.Size(284, 21);
             this.txtDealResult.StyleController = this.layControl;
             this.txtDealResult.TabIndex = 23;
             // 
             // rdgIsLockedBatch
             // 
-            this.rdgIsLockedBatch.EditValue = false;
+            this.rdgIsLockedBatch.EditValue = true;
             this.rdgIsLockedBatch.Location = new System.Drawing.Point(107, 257);
             this.rdgIsLockedBatch.Name = "rdgIsLockedBatch";
             this.rdgIsLockedBatch.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
@@ -407,10 +402,10 @@
             this.txtUnLockedUser.IsNullString = null;
             this.txtUnLockedUser.IsNullValidate = false;
             this.txtUnLockedUser.IsTransferAlphabetic = true;
-            this.txtUnLockedUser.Location = new System.Drawing.Point(75, 422);
+            this.txtUnLockedUser.Location = new System.Drawing.Point(99, 422);
             this.txtUnLockedUser.Name = "txtUnLockedUser";
             this.txtUnLockedUser.Properties.ReadOnly = true;
-            this.txtUnLockedUser.Size = new System.Drawing.Size(306, 21);
+            this.txtUnLockedUser.Size = new System.Drawing.Size(282, 21);
             this.txtUnLockedUser.StyleController = this.layControl;
             this.txtUnLockedUser.TabIndex = 22;
             // 
@@ -422,10 +417,10 @@
             this.txtLockedUser.IsNullString = null;
             this.txtLockedUser.IsNullValidate = false;
             this.txtLockedUser.IsTransferAlphabetic = true;
-            this.txtLockedUser.Location = new System.Drawing.Point(436, 12);
+            this.txtLockedUser.Location = new System.Drawing.Point(460, 12);
             this.txtLockedUser.Name = "txtLockedUser";
             this.txtLockedUser.Properties.ReadOnly = true;
-            this.txtLockedUser.Size = new System.Drawing.Size(320, 21);
+            this.txtLockedUser.Size = new System.Drawing.Size(296, 21);
             this.txtLockedUser.StyleController = this.layControl;
             this.txtLockedUser.TabIndex = 1;
             // 
@@ -436,10 +431,10 @@
             this.txtProducerName.IsNullString = null;
             this.txtProducerName.IsNullValidate = false;
             this.txtProducerName.IsTransferAlphabetic = false;
-            this.txtProducerName.Location = new System.Drawing.Point(75, 220);
+            this.txtProducerName.Location = new System.Drawing.Point(99, 220);
             this.txtProducerName.Name = "txtProducerName";
             this.txtProducerName.Properties.ReadOnly = true;
-            this.txtProducerName.Size = new System.Drawing.Size(669, 21);
+            this.txtProducerName.Size = new System.Drawing.Size(645, 21);
             this.txtProducerName.StyleController = this.layControl;
             this.txtProducerName.TabIndex = 13;
             // 
@@ -450,10 +445,10 @@
             this.txtAuthorizedNo.IsNullString = null;
             this.txtAuthorizedNo.IsNullValidate = false;
             this.txtAuthorizedNo.IsTransferAlphabetic = false;
-            this.txtAuthorizedNo.Location = new System.Drawing.Point(436, 195);
+            this.txtAuthorizedNo.Location = new System.Drawing.Point(460, 195);
             this.txtAuthorizedNo.Name = "txtAuthorizedNo";
             this.txtAuthorizedNo.Properties.ReadOnly = true;
-            this.txtAuthorizedNo.Size = new System.Drawing.Size(308, 21);
+            this.txtAuthorizedNo.Size = new System.Drawing.Size(284, 21);
             this.txtAuthorizedNo.StyleController = this.layControl;
             this.txtAuthorizedNo.TabIndex = 12;
             // 
@@ -464,10 +459,10 @@
             this.txtPackageSpec.IsNullString = null;
             this.txtPackageSpec.IsNullValidate = false;
             this.txtPackageSpec.IsTransferAlphabetic = false;
-            this.txtPackageSpec.Location = new System.Drawing.Point(75, 195);
+            this.txtPackageSpec.Location = new System.Drawing.Point(99, 195);
             this.txtPackageSpec.Name = "txtPackageSpec";
             this.txtPackageSpec.Properties.ReadOnly = true;
-            this.txtPackageSpec.Size = new System.Drawing.Size(306, 21);
+            this.txtPackageSpec.Size = new System.Drawing.Size(282, 21);
             this.txtPackageSpec.StyleController = this.layControl;
             this.txtPackageSpec.TabIndex = 11;
             // 
@@ -478,26 +473,12 @@
             this.txtProductStyle.IsNullString = null;
             this.txtProductStyle.IsNullValidate = false;
             this.txtProductStyle.IsTransferAlphabetic = false;
-            this.txtProductStyle.Location = new System.Drawing.Point(436, 170);
+            this.txtProductStyle.Location = new System.Drawing.Point(99, 170);
             this.txtProductStyle.Name = "txtProductStyle";
             this.txtProductStyle.Properties.ReadOnly = true;
-            this.txtProductStyle.Size = new System.Drawing.Size(308, 21);
+            this.txtProductStyle.Size = new System.Drawing.Size(645, 21);
             this.txtProductStyle.StyleController = this.layControl;
             this.txtProductStyle.TabIndex = 10;
-            // 
-            // txtPhysicType
-            // 
-            this.txtPhysicType.AlphabeticFiled = null;
-            this.txtPhysicType.IsIntegerOnly = false;
-            this.txtPhysicType.IsNullString = null;
-            this.txtPhysicType.IsNullValidate = false;
-            this.txtPhysicType.IsTransferAlphabetic = false;
-            this.txtPhysicType.Location = new System.Drawing.Point(75, 170);
-            this.txtPhysicType.Name = "txtPhysicType";
-            this.txtPhysicType.Properties.ReadOnly = true;
-            this.txtPhysicType.Size = new System.Drawing.Size(306, 21);
-            this.txtPhysicType.StyleController = this.layControl;
-            this.txtPhysicType.TabIndex = 9;
             // 
             // txtProductUnit
             // 
@@ -506,10 +487,10 @@
             this.txtProductUnit.IsNullString = null;
             this.txtProductUnit.IsNullValidate = false;
             this.txtProductUnit.IsTransferAlphabetic = false;
-            this.txtProductUnit.Location = new System.Drawing.Point(436, 145);
+            this.txtProductUnit.Location = new System.Drawing.Point(460, 145);
             this.txtProductUnit.Name = "txtProductUnit";
             this.txtProductUnit.Properties.ReadOnly = true;
-            this.txtProductUnit.Size = new System.Drawing.Size(308, 21);
+            this.txtProductUnit.Size = new System.Drawing.Size(284, 21);
             this.txtProductUnit.StyleController = this.layControl;
             this.txtProductUnit.TabIndex = 8;
             // 
@@ -520,10 +501,10 @@
             this.txtProductSpec.IsNullString = null;
             this.txtProductSpec.IsNullValidate = false;
             this.txtProductSpec.IsTransferAlphabetic = false;
-            this.txtProductSpec.Location = new System.Drawing.Point(75, 145);
+            this.txtProductSpec.Location = new System.Drawing.Point(99, 145);
             this.txtProductSpec.Name = "txtProductSpec";
             this.txtProductSpec.Properties.ReadOnly = true;
-            this.txtProductSpec.Size = new System.Drawing.Size(306, 21);
+            this.txtProductSpec.Size = new System.Drawing.Size(282, 21);
             this.txtProductSpec.StyleController = this.layControl;
             this.txtProductSpec.TabIndex = 7;
             // 
@@ -534,16 +515,32 @@
             this.txtProductName.IsNullString = null;
             this.txtProductName.IsNullValidate = false;
             this.txtProductName.IsTransferAlphabetic = false;
-            this.txtProductName.Location = new System.Drawing.Point(437, 120);
+            this.txtProductName.Location = new System.Drawing.Point(461, 120);
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.Properties.ReadOnly = true;
-            this.txtProductName.Size = new System.Drawing.Size(307, 21);
+            this.txtProductName.Size = new System.Drawing.Size(283, 21);
             this.txtProductName.StyleController = this.layControl;
             this.txtProductName.TabIndex = 6;
             // 
+            // txtLockedAmount
+            // 
+            this.txtLockedAmount.AlphabeticFiled = null;
+            this.txtLockedAmount.EditValue = "0";
+            this.txtLockedAmount.EntityField = DQS.Module.Entities.BUSProductLockedEntityFields2.LockedAmount;
+            this.txtLockedAmount.IsIntegerOnly = false;
+            this.txtLockedAmount.IsNullString = null;
+            this.txtLockedAmount.IsNullValidate = false;
+            this.txtLockedAmount.IsTransferAlphabetic = false;
+            this.txtLockedAmount.Location = new System.Drawing.Point(461, 323);
+            this.txtLockedAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtLockedAmount.Name = "txtLockedAmount";
+            this.txtLockedAmount.Size = new System.Drawing.Size(283, 21);
+            this.txtLockedAmount.StyleController = this.layControl;
+            this.txtLockedAmount.TabIndex = 24;
+            // 
             // layControlGroup
             // 
-            this.layControlGroup.CustomizationFormText = "药品锁定";
+            this.layControlGroup.CustomizationFormText = "产品锁定";
             this.layControlGroup.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.layControlGroup.GroupBordersVisible = false;
             this.layControlGroup.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
@@ -564,17 +561,16 @@
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(768, 509);
             this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layControlGroup.Text = "药品锁定";
+            this.layControlGroup.Text = "产品锁定";
             this.layControlGroup.TextVisible = false;
             // 
             // layControlGroupProduct
             // 
-            this.layControlGroupProduct.CustomizationFormText = "锁定的药品信息";
+            this.layControlGroupProduct.CustomizationFormText = "锁定的产品信息";
             this.layControlGroupProduct.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layProducerName,
             this.layPackageSpec,
             this.layAuthorizedNo,
-            this.layPhysicType,
             this.layProductStyle,
             this.layProductSpec,
             this.layProductUnit,
@@ -583,7 +579,7 @@
             this.layControlGroupProduct.Location = new System.Drawing.Point(0, 75);
             this.layControlGroupProduct.Name = "layControlGroupProduct";
             this.layControlGroupProduct.Size = new System.Drawing.Size(748, 170);
-            this.layControlGroupProduct.Text = "锁定的药品信息";
+            this.layControlGroupProduct.Text = "锁定的产品信息";
             // 
             // layProducerName
             // 
@@ -593,57 +589,47 @@
             this.layProducerName.Name = "layProducerName";
             this.layProducerName.Size = new System.Drawing.Size(724, 25);
             this.layProducerName.Text = "生产厂商";
-            this.layProducerName.TextSize = new System.Drawing.Size(48, 14);
+            this.layProducerName.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layPackageSpec
             // 
             this.layPackageSpec.Control = this.txtPackageSpec;
-            this.layPackageSpec.CustomizationFormText = "包装规格";
+            this.layPackageSpec.CustomizationFormText = "包装规格型号";
             this.layPackageSpec.Location = new System.Drawing.Point(0, 75);
             this.layPackageSpec.Name = "layPackageSpec";
             this.layPackageSpec.Size = new System.Drawing.Size(361, 25);
-            this.layPackageSpec.Text = "包装规格";
-            this.layPackageSpec.TextSize = new System.Drawing.Size(48, 14);
+            this.layPackageSpec.Text = "包装规格型号";
+            this.layPackageSpec.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layAuthorizedNo
             // 
             this.layAuthorizedNo.Control = this.txtAuthorizedNo;
-            this.layAuthorizedNo.CustomizationFormText = "批准文号";
+            this.layAuthorizedNo.CustomizationFormText = "注册证号";
             this.layAuthorizedNo.Location = new System.Drawing.Point(361, 75);
             this.layAuthorizedNo.Name = "layAuthorizedNo";
             this.layAuthorizedNo.Size = new System.Drawing.Size(363, 25);
-            this.layAuthorizedNo.Text = "批准文号";
-            this.layAuthorizedNo.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // layPhysicType
-            // 
-            this.layPhysicType.Control = this.txtPhysicType;
-            this.layPhysicType.CustomizationFormText = "剂型";
-            this.layPhysicType.Location = new System.Drawing.Point(0, 50);
-            this.layPhysicType.Name = "layPhysicType";
-            this.layPhysicType.Size = new System.Drawing.Size(361, 25);
-            this.layPhysicType.Text = "剂型";
-            this.layPhysicType.TextSize = new System.Drawing.Size(48, 14);
+            this.layAuthorizedNo.Text = "注册证号";
+            this.layAuthorizedNo.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layProductStyle
             // 
             this.layProductStyle.Control = this.txtProductStyle;
-            this.layProductStyle.CustomizationFormText = "药品类别";
-            this.layProductStyle.Location = new System.Drawing.Point(361, 50);
+            this.layProductStyle.CustomizationFormText = "产品类别";
+            this.layProductStyle.Location = new System.Drawing.Point(0, 50);
             this.layProductStyle.Name = "layProductStyle";
-            this.layProductStyle.Size = new System.Drawing.Size(363, 25);
-            this.layProductStyle.Text = "药品类别";
-            this.layProductStyle.TextSize = new System.Drawing.Size(48, 14);
+            this.layProductStyle.Size = new System.Drawing.Size(724, 25);
+            this.layProductStyle.Text = "产品类别";
+            this.layProductStyle.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layProductSpec
             // 
             this.layProductSpec.Control = this.txtProductSpec;
-            this.layProductSpec.CustomizationFormText = "规格";
+            this.layProductSpec.CustomizationFormText = "规格型号";
             this.layProductSpec.Location = new System.Drawing.Point(0, 25);
             this.layProductSpec.Name = "layProductSpec";
             this.layProductSpec.Size = new System.Drawing.Size(361, 25);
-            this.layProductSpec.Text = "规格";
-            this.layProductSpec.TextSize = new System.Drawing.Size(48, 14);
+            this.layProductSpec.Text = "规格型号";
+            this.layProductSpec.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layProductUnit
             // 
@@ -653,27 +639,27 @@
             this.layProductUnit.Name = "layProductUnit";
             this.layProductUnit.Size = new System.Drawing.Size(363, 25);
             this.layProductUnit.Text = "单位";
-            this.layProductUnit.TextSize = new System.Drawing.Size(48, 14);
+            this.layProductUnit.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layProductName
             // 
             this.layProductName.Control = this.txtProductName;
-            this.layProductName.CustomizationFormText = "药品名称";
+            this.layProductName.CustomizationFormText = "产品名称";
             this.layProductName.Location = new System.Drawing.Point(362, 0);
             this.layProductName.Name = "layProductName";
             this.layProductName.Size = new System.Drawing.Size(362, 25);
-            this.layProductName.Text = "药品名称";
-            this.layProductName.TextSize = new System.Drawing.Size(48, 14);
+            this.layProductName.Text = "产品名称";
+            this.layProductName.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layPopupProduct
             // 
             this.layPopupProduct.Control = this.txtPopupProduct;
-            this.layPopupProduct.CustomizationFormText = "药品编号";
+            this.layPopupProduct.CustomizationFormText = "产品编号";
             this.layPopupProduct.Location = new System.Drawing.Point(0, 0);
             this.layPopupProduct.Name = "layPopupProduct";
             this.layPopupProduct.Size = new System.Drawing.Size(362, 25);
-            this.layPopupProduct.Text = "药品编号";
-            this.layPopupProduct.TextSize = new System.Drawing.Size(48, 14);
+            this.layPopupProduct.Text = "产品编号";
+            this.layPopupProduct.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layLockedCode
             // 
@@ -683,7 +669,7 @@
             this.layLockedCode.Name = "layLockedCode";
             this.layLockedCode.Size = new System.Drawing.Size(373, 25);
             this.layLockedCode.Text = "锁定编号";
-            this.layLockedCode.TextSize = new System.Drawing.Size(48, 14);
+            this.layLockedCode.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layLockedUser
             // 
@@ -693,7 +679,7 @@
             this.layLockedUser.Name = "layLockedUser";
             this.layLockedUser.Size = new System.Drawing.Size(375, 25);
             this.layLockedUser.Text = "锁定人";
-            this.layLockedUser.TextSize = new System.Drawing.Size(48, 14);
+            this.layLockedUser.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layIsLockedBatch
             // 
@@ -710,6 +696,7 @@
             this.layIsLockedBatch.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
             this.layIsLockedBatch.TextSize = new System.Drawing.Size(90, 18);
             this.layIsLockedBatch.TextToControlDistance = 5;
+            this.layIsLockedBatch.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // layIsUnLocked
             // 
@@ -719,7 +706,7 @@
             this.layIsUnLocked.Name = "layIsUnLocked";
             this.layIsUnLocked.Size = new System.Drawing.Size(228, 29);
             this.layIsUnLocked.Text = "是否解锁";
-            this.layIsUnLocked.TextSize = new System.Drawing.Size(48, 14);
+            this.layIsUnLocked.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layUnLockedTime
             // 
@@ -729,7 +716,7 @@
             this.layUnLockedTime.Name = "layUnLockedTime";
             this.layUnLockedTime.Size = new System.Drawing.Size(258, 29);
             this.layUnLockedTime.Text = "解除时间";
-            this.layUnLockedTime.TextSize = new System.Drawing.Size(48, 14);
+            this.layUnLockedTime.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layUnLockedDate
             // 
@@ -739,7 +726,7 @@
             this.layUnLockedDate.Name = "layUnLockedDate";
             this.layUnLockedDate.Size = new System.Drawing.Size(262, 29);
             this.layUnLockedDate.Text = "解除日期";
-            this.layUnLockedDate.TextSize = new System.Drawing.Size(48, 14);
+            this.layUnLockedDate.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layControlGroupUnLocked
             // 
@@ -760,7 +747,7 @@
             this.layUnLockedUser.Name = "layUnLockedUser";
             this.layUnLockedUser.Size = new System.Drawing.Size(361, 25);
             this.layUnLockedUser.Text = "解除人";
-            this.layUnLockedUser.TextSize = new System.Drawing.Size(48, 14);
+            this.layUnLockedUser.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layDealResult
             // 
@@ -770,7 +757,7 @@
             this.layDealResult.Name = "layDealResult";
             this.layDealResult.Size = new System.Drawing.Size(363, 25);
             this.layDealResult.Text = "处理结果";
-            this.layDealResult.TextSize = new System.Drawing.Size(48, 14);
+            this.layDealResult.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layLockedDate
             // 
@@ -780,7 +767,7 @@
             this.layLockedDate.Name = "layLockedDate";
             this.layLockedDate.Size = new System.Drawing.Size(374, 25);
             this.layLockedDate.Text = "锁定日期";
-            this.layLockedDate.TextSize = new System.Drawing.Size(48, 14);
+            this.layLockedDate.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layLockedTime
             // 
@@ -790,7 +777,26 @@
             this.layLockedTime.Name = "layLockedTime";
             this.layLockedTime.Size = new System.Drawing.Size(374, 25);
             this.layLockedTime.Text = "锁定时间";
-            this.layLockedTime.TextSize = new System.Drawing.Size(48, 14);
+            this.layLockedTime.TextSize = new System.Drawing.Size(72, 14);
+            // 
+            // emptySpaceItem1
+            // 
+            this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 447);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(748, 42);
+            this.emptySpaceItem1.Text = "emptySpaceItem1";
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // layLockedRemark
+            // 
+            this.layLockedRemark.Control = this.txtLockedRemark;
+            this.layLockedRemark.CustomizationFormText = "备注";
+            this.layLockedRemark.Location = new System.Drawing.Point(0, 50);
+            this.layLockedRemark.Name = "layLockedRemark";
+            this.layLockedRemark.Size = new System.Drawing.Size(748, 25);
+            this.layLockedRemark.Text = "备注";
+            this.layLockedRemark.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layControlGroupBatch
             // 
@@ -811,7 +817,7 @@
             this.layPopBatch.Name = "layPopBatch";
             this.layPopBatch.Size = new System.Drawing.Size(362, 25);
             this.layPopBatch.Text = "批号";
-            this.layPopBatch.TextSize = new System.Drawing.Size(48, 14);
+            this.layPopBatch.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layLockedAmount
             // 
@@ -821,42 +827,7 @@
             this.layLockedAmount.Name = "layLockedAmount";
             this.layLockedAmount.Size = new System.Drawing.Size(362, 25);
             this.layLockedAmount.Text = "数量";
-            this.layLockedAmount.TextSize = new System.Drawing.Size(48, 14);
-            // 
-            // txtLockedAmount
-            // 
-            this.txtLockedAmount.AlphabeticFiled = null;
-            this.txtLockedAmount.EditValue = "0";
-            this.txtLockedAmount.EntityField = DQS.Module.Entities.BUSProductLockedEntityFields2.LockedAmount;
-            this.txtLockedAmount.IsIntegerOnly = false;
-            this.txtLockedAmount.IsNullString = null;
-            this.txtLockedAmount.IsNullValidate = false;
-            this.txtLockedAmount.IsTransferAlphabetic = false;
-            this.txtLockedAmount.Location = new System.Drawing.Point(437, 323);
-            this.txtLockedAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtLockedAmount.Name = "txtLockedAmount";
-            this.txtLockedAmount.Size = new System.Drawing.Size(307, 21);
-            this.txtLockedAmount.StyleController = this.layControl;
-            this.txtLockedAmount.TabIndex = 24;
-            // 
-            // emptySpaceItem1
-            // 
-            this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 447);
-            this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(748, 42);
-            this.emptySpaceItem1.Text = "emptySpaceItem1";
-            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // layLockedRemark
-            // 
-            this.layLockedRemark.Control = this.txtLockedRemark;
-            this.layLockedRemark.CustomizationFormText = "备注";
-            this.layLockedRemark.Location = new System.Drawing.Point(0, 50);
-            this.layLockedRemark.Name = "layLockedRemark";
-            this.layLockedRemark.Size = new System.Drawing.Size(748, 25);
-            this.layLockedRemark.Text = "备注";
-            this.layLockedRemark.TextSize = new System.Drawing.Size(48, 14);
+            this.layLockedAmount.TextSize = new System.Drawing.Size(72, 14);
             // 
             // FrmSingleProductLocked
             // 
@@ -873,7 +844,7 @@
             this.Name = "FrmSingleProductLocked";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "药品锁定";
+            this.Text = "产品锁定";
             this.Load += new System.EventHandler(this.FrmSingleProductLocked_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pnOperating)).EndInit();
             this.pnOperating.ResumeLayout(false);
@@ -900,16 +871,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtAuthorizedNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPackageSpec.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductStyle.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPhysicType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductUnit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductSpec.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtLockedAmount.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layControlGroup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layControlGroupProduct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProducerName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layPackageSpec)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layAuthorizedNo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layPhysicType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductStyle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductSpec)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductUnit)).EndInit();
@@ -926,12 +896,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layDealResult)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layLockedDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layLockedTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layLockedRemark)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layControlGroupBatch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layPopBatch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layLockedAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtLockedAmount.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layLockedRemark)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -947,7 +916,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layProductName;
         private DevExpress.XtraLayout.LayoutControlItem layProductSpec;
         private DevExpress.XtraLayout.LayoutControlItem layProductUnit;
-        private DevExpress.XtraLayout.LayoutControlItem layPhysicType;
         private DevExpress.XtraLayout.LayoutControlItem layProductStyle;
         private DevExpress.XtraLayout.LayoutControlItem layPackageSpec;
         private DevExpress.XtraLayout.LayoutControlItem layAuthorizedNo;
@@ -982,7 +950,6 @@
         private DQS.Controls.TextBoxEx txtAuthorizedNo;
         private DQS.Controls.TextBoxEx txtPackageSpec;
         private DQS.Controls.TextBoxEx txtProductStyle;
-        private DQS.Controls.TextBoxEx txtPhysicType;
         private DQS.Controls.TextBoxEx txtProductUnit;
         private DQS.Controls.TextBoxEx txtProductSpec;
         private DQS.Controls.TextBoxPopupEx txtPopupProduct;

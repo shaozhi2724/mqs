@@ -145,6 +145,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="StockManager\FrmAddInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmAddInventory.Designer.cs">
+      <DependentUpon>FrmAddInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StockManager\FrmBeginInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmBeginInventory.Designer.cs">
+      <DependentUpon>FrmBeginInventory.cs</DependentUpon>
+    </Compile>
     <Compile Include="StockManager\FrmInitInventory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +174,12 @@
     </Compile>
     <Compile Include="StockManager\FrmProductQuery.Designer.cs">
       <DependentUpon>FrmProductQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StockManager\FrmSingleBeginInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmSingleBeginInventory.Designer.cs">
+      <DependentUpon>FrmSingleBeginInventory.cs</DependentUpon>
     </Compile>
     <Compile Include="StockManager\FrmSingleInitInventory.cs">
       <SubType>Form</SubType>
@@ -209,7 +227,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmAddInventory.resx">
+      <DependentUpon>FrmAddInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmBeginInventory.resx">
+      <DependentUpon>FrmBeginInventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StockManager\FrmInitInventory.resx">
       <DependentUpon>FrmInitInventory.cs</DependentUpon>
@@ -219,6 +244,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StockManager\FrmProductQuery.resx">
       <DependentUpon>FrmProductQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmSingleBeginInventory.resx">
+      <DependentUpon>FrmSingleBeginInventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StockManager\FrmSingleInitInventory.resx">
       <DependentUpon>FrmSingleInitInventory.cs</DependentUpon>

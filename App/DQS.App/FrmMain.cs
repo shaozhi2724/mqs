@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Security.Permissions;
 using System.Text;
 using System.Windows.Forms;
@@ -22,9 +23,13 @@ using DevExpress.Utils;
 using System.Resources;
 using System.Reflection;
 using System.Threading;
+using DQS.App.Licenser;
+using DQS.App.MQSKeyServices;
 using DQS.Module;
 using DQS.Common;
 using DQS.Controls;
+using Microsoft.Win32;
+using Timer = System.Timers.Timer;
 
 namespace DQS.App
 {
@@ -60,8 +65,141 @@ namespace DQS.App
             m_ResourceManager = new ResourceManager("DQS.App.Properties.Resources", assembly);
             GlobalItem.g_DbConnectStrings = ConfigurationManager.ConnectionStrings["DbConnectStrings"].ConnectionString;
 
+            ThreadPool.QueueUserWorkItem((w) => SubmitEnterpriseInfo());
+#if RockeyLicense
+            Timer timerToCheckRockeyLicense = new Timer(60000);
+            timerToCheckRockeyLicense.Elapsed += timerToCheckRockeyLicense_Elapsed;
+            timerToCheckRockeyLicense.Enabled = true;
+            timerToCheckRockeyLicense.Start();
+#endif
             ShowApproveNotificationLink();
         }
+
+        private void SubmitEnterpriseInfo()
+        {
+            try
+            {
+                var decodedContent = "";
+                var keyHid = "";
+                var keyVersion = "";
+                #if RockeyLicense
+                    try
+                    {
+                        byte[] content = Program.RockeyLicenseManager.ReadBytes();
+                        decodedContent = Program.RockeyLicenseManager.RSADecrypt(content);
+                        keyHid = Program.RockeyLicenseManager.Hid;
+                        keyVersion = Program.RockeyLicenseManager.Version;
+                    }
+                    catch (Exception)
+                    {
+                        decodedContent = "加密锁RSA内容解密错误！";
+                    }
+                #else
+                        decodedContent = "非加密锁";
+                #endif
+                EntityCollection<BFIEnterpriseEntity> entities = new EntityCollection<BFIEnterpriseEntity>();
+                entities.Fetch();
+                BFIEnterpriseEntity enterprise = new BFIEnterpriseEntity();
+                if (entities.Count > 0)
+                {
+                    enterprise = entities.Cast<BFIEnterpriseEntity>().FirstOrDefault();
+                }
+
+                MQSKeyServiceSoapClient service = new MQSKeyServiceSoapClient();
+
+                NetworkInterface[] networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
+                List<string> macAddresses = new List<string>();
+                foreach (NetworkInterface adapter in networkInterfaces)
+                {
+                    string fRegistryKey = "SYSTEM\\CurrentControlSet\\Control\\Network\\{4D36E972-E325-11CE-BFC1-08002BE10318}\\" + adapter.Id + "\\Connection";
+                    RegistryKey rk = Registry.LocalMachine.OpenSubKey(fRegistryKey, false);
+                    if (rk != null)
+                    {
+                        // 区分 PnpInstanceID
+                        // 如果前面有 PCI 就是本机的真实网卡
+                        string pnpInstanceId = rk.GetValue("PnpInstanceID", "").ToString();
+                        if (pnpInstanceId.Length > 3 && pnpInstanceId.Substring(0, 3) == "PCI") //物理网卡
+                        {
+                            macAddresses.Add(adapter.GetPhysicalAddress().ToString());
+                        }
+                    }
+                }
+                var macAddress = macAddresses.FirstOrDefault();
+
+                service.SubmitClientInfo(new ClientKeyInfo
+                                             {
+                                                 EnterpriseName = enterprise.EnterpriseName,
+                                                 ContactPerson = enterprise.ContactPerson,
+                                                 ContactPhone = enterprise.ContactPhone,
+                                                 EmployeeCount =!enterprise.IsNullField("EmployeeNum") && !string.IsNullOrWhiteSpace(enterprise.EmployeeNum) ? int.Parse(enterprise.EmployeeNum) : 0,
+                                                 EnterpriseAddress = enterprise.EnterpriseAddress,
+                                                 EnterpriseFax = enterprise.EnterpriseFaxNo,
+                                                 EnterpriseLevel = enterprise.EnterpriseLevel,
+                                                 EnterpriseMail = enterprise.EnterpriseMail,
+                                                 EnterprisePhone = enterprise.EnterprisePhone,
+                                                 EnterprisePostCode = enterprise.EnterprisePostalCode,
+                                                 EnterpriseType = enterprise.EnterpriseType,
+                                                 EnterpriseWebsite = enterprise.EnterpriseWebSiteUrl,
+                                                 Industry = enterprise.IndustryStyle,
+                                                 OrganizationCode = enterprise.OrganizationCode,
+                                                 RegisterLicenseNo = enterprise.RegisterLicenseNo,
+                                                 LicenseValidateDate = enterprise.LicenseValidateDate,
+                                                 RegisterTaxNo = enterprise.RegisterTaxNo,
+                                                 RegisterAddress = enterprise.RegisterAddress,
+                                                 RegisterDate = enterprise.RegisterData,
+                                                 TradeLicenseValidateDate = enterprise.TradeLicenseValidateDate,
+                                                 KeyHid = keyHid,
+                                                 ClientMacAddress = macAddress,
+                                                 KeyVersion = keyVersion,
+                                                 KeyDecryptedContent = decodedContent,
+                                                 InstallDate = !enterprise.IsNullField("CreateDate") ? enterprise.CreateDate : DateTime.MinValue,
+                                                 InfoSendDate = DateTime.Now,
+                                             });
+                service.Close();
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+#if RockeyLicense
+        void timerToCheckRockeyLicense_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            string pid = Settings.Default.PID_Rockey;
+            string pin = Settings.Default.PIN_Rockey;
+            Program.RockeyLicenseManager = new RockeyLicenseManager(pid, pin);
+            if (Program.RockeyLicenseManager.Find())
+            {
+                Program.RockeyLicenseManager.Open();
+                if (!Program.RockeyLicenseManager.IsOpened)
+                {
+                        ShowError("未检测到密钥锁连接，请检查后重试！");
+
+                        Application.Exit();
+                }
+            }
+            else
+            {
+                ShowError("未检测到密钥锁，请插入密钥锁后重试！");
+
+                Application.Exit();
+            }
+            
+        }
+
+        private void ShowError(string message)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => { XtraMessageBox.Show(this, message, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);}));
+            }
+            else
+            {
+                XtraMessageBox.Show(message, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+#endif
 
         protected override bool ProcessDialogKey(Keys keyData)
         {
@@ -96,6 +234,7 @@ namespace DQS.App
             EntityCollection<ATCUserPageEntity> approvePages = new EntityCollection<ATCUserPageEntity>();
             approvePages.Fetch(ATCUserPageEntityFields.ApprovalUserID == GlobalItem.g_CurrentUser.UserID);
             hleApproveNote.Visible = approvePages.Count > 0;
+            picApproveNote.Visible = approvePages.Count > 0;
 
             if (e.Info == SqlNotificationInfo.Insert)
             {
@@ -128,10 +267,10 @@ namespace DQS.App
                         notifierType = "销售退回单";
                         break;
                     case "ProductUnqualified":
-                        notifierType = "不合格药品处理单";
+                        notifierType = "不合格产品处理单";
                         break;
                     case "ProductDestroy":
-                        notifierType = "药品销毁处理单";
+                        notifierType = "产品销毁处理单";
                         break;
                 }
 
@@ -174,6 +313,7 @@ namespace DQS.App
                 EntityCollection<ATCUserPageEntity> approvePages = new EntityCollection<ATCUserPageEntity>();
                 approvePages.Fetch(ATCUserPageEntityFields.ApprovalUserID == GlobalItem.g_CurrentUser.UserID);
                 hleApproveNote.Visible = approvePages.Count > 0;
+                picApproveNote.Visible = approvePages.Count > 0;
                 if (approvePages.Count == 0 && notifications.Rows.Count == 0)
                 {
                     dockPanel.HideImmediately();
@@ -214,6 +354,11 @@ namespace DQS.App
             this.lblDate.Text += " " + Week();
 
             this.Text += " - V " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            BFIEnterpriseEntity enterprise = new BFIEnterpriseEntity { EnterpriseID = 1 };
+            enterprise.Fetch();
+            this.Text += " - " + enterprise.EnterpriseName;
+
             this.AutoLoadTopMenu();
 
             //点击第一个大菜单
@@ -250,6 +395,7 @@ namespace DQS.App
                 {
                     this.hleWarning.Tag = dataSet; //将数据关联到此控件
                     this.hleWarning.Visible = true;
+                    this.picWarning.Visible = true;
                     alertControl.Show(null, new AlertInfo("系统预警信息", "点击查看系统预警信息", this.imageList.Images[0]));
                     break;
                 }
@@ -261,11 +407,11 @@ namespace DQS.App
             string message = "";
             if (!checkEnterpriseLicense)
             {
-                message += "- 企业GSP证书已到期\n";
+                message += "- 企业营业执照已到期\n";
             }
             if (!checkEnterpriseTradeLicense)
             {
-                message += "- 企业药品经营许可证已到期\n";
+                message += "- 企业经营许可证已到期\n";
             }
             if (!string.IsNullOrWhiteSpace(message))
             {
@@ -471,11 +617,11 @@ namespace DQS.App
                         string message = "";
                         if (!checkEnterpriseLicense)
                         {
-                            message += "- 企业GSP证书已到期\n";
+                            message += "- 企业营业执照已到期\n";
                         }
                         if (!checkEnterpriseTradeLicense)
                         {
-                            message += "- 企业药品经营许可证已到期\n";
+                            message += "- 企业经营许可证已到期\n";
                         }
                         if (!string.IsNullOrWhiteSpace(message))
                         {
@@ -791,7 +937,7 @@ namespace DQS.App
             }
             if (null != tbControlMain.SelectedTabPage)
             {
-                if (tbControlMain.SelectedTabPage.Text == "在库药品查询")
+                if (tbControlMain.SelectedTabPage.Text == "在库产品查询")
                 {
 
                     //快速查询暂时只对“在库查询”开放
@@ -861,6 +1007,13 @@ namespace DQS.App
             {
                 notification.Termination();
             }
+
+
+            SYSDateLogEntity sysDateLog = new SYSDateLogEntity();
+            sysDateLog.UserName = GlobalItem.g_CurrentUser.UserName;
+            sysDateLog.Operate = "退出系统";
+            sysDateLog.OperateDate = DateTime.Now;
+            sysDateLog.Save();
         }
 
         private void alertControl_FormLoad(object sender, AlertFormLoadEventArgs e)

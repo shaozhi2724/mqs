@@ -31,7 +31,9 @@
             this.gridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.btnReSet = new DevExpress.XtraEditors.SimpleButton();
             this.deEndDate = new DevExpress.XtraEditors.DateEdit();
+            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.deStartDate = new DevExpress.XtraEditors.DateEdit();
             this.txtDealerCode = new DevExpress.XtraEditors.TextEdit();
             this.txtVoucherCode = new DevExpress.XtraEditors.TextEdit();
@@ -44,8 +46,6 @@
             this.txtBillingCode = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.btnReSet = new DevExpress.XtraEditors.SimpleButton();
-            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.btnDel = new DevExpress.XtraEditors.SimpleButton();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
@@ -83,6 +83,7 @@
             this.gridView.IndicatorWidth = 40;
             this.gridView.Name = "gridView";
             this.gridView.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
+            this.gridView.DoubleClick += new System.EventHandler(this.gridView_DoubleClick);
             // 
             // panelControl2
             // 
@@ -107,6 +108,15 @@
             this.panelControl2.Size = new System.Drawing.Size(799, 66);
             this.panelControl2.TabIndex = 20;
             // 
+            // btnReSet
+            // 
+            this.btnReSet.Location = new System.Drawing.Point(607, 34);
+            this.btnReSet.Name = "btnReSet";
+            this.btnReSet.Size = new System.Drawing.Size(79, 27);
+            this.btnReSet.TabIndex = 0;
+            this.btnReSet.Text = "重置";
+            this.btnReSet.Click += new System.EventHandler(this.btnReSet_Click);
+            // 
             // deEndDate
             // 
             this.deEndDate.EditValue = null;
@@ -118,7 +128,15 @@
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.deEndDate.Size = new System.Drawing.Size(107, 21);
             this.deEndDate.TabIndex = 2;
-            this.deEndDate.Visible = false;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(701, 34);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(79, 27);
+            this.btnSearch.TabIndex = 0;
+            this.btnSearch.Text = "查询";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // deStartDate
             // 
@@ -131,7 +149,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.deStartDate.Size = new System.Drawing.Size(107, 21);
             this.deStartDate.TabIndex = 2;
-            this.deStartDate.Visible = false;
             // 
             // txtDealerCode
             // 
@@ -156,7 +173,6 @@
             this.labelControl5.Size = new System.Drawing.Size(60, 14);
             this.labelControl5.TabIndex = 0;
             this.labelControl5.Text = "结束日期：";
-            this.labelControl5.Visible = false;
             // 
             // labelControl4
             // 
@@ -165,7 +181,6 @@
             this.labelControl4.Size = new System.Drawing.Size(60, 14);
             this.labelControl4.TabIndex = 0;
             this.labelControl4.Text = "开始日期：";
-            this.labelControl4.Visible = false;
             // 
             // labelControl3
             // 
@@ -228,25 +243,6 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(799, 50);
             this.panelControl1.TabIndex = 19;
-            // 
-            // btnReSet
-            // 
-            this.btnReSet.Location = new System.Drawing.Point(607, 34);
-            this.btnReSet.Name = "btnReSet";
-            this.btnReSet.Size = new System.Drawing.Size(79, 27);
-            this.btnReSet.TabIndex = 0;
-            this.btnReSet.Text = "重置";
-            this.btnReSet.Click += new System.EventHandler(this.btnReSet_Click);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(701, 34);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(79, 27);
-            this.btnSearch.TabIndex = 0;
-            this.btnSearch.Text = "查询";
-            this.btnSearch.Visible = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnDel
             // 

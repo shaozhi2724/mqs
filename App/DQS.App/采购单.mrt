@@ -5,82 +5,83 @@
     <Databases isList="true" count="1">
       <DQS Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
         <Alias>DQS</Alias>
-        <ConnectionStringEncrypted>9Gz7oWFZkgVrW4QEw3j2F8la3YnGX9n1Yn25CMM9pLvRVNXPRV3z7cxh7YBjAKL34XjLK0Nxc8XiRs3s8T3hRvNwm2nNSquZRU39pU4=</ConnectionStringEncrypted>
+        <ConnectionStringEncrypted>9Gz7oWFZkgVrW4QEw3j2F8la3YnGX9n1Yn25CMM9pLvRVNXPRV3z7cxh7YBjAKL34XjLK0Nxc8XiRs3s8T3hRvNwiWnNSquZRU39pU4=</ConnectionStringEncrypted>
         <Name>DQS</Name>
       </DQS>
     </Databases>
     <DataSources isList="true" count="2">
-      <JH Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
-        <Alias>JH</Alias>
-        <Columns isList="true" count="7">
-          <value>ProductName,System.String</value>
-          <value>PackageSpec,System.String</value>
-          <value>ProductUnit,System.String</value>
-          <value>ProducerName,System.String</value>
-          <value>Amount,System.Int32</value>
-          <value>UnitPrice,System.Double</value>
-          <value>TotalPrice,System.Double</value>
+      <数据源 Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>数据源</Alias>
+        <Columns isList="true" count="18">
+          <value>药品名称,System.String</value>
+          <value>规格型号,System.String</value>
+          <value>包装规格型号,System.String</value>
+          <value>产品类别,System.String</value>
+          <value>包装单位,System.String</value>
+          <value>生产厂商,System.String</value>
+          <value>储存库区,System.String</value>
+          <value>采购订单编号,System.String</value>
+          <value>购货日期,System.DateTime</value>
+          <value>订单类型,System.String</value>
+          <value>采购员,System.String</value>
+          <value>供应商名称,System.String</value>
+          <value>供应商业务员,System.String</value>
+          <value>价格,System.Double</value>
+          <value>数量,System.Int32</value>
+          <value>金额,System.Double</value>
+          <value>地址,System.String</value>
+          <value>注册证号,System.String</value>
         </Columns>
         <CommandTimeout>30</CommandTimeout>
         <Dictionary isRef="1" />
-        <Name>JH</Name>
+        <Name>数据源</Name>
         <NameInSource>DQS</NameInSource>
         <Parameters isList="true" count="1">
           <value>BillID,,8,0</value>
         </Parameters>
-        <SqlCommand>SELECT 
-	p.ProductName,
-	p.PackageSpec,
-	p.ProductUnit,
-	p.ProducerName,
-	bd.Amount,
-	bd.UnitPrice,
-	bd.TotalPrice
-	FROM dbo.BUS_BillDetail bd
-	INNER JOIN dbo.BFI_Product p
-		ON bd.ProductID = p.ProductID
-WHERE bd.BillID = @BillID</SqlCommand>
-      </JH>
-      <JHT Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
-        <Alias>JHT</Alias>
-        <Columns isList="true" count="10">
-          <value>DealerName,System.String</value>
-          <value>BillDate,System.DateTime</value>
-          <value>BillCode,System.String</value>
-          <value>DealerAddress,System.String</value>
-          <value>DealerPhone,System.String</value>
-          <value>AccountBankName,System.String</value>
-          <value>AccountNo,System.String</value>
-          <value>CertificateNo,System.String</value>
-          <value>TotalPrice,System.Double</value>
-          <value>BigTotalPrice,System.String</value>
+        <SqlCommand>SELECT  
+	p.ProductName AS [药品名称],
+	p.ProductSpec AS [规格型号],
+	p.PackageSpec AS [包装规格型号],
+	p.ProductStyle AS [产品类别],
+	p.ProductUnit AS [包装单位],
+	p.ProducerName AS [生产厂商],
+	p.StockCondition AS [储存库区],
+	b.BillCode AS [采购订单编号],
+	b.BillDate AS [购货日期],
+	b.BillTypeName AS [订单类型],
+	b.Operator AS [采购员],
+	b.DealerName AS [供应商名称],
+	b.BusinessPerson AS [供应商业务员],
+	bd.UnitPrice AS [价格],
+	bd.Amount AS [数量],
+	bd.TotalPrice AS [金额],
+	bfd.DealerAddress AS [地址],
+	(select CertificateNo from BFI_Qualification 
+	where BelongTable = 'BFI_Product' 
+	and BelongID =  p.ProductID  and QualificationName = '药品注册证') AS 注册证号
+	FROM BUS_Bill b
+		INNER JOIN BUS_BillDetail bd
+			ON b.BillID = bd.BillID
+		Left join BFI_Dealer bfd
+			on b.DealerID = bfd.DealerID
+		left JOIN BFI_Product p
+			ON bd.ProductID = p.ProductID 
+	where b.Billid = @BillID</SqlCommand>
+      </数据源>
+      <Enterprise Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Enterprise</Alias>
+        <Columns isList="true" count="1">
+          <value>公司名称,System.String</value>
         </Columns>
         <CommandTimeout>30</CommandTimeout>
         <Dictionary isRef="1" />
-        <Name>JHT</Name>
+        <Name>Enterprise</Name>
         <NameInSource>DQS</NameInSource>
-        <Parameters isList="true" count="1">
-          <value>BillID,,8,0</value>
-        </Parameters>
-        <SqlCommand>SELECT 
-	d.DealerName,
-	CONVERT(DATE,b.BillDate,23) AS [BillDate],
-	b.BillCode,
-	d.DealerAddress,
-	d.DealerPhone,
-	d.AccountBankName,
-	d.AccountNo,
-	ISNULL((SELECT CertificateNo FROM dbo.BFI_Qualification 
-		WHERE BelongTable = 'BFI_Dealer' 
-			AND b.DealerID = BelongID 
-			AND CertificateStyle = '税务登记证'),'') AS [CertificateNo],
-	b.TotalPrice,
-	dbo.usf_ChineseCost(b.TotalPrice) AS [BigTotalPrice]
-FROM dbo.BUS_Bill b
-	INNER JOIN dbo.BFI_Dealer d
-		ON b.DealerID = d.DealerID
-WHERE b.BillID = @BillID</SqlCommand>
-      </JHT>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>select 
+	EnterpriseName as [公司名称] from dbo.BFI_Enterprise</SqlCommand>
+      </Enterprise>
     </DataSources>
     <Relations isList="true" count="0" />
     <Report isRef="0" />
@@ -93,1098 +94,538 @@ WHERE b.BillID = @BillID</SqlCommand>
     <Page1 Ref="5" type="Page" isKey="true">
       <Border>None;Black;2;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
-      <Components isList="true" count="7">
+      <Components isList="true" count="3">
         <PageHeaderBand1 Ref="6" type="PageHeaderBand" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>0,0.4,20.2,4.4</ClientRectangle>
-          <Components isList="true" count="6">
+          <ClientRectangle>0,0.4,19.7,3.8</ClientRectangle>
+          <Components isList="true" count="16">
             <Text1 Ref="7" type="Text" isKey="true">
               <Border>None;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>6.6,0.4,6.4,1.2</ClientRectangle>
+              <ClientRectangle>0.2,2.4,6.6,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>微软雅黑,18,Bold</Font>
-              <HorAlignment>Center</HorAlignment>
+              <Font>微软雅黑,9</Font>
               <Margins>0,0,0,0</Margins>
               <Name>Text1</Name>
               <Page isRef="5" />
               <Parent isRef="6" />
-              <Text>生物制品购销合同</Text>
+              <Text>供货单位：{数据源.供应商名称}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text1>
-            <Text2 Ref="8" type="Text" isKey="true">
+            <Text3 Ref="8" type="Text" isKey="true">
               <Border>None;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>0.8,2,9.2,0.6</ClientRectangle>
+              <ClientRectangle>13.4,0.2,3.4,1</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>微软雅黑,10</Font>
-              <Margins>0,0,0,0</Margins>
-              <Name>Text2</Name>
-              <Page isRef="5" />
-              <Parent isRef="6" />
-              <Text>供货方：北京吉康安顺生物医药有限公司</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Text2>
-            <Text4 Ref="9" type="Text" isKey="true">
-              <Border>None;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>0.8,2.8,9.2,0.6</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>微软雅黑,10</Font>
-              <Guid>392ce8e0c22746a2bf872417aa5eae8d</Guid>
-              <Margins>0,0,0,0</Margins>
-              <Name>Text4</Name>
-              <Page isRef="5" />
-              <Parent isRef="6" />
-              <Text>供货方：{JHT.DealerName}</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Text4>
-            <Text3 Ref="10" type="Text" isKey="true">
-              <Border>None;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>13.8,2,6,0.6</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>微软雅黑,10</Font>
+              <Font>宋体,16,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text3</Name>
               <Page isRef="5" />
               <Parent isRef="6" />
-              <Text>合同编号：{JHT.BillCode}</Text>
+              <Text>【采购单】</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text3>
-            <Text5 Ref="11" type="Text" isKey="true">
+            <Text5 Ref="9" type="Text" isKey="true">
               <Border>None;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>13.8,2.8,6,0.6</ClientRectangle>
+              <ClientRectangle>0.2,1.6,6.6,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>微软雅黑,10</Font>
-              <Guid>ec722ea8431f41c483d9d354ba8abe51</Guid>
+              <Font>微软雅黑,9</Font>
               <Margins>0,0,0,0</Margins>
               <Name>Text5</Name>
               <Page isRef="5" />
               <Parent isRef="6" />
-              <Text>签订日期：{Format("{0:yyyy-MM-dd}", JHT.BillDate)}</Text>
+              <Text>订单号：{数据源.采购订单编号}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text5>
-            <Text6 Ref="12" type="Text" isKey="true">
+            <Text2 Ref="10" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14.2,2.4,5.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>采购日期：{Format("{0:yyyy/MM/dd}", 数据源.购货日期)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="11" type="DateFormat" isKey="true">
+                <StringFormat>D</StringFormat>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text8 Ref="12" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,3.2,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <Guid>dc21bdc7237d45da8fb710ef5e6770ac</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>规格型号</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text9 Ref="13" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,3.2,3.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <Guid>4183d8d1114846a2b40f86050e62e3fd</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>产品</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <Text10 Ref="14" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.4,3.2,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <Guid>1eb9ee9e7d1247d8a5d496778379c0e2</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>产品类别</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text18 Ref="15" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8,3.2,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9</Font>
+              <Guid>b420ac7a93bf4ac599bdbb5543bce121</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>生产厂商</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+            <Text19 Ref="16" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.8,3.2,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9</Font>
+              <Guid>47ef3ea0df374e73a8e5310218b66b2c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>数量</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text19>
+            <Text6 Ref="17" type="Text" isKey="true">
               <Border>None;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>0.4,3.8,4.2,0.6</ClientRectangle>
+              <ClientRectangle>12.2,1.8,5.4,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>微软雅黑,10</Font>
+              <Font>微软雅黑,9</Font>
+              <Guid>1eeae712347243bfa458c4a3d05eeac8</Guid>
+              <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text6</Name>
               <Page isRef="5" />
               <Parent isRef="6" />
-              <Text>一、产品清单</Text>
+              <Text>第{PageNumber}页，共{TotalPageCount}页</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text6>
+            <Text4 Ref="18" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.6,3.2,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <Guid>4423b6299a5f46dea877514e0116d93f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>注册证号</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text7 Ref="19" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.2,3.2,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <Guid>16f13b3c1d674b1a900282dd91e485a4</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>单位</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text11 Ref="20" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17.6,3.2,2.1,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9</Font>
+              <Guid>127d20903a8a4e5ca33823d3124e4729</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>金额</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text15 Ref="21" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14,3.2,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <Guid>e4fb6097773f44c6ab3244bfaeeb6c3e</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>单价</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text13 Ref="22" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.2,3.2,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,8</Font>
+              <Guid>fc482c090c1f41d39b4d7522f2d82a12</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>包装单位</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text16 Ref="23" type="Text" isKey="true">
+              <Border>None;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,0.2,10,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,16,Bold</Font>
+              <Guid>9cf6f89db8a1460dacbaf59eaae49ad2</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{Enterprise.公司名称}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
           </Components>
           <Conditions isList="true" count="0" />
           <Name>PageHeaderBand1</Name>
           <Page isRef="5" />
           <Parent isRef="5" />
         </PageHeaderBand1>
-        <PageFooterBand1 Ref="13" type="PageFooterBand" isKey="true">
+        <PageFooterBand1 Ref="24" type="PageFooterBand" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>0,28.7,20.2,0.2</ClientRectangle>
-          <Components isList="true" count="0" />
+          <ClientRectangle>0,9.7,19.7,1.6</ClientRectangle>
+          <Components isList="true" count="2">
+            <Text14 Ref="25" type="Text" isKey="true">
+              <Border>None;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,0.2,5.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="5" />
+              <Parent isRef="24" />
+              <Text>采购员：{数据源.采购员}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text14>
+            <Text12 Ref="26" type="Text" isKey="true">
+              <Border>None;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.6,0.2,13,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,10</Font>
+              <Guid>9a3fbde7c33c4039bb6844419f157e9f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="5" />
+              <Parent isRef="24" />
+              <Text>发货地址：{数据源.地址}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text12>
+          </Components>
           <Conditions isList="true" count="0" />
           <Name>PageFooterBand1</Name>
           <Page isRef="5" />
           <Parent isRef="5" />
         </PageFooterBand1>
-        <Table1 Ref="14" type="Stimulsoft.Report.Components.Table.StiTable" isKey="true">
+        <Table1 Ref="27" type="Stimulsoft.Report.Components.Table.StiTable" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>Transparent</Brush>
-          <ClientRectangle>0,5.6,20.2,0.8</ClientRectangle>
-          <ColumnCount>7</ColumnCount>
-          <Components isList="true" count="7">
-            <Table1_Cell1 Ref="15" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,5,19.7,3.4</ClientRectangle>
+          <ColumnCount>9</ColumnCount>
+          <Components isList="true" count="9">
+            <Table1_Cell1 Ref="28" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>0,0,5.2,0.8</ClientRectangle>
+              <ClientRectangle>0,0,3.2,3.4</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>微软雅黑,10</Font>
+              <Font>微软雅黑,9</Font>
               <HorAlignment>Center</HorAlignment>
-              <ID>0</ID>
+              <ID>6</ID>
               <JoinCells isList="true" count="0" />
               <Margins>0,0,0,0</Margins>
               <Name>Table1_Cell1</Name>
               <Page isRef="5" />
-              <Parent isRef="14" />
+              <Parent isRef="27" />
               <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>商品名称</Text>
+              <Text>{数据源.药品名称}</Text>
               <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
               <VertAlignment>Center</VertAlignment>
             </Table1_Cell1>
-            <Table1_Cell2 Ref="16" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+            <Table1_Cell2 Ref="29" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>5.2,0,2.6,0.8</ClientRectangle>
+              <ClientRectangle>3.2,0,2.4,3.4</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>微软雅黑,10</Font>
+              <Font>微软雅黑,9</Font>
               <HorAlignment>Center</HorAlignment>
-              <ID>1</ID>
+              <ID>7</ID>
               <JoinCells isList="true" count="0" />
               <Margins>0,0,0,0</Margins>
               <Name>Table1_Cell2</Name>
               <Page isRef="5" />
-              <Parent isRef="14" />
+              <Parent isRef="27" />
               <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>规格</Text>
+              <Text>{数据源.规格型号}</Text>
               <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
               <VertAlignment>Center</VertAlignment>
             </Table1_Cell2>
-            <Table1_Cell3 Ref="17" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+            <Table1_Cell3 Ref="30" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>7.8,0,1.2,0.8</ClientRectangle>
+              <ClientRectangle>5.6,0,2.4,3.4</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>微软雅黑,10</Font>
+              <Font>微软雅黑,9</Font>
               <HorAlignment>Center</HorAlignment>
-              <ID>2</ID>
+              <ID>8</ID>
               <JoinCells isList="true" count="0" />
               <Margins>0,0,0,0</Margins>
               <Name>Table1_Cell3</Name>
               <Page isRef="5" />
-              <Parent isRef="14" />
+              <Parent isRef="27" />
               <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>单位</Text>
+              <Text>{数据源.注册证号}</Text>
               <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
               <VertAlignment>Center</VertAlignment>
             </Table1_Cell3>
-            <Table1_Cell4 Ref="18" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+            <Table1_Cell4 Ref="31" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>9,0,5.4,0.8</ClientRectangle>
+              <ClientRectangle>8,0,2.4,3.4</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>微软雅黑,10</Font>
+              <Font>微软雅黑,9</Font>
               <HorAlignment>Center</HorAlignment>
-              <ID>3</ID>
+              <ID>30</ID>
               <JoinCells isList="true" count="0" />
               <Margins>0,0,0,0</Margins>
               <Name>Table1_Cell4</Name>
               <Page isRef="5" />
-              <Parent isRef="14" />
+              <Parent isRef="27" />
               <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>生产厂家</Text>
+              <Text>{数据源.生产厂商}</Text>
               <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
               <VertAlignment>Center</VertAlignment>
             </Table1_Cell4>
-            <Table1_Cell5 Ref="19" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+            <Table1_Cell5 Ref="32" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>14.4,0,1.8,0.8</ClientRectangle>
+              <ClientRectangle>10.4,0,1.8,3.4</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>微软雅黑,10</Font>
+              <Font>微软雅黑,9</Font>
               <HorAlignment>Center</HorAlignment>
-              <ID>4</ID>
+              <ID>31</ID>
               <JoinCells isList="true" count="0" />
               <Margins>0,0,0,0</Margins>
               <Name>Table1_Cell5</Name>
               <Page isRef="5" />
-              <Parent isRef="14" />
+              <Parent isRef="27" />
               <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>数量</Text>
+              <Text>{数据源.产品类别}</Text>
               <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
               <VertAlignment>Center</VertAlignment>
             </Table1_Cell5>
-            <Table1_Cell6 Ref="20" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+            <Table1_Cell6 Ref="33" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>16.2,0,2,0.8</ClientRectangle>
+              <ClientRectangle>12.2,0,1.8,3.4</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>微软雅黑,10</Font>
+              <Font>微软雅黑,9</Font>
               <HorAlignment>Center</HorAlignment>
-              <ID>25</ID>
+              <ID>32</ID>
               <JoinCells isList="true" count="0" />
               <Margins>0,0,0,0</Margins>
               <Name>Table1_Cell6</Name>
               <Page isRef="5" />
-              <Parent isRef="14" />
+              <Parent isRef="27" />
               <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>单价</Text>
+              <Text>{数据源.包装单位}</Text>
               <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
               <VertAlignment>Center</VertAlignment>
             </Table1_Cell6>
-            <Table1_Cell7 Ref="21" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
+            <Table1_Cell7 Ref="34" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>18.2,0,2,0.8</ClientRectangle>
+              <ClientRectangle>14,0,1.8,3.4</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>微软雅黑,10</Font>
+              <Font>微软雅黑,9</Font>
               <HorAlignment>Center</HorAlignment>
-              <ID>26</ID>
+              <ID>53</ID>
               <JoinCells isList="true" count="0" />
               <Margins>0,0,0,0</Margins>
               <Name>Table1_Cell7</Name>
               <Page isRef="5" />
-              <Parent isRef="14" />
+              <Parent isRef="27" />
               <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>金额</Text>
+              <Text>{数据源.价格}</Text>
               <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
               <VertAlignment>Center</VertAlignment>
             </Table1_Cell7>
+            <Table1_Cell8 Ref="35" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.8,0,1.8,3.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>33</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>Table1_Cell8</Name>
+              <Page isRef="5" />
+              <Parent isRef="27" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{数据源.数量}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Table1_Cell8>
+            <Table1_Cell9 Ref="36" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
+              <Border>All;Black;1;Solid;False;4;[105:105:105]</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17.6,0,2.1,3.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>微软雅黑,9</Font>
+              <HorAlignment>Center</HorAlignment>
+              <ID>34</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>Table1_Cell9</Name>
+              <Page isRef="5" />
+              <Parent isRef="27" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{数据源.金额}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Table1_Cell9>
           </Components>
           <Conditions isList="true" count="0" />
           <DataRelationName isNull="true" />
+          <DataSourceName>数据源</DataSourceName>
           <Filters isList="true" count="0" />
           <MinHeight>0.2</MinHeight>
           <Name>Table1</Name>
-          <NumberID>27</NumberID>
+          <NumberID>54</NumberID>
           <Page isRef="5" />
           <Parent isRef="5" />
           <RowCount>1</RowCount>
           <Sort isList="true" count="0" />
         </Table1>
-        <Table2 Ref="22" type="Stimulsoft.Report.Components.Table.StiTable" isKey="true">
-          <Border>All;Black;1;Solid;False;4;Black</Border>
-          <Brush>Transparent</Brush>
-          <BusinessObjectGuid isNull="true" />
-          <ClientRectangle>0,7.2,20.2,0.8</ClientRectangle>
-          <ColumnCount>7</ColumnCount>
-          <Components isList="true" count="7">
-            <Table2_Cell1 Ref="23" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>0,0,5.2,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>微软雅黑,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>0</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table2_Cell1</Name>
-              <Page isRef="5" />
-              <Parent isRef="22" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>{JH.ProductName}</Text>
-              <TextBrush>Black</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table2_Cell1>
-            <Table2_Cell2 Ref="24" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>5.2,0,2.6,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>微软雅黑,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>1</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table2_Cell2</Name>
-              <Page isRef="5" />
-              <Parent isRef="22" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>{JH.PackageSpec}</Text>
-              <TextBrush>Black</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
-              <Type>DataColumn</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table2_Cell2>
-            <Table2_Cell3 Ref="25" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>7.8,0,1.2,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>微软雅黑,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>2</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table2_Cell3</Name>
-              <Page isRef="5" />
-              <Parent isRef="22" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>{JH.ProductUnit}</Text>
-              <TextBrush>Black</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
-              <Type>DataColumn</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table2_Cell3>
-            <Table2_Cell4 Ref="26" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>9,0,5.4,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>微软雅黑,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>3</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table2_Cell4</Name>
-              <Page isRef="5" />
-              <Parent isRef="22" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>{JH.ProducerName}</Text>
-              <TextBrush>Black</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
-              <Type>DataColumn</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table2_Cell4>
-            <Table2_Cell5 Ref="27" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>14.4,0,1.8,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>微软雅黑,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>4</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table2_Cell5</Name>
-              <Page isRef="5" />
-              <Parent isRef="22" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>{JH.Amount}</Text>
-              <TextBrush>Black</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
-              <Type>DataColumn</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table2_Cell5>
-            <Table2_Cell6 Ref="28" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>16.2,0,2,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>微软雅黑,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>25</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table2_Cell6</Name>
-              <Page isRef="5" />
-              <Parent isRef="22" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>{JH.UnitPrice}</Text>
-              <TextBrush>Black</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
-              <Type>DataColumn</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table2_Cell6>
-            <Table2_Cell7 Ref="29" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>18.2,0,2,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>微软雅黑,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>26</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table2_Cell7</Name>
-              <Page isRef="5" />
-              <Parent isRef="22" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>{JH.TotalPrice}</Text>
-              <TextBrush>Black</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
-              <Type>DataColumn</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table2_Cell7>
-          </Components>
-          <Conditions isList="true" count="0" />
-          <DataRelationName isNull="true" />
-          <DataSourceName>JH</DataSourceName>
-          <Filters isList="true" count="0" />
-          <MinHeight>0.2</MinHeight>
-          <Name>Table2</Name>
-          <NumberID>27</NumberID>
-          <Page isRef="5" />
-          <Parent isRef="5" />
-          <RowCount>1</RowCount>
-          <Sort isList="true" count="0" />
-        </Table2>
-        <Table3 Ref="30" type="Stimulsoft.Report.Components.Table.StiTable" isKey="true">
-          <Border>All;Black;1;Solid;False;4;Black</Border>
-          <Brush>Transparent</Brush>
-          <BusinessObjectGuid isNull="true" />
-          <ClientRectangle>0,8.8,20.2,0.8</ClientRectangle>
-          <ColumnCount>3</ColumnCount>
-          <Components isList="true" count="3">
-            <Table3_Cell1 Ref="31" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>0,0,3.6,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>微软雅黑,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>0</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table3_Cell1</Name>
-              <Page isRef="5" />
-              <Parent isRef="30" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>总金额</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table3_Cell1>
-            <Table3_Cell2 Ref="32" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>3.6,0,6.6,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>微软雅黑,9</Font>
-              <ID>1</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table3_Cell2</Name>
-              <Page isRef="5" />
-              <Parent isRef="30" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>{JHT.TotalPrice}</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>DataColumn</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table3_Cell2>
-            <Table3_Cell3 Ref="33" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>10.2,0,10,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>微软雅黑,9</Font>
-              <ID>2</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table3_Cell3</Name>
-              <Page isRef="5" />
-              <Parent isRef="30" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>{JHT.BigTotalPrice}</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>DataColumn</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table3_Cell3>
-          </Components>
-          <Conditions isList="true" count="0" />
-          <DataRelationName isNull="true" />
-          <DataSourceName>JHT</DataSourceName>
-          <Filters isList="true" count="0" />
-          <MinHeight>0.2</MinHeight>
-          <Name>Table3</Name>
-          <NumberID>25</NumberID>
-          <Page isRef="5" />
-          <Parent isRef="5" />
-          <RowCount>1</RowCount>
-          <Sort isList="true" count="0" />
-        </Table3>
-        <DataBand1 Ref="34" type="DataBand" isKey="true">
-          <Brush>Transparent</Brush>
-          <ClientRectangle>0,10.4,20.2,12.8</ClientRectangle>
-          <Components isList="true" count="1">
-            <Text7 Ref="35" type="Text" isKey="true">
-              <Border>None;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>0.4,0,19.4,12.6</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>微软雅黑,10</Font>
-              <Margins>0,0,0,0</Margins>
-              <Name>Text7</Name>
-              <Page isRef="5" />
-              <Parent isRef="34" />
-              <Text>二、付款方式及期限：银行转账
-
-三、产品运输方式及运达站港： 冷藏车送至仓库地址
-
-四、运杂费：产品到达合同规定站港的运杂费由供货方承担。
-
-五、质量条款：
-
-	 1、保证销售的药品具有法定的批准文号，质量符合法定质量标准和有关质量要求；
-	 2、保证销售的药品包装、标签和说明书符合有关规定，药品包装应符合货物运输要求；
-	 3、保证销售的整件药品中应附产品合格；国家食品药品监督管理局规定批签发的生物制品，附生物制品批签发合格证；负责提供同批号生物制品的出厂检验报告书；
-	 4、保证药品在冷链运输过程中质量和温度符合法定标准；
-	 5、销售进口药品，负责提供加盖本企业公章原印章的：《进口药品注册证》（或《医药产品注册证》或《进口药品批件》）复印件和《进口药品通关单》（或《进口药品检验报告书》）复印件；《生物制品批签发合格证》和《进口生物制品检验报告书》；
-	 6、应当按照国家规定开具发票。
-
-六、验收要求：购货方应依据药品质量标准和有关规定及时验收。除产品质量原因，购货方向供货方承诺不退货。
-
-七、缺损处理约定：产品运输过程中发生缺失或破损、购货方应在收货后三日内口头通知供货方，并于七日内书面通知供货方，同时提供运输部门的相关证明，由供货方确认后，按实际数量予以补充、调换。破损产品退还供货方。
-
-八、双方应共同进行市场开发，供货方应向购货方及时提供产品宣传资料等。
-
-九、合同签字或盖章后生效，货款两清后截止。合同文本一式两份，双方各执一份，两份文本具有同等效力。
-
-十、未尽事宜，双方友好协商解决。如遇纠纷协商不成，由有关机构仲裁或法律解决。</Text>
-              <TextBrush>Black</TextBrush>
-              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
-              <Type>Expression</Type>
-            </Text7>
-          </Components>
-          <Conditions isList="true" count="0" />
-          <DataRelationName isNull="true" />
-          <Filters isList="true" count="0" />
-          <Name>DataBand1</Name>
-          <Page isRef="5" />
-          <Parent isRef="5" />
-          <Sort isList="true" count="0" />
-        </DataBand1>
-        <Table5 Ref="36" type="Stimulsoft.Report.Components.Table.StiTable" isKey="true">
-          <Border>All;Black;1;Solid;False;4;Black</Border>
-          <Brush>Transparent</Brush>
-          <BusinessObjectGuid isNull="true" />
-          <ClientRectangle>0,24,20.2,5.6</ClientRectangle>
-          <ColumnCount>4</ColumnCount>
-          <Components isList="true" count="28">
-            <Table5_Cell1 Ref="37" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>0,0,3.8,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>0</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell1</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>供货方：</Text>
-              <TextBrush>Black</TextBrush>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell1>
-            <Table5_Cell2 Ref="38" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>3.8,0,7,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <ID>1</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell2</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>北京吉康安顺生物医药有限公司</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell2>
-            <Table5_Cell3 Ref="39" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>10.8,0,3.4,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>2</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell3</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>购货方：</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell3>
-            <Table5_Cell4 Ref="40" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>14.2,0,6,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <ID>3</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell4</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>{JHT.DealerName}</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>DataColumn</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell4>
-            <Table5_Cell5 Ref="41" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>0,0.8,3.8,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>5</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell5</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>地址：</Text>
-              <TextBrush>Black</TextBrush>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell5>
-            <Table5_Cell6 Ref="42" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>3.8,0.8,7,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <ID>6</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell6</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>北京市海淀区马甸冠城园6号楼2单元6层</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell6>
-            <Table5_Cell7 Ref="43" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>10.8,0.8,3.4,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>7</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell7</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>地址：</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell7>
-            <Table5_Cell8 Ref="44" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>14.2,0.8,6,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <ID>8</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell8</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>{JHT.DealerAddress}</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>DataColumn</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell8>
-            <Table5_Cell9 Ref="45" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>0,1.6,3.8,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>10</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell9</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>电话：</Text>
-              <TextBrush>Black</TextBrush>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell9>
-            <Table5_Cell10 Ref="46" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>3.8,1.6,7,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <ID>11</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell10</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>010-62035907</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell10>
-            <Table5_Cell11 Ref="47" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>10.8,1.6,3.4,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>12</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell11</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>电话：</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell11>
-            <Table5_Cell12 Ref="48" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>14.2,1.6,6,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <ID>13</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell12</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>{JHT.DealerPhone}</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>DataColumn</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell12>
-            <Table5_Cell13 Ref="49" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>0,2.4,3.8,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>15</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell13</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>开户行：</Text>
-              <TextBrush>Black</TextBrush>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell13>
-            <Table5_Cell14 Ref="50" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>3.8,2.4,7,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <ID>16</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell14</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>北京银行双秀支行</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell14>
-            <Table5_Cell15 Ref="51" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>10.8,2.4,3.4,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>17</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell15</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>开户行：</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell15>
-            <Table5_Cell16 Ref="52" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>14.2,2.4,6,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <ID>18</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell16</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>{JHT.AccountBankName}</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>DataColumn</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell16>
-            <Table5_Cell17 Ref="53" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>0,3.2,3.8,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>20</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell17</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>账号：</Text>
-              <TextBrush>Black</TextBrush>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell17>
-            <Table5_Cell18 Ref="54" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>3.8,3.2,7,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <ID>21</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell18</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>01090379900120102139169</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell18>
-            <Table5_Cell19 Ref="55" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>10.8,3.2,3.4,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>22</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell19</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>账号：</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell19>
-            <Table5_Cell20 Ref="56" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>14.2,3.2,6,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <ID>23</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell20</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>{JHT.AccountNo}</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>DataColumn</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell20>
-            <Table5_Cell21 Ref="57" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>0,4,3.8,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>25</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell21</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>税号：</Text>
-              <TextBrush>Black</TextBrush>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell21>
-            <Table5_Cell22 Ref="58" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>3.8,4,7,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <ID>26</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell22</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>110108746138006</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell22>
-            <Table5_Cell23 Ref="59" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>10.8,4,3.4,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>27</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell23</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>税号：</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell23>
-            <Table5_Cell24 Ref="60" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>14.2,4,6,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <ID>28</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell24</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>{JHT.CertificateNo}</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>DataColumn</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell24>
-            <Table5_Cell25 Ref="61" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>0,4.8,3.8,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>30</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell25</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>代表：</Text>
-              <TextBrush>Black</TextBrush>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell25>
-            <Table5_Cell26 Ref="62" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>3.8,4.8,7,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <ID>31</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell26</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <TextBrush>Black</TextBrush>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell26>
-            <Table5_Cell27 Ref="63" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>10.8,4.8,3.4,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>32</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell27</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>代表：</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell27>
-            <Table5_Cell28 Ref="64" type="Stimulsoft.Report.Components.Table.StiTableCell" isKey="true">
-              <Border>All;[105:105:105];1;Solid;False;4;[105:105:105]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>14.2,4.8,6,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Arial,9</Font>
-              <ID>33</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>Table5_Cell28</Name>
-              <Page isRef="5" />
-              <Parent isRef="36" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <TextBrush>Black</TextBrush>
-              <VertAlignment>Center</VertAlignment>
-            </Table5_Cell28>
-          </Components>
-          <Conditions isList="true" count="0" />
-          <DataRelationName isNull="true" />
-          <DataSourceName>JHT</DataSourceName>
-          <Filters isList="true" count="0" />
-          <MinHeight>1.4000000000000001</MinHeight>
-          <Name>Table5</Name>
-          <NumberID>35</NumberID>
-          <Page isRef="5" />
-          <Parent isRef="5" />
-          <RowCount>7</RowCount>
-          <Sort isList="true" count="0" />
-        </Table5>
       </Components>
       <Conditions isList="true" count="0" />
-      <Guid>2e6e350d69fa4e27a510e757d0c4bb76</Guid>
-      <Margins>0.4,0.4,0.4,0.4</Margins>
+      <Guid>ee81b08aafa4439a9c693f7a73d92644</Guid>
+      <Margins>0.3,4,0.3,0.4</Margins>
       <Name>Page1</Name>
-      <PageHeight>29.7</PageHeight>
-      <PageWidth>21</PageWidth>
+      <PageHeight>12</PageHeight>
+      <PageWidth>24</PageWidth>
       <Report isRef="0" />
-      <Watermark Ref="65" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+      <Watermark Ref="37" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
         <Font>Arial,100</Font>
         <TextBrush>[50:0:0:0]</TextBrush>
       </Watermark>
     </Page1>
   </Pages>
-  <PrinterSettings Ref="66" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <PrinterSettings Ref="38" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
   <ReferencedAssemblies isList="true" count="8">
     <value>System.Dll</value>
     <value>System.Drawing.Dll</value>
@@ -1196,10 +637,10 @@ WHERE b.BillID = @BillID</SqlCommand>
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>5/20/2014 3:48:20 PM</ReportChanged>
-  <ReportCreated>5/20/2014 2:56:28 PM</ReportCreated>
-  <ReportFile>D:\Program Files (x86)\北京博科智信科技有限公司\博科智信药品经营质量管理系统\采购单.mrt</ReportFile>
-  <ReportGuid>d359cc73a1894b3c81317e2f558fc7e9</ReportGuid>
+  <ReportChanged>11/20/2015 6:26:50 PM</ReportChanged>
+  <ReportCreated>6/4/2014 1:35:35 PM</ReportCreated>
+  <ReportFile>E:\1~~~~超人的裤衩\程序\DQS-器械版\采购单.mrt</ReportFile>
+  <ReportGuid>8173dd42f64f49b0bbfaa48d99410d97</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
   <ReportVersion>2013.1.1503</ReportVersion>

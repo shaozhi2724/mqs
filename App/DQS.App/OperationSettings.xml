@@ -4,39 +4,39 @@
     <Grid EntityName="BUSBillDetailEntity" ViewName="vw_AllPurchaseDetail" KeyField="采购单ID" EmptyRows="200">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
-          <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
+          <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_AllProduct</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,包装规格,包装比例,批准文号,贮藏条件,剂型,药品类别,单位</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,进项税</Fields>
           <Filter>[状态] is  null or [状态] = '正常'</Filter>
           <PageSize>100</PageSize>
         </PopupForm>
         <PopupForm Name="Price" PopStyle="EnterKey">
           <FormatQueryString>[价格分类] LIKE '%{0}%' OR [价格分类Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_AllProductPrice</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,价格分类,价格分类Spell,[价格]</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>产品ID,价格分类,价格分类Spell,[价格]</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
       </PopupForms>
       <Columns>
         <!--Name：表格显示的列名称，EntityField：对应实体的字段名，Visible：是否显示，AllowEdit：是否可编辑，PopupForm：弹出的窗体，PopupField：对应窗体中要回显的列-->
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="药品ID"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品编号"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品名称"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="产品ID"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品编号"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品名称"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产厂商"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格型号"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格型号"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装比例"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批准文号"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="注册证号"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="贮藏条件"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="剂型"/>
-        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品类别"/>
+        <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品类别"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="单位"/>
         <Column Name="单价" EntityField="UnitPrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price" PopupField="价格"/>
         <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
         <Column Name="金额" EntityField="TotalPrice" FieldType="System.Double"  Visible="true" AllowEdit="false" />
+        <Column Name="进项税" EntityField="Reservation1" FieldType="System.Int32" Visible="true" AllowEdit="true" PopupForm="Product" PopupField="进项税"/>
       </Columns>
     </Grid>
     <Report>
@@ -53,17 +53,16 @@
         <Parameter Name="订单总额" ParameterType="Double" TestValue="1000" ValueToControl="txtTotalPrice"/>
       </Parameters>
       <Deatils>
-        <Column Name="药品ID" DataType="System.Int32" DefaultValue="1"/>
-        <Column Name="药品编号" DataType="System.String" DefaultValue="P1001"/>
-        <Column Name="药品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
+        <Column Name="产品ID" DataType="System.Int32" DefaultValue="1"/>
+        <Column Name="产品编号" DataType="System.String" DefaultValue="P1001"/>
+        <Column Name="产品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
         <Column Name="生产厂商" DataType="System.String" DefaultValue="北京同仁堂药业有限公司"/>
-        <Column Name="规格" DataType="System.String" DefaultValue="9g*10丸"/>
-        <Column Name="包装规格" DataType="System.String" DefaultValue="盒/24丸"/>
+        <Column Name="规格型号" DataType="System.String" DefaultValue="9g*10丸"/>
+        <Column Name="包装规格型号" DataType="System.String" DefaultValue="盒/24丸"/>
         <Column Name="包装比例" DataType="System.String" DefaultValue="1:100"/>
-        <Column Name="批准文号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
+        <Column Name="注册证号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
         <Column Name="贮藏条件" DataType="System.String" DefaultValue="常温"/>
-        <Column Name="剂型" DataType="System.String" DefaultValue="口服"/>
-        <Column Name="药品类别" DataType="System.String" DefaultValue="基本药"/>
+        <Column Name="产品类别" DataType="System.String" DefaultValue="基本药"/>
         <Column Name="单位" DataType="System.String" DefaultValue="丸"/>
         <Column Name="单价" DataType="System.Double" DefaultValue="100"/>
         <Column Name="数量" DataType="System.Int32" DefaultValue="10"/>
@@ -76,35 +75,34 @@
     <Grid EntityName="BUSOnlyBillDetailEntity" ViewName="vw_AllOnlyBackDetail" KeyField="直调单ID" EmptyRows="50">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
-          <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
+          <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_AllProduct</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,包装规格,包装比例,批准文号,贮藏条件,剂型,药品类别,单位</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位</Fields>
           <Filter>[状态] is  null or [状态] = '正常'</Filter>
           <PageSize>100</PageSize>
         </PopupForm>
         <PopupForm Name="Price" PopStyle="EnterKey">
           <FormatQueryString>[价格分类] LIKE '%{0}%' OR [价格分类Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_AllProductPrice</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,价格分类,价格分类Spell,[价格]</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>产品ID,价格分类,价格分类Spell,[价格]</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
       </PopupForms>
       <Columns>
         <!--Name：表格显示的列名称，EntityField：对应实体的字段名，Visible：是否显示，AllowEdit：是否可编辑，PopupForm：弹出的窗体，PopupField：对应窗体中要回显的列-->
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="药品ID"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品编号"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品名称"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="产品ID"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品编号"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品名称"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产厂商"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格型号"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格型号"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装比例"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批准文号"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="注册证号"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="贮藏条件"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="剂型"/>
-        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品类别"/>
+        <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品类别"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="单位"/>
         <Column Name="单价" EntityField="PUnitPrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price" PopupField="价格"/>
         <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
@@ -117,18 +115,17 @@
   <Operation Name="PurchaseBillPrice">
     <Grid EntityName="BUSBillPriceHistoryDetailEntity" ViewName="vw_AllPurchaseBillPriceDetail" KeyField="调价单ID" EmptyRows="50">
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
         <Column Name="明细ID" EntityField="DetailID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="false" />
         <Column Name="单价" EntityField="OldUnitPrice" FieldType="System.Double" Visible="true" AllowEdit="false"/>
@@ -144,38 +141,41 @@
     <Grid EntityName="BUSBillDetailEntity" ViewName="vw_AllPurchaseBackDetail" KeyField="采购退货单ID" EmptyRows="200">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
-          <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
+          <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_BusinessStoreDetailForSale</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,药品编号,药品名称,药品名称Spell,生产厂商,生产厂商Spell,规格,包装规格,包装比例,批准文号,贮藏条件,剂型,药品类别,单位,批号,生产日期,有效期至,过期状态,锁定状态,库存数量</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>产品ID,产品编号,产品名称,产品名称Spell,生产厂商,生产厂商Spell,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,批号,生产日期,有效期至,灭菌批号,灭菌日期,过期状态,锁定状态,库存数量</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
         <PopupForm Name="Price" PopStyle="EnterKey">
           <FormatQueryString>[价格分类] LIKE '%{0}%' OR [价格分类Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_AllProductPrice</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,价格分类,价格分类Spell,[价格]</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>产品ID,价格分类,价格分类Spell,[价格]</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
       </PopupForms>
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="药品ID"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品编号"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品名称"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="产品ID"/>
+        <Column Name="入库ID" EntityField="Reservation2" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="入库ID"/>
+        <Column Name="DetailID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品编号"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品名称"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产厂商"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格型号"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格型号"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装比例"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批准文号"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="注册证号"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="贮藏条件"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="剂型"/>
-        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品类别"/>
+        <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品类别"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="单位"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批号"/>
-        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产日期"/>
-        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="有效期至"/>
+        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false" PopupForm="Product" PopupField="生产日期"/>
+        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false" PopupForm="Product" PopupField="有效期至"/>
+        <Column Name="灭菌批号" EntityField="SterilizationBatchNo" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="灭菌批号" />
+        <Column Name="灭菌日期" EntityField="SterilizationDate" FieldType="System.DateTime" Nullable="true" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="灭菌日期" />
         <Column Name="过期状态" FieldType="System.String" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="过期状态"/>
         <Column Name="锁定状态" FieldType="System.String" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="锁定状态"/>
         <Column Name="库存数量" FieldType="System.Int32" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="库存数量"/>
@@ -197,17 +197,16 @@
         <Parameter Name="订单总额" ParameterType="Double" TestValue="1000" ValueToControl="txtTotalPrice"/>
       </Parameters>
       <Deatils>
-        <Column Name="药品ID" DataType="System.Int32" DefaultValue="1"/>
-        <Column Name="药品编号" DataType="System.String" DefaultValue="P1001"/>
-        <Column Name="药品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
+        <Column Name="产品ID" DataType="System.Int32" DefaultValue="1"/>
+        <Column Name="产品编号" DataType="System.String" DefaultValue="P1001"/>
+        <Column Name="产品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
         <Column Name="生产厂商" DataType="System.String" DefaultValue="北京同仁堂药业有限公司"/>
-        <Column Name="规格" DataType="System.String" DefaultValue="9g*10丸"/>
-        <Column Name="包装规格" DataType="System.String" DefaultValue="盒/24丸"/>
+        <Column Name="规格型号" DataType="System.String" DefaultValue="9g*10丸"/>
+        <Column Name="包装规格型号" DataType="System.String" DefaultValue="盒/24丸"/>
         <Column Name="包装比例" DataType="System.String" DefaultValue="1:100"/>
-        <Column Name="批准文号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
+        <Column Name="注册证号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
         <Column Name="贮藏条件" DataType="System.String" DefaultValue="常温"/>
-        <Column Name="剂型" DataType="System.String" DefaultValue="口服"/>
-        <Column Name="药品类别" DataType="System.String" DefaultValue="基本药"/>
+        <Column Name="产品类别" DataType="System.String" DefaultValue="基本药"/>
         <Column Name="单位" DataType="System.String" DefaultValue="丸"/>
         <Column Name="批号" DataType="System.String" DefaultValue="20121212"/>
         <Column Name="生产日期" DataType="System.DateTime" DefaultValue="2012-12-12"/>
@@ -221,22 +220,21 @@
   <Operation Name="PurchaseBackBillPrice">
     <Grid EntityName="BUSBillPriceHistoryDetailEntity" ViewName="vw_AllPurchaseBackBillPriceDetail" KeyField="调价单ID" EmptyRows="50">
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
         <Column Name="明细ID" EntityField="DetailID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" AllowEdit="false"/>
-        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" AllowEdit="false"/>
+        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false"/>
+        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false"/>
         <Column Name="过期状态" FieldType="System.String" Visible="false" AllowEdit="false"/>
         <Column Name="锁定状态" FieldType="System.String" Visible="false" AllowEdit="false"/>
         <Column Name="库存数量" FieldType="System.Int32" Visible="true" AllowEdit="false"/>
@@ -254,50 +252,52 @@
     <Grid EntityName="BUSBillDetailEntity" ViewName="vw_AllSaleDetail" KeyField="销售单ID" EmptyRows="200">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
-          <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
+          <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_BusinessStoreDetailForSale</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,药品编号,药品名称,规格,包装规格,单位,批号,库存数量,剂型,药品类别,所属部门,生产厂商,包装比例,批准文号,贮藏条件,进货价,批发价,零售价,药品名称Spell,生产日期,有效期至,过期状态,锁定状态,当天限购数量,当月限购数量,StyleID,StyleName</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>产品ID,产品编号,产品名称,规格型号,包装规格型号,单位,批号,灭菌批号,灭菌日期,库存数量,产品类别,所属部门,生产厂商,包装比例,注册证号,贮藏条件,进货价,批发价,零售价,产品名称Spell,生产日期,有效期至,过期状态,锁定状态,当天限购数量,当月限购数量,StyleID,StyleName</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
         <PopupForm Name="Price1" PopStyle="EnterKey">
-          <FormatQueryString>[往来单位] = '{0}' AND [药品名称] = '{1}'</FormatQueryString>
+          <FormatQueryString>[往来单位] = '{0}' AND [产品名称] = '{1}'</FormatQueryString>
           <ViewName>vw_PriceOfDealer</ViewName>
           <PrimaryField>PriceID</PrimaryField>
-          <Fields>[往来单位],[药品名称],[批发价],[零售价],[创建人],[创建日期],[最后修改人],[最后修改日期]</Fields>
+          <Fields>[往来单位],[产品名称],[批发价],[零售价],[创建人],[创建日期],[最后修改人],[最后修改日期]</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
         <PopupForm Name="Price2" PopStyle="EnterKey">
-          <FormatQueryString>[往来单位] = '{0}' AND [药品名称] = '{1}'</FormatQueryString>
+          <FormatQueryString>[往来单位] = '{0}' AND [产品名称] = '{1}'</FormatQueryString>
           <ViewName>vw_PriceOfDealer</ViewName>
           <PrimaryField>PriceID</PrimaryField>
-          <Fields>[往来单位],[药品名称],[批发价],[零售价],[创建人],[创建日期],[最后修改人],[最后修改日期]</Fields>
+          <Fields>[往来单位],[产品名称],[批发价],[零售价],[创建人],[创建日期],[最后修改人],[最后修改日期]</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
         <PopupForm Name="Price3" PopStyle="DoubleClick">
           <FormatQueryString>[价格分类] LIKE '%{0}%' OR [价格分类Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_AllProductPrice</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,价格分类,价格分类Spell,[价格]</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>产品ID,价格分类,价格分类Spell,[价格]</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
         <PopupForm Name="ProductBatch" PopStyle="DoubleClick">
           <FormatQueryString>[批号] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_StoreDetail</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,批号,生产日期,有效期至,库存数量</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>产品ID,批号,生产日期,有效期至,库存数量</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
       </PopupForms>
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="药品ID"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品编号"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品名称"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="产品ID"/>
+        <Column Name="入库ID" EntityField="Reservation2" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="入库ID"/>
+        <Column Name="DetailID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品编号"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品名称"/>
         <Column Name="进货价" FieldType="System.Double" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="进货价"/>
         <Column Name="批发价" EntityField="TradePrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price1" PopupField="批发价"/>
         <Column Name="零售价" EntityField="RetailPrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price2" PopupField="零售价"/>
@@ -305,19 +305,22 @@
         <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
         <Column Name="金额" EntityField="TotalPrice" FieldType="System.Double"  Visible="true" AllowEdit="false" />
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批号"/>
+        <Column Name="销项税" EntityField="Reservation1" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="销项税"/>
         <Column Name="库存数量" FieldType="System.Int32" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="库存数量"/>
-        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产日期"/>
-        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="有效期至"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格"/>
+        <Column Name="灭菌批号" EntityField="SterilizationBatchNo" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="灭菌批号" />
+        <Column Name="灭菌日期" EntityField="SterilizationDate" FieldType="System.DateTime" Nullable="true" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="灭菌日期" />
+        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false" PopupForm="Product" PopupField="生产日期"/>
+        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false" PopupForm="Product" PopupField="有效期至"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格型号"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="单位"/>
+        <Column Name="是否打印检报" EntityField="Reservation3" FieldType="System.String" Visible="true" Nullable="true" AllowEdit="true" />
         <Column Name="所属部门" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="所属部门"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产厂商"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格型号"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装比例"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批准文号"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="注册证号"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="贮藏条件"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="剂型"/>
-        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品类别"/>
+        <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品类别"/>
         <Column Name="过期状态" FieldType="System.String" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="过期状态"/>
         <Column Name="锁定状态" FieldType="System.String" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="锁定状态"/>
         <Column Name="件数" FieldType="System.Double"  Visible="true" AllowEdit="false" />
@@ -344,17 +347,16 @@
         <Parameter Name="商品数目" ParameterType="Int32" TestValue="5" ValueToControl="txtProductAmount"/>
       </Parameters>
       <Deatils>
-        <Column Name="药品ID" DataType="System.Int32" DefaultValue="1"/>
-        <Column Name="药品编号" DataType="System.String" DefaultValue="P1001"/>
-        <Column Name="药品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
+        <Column Name="产品ID" DataType="System.Int32" DefaultValue="1"/>
+        <Column Name="产品编号" DataType="System.String" DefaultValue="P1001"/>
+        <Column Name="产品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
         <Column Name="生产厂商" DataType="System.String" DefaultValue="北京同仁堂药业有限公司"/>
-        <Column Name="规格" DataType="System.String" DefaultValue="9g*10丸"/>
-        <Column Name="包装规格" DataType="System.String" DefaultValue="盒/24丸"/>
+        <Column Name="规格型号" DataType="System.String" DefaultValue="9g*10丸"/>
+        <Column Name="包装规格型号" DataType="System.String" DefaultValue="盒/24丸"/>
         <Column Name="包装比例" DataType="System.String" DefaultValue="1:100"/>
-        <Column Name="批准文号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
+        <Column Name="注册证号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
         <Column Name="贮藏条件" DataType="System.String" DefaultValue="常温"/>
-        <Column Name="剂型" DataType="System.String" DefaultValue="口服"/>
-        <Column Name="药品类别" DataType="System.String" DefaultValue="基本药"/>
+        <Column Name="产品类别" DataType="System.String" DefaultValue="基本药"/>
         <Column Name="单位" DataType="System.String" DefaultValue="丸"/>
         <Column Name="单价" DataType="System.Double" DefaultValue="100"/>
         <Column Name="数量" DataType="System.Int32" DefaultValue="10"/>
@@ -363,24 +365,23 @@
     </Report>
   </Operation>
   <Operation Name="SaleBillPrice">
-    <Grid EntityName="BUSBillPriceHistoryDetailEntity" ViewName="vw_AllSaleBillPriceDetail" KeyField="调价单ID" EmptyRows="50">
+    <Grid EntityName="BUSBillPriceHistoryDetailEntity" ViewName="vw_AllSaleBillPriceDetail" KeyField="调价单ID" EmptyRows="200">
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
         <Column Name="明细ID" EntityField="DetailID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" AllowEdit="false"/>
-        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" AllowEdit="false"/>
+        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false"/>
+        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false"/>
         <Column Name="过期状态" FieldType="System.String" Visible="false" AllowEdit="false"/>
         <Column Name="锁定状态" FieldType="System.String" Visible="false" AllowEdit="false"/>
         <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="false" />
@@ -401,38 +402,38 @@
     <Grid EntityName="BUSBillDetailEntity" ViewName="vw_AllSaleBackDetail" KeyField="销售退货单ID" EmptyRows="200">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
-          <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
+          <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_AllProduct</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,包装规格,包装比例,批准文号,贮藏条件,剂型,药品类别,单位</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
         <PopupForm Name="Price" PopStyle="EnterKey">
           <FormatQueryString>[价格分类] LIKE '%{0}%' OR [价格分类Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_AllProductPrice</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,价格分类,价格分类Spell,[价格]</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>产品ID,价格分类,价格分类Spell,[价格]</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
       </PopupForms>
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="药品ID"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品编号"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品名称"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="产品ID"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品编号"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品名称"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产厂商"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="剂型"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格型号"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格型号"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装比例"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批准文号"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="注册证号"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="贮藏条件"/>
-        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品类别"/>
+        <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品类别"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="单位"/>
+        <Column Name="入库ID" EntityField="Reservation2" FieldType="System.Int32" Visible="true" Nullable="true" AllowEdit="false"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="true"/>
-        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" AllowEdit="true"/>
-        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" AllowEdit="true"/>
+        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="true"/>
+        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="true"/>
         <Column Name="复核数量" FieldType="System.Int32" Visible="true" AllowEdit="false" />
         <Column Name="单价" EntityField="UnitPrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price" PopupField="价格"/>
         <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
@@ -457,17 +458,16 @@
         <Parameter Name="订单总额" ParameterType="Double" TestValue="1000" ValueToControl="txtTotalPrice"/>
       </Parameters>
       <Deatils>
-        <Column Name="药品ID" DataType="System.Int32" DefaultValue="1"/>
-        <Column Name="药品编号" DataType="System.String" DefaultValue="P1001"/>
-        <Column Name="药品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
+        <Column Name="产品ID" DataType="System.Int32" DefaultValue="1"/>
+        <Column Name="产品编号" DataType="System.String" DefaultValue="P1001"/>
+        <Column Name="产品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
         <Column Name="生产厂商" DataType="System.String" DefaultValue="北京同仁堂药业有限公司"/>
-        <Column Name="规格" DataType="System.String" DefaultValue="9g*10丸"/>
-        <Column Name="包装规格" DataType="System.String" DefaultValue="盒/24丸"/>
+        <Column Name="规格型号" DataType="System.String" DefaultValue="9g*10丸"/>
+        <Column Name="包装规格型号" DataType="System.String" DefaultValue="盒/24丸"/>
         <Column Name="包装比例" DataType="System.String" DefaultValue="1:100"/>
-        <Column Name="批准文号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
+        <Column Name="注册证号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
         <Column Name="贮藏条件" DataType="System.String" DefaultValue="常温"/>
-        <Column Name="剂型" DataType="System.String" DefaultValue="口服"/>
-        <Column Name="药品类别" DataType="System.String" DefaultValue="基本药"/>
+        <Column Name="产品类别" DataType="System.String" DefaultValue="基本药"/>
         <Column Name="单位" DataType="System.String" DefaultValue="丸"/>
         <Column Name="批号" DataType="System.String" DefaultValue="20121212"/>
         <Column Name="生产日期" DataType="System.DateTime" DefaultValue="2012-12-12"/>
@@ -485,24 +485,23 @@
     </Report>
   </Operation>
   <Operation Name="SaleBackBillPrice">
-    <Grid EntityName="BUSBillPriceHistoryDetailEntity" ViewName="vw_AllSaleBackBillPriceDetail" KeyField="调价单ID" EmptyRows="50">
+    <Grid EntityName="BUSBillPriceHistoryDetailEntity" ViewName="vw_AllSaleBackBillPriceDetail" KeyField="调价单ID" EmptyRows="200">
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
         <Column Name="明细ID" EntityField="DetailID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="true"/>
-        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" AllowEdit="true"/>
-        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" AllowEdit="true"/>
+        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="true"/>
+        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="true"/>
         <Column Name="复核数量" FieldType="System.Int32" Visible="true" AllowEdit="false" />
         <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
         <Column Name="开票日期" DataType="System.DateTime" Visible="false" AllowEdit="false"/>
@@ -523,18 +522,17 @@
   <Operation Name="Receive">
     <Grid EntityName="BUSReceiveDetailEntity" ViewName="vw_AllReceiveDetail" KeyField="收货单ID" EmptyRows="200">
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="批号" FieldType="System.String" Visible="false" AllowEdit="false"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="订单数量" EntityField="Amount" FieldType="System.Int32" Visible="true"/>
         <Column Name="收货数量" EntityField="ReceiveAmount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
@@ -555,17 +553,16 @@
         <Parameter Name="备注" ParameterType="String" TestValue="备注" ValueToControl="txtReceiveRemark"/>
       </Parameters>
       <Deatils>
-        <Column Name="药品ID" DataType="System.Int32" DefaultValue="1"/>
-        <Column Name="药品编号" DataType="System.String" DefaultValue="P1001"/>
-        <Column Name="药品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
+        <Column Name="产品ID" DataType="System.Int32" DefaultValue="1"/>
+        <Column Name="产品编号" DataType="System.String" DefaultValue="P1001"/>
+        <Column Name="产品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
         <Column Name="生产厂商" DataType="System.String" DefaultValue="北京同仁堂药业有限公司"/>
-        <Column Name="规格" DataType="System.String" DefaultValue="9g*10丸"/>
-        <Column Name="包装规格" DataType="System.String" DefaultValue="盒/24丸"/>
+        <Column Name="规格型号" DataType="System.String" DefaultValue="9g*10丸"/>
+        <Column Name="包装规格型号" DataType="System.String" DefaultValue="盒/24丸"/>
         <Column Name="包装比例" DataType="System.String" DefaultValue="1:100"/>
-        <Column Name="批准文号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
+        <Column Name="注册证号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
         <Column Name="贮藏条件" DataType="System.String" DefaultValue="常温"/>
-        <Column Name="剂型" DataType="System.String" DefaultValue="口服"/>
-        <Column Name="药品类别" DataType="System.String" DefaultValue="基本药"/>
+        <Column Name="产品类别" DataType="System.String" DefaultValue="基本药"/>
         <Column Name="单位" DataType="System.String" DefaultValue="丸"/>
         <Column Name="订单数量" DataType="System.Int32" DefaultValue="200"/>
         <Column Name="收货数量" DataType="System.Int32" DefaultValue="200"/>
@@ -575,18 +572,17 @@
   <Operation Name="Declined">
     <Grid EntityName="BUSDeclinedDetailEntity" ViewName="vw_AllDeclinedDetail" KeyField="拒收单ID" EmptyRows="100">
       <Columns>
-        <Column Name="药品ID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品ID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="批号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="订单数量" FieldType="System.Int32" Visible="true" AllowEdit="false"/>
         <Column Name="拒收数量" FieldType="System.Int32" Visible="true" AllowEdit="false" />
@@ -605,17 +601,16 @@
         <Parameter Name="备注" ParameterType="String" TestValue="备注" ValueToControl="txtReceiveRemark"/>
       </Parameters>
       <Deatils>
-        <Column Name="药品ID" DataType="System.Int32" DefaultValue="1"/>
-        <Column Name="药品编号" DataType="System.String" DefaultValue="P1001"/>
-        <Column Name="药品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
+        <Column Name="产品ID" DataType="System.Int32" DefaultValue="1"/>
+        <Column Name="产品编号" DataType="System.String" DefaultValue="P1001"/>
+        <Column Name="产品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
         <Column Name="生产厂商" DataType="System.String" DefaultValue="北京同仁堂药业有限公司"/>
-        <Column Name="规格" DataType="System.String" DefaultValue="9g*10丸"/>
-        <Column Name="包装规格" DataType="System.String" DefaultValue="盒/24丸"/>
+        <Column Name="规格型号" DataType="System.String" DefaultValue="9g*10丸"/>
+        <Column Name="包装规格型号" DataType="System.String" DefaultValue="盒/24丸"/>
         <Column Name="包装比例" DataType="System.String" DefaultValue="1:100"/>
-        <Column Name="批准文号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
+        <Column Name="注册证号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
         <Column Name="贮藏条件" DataType="System.String" DefaultValue="常温"/>
-        <Column Name="剂型" DataType="System.String" DefaultValue="口服"/>
-        <Column Name="药品类别" DataType="System.String" DefaultValue="基本药"/>
+        <Column Name="产品类别" DataType="System.String" DefaultValue="基本药"/>
         <Column Name="单位" DataType="System.String" DefaultValue="丸"/>
         <Column Name="订单数量" DataType="System.Int32" DefaultValue="200"/>
         <Column Name="收货数量" DataType="System.Int32" DefaultValue="200"/>
@@ -626,24 +621,26 @@
     <Grid EntityName="BUSAcceptDetailEntity" ViewName="vw_AllAcceptDetail" KeyField="验收单ID" EmptyRows="300">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
-          <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
+          <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_AllProduct</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,包装规格,包装比例,批准文号,贮藏条件,剂型,药品类别,单位</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
       </PopupForms>
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="药品ID"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品编号"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品名称"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="产品ID"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品编号"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品名称"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产厂商"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格型号"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格型号"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="true" />
-        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" AllowEdit="true" />
-        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" AllowEdit="true" />
+        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="true" />
+        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="true" />
+        <Column Name="灭菌批号" EntityField="SterilizationBatchNo" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="true" />
+        <Column Name="灭菌日期" EntityField="SterilizationDate" FieldType="System.DateTime" Nullable="true" Visible="true" AllowEdit="true" />
         <Column Name="收货数量" EntityField="Amount" FieldType="System.Int32" Visible="true" Nullable="true" AllowEdit="false" />
         <Column Name="验收数量" EntityField="ReceiveAmount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
         <Column Name="验收合格数量" EntityField="QualifiedAmount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
@@ -651,10 +648,9 @@
         <Column Name="验收结果" EntityField="AcceptResult" FieldType="System.String" Visible="true" AllowEdit="true" />
         <Column Name="不合格事项及处置措施" EntityField="DetailRemark" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="true" />
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装比例"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批准文号"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="注册证号"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="贮藏条件"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="剂型"/>
-        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品类别"/>
+        <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品类别"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="单位"/>
       </Columns>
     </Grid>
@@ -669,14 +665,14 @@
         <Parameter Name="备注" ParameterType="DateTime" TestValue="备注" ValueToControl="txtAcceptRemark"/>
       </Parameters>
       <Deatils>
-        <Column Name="药品ID" DataType="System.Int32" DefaultValue="1"/>
-        <Column Name="药品编号" DataType="System.String" DefaultValue="P1001"/>
-        <Column Name="药品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
+        <Column Name="产品ID" DataType="System.Int32" DefaultValue="1"/>
+        <Column Name="产品编号" DataType="System.String" DefaultValue="P1001"/>
+        <Column Name="产品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
         <Column Name="生产厂商" DataType="System.String" DefaultValue="北京同仁堂药业有限公司"/>
-        <Column Name="规格" DataType="System.String" DefaultValue="9g*10丸"/>
-        <Column Name="包装规格" DataType="System.String" DefaultValue="盒/24丸"/>
+        <Column Name="规格型号" DataType="System.String" DefaultValue="9g*10丸"/>
+        <Column Name="包装规格型号" DataType="System.String" DefaultValue="盒/24丸"/>
         <Column Name="包装比例" DataType="System.String" DefaultValue="1:100"/>
-        <Column Name="批准文号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
+        <Column Name="注册证号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
         <Column Name="贮藏条件" DataType="System.String" DefaultValue="常温"/>
         <Column Name="订单数量" DataType="System.Int32" DefaultValue="200"/>
         <Column Name="批号" DataType="System.String" DefaultValue="20130515"/>
@@ -684,8 +680,7 @@
         <Column Name="有效期至" DataType="System.DateTime" DefaultValue="2016-05-14"/>
         <Column Name="验收数量" DataType="System.Int32" DefaultValue="200"/>
         <Column Name="验收结果" DataType="System.String" DefaultValue="合格"/>
-        <Column Name="剂型" DataType="System.String" DefaultValue="口服"/>
-        <Column Name="药品类别" DataType="System.String" DefaultValue="基本药"/>
+        <Column Name="产品类别" DataType="System.String" DefaultValue="基本药"/>
         <Column Name="单位" DataType="System.String" DefaultValue="丸"/>
       </Deatils>
     </Report>
@@ -703,21 +698,20 @@
         </PopupForm>
       </PopupForms>
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false" />
-        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" />
-        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" />
+        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false" />
+        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false" />
         <Column Name="验收数量" EntityField="Amount" FieldType="System.Int32" Nullable="true" Visible="true"/>
         <Column Name="抽检数量" EntityField="SamplingAmount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
         <Column Name="抽检合格数量" EntityField="QualifiedAmount" FieldType="System.Int32" Visible="true" AllowEdit="true"/>
@@ -729,21 +723,22 @@
   <Operation Name="StockIn">
     <Grid EntityName="BUSStoreBillDetailEntity" ViewName="vw_AllStockInDeatil" KeyField="入库单ID" EmptyRows="500">
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" AllowEdit="false"/>
-        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" AllowEdit="false"/>
+        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false"/>
+        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false"/>
+        <Column Name="灭菌批号" EntityField="SterilizationBatchNo" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="false" />
+        <Column Name="灭菌日期" EntityField="SterilizationDate" FieldType="System.DateTime" Nullable="true" Visible="true" AllowEdit="false" />
         <!--<Column Name="订单数量" EntityField="BillAmount" FieldType="System.Int32" Nullable="true" Visible="true" AllowEdit="false"/>-->
         <Column Name="验收数量" EntityField="BillAmount" FieldType="System.Int32" Nullable="true" Visible="true" AllowEdit="false"/>
         <Column Name="入库数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true"/>
@@ -768,17 +763,16 @@
         <Parameter Name="备注" ParameterType="String" TestValue="备注" ValueToControl="txtStoreRemark"/>
       </Parameters>
       <Deatils>
-        <Column Name="药品ID" DataType="System.Int32" DefaultValue="1"/>
-        <Column Name="药品编号" DataType="System.String" DefaultValue="P1001"/>
-        <Column Name="药品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
+        <Column Name="产品ID" DataType="System.Int32" DefaultValue="1"/>
+        <Column Name="产品编号" DataType="System.String" DefaultValue="P1001"/>
+        <Column Name="产品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
         <Column Name="生产厂商" DataType="System.String" DefaultValue="北京同仁堂药业有限公司"/>
-        <Column Name="规格" DataType="System.String" DefaultValue="9g*10丸"/>
-        <Column Name="包装规格" DataType="System.String" DefaultValue="盒/24丸"/>
+        <Column Name="规格型号" DataType="System.String" DefaultValue="9g*10丸"/>
+        <Column Name="包装规格型号" DataType="System.String" DefaultValue="盒/24丸"/>
         <Column Name="包装比例" DataType="System.String" DefaultValue="1:100"/>
-        <Column Name="批准文号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
+        <Column Name="注册证号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
         <Column Name="贮藏条件" DataType="System.String" DefaultValue="常温"/>
-        <Column Name="剂型" DataType="System.String" DefaultValue="口服"/>
-        <Column Name="药品类别" DataType="System.String" DefaultValue="基本药"/>
+        <Column Name="产品类别" DataType="System.String" DefaultValue="基本药"/>
         <Column Name="单位" DataType="System.String" DefaultValue="丸"/>
         <Column Name="批号" DataType="System.String" DefaultValue="20130515"/>
         <Column Name="生产日期" DataType="System.DateTime" DefaultValue="2013-05-15"/>
@@ -800,39 +794,40 @@
     <Grid EntityName="BUSStoreBillDetailEntity" ViewName="vw_AllStockOutDeatil" KeyField="出库单ID" EmptyRows="500">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
-          <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
+          <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_AllProduct</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,包装规格,包装比例,批准文号,贮藏条件,剂型,药品类别,单位</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
         <PopupForm Name="ProductBatch" PopStyle="DoubleClick">
           <FormatQueryString>[批号] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_StoreDetail</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,批号,生产日期,有效期至,库存数量</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>产品ID,批号,生产日期,有效期至,灭菌批号,灭菌日期,库存数量</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
       </PopupForms>
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="药品ID"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品编号"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品名称"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="产品ID"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品编号"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品名称"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产厂商"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格型号"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格型号"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装比例"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批准文号"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="注册证号"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="贮藏条件"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="剂型"/>
-        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品类别"/>
+        <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品类别"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="单位"/>
         <Column Name="订单数量" EntityField="BillAmount" FieldType="System.Int32" Nullable="true" Visible="true" AllowEdit="false"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="ProductBatch" PopupField="批号"/>
-        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" PopupForm="ProductBatch" PopupField="生产日期"/>
-        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" PopupForm="ProductBatch" PopupField="有效期至"/>
+        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false" PopupForm="ProductBatch" PopupField="生产日期"/>
+        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false" PopupForm="ProductBatch" PopupField="有效期至"/>
+        <Column Name="灭菌批号" EntityField="SterilizationBatchNo" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="false" PopupForm="ProductBatch" PopupField="灭菌批号" />
+        <Column Name="灭菌日期" EntityField="SterilizationDate" FieldType="System.DateTime" Nullable="true" Visible="true" AllowEdit="false" PopupForm="ProductBatch" PopupField="灭菌日期" />
         <Column Name="出库数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true"/>
       </Columns>
     </Grid>
@@ -846,17 +841,16 @@
         <Parameter Name="备注" ParameterType="String" TestValue="备注" ValueToControl="txtStoreRemark"/>
       </Parameters>
       <Deatils>
-        <Column Name="药品ID" DataType="System.Int32" DefaultValue="1"/>
-        <Column Name="药品编号" DataType="System.String" DefaultValue="P1001"/>
-        <Column Name="药品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
+        <Column Name="产品ID" DataType="System.Int32" DefaultValue="1"/>
+        <Column Name="产品编号" DataType="System.String" DefaultValue="P1001"/>
+        <Column Name="产品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
         <Column Name="生产厂商" DataType="System.String" DefaultValue="北京同仁堂药业有限公司"/>
-        <Column Name="规格" DataType="System.String" DefaultValue="9g*10丸"/>
-        <Column Name="包装规格" DataType="System.String" DefaultValue="盒/24丸"/>
+        <Column Name="规格型号" DataType="System.String" DefaultValue="9g*10丸"/>
+        <Column Name="包装规格型号" DataType="System.String" DefaultValue="盒/24丸"/>
         <Column Name="包装比例" DataType="System.String" DefaultValue="1:100"/>
-        <Column Name="批准文号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
+        <Column Name="注册证号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
         <Column Name="贮藏条件" DataType="System.String" DefaultValue="常温"/>
-        <Column Name="剂型" DataType="System.String" DefaultValue="口服"/>
-        <Column Name="药品类别" DataType="System.String" DefaultValue="基本药"/>
+        <Column Name="产品类别" DataType="System.String" DefaultValue="基本药"/>
         <Column Name="单位" DataType="System.String" DefaultValue="丸"/>
         <Column Name="订单数量" DataType="System.Int32" DefaultValue="1000"/>
         <Column Name="批号" DataType="System.String" DefaultValue="20130515"/>
@@ -872,21 +866,22 @@
   <Operation Name="Review">
     <Grid EntityName="BUSReviewDetailEntity" ViewName="vw_AllReviewDetail" KeyField="复核单ID" EmptyRows="500">
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" AllowEdit="false"/>
-        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" AllowEdit="false"/>
+        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false"/>
+        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false"/>
+        <Column Name="灭菌批号" EntityField="SterilizationBatchNo" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="false" />
+        <Column Name="灭菌日期" EntityField="SterilizationDate" FieldType="System.DateTime" Nullable="true" Visible="true" AllowEdit="false" />
         <Column Name="出库数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="false"/>
         <Column Name="复核数量" EntityField="ReviewAmount" FieldType="System.Int32" Visible="true" AllowEdit="true"/>
       </Columns>
@@ -901,17 +896,16 @@
         <Parameter Name="备注" ParameterType="String" TestValue="备注" ValueToControl="txtRemark"/>
       </Parameters>
       <Deatils>
-        <Column Name="药品ID" DataType="System.Int32" DefaultValue="1"/>
-        <Column Name="药品编号" DataType="System.String" DefaultValue="P1001"/>
-        <Column Name="药品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
+        <Column Name="产品ID" DataType="System.Int32" DefaultValue="1"/>
+        <Column Name="产品编号" DataType="System.String" DefaultValue="P1001"/>
+        <Column Name="产品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
         <Column Name="生产厂商" DataType="System.String" DefaultValue="北京同仁堂药业有限公司"/>
-        <Column Name="规格" DataType="System.String" DefaultValue="9g*10丸"/>
-        <Column Name="包装规格" DataType="System.String" DefaultValue="盒/24丸"/>
+        <Column Name="规格型号" DataType="System.String" DefaultValue="9g*10丸"/>
+        <Column Name="包装规格型号" DataType="System.String" DefaultValue="盒/24丸"/>
         <Column Name="包装比例" DataType="System.String" DefaultValue="1:100"/>
-        <Column Name="批准文号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
+        <Column Name="注册证号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
         <Column Name="贮藏条件" DataType="System.String" DefaultValue="常温"/>
-        <Column Name="剂型" DataType="System.String" DefaultValue="口服"/>
-        <Column Name="药品类别" DataType="System.String" DefaultValue="基本药"/>
+        <Column Name="产品类别" DataType="System.String" DefaultValue="基本药"/>
         <Column Name="单位" DataType="System.String" DefaultValue="丸"/>
         <Column Name="批号" DataType="System.String" DefaultValue="20130515"/>
         <Column Name="生产日期" DataType="System.DateTime" DefaultValue="2013-05-15"/>
@@ -924,18 +918,17 @@
   <Operation Name="Transport">
     <Grid EntityName="BUSTransportDetailEntity" ViewName="vw_AllReviewDetail" KeyField="复核单ID" EmptyRows="500">
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
         <Column Name="订单编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="出库数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="false"/>
@@ -963,17 +956,16 @@
         <Parameter Name="备注" ParameterType="String" TestValue="备注" ValueToControl="txtTransportRemark"/>
       </Parameters>
       <Deatils>
-        <Column Name="药品ID" DataType="System.Int32" DefaultValue="1"/>
-        <Column Name="药品编号" DataType="System.String" DefaultValue="P1001"/>
-        <Column Name="药品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
+        <Column Name="产品ID" DataType="System.Int32" DefaultValue="1"/>
+        <Column Name="产品编号" DataType="System.String" DefaultValue="P1001"/>
+        <Column Name="产品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
         <Column Name="生产厂商" DataType="System.String" DefaultValue="北京同仁堂药业有限公司"/>
-        <Column Name="规格" DataType="System.String" DefaultValue="9g*10丸"/>
-        <Column Name="包装规格" DataType="System.String" DefaultValue="盒/24丸"/>
+        <Column Name="规格型号" DataType="System.String" DefaultValue="9g*10丸"/>
+        <Column Name="包装规格型号" DataType="System.String" DefaultValue="盒/24丸"/>
         <Column Name="包装比例" DataType="System.String" DefaultValue="1:100"/>
-        <Column Name="批准文号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
+        <Column Name="注册证号" DataType="System.String" DefaultValue="国药准字Z101023923"/>
         <Column Name="贮藏条件" DataType="System.String" DefaultValue="常温"/>
-        <Column Name="剂型" DataType="System.String" DefaultValue="口服"/>
-        <Column Name="药品类别" DataType="System.String" DefaultValue="基本药"/>
+        <Column Name="产品类别" DataType="System.String" DefaultValue="基本药"/>
         <Column Name="单位" DataType="System.String" DefaultValue="丸"/>
         <Column Name="批号" DataType="System.String" DefaultValue="20130515"/>
         <Column Name="出库数量" DataType="System.Int32" DefaultValue="200"/>
@@ -984,33 +976,33 @@
     <Grid EntityName="BUSInventoryDetailEntity" ViewName="vw_AllInventoryDetail" KeyField="盘点ID" EmptyRows="1">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick" AllowMultipleSelection="True" GroupFieldName="贮藏条件">
-          <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
+          <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_BusinessStoreDetailForInitInventory</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,包装规格,包装比例,批准文号,贮藏条件,剂型,药品类别,单位,批号,生产日期,有效期至,库存数量</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>库存ID,产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,批号,生产日期,有效期至,库存数量</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
       </PopupForms>
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="药品ID"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品编号"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品名称"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="产品ID"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品编号"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品名称"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产厂商"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格型号"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格型号"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装比例"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批准文号"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="注册证号"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="贮藏条件"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="剂型"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="单位"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批号"/>
-        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产日期"/>
-        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="有效期至"/>
+        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false" PopupForm="Product" PopupField="生产日期"/>
+        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false" PopupForm="Product" PopupField="有效期至"/>
         <Column Name="库存数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="库存数量"/>
         <Column Name="盘点数量" EntityField="InventoryAmount" FieldType="System.Int32" Visible="true" AllowEdit="true"/>
         <Column Name="差异数量" EntityField="DifferenceAmount" FieldType="System.Int32" Visible="true" AllowEdit="false"/>
         <Column Name="盘点结果" EntityField="InventoryResult" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="入库ID" EntityField="InStoreID" FieldType="System.String" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="库存ID"/>
       </Columns>
     </Grid>
   </Operation>
@@ -1018,31 +1010,31 @@
     <Grid EntityName="BUSProductUnqualifiedDetailEntity" ViewName="vw_AllProductUnqualifiedDetail" KeyField="记录ID" EmptyRows="50">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
-          <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
+          <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_LockedStoreDetail</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,包装规格,包装比例,批准文号,贮藏条件,剂型,药品类别,单位,批号,生产日期,有效期至,库存数量</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>产品ID,入库ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,批号,生产日期,有效期至,库存数量,锁定数量</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
       </PopupForms>
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="药品ID"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品编号"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品名称"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="产品ID"/>
+        <Column Name="入库ID" EntityField="InStoreID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="入库ID"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品编号"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品名称"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产厂商"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格型号"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格型号"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装比例"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批准文号"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="注册证号"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="贮藏条件"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="剂型"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="单位"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批号"/>
-        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产日期"/>
-        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="有效期至"/>
+        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false" PopupForm="Product" PopupField="生产日期"/>
+        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false" PopupForm="Product" PopupField="有效期至"/>
         <Column Name="库存数量" FieldType="System.Int32" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="库存数量"/>
-        <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true"/>
+        <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true" PopupForm="Product" PopupField="锁定数量"/>
         <Column Name="明细原因" EntityField="DetailCause" FieldType="System.String" Visible="true" AllowEdit="true" Nullable="true"/>
         <Column Name="明细备注" EntityField="DetailRemark" FieldType="System.String" Visible="true" AllowEdit="true" Nullable="true"/>
       </Columns>
@@ -1052,29 +1044,28 @@
     <Grid EntityName="BUSProdcutDestroyDetailEntity" ViewName="vw_AllProdcutDestroyDetail" KeyField="记录ID" EmptyRows="50">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
-          <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
+          <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_UnStoreDetail</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,包装规格,包装比例,批准文号,贮藏条件,剂型,药品类别,单位,批号,生产日期,有效期至,数量</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,批号,生产日期,有效期至,数量</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
       </PopupForms>
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="药品ID"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品编号"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品名称"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="产品ID"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品编号"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品名称"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产厂商"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格型号"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格型号"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装比例"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批准文号"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="注册证号"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="贮藏条件"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="剂型"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="单位"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批号"/>
-        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产日期"/>
-        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="有效期至"/>
+        <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false" PopupForm="Product" PopupField="生产日期"/>
+        <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false" PopupForm="Product" PopupField="有效期至"/>
         <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true" PopupForm="Product" PopupField="数量"/>
         <Column Name="销毁原因" EntityField="DetailCause" FieldType="System.String" Visible="false" AllowEdit="true" Nullable="true"/>
         <Column Name="明细备注" EntityField="DetailRemark" FieldType="System.String" Visible="true" AllowEdit="true" Nullable="true"/>
@@ -1085,51 +1076,49 @@
     <Grid EntityName="BUSExceptionReportDetailEntity" ViewName="vw_AllExceptionReportDetail" KeyField="异常ID" EmptyRows="50">
       <PopupForms>
         <PopupForm Name="Product" PopStyle="DoubleClick">
-          <FormatQueryString>[药品编号] LIKE '%{0}%' OR [药品名称] LIKE '%{0}%' OR [药品名称Spell] LIKE '%{0}%'</FormatQueryString>
+          <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_LockedStoreDetail</ViewName>
-          <PrimaryField>药品ID</PrimaryField>
-          <Fields>药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,包装规格,包装比例,批准文号,贮藏条件,剂型,药品类别,单位,批号,生产日期,有效期至</Fields>
+          <PrimaryField>产品ID</PrimaryField>
+          <Fields>产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,批号,生产日期,有效期至,锁定数量</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
       </PopupForms>
       <Columns>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="药品ID"/>
-        <Column Name="药品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品编号"/>
-        <Column Name="药品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="药品名称"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="产品ID"/>
+        <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品编号"/>
+        <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品名称"/>
         <Column Name="生产厂商" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="生产厂商"/>
-        <Column Name="规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格"/>
-        <Column Name="包装规格" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格"/>
+        <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格型号"/>
+        <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格型号"/>
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装比例"/>
-        <Column Name="批准文号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批准文号"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="注册证号"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="贮藏条件"/>
-        <Column Name="剂型" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="剂型"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="单位"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false" Nullable="true" PopupForm="Product" PopupField="批号"/>
         <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" Nullable="true" PopupForm="Product" PopupField="生产日期"/>
         <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" AllowEdit="false" Nullable="true" PopupForm="Product" PopupField="有效期至"/>
-        <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true"/>
+        <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true" PopupForm="Product" PopupField="锁定数量"/>
         <Column Name="异常内容" EntityField="DetailContent" FieldType="System.String" Visible="true" AllowEdit="true" Nullable="true"/>
         <Column Name="明细备注" EntityField="DetailRemark" FieldType="System.String" Visible="true" AllowEdit="true" Nullable="true"/>
       </Columns>
     </Grid>
   </Operation>
   <Operation Name="FirstProduct">
-    <Grid EntityName="BFIProductEntity" ViewName="vw_AllFirstProductPrint" KeyField="药品ID" EmptyRows="50"/>
+    <Grid EntityName="BFIProductEntity" ViewName="vw_AllFirstProductPrint" KeyField="产品ID" EmptyRows="50"/>
     <Report>
       <Deatils>
-        <Column Name="药品ID" DataType="System.Int32" DefaultValue="1"/>
-        <Column Name="药品编号" DataType="System.String" DefaultValue="P1001"/>
-        <Column Name="药品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
+        <Column Name="产品ID" DataType="System.Int32" DefaultValue="1"/>
+        <Column Name="产品编号" DataType="System.String" DefaultValue="P1001"/>
+        <Column Name="产品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
         <Column Name="商品名称" DataType="System.String" DefaultValue="六味地黄丸"/>
         <Column Name="通用名称" DataType="System.String" DefaultValue="六味地黄丸"/>
         <Column Name="商品条码" DataType="System.String" DefaultValue="1234567890123"/>
-        <Column Name="规格" DataType="System.String" DefaultValue="9g*10丸"/>
-        <Column Name="包装规格" DataType="System.String" DefaultValue="0.9g*100丸"/>
+        <Column Name="规格型号" DataType="System.String" DefaultValue="9g*10丸"/>
+        <Column Name="包装规格型号" DataType="System.String" DefaultValue="0.9g*100丸"/>
         <Column Name="单位" DataType="System.String" DefaultValue="丸"/>
-        <Column Name="剂型" DataType="System.String" DefaultValue="丸剂"/>
-        <Column Name="药品类别" DataType="System.String" DefaultValue="中药材"/>
-        <Column Name="批准文号" DataType="System.String" DefaultValue="国药准字Z20140304"/>
+        <Column Name="产品类别" DataType="System.String" DefaultValue="中药材"/>
+        <Column Name="注册证号" DataType="System.String" DefaultValue="国药准字Z20140304"/>
         <Column Name="生产厂商" DataType="System.String" DefaultValue="北京同仁堂药业有限公司"/>
         <Column Name="效期" DataType="System.String" DefaultValue="2年"/>
         <Column Name="首次供货商" DataType="System.String" DefaultValue="首次供货商"/>
@@ -1146,79 +1135,79 @@
         <Column Name="执行标准" DataType="System.String" DefaultValue="中国药典第二部"/>
         <Column Name="商标" DataType="System.String" DefaultValue="利多新"/>
         <Column Name="性状用途" DataType="System.String" DefaultValue="本品为无色的澄明液体，主要用于治疗..."/>
-        <Column Name="药品GMP证书" DataType="System.String" DefaultValue="药品GMP证书"/>
+        <Column Name="产品GMP证书" DataType="System.String" DefaultValue="产品GMP证书"/>
         <Column Name="GMP证书编号" DataType="System.String" DefaultValue="1234566768"/>
-        <Column Name="GMP证书发证机关" DataType="System.String" DefaultValue="北京市食品药品安全局"/>
+        <Column Name="GMP证书发证机关" DataType="System.String" DefaultValue="北京市食品产品安全局"/>
         <Column Name="GMP发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
         <Column Name="GMP效期至" DataType="System.String" DefaultValue="2033-01-28"/>
         <Column Name="营业执照" DataType="System.String" DefaultValue="营业执照"/>
         <Column Name="营业执照编号" DataType="System.String" DefaultValue="87654323"/>
-        <Column Name="营业执照发证机关" DataType="System.String" DefaultValue="北京市食品药品安全局"/>
+        <Column Name="营业执照发证机关" DataType="System.String" DefaultValue="北京市食品产品安全局"/>
         <Column Name="营业执照发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
         <Column Name="营业执照效期至" DataType="System.String" DefaultValue="2033-01-28"/>
-        <Column Name="药品注册证" DataType="System.String" DefaultValue="药品注册证"/>
-        <Column Name="药品注册证编号" DataType="System.String" DefaultValue="1234566768"/>
-        <Column Name="药品注册证发证机关" DataType="System.String" DefaultValue="北京市食品药品安全局"/>
-        <Column Name="药品注册证发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
-        <Column Name="药品注册证效期至" DataType="System.String" DefaultValue="2033-01-28"/>
+        <Column Name="产品注册证" DataType="System.String" DefaultValue="产品注册证"/>
+        <Column Name="产品注册证编号" DataType="System.String" DefaultValue="1234566768"/>
+        <Column Name="产品注册证发证机关" DataType="System.String" DefaultValue="北京市食品产品安全局"/>
+        <Column Name="产品注册证发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
+        <Column Name="产品注册证效期至" DataType="System.String" DefaultValue="2033-01-28"/>
         <Column Name="委托生产批件" DataType="System.String" DefaultValue="委托生产批件"/>
         <Column Name="委托生产批件编号" DataType="System.String" DefaultValue="1234566768"/>
-        <Column Name="委托生产批件发证机关" DataType="System.String" DefaultValue="北京市食品药品安全局"/>
+        <Column Name="委托生产批件发证机关" DataType="System.String" DefaultValue="北京市食品产品安全局"/>
         <Column Name="委托生产批件发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
         <Column Name="委托生产批件效期至" DataType="System.String" DefaultValue="2033-01-28"/>
-        <Column Name="药品生产许可证" DataType="System.String" DefaultValue="药品生产许可证"/>
-        <Column Name="药品生产许可证编号" DataType="System.String" DefaultValue="1234566768"/>
-        <Column Name="药品生产许可证发证机关" DataType="System.String" DefaultValue="北京市食品药品安全局"/>
-        <Column Name="药品生产许可证发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
-        <Column Name="药品生产许可证效期至" DataType="System.String" DefaultValue="2033-01-28"/>
-        <Column Name="药品标签" DataType="System.String" DefaultValue="药品标签"/>
-        <Column Name="药品标签编号" DataType="System.String" DefaultValue="1234566768"/>
-        <Column Name="药品标签发证机关" DataType="System.String" DefaultValue="北京市食品药品安全局"/>
-        <Column Name="药品标签发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
-        <Column Name="药品标签效期至" DataType="System.String" DefaultValue="2033-01-28"/>
+        <Column Name="产品生产许可证" DataType="System.String" DefaultValue="产品生产许可证"/>
+        <Column Name="产品生产许可证编号" DataType="System.String" DefaultValue="1234566768"/>
+        <Column Name="产品生产许可证发证机关" DataType="System.String" DefaultValue="北京市食品产品安全局"/>
+        <Column Name="产品生产许可证发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
+        <Column Name="产品生产许可证效期至" DataType="System.String" DefaultValue="2033-01-28"/>
+        <Column Name="产品标签" DataType="System.String" DefaultValue="产品标签"/>
+        <Column Name="产品标签编号" DataType="System.String" DefaultValue="1234566768"/>
+        <Column Name="产品标签发证机关" DataType="System.String" DefaultValue="北京市食品产品安全局"/>
+        <Column Name="产品标签发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
+        <Column Name="产品标签效期至" DataType="System.String" DefaultValue="2033-01-28"/>
         <Column Name="说明书" DataType="System.String" DefaultValue="说明书"/>
         <Column Name="说明书编号" DataType="System.String" DefaultValue="1234566768"/>
-        <Column Name="说明书发证机关" DataType="System.String" DefaultValue="北京市食品药品安全局"/>
+        <Column Name="说明书发证机关" DataType="System.String" DefaultValue="北京市食品产品安全局"/>
         <Column Name="说明书发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
         <Column Name="说明书效期至" DataType="System.String" DefaultValue="2033-01-28"/>
         <Column Name="外包装" DataType="System.String" DefaultValue="外包装"/>
         <Column Name="外包装编号" DataType="System.String" DefaultValue="1234566768"/>
-        <Column Name="外包装发证机关" DataType="System.String" DefaultValue="北京市食品药品安全局"/>
+        <Column Name="外包装发证机关" DataType="System.String" DefaultValue="北京市食品产品安全局"/>
         <Column Name="外包装发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
         <Column Name="外包装效期至" DataType="System.String" DefaultValue="2033-01-28"/>
         <Column Name="检验报告" DataType="System.String" DefaultValue="检验报告"/>
         <Column Name="检验报告编号" DataType="System.String" DefaultValue="1234566768"/>
-        <Column Name="检验报告发证机关" DataType="System.String" DefaultValue="北京市食品药品安全局"/>
+        <Column Name="检验报告发证机关" DataType="System.String" DefaultValue="北京市食品产品安全局"/>
         <Column Name="检验报告发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
         <Column Name="检验报告效期至" DataType="System.String" DefaultValue="2033-01-28"/>
         <Column Name="检验标准和检验方法" DataType="System.String" DefaultValue="检验标准和检验方法"/>
         <Column Name="检验标准和检验方法编号" DataType="System.String" DefaultValue="1234566768"/>
-        <Column Name="检验标准和检验方法发证机关" DataType="System.String" DefaultValue="北京市食品药品安全局"/>
+        <Column Name="检验标准和检验方法发证机关" DataType="System.String" DefaultValue="北京市食品产品安全局"/>
         <Column Name="检验标准和检验方法发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
         <Column Name="检验标准和检验方法效期至" DataType="System.String" DefaultValue="2033-01-28"/>
-        <Column Name="进口药品注册证" DataType="System.String" DefaultValue="进口药品注册证"/>
-        <Column Name="进口药品注册证编号" DataType="System.String" DefaultValue="1234566768"/>
-        <Column Name="进口药品注册证发证机关" DataType="System.String" DefaultValue="北京市食品药品安全局"/>
-        <Column Name="进口药品注册证发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
-        <Column Name="进口药品注册证效期至" DataType="System.String" DefaultValue="2033-01-28"/>
+        <Column Name="进口产品注册证" DataType="System.String" DefaultValue="进口产品注册证"/>
+        <Column Name="进口产品注册证编号" DataType="System.String" DefaultValue="1234566768"/>
+        <Column Name="进口产品注册证发证机关" DataType="System.String" DefaultValue="北京市食品产品安全局"/>
+        <Column Name="进口产品注册证发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
+        <Column Name="进口产品注册证效期至" DataType="System.String" DefaultValue="2033-01-28"/>
         <Column Name="医药产品注册证" DataType="System.String" DefaultValue="医药产品注册证"/>
         <Column Name="医药产品注册证编号" DataType="System.String" DefaultValue="1234566768"/>
-        <Column Name="医药产品注册证发证机关" DataType="System.String" DefaultValue="北京市食品药品安全局"/>
+        <Column Name="医药产品注册证发证机关" DataType="System.String" DefaultValue="北京市食品产品安全局"/>
         <Column Name="医药产品注册证发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
         <Column Name="医药产品注册证效期至" DataType="System.String" DefaultValue="2033-01-28"/>
-        <Column Name="进口药品检验报告单" DataType="System.String" DefaultValue="进口药品检验报告单"/>
-        <Column Name="进口药品检验报告单编号" DataType="System.String" DefaultValue="1234566768"/>
-        <Column Name="进口药品检验报告单发证机关" DataType="System.String" DefaultValue="北京市食品药品安全局"/>
-        <Column Name="进口药品检验报告单发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
-        <Column Name="进口药品检验报告单效期至" DataType="System.String" DefaultValue="2033-01-28"/>
-        <Column Name="进口药品通关单" DataType="System.String" DefaultValue="进口药品通关单"/>
-        <Column Name="进口药品通关单编号" DataType="System.String" DefaultValue="1234566768"/>
-        <Column Name="进口药品通关单发证机关" DataType="System.String" DefaultValue="北京市食品药品安全局"/>
-        <Column Name="进口药品通关单发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
-        <Column Name="进口药品通关单效期至" DataType="System.String" DefaultValue="2033-01-28"/>
+        <Column Name="进口产品检验报告单" DataType="System.String" DefaultValue="进口产品检验报告单"/>
+        <Column Name="进口产品检验报告单编号" DataType="System.String" DefaultValue="1234566768"/>
+        <Column Name="进口产品检验报告单发证机关" DataType="System.String" DefaultValue="北京市食品产品安全局"/>
+        <Column Name="进口产品检验报告单发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
+        <Column Name="进口产品检验报告单效期至" DataType="System.String" DefaultValue="2033-01-28"/>
+        <Column Name="进口产品通关单" DataType="System.String" DefaultValue="进口产品通关单"/>
+        <Column Name="进口产品通关单编号" DataType="System.String" DefaultValue="1234566768"/>
+        <Column Name="进口产品通关单发证机关" DataType="System.String" DefaultValue="北京市食品产品安全局"/>
+        <Column Name="进口产品通关单发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
+        <Column Name="进口产品通关单效期至" DataType="System.String" DefaultValue="2033-01-28"/>
         <Column Name="其他" DataType="System.String" DefaultValue="其他"/>
         <Column Name="其他编号" DataType="System.String" DefaultValue="1234566768"/>
-        <Column Name="其他发证机关" DataType="System.String" DefaultValue="北京市食品药品安全局"/>
+        <Column Name="其他发证机关" DataType="System.String" DefaultValue="北京市食品产品安全局"/>
         <Column Name="其他发证日期" DataType="System.String" DefaultValue="2013-01-28"/>
         <Column Name="其他效期至" DataType="System.String" DefaultValue="2033-01-28"/>
         <Column Name="进货价" DataType="System.Double" DefaultValue="10"/>
@@ -1253,15 +1242,15 @@
         <Column Name="营业执照发证日期" DataType="System.String" DefaultValue="营业执照发证日期"/>
         <Column Name="营业执照效期至" DataType="System.String" DefaultValue="营业执照效期至"/>
         <Column Name="营业执照备注" DataType="System.String" DefaultValue="营业执照备注"/>
-        <Column Name="药品经营许可证" DataType="System.String" DefaultValue="药品经营许可证"/>
-        <Column Name="药品经营许可证编号" DataType="System.String" DefaultValue="药品经营许可证编号"/>
-        <Column Name="药品经营许可证发证机关" DataType="System.String" DefaultValue="药品经营许可证发证机关"/>
-        <Column Name="药品经营许可证发证日期" DataType="System.String" DefaultValue="药品经营许可证发证日期"/>
-        <Column Name="药品经营许可证效期至" DataType="System.String" DefaultValue="药品经营许可证效期至"/>
-        <Column Name="药品经营许可证备注" DataType="System.String" DefaultValue="药品经营许可证备注"/>
-        <Column Name="药品GSPGMP证书" DataType="System.String" DefaultValue="药品GSPGMP证书"/>
-        <Column Name="药品GSPGMP证书编号" DataType="System.String" DefaultValue="药品GSPGMP证书编号"/>
-        <Column Name="药品GSPGMP证书效期至" DataType="System.String" DefaultValue="药品GSPGMP证书效期至"/>
+        <Column Name="产品经营许可证" DataType="System.String" DefaultValue="产品经营许可证"/>
+        <Column Name="产品经营许可证编号" DataType="System.String" DefaultValue="产品经营许可证编号"/>
+        <Column Name="产品经营许可证发证机关" DataType="System.String" DefaultValue="产品经营许可证发证机关"/>
+        <Column Name="产品经营许可证发证日期" DataType="System.String" DefaultValue="产品经营许可证发证日期"/>
+        <Column Name="产品经营许可证效期至" DataType="System.String" DefaultValue="产品经营许可证效期至"/>
+        <Column Name="产品经营许可证备注" DataType="System.String" DefaultValue="产品经营许可证备注"/>
+        <Column Name="产品GSPGMP证书" DataType="System.String" DefaultValue="产品GSPGMP证书"/>
+        <Column Name="产品GSPGMP证书编号" DataType="System.String" DefaultValue="产品GSPGMP证书编号"/>
+        <Column Name="产品GSPGMP证书效期至" DataType="System.String" DefaultValue="产品GSPGMP证书效期至"/>
         <Column Name="法人委托书" DataType="System.String" DefaultValue="法人委托书"/>
         <Column Name="法人委托书编号vs姓名" DataType="System.String" DefaultValue="法人委托书编号vs姓名"/>
         <Column Name="法人委托书发证机关vs身份证号" DataType="System.String" DefaultValue="法人委托书发证机关vs身份证号"/>
@@ -1293,15 +1282,15 @@
         <Column Name="营业执照发证日期" DataType="System.String" DefaultValue="营业执照发证日期"/>
         <Column Name="营业执照效期至" DataType="System.String" DefaultValue="营业执照效期至"/>
         <Column Name="营业执照备注" DataType="System.String" DefaultValue="营业执照备注"/>
-        <Column Name="药品经营许可证" DataType="System.String" DefaultValue="药品经营许可证"/>
-        <Column Name="药品经营许可证编号" DataType="System.String" DefaultValue="药品经营许可证编号"/>
-        <Column Name="药品经营许可证发证机关" DataType="System.String" DefaultValue="药品经营许可证发证机关"/>
-        <Column Name="药品经营许可证发证日期" DataType="System.String" DefaultValue="药品经营许可证发证日期"/>
-        <Column Name="药品经营许可证效期至" DataType="System.String" DefaultValue="药品经营许可证效期至"/>
-        <Column Name="药品经营许可证备注" DataType="System.String" DefaultValue="药品经营许可证备注"/>
-        <Column Name="药品GSPGMP证书" DataType="System.String" DefaultValue="药品GSPGMP证书"/>
-        <Column Name="药品GSPGMP证书编号" DataType="System.String" DefaultValue="药品GSPGMP证书编号"/>
-        <Column Name="药品GSPGMP证书效期至" DataType="System.String" DefaultValue="药品GSPGMP证书效期至"/>
+        <Column Name="产品经营许可证" DataType="System.String" DefaultValue="产品经营许可证"/>
+        <Column Name="产品经营许可证编号" DataType="System.String" DefaultValue="产品经营许可证编号"/>
+        <Column Name="产品经营许可证发证机关" DataType="System.String" DefaultValue="产品经营许可证发证机关"/>
+        <Column Name="产品经营许可证发证日期" DataType="System.String" DefaultValue="产品经营许可证发证日期"/>
+        <Column Name="产品经营许可证效期至" DataType="System.String" DefaultValue="产品经营许可证效期至"/>
+        <Column Name="产品经营许可证备注" DataType="System.String" DefaultValue="产品经营许可证备注"/>
+        <Column Name="产品GSPGMP证书" DataType="System.String" DefaultValue="产品GSPGMP证书"/>
+        <Column Name="产品GSPGMP证书编号" DataType="System.String" DefaultValue="产品GSPGMP证书编号"/>
+        <Column Name="产品GSPGMP证书效期至" DataType="System.String" DefaultValue="产品GSPGMP证书效期至"/>
         <Column Name="法人委托书" DataType="System.String" DefaultValue="法人委托书"/>
         <Column Name="法人委托书编号vs姓名" DataType="System.String" DefaultValue="法人委托书编号vs姓名"/>
         <Column Name="法人委托书发证机关vs身份证号" DataType="System.String" DefaultValue="法人委托书发证机关vs身份证号"/>
@@ -1385,9 +1374,9 @@
         <Column Name="价格明细ID" EntityField="PriceListItemID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
         <Column Name="价格规则名称" EntityField="PriceListItemName" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="优先级" EntityField="Sequence" FieldType="System.Int32" Visible="true" AllowEdit="false"/>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
-        <Column Name="药品名称" EntityField="ProductName" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品类型" EntityField="ProductCategory" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
+        <Column Name="产品名称" EntityField="ProductName" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品类型" EntityField="ProductCategory" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="最小数量" EntityField="MinQuantity" FieldType="System.Int32" Visible="true" AllowEdit="false"/>
         <Column Name="基于" EntityField="BasePriceCategoryName" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="折扣点数" EntityField="PriceDiscount" FieldType="System.Double" Visible="true" AllowEdit="false"/>
@@ -1403,9 +1392,9 @@
         <Column Name="价格明细ID" EntityField="PriceListItemID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
         <Column Name="价格规则名称" EntityField="PriceListItemName" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="优先级" EntityField="Sequence" FieldType="System.Int32" Visible="true" AllowEdit="false"/>
-        <Column Name="药品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
-        <Column Name="药品名称" EntityField="ProductName" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="药品类型" EntityField="ProductCategory" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品ID" EntityField="ProductID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
+        <Column Name="产品名称" EntityField="ProductName" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="产品类型" EntityField="ProductCategory" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="最小数量" EntityField="MinQuantity" FieldType="System.Int32" Visible="true" AllowEdit="false"/>
         <Column Name="基于" EntityField="BasePriceCategoryName" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="折扣点数" EntityField="PriceDiscount" FieldType="System.Double" Visible="true" AllowEdit="false"/>

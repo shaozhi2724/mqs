@@ -58,6 +58,18 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     this.txtReceivePerson.Text = GlobalItem.g_CurrentUser.UserName;
                 }
             }
+
+            if (txtBillTypeName.Text.Trim() == "采购进货")
+            {
+                for (int i = 0; i < popupGrid.PopupView.Columns.Count; i++)
+                {
+                    string ColumnName = popupGrid.PopupView.Columns[i].ToString();
+                    if (ColumnName.Contains("批号") || ColumnName.Contains("生产日期") || ColumnName.Contains("有效期至"))
+                    {
+                        popupGrid.PopupView.Columns[i].Visible = false;
+                    }
+                }
+            }
             //RenderRequiredFields();
         }
 
@@ -614,6 +626,18 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 this.txtDealerAddress.Text = (this.txtBillCode.EditData as DataRow)["往来单位仓库地址"].ToString();
                 this.txtCarryCompnay.Focus();
 
+                if (txtBillTypeName.Text.Trim() == "采购进货")
+                {
+                    for (int i = 0; i < popupGrid.PopupView.Columns.Count; i++)
+                    {
+                        string ColumnName = popupGrid.PopupView.Columns[i].ToString();
+                        if (ColumnName.Contains("批号") || ColumnName.Contains("生产日期") || ColumnName.Contains("有效期至"))
+                        {
+                            popupGrid.PopupView.Columns[i].Visible = false;
+                        }
+                    }
+                }
+
                 object id = (this.txtBillCode.EditData as DataRow)["订单ID"].ToString();
 
                 if (id != null)
@@ -668,7 +692,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
         private void btnProductQualification_Click(object sender, EventArgs e)
         {
-            object id = this.popupGrid.PopupView.GetFocusedRowCellValue("药品ID");
+            object id = this.popupGrid.PopupView.GetFocusedRowCellValue("产品ID");
             if (id != null && id != DBNull.Value)
             {
                 using (FrmQualification frmQualification = new FrmQualification(Convert.ToInt32(id), "BFI_Product", "ProductID", "ProductCertificate"))
@@ -727,12 +751,12 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
         }
 
         /// <summary>
-        /// 验证药品的电子档案
+        /// 验证产品的电子档案
         /// </summary>
         /// <returns></returns>
         private bool ValidateProductQualification()
         {
-            //获取所有药品的过期证书
+            //获取所有产品的过期证书
             ViewCollection<AllQualificationView> qualifications = new ViewCollection<AllQualificationView>();
 
             PredicateExpression pe = new PredicateExpression();
@@ -743,7 +767,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             int rowCount = this.popupGrid.PopupView.RowCount;
             for (int i = 0; i < rowCount; i++)
             {
-                object id = this.popupGrid.PopupView.GetRowCellValue(i, "药品ID");
+                object id = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
                 if (id != null && id != DBNull.Value)
                 {
                     bool isHava = false;
@@ -756,7 +780,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         }
                     }
 
-                    if (isHava)//存在则药品过期
+                    if (isHava)//存在则产品过期
                     {
                         XtraMessageBox.Show(String.Format("表格中第{0}行药品的电子档案存在已过期档案，无法生成收货单，请修改！", (i + 1)), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;

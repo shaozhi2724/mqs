@@ -30,6 +30,10 @@ namespace DQS.AppViews.QualityDocument.ProductManager
             this.cbxPhysicType.InitSource();
             this.cbxStockCondition.InitSource();
             this.cbxProductStyle.InitSource();
+            this.cboPurchaseTax.InitSource();
+            this.cboSaleTax.InitSource();
+            this.cboPurchaseTax.SelectedValue = 3;
+            this.cboSaleTax.SelectedValue = 3;
             this.cbxProductCycleStyle.InitSource();
             this.cbxIsForeignDrug.Checked = false;
             if (this.Tag != null)
@@ -144,16 +148,28 @@ WHERE UP.ProductID = {0}", productID);
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (!this.ftPanel.ValidateIsNullFields()) return;
-            if (null == cbxPhysicType.SelectedValue)
-            {
-                XtraMessageBox.Show(cbxPhysicType.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                cbxPhysicType.Focus();
-                return;
-            }
+            //if (null == cbxPhysicType.SelectedValue)
+            //{
+            //    XtraMessageBox.Show(cbxPhysicType.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //    cbxPhysicType.Focus();
+            //    return;
+            //}
             if (null == cbxProductStyle.SelectedValue)
             {
                 XtraMessageBox.Show(cbxProductStyle.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 cbxProductStyle.Focus();
+                return;
+            }
+            if (null == cboPurchaseTax.SelectedValue)
+            {
+                XtraMessageBox.Show(cboPurchaseTax.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                cboPurchaseTax.Focus();
+                return;
+            }
+            if (null == cboSaleTax.SelectedValue)
+            {
+                XtraMessageBox.Show(cboSaleTax.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                cboSaleTax.Focus();
                 return;
             }
             if (null == cbxStockCondition.SelectedValue)
@@ -192,7 +208,7 @@ WHERE UP.ProductID = {0}", productID);
 
                     if (data.Rows.Count <= 0)
                     {
-                        XtraMessageBox.Show("系统未设置您的审批流程，无法创建首营药品。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        XtraMessageBox.Show("系统未设置您的审批流程，无法创建首营产品。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
 
@@ -205,8 +221,8 @@ WHERE UP.ProductID = {0}", productID);
                     approveEntity.InternalNo = "SYYP" + DateTime.Now.ToString("yyyyMMddHHmmss");
                     approveEntity.DocumentCode = "FirstProduct";
                     approveEntity.BillCode = entity.ProductCode;
-                    approveEntity.ApproveTitle = "首营药品，编号：" + entity.ProductCode;
-                    approveEntity.ApprovalContent = String.Format("首营药品 {0} 申请审批。", entity.ProductName);
+                    approveEntity.ApproveTitle = "首营产品，编号：" + entity.ProductCode;
+                    approveEntity.ApprovalContent = String.Format("首营产品 {0} 申请审批。", entity.ProductName);
                     approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     approveEntity.CreateDate = DateTime.Now;
                     approveEntity.IsApprovaled = false;
@@ -243,7 +259,7 @@ WHERE UP.ProductID = {0}", productID);
                         notification.TargetID = entity.ProductID;
                         notification.TargetCode = entity.ProductCode;
                         notification.ApproveCode = approveCode;
-                        notification.Message = string.Format("{0} 于 {1} 申请首营药品（名称 {2}）。请您审批。", userName,
+                        notification.Message = string.Format("{0} 于 {1} 申请首营产品（名称 {2}）。请您审批。", userName,
                             DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.ProductName);
                         notification.OwnerUserID = approvalUserId;
                         notification.Save();
@@ -253,7 +269,7 @@ WHERE UP.ProductID = {0}", productID);
                 }
                 else
                 {
-                    XtraMessageBox.Show("药品编号已存在。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    XtraMessageBox.Show("产品编号已存在。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
             }
@@ -280,6 +296,16 @@ WHERE UP.ProductID = {0}", productID);
             if (!entity.IsNullField("ProductStyleID"))
             {
                 this.cbxProductStyle.SelectedValue = entity.ProductStyleID;
+            }
+
+            if (!entity.IsNullField("PurchaseTaxID"))
+            {
+                this.cboPurchaseTax.SelectedValue = entity.PurchaseTaxID;
+            }
+
+            if (!entity.IsNullField("SaleTaxID"))
+            {
+                this.cboSaleTax.SelectedValue = entity.SaleTaxID;
             }
 
             if (!entity.IsNullField("StockCondition"))
@@ -348,6 +374,16 @@ WHERE UP.ProductID = {0}", productID);
             {
                 entity.ProductStyleID = Convert.ToInt32(this.cbxProductStyle.SelectedValue);
                 entity.ProductStyle = this.cbxProductStyle.Text.Trim();
+            }
+            if (this.cboPurchaseTax.SelectedValue != null)
+            {
+                entity.PurchaseTaxID = Convert.ToInt32(this.cboPurchaseTax.SelectedValue);
+                entity.PurchaseTax = this.cboPurchaseTax.Text.Trim();
+            }
+            if (this.cboSaleTax.SelectedValue != null)
+            {
+                entity.SaleTaxID = Convert.ToInt32(this.cboSaleTax.SelectedValue);
+                entity.SaleTax = this.cboSaleTax.Text.Trim();
             }
             if (this.cbxProductCycleStyle.SelectedValue != null)
             {

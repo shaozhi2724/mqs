@@ -300,7 +300,6 @@
             // 
             this.btnSaveNew.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveNew.Appearance.Options.UseFont = true;
-            this.btnSaveNew.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnSaveNew.Location = new System.Drawing.Point(74, 268);
             this.btnSaveNew.Name = "btnSaveNew";
             this.btnSaveNew.Size = new System.Drawing.Size(70, 27);
@@ -381,7 +380,7 @@
             this.xtbBillStyle.Controls.Add(this.panelControl1);
             this.xtbBillStyle.Name = "xtbBillStyle";
             this.xtbBillStyle.Size = new System.Drawing.Size(787, 440);
-            this.xtbBillStyle.Text = "药品开单类别";
+            this.xtbBillStyle.Text = "产品开单类别";
             // 
             // panelProductStyle
             // 

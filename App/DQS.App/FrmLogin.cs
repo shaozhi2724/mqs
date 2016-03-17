@@ -49,6 +49,9 @@ namespace DQS.App
             this.lblUserError.Text = "";
             this.lblPasswordError.Text = "";
             this.Text += " - V " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            BFIEnterpriseEntity enterprise = new BFIEnterpriseEntity { EnterpriseID = 1 };
+            enterprise.Fetch();
+            this.Text += " - " + enterprise.EnterpriseName;
         }
 
         private void txtUserCode_TextChanged(object sender, EventArgs e)
@@ -123,6 +126,13 @@ namespace DQS.App
                     GlobalItem.g_CurrentEmployee = employee;
                 }
             }
+
+            SYSDateLogEntity sysDateLog = new SYSDateLogEntity();
+            sysDateLog.UserName = GlobalItem.g_CurrentUser.UserName;
+            sysDateLog.Operate = "登录系统";
+            sysDateLog.OperateDate = DateTime.Now;
+            sysDateLog.Save();
+
             this.Close();
         }
 

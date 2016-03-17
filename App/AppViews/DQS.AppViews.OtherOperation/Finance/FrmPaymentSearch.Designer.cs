@@ -74,6 +74,7 @@
             this.gridView.GridControl = this.gridControl;
             this.gridView.IndicatorWidth = 40;
             this.gridView.Name = "gridView";
+            this.gridView.OptionsView.ShowFooter = true;
             this.gridView.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
             // 
             // panelControl1
@@ -104,6 +105,7 @@
             this.lblTotalPrice.Name = "lblTotalPrice";
             this.lblTotalPrice.Size = new System.Drawing.Size(0, 14);
             this.lblTotalPrice.TabIndex = 14;
+            this.lblTotalPrice.Visible = false;
             // 
             // labelControl8
             // 
@@ -112,6 +114,7 @@
             this.labelControl8.Size = new System.Drawing.Size(60, 14);
             this.labelControl8.TabIndex = 15;
             this.labelControl8.Text = "查询总计：";
+            this.labelControl8.Visible = false;
             // 
             // btnReSet
             // 

@@ -126,7 +126,7 @@
             // 
             // txtProductCode
             // 
-            this.txtProductCode.FormatQueryString = "[药品名称] LIKE \'%{0}%\' OR [药品名称Spell] LIKE \'%{0}%\'";
+            this.txtProductCode.FormatQueryString = "[产品名称] LIKE \'%{0}%\' OR [产品名称Spell] LIKE \'%{0}%\'";
             this.txtProductCode.Location = new System.Drawing.Point(479, 12);
             this.txtProductCode.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtProductCode.Name = "txtProductCode";
@@ -137,11 +137,11 @@
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.txtProductCode;
-            this.layoutControlItem2.CustomizationFormText = "药品名称：";
+            this.layoutControlItem2.CustomizationFormText = "产品名称：";
             this.layoutControlItem2.Location = new System.Drawing.Point(404, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(405, 42);
-            this.layoutControlItem2.Text = "药品名称：";
+            this.layoutControlItem2.Text = "产品名称：";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(60, 14);
             // 
             // FrmPriceOfDealer

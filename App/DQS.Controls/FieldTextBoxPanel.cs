@@ -70,6 +70,7 @@ namespace DQS.Controls
                             PropertyInfo property = entityBase.GetType().GetProperty(fieldName);
                             if (null != property)
                             {
+                                if (property.PropertyType.Name == "DateTime" && field.Text.Trim() == "") { continue; }
                                 property.SetValue(entityBase, Convert.ChangeType(field.Text.Trim(), property.PropertyType), null);
                             }
 

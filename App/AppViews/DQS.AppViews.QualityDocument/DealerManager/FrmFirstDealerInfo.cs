@@ -91,6 +91,19 @@ namespace DQS.AppViews.QualityDocument.DealerManager
             base.CustomQualification();
         }
 
+        protected override void CustomProductForDealer()
+        {
+            using (FrmProductOfDealer pod = new FrmProductOfDealer())
+            {
+                object id = gvData.GetFocusedRowCellValue("单位ID");
+                if (id != null)
+                {
+                    pod.DealerID = Convert.ToInt32(id);
+                }
+                pod.ShowDialog();
+            }
+        }
+
         protected override void CustomModifyRequest()
         {
             try

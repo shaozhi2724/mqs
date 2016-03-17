@@ -434,6 +434,30 @@ namespace DQS.Module.Entities
 			set { this.SetValue("ProductRemrk", value); } 
 		}
 
+        public int PurchaseTaxID
+		{
+            get { return (int)this.GetValue("PurchaseTaxID"); }
+            set { this.SetValue("PurchaseTaxID", value); } 
+		}
+
+        public string PurchaseTax
+		{
+            get { return (string)this.GetValue("PurchaseTax"); }
+            set { this.SetValue("PurchaseTax", value); } 
+		}
+
+		public int SaleTaxID
+		{
+            get { return (int)this.GetValue("SaleTaxID"); }
+            set { this.SetValue("SaleTaxID", value); } 
+		}
+
+        public string SaleTax
+		{
+            get { return (string)this.GetValue("SaleTax"); }
+            set { this.SetValue("SaleTax", value); } 
+		}
+
 		public string Reservation1
 		{
 			get { return (string)this.GetValue("Reservation1"); } 
@@ -568,6 +592,10 @@ namespace DQS.Module.Entities
 			this.Fields.Add("LastModifyUserID", BFIProductEntityFields.LastModifyUserID);
 			this.Fields.Add("LastModifyDate", BFIProductEntityFields.LastModifyDate);
 			this.Fields.Add("ProductRemrk", BFIProductEntityFields.ProductRemrk);
+            this.Fields.Add("PurchaseTaxID", BFIProductEntityFields.PurchaseTaxID);
+            this.Fields.Add("PurchaseTax", BFIProductEntityFields.PurchaseTax);
+            this.Fields.Add("SaleTaxID", BFIProductEntityFields.SaleTaxID);
+            this.Fields.Add("SaleTax", BFIProductEntityFields.SaleTax);
 			this.Fields.Add("Reservation1", BFIProductEntityFields.Reservation1);
 			this.Fields.Add("Reservation2", BFIProductEntityFields.Reservation2);
 			this.Fields.Add("Reservation3", BFIProductEntityFields.Reservation3);
@@ -932,54 +960,74 @@ namespace DQS.Module.Entities
 			get { return new EntityField("BFI_Product", 69, "ProductRemrk", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
+        public static EntityField PurchaseTaxID
+		{
+            get { return new EntityField("BFI_Product", 70, "PurchaseTaxID", SqlDbType.Int, false, false, false, true); }
+		}
+
+        public static EntityField PurchaseTax
+		{
+            get { return new EntityField("BFI_Product", 71, "PurchaseTax", SqlDbType.NVarChar, false, false, false, true); }
+		}
+
+		public static EntityField SaleTaxID
+		{
+            get { return new EntityField("BFI_Product", 72, "SaleTaxID", SqlDbType.Int, false, false, false, true); }
+		}
+
+		public static EntityField SaleTax
+		{
+            get { return new EntityField("BFI_Product", 73, "SaleTax", SqlDbType.NVarChar, false, false, false, true); }
+		}
+
 		public static EntityField Reservation1
 		{
-			get { return new EntityField("BFI_Product", 70, "Reservation1", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BFI_Product", 74, "Reservation1", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation2
 		{
-			get { return new EntityField("BFI_Product", 71, "Reservation2", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BFI_Product", 75, "Reservation2", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation3
 		{
-			get { return new EntityField("BFI_Product", 72, "Reservation3", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BFI_Product", 76, "Reservation3", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation4
 		{
-			get { return new EntityField("BFI_Product", 73, "Reservation4", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BFI_Product", 77, "Reservation4", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation5
 		{
-			get { return new EntityField("BFI_Product", 74, "Reservation5", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BFI_Product", 78, "Reservation5", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation6
 		{
-			get { return new EntityField("BFI_Product", 75, "Reservation6", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BFI_Product", 79, "Reservation6", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation7
 		{
-			get { return new EntityField("BFI_Product", 76, "Reservation7", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BFI_Product", 80, "Reservation7", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation8
 		{
-			get { return new EntityField("BFI_Product", 77, "Reservation8", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BFI_Product", 81, "Reservation8", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation9
 		{
-			get { return new EntityField("BFI_Product", 78, "Reservation9", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BFI_Product", 82, "Reservation9", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation10
 		{
-			get { return new EntityField("BFI_Product", 79, "Reservation10", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BFI_Product", 83, "Reservation10", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 	}
@@ -1129,6 +1177,14 @@ namespace DQS.Module.Entities
 		LastModifyDate,
 
 		ProductRemrk,
+
+        PurchaseTaxID,
+
+        PurchaseTax,
+
+        SaleTaxID,
+
+        SaleTax,
 
 		Reservation1,
 

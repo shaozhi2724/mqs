@@ -43,14 +43,14 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         protected override void CustomQualification()
         {
-            object id = gvData.GetFocusedRowCellValue("药品ID");
+            object id = gvData.GetFocusedRowCellValue("产品ID");
             if (id != null)
             {
                 using (FrmQualification frmQualification = new FrmQualification(Convert.ToInt32(id), "BFI_Product", "ProductID", "ProductCertificate"))
                 {
                     frmQualification.VisbleBarItem();
                     object approveStatus = this.gvData.GetFocusedRowCellValue("审批状态");
-                    object productCode = this.gvData.GetFocusedRowCellValue("药品编号");
+                    object productCode = this.gvData.GetFocusedRowCellValue("产品编号");
                     if (productCode != null && productCode != DBNull.Value && approveStatus != null && approveStatus != DBNull.Value)
                     {
                         if (approveStatus.ToString() == "审批结束")
@@ -115,11 +115,11 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         protected override void CustomApprove()
         {
-            object id = this.gvData.GetFocusedRowCellValue("药品ID");
+            object id = this.gvData.GetFocusedRowCellValue("产品ID");
             if (id != null && id != DBNull.Value)
             {
                 object approveStatus = this.gvData.GetFocusedRowCellValue("审批状态");
-                object productCode = this.gvData.GetFocusedRowCellValue("药品编号");
+                object productCode = this.gvData.GetFocusedRowCellValue("产品编号");
                 if (productCode != null && productCode != DBNull.Value && approveStatus != null &&
                     approveStatus != DBNull.Value)
                 {
@@ -187,7 +187,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                 DialogResult dr = base.BaseApprove();
                 if (dr == DialogResult.Yes)
                 {
-                    //更新首营药品状态
+                    //更新首营产品状态
                     BFIProductEntity product = new BFIProductEntity();
                     product.BusinessStatus = 1;
                     product.ProductID = Convert.ToInt32(id);
@@ -202,11 +202,11 @@ namespace DQS.AppViews.QualityDocument.ProductManager
         {
             try
             {
-                object id = gvData.GetFocusedRowCellValue("药品ID");
+                object id = gvData.GetFocusedRowCellValue("产品ID");
                 if (id != null)
                 {
                     object approveStatus = this.gvData.GetFocusedRowCellValue("审批状态");
-                    object productCode = this.gvData.GetFocusedRowCellValue("药品编号");
+                    object productCode = this.gvData.GetFocusedRowCellValue("产品编号");
                     if (productCode != null && productCode != DBNull.Value && approveStatus != null &&
                         approveStatus != DBNull.Value)
                     {
@@ -267,7 +267,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
         protected override void CustomDelete()
         {
             object approveStatus = this.gvData.GetFocusedRowCellValue("审批状态");
-            object productCode = this.gvData.GetFocusedRowCellValue("药品编号");
+            object productCode = this.gvData.GetFocusedRowCellValue("产品编号");
             if (productCode != null && productCode != DBNull.Value && approveStatus != null && approveStatus != DBNull.Value)
             {
                 if (approveStatus.ToString() == "审批结束")
@@ -294,8 +294,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
         }
         protected override void CustomProductPrice()
         {
-            object productID = gvData.GetFocusedRowCellValue("药品ID");
-            object productName = gvData.GetFocusedRowCellValue("药品名称");
+            object productID = gvData.GetFocusedRowCellValue("产品ID");
+            object productName = gvData.GetFocusedRowCellValue("产品名称");
             if (productID != null)
             {
                 using (FrmSinglePrice2 frmSinglePrice = new FrmSinglePrice2(Convert.ToInt32(productID), productName.ToString()))
@@ -311,11 +311,11 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         protected override void CustomPrint()
         {
-            //object productID = gvData.GetFocusedRowCellValue("药品ID");
+            //object productID = gvData.GetFocusedRowCellValue("产品ID");
             //if (productID != null)
             //{
-            //    base.SinglePrint("首营药品", "FirstProduct", "药品ID = " + productID);
-            //    //base.SinglePrint("首营药品", int.Parse(productID.ToString()));
+            //    base.SinglePrint("首营产品", "FirstProduct", "产品ID = " + productID);
+            //    //base.SinglePrint("首营产品", int.Parse(productID.ToString()));
             //}
 
             base.CustomPrint();

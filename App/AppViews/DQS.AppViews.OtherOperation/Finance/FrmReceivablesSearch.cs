@@ -28,14 +28,7 @@ namespace DQS.AppViews.OtherOperation.Finance
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sqlBill = @"SELECT d.*,d.期初+d.本期应收-d.本期实收 AS [余额] FROM (
-SELECT a.DealerCode AS [编号],a.DealerName AS [客户名称],a.DealerSpell AS [客户简拼],a.ThisInventoryReceivables AS [期初],ISNULL(b.TotalPrice,0) AS [本期应收],ISNULL(c.TotalPrice,0) AS [本期实收] FROM
-(SELECT DealerCode,DealerName,DealerSpell,ThisInventoryReceivables FROM dbo.FIN_InventoryDetail WHERE DealerType = '客户') a
-FULL JOIN 
-(SELECT DealerCode,DealerName,DealerSpell,SUM(TotalPrice) AS TotalPrice FROM dbo.FIN_Receivables GROUP BY DealerCode,DealerName,DealerSpell) b ON a.DealerCode = b.DealerCode AND a.DealerName = b.DealerName
-FULL JOIN 
-(SELECT DealerCode,DealerName,DealerSpell,SUM(TotalPrice) AS TotalPrice FROM dbo.FIN_MakeCollections GROUP BY DealerCode,DealerName,DealerSpell) c ON a.DealerCode = c.DealerCode AND a.DealerName = c.DealerName) d
-WHERE (d.编号 LIKE '%" + txtDealerCode.Text.Trim() + "%' OR d.客户名称 LIKE '%" + txtDealerCode.Text.Trim() + "%' OR d.客户简拼 LIKE '%" + txtDealerCode.Text.Trim() + "%')";
+                string sqlBill = @"EXEC sp_InventoryReceivablesMakeCollections '" + txtDealerCode.Text.Trim() + "'";
 
                 SqlDataAdapter sda = new SqlDataAdapter(sqlBill, conn);
                 DataSet ds = new DataSet();
@@ -116,18 +109,7 @@ WHERE (d.编号 LIKE '%" + txtDealerCode.Text.Trim() + "%' OR d.客户名称 LIK
             decimal ablesPrice = Convert.ToDecimal(gridView.GetDataRow(gridView.FocusedRowHandle)["本期应收"]);
             decimal thisPrice = Convert.ToDecimal(gridView.GetDataRow(gridView.FocusedRowHandle)["本期实收"]);
             decimal thisAblesPrice = Convert.ToDecimal(gridView.GetDataRow(gridView.FocusedRowHandle)["余额"]);
-            string sql = @"SELECT * FROM 
-(
-SELECT MakeCollectionsCode AS [单据编号],'收款单' AS [类型],DealerCode AS [客户编号],DealerName AS [客户名称],CONVERT(NVARCHAR(60),OperateDate,23) AS [日期],0 AS [应收],TotalPrice AS [收款] FROM dbo.FIN_MakeCollections WHERE DealerCode = '{0}'
-UNION 
-SELECT BusinessBillCode,
-CASE SUBSTRING(BusinessBillCode,0,3)
-WHEN 'XS' THEN '销售单'
-WHEN 'XT' THEN '销退单'
-END
-,DealerCode,DealerName,CONVERT(NVARCHAR(60),StoreOutDate,23) AS [StoreOutDate],TotalPrice,0 FROM dbo.FIN_Receivables
-WHERE DealerCode = '{0}') a ORDER BY a.日期";
-            sql = String.Format(sql, dealerCode);
+            string sql = @" EXEC sp_InventoryReceivablesMakeCollectionsDetail '" + dealerCode + "'";
             using (FrmShowSecond fss = new FrmShowSecond())
             {
                 fss.sql = sql;

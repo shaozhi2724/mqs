@@ -236,7 +236,7 @@ namespace DQS.Controls
                 case "审批状态":
                     this.CustomApproveStatusQuery();
                     break;
-                case "药品价格":
+                case "产品价格":
                     this.CustomProductPrice();
                     break;
                 case "信息变更":
@@ -244,6 +244,9 @@ namespace DQS.Controls
                     break;
                 case "反审批":
                     this.CustomRejectApprove();
+                    break;
+                case "关联产品":
+                    this.CustomProductForDealer();
                     break;
                 default:
                     break;
@@ -403,6 +406,16 @@ namespace DQS.Controls
             return filedNames;
         }
 
+        private void SaveDataLog(string Operate)
+        {
+            SYSDateDataLogEntity sysDataLog = new SYSDateDataLogEntity();
+            sysDataLog.UserName = GlobalItem.g_CurrentUser.UserName;
+            sysDataLog.ModuleEntities = sysPage.PageName;
+            sysDataLog.Operate = Operate;
+            sysDataLog.OperateDate = DateTime.Now;
+            sysDataLog.Save();
+        }
+
         /// <summary>
         /// 自定义新建
         /// </summary>
@@ -417,6 +430,8 @@ namespace DQS.Controls
                         XtraMessageBox.Show("未设置 SingleFullClass 的值。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
+                    SaveDataLog("新建");
+                    //MessageBox.Show(sysPage.PageName.ToString());
                     XtraForm singleForm = Activator.CreateInstance(Type.GetType(sysPage.SingleFullClass)) as XtraForm;
                     DialogResult result = singleForm.ShowDialog();
                     if (result == DialogResult.OK)
@@ -450,6 +465,7 @@ namespace DQS.Controls
                         //XtraMessageBox.Show("未设置 SingleFullClass 的值。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
+                    SaveDataLog("修改");
 
                     XtraForm singleForm = Activator.CreateInstance(Type.GetType(sysPage.SingleFullClass)) as XtraForm;
                     singleForm.Tag = gvData.GetFocusedRowCellValue(sysPage.ViewPrimaryField);
@@ -522,7 +538,7 @@ namespace DQS.Controls
 
         protected virtual void CustomModifyRequest()
         {
-            
+            SaveDataLog("信息变更");
         }
         /// <summary>
         /// 自定义删除
@@ -554,6 +570,8 @@ namespace DQS.Controls
                             CustomGroup();
                         }
                     }
+
+                    SaveDataLog("删除");
                 }
                 catch (Exception ex)
                 {
@@ -571,6 +589,7 @@ namespace DQS.Controls
         /// </summary>
         protected virtual void CustomView()
         {
+            SaveDataLog("显示设置");
             List<string> filedNames = new List<string>();
             foreach (DataColumn col in this.pageNavigator.EmptySource.Columns)
             {
@@ -597,6 +616,7 @@ namespace DQS.Controls
         /// </summary>
         protected virtual void CustomHighQuery()
         {
+            SaveDataLog("高级查询");
             List<string> filedNames = new List<string>();
             foreach (DataColumn col in this.pageNavigator.EmptySource.Columns)
             {
@@ -622,8 +642,9 @@ namespace DQS.Controls
         /// </summary>
         protected virtual void CustomReset()
         {
+            SaveDataLog("重置");
             this.ClearTextEdit(this.gpcQuery);
-            if (pageNavigator.Filter.StartsWith("所属部门ID") || pageNavigator.Filter.Contains("[药品ID] IN ("))
+            if (pageNavigator.Filter.StartsWith("所属部门ID") || pageNavigator.Filter.Contains("[产品ID] IN ("))
             {
                 pageNavigator.Filter = pageNavigator.Filter.Split(' ')[0];
             }
@@ -640,6 +661,7 @@ namespace DQS.Controls
         /// </summary>
         protected virtual void CustomRefresh()
         {
+            SaveDataLog("刷新");
             CustomQuery();
         }
 
@@ -648,6 +670,7 @@ namespace DQS.Controls
         /// </summary>
         protected virtual void CustomExport()
         {
+            SaveDataLog("导出");
             using (SaveFileDialog fileDialog = new SaveFileDialog())
             {
                 if (sysPage != null)
@@ -671,20 +694,33 @@ namespace DQS.Controls
         /// </summary>
         protected virtual void CustomPrint()
         {
+            SaveDataLog("打印");
             //this.gvControl.Print();
             SinglePrint(sysPage.PageName, 0);
         }
 
         /// <summary>
-        /// 自定义药品价格（首营药品用）
+        /// 自定义产品价格（首营产品用）
         /// </summary>
-        protected virtual void CustomProductPrice() { }
+        protected virtual void CustomProductPrice()
+        {
+            SaveDataLog("产品价格");
+        }
+
+        /// <summary>
+        /// 自定义关联产品（首营供应商用）
+        /// </summary>
+        protected virtual void CustomProductForDealer()
+        {
+            SaveDataLog("关联产品");
+        }
 
         /// <summary>
         /// 自定义查询
         /// </summary>
         protected virtual void CustomQuery()
         {
+            SaveDataLog("查询");
             List<string> filters = new List<string>();
             this.GetQueryFilters(this.gpcQuery, filters);
             if (filters.Count > 0)
@@ -702,7 +738,7 @@ namespace DQS.Controls
             }
             else
             {
-                if (pageNavigator.Filter.StartsWith("所属部门ID") || pageNavigator.Filter.Contains("[药品ID] IN ("))
+                if (pageNavigator.Filter.StartsWith("所属部门ID") || pageNavigator.Filter.Contains("[产品ID] IN ("))
                 {
                     this.pageNavigator.Filter = pageNavigator.Filter.Split(' ')[0];
                 }
@@ -725,7 +761,7 @@ namespace DQS.Controls
         {
             if (filters.Count > 0)
             {
-                if (pageNavigator.Filter.StartsWith("所属部门ID") || pageNavigator.Filter.Contains("[药品ID] IN ("))
+                if (pageNavigator.Filter.StartsWith("所属部门ID") || pageNavigator.Filter.Contains("[产品ID] IN ("))
                 {
                     this.pageNavigator.Filter = pageNavigator.Filter.Split(' ')[0] + " AND " +
                                                 string.Join(" AND ", filters.ToArray());
@@ -856,6 +892,7 @@ namespace DQS.Controls
         /// </summary>
         protected virtual void CustomApprove()
         {
+            SaveDataLog("审批");
             #region 无法先调用此方法的返回值，故无用，可使用BaseApprove方法
             //if (sysPage != null)
             //{
@@ -963,6 +1000,7 @@ namespace DQS.Controls
         /// </summary>
         protected virtual void CustomApproveStatusQuery()
         {
+            SaveDataLog("审批状态");
             if (gvData.FocusedRowHandle < 0)
             {
                 return;//无数据
@@ -1008,12 +1046,14 @@ namespace DQS.Controls
         /// </summary>
         protected virtual void CustomQualification()
         {
+            SaveDataLog("电子档案");
         }
         /// <summary>
         /// 自定义电子档案
         /// </summary>
         protected virtual void CustomRejectApprove()
         {
+            SaveDataLog("反审批");
             CustomQuery();
         }
 

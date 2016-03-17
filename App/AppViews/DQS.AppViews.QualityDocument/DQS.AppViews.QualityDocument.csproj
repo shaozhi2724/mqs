@@ -113,6 +113,12 @@
     <Compile Include="DealerManager\FrmFirstDealerInfo.Designer.cs">
       <DependentUpon>FrmFirstDealerInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="DealerManager\FrmProductOfDealer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DealerManager\FrmProductOfDealer.Designer.cs">
+      <DependentUpon>FrmProductOfDealer.cs</DependentUpon>
+    </Compile>
     <Compile Include="DealerManager\FrmSalesmanInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +154,24 @@
     </Compile>
     <Compile Include="DealerManager\FrmSingleFirstDealerChange.designer.cs">
       <DependentUpon>FrmSingleFirstDealerChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EnterpriseManager\FrmEnterpriseAttachment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterpriseManager\FrmEnterpriseAttachment.Designer.cs">
+      <DependentUpon>FrmEnterpriseAttachment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EnterpriseManager\FrmEnterpriseAttachmentPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterpriseManager\FrmEnterpriseAttachmentPreview.Designer.cs">
+      <DependentUpon>FrmEnterpriseAttachmentPreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EnterpriseManager\FrmEnterpriseAttachmentProgressing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterpriseManager\FrmEnterpriseAttachmentProgressing.Designer.cs">
+      <DependentUpon>FrmEnterpriseAttachmentProgressing.cs</DependentUpon>
     </Compile>
     <Compile Include="EnterpriseManager\FrmEnterpriseInfo.cs">
       <SubType>Form</SubType>
@@ -422,6 +446,9 @@
     <EmbeddedResource Include="DealerManager\FrmFirstDealerInfo.resx">
       <DependentUpon>FrmFirstDealerInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DealerManager\FrmProductOfDealer.resx">
+      <DependentUpon>FrmProductOfDealer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DealerManager\FrmSalesmanInfo.resx">
       <DependentUpon>FrmSalesmanInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -439,6 +466,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DealerManager\FrmSingleFirstDealerChange.resx">
       <DependentUpon>FrmSingleFirstDealerChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnterpriseManager\FrmEnterpriseAttachment.resx">
+      <DependentUpon>FrmEnterpriseAttachment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnterpriseManager\FrmEnterpriseAttachmentPreview.resx">
+      <DependentUpon>FrmEnterpriseAttachmentPreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnterpriseManager\FrmEnterpriseAttachmentProgressing.resx">
+      <DependentUpon>FrmEnterpriseAttachmentProgressing.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EnterpriseManager\FrmEnterpriseInfo.resx">
       <DependentUpon>FrmEnterpriseInfo.cs</DependentUpon>
@@ -524,6 +560,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ProviderManager\FrmProviderInfoChangeRequest.resx">
@@ -683,6 +720,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\预览.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue-loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\删除.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -190,7 +190,7 @@
             this.gpcBottom.Name = "gpcBottom";
             this.gpcBottom.Size = new System.Drawing.Size(1101, 304);
             this.gpcBottom.TabIndex = 2;
-            this.gpcBottom.Text = "药品检验报告列表";
+            this.gpcBottom.Text = "产品检验报告列表";
             // 
             // gridAttachmentControl
             // 
@@ -219,7 +219,7 @@
             this.MinimizeBox = false;
             this.Name = "FrmAcceptAttachment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "药品检验报告管理器";
+            this.Text = "产品检验报告管理器";
             this.Load += new System.EventHandler(this.FrmAcceptAttachment_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlContent)).EndInit();

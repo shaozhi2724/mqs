@@ -14,22 +14,22 @@ namespace DQS.Module.Views
 {
 	public class AllFirstProductPrintView : ViewBase
 	{
-		public int 药品ID
+		public int 产品ID
 		{
-			get { return (int)this.GetValue("药品ID"); } 
-			set { this.SetValue("药品ID", value); } 
+			get { return (int)this.GetValue("产品ID"); } 
+			set { this.SetValue("产品ID", value); } 
 		}
 
-		public string 药品编号
+		public string 产品编号
 		{
-			get { return (string)this.GetValue("药品编号"); } 
-			set { this.SetValue("药品编号", value); } 
+			get { return (string)this.GetValue("产品编号"); } 
+			set { this.SetValue("产品编号", value); } 
 		}
 
-		public string 药品名称
+		public string 产品名称
 		{
-			get { return (string)this.GetValue("药品名称"); } 
-			set { this.SetValue("药品名称", value); } 
+			get { return (string)this.GetValue("产品名称"); } 
+			set { this.SetValue("产品名称", value); } 
 		}
 
 		public string 通用名称
@@ -50,10 +50,10 @@ namespace DQS.Module.Views
 			set { this.SetValue("商品条码", value); } 
 		}
 
-		public string 规格
+		public string 规格型号
 		{
-			get { return (string)this.GetValue("规格"); } 
-			set { this.SetValue("规格", value); } 
+			get { return (string)this.GetValue("规格型号"); } 
+			set { this.SetValue("规格型号", value); } 
 		}
 
 		public string 单位
@@ -64,8 +64,8 @@ namespace DQS.Module.Views
 
 		public string 包装规格
 		{
-			get { return (string)this.GetValue("包装规格"); } 
-			set { this.SetValue("包装规格", value); } 
+			get { return (string)this.GetValue("包装规格型号"); } 
+			set { this.SetValue("包装规格型号", value); } 
 		}
 
 		public string 剂型
@@ -74,16 +74,16 @@ namespace DQS.Module.Views
 			set { this.SetValue("剂型", value); } 
 		}
 
-		public string 药品类别
+		public string 产品类别
 		{
-			get { return (string)this.GetValue("药品类别"); } 
-			set { this.SetValue("药品类别", value); } 
+			get { return (string)this.GetValue("产品类别"); } 
+			set { this.SetValue("产品类别", value); } 
 		}
 
-		public string 批准文号
+		public string 注册证号
 		{
-			get { return (string)this.GetValue("批准文号"); } 
-			set { this.SetValue("批准文号", value); } 
+			get { return (string)this.GetValue("注册证号"); } 
+			set { this.SetValue("注册证号", value); } 
 		}
 
 		public string 生产厂商
@@ -140,10 +140,10 @@ namespace DQS.Module.Views
 			set { this.SetValue("联系人电话", value); } 
 		}
 
-		public bool 是否是电子监管药品
+		public bool 是否是电子监管产品
 		{
-			get { return (bool)this.GetValue("是否是电子监管药品"); } 
-			set { this.SetValue("是否是电子监管药品", value); } 
+			get { return (bool)this.GetValue("是否是电子监管产品"); } 
+			set { this.SetValue("是否是电子监管产品", value); } 
 		}
 
 		public string 监管标识条码
@@ -188,10 +188,10 @@ namespace DQS.Module.Views
 			set { this.SetValue("性状用途", value); } 
 		}
 
-		public string 药品GMP证书
+		public string 产品GMP证书
 		{
-			get { return (string)this.GetValue("药品GMP证书"); } 
-			set { this.SetValue("药品GMP证书", value); } 
+			get { return (string)this.GetValue("产品GMP证书"); } 
+			set { this.SetValue("产品GMP证书", value); } 
 		}
 
 		public string GMP证书编号
@@ -248,34 +248,34 @@ namespace DQS.Module.Views
 			set { this.SetValue("营业执照效期至", value); } 
 		}
 
-		public string 药品注册证
+		public string 产品注册证
 		{
-			get { return (string)this.GetValue("药品注册证"); } 
-			set { this.SetValue("药品注册证", value); } 
+			get { return (string)this.GetValue("产品注册证"); } 
+			set { this.SetValue("产品注册证", value); } 
 		}
 
-		public string 药品注册证编号
+		public string 产品注册证编号
 		{
-			get { return (string)this.GetValue("药品注册证编号"); } 
-			set { this.SetValue("药品注册证编号", value); } 
+			get { return (string)this.GetValue("产品注册证编号"); } 
+			set { this.SetValue("产品注册证编号", value); } 
 		}
 
-		public string 药品注册证发证机关
+		public string 产品注册证发证机关
 		{
-			get { return (string)this.GetValue("药品注册证发证机关"); } 
-			set { this.SetValue("药品注册证发证机关", value); } 
+			get { return (string)this.GetValue("产品注册证发证机关"); } 
+			set { this.SetValue("产品注册证发证机关", value); } 
 		}
 
-		public string 药品注册证发证日期
+		public string 产品注册证发证日期
 		{
-			get { return (string)this.GetValue("药品注册证发证日期"); } 
-			set { this.SetValue("药品注册证发证日期", value); } 
+			get { return (string)this.GetValue("产品注册证发证日期"); } 
+			set { this.SetValue("产品注册证发证日期", value); } 
 		}
 
-		public string 药品注册证效期至
+		public string 产品注册证效期至
 		{
-			get { return (string)this.GetValue("药品注册证效期至"); } 
-			set { this.SetValue("药品注册证效期至", value); } 
+			get { return (string)this.GetValue("产品注册证效期至"); } 
+			set { this.SetValue("产品注册证效期至", value); } 
 		}
 
 		public string 委托生产批件
@@ -308,64 +308,64 @@ namespace DQS.Module.Views
 			set { this.SetValue("委托生产批件效期至", value); } 
 		}
 
-		public string 药品生产许可证
+		public string 产品生产许可证
 		{
-			get { return (string)this.GetValue("药品生产许可证"); } 
-			set { this.SetValue("药品生产许可证", value); } 
+			get { return (string)this.GetValue("产品生产许可证"); } 
+			set { this.SetValue("产品生产许可证", value); } 
 		}
 
-		public string 药品生产许可证编号
+		public string 产品生产许可证编号
 		{
-			get { return (string)this.GetValue("药品生产许可证编号"); } 
-			set { this.SetValue("药品生产许可证编号", value); } 
+			get { return (string)this.GetValue("产品生产许可证编号"); } 
+			set { this.SetValue("产品生产许可证编号", value); } 
 		}
 
-		public string 药品生产许可证发证机关
+		public string 产品生产许可证发证机关
 		{
-			get { return (string)this.GetValue("药品生产许可证发证机关"); } 
-			set { this.SetValue("药品生产许可证发证机关", value); } 
+			get { return (string)this.GetValue("产品生产许可证发证机关"); } 
+			set { this.SetValue("产品生产许可证发证机关", value); } 
 		}
 
-		public string 药品生产许可证发证日期
+		public string 产品生产许可证发证日期
 		{
-			get { return (string)this.GetValue("药品生产许可证发证日期"); } 
-			set { this.SetValue("药品生产许可证发证日期", value); } 
+			get { return (string)this.GetValue("产品生产许可证发证日期"); } 
+			set { this.SetValue("产品生产许可证发证日期", value); } 
 		}
 
-		public string 药品生产许可证效期至
+		public string 产品生产许可证效期至
 		{
-			get { return (string)this.GetValue("药品生产许可证效期至"); } 
-			set { this.SetValue("药品生产许可证效期至", value); } 
+			get { return (string)this.GetValue("产品生产许可证效期至"); } 
+			set { this.SetValue("产品生产许可证效期至", value); } 
 		}
 
-		public string 药品标签
+		public string 产品标签
 		{
-			get { return (string)this.GetValue("药品标签"); } 
-			set { this.SetValue("药品标签", value); } 
+			get { return (string)this.GetValue("产品标签"); } 
+			set { this.SetValue("产品标签", value); } 
 		}
 
-		public string 药品标签编号
+		public string 产品标签编号
 		{
-			get { return (string)this.GetValue("药品标签编号"); } 
-			set { this.SetValue("药品标签编号", value); } 
+			get { return (string)this.GetValue("产品标签编号"); } 
+			set { this.SetValue("产品标签编号", value); } 
 		}
 
-		public string 药品标签发证机关
+		public string 产品标签发证机关
 		{
-			get { return (string)this.GetValue("药品标签发证机关"); } 
-			set { this.SetValue("药品标签发证机关", value); } 
+			get { return (string)this.GetValue("产品标签发证机关"); } 
+			set { this.SetValue("产品标签发证机关", value); } 
 		}
 
-		public string 药品标签发证日期
+		public string 产品标签发证日期
 		{
-			get { return (string)this.GetValue("药品标签发证日期"); } 
-			set { this.SetValue("药品标签发证日期", value); } 
+			get { return (string)this.GetValue("产品标签发证日期"); } 
+			set { this.SetValue("产品标签发证日期", value); } 
 		}
 
-		public string 药品标签效期至
+		public string 产品标签效期至
 		{
-			get { return (string)this.GetValue("药品标签效期至"); } 
-			set { this.SetValue("药品标签效期至", value); } 
+			get { return (string)this.GetValue("产品标签效期至"); } 
+			set { this.SetValue("产品标签效期至", value); } 
 		}
 
 		public string 说明书
@@ -488,34 +488,34 @@ namespace DQS.Module.Views
 			set { this.SetValue("检验标准和检验方法效期至", value); } 
 		}
 
-		public string 进口药品注册证
+		public string 进口产品注册证
 		{
-			get { return (string)this.GetValue("进口药品注册证"); } 
-			set { this.SetValue("进口药品注册证", value); } 
+			get { return (string)this.GetValue("进口产品注册证"); } 
+			set { this.SetValue("进口产品注册证", value); } 
 		}
 
-		public string 进口药品注册证编号
+		public string 进口产品注册证编号
 		{
-			get { return (string)this.GetValue("进口药品注册证编号"); } 
-			set { this.SetValue("进口药品注册证编号", value); } 
+			get { return (string)this.GetValue("进口产品注册证编号"); } 
+			set { this.SetValue("进口产品注册证编号", value); } 
 		}
 
-		public string 进口药品注册证发证机关
+		public string 进口产品注册证发证机关
 		{
-			get { return (string)this.GetValue("进口药品注册证发证机关"); } 
-			set { this.SetValue("进口药品注册证发证机关", value); } 
+			get { return (string)this.GetValue("进口产品注册证发证机关"); } 
+			set { this.SetValue("进口产品注册证发证机关", value); } 
 		}
 
-		public string 进口药品注册证发证日期
+		public string 进口产品注册证发证日期
 		{
-			get { return (string)this.GetValue("进口药品注册证发证日期"); } 
-			set { this.SetValue("进口药品注册证发证日期", value); } 
+			get { return (string)this.GetValue("进口产品注册证发证日期"); } 
+			set { this.SetValue("进口产品注册证发证日期", value); } 
 		}
 
-		public string 进口药品注册证效期至
+		public string 进口产品注册证效期至
 		{
-			get { return (string)this.GetValue("进口药品注册证效期至"); } 
-			set { this.SetValue("进口药品注册证效期至", value); } 
+			get { return (string)this.GetValue("进口产品注册证效期至"); } 
+			set { this.SetValue("进口产品注册证效期至", value); } 
 		}
 
 		public string 医药产品注册证
@@ -548,64 +548,64 @@ namespace DQS.Module.Views
 			set { this.SetValue("医药产品注册证效期至", value); } 
 		}
 
-		public string 进口药品检验报告单
+		public string 进口产品检验报告单
 		{
-			get { return (string)this.GetValue("进口药品检验报告单"); } 
-			set { this.SetValue("进口药品检验报告单", value); } 
+			get { return (string)this.GetValue("进口产品检验报告单"); } 
+			set { this.SetValue("进口产品检验报告单", value); } 
 		}
 
-		public string 进口药品检验报告单编号
+		public string 进口产品检验报告单编号
 		{
-			get { return (string)this.GetValue("进口药品检验报告单编号"); } 
-			set { this.SetValue("进口药品检验报告单编号", value); } 
+			get { return (string)this.GetValue("进口产品检验报告单编号"); } 
+			set { this.SetValue("进口产品检验报告单编号", value); } 
 		}
 
-		public string 进口药品检验报告单发证机关
+		public string 进口产品检验报告单发证机关
 		{
-			get { return (string)this.GetValue("进口药品检验报告单发证机关"); } 
-			set { this.SetValue("进口药品检验报告单发证机关", value); } 
+			get { return (string)this.GetValue("进口产品检验报告单发证机关"); } 
+			set { this.SetValue("进口产品检验报告单发证机关", value); } 
 		}
 
-		public string 进口药品检验报告单发证日期
+		public string 进口产品检验报告单发证日期
 		{
-			get { return (string)this.GetValue("进口药品检验报告单发证日期"); } 
-			set { this.SetValue("进口药品检验报告单发证日期", value); } 
+			get { return (string)this.GetValue("进口产品检验报告单发证日期"); } 
+			set { this.SetValue("进口产品检验报告单发证日期", value); } 
 		}
 
-		public string 进口药品检验报告单效期至
+		public string 进口产品检验报告单效期至
 		{
-			get { return (string)this.GetValue("进口药品检验报告单效期至"); } 
-			set { this.SetValue("进口药品检验报告单效期至", value); } 
+			get { return (string)this.GetValue("进口产品检验报告单效期至"); } 
+			set { this.SetValue("进口产品检验报告单效期至", value); } 
 		}
 
-		public string 进口药品通关单
+		public string 进口产品通关单
 		{
-			get { return (string)this.GetValue("进口药品通关单"); } 
-			set { this.SetValue("进口药品通关单", value); } 
+			get { return (string)this.GetValue("进口产品通关单"); } 
+			set { this.SetValue("进口产品通关单", value); } 
 		}
 
-		public string 进口药品通关单编号
+		public string 进口产品通关单编号
 		{
-			get { return (string)this.GetValue("进口药品通关单编号"); } 
-			set { this.SetValue("进口药品通关单编号", value); } 
+			get { return (string)this.GetValue("进口产品通关单编号"); } 
+			set { this.SetValue("进口产品通关单编号", value); } 
 		}
 
-		public string 进口药品通关单发证机关
+		public string 进口产品通关单发证机关
 		{
-			get { return (string)this.GetValue("进口药品通关单发证机关"); } 
-			set { this.SetValue("进口药品通关单发证机关", value); } 
+			get { return (string)this.GetValue("进口产品通关单发证机关"); } 
+			set { this.SetValue("进口产品通关单发证机关", value); } 
 		}
 
-		public string 进口药品通关单发证日期
+		public string 进口产品通关单发证日期
 		{
-			get { return (string)this.GetValue("进口药品通关单发证日期"); } 
-			set { this.SetValue("进口药品通关单发证日期", value); } 
+			get { return (string)this.GetValue("进口产品通关单发证日期"); } 
+			set { this.SetValue("进口产品通关单发证日期", value); } 
 		}
 
-		public string 进口药品通关单效期至
+		public string 进口产品通关单效期至
 		{
-			get { return (string)this.GetValue("进口药品通关单效期至"); } 
-			set { this.SetValue("进口药品通关单效期至", value); } 
+			get { return (string)this.GetValue("进口产品通关单效期至"); } 
+			set { this.SetValue("进口产品通关单效期至", value); } 
 		}
 
 		public string 其他
@@ -708,18 +708,18 @@ namespace DQS.Module.Views
 		{
 			this.ViewName = "vw_AllFirstProductPrint";
 			this.Fields = new Dictionary<string, EntityField>();
-			this.Fields.Add("药品ID", AllFirstProductPrintViewFields.药品ID);
-			this.Fields.Add("药品编号", AllFirstProductPrintViewFields.药品编号);
-			this.Fields.Add("药品名称", AllFirstProductPrintViewFields.药品名称);
+			this.Fields.Add("产品ID", AllFirstProductPrintViewFields.产品ID);
+			this.Fields.Add("产品编号", AllFirstProductPrintViewFields.产品编号);
+			this.Fields.Add("产品名称", AllFirstProductPrintViewFields.产品名称);
 			this.Fields.Add("通用名称", AllFirstProductPrintViewFields.通用名称);
 			this.Fields.Add("商品名称", AllFirstProductPrintViewFields.商品名称);
 			this.Fields.Add("商品条码", AllFirstProductPrintViewFields.商品条码);
-			this.Fields.Add("规格", AllFirstProductPrintViewFields.规格);
+			this.Fields.Add("规格型号", AllFirstProductPrintViewFields.规格型号);
 			this.Fields.Add("单位", AllFirstProductPrintViewFields.单位);
-			this.Fields.Add("包装规格", AllFirstProductPrintViewFields.包装规格);
+			this.Fields.Add("包装规格型号", AllFirstProductPrintViewFields.包装规格);
 			this.Fields.Add("剂型", AllFirstProductPrintViewFields.剂型);
-			this.Fields.Add("药品类别", AllFirstProductPrintViewFields.药品类别);
-			this.Fields.Add("批准文号", AllFirstProductPrintViewFields.批准文号);
+			this.Fields.Add("产品类别", AllFirstProductPrintViewFields.产品类别);
+			this.Fields.Add("注册证号", AllFirstProductPrintViewFields.注册证号);
 			this.Fields.Add("生产厂商", AllFirstProductPrintViewFields.生产厂商);
 			this.Fields.Add("效期", AllFirstProductPrintViewFields.效期);
 			this.Fields.Add("首次供货商", AllFirstProductPrintViewFields.首次供货商);
@@ -729,7 +729,7 @@ namespace DQS.Module.Views
 			this.Fields.Add("传真", AllFirstProductPrintViewFields.传真);
 			this.Fields.Add("联系人", AllFirstProductPrintViewFields.联系人);
 			this.Fields.Add("联系人电话", AllFirstProductPrintViewFields.联系人电话);
-			this.Fields.Add("是否是电子监管药品", AllFirstProductPrintViewFields.是否是电子监管药品);
+			this.Fields.Add("是否是电子监管产品", AllFirstProductPrintViewFields.是否是电子监管产品);
 			this.Fields.Add("监管标识条码", AllFirstProductPrintViewFields.监管标识条码);
 			this.Fields.Add("适应症", AllFirstProductPrintViewFields.适应症);
 			this.Fields.Add("贮藏条件", AllFirstProductPrintViewFields.贮藏条件);
@@ -737,7 +737,7 @@ namespace DQS.Module.Views
 			this.Fields.Add("执行标准", AllFirstProductPrintViewFields.执行标准);
 			this.Fields.Add("商标", AllFirstProductPrintViewFields.商标);
 			this.Fields.Add("性状用途", AllFirstProductPrintViewFields.性状用途);
-			this.Fields.Add("药品GMP证书", AllFirstProductPrintViewFields.药品GMP证书);
+			this.Fields.Add("产品GMP证书", AllFirstProductPrintViewFields.产品GMP证书);
 			this.Fields.Add("GMP证书编号", AllFirstProductPrintViewFields.GMP证书编号);
 			this.Fields.Add("GMP证书发证机关", AllFirstProductPrintViewFields.GMP证书发证机关);
 			this.Fields.Add("GMP发证日期", AllFirstProductPrintViewFields.GMP发证日期);
@@ -747,26 +747,26 @@ namespace DQS.Module.Views
 			this.Fields.Add("营业执照发证机关", AllFirstProductPrintViewFields.营业执照发证机关);
 			this.Fields.Add("营业执照发证日期", AllFirstProductPrintViewFields.营业执照发证日期);
 			this.Fields.Add("营业执照效期至", AllFirstProductPrintViewFields.营业执照效期至);
-			this.Fields.Add("药品注册证", AllFirstProductPrintViewFields.药品注册证);
-			this.Fields.Add("药品注册证编号", AllFirstProductPrintViewFields.药品注册证编号);
-			this.Fields.Add("药品注册证发证机关", AllFirstProductPrintViewFields.药品注册证发证机关);
-			this.Fields.Add("药品注册证发证日期", AllFirstProductPrintViewFields.药品注册证发证日期);
-			this.Fields.Add("药品注册证效期至", AllFirstProductPrintViewFields.药品注册证效期至);
+			this.Fields.Add("产品注册证", AllFirstProductPrintViewFields.产品注册证);
+			this.Fields.Add("产品注册证编号", AllFirstProductPrintViewFields.产品注册证编号);
+			this.Fields.Add("产品注册证发证机关", AllFirstProductPrintViewFields.产品注册证发证机关);
+			this.Fields.Add("产品注册证发证日期", AllFirstProductPrintViewFields.产品注册证发证日期);
+			this.Fields.Add("产品注册证效期至", AllFirstProductPrintViewFields.产品注册证效期至);
 			this.Fields.Add("委托生产批件", AllFirstProductPrintViewFields.委托生产批件);
 			this.Fields.Add("委托生产批件编号", AllFirstProductPrintViewFields.委托生产批件编号);
 			this.Fields.Add("委托生产批件发证机关", AllFirstProductPrintViewFields.委托生产批件发证机关);
 			this.Fields.Add("委托生产批件发证日期", AllFirstProductPrintViewFields.委托生产批件发证日期);
 			this.Fields.Add("委托生产批件效期至", AllFirstProductPrintViewFields.委托生产批件效期至);
-			this.Fields.Add("药品生产许可证", AllFirstProductPrintViewFields.药品生产许可证);
-			this.Fields.Add("药品生产许可证编号", AllFirstProductPrintViewFields.药品生产许可证编号);
-			this.Fields.Add("药品生产许可证发证机关", AllFirstProductPrintViewFields.药品生产许可证发证机关);
-			this.Fields.Add("药品生产许可证发证日期", AllFirstProductPrintViewFields.药品生产许可证发证日期);
-			this.Fields.Add("药品生产许可证效期至", AllFirstProductPrintViewFields.药品生产许可证效期至);
-			this.Fields.Add("药品标签", AllFirstProductPrintViewFields.药品标签);
-			this.Fields.Add("药品标签编号", AllFirstProductPrintViewFields.药品标签编号);
-			this.Fields.Add("药品标签发证机关", AllFirstProductPrintViewFields.药品标签发证机关);
-			this.Fields.Add("药品标签发证日期", AllFirstProductPrintViewFields.药品标签发证日期);
-			this.Fields.Add("药品标签效期至", AllFirstProductPrintViewFields.药品标签效期至);
+			this.Fields.Add("产品生产许可证", AllFirstProductPrintViewFields.产品生产许可证);
+			this.Fields.Add("产品生产许可证编号", AllFirstProductPrintViewFields.产品生产许可证编号);
+			this.Fields.Add("产品生产许可证发证机关", AllFirstProductPrintViewFields.产品生产许可证发证机关);
+			this.Fields.Add("产品生产许可证发证日期", AllFirstProductPrintViewFields.产品生产许可证发证日期);
+			this.Fields.Add("产品生产许可证效期至", AllFirstProductPrintViewFields.产品生产许可证效期至);
+			this.Fields.Add("产品标签", AllFirstProductPrintViewFields.产品标签);
+			this.Fields.Add("产品标签编号", AllFirstProductPrintViewFields.产品标签编号);
+			this.Fields.Add("产品标签发证机关", AllFirstProductPrintViewFields.产品标签发证机关);
+			this.Fields.Add("产品标签发证日期", AllFirstProductPrintViewFields.产品标签发证日期);
+			this.Fields.Add("产品标签效期至", AllFirstProductPrintViewFields.产品标签效期至);
 			this.Fields.Add("说明书", AllFirstProductPrintViewFields.说明书);
 			this.Fields.Add("说明书编号", AllFirstProductPrintViewFields.说明书编号);
 			this.Fields.Add("说明书发证机关", AllFirstProductPrintViewFields.说明书发证机关);
@@ -787,26 +787,26 @@ namespace DQS.Module.Views
 			this.Fields.Add("检验标准和检验方法发证机关", AllFirstProductPrintViewFields.检验标准和检验方法发证机关);
 			this.Fields.Add("检验标准和检验方法发证日期", AllFirstProductPrintViewFields.检验标准和检验方法发证日期);
 			this.Fields.Add("检验标准和检验方法效期至", AllFirstProductPrintViewFields.检验标准和检验方法效期至);
-			this.Fields.Add("进口药品注册证", AllFirstProductPrintViewFields.进口药品注册证);
-			this.Fields.Add("进口药品注册证编号", AllFirstProductPrintViewFields.进口药品注册证编号);
-			this.Fields.Add("进口药品注册证发证机关", AllFirstProductPrintViewFields.进口药品注册证发证机关);
-			this.Fields.Add("进口药品注册证发证日期", AllFirstProductPrintViewFields.进口药品注册证发证日期);
-			this.Fields.Add("进口药品注册证效期至", AllFirstProductPrintViewFields.进口药品注册证效期至);
+			this.Fields.Add("进口产品注册证", AllFirstProductPrintViewFields.进口产品注册证);
+			this.Fields.Add("进口产品注册证编号", AllFirstProductPrintViewFields.进口产品注册证编号);
+			this.Fields.Add("进口产品注册证发证机关", AllFirstProductPrintViewFields.进口产品注册证发证机关);
+			this.Fields.Add("进口产品注册证发证日期", AllFirstProductPrintViewFields.进口产品注册证发证日期);
+			this.Fields.Add("进口产品注册证效期至", AllFirstProductPrintViewFields.进口产品注册证效期至);
 			this.Fields.Add("医药产品注册证", AllFirstProductPrintViewFields.医药产品注册证);
 			this.Fields.Add("医药产品注册证编号", AllFirstProductPrintViewFields.医药产品注册证编号);
 			this.Fields.Add("医药产品注册证发证机关", AllFirstProductPrintViewFields.医药产品注册证发证机关);
 			this.Fields.Add("医药产品注册证发证日期", AllFirstProductPrintViewFields.医药产品注册证发证日期);
 			this.Fields.Add("医药产品注册证效期至", AllFirstProductPrintViewFields.医药产品注册证效期至);
-			this.Fields.Add("进口药品检验报告单", AllFirstProductPrintViewFields.进口药品检验报告单);
-			this.Fields.Add("进口药品检验报告单编号", AllFirstProductPrintViewFields.进口药品检验报告单编号);
-			this.Fields.Add("进口药品检验报告单发证机关", AllFirstProductPrintViewFields.进口药品检验报告单发证机关);
-			this.Fields.Add("进口药品检验报告单发证日期", AllFirstProductPrintViewFields.进口药品检验报告单发证日期);
-			this.Fields.Add("进口药品检验报告单效期至", AllFirstProductPrintViewFields.进口药品检验报告单效期至);
-			this.Fields.Add("进口药品通关单", AllFirstProductPrintViewFields.进口药品通关单);
-			this.Fields.Add("进口药品通关单编号", AllFirstProductPrintViewFields.进口药品通关单编号);
-			this.Fields.Add("进口药品通关单发证机关", AllFirstProductPrintViewFields.进口药品通关单发证机关);
-			this.Fields.Add("进口药品通关单发证日期", AllFirstProductPrintViewFields.进口药品通关单发证日期);
-			this.Fields.Add("进口药品通关单效期至", AllFirstProductPrintViewFields.进口药品通关单效期至);
+			this.Fields.Add("进口产品检验报告单", AllFirstProductPrintViewFields.进口产品检验报告单);
+			this.Fields.Add("进口产品检验报告单编号", AllFirstProductPrintViewFields.进口产品检验报告单编号);
+			this.Fields.Add("进口产品检验报告单发证机关", AllFirstProductPrintViewFields.进口产品检验报告单发证机关);
+			this.Fields.Add("进口产品检验报告单发证日期", AllFirstProductPrintViewFields.进口产品检验报告单发证日期);
+			this.Fields.Add("进口产品检验报告单效期至", AllFirstProductPrintViewFields.进口产品检验报告单效期至);
+			this.Fields.Add("进口产品通关单", AllFirstProductPrintViewFields.进口产品通关单);
+			this.Fields.Add("进口产品通关单编号", AllFirstProductPrintViewFields.进口产品通关单编号);
+			this.Fields.Add("进口产品通关单发证机关", AllFirstProductPrintViewFields.进口产品通关单发证机关);
+			this.Fields.Add("进口产品通关单发证日期", AllFirstProductPrintViewFields.进口产品通关单发证日期);
+			this.Fields.Add("进口产品通关单效期至", AllFirstProductPrintViewFields.进口产品通关单效期至);
 			this.Fields.Add("其他", AllFirstProductPrintViewFields.其他);
 			this.Fields.Add("其他编号", AllFirstProductPrintViewFields.其他编号);
 			this.Fields.Add("其他发证机关", AllFirstProductPrintViewFields.其他发证机关);
@@ -830,19 +830,19 @@ namespace DQS.Module.Views
 
 	public class AllFirstProductPrintViewFields
 	{
-		public static EntityField 药品ID
+		public static EntityField 产品ID
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 0, "药品ID", SqlDbType.Int); }
+			get { return new EntityField("vw_AllFirstProductPrint", 0, "产品ID", SqlDbType.Int); }
 		}
 
-		public static EntityField 药品编号
+		public static EntityField 产品编号
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 1, "药品编号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 1, "产品编号", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品名称
+		public static EntityField 产品名称
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 2, "药品名称", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 2, "产品名称", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 通用名称
@@ -860,9 +860,9 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllFirstProductPrint", 5, "商品条码", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 规格
+		public static EntityField 规格型号
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 6, "规格", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 6, "规格型号", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 单位
@@ -872,7 +872,7 @@ namespace DQS.Module.Views
 
 		public static EntityField 包装规格
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 8, "包装规格", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 8, "包装规格型号", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 剂型
@@ -880,14 +880,14 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllFirstProductPrint", 9, "剂型", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品类别
+		public static EntityField 产品类别
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 10, "药品类别", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 10, "产品类别", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 批准文号
+		public static EntityField 注册证号
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 11, "批准文号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 11, "注册证号", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 生产厂商
@@ -935,9 +935,9 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllFirstProductPrint", 20, "联系人电话", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 是否是电子监管药品
+		public static EntityField 是否是电子监管产品
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 21, "是否是电子监管药品", SqlDbType.Bit); }
+			get { return new EntityField("vw_AllFirstProductPrint", 21, "是否是电子监管产品", SqlDbType.Bit); }
 		}
 
 		public static EntityField 监管标识条码
@@ -975,9 +975,9 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllFirstProductPrint", 28, "性状用途", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品GMP证书
+		public static EntityField 产品GMP证书
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 29, "药品GMP证书", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 29, "产品GMP证书", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField GMP证书编号
@@ -1025,29 +1025,29 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllFirstProductPrint", 38, "营业执照效期至", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品注册证
+		public static EntityField 产品注册证
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 39, "药品注册证", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 39, "产品注册证", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品注册证编号
+		public static EntityField 产品注册证编号
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 40, "药品注册证编号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 40, "产品注册证编号", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品注册证发证机关
+		public static EntityField 产品注册证发证机关
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 41, "药品注册证发证机关", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 41, "产品注册证发证机关", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品注册证发证日期
+		public static EntityField 产品注册证发证日期
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 42, "药品注册证发证日期", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 42, "产品注册证发证日期", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品注册证效期至
+		public static EntityField 产品注册证效期至
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 43, "药品注册证效期至", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 43, "产品注册证效期至", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 委托生产批件
@@ -1075,54 +1075,54 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllFirstProductPrint", 48, "委托生产批件效期至", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品生产许可证
+		public static EntityField 产品生产许可证
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 49, "药品生产许可证", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 49, "产品生产许可证", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品生产许可证编号
+		public static EntityField 产品生产许可证编号
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 50, "药品生产许可证编号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 50, "产品生产许可证编号", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品生产许可证发证机关
+		public static EntityField 产品生产许可证发证机关
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 51, "药品生产许可证发证机关", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 51, "产品生产许可证发证机关", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品生产许可证发证日期
+		public static EntityField 产品生产许可证发证日期
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 52, "药品生产许可证发证日期", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 52, "产品生产许可证发证日期", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品生产许可证效期至
+		public static EntityField 产品生产许可证效期至
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 53, "药品生产许可证效期至", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 53, "产品生产许可证效期至", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品标签
+		public static EntityField 产品标签
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 54, "药品标签", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 54, "产品标签", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品标签编号
+		public static EntityField 产品标签编号
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 55, "药品标签编号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 55, "产品标签编号", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品标签发证机关
+		public static EntityField 产品标签发证机关
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 56, "药品标签发证机关", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 56, "产品标签发证机关", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品标签发证日期
+		public static EntityField 产品标签发证日期
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 57, "药品标签发证日期", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 57, "产品标签发证日期", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品标签效期至
+		public static EntityField 产品标签效期至
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 58, "药品标签效期至", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 58, "产品标签效期至", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 说明书
@@ -1225,29 +1225,29 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllFirstProductPrint", 78, "检验标准和检验方法效期至", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 进口药品注册证
+		public static EntityField 进口产品注册证
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 79, "进口药品注册证", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 79, "进口产品注册证", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 进口药品注册证编号
+		public static EntityField 进口产品注册证编号
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 80, "进口药品注册证编号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 80, "进口产品注册证编号", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 进口药品注册证发证机关
+		public static EntityField 进口产品注册证发证机关
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 81, "进口药品注册证发证机关", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 81, "进口产品注册证发证机关", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 进口药品注册证发证日期
+		public static EntityField 进口产品注册证发证日期
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 82, "进口药品注册证发证日期", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 82, "进口产品注册证发证日期", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 进口药品注册证效期至
+		public static EntityField 进口产品注册证效期至
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 83, "进口药品注册证效期至", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 83, "进口产品注册证效期至", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 医药产品注册证
@@ -1275,54 +1275,54 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllFirstProductPrint", 88, "医药产品注册证效期至", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 进口药品检验报告单
+		public static EntityField 进口产品检验报告单
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 89, "进口药品检验报告单", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 89, "进口产品检验报告单", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 进口药品检验报告单编号
+		public static EntityField 进口产品检验报告单编号
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 90, "进口药品检验报告单编号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 90, "进口产品检验报告单编号", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 进口药品检验报告单发证机关
+		public static EntityField 进口产品检验报告单发证机关
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 91, "进口药品检验报告单发证机关", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 91, "进口产品检验报告单发证机关", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 进口药品检验报告单发证日期
+		public static EntityField 进口产品检验报告单发证日期
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 92, "进口药品检验报告单发证日期", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 92, "进口产品检验报告单发证日期", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 进口药品检验报告单效期至
+		public static EntityField 进口产品检验报告单效期至
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 93, "进口药品检验报告单效期至", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 93, "进口产品检验报告单效期至", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 进口药品通关单
+		public static EntityField 进口产品通关单
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 94, "进口药品通关单", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 94, "进口产品通关单", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 进口药品通关单编号
+		public static EntityField 进口产品通关单编号
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 95, "进口药品通关单编号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 95, "进口产品通关单编号", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 进口药品通关单发证机关
+		public static EntityField 进口产品通关单发证机关
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 96, "进口药品通关单发证机关", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 96, "进口产品通关单发证机关", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 进口药品通关单发证日期
+		public static EntityField 进口产品通关单发证日期
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 97, "进口药品通关单发证日期", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 97, "进口产品通关单发证日期", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 进口药品通关单效期至
+		public static EntityField 进口产品通关单效期至
 		{
-			get { return new EntityField("vw_AllFirstProductPrint", 98, "进口药品通关单效期至", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllFirstProductPrint", 98, "进口产品通关单效期至", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 其他

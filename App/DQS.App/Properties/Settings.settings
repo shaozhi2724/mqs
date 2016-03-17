@@ -8,5 +8,11 @@
     <Setting Name="AutoCheckForUpdate" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="PID_Rockey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">587DCC16</Value>
+    </Setting>
+    <Setting Name="PIN_Rockey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">FFFFFFFFFFFFFFFF</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

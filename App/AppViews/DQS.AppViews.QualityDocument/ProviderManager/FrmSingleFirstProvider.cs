@@ -149,7 +149,7 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
 
                 layBusinessRange.Text = "经营范围";
                 layBusinessRange.CustomizationFormText = "经营范围";
-                gpcRight.Text = "药品类别清单";
+                gpcRight.Text = "产品类别清单";
                 EntityCollection<SYSCategoryEntity> categories = new EntityCollection<SYSCategoryEntity>();
                 categories.Fetch(SYSCategoryEntityFields.CategoryCode == "ProductStyle");
 

@@ -22,7 +22,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
 
         private void FrmInitInventory_Load(object sender, EventArgs e)
         {
-            this.pageNavigator.SortField = "药品编号";
+            this.pageNavigator.SortField = "产品编号";
             this.pageNavigator.SortType = "ASC";
             base.InitPage();
         }

@@ -189,6 +189,12 @@
     <Compile Include="Finance\FrmDealer.Designer.cs">
       <DependentUpon>FrmDealer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Finance\FrmDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmDetails.Designer.cs">
+      <DependentUpon>FrmDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Finance\FrmFirstInventory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -500,6 +506,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Finance\FrmDealer.resx">
       <DependentUpon>FrmDealer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmDetails.resx">
+      <DependentUpon>FrmDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Finance\FrmFirstInventory.resx">
       <DependentUpon>FrmFirstInventory.cs</DependentUpon>

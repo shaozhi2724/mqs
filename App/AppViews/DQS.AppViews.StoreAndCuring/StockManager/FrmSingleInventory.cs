@@ -50,6 +50,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
             }
             else
             {
+                btnAddNew.Enabled = false;
                 btnImport.Enabled = false;
                 this.txtInventoryCode.Text = "PD" + DateTime.Now.ToString("yyyyMMddHHmmss");
                 this.txtInventoryCode.Select(this.txtInventoryCode.Text.Length, 0);
@@ -157,7 +158,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                             BUSInventoryDetailEntity child = childEntity as BUSInventoryDetailEntity;
                             child.InventoryID = entity.InventoryID;
                             child.Save();
-                            UpdateLastCuringDate(child);
+                            UpdateLastCuringDate(child.InStoreID);
                         }
 
                         #endregion
@@ -312,27 +313,26 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                     BUSInventoryDetailEntity child = childEntity as BUSInventoryDetailEntity;
                     child.InventoryID = entity.InventoryID;
                     child.Save();
-                    UpdateLastCuringDate(child);
-                    UpdateStoreAmount(child);
+                    UpdateLastCuringDate(child.InStoreID);
                 }
+                UpdateStoreAmount(entity.InventoryID);
 
                 this.DialogResult = DialogResult.OK;
             }
             else
             {
-
                 this.DialogResult = DialogResult.None;
             }
         }
 
         private void popupGrid_PopupClosed(object sender, DQS.Controls.CommonCode.PopupFormClosedArgs e)
         {
-            string fieldName = "药品ID";
+            string fieldName = "产品ID";
             string fieldName2 = "批号";
             for (int i = 0; i < e.PopupRows.Length; i++)
             {
-                object fieldValue = this.popupGrid.PopupView.GetRowCellValue(i, "药品ID");
-                object productName = this.popupGrid.PopupView.GetRowCellValue(i, "药品名称");
+                object fieldValue = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
+                object productName = this.popupGrid.PopupView.GetRowCellValue(i, "产品名称");
                 object fieldValue2 = this.popupGrid.PopupView.GetRowCellValue(i, fieldName2);
                 if (fieldValue != null && fieldValue != DBNull.Value)
                 {
@@ -341,7 +341,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                                                   && p[fieldName2] != null && p[fieldName2] != DBNull.Value
                                                   && fieldValue2.ToString().Trim() == p[fieldName2].ToString().Trim()))
                     {
-                        XtraMessageBox.Show(string.Format("药品{0}(批号:{1})已存在。", productName, fieldValue2), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        XtraMessageBox.Show(string.Format("产品{0}(批号:{1})已存在。", productName, fieldValue2), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         this.popupGrid.PopupView.FocusedRowHandle = i;
                         e.Cancel = true;
                     }
@@ -349,20 +349,43 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
             }
         }
 
-        public static void UpdateLastCuringDate(BUSInventoryDetailEntity inventoryDetail)
+        public static void UpdateLastCuringDate(int inStoreID)
         {
-            EntityCollection<BUSStoreDetailEntity> entities = new EntityCollection<BUSStoreDetailEntity>();
-            entities.Fetch(BUSStoreDetailEntityFields.ProductID == inventoryDetail.ProductID & BUSStoreDetailEntityFields.BatchNo == inventoryDetail.BatchNo);
-
-            foreach (BUSStoreDetailEntity entity in entities)
+            if (inStoreID > 0)
             {
-                entity.LastCuringDate = DateTime.Now;
-
-                entity.Update();
+                EntityCollection<BUSInStoreDetailEntity> inStoreDetail = new EntityCollection<BUSInStoreDetailEntity>();
+                inStoreDetail.Fetch(BUSInStoreDetailEntityFields.InStoreID == inStoreID);
+                foreach (BUSInStoreDetailEntity instore in inStoreDetail)
+                {
+                    instore.CuringDate = DateTime.Now;
+                    instore.Update();
+                }
             }
         }
-        public void UpdateStoreAmount(BUSInventoryDetailEntity inventoryDetail)
+        public void UpdateStoreAmount(int InventoryID)
         {
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                conn.Open(); //连接数据库
+                //必须为SqlCommand指定数据库连接和登记的事务
+                try
+                {
+                    string sql = "EXEC sp_InsertNewStoreDetailForInventoryDetail " + InventoryID;
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+
+            #region 作废
+            /*
             EntityCollection<BUSStoreDetailEntity> entities = new EntityCollection<BUSStoreDetailEntity>();
             entities.Fetch(BUSStoreDetailEntityFields.ProductID == inventoryDetail.ProductID & BUSStoreDetailEntityFields.BatchNo == inventoryDetail.BatchNo);
 
@@ -493,11 +516,13 @@ WHERE StoreDetailID={0}
                 storeDetail.DetailRemark = string.Format("{0}于{1}通过盘点单：{2}进行期初,期初数据 - 批号:{3},数量:{4}", userName, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), txtInventoryCode.Text.Trim(), inventoryDetail.BatchNo,inventoryDetail.Amount);
                 storeDetail.Save();
             }
+            */
+            #endregion
         }
 
         private void popupGrid_BeforePopupFormShow(object sender, Controls.CommonCode.BeforePopupFormShowArgs e)
         {
-            string fieldName = "药品ID";
+            string fieldName = "产品ID";
             string fieldName2 = "批号";
             List<string> filters = new List<string>();
             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
@@ -506,7 +531,7 @@ WHERE StoreDetailID={0}
                 object fieldValue2 = this.popupGrid.PopupView.GetRowCellValue(i, fieldName2);
                 if (fieldValue != null && fieldValue != DBNull.Value)
                 {
-                    string item = string.Format("([药品ID]={0} AND [批号]='{1}')", fieldValue, fieldValue2);
+                    string item = string.Format("([产品ID]={0} AND [批号]='{1}')", fieldValue, fieldValue2);
                     if (!filters.Contains(item))
                     {
                         filters.Add(item);
@@ -540,10 +565,10 @@ WHERE StoreDetailID={0}
                         {
                             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
                             {
-                                object productCode = this.popupGrid.PopupView.GetRowCellValue(i, "药品编号");
-                                object productName = this.popupGrid.PopupView.GetRowCellValue(i, "药品名称");
+                                object productCode = this.popupGrid.PopupView.GetRowCellValue(i, "产品编号");
+                                object productName = this.popupGrid.PopupView.GetRowCellValue(i, "产品名称");
                                 object batchNumber = this.popupGrid.PopupView.GetRowCellValue(i, "批号");
-                                //object fieldValue2 = this.popupGrid.PopupView.GetRowCellValue(i, "规格");
+                                //object fieldValue2 = this.popupGrid.PopupView.GetRowCellValue(i, "规格型号");
                                 //object fieldValue2 = this.popupGrid.PopupView.GetRowCellValue(i, "剂型");
                                 object amount = this.popupGrid.PopupView.GetRowCellValue(i, "库存数量");
                                 if (productCode != null
@@ -562,10 +587,10 @@ WHERE StoreDetailID={0}
 
                             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
                             {
-                                object productCode = this.popupGrid.PopupView.GetRowCellValue(i, "药品编号");
-                                object productName = this.popupGrid.PopupView.GetRowCellValue(i, "药品名称");
+                                object productCode = this.popupGrid.PopupView.GetRowCellValue(i, "产品编号");
+                                object productName = this.popupGrid.PopupView.GetRowCellValue(i, "产品名称");
                                 object batchNumber = this.popupGrid.PopupView.GetRowCellValue(i, "批号");
-                                //object fieldValue2 = this.popupGrid.PopupView.GetRowCellValue(i, "规格");
+                                //object fieldValue2 = this.popupGrid.PopupView.GetRowCellValue(i, "规格型号");
                                 //object fieldValue2 = this.popupGrid.PopupView.GetRowCellValue(i, "剂型");
                                 object amount = this.popupGrid.PopupView.GetRowCellValue(i, "库存数量");
                                 if (productCode != null
@@ -631,24 +656,25 @@ WHERE StoreDetailID={0}
                         popupGrid.InitGrid();
                         foreach (var inventoryDetail in importedInventoryDetails)
                         {
-                            var product = products.SingleOrDefault(p => p.ProductCode == inventoryDetail.药品编号);
+                            var product = products.SingleOrDefault(p => p.ProductCode == inventoryDetail.产品编号);
                             if (null != product)
                             {
-                                this.popupGrid.PopupView.SetFocusedRowCellValue("药品ID", product.ProductID);
-                                this.popupGrid.PopupView.SetFocusedRowCellValue("药品编号", inventoryDetail.药品编号);
-                                this.popupGrid.PopupView.SetFocusedRowCellValue("药品名称", inventoryDetail.药品名称);
+                                this.popupGrid.PopupView.SetFocusedRowCellValue("产品ID", product.ProductID);
+                                this.popupGrid.PopupView.SetFocusedRowCellValue("产品编号", inventoryDetail.产品编号);
+                                this.popupGrid.PopupView.SetFocusedRowCellValue("产品名称", inventoryDetail.产品名称);
                                 this.popupGrid.PopupView.SetFocusedRowCellValue("批号", inventoryDetail.批号);
                                 this.popupGrid.PopupView.SetFocusedRowCellValue("生产厂商", inventoryDetail.生产厂商);
                                 this.popupGrid.PopupView.SetFocusedRowCellValue("生产日期", inventoryDetail.生产日期);
                                 this.popupGrid.PopupView.SetFocusedRowCellValue("有效期至", inventoryDetail.有效期至);
-                                this.popupGrid.PopupView.SetFocusedRowCellValue("规格", inventoryDetail.规格);
+                                this.popupGrid.PopupView.SetFocusedRowCellValue("规格型号", inventoryDetail.规格型号);
                                 this.popupGrid.PopupView.SetFocusedRowCellValue("剂型", inventoryDetail.剂型);
                                 this.popupGrid.PopupView.SetFocusedRowCellValue("单位", inventoryDetail.单位);
-                                this.popupGrid.PopupView.SetFocusedRowCellValue("包装规格", inventoryDetail.包装规格);
+                                this.popupGrid.PopupView.SetFocusedRowCellValue("包装规格型号", inventoryDetail.包装规格);
                                 this.popupGrid.PopupView.SetFocusedRowCellValue("包装比例", inventoryDetail.包装比例);
-                                this.popupGrid.PopupView.SetFocusedRowCellValue("批准文号", inventoryDetail.批准文号);
+                                this.popupGrid.PopupView.SetFocusedRowCellValue("注册证号", inventoryDetail.注册证号);
                                 this.popupGrid.PopupView.SetFocusedRowCellValue("贮藏条件", inventoryDetail.贮藏条件);
                                 this.popupGrid.PopupView.SetFocusedRowCellValue("库存数量", inventoryDetail.库存数量);
+                                this.popupGrid.PopupView.SetFocusedRowCellValue("盘点数量", inventoryDetail.盘点数量);
                                 this.popupGrid.PopupView.SetFocusedRowCellValue("盘点数量", inventoryDetail.盘点数量);
                                 this.popupGrid.PopupView.AddNewRow();
                                 this.popupGrid.PopupView.FocusedRowHandle = GridControl.NewItemRowHandle;
@@ -665,16 +691,16 @@ WHERE StoreDetailID={0}
             try
             {
                 var excel = new ExcelQueryFactory(fileName);
-                excel.AddMapping<InventoryDetail>(x => x.药品编号 , "药品编号");
-                excel.AddMapping<InventoryDetail>(x => x.药品名称, "药品名称");
+                excel.AddMapping<InventoryDetail>(x => x.产品编号 , "产品编号");
+                excel.AddMapping<InventoryDetail>(x => x.产品名称, "产品名称");
                 excel.AddMapping<InventoryDetail>(x => x.生产厂商, "生产厂商");
-                excel.AddMapping<InventoryDetail>(x => x.规格, "规格");
+                excel.AddMapping<InventoryDetail>(x => x.规格型号, "规格型号");
                 excel.AddMapping<InventoryDetail>(x => x.剂型, "剂型");
                 excel.AddMapping<InventoryDetail>(x => x.单位, "单位");
                 excel.AddMapping<InventoryDetail>(x => x.批号, "批号");
-                excel.AddMapping<InventoryDetail>(x => x.包装规格, "包装规格");
+                excel.AddMapping<InventoryDetail>(x => x.包装规格, "包装规格型号");
                 excel.AddMapping<InventoryDetail>(x => x.包装比例, "包装比例");
-                excel.AddMapping<InventoryDetail>(x => x.批准文号, "批准文号");
+                excel.AddMapping<InventoryDetail>(x => x.注册证号, "注册证号");
                 excel.AddMapping<InventoryDetail>(x => x.贮藏条件, "贮藏条件");
                 excel.AddMapping<InventoryDetail>(x => x.生产日期, "生产日期");
                 excel.AddMapping<InventoryDetail>(x => x.有效期至, "有效期至");
@@ -684,7 +710,7 @@ WHERE StoreDetailID={0}
                 excel.AddMapping<InventoryDetail>(x => x.盘点结果, "盘点结果");
 
                 importedRecords = (from c in excel.Worksheet<InventoryDetail>(0)
-                                       where c.药品编号 != null
+                                       where c.产品编号 != null
                                        select c).ToList();
             }
             catch (Exception ex)
@@ -693,15 +719,28 @@ WHERE StoreDetailID={0}
             }
             return importedRecords;
         }
+
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+            using (FrmAddInventory fa = new FrmAddInventory())
+            {
+                fa.InventoryID = m_id.Value;
+                DialogResult dr = fa.ShowDialog();
+                if (dr == DialogResult.Yes)
+                {
+                    FrmSingleInventory_Load(null,null);
+                }
+            }
+        }
     }
 
     internal class InventoryDetail
     {
-        public int 药品ID { get; set; }
-        public string 药品编号 { get; set; }
-        public string 药品名称 { get; set; }
+        public int 产品ID { get; set; }
+        public string 产品编号 { get; set; }
+        public string 产品名称 { get; set; }
         public string 生产厂商 { get; set; }
-        public string 规格 { get; set; }
+        public string 规格型号 { get; set; }
         public string 剂型 { get; set; }
         public string 单位 { get; set; }
         public string 批号 { get; set; }
@@ -713,7 +752,7 @@ WHERE StoreDetailID={0}
         public string 盘点结果 { get; set; }
         public string 包装规格 { get; set; }
         public string 包装比例 { get; set; }
-        public string 批准文号 { get; set; }
+        public string 注册证号 { get; set; }
         public string 贮藏条件 { get; set; }
     }
 }

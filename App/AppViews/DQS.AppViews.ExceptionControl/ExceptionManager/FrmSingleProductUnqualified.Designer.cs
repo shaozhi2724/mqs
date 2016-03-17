@@ -79,9 +79,8 @@
             this.ftPanel.Controls.Add(this.layControl);
             this.ftPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.ftPanel.Location = new System.Drawing.Point(0, 0);
-            this.ftPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ftPanel.Name = "ftPanel";
-            this.ftPanel.Size = new System.Drawing.Size(981, 174);
+            this.ftPanel.Size = new System.Drawing.Size(858, 135);
             this.ftPanel.TabIndex = 0;
             this.ftPanel.TypeOfEntity = DQS.Module.EntityType2.BUSProductUnqualifiedEntity;
             // 
@@ -95,18 +94,16 @@
             this.layControl.Controls.Add(this.txtUnqualifiedCode);
             this.layControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layControl.Location = new System.Drawing.Point(2, 2);
-            this.layControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.layControl.Name = "layControl";
             this.layControl.Root = this.layControlGroup;
-            this.layControl.Size = new System.Drawing.Size(977, 170);
+            this.layControl.Size = new System.Drawing.Size(854, 131);
             this.layControl.TabIndex = 0;
             this.layControl.Text = "layControl";
             // 
             // rdgIsCutAmount
             // 
             this.rdgIsCutAmount.EditValue = false;
-            this.rdgIsCutAmount.Location = new System.Drawing.Point(105, 128);
-            this.rdgIsCutAmount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.rdgIsCutAmount.Location = new System.Drawing.Point(87, 112);
             this.rdgIsCutAmount.Name = "rdgIsCutAmount";
             this.rdgIsCutAmount.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.rdgIsCutAmount.Properties.Appearance.Options.UseBackColor = true;
@@ -114,7 +111,7 @@
             this.rdgIsCutAmount.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem(false, "否"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(true, "是")});
-            this.rdgIsCutAmount.Size = new System.Drawing.Size(141, 30);
+            this.rdgIsCutAmount.Size = new System.Drawing.Size(124, 25);
             this.rdgIsCutAmount.StyleController = this.layControl;
             this.rdgIsCutAmount.TabIndex = 2;
             // 
@@ -126,10 +123,9 @@
             this.txtUnqualifiedRemark.IsNullString = null;
             this.txtUnqualifiedRemark.IsNullValidate = false;
             this.txtUnqualifiedRemark.IsTransferAlphabetic = false;
-            this.txtUnqualifiedRemark.Location = new System.Drawing.Point(105, 99);
-            this.txtUnqualifiedRemark.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtUnqualifiedRemark.Location = new System.Drawing.Point(87, 87);
             this.txtUnqualifiedRemark.Name = "txtUnqualifiedRemark";
-            this.txtUnqualifiedRemark.Size = new System.Drawing.Size(860, 25);
+            this.txtUnqualifiedRemark.Size = new System.Drawing.Size(738, 21);
             this.txtUnqualifiedRemark.StyleController = this.layControl;
             this.txtUnqualifiedRemark.TabIndex = 3;
             // 
@@ -141,10 +137,9 @@
             this.txtDealSuggestion.IsNullString = null;
             this.txtDealSuggestion.IsNullValidate = false;
             this.txtDealSuggestion.IsTransferAlphabetic = false;
-            this.txtDealSuggestion.Location = new System.Drawing.Point(105, 70);
-            this.txtDealSuggestion.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDealSuggestion.Location = new System.Drawing.Point(87, 62);
             this.txtDealSuggestion.Name = "txtDealSuggestion";
-            this.txtDealSuggestion.Size = new System.Drawing.Size(860, 25);
+            this.txtDealSuggestion.Size = new System.Drawing.Size(738, 21);
             this.txtDealSuggestion.StyleController = this.layControl;
             this.txtDealSuggestion.TabIndex = 3;
             // 
@@ -156,10 +151,9 @@
             this.txtUnqualifiedCause.IsNullString = null;
             this.txtUnqualifiedCause.IsNullValidate = false;
             this.txtUnqualifiedCause.IsTransferAlphabetic = false;
-            this.txtUnqualifiedCause.Location = new System.Drawing.Point(105, 41);
-            this.txtUnqualifiedCause.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtUnqualifiedCause.Location = new System.Drawing.Point(87, 37);
             this.txtUnqualifiedCause.Name = "txtUnqualifiedCause";
-            this.txtUnqualifiedCause.Size = new System.Drawing.Size(860, 25);
+            this.txtUnqualifiedCause.Size = new System.Drawing.Size(738, 21);
             this.txtUnqualifiedCause.StyleController = this.layControl;
             this.txtUnqualifiedCause.TabIndex = 3;
             // 
@@ -171,11 +165,10 @@
             this.txtBlame.IsNullString = null;
             this.txtBlame.IsNullValidate = false;
             this.txtBlame.IsTransferAlphabetic = true;
-            this.txtBlame.Location = new System.Drawing.Point(582, 12);
-            this.txtBlame.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtBlame.Location = new System.Drawing.Point(494, 12);
             this.txtBlame.Name = "txtBlame";
             this.txtBlame.Properties.ReadOnly = true;
-            this.txtBlame.Size = new System.Drawing.Size(383, 25);
+            this.txtBlame.Size = new System.Drawing.Size(331, 21);
             this.txtBlame.StyleController = this.layControl;
             this.txtBlame.TabIndex = 3;
             // 
@@ -187,10 +180,9 @@
             this.txtUnqualifiedCode.IsNullString = "记录编号不能为空。";
             this.txtUnqualifiedCode.IsNullValidate = true;
             this.txtUnqualifiedCode.IsTransferAlphabetic = false;
-            this.txtUnqualifiedCode.Location = new System.Drawing.Point(105, 12);
-            this.txtUnqualifiedCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtUnqualifiedCode.Location = new System.Drawing.Point(87, 12);
             this.txtUnqualifiedCode.Name = "txtUnqualifiedCode";
-            this.txtUnqualifiedCode.Size = new System.Drawing.Size(380, 25);
+            this.txtUnqualifiedCode.Size = new System.Drawing.Size(328, 21);
             this.txtUnqualifiedCode.StyleController = this.layControl;
             this.txtUnqualifiedCode.TabIndex = 2;
             // 
@@ -211,7 +203,7 @@
             this.layBlame});
             this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
-            this.layControlGroup.Size = new System.Drawing.Size(977, 170);
+            this.layControlGroup.Size = new System.Drawing.Size(837, 149);
             this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layControlGroup.Text = "不合格品记录";
             this.layControlGroup.TextVisible = false;
@@ -222,56 +214,57 @@
             this.layUnqualifiedCode.CustomizationFormText = "记录编号";
             this.layUnqualifiedCode.Location = new System.Drawing.Point(0, 0);
             this.layUnqualifiedCode.Name = "layUnqualifiedCode";
-            this.layUnqualifiedCode.Size = new System.Drawing.Size(477, 29);
+            this.layUnqualifiedCode.Size = new System.Drawing.Size(407, 25);
             this.layUnqualifiedCode.Text = "记录编号";
-            this.layUnqualifiedCode.TextSize = new System.Drawing.Size(90, 20);
+            this.layUnqualifiedCode.TextSize = new System.Drawing.Size(72, 17);
             // 
             // layUnqualifiedCause
             // 
             this.layUnqualifiedCause.Control = this.txtUnqualifiedCause;
             this.layUnqualifiedCause.CustomizationFormText = "不合格原因";
-            this.layUnqualifiedCause.Location = new System.Drawing.Point(0, 29);
+            this.layUnqualifiedCause.Location = new System.Drawing.Point(0, 25);
             this.layUnqualifiedCause.Name = "layUnqualifiedCause";
-            this.layUnqualifiedCause.Size = new System.Drawing.Size(957, 29);
+            this.layUnqualifiedCause.Size = new System.Drawing.Size(817, 25);
             this.layUnqualifiedCause.Text = "不合格原因";
-            this.layUnqualifiedCause.TextSize = new System.Drawing.Size(90, 20);
+            this.layUnqualifiedCause.TextSize = new System.Drawing.Size(72, 17);
             // 
             // layDealSuggestion
             // 
             this.layDealSuggestion.Control = this.txtDealSuggestion;
             this.layDealSuggestion.CustomizationFormText = "处理意见";
-            this.layDealSuggestion.Location = new System.Drawing.Point(0, 58);
+            this.layDealSuggestion.Location = new System.Drawing.Point(0, 50);
             this.layDealSuggestion.Name = "layDealSuggestion";
-            this.layDealSuggestion.Size = new System.Drawing.Size(957, 29);
+            this.layDealSuggestion.Size = new System.Drawing.Size(817, 25);
             this.layDealSuggestion.Text = "处理意见";
-            this.layDealSuggestion.TextSize = new System.Drawing.Size(90, 20);
+            this.layDealSuggestion.TextSize = new System.Drawing.Size(72, 17);
             // 
             // layUnqualifiedRemark
             // 
             this.layUnqualifiedRemark.Control = this.txtUnqualifiedRemark;
             this.layUnqualifiedRemark.CustomizationFormText = "备注";
-            this.layUnqualifiedRemark.Location = new System.Drawing.Point(0, 87);
+            this.layUnqualifiedRemark.Location = new System.Drawing.Point(0, 75);
             this.layUnqualifiedRemark.Name = "layUnqualifiedRemark";
-            this.layUnqualifiedRemark.Size = new System.Drawing.Size(957, 29);
+            this.layUnqualifiedRemark.Size = new System.Drawing.Size(817, 25);
             this.layUnqualifiedRemark.Text = "备注";
-            this.layUnqualifiedRemark.TextSize = new System.Drawing.Size(90, 20);
+            this.layUnqualifiedRemark.TextSize = new System.Drawing.Size(72, 17);
             // 
             // layIsCutAmount
             // 
             this.layIsCutAmount.Control = this.rdgIsCutAmount;
             this.layIsCutAmount.CustomizationFormText = "是否削减库存";
-            this.layIsCutAmount.Location = new System.Drawing.Point(0, 116);
+            this.layIsCutAmount.Location = new System.Drawing.Point(0, 100);
             this.layIsCutAmount.Name = "layIsCutAmount";
-            this.layIsCutAmount.Size = new System.Drawing.Size(238, 34);
+            this.layIsCutAmount.Size = new System.Drawing.Size(203, 29);
             this.layIsCutAmount.Text = "是否削减库存";
-            this.layIsCutAmount.TextSize = new System.Drawing.Size(90, 20);
+            this.layIsCutAmount.TextSize = new System.Drawing.Size(72, 17);
+            this.layIsCutAmount.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
-            this.emptySpaceItem1.Location = new System.Drawing.Point(238, 116);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(203, 100);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(719, 34);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(614, 29);
             this.emptySpaceItem1.Text = "emptySpaceItem1";
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -279,21 +272,20 @@
             // 
             this.layBlame.Control = this.txtBlame;
             this.layBlame.CustomizationFormText = "责任部门(人)";
-            this.layBlame.Location = new System.Drawing.Point(477, 0);
+            this.layBlame.Location = new System.Drawing.Point(407, 0);
             this.layBlame.Name = "layBlame";
-            this.layBlame.Size = new System.Drawing.Size(480, 29);
+            this.layBlame.Size = new System.Drawing.Size(410, 25);
             this.layBlame.Text = "责任部门(人)";
-            this.layBlame.TextSize = new System.Drawing.Size(90, 20);
+            this.layBlame.TextSize = new System.Drawing.Size(72, 17);
             // 
             // pnlAction
             // 
             this.pnlAction.Controls.Add(this.btnCancel);
             this.pnlAction.Controls.Add(this.btnSave);
             this.pnlAction.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlAction.Location = new System.Drawing.Point(0, 621);
-            this.pnlAction.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pnlAction.Location = new System.Drawing.Point(0, 483);
             this.pnlAction.Name = "pnlAction";
-            this.pnlAction.Size = new System.Drawing.Size(981, 62);
+            this.pnlAction.Size = new System.Drawing.Size(858, 48);
             this.pnlAction.TabIndex = 1;
             // 
             // btnCancel
@@ -302,10 +294,9 @@
             this.btnCancel.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Appearance.Options.UseFont = true;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(879, 17);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCancel.Location = new System.Drawing.Point(769, 13);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(86, 30);
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "取消(&C)";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -315,10 +306,9 @@
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Appearance.Options.UseFont = true;
-            this.btnSave.Location = new System.Drawing.Point(759, 17);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnSave.Location = new System.Drawing.Point(664, 13);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(86, 30);
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "保存(&S)";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -329,35 +319,31 @@
             this.gpcButtom.AppearanceCaption.Options.UseFont = true;
             this.gpcButtom.Controls.Add(this.popupGrid);
             this.gpcButtom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gpcButtom.Location = new System.Drawing.Point(0, 174);
-            this.gpcButtom.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gpcButtom.Location = new System.Drawing.Point(0, 135);
             this.gpcButtom.Name = "gpcButtom";
-            this.gpcButtom.Size = new System.Drawing.Size(981, 447);
+            this.gpcButtom.Size = new System.Drawing.Size(858, 348);
             this.gpcButtom.TabIndex = 2;
-            this.gpcButtom.Text = "药品明细";
+            this.gpcButtom.Text = "产品明细";
             // 
             // popupGrid
             // 
             this.popupGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.popupGrid.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.popupGrid.IsCalculatePrice = false;
-            this.popupGrid.Location = new System.Drawing.Point(2, 28);
-            this.popupGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.popupGrid.Location = new System.Drawing.Point(2, 25);
             this.popupGrid.Name = "popupGrid";
             this.popupGrid.OperationName = "Unqualified";
-            this.popupGrid.Size = new System.Drawing.Size(977, 417);
+            this.popupGrid.Size = new System.Drawing.Size(854, 321);
             this.popupGrid.TabIndex = 2;
             this.popupGrid.PopupClosed += new DQS.Controls.PopupGrid.OnPopupClosedEventHandler(this.popupGrid_PopupClosed);
             // 
             // FrmSingleProductUnqualified
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(981, 683);
+            this.ClientSize = new System.Drawing.Size(858, 531);
             this.Controls.Add(this.gpcButtom);
             this.Controls.Add(this.pnlAction);
             this.Controls.Add(this.ftPanel);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmSingleProductUnqualified";

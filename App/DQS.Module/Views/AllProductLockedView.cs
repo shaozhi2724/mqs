@@ -38,22 +38,22 @@ namespace DQS.Module.Views
 			set { this.SetValue("锁定时间", value); } 
 		}
 
-		public string 药品编号
+		public string 产品编号
 		{
-			get { return (string)this.GetValue("药品编号"); } 
-			set { this.SetValue("药品编号", value); } 
+			get { return (string)this.GetValue("产品编号"); } 
+			set { this.SetValue("产品编号", value); } 
 		}
 
-		public string 药品名称
+		public string 产品名称
 		{
-			get { return (string)this.GetValue("药品名称"); } 
-			set { this.SetValue("药品名称", value); } 
+			get { return (string)this.GetValue("产品名称"); } 
+			set { this.SetValue("产品名称", value); } 
 		}
 
-		public string 药品名称Spell
+		public string 产品名称Spell
 		{
-			get { return (string)this.GetValue("药品名称Spell"); } 
-			set { this.SetValue("药品名称Spell", value); } 
+			get { return (string)this.GetValue("产品名称Spell"); } 
+			set { this.SetValue("产品名称Spell", value); } 
 		}
 
 		public string 生产厂商
@@ -62,10 +62,10 @@ namespace DQS.Module.Views
 			set { this.SetValue("生产厂商", value); } 
 		}
 
-		public string 规格
+		public string 规格型号
 		{
-			get { return (string)this.GetValue("规格"); } 
-			set { this.SetValue("规格", value); } 
+			get { return (string)this.GetValue("规格型号"); } 
+			set { this.SetValue("规格型号", value); } 
 		}
 
 		public string 剂型
@@ -74,10 +74,10 @@ namespace DQS.Module.Views
 			set { this.SetValue("剂型", value); } 
 		}
 
-		public string 药品类别
+		public string 产品类别
 		{
-			get { return (string)this.GetValue("药品类别"); } 
-			set { this.SetValue("药品类别", value); } 
+			get { return (string)this.GetValue("产品类别"); } 
+			set { this.SetValue("产品类别", value); } 
 		}
 
 		public string 单位
@@ -178,13 +178,13 @@ namespace DQS.Module.Views
 			this.Fields.Add("记录编号", AllProductLockedViewFields.记录编号);
 			this.Fields.Add("锁定人", AllProductLockedViewFields.锁定人);
 			this.Fields.Add("锁定时间", AllProductLockedViewFields.锁定时间);
-			this.Fields.Add("药品编号", AllProductLockedViewFields.药品编号);
-			this.Fields.Add("药品名称", AllProductLockedViewFields.药品名称);
-			this.Fields.Add("药品名称Spell", AllProductLockedViewFields.药品名称Spell);
+			this.Fields.Add("产品编号", AllProductLockedViewFields.产品编号);
+			this.Fields.Add("产品名称", AllProductLockedViewFields.产品名称);
+			this.Fields.Add("产品名称Spell", AllProductLockedViewFields.产品名称Spell);
 			this.Fields.Add("生产厂商", AllProductLockedViewFields.生产厂商);
-			this.Fields.Add("规格", AllProductLockedViewFields.规格);
+			this.Fields.Add("规格型号", AllProductLockedViewFields.规格型号);
 			this.Fields.Add("剂型", AllProductLockedViewFields.剂型);
-			this.Fields.Add("药品类别", AllProductLockedViewFields.药品类别);
+			this.Fields.Add("产品类别", AllProductLockedViewFields.产品类别);
 			this.Fields.Add("单位", AllProductLockedViewFields.单位);
 			this.Fields.Add("是否锁定批次", AllProductLockedViewFields.是否锁定批次);
 			this.Fields.Add("锁定的批号", AllProductLockedViewFields.锁定的批号);
@@ -227,19 +227,19 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllProductLocked", 3, "锁定时间", SqlDbType.DateTime); }
 		}
 
-		public static EntityField 药品编号
+		public static EntityField 产品编号
 		{
-			get { return new EntityField("vw_AllProductLocked", 4, "药品编号", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProductLocked", 4, "产品编号", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品名称
+		public static EntityField 产品名称
 		{
-			get { return new EntityField("vw_AllProductLocked", 5, "药品名称", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProductLocked", 5, "产品名称", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品名称Spell
+		public static EntityField 产品名称Spell
 		{
-			get { return new EntityField("vw_AllProductLocked", 6, "药品名称Spell", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProductLocked", 6, "产品名称Spell", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 生产厂商
@@ -247,9 +247,9 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllProductLocked", 7, "生产厂商", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 规格
+		public static EntityField 规格型号
 		{
-			get { return new EntityField("vw_AllProductLocked", 8, "规格", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProductLocked", 8, "规格型号", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 剂型
@@ -257,9 +257,9 @@ namespace DQS.Module.Views
 			get { return new EntityField("vw_AllProductLocked", 9, "剂型", SqlDbType.NVarChar); }
 		}
 
-		public static EntityField 药品类别
+		public static EntityField 产品类别
 		{
-			get { return new EntityField("vw_AllProductLocked", 10, "药品类别", SqlDbType.NVarChar); }
+			get { return new EntityField("vw_AllProductLocked", 10, "产品类别", SqlDbType.NVarChar); }
 		}
 
 		public static EntityField 单位

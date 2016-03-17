@@ -532,7 +532,7 @@
             this.tbPage2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tbPage2.Name = "tbPage2";
             this.tbPage2.Size = new System.Drawing.Size(942, 535);
-            this.tbPage2.Text = "授权管理药品";
+            this.tbPage2.Text = "授权管理产品";
             // 
             // GridDeputy
             // 

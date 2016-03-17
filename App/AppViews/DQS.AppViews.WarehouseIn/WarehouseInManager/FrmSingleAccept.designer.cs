@@ -408,7 +408,7 @@
             this.btnAttachment.Name = "btnAttachment";
             this.btnAttachment.Size = new System.Drawing.Size(116, 23);
             this.btnAttachment.TabIndex = 8;
-            this.btnAttachment.Text = "药品检验报告(&V)";
+            this.btnAttachment.Text = "产品检验报告(&V)";
             this.btnAttachment.Click += new System.EventHandler(this.btnAttachment_Click);
             // 
             // btnDealerQualification
@@ -432,7 +432,7 @@
             this.btnProductQualification.Name = "btnProductQualification";
             this.btnProductQualification.Size = new System.Drawing.Size(129, 23);
             this.btnProductQualification.TabIndex = 6;
-            this.btnProductQualification.Text = "药品电子档案(&A)";
+            this.btnProductQualification.Text = "产品电子档案(&A)";
             this.btnProductQualification.Click += new System.EventHandler(this.btnProductQualification_Click);
             // 
             // btnPrint

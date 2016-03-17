@@ -37,9 +37,12 @@ namespace DQS.AppViews.OtherOperation.Finance
         /// </summary>
         private void GainData()
         {
+            string type = "";
+            if (table == "FIN_MakeCollectionsOnPassage") { type = "客户"; }
+            if (table == "FIN_PaymentOnPassage") { type = "供应商"; }
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sql = @"SELECT DealerCode AS [编号],DealerName AS [名称],DealerSpell AS [简拼] FROM " + table + " WHERE (DealerCode LIKE '%" + txtDealerName.Text.Trim() + "%' OR DealerName LIKE '%" + txtDealerName.Text.Trim() + "%' OR DealerSpell LIKE '%" + txtDealerName.Text.Trim() + "%') GROUP BY DealerCode,DealerName,DealerSpell";
+                string sql = @"SELECT DealerCode AS [编号],DealerName AS [名称],DealerSpell AS [简拼] FROM BFI_Dealer WHERE DealerType = '" + type + "' AND (DealerCode LIKE '%" + txtDealerName.Text.Trim() + "%' OR DealerName LIKE '%" + txtDealerName.Text.Trim() + "%' OR DealerSpell LIKE '%" + txtDealerName.Text.Trim() + "%')";
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 try

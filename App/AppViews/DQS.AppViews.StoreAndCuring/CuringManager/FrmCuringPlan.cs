@@ -24,15 +24,15 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
 
         protected override void CustomModify(bool isView)
         {
-            object productID = this.gvData.GetFocusedRowCellValue("药品ID");
-            object productCode = this.gvData.GetFocusedRowCellValue("药品编号");
-            object productName = this.gvData.GetFocusedRowCellValue("药品名称");
-            object productSpec = this.gvData.GetFocusedRowCellValue("规格");
+            object productID = this.gvData.GetFocusedRowCellValue("产品ID");
+            object productCode = this.gvData.GetFocusedRowCellValue("产品编号");
+            object productName = this.gvData.GetFocusedRowCellValue("产品名称");
+            object productSpec = this.gvData.GetFocusedRowCellValue("规格型号");
             object productUnit = this.gvData.GetFocusedRowCellValue("单位");
-            object packageSpec = this.gvData.GetFocusedRowCellValue("包装规格");
+            object packageSpec = this.gvData.GetFocusedRowCellValue("包装规格型号");
             object physicType = this.gvData.GetFocusedRowCellValue("剂型");
-            object productStyle = this.gvData.GetFocusedRowCellValue("药品类别");
-            object authorizedNo = this.gvData.GetFocusedRowCellValue("批准文号");
+            object productStyle = this.gvData.GetFocusedRowCellValue("产品类别");
+            object authorizedNo = this.gvData.GetFocusedRowCellValue("注册证号");
             object producerName = this.gvData.GetFocusedRowCellValue("生产厂商");
 
 
@@ -123,15 +123,15 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
 
         protected override void CustomModify()
         {
-            object productID = this.gvData.GetFocusedRowCellValue("药品ID");
-            object productCode = this.gvData.GetFocusedRowCellValue("药品编号");
-            object productName = this.gvData.GetFocusedRowCellValue("药品名称");
-            object productSpec = this.gvData.GetFocusedRowCellValue("规格");
+            object productID = this.gvData.GetFocusedRowCellValue("产品ID");
+            object productCode = this.gvData.GetFocusedRowCellValue("产品编号");
+            object productName = this.gvData.GetFocusedRowCellValue("产品名称");
+            object productSpec = this.gvData.GetFocusedRowCellValue("规格型号");
             object productUnit = this.gvData.GetFocusedRowCellValue("单位");
-            object packageSpec = this.gvData.GetFocusedRowCellValue("包装规格");
+            object packageSpec = this.gvData.GetFocusedRowCellValue("包装规格型号");
             object physicType = this.gvData.GetFocusedRowCellValue("剂型");
-            object productStyle = this.gvData.GetFocusedRowCellValue("药品类别");
-            object authorizedNo = this.gvData.GetFocusedRowCellValue("批准文号");
+            object productStyle = this.gvData.GetFocusedRowCellValue("产品类别");
+            object authorizedNo = this.gvData.GetFocusedRowCellValue("注册证号");
             object producerName = this.gvData.GetFocusedRowCellValue("生产厂商");
 
 
@@ -139,6 +139,9 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
             object amount = this.gvData.GetFocusedRowCellValue("库存数量");
             object produceDate = this.gvData.GetFocusedRowCellValue("生产日期");
             object validateDate = this.gvData.GetFocusedRowCellValue("有效期至");
+            object SterilizationBatchNo = this.gvData.GetFocusedRowCellValue("灭菌批号");
+            object SterilizationDate = this.gvData.GetFocusedRowCellValue("灭菌日期");
+            object InStoreID = this.gvData.GetFocusedRowCellValue("入库ID");
             using (FrmSingleCuringRecord frmSingleCuringRecord = new FrmSingleCuringRecord(productID))
             {
                 if (productCode != null && productCode != DBNull.Value)
@@ -204,6 +207,21 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
                 if (validateDate != null && validateDate != DBNull.Value)
                 {
                     frmSingleCuringRecord.txtValidateDate.Text = Convert.ToDateTime(validateDate).ToString("yyyy-MM-dd");
+                }
+
+                if (SterilizationBatchNo != null && SterilizationBatchNo != DBNull.Value)
+                {
+                    frmSingleCuringRecord.txtSterilizationBatchNo.Text = SterilizationBatchNo.ToString();
+                }
+
+                if (SterilizationDate != null && SterilizationDate != DBNull.Value)
+                {
+                    frmSingleCuringRecord.txtSterilizationDate.Text = Convert.ToDateTime(SterilizationDate).ToString("yyyy-MM-dd");
+                }
+
+                if (InStoreID != null && InStoreID != DBNull.Value)
+                {
+                    frmSingleCuringRecord.txtInStoreID.Text = InStoreID.ToString();
                 }
 
                 DialogResult result = frmSingleCuringRecord.ShowDialog();

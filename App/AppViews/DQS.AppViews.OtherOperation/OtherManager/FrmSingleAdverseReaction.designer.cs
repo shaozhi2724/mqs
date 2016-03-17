@@ -235,20 +235,20 @@
             // 
             this.txtPopupProduct.AlphabeticFiled = null;
             this.txtPopupProduct.EditData = null;
-            this.txtPopupProduct.Fields = "药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,包装规格,剂型,药品类别,批准文号";
+            this.txtPopupProduct.Fields = "产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,产品类别,注册证号";
             this.txtPopupProduct.Filter = null;
-            this.txtPopupProduct.FormatQueryString = "[药品编号] LIKE \'%{0}%\' OR [药品名称] LIKE \'%{0}%\' OR [药品名称Spell] LIKE \'%{0}%\'";
+            this.txtPopupProduct.FormatQueryString = "[产品编号] LIKE \'%{0}%\' OR [产品名称] LIKE \'%{0}%\' OR [产品名称Spell] LIKE \'%{0}%\'";
             this.txtPopupProduct.IsIntegerOnly = false;
-            this.txtPopupProduct.IsNullString = "药品名称不能为空。";
+            this.txtPopupProduct.IsNullString = "产品名称不能为空。";
             this.txtPopupProduct.IsNullValidate = true;
             this.txtPopupProduct.IsTransferAlphabetic = false;
             this.txtPopupProduct.Location = new System.Drawing.Point(120, 128);
             this.txtPopupProduct.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtPopupProduct.MemberText = "药品名称";
-            this.txtPopupProduct.MemberValue = "药品ID";
+            this.txtPopupProduct.MemberText = "产品名称";
+            this.txtPopupProduct.MemberValue = "产品ID";
             this.txtPopupProduct.Name = "txtPopupProduct";
             this.txtPopupProduct.PageSize = 0;
-            this.txtPopupProduct.PrimaryField = "药品ID";
+            this.txtPopupProduct.PrimaryField = "产品ID";
             this.txtPopupProduct.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtPopupProduct.Properties.Appearance.Options.UseBackColor = true;
             this.txtPopupProduct.Properties.ReadOnly = true;
@@ -440,7 +440,7 @@
             // 
             this.layControlGroup.AppearanceItemCaption.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.layControlGroup.AppearanceItemCaption.Options.UseFont = true;
-            this.layControlGroup.CustomizationFormText = "药品不良反应记录";
+            this.layControlGroup.CustomizationFormText = "产品不良反应记录";
             this.layControlGroup.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.layControlGroup.GroupBordersVisible = false;
             this.layControlGroup.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
@@ -464,7 +464,7 @@
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(641, 350);
             this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layControlGroup.Text = "药品不良反应记录";
+            this.layControlGroup.Text = "产品不良反应记录";
             this.layControlGroup.TextVisible = false;
             // 
             // layReactionCode
@@ -643,7 +643,7 @@
             this.Name = "FrmSingleAdverseReaction";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "药品不良反应记录";
+            this.Text = "产品不良反应记录";
             this.Load += new System.EventHandler(this.FrmSingleAdverseReaction_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pnOperating)).EndInit();
             this.pnOperating.ResumeLayout(false);

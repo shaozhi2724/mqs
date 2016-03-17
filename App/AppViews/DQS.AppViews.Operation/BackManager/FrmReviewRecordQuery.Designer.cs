@@ -174,9 +174,9 @@
             // 
             this.txtProductName.AlphabeticFiled = null;
             this.txtProductName.EditData = null;
-            this.txtProductName.Fields = "药品ID,药品编号,药品名称,药品名称Spell,生产厂商,规格,包装规格,剂型,药品类别,批准文号";
+            this.txtProductName.Fields = "产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,产品类别,注册证号";
             this.txtProductName.Filter = null;
-            this.txtProductName.FormatQueryString = "[药品编号] LIKE \'%{0}%\' OR [药品名称] LIKE \'%{0}%\' OR [药品名称Spell] LIKE \'%{0}%\'";
+            this.txtProductName.FormatQueryString = "[产品编号] LIKE \'%{0}%\' OR [产品名称] LIKE \'%{0}%\' OR [产品名称Spell] LIKE \'%{0}%\'";
             this.txtProductName.GroupColumn = null;
             this.txtProductName.IsIntegerOnly = false;
             this.txtProductName.IsNullString = null;
@@ -184,11 +184,11 @@
             this.txtProductName.IsTransferAlphabetic = false;
             this.txtProductName.Location = new System.Drawing.Point(75, 41);
             this.txtProductName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtProductName.MemberText = "药品名称";
-            this.txtProductName.MemberValue = "药品ID";
+            this.txtProductName.MemberText = "产品名称";
+            this.txtProductName.MemberValue = "产品ID";
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.PageSize = 0;
-            this.txtProductName.PrimaryField = "药品ID";
+            this.txtProductName.PrimaryField = "产品ID";
             this.txtProductName.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtProductName.Properties.Appearance.Options.UseBackColor = true;
             this.txtProductName.Properties.ReadOnly = true;
@@ -235,11 +235,11 @@
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.txtProductName;
-            this.layoutControlItem2.CustomizationFormText = "药品名称";
+            this.layoutControlItem2.CustomizationFormText = "产品名称";
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 29);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(978, 34);
-            this.layoutControlItem2.Text = "药品名称";
+            this.layoutControlItem2.Text = "产品名称";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(60, 18);
             this.layoutControlItem2.TextToControlDistance = 5;
             // 

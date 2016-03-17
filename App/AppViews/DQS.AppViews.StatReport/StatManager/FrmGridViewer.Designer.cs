@@ -29,15 +29,17 @@
         private void InitializeComponent()
         {
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.lblEndDate = new DevExpress.XtraEditors.LabelControl();
-            this.lblStartDate = new DevExpress.XtraEditors.LabelControl();
-            this.deEndDate = new DevExpress.XtraEditors.DateEdit();
-            this.deStartDate = new DevExpress.XtraEditors.DateEdit();
+            this.btnChooseSearch = new DevExpress.XtraEditors.SimpleButton();
+            this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.btnReSet = new DevExpress.XtraEditors.SimpleButton();
+            this.deEndDate = new DevExpress.XtraEditors.DateEdit();
+            this.deStartDate = new DevExpress.XtraEditors.DateEdit();
             this.gridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.lblStartDate = new DevExpress.XtraEditors.LabelControl();
+            this.lblEndDate = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties.VistaTimeProperties)).BeginInit();
@@ -54,59 +56,37 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelControl1.Controls.Add(this.lblEndDate);
             this.panelControl1.Controls.Add(this.lblStartDate);
-            this.panelControl1.Controls.Add(this.deEndDate);
-            this.panelControl1.Controls.Add(this.deStartDate);
+            this.panelControl1.Controls.Add(this.btnChooseSearch);
+            this.panelControl1.Controls.Add(this.btnPrint);
             this.panelControl1.Controls.Add(this.btnExport);
             this.panelControl1.Controls.Add(this.btnSearch);
+            this.panelControl1.Controls.Add(this.deEndDate);
+            this.panelControl1.Controls.Add(this.deStartDate);
             this.panelControl1.Controls.Add(this.btnReSet);
             this.panelControl1.Location = new System.Drawing.Point(3, 3);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(791, 41);
             this.panelControl1.TabIndex = 0;
             // 
-            // lblEndDate
+            // btnChooseSearch
             // 
-            this.lblEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblEndDate.Location = new System.Drawing.Point(644, 14);
-            this.lblEndDate.Name = "lblEndDate";
-            this.lblEndDate.Size = new System.Drawing.Size(24, 14);
-            this.lblEndDate.TabIndex = 3;
-            this.lblEndDate.Text = "至：";
+            this.btnChooseSearch.Location = new System.Drawing.Point(333, 9);
+            this.btnChooseSearch.Name = "btnChooseSearch";
+            this.btnChooseSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnChooseSearch.TabIndex = 1;
+            this.btnChooseSearch.Text = "查询条件";
+            this.btnChooseSearch.Visible = false;
+            this.btnChooseSearch.Click += new System.EventHandler(this.btnChooseSearch_Click);
             // 
-            // lblStartDate
+            // btnPrint
             // 
-            this.lblStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblStartDate.Location = new System.Drawing.Point(472, 14);
-            this.lblStartDate.Name = "lblStartDate";
-            this.lblStartDate.Size = new System.Drawing.Size(60, 14);
-            this.lblStartDate.TabIndex = 3;
-            this.lblStartDate.Text = "开始日期：";
-            // 
-            // deEndDate
-            // 
-            this.deEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.deEndDate.EditValue = null;
-            this.deEndDate.Location = new System.Drawing.Point(674, 11);
-            this.deEndDate.Name = "deEndDate";
-            this.deEndDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deEndDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.deEndDate.Size = new System.Drawing.Size(100, 21);
-            this.deEndDate.TabIndex = 2;
-            // 
-            // deStartDate
-            // 
-            this.deStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.deStartDate.EditValue = null;
-            this.deStartDate.Location = new System.Drawing.Point(538, 11);
-            this.deStartDate.Name = "deStartDate";
-            this.deStartDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deStartDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.deStartDate.Size = new System.Drawing.Size(100, 21);
-            this.deStartDate.TabIndex = 2;
+            this.btnPrint.Location = new System.Drawing.Point(252, 9);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(75, 23);
+            this.btnPrint.TabIndex = 1;
+            this.btnPrint.Text = "打印";
+            this.btnPrint.Visible = false;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnExport
             // 
@@ -135,15 +115,41 @@
             this.btnReSet.Text = "重置";
             this.btnReSet.Click += new System.EventHandler(this.btnReSet_Click);
             // 
+            // deEndDate
+            // 
+            this.deEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.deEndDate.EditValue = null;
+            this.deEndDate.Location = new System.Drawing.Point(679, 9);
+            this.deEndDate.Name = "deEndDate";
+            this.deEndDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deEndDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.deEndDate.Size = new System.Drawing.Size(104, 21);
+            this.deEndDate.TabIndex = 2;
+            // 
+            // deStartDate
+            // 
+            this.deStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.deStartDate.EditValue = null;
+            this.deStartDate.Location = new System.Drawing.Point(530, 9);
+            this.deStartDate.Name = "deStartDate";
+            this.deStartDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deStartDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.deStartDate.Size = new System.Drawing.Size(104, 21);
+            this.deStartDate.TabIndex = 2;
+            // 
             // gridControl
             // 
             this.gridControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridControl.Location = new System.Drawing.Point(3, 47);
+            this.gridControl.Location = new System.Drawing.Point(3, 46);
             this.gridControl.MainView = this.gridView;
             this.gridControl.Name = "gridControl";
-            this.gridControl.Size = new System.Drawing.Size(791, 420);
+            this.gridControl.Size = new System.Drawing.Size(791, 421);
             this.gridControl.TabIndex = 1;
             this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView});
@@ -155,6 +161,24 @@
             this.gridView.Name = "gridView";
             this.gridView.OptionsView.ShowFooter = true;
             this.gridView.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
+            // 
+            // lblStartDate
+            // 
+            this.lblStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblStartDate.Location = new System.Drawing.Point(464, 12);
+            this.lblStartDate.Name = "lblStartDate";
+            this.lblStartDate.Size = new System.Drawing.Size(60, 14);
+            this.lblStartDate.TabIndex = 3;
+            this.lblStartDate.Text = "开始时间：";
+            // 
+            // lblEndDate
+            // 
+            this.lblEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblEndDate.Location = new System.Drawing.Point(649, 12);
+            this.lblEndDate.Name = "lblEndDate";
+            this.lblEndDate.Size = new System.Drawing.Size(24, 14);
+            this.lblEndDate.TabIndex = 3;
+            this.lblEndDate.Text = "至：";
             // 
             // FrmGridViewer
             // 
@@ -187,9 +211,11 @@
         private DevExpress.XtraEditors.SimpleButton btnExport;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
         private DevExpress.XtraEditors.SimpleButton btnReSet;
-        private DevExpress.XtraEditors.LabelControl lblEndDate;
-        private DevExpress.XtraEditors.LabelControl lblStartDate;
         private DevExpress.XtraEditors.DateEdit deEndDate;
         private DevExpress.XtraEditors.DateEdit deStartDate;
+        private DevExpress.XtraEditors.SimpleButton btnPrint;
+        private DevExpress.XtraEditors.SimpleButton btnChooseSearch;
+        private DevExpress.XtraEditors.LabelControl lblEndDate;
+        private DevExpress.XtraEditors.LabelControl lblStartDate;
     }
 }

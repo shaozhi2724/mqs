@@ -105,7 +105,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
                         if (data.Rows.Count <= 0)
                         {
-                            XtraMessageBox.Show("系统未设置您的审批流程，无法进行药品销毁处理。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            XtraMessageBox.Show("系统未设置您的审批流程，无法进行产品销毁处理。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return;
                         }
                         #region 新建
@@ -127,8 +127,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                         Dictionary<int, string> selectedProducts = new Dictionary<int, string>();
                         for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
                         {
-                            object productID = this.popupGrid.PopupView.GetRowCellValue(i, "药品ID");
-                            object productName = this.popupGrid.PopupView.GetRowCellValue(i, "药品名称");
+                            object productID = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
+                            object productName = this.popupGrid.PopupView.GetRowCellValue(i, "产品名称");
 
                             if (productID != null && productID != DBNull.Value 
                                 && productName != null && productName != DBNull.Value)
@@ -144,7 +144,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                             BUSProdcutDestroyDetailEntity child = childEntity as BUSProdcutDestroyDetailEntity;
                             child.DestroyID = entity.DestroyID;
                             child.Save();
-                            message.AppendLine(string.Format("{0}. 药品：{1}，批号：{2}，数量：{3}", 
+                            message.AppendLine(string.Format("{0}. 产品：{1}，批号：{2}，数量：{3}", 
                                 index,
                                 selectedProducts[child.ProductID],
                                 child.BatchNo,
@@ -165,8 +165,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                             approveEntity.InternalNo = "SH-" + entity.DestroyCode.Substring(2);
                             approveEntity.DocumentCode = "ProductDestroy";
                             approveEntity.BillCode = entity.DestroyCode;
-                            approveEntity.ApproveTitle = string.Format("药品销毁，编号：{0}", entity.DestroyCode);
-                            approveEntity.ApprovalContent = String.Format("药品销毁 {0}:{2}{1}{2} 申请审批。", entity.DestroyCode, message.ToString(), Environment.NewLine);
+                            approveEntity.ApproveTitle = string.Format("产品销毁，编号：{0}", entity.DestroyCode);
+                            approveEntity.ApprovalContent = String.Format("产品销毁 {0}:{2}{1}{2} 申请审批。", entity.DestroyCode, message.ToString(), Environment.NewLine);
                             approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                             approveEntity.CreateDate = DateTime.Now;
                             approveEntity.IsApprovaled = false;
@@ -192,7 +192,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                                 notification.TargetID = entity.DestroyID;
                                 notification.TargetCode = entity.DestroyCode;
                                 notification.ApproveCode = approveCode;
-                                notification.Message = string.Format("{0} 于 {1} 申请药品销毁（单号 {2}）。请您审批。", userName,
+                                notification.Message = string.Format("{0} 于 {1} 申请产品销毁（单号 {2}）。请您审批。", userName,
                                     DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.DestroyCode);
                                 notification.OwnerUserID = approvalUserId;
                                 notification.Save();

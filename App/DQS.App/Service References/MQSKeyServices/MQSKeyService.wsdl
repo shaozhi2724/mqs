@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.bokesys.com/MQS/MQSKeyService" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.bokesys.com/MQS/MQSKeyService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.bokesys.com/MQS/MQSKeyService">
+      <s:element name="GetClientInfos">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetClientInfosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetClientInfosResult" type="tns:ArrayOfClientKeyInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfClientKeyInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ClientKeyInfo" nillable="true" type="tns:ClientKeyInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ClientKeyInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="KeyHid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KeyVersion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KeyDecryptedContent" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnterpriseName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrganizationCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Industry" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnterpriseType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnterpriseLevel" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="EmployeeCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnterpriseMail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnterpriseWebsite" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnterpriseAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnterprisePostCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnterprisePhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnterpriseFax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContactPerson" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContactPhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RegisterAddress" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RegisterDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="RegisterLicenseNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RegisterTaxNo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LicenseValidateDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="TradeLicenseValidateDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClientMacAddress" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="InstallDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="InfoSendDate" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SubmitClientInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="info" type="tns:ClientKeyInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitClientInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SubmitClientInfoResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArrayOfClientKeyInfo" nillable="true" type="tns:ArrayOfClientKeyInfo" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetClientInfosSoapIn">
+    <wsdl:part name="parameters" element="tns:GetClientInfos" />
+  </wsdl:message>
+  <wsdl:message name="GetClientInfosSoapOut">
+    <wsdl:part name="parameters" element="tns:GetClientInfosResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitClientInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitClientInfo" />
+  </wsdl:message>
+  <wsdl:message name="SubmitClientInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitClientInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetClientInfosHttpGetIn" />
+  <wsdl:message name="GetClientInfosHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfClientKeyInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetClientInfosHttpPostIn" />
+  <wsdl:message name="GetClientInfosHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfClientKeyInfo" />
+  </wsdl:message>
+  <wsdl:portType name="MQSKeyServiceSoap">
+    <wsdl:operation name="GetClientInfos">
+      <wsdl:input message="tns:GetClientInfosSoapIn" />
+      <wsdl:output message="tns:GetClientInfosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitClientInfo">
+      <wsdl:input message="tns:SubmitClientInfoSoapIn" />
+      <wsdl:output message="tns:SubmitClientInfoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MQSKeyServiceHttpGet">
+    <wsdl:operation name="GetClientInfos">
+      <wsdl:input message="tns:GetClientInfosHttpGetIn" />
+      <wsdl:output message="tns:GetClientInfosHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MQSKeyServiceHttpPost">
+    <wsdl:operation name="GetClientInfos">
+      <wsdl:input message="tns:GetClientInfosHttpPostIn" />
+      <wsdl:output message="tns:GetClientInfosHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MQSKeyServiceSoap" type="tns:MQSKeyServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetClientInfos">
+      <soap:operation soapAction="http://www.bokesys.com/MQS/MQSKeyService/GetClientInfos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitClientInfo">
+      <soap:operation soapAction="http://www.bokesys.com/MQS/MQSKeyService/SubmitClientInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MQSKeyServiceSoap12" type="tns:MQSKeyServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetClientInfos">
+      <soap12:operation soapAction="http://www.bokesys.com/MQS/MQSKeyService/GetClientInfos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitClientInfo">
+      <soap12:operation soapAction="http://www.bokesys.com/MQS/MQSKeyService/SubmitClientInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MQSKeyServiceHttpGet" type="tns:MQSKeyServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetClientInfos">
+      <http:operation location="/GetClientInfos" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MQSKeyServiceHttpPost" type="tns:MQSKeyServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetClientInfos">
+      <http:operation location="/GetClientInfos" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MQSKeyService">
+    <wsdl:port name="MQSKeyServiceSoap" binding="tns:MQSKeyServiceSoap">
+      <soap:address location="http://www.bokesys.com/MQS/MQSKeyService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MQSKeyServiceSoap12" binding="tns:MQSKeyServiceSoap12">
+      <soap12:address location="http://www.bokesys.com/MQS/MQSKeyService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MQSKeyServiceHttpGet" binding="tns:MQSKeyServiceHttpGet">
+      <http:address location="http://www.bokesys.com/MQS/MQSKeyService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MQSKeyServiceHttpPost" binding="tns:MQSKeyServiceHttpPost">
+      <http:address location="http://www.bokesys.com/MQS/MQSKeyService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

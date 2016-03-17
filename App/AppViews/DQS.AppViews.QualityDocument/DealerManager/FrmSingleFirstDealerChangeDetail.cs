@@ -244,8 +244,8 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                 if (industryStyle == "生产厂商")
                 {
                     /*//如果是生产企业
-                        药品生产许可证
-                        药品GMP证书
+                        产品生产许可证
+                        产品GMP证书
                         印章印模
                         随货同行单
                          */
@@ -285,8 +285,8 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                     else
                     {
                         /*//如果是经营企业
-                        药品经营许可证
-                        药品GSP证书"*/
+                        产品经营许可证
+                        产品GSP证书"*/
                         certificateTypeName = "经营企业证书";
                     }
                     DataTable requiredRecords = GlobalMethod.GetViewData(RequiredCertificatesViewName,

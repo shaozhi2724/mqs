@@ -53,7 +53,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             this.MinimizeBox = false;
             this.Name = "FrmAcceptAttachmentPreview";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "药品检验报告预览";
+            this.Text = "产品检验报告预览";
             this.Load += new System.EventHandler(this.FrmAcceptAttachmentPreview_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picAttachment.Properties)).EndInit();
             this.ResumeLayout(false);

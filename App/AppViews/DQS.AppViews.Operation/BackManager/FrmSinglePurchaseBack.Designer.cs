@@ -260,7 +260,7 @@
             // 
             this.txtDealerName.AlphabeticFiled = "DealerSpell";
             this.txtDealerName.EditData = null;
-            this.txtDealerName.Fields = "单位ID,单位编号,单位名称,单位名称Spell,单位类型,通讯地址";
+            this.txtDealerName.Fields = "单位ID,单位编号,单位名称,单位名称Spell,单位类型,通讯地址,过期状态";
             this.txtDealerName.Filter = null;
             this.txtDealerName.FormatQueryString = "[单位编号] LIKE \'%{0}%\' OR ([单位名称] LIKE \'%{0}%\' OR [单位名称Spell] LIKE \'%{0}%\')";
             this.txtDealerName.GroupColumn = null;

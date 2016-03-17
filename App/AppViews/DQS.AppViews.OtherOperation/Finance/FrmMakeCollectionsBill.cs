@@ -139,39 +139,43 @@ namespace DQS.AppViews.OtherOperation.Finance
             }
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sql = @"SELECT 
-	onp.MakeCollectionsOnPassageID AS [OnPassageID],
-	onp.BusinessBillID AS [StoreID],
-	onp.BusinessBillCode AS [单据编码],
-	onp.DealerCode AS [往来单位编码],
-	onp.DealerName AS [往来单位名称],
-	onp.DealerSpell AS [往来单位简拼],
-	onp.DealerType AS [往来单位类型],
-	fm.OperatePerson AS [开票员],
-	fm.BusinessPerson AS [业务员],
-	fm.BusinessBillDate AS [下单日期],
-	fm.StoreOutPerson AS [出库人],
-	fm.StoreOutDate AS [出库日期],
-	onp.BusinessBillDetailID AS [DetailID],
-	onp.ProductName AS [药品名称],
-	onp.BatchNo AS [批号],
-	onp.Amount AS [数量],
-	onp.TotalPrice AS [金额],
-	onp.PackageSpec AS [包装规格],
-	onp.ProducerName AS [生产厂商],
-	onp.ProductStyle AS [类别],
-	onp.PhysicType AS [剂型],
-	onp.AuthorizedNo AS [批准文号],
-	onp.ProduceDate AS [生产日期],
-	onp.ValidateDate AS [有效期],
-	onp.PackageSpec AS [包装规格],
-	onp.TotalPrice AS [含税金额],
-	CONVERT(DECIMAL(18,2), onp.TotalPrice/{1}) AS [不含税金额],
-	{0} AS [税率],
-	CONVERT(DECIMAL(18,2), onp.TotalPrice/{1}*{2}) AS [税额]
-FROM dbo.FIN_MakeCollectionsOnPassageDetail onp 
-INNER JOIN dbo.FIN_MakeCollectionsOnPassage fm ON onp.BusinessBillID = fm.BusinessBillID
-WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsBillDetail nr WHERE onp.BusinessBillDetailID = nr.BusinessBillDetailID) AND onp.BusinessBillDetailID IN (" + StoreID + ")";
+                string sql = @"SELECT  b.BillID AS StoreID,
+		BillCode AS [单据编码],
+		DealerCode AS [单位编码],
+		DealerName AS [单位名称],
+		b.Reservation6 AS [开票员],
+		b.Operator AS [业务员],
+		b.BillDate AS [下单日期],
+		bd.DetailID,
+		ProductName AS [产品名称],
+		BatchNo AS [批号],
+		CASE b.IsBillIn
+		WHEN 0 THEN Amount
+		ELSE -Amount
+		END AS [数量],
+		UnitPrice AS [单价],
+		CASE b.IsBillIn
+		WHEN 0 THEN bd.TotalPrice
+		ELSE -bd.TotalPrice
+		END AS [含税金额],
+		CONVERT(DECIMAL(18,2), 
+        CASE b.IsBillIn
+		WHEN 0 THEN bd.TotalPrice
+		ELSE -bd.TotalPrice
+		END/{1}) AS [不含税金额],
+		{0} AS [税率],
+		CONVERT(DECIMAL(18,2), 
+        CASE b.IsBillIn
+		WHEN 0 THEN bd.TotalPrice
+		ELSE -bd.TotalPrice
+		END/{1}*{2}) AS [税额],
+		ProducerName AS [生产厂商],
+		ProductUnit AS [单位],
+		PackageSpec AS [包装规格]
+FROM dbo.BUS_Bill b
+INNER JOIN dbo.BUS_BillDetail bd ON b.BillID = bd.BillID
+INNER JOIN dbo.BFI_Product p ON bd.ProductID = p.ProductID
+WHERE bd.DetailID IN (" + StoreID + ")";
                 sql = String.Format(sql, tax, taxadd, taxabate);
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
@@ -332,13 +336,13 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsBillDetail nr WHERE onp.Bu
             }
             else if (txtVoucherCode.Text.Trim() == "")
             {
-                XtraMessageBox.Show("请填写税号！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show("请填写发票号！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtVoucherCode.Focus();
                 return false;
             }
             else if (txtTaxCode.Text.Trim() == "")
             {
-                XtraMessageBox.Show("请填写发票号！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show("请填写税号！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtTaxCode.Focus();
                 return false;
             }

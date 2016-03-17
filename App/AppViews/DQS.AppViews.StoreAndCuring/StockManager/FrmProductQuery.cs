@@ -58,11 +58,11 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                 if (productIDs.Any())
                 {
                     string productFilter = string.Join(",", productIDs);
-                    pageNavigator.DefaultFilter = string.Format("[药品ID] IN ({0})", productFilter);
+                    pageNavigator.DefaultFilter = string.Format("[产品ID] IN ({0})", productFilter);
                 }
                 else
                 {
-                    pageNavigator.DefaultFilter = "[药品ID]=0";
+                    pageNavigator.DefaultFilter = "[产品ID]=0";
                 }
             }
         }

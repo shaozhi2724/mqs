@@ -29,7 +29,9 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
             this.cbxEnterpriseLevel.InitSource();
             this.cbxEnterpriseType.InitSource();
             this.cbxEnterpriseStyle.InitSource();
-            this.cbxIndustryStyle.InitSource();
+            //this.cbxIndustryStyle.InitSource();
+            cbxIndustryStyle.Properties.Items.Add("批发");
+            cbxIndustryStyle.Properties.Items.Add("零售");
             
             if (this.Tag != null)
             {
@@ -91,18 +93,18 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
                 datBusinessValidateDate.Focus();
                 return;
             }
-            if (null == cbxEnterpriseType.SelectedValue)
-            {
-                XtraMessageBox.Show(cbxEnterpriseType.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                cbxEnterpriseType.Focus();
-                return;
-            }
-            if (null == cbxIndustryStyle.SelectedValue)
-            {
-                XtraMessageBox.Show(cbxIndustryStyle.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                cbxIndustryStyle.Focus();
-                return;
-            }
+            //if (null == cbxEnterpriseType.SelectedValue)
+            //{
+            //    XtraMessageBox.Show(cbxEnterpriseType.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //    cbxEnterpriseType.Focus();
+            //    return;
+            //}
+            //if (null == cbxIndustryStyle.SelectedValue)
+            //{
+            //    XtraMessageBox.Show(cbxIndustryStyle.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //    cbxIndustryStyle.Focus();
+            //    return;
+            //}
             if (null == cbxEnterpriseStyle.SelectedValue)
             {
                 XtraMessageBox.Show(cbxEnterpriseStyle.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -263,7 +265,7 @@ WHERE EnterpriseID={0}
                 BFIEnterpriseEntity oldEntity = new BFIEnterpriseEntity { EnterpriseID = m_id.Value };
                 oldEntity.Fetch();
 
-                #region GSP证书到期日修改
+                #region 营业执照到期日修改
                 DateTime oldLicenseValidateDate = oldEntity.LicenseValidateDate;
 
                 if (entity.LicenseValidateDate != oldLicenseValidateDate)
@@ -300,7 +302,7 @@ WHERE EnterpriseID={0}
                 }
                 #endregion
 
-                #region 药品经营许可证到期日修改
+                #region 经营许可证到期日修改
                 DateTime oldTradeLicenseValidateDate = oldEntity.TradeLicenseValidateDate;
 
                 if (entity.TradeLicenseValidateDate != oldTradeLicenseValidateDate)
@@ -448,6 +450,17 @@ WHERE EnterpriseID={0}
         {
             FrmSingleEnterpriseChangeHistory doc = new FrmSingleEnterpriseChangeHistory();
             doc.Show(this);
+        }
+
+        private void btnEnterprisePic_Click(object sender, EventArgs e)
+        {
+            if (this.m_id != null)
+            {
+                using (FrmEnterpriseAttachment frmEnterpriseAttachment = new FrmEnterpriseAttachment(m_id.Value))
+                {
+                    frmEnterpriseAttachment.ShowDialog();
+                }
+            }
         }
     }
 }

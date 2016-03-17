@@ -144,9 +144,8 @@
             this.ftPanel.Controls.Add(this.layControl);
             this.ftPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.ftPanel.Location = new System.Drawing.Point(0, 0);
-            this.ftPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ftPanel.Name = "ftPanel";
-            this.ftPanel.Size = new System.Drawing.Size(868, 375);
+            this.ftPanel.Size = new System.Drawing.Size(760, 292);
             this.ftPanel.TabIndex = 0;
             this.ftPanel.TypeOfEntity = DQS.Module.EntityType2.BUSTransportRecordEntity;
             // 
@@ -176,17 +175,15 @@
             this.layControl.Controls.Add(this.txtCarryCompnay);
             this.layControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layControl.Location = new System.Drawing.Point(2, 2);
-            this.layControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.layControl.Name = "layControl";
             this.layControl.Root = this.layControlGroup;
-            this.layControl.Size = new System.Drawing.Size(864, 371);
+            this.layControl.Size = new System.Drawing.Size(756, 288);
             this.layControl.TabIndex = 0;
             this.layControl.Text = "layControl";
             // 
             // txtTransportTool
             // 
-            this.txtTransportTool.Location = new System.Drawing.Point(444, 244);
-            this.txtTransportTool.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTransportTool.Location = new System.Drawing.Point(384, 212);
             this.txtTransportTool.Name = "txtTransportTool";
             this.txtTransportTool.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtTransportTool.Properties.Appearance.BackColor = System.Drawing.Color.White;
@@ -194,7 +191,7 @@
             this.txtTransportTool.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtTransportTool.Properties.NullValuePrompt = "请选择运输工具";
-            this.txtTransportTool.Size = new System.Drawing.Size(387, 25);
+            this.txtTransportTool.Size = new System.Drawing.Size(343, 21);
             this.txtTransportTool.StyleController = this.layControl;
             this.txtTransportTool.TabIndex = 7;
             // 
@@ -206,45 +203,41 @@
             this.txtCommissionedManagers.IsNullString = null;
             this.txtCommissionedManagers.IsNullValidate = false;
             this.txtCommissionedManagers.IsTransferAlphabetic = false;
-            this.txtCommissionedManagers.Location = new System.Drawing.Point(444, 273);
-            this.txtCommissionedManagers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCommissionedManagers.Location = new System.Drawing.Point(384, 237);
             this.txtCommissionedManagers.Name = "txtCommissionedManagers";
             this.txtCommissionedManagers.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtCommissionedManagers.Properties.Appearance.Options.UseBackColor = true;
-            this.txtCommissionedManagers.Size = new System.Drawing.Size(387, 25);
+            this.txtCommissionedManagers.Size = new System.Drawing.Size(343, 21);
             this.txtCommissionedManagers.StyleController = this.layControl;
             this.txtCommissionedManagers.TabIndex = 5;
             // 
             // tmeArriveTime
             // 
             this.tmeArriveTime.EditValue = new System.DateTime(2013, 10, 18, 0, 0, 0, 0);
-            this.tmeArriveTime.Location = new System.Drawing.Point(444, 186);
-            this.tmeArriveTime.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tmeArriveTime.Location = new System.Drawing.Point(384, 162);
             this.tmeArriveTime.Name = "tmeArriveTime";
             this.tmeArriveTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.tmeArriveTime.Size = new System.Drawing.Size(387, 25);
+            this.tmeArriveTime.Size = new System.Drawing.Size(343, 21);
             this.tmeArriveTime.StyleController = this.layControl;
             this.tmeArriveTime.TabIndex = 14;
             // 
             // tmeStartTime
             // 
             this.tmeStartTime.EditValue = new System.DateTime(2013, 10, 18, 0, 0, 0, 0);
-            this.tmeStartTime.Location = new System.Drawing.Point(444, 157);
-            this.tmeStartTime.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tmeStartTime.Location = new System.Drawing.Point(384, 137);
             this.tmeStartTime.Name = "tmeStartTime";
             this.tmeStartTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.tmeStartTime.Size = new System.Drawing.Size(387, 25);
+            this.tmeStartTime.Size = new System.Drawing.Size(343, 21);
             this.tmeStartTime.StyleController = this.layControl;
             this.tmeStartTime.TabIndex = 13;
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(332, 331);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.labelControl1.Location = new System.Drawing.Point(293, 287);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(30, 18);
+            this.labelControl1.Size = new System.Drawing.Size(24, 14);
             this.labelControl1.StyleController = this.layControl;
             this.labelControl1.TabIndex = 12;
             this.labelControl1.Text = "小时";
@@ -256,12 +249,11 @@
             0,
             0,
             0});
-            this.speMinTimeLimit.Location = new System.Drawing.Point(90, 331);
-            this.speMinTimeLimit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.speMinTimeLimit.Location = new System.Drawing.Point(75, 287);
             this.speMinTimeLimit.Name = "speMinTimeLimit";
             this.speMinTimeLimit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.speMinTimeLimit.Size = new System.Drawing.Size(238, 25);
+            this.speMinTimeLimit.Size = new System.Drawing.Size(214, 21);
             this.speMinTimeLimit.StyleController = this.layControl;
             this.speMinTimeLimit.TabIndex = 2;
             // 
@@ -277,8 +269,7 @@
             this.txtPopCarCode.IsNullString = "";
             this.txtPopCarCode.IsNullValidate = false;
             this.txtPopCarCode.IsTransferAlphabetic = false;
-            this.txtPopCarCode.Location = new System.Drawing.Point(90, 302);
-            this.txtPopCarCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtPopCarCode.Location = new System.Drawing.Point(75, 262);
             this.txtPopCarCode.MemberText = "车辆编号";
             this.txtPopCarCode.MemberValue = "车辆ID";
             this.txtPopCarCode.Name = "txtPopCarCode";
@@ -287,7 +278,7 @@
             this.txtPopCarCode.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtPopCarCode.Properties.Appearance.Options.UseBackColor = true;
             this.txtPopCarCode.Properties.ReadOnly = true;
-            this.txtPopCarCode.Size = new System.Drawing.Size(272, 25);
+            this.txtPopCarCode.Size = new System.Drawing.Size(242, 21);
             this.txtPopCarCode.StyleController = this.layControl;
             this.txtPopCarCode.TabIndex = 8;
             this.txtPopCarCode.ViewName = "vw_AllTransportCar";
@@ -301,10 +292,9 @@
             this.txtTransportRemark.IsNullString = null;
             this.txtTransportRemark.IsNullValidate = false;
             this.txtTransportRemark.IsTransferAlphabetic = false;
-            this.txtTransportRemark.Location = new System.Drawing.Point(90, 360);
-            this.txtTransportRemark.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTransportRemark.Location = new System.Drawing.Point(75, 312);
             this.txtTransportRemark.Name = "txtTransportRemark";
-            this.txtTransportRemark.Size = new System.Drawing.Size(741, 25);
+            this.txtTransportRemark.Size = new System.Drawing.Size(652, 21);
             this.txtTransportRemark.StyleController = this.layControl;
             this.txtTransportRemark.TabIndex = 3;
             // 
@@ -316,10 +306,9 @@
             this.txtTransportCode.IsNullString = "运输单号不能为空。";
             this.txtTransportCode.IsNullValidate = true;
             this.txtTransportCode.IsTransferAlphabetic = false;
-            this.txtTransportCode.Location = new System.Drawing.Point(90, 12);
-            this.txtTransportCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTransportCode.Location = new System.Drawing.Point(75, 12);
             this.txtTransportCode.Name = "txtTransportCode";
-            this.txtTransportCode.Size = new System.Drawing.Size(272, 25);
+            this.txtTransportCode.Size = new System.Drawing.Size(242, 21);
             this.txtTransportCode.StyleController = this.layControl;
             this.txtTransportCode.TabIndex = 0;
             // 
@@ -335,8 +324,7 @@
             this.txtBillCode.IsNullString = "订单编号不能为空。";
             this.txtBillCode.IsNullValidate = true;
             this.txtBillCode.IsTransferAlphabetic = false;
-            this.txtBillCode.Location = new System.Drawing.Point(444, 12);
-            this.txtBillCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtBillCode.Location = new System.Drawing.Point(384, 12);
             this.txtBillCode.MemberText = "订单编号";
             this.txtBillCode.MemberValue = "订单ID";
             this.txtBillCode.Name = "txtBillCode";
@@ -345,7 +333,7 @@
             this.txtBillCode.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtBillCode.Properties.Appearance.Options.UseBackColor = true;
             this.txtBillCode.Properties.ReadOnly = true;
-            this.txtBillCode.Size = new System.Drawing.Size(387, 25);
+            this.txtBillCode.Size = new System.Drawing.Size(343, 21);
             this.txtBillCode.StyleController = this.layControl;
             this.txtBillCode.TabIndex = 7;
             this.txtBillCode.ViewName = "vw_AllWarehouseOutBill";
@@ -358,10 +346,9 @@
             this.txtCarName.IsNullString = null;
             this.txtCarName.IsNullValidate = false;
             this.txtCarName.IsTransferAlphabetic = false;
-            this.txtCarName.Location = new System.Drawing.Point(444, 331);
-            this.txtCarName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCarName.Location = new System.Drawing.Point(384, 287);
             this.txtCarName.Name = "txtCarName";
-            this.txtCarName.Size = new System.Drawing.Size(387, 25);
+            this.txtCarName.Size = new System.Drawing.Size(343, 21);
             this.txtCarName.StyleController = this.layControl;
             this.txtCarName.TabIndex = 3;
             // 
@@ -372,10 +359,9 @@
             this.txtCarNo.IsNullString = null;
             this.txtCarNo.IsNullValidate = false;
             this.txtCarNo.IsTransferAlphabetic = false;
-            this.txtCarNo.Location = new System.Drawing.Point(444, 302);
-            this.txtCarNo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCarNo.Location = new System.Drawing.Point(384, 262);
             this.txtCarNo.Name = "txtCarNo";
-            this.txtCarNo.Size = new System.Drawing.Size(387, 25);
+            this.txtCarNo.Size = new System.Drawing.Size(343, 21);
             this.txtCarNo.StyleController = this.layControl;
             this.txtCarNo.TabIndex = 3;
             // 
@@ -387,10 +373,9 @@
             this.txtRelatePersonContact.IsNullString = null;
             this.txtRelatePersonContact.IsNullValidate = false;
             this.txtRelatePersonContact.IsTransferAlphabetic = false;
-            this.txtRelatePersonContact.Location = new System.Drawing.Point(445, 128);
-            this.txtRelatePersonContact.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtRelatePersonContact.Location = new System.Drawing.Point(385, 112);
             this.txtRelatePersonContact.Name = "txtRelatePersonContact";
-            this.txtRelatePersonContact.Size = new System.Drawing.Size(386, 25);
+            this.txtRelatePersonContact.Size = new System.Drawing.Size(342, 21);
             this.txtRelatePersonContact.StyleController = this.layControl;
             this.txtRelatePersonContact.TabIndex = 11;
             // 
@@ -406,8 +391,7 @@
             this.txtRelatePerson.IsNullString = "";
             this.txtRelatePerson.IsNullValidate = false;
             this.txtRelatePerson.IsTransferAlphabetic = true;
-            this.txtRelatePerson.Location = new System.Drawing.Point(90, 128);
-            this.txtRelatePerson.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtRelatePerson.Location = new System.Drawing.Point(75, 112);
             this.txtRelatePerson.MemberText = "人员姓名";
             this.txtRelatePerson.MemberValue = "人员ID";
             this.txtRelatePerson.Name = "txtRelatePerson";
@@ -416,7 +400,7 @@
             this.txtRelatePerson.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtRelatePerson.Properties.Appearance.Options.UseBackColor = true;
             this.txtRelatePerson.Properties.ReadOnly = true;
-            this.txtRelatePerson.Size = new System.Drawing.Size(273, 25);
+            this.txtRelatePerson.Size = new System.Drawing.Size(243, 21);
             this.txtRelatePerson.StyleController = this.layControl;
             this.txtRelatePerson.TabIndex = 10;
             this.txtRelatePerson.ViewName = "vw_AllProviderSalesman";
@@ -431,11 +415,10 @@
             this.txtRelateAddress.IsNullString = null;
             this.txtRelateAddress.IsNullValidate = false;
             this.txtRelateAddress.IsTransferAlphabetic = false;
-            this.txtRelateAddress.Location = new System.Drawing.Point(90, 99);
-            this.txtRelateAddress.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtRelateAddress.Location = new System.Drawing.Point(75, 87);
             this.txtRelateAddress.Name = "txtRelateAddress";
             this.txtRelateAddress.Properties.ReadOnly = true;
-            this.txtRelateAddress.Size = new System.Drawing.Size(741, 25);
+            this.txtRelateAddress.Size = new System.Drawing.Size(652, 21);
             this.txtRelateAddress.StyleController = this.layControl;
             this.txtRelateAddress.TabIndex = 9;
             // 
@@ -447,31 +430,28 @@
             this.txtRelateCompany.IsNullString = null;
             this.txtRelateCompany.IsNullValidate = false;
             this.txtRelateCompany.IsTransferAlphabetic = true;
-            this.txtRelateCompany.Location = new System.Drawing.Point(90, 70);
-            this.txtRelateCompany.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtRelateCompany.Location = new System.Drawing.Point(75, 62);
             this.txtRelateCompany.Name = "txtRelateCompany";
             this.txtRelateCompany.Properties.ReadOnly = true;
-            this.txtRelateCompany.Size = new System.Drawing.Size(741, 25);
+            this.txtRelateCompany.Size = new System.Drawing.Size(652, 21);
             this.txtRelateCompany.StyleController = this.layControl;
             this.txtRelateCompany.TabIndex = 8;
             // 
             // txtDeliveryPerson
             // 
-            this.txtDeliveryPerson.Location = new System.Drawing.Point(90, 273);
-            this.txtDeliveryPerson.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDeliveryPerson.Location = new System.Drawing.Point(75, 237);
             this.txtDeliveryPerson.Name = "txtDeliveryPerson";
             this.txtDeliveryPerson.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtDeliveryPerson.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtDeliveryPerson.Properties.Appearance.Options.UseBackColor = true;
-            this.txtDeliveryPerson.Size = new System.Drawing.Size(272, 25);
+            this.txtDeliveryPerson.Size = new System.Drawing.Size(242, 21);
             this.txtDeliveryPerson.StyleController = this.layControl;
             this.txtDeliveryPerson.TabIndex = 4;
             // 
             // dteStartTime
             // 
             this.dteStartTime.EditValue = null;
-            this.dteStartTime.Location = new System.Drawing.Point(90, 157);
-            this.dteStartTime.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dteStartTime.Location = new System.Drawing.Point(75, 137);
             this.dteStartTime.Name = "dteStartTime";
             this.dteStartTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -480,15 +460,14 @@
             this.dteStartTime.Properties.NullValuePrompt = "请选择起运日期";
             this.dteStartTime.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dteStartTime.Size = new System.Drawing.Size(272, 25);
+            this.dteStartTime.Size = new System.Drawing.Size(242, 21);
             this.dteStartTime.StyleController = this.layControl;
             this.dteStartTime.TabIndex = 5;
             // 
             // dteArriveTime
             // 
             this.dteArriveTime.EditValue = null;
-            this.dteArriveTime.Location = new System.Drawing.Point(90, 186);
-            this.dteArriveTime.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dteArriveTime.Location = new System.Drawing.Point(75, 162);
             this.dteArriveTime.Name = "dteArriveTime";
             this.dteArriveTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -496,27 +475,25 @@
             this.dteArriveTime.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.None;
             this.dteArriveTime.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dteArriveTime.Size = new System.Drawing.Size(272, 25);
+            this.dteArriveTime.Size = new System.Drawing.Size(242, 21);
             this.dteArriveTime.StyleController = this.layControl;
             this.dteArriveTime.TabIndex = 6;
             // 
             // txtShippingAddress
             // 
-            this.txtShippingAddress.Location = new System.Drawing.Point(90, 41);
-            this.txtShippingAddress.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtShippingAddress.Location = new System.Drawing.Point(75, 37);
             this.txtShippingAddress.Name = "txtShippingAddress";
             this.txtShippingAddress.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtShippingAddress.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtShippingAddress.Properties.NullValuePrompt = "请选择或输入发货地址";
-            this.txtShippingAddress.Size = new System.Drawing.Size(741, 25);
+            this.txtShippingAddress.Size = new System.Drawing.Size(652, 21);
             this.txtShippingAddress.StyleController = this.layControl;
             this.txtShippingAddress.TabIndex = 12;
             // 
             // txtTransportType
             // 
-            this.txtTransportType.Location = new System.Drawing.Point(90, 244);
-            this.txtTransportType.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTransportType.Location = new System.Drawing.Point(75, 212);
             this.txtTransportType.Name = "txtTransportType";
             this.txtTransportType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtTransportType.Properties.Appearance.BackColor = System.Drawing.Color.White;
@@ -524,18 +501,17 @@
             this.txtTransportType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtTransportType.Properties.NullValuePrompt = "请选择运输方式";
-            this.txtTransportType.Size = new System.Drawing.Size(272, 25);
+            this.txtTransportType.Size = new System.Drawing.Size(242, 21);
             this.txtTransportType.StyleController = this.layControl;
             this.txtTransportType.TabIndex = 6;
             // 
             // txtCarryCompnay
             // 
-            this.txtCarryCompnay.Location = new System.Drawing.Point(90, 215);
-            this.txtCarryCompnay.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCarryCompnay.Location = new System.Drawing.Point(75, 187);
             this.txtCarryCompnay.Name = "txtCarryCompnay";
             this.txtCarryCompnay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtCarryCompnay.Size = new System.Drawing.Size(741, 25);
+            this.txtCarryCompnay.Size = new System.Drawing.Size(652, 21);
             this.txtCarryCompnay.StyleController = this.layControl;
             this.txtCarryCompnay.TabIndex = 10;
             // 
@@ -571,7 +547,7 @@
             this.layoutControlItem2});
             this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
-            this.layControlGroup.Size = new System.Drawing.Size(843, 397);
+            this.layControlGroup.Size = new System.Drawing.Size(739, 345);
             this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layControlGroup.Text = "运输记录";
             this.layControlGroup.TextVisible = false;
@@ -582,99 +558,99 @@
             this.layTransportCode.CustomizationFormText = "运输单号";
             this.layTransportCode.Location = new System.Drawing.Point(0, 0);
             this.layTransportCode.Name = "layTransportCode";
-            this.layTransportCode.Size = new System.Drawing.Size(354, 29);
+            this.layTransportCode.Size = new System.Drawing.Size(309, 25);
             this.layTransportCode.Text = "运输单号";
-            this.layTransportCode.TextSize = new System.Drawing.Size(75, 20);
+            this.layTransportCode.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layRelateAddress
             // 
             this.layRelateAddress.Control = this.txtRelateAddress;
             this.layRelateAddress.CustomizationFormText = "收货地址";
-            this.layRelateAddress.Location = new System.Drawing.Point(0, 87);
+            this.layRelateAddress.Location = new System.Drawing.Point(0, 75);
             this.layRelateAddress.Name = "layRelateAddress";
-            this.layRelateAddress.Size = new System.Drawing.Size(823, 29);
+            this.layRelateAddress.Size = new System.Drawing.Size(719, 25);
             this.layRelateAddress.Text = "收货地址";
-            this.layRelateAddress.TextSize = new System.Drawing.Size(75, 20);
+            this.layRelateAddress.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layRelatePerson
             // 
             this.layRelatePerson.Control = this.txtRelatePerson;
             this.layRelatePerson.CustomizationFormText = "收货人";
-            this.layRelatePerson.Location = new System.Drawing.Point(0, 116);
+            this.layRelatePerson.Location = new System.Drawing.Point(0, 100);
             this.layRelatePerson.Name = "layRelatePerson";
-            this.layRelatePerson.Size = new System.Drawing.Size(355, 29);
+            this.layRelatePerson.Size = new System.Drawing.Size(310, 25);
             this.layRelatePerson.Text = "收货人";
-            this.layRelatePerson.TextSize = new System.Drawing.Size(75, 20);
+            this.layRelatePerson.TextSize = new System.Drawing.Size(60, 17);
             this.layRelatePerson.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // layRelatePersonContact
             // 
             this.layRelatePersonContact.Control = this.txtRelatePersonContact;
             this.layRelatePersonContact.CustomizationFormText = "收货人电话";
-            this.layRelatePersonContact.Location = new System.Drawing.Point(355, 116);
+            this.layRelatePersonContact.Location = new System.Drawing.Point(310, 100);
             this.layRelatePersonContact.Name = "layRelatePersonContact";
-            this.layRelatePersonContact.Size = new System.Drawing.Size(468, 29);
+            this.layRelatePersonContact.Size = new System.Drawing.Size(409, 25);
             this.layRelatePersonContact.Text = "收货人电话";
-            this.layRelatePersonContact.TextSize = new System.Drawing.Size(75, 20);
+            this.layRelatePersonContact.TextSize = new System.Drawing.Size(60, 17);
             this.layRelatePersonContact.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.txtCarNo;
             this.layoutControlItem1.CustomizationFormText = "车牌号";
-            this.layoutControlItem1.Location = new System.Drawing.Point(354, 290);
+            this.layoutControlItem1.Location = new System.Drawing.Point(309, 250);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(469, 29);
+            this.layoutControlItem1.Size = new System.Drawing.Size(410, 25);
             this.layoutControlItem1.Text = "车牌号";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(75, 20);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layStartTime
             // 
             this.layStartTime.Control = this.dteStartTime;
             this.layStartTime.CustomizationFormText = "起运日期";
-            this.layStartTime.Location = new System.Drawing.Point(0, 145);
+            this.layStartTime.Location = new System.Drawing.Point(0, 125);
             this.layStartTime.Name = "layStartTime";
-            this.layStartTime.Size = new System.Drawing.Size(354, 29);
+            this.layStartTime.Size = new System.Drawing.Size(309, 25);
             this.layStartTime.Text = "起运日期";
-            this.layStartTime.TextSize = new System.Drawing.Size(75, 20);
+            this.layStartTime.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layTransportRemark
             // 
             this.layTransportRemark.Control = this.txtTransportRemark;
             this.layTransportRemark.CustomizationFormText = "备注";
-            this.layTransportRemark.Location = new System.Drawing.Point(0, 348);
+            this.layTransportRemark.Location = new System.Drawing.Point(0, 300);
             this.layTransportRemark.Name = "layTransportRemark";
-            this.layTransportRemark.Size = new System.Drawing.Size(823, 29);
+            this.layTransportRemark.Size = new System.Drawing.Size(719, 25);
             this.layTransportRemark.Text = "备注";
-            this.layTransportRemark.TextSize = new System.Drawing.Size(75, 20);
+            this.layTransportRemark.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layCarCode
             // 
             this.layCarCode.Control = this.txtPopCarCode;
             this.layCarCode.CustomizationFormText = "车辆编号";
-            this.layCarCode.Location = new System.Drawing.Point(0, 290);
+            this.layCarCode.Location = new System.Drawing.Point(0, 250);
             this.layCarCode.Name = "layCarCode";
-            this.layCarCode.Size = new System.Drawing.Size(354, 29);
+            this.layCarCode.Size = new System.Drawing.Size(309, 25);
             this.layCarCode.Text = "车辆编号";
-            this.layCarCode.TextSize = new System.Drawing.Size(75, 20);
+            this.layCarCode.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.speMinTimeLimit;
             this.layoutControlItem3.CustomizationFormText = "运输时限";
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 319);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 275);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(320, 29);
+            this.layoutControlItem3.Size = new System.Drawing.Size(281, 25);
             this.layoutControlItem3.Text = "运输时限";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(75, 20);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.labelControl1;
             this.layoutControlItem4.CustomizationFormText = "小时";
-            this.layoutControlItem4.Location = new System.Drawing.Point(320, 319);
+            this.layoutControlItem4.Location = new System.Drawing.Point(281, 275);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(34, 29);
+            this.layoutControlItem4.Size = new System.Drawing.Size(28, 25);
             this.layoutControlItem4.Text = "小时";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextToControlDistance = 0;
@@ -684,121 +660,121 @@
             // 
             this.layArriveTime.Control = this.dteArriveTime;
             this.layArriveTime.CustomizationFormText = "到达日期";
-            this.layArriveTime.Location = new System.Drawing.Point(0, 174);
+            this.layArriveTime.Location = new System.Drawing.Point(0, 150);
             this.layArriveTime.Name = "layArriveTime";
-            this.layArriveTime.Size = new System.Drawing.Size(354, 29);
+            this.layArriveTime.Size = new System.Drawing.Size(309, 25);
             this.layArriveTime.Text = "到达日期";
-            this.layArriveTime.TextSize = new System.Drawing.Size(75, 20);
+            this.layArriveTime.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.tmeStartTime;
             this.layoutControlItem5.CustomizationFormText = "起运时间";
-            this.layoutControlItem5.Location = new System.Drawing.Point(354, 145);
+            this.layoutControlItem5.Location = new System.Drawing.Point(309, 125);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(469, 29);
+            this.layoutControlItem5.Size = new System.Drawing.Size(410, 25);
             this.layoutControlItem5.Text = "起运时间";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(75, 20);
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.tmeArriveTime;
             this.layoutControlItem6.CustomizationFormText = "到达时间";
-            this.layoutControlItem6.Location = new System.Drawing.Point(354, 174);
+            this.layoutControlItem6.Location = new System.Drawing.Point(309, 150);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(469, 29);
+            this.layoutControlItem6.Size = new System.Drawing.Size(410, 25);
             this.layoutControlItem6.Text = "到达时间";
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(75, 20);
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layShippingAddress
             // 
             this.layShippingAddress.Control = this.txtShippingAddress;
             this.layShippingAddress.CustomizationFormText = "发货地址";
-            this.layShippingAddress.Location = new System.Drawing.Point(0, 29);
+            this.layShippingAddress.Location = new System.Drawing.Point(0, 25);
             this.layShippingAddress.Name = "layShippingAddress";
-            this.layShippingAddress.Size = new System.Drawing.Size(823, 29);
+            this.layShippingAddress.Size = new System.Drawing.Size(719, 25);
             this.layShippingAddress.Text = "发货地址";
-            this.layShippingAddress.TextSize = new System.Drawing.Size(75, 20);
+            this.layShippingAddress.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layBillCode
             // 
             this.layBillCode.Control = this.txtBillCode;
             this.layBillCode.CustomizationFormText = "复核记录";
-            this.layBillCode.Location = new System.Drawing.Point(354, 0);
+            this.layBillCode.Location = new System.Drawing.Point(309, 0);
             this.layBillCode.Name = "layBillCode";
-            this.layBillCode.Size = new System.Drawing.Size(469, 29);
+            this.layBillCode.Size = new System.Drawing.Size(410, 25);
             this.layBillCode.Text = "复核记录";
-            this.layBillCode.TextSize = new System.Drawing.Size(75, 20);
+            this.layBillCode.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layRelateCompany
             // 
             this.layRelateCompany.Control = this.txtRelateCompany;
             this.layRelateCompany.CustomizationFormText = "收货单位";
-            this.layRelateCompany.Location = new System.Drawing.Point(0, 58);
+            this.layRelateCompany.Location = new System.Drawing.Point(0, 50);
             this.layRelateCompany.Name = "layRelateCompany";
-            this.layRelateCompany.Size = new System.Drawing.Size(823, 29);
+            this.layRelateCompany.Size = new System.Drawing.Size(719, 25);
             this.layRelateCompany.Text = "收货单位";
-            this.layRelateCompany.TextSize = new System.Drawing.Size(75, 20);
+            this.layRelateCompany.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layDeliveryPerson
             // 
             this.layDeliveryPerson.Control = this.txtDeliveryPerson;
             this.layDeliveryPerson.CustomizationFormText = "送货人";
-            this.layDeliveryPerson.Location = new System.Drawing.Point(0, 261);
+            this.layDeliveryPerson.Location = new System.Drawing.Point(0, 225);
             this.layDeliveryPerson.Name = "layDeliveryPerson";
-            this.layDeliveryPerson.Size = new System.Drawing.Size(354, 29);
+            this.layDeliveryPerson.Size = new System.Drawing.Size(309, 25);
             this.layDeliveryPerson.Text = "送货人";
-            this.layDeliveryPerson.TextSize = new System.Drawing.Size(75, 20);
+            this.layDeliveryPerson.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layCommissionedManagers
             // 
             this.layCommissionedManagers.Control = this.txtCommissionedManagers;
             this.layCommissionedManagers.CustomizationFormText = "委托经办人";
-            this.layCommissionedManagers.Location = new System.Drawing.Point(354, 261);
+            this.layCommissionedManagers.Location = new System.Drawing.Point(309, 225);
             this.layCommissionedManagers.Name = "layCommissionedManagers";
-            this.layCommissionedManagers.Size = new System.Drawing.Size(469, 29);
+            this.layCommissionedManagers.Size = new System.Drawing.Size(410, 25);
             this.layCommissionedManagers.Text = "委托经办人";
-            this.layCommissionedManagers.TextSize = new System.Drawing.Size(75, 20);
+            this.layCommissionedManagers.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layCarryCompnay
             // 
             this.layCarryCompnay.Control = this.txtCarryCompnay;
             this.layCarryCompnay.CustomizationFormText = "承运单位";
-            this.layCarryCompnay.Location = new System.Drawing.Point(0, 203);
+            this.layCarryCompnay.Location = new System.Drawing.Point(0, 175);
             this.layCarryCompnay.Name = "layCarryCompnay";
-            this.layCarryCompnay.Size = new System.Drawing.Size(823, 29);
+            this.layCarryCompnay.Size = new System.Drawing.Size(719, 25);
             this.layCarryCompnay.Text = "承运单位";
-            this.layCarryCompnay.TextSize = new System.Drawing.Size(75, 20);
+            this.layCarryCompnay.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layTransportType
             // 
             this.layTransportType.Control = this.txtTransportType;
             this.layTransportType.CustomizationFormText = "运输方式";
-            this.layTransportType.Location = new System.Drawing.Point(0, 232);
+            this.layTransportType.Location = new System.Drawing.Point(0, 200);
             this.layTransportType.Name = "layTransportType";
-            this.layTransportType.Size = new System.Drawing.Size(354, 29);
+            this.layTransportType.Size = new System.Drawing.Size(309, 25);
             this.layTransportType.Text = "运输方式";
-            this.layTransportType.TextSize = new System.Drawing.Size(75, 20);
+            this.layTransportType.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layTransportTool
             // 
             this.layTransportTool.Control = this.txtTransportTool;
             this.layTransportTool.CustomizationFormText = "运输工具";
-            this.layTransportTool.Location = new System.Drawing.Point(354, 232);
+            this.layTransportTool.Location = new System.Drawing.Point(309, 200);
             this.layTransportTool.Name = "layTransportTool";
-            this.layTransportTool.Size = new System.Drawing.Size(469, 29);
+            this.layTransportTool.Size = new System.Drawing.Size(410, 25);
             this.layTransportTool.Text = "运输工具";
-            this.layTransportTool.TextSize = new System.Drawing.Size(75, 20);
+            this.layTransportTool.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.txtCarName;
             this.layoutControlItem2.CustomizationFormText = "车辆名称";
-            this.layoutControlItem2.Location = new System.Drawing.Point(354, 319);
+            this.layoutControlItem2.Location = new System.Drawing.Point(309, 275);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(469, 29);
+            this.layoutControlItem2.Size = new System.Drawing.Size(410, 25);
             this.layoutControlItem2.Text = "车辆名称";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(75, 20);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(60, 17);
             this.layoutControlItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // panelControl1
@@ -808,10 +784,9 @@
             this.panelControl1.Controls.Add(this.btnCancel);
             this.panelControl1.Controls.Add(this.btnSave);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl1.Location = new System.Drawing.Point(0, 684);
-            this.panelControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panelControl1.Location = new System.Drawing.Point(0, 528);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(868, 62);
+            this.panelControl1.Size = new System.Drawing.Size(760, 48);
             this.panelControl1.TabIndex = 1;
             // 
             // btnTemperature
@@ -819,10 +794,9 @@
             this.btnTemperature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTemperature.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTemperature.Appearance.Options.UseFont = true;
-            this.btnTemperature.Location = new System.Drawing.Point(371, 16);
-            this.btnTemperature.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnTemperature.Location = new System.Drawing.Point(325, 12);
             this.btnTemperature.Name = "btnTemperature";
-            this.btnTemperature.Size = new System.Drawing.Size(126, 30);
+            this.btnTemperature.Size = new System.Drawing.Size(110, 23);
             this.btnTemperature.TabIndex = 8;
             this.btnTemperature.Text = "温湿度记录(&T)";
             this.btnTemperature.Click += new System.EventHandler(this.btnTemperature_Click);
@@ -832,12 +806,11 @@
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrint.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrint.Appearance.Options.UseFont = true;
-            this.btnPrint.Location = new System.Drawing.Point(525, 17);
-            this.btnPrint.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnPrint.Location = new System.Drawing.Point(459, 13);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.OperationName = "Transport";
             this.btnPrint.ReportName = "运输单";
-            this.btnPrint.Size = new System.Drawing.Size(86, 30);
+            this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 5;
             this.btnPrint.Text = "打印(&P)";
             // 
@@ -847,10 +820,9 @@
             this.btnCancel.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Appearance.Options.UseFont = true;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(766, 17);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCancel.Location = new System.Drawing.Point(670, 13);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(86, 30);
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "取消(&C)";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -860,10 +832,9 @@
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Appearance.Options.UseFont = true;
-            this.btnSave.Location = new System.Drawing.Point(646, 17);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnSave.Location = new System.Drawing.Point(565, 13);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(86, 30);
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "保存(&S)";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -874,35 +845,31 @@
             this.groupControl1.AppearanceCaption.Options.UseFont = true;
             this.groupControl1.Controls.Add(this.popupGrid);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl1.Location = new System.Drawing.Point(0, 375);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupControl1.Location = new System.Drawing.Point(0, 292);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(868, 309);
+            this.groupControl1.Size = new System.Drawing.Size(760, 236);
             this.groupControl1.TabIndex = 2;
             this.groupControl1.Text = "运输明细";
             // 
             // popupGrid
             // 
             this.popupGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.popupGrid.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.popupGrid.IsCalculatePrice = false;
-            this.popupGrid.Location = new System.Drawing.Point(2, 28);
-            this.popupGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.popupGrid.Location = new System.Drawing.Point(2, 25);
             this.popupGrid.Name = "popupGrid";
             this.popupGrid.OperationName = "Transport";
-            this.popupGrid.Size = new System.Drawing.Size(864, 279);
+            this.popupGrid.Size = new System.Drawing.Size(756, 209);
             this.popupGrid.TabIndex = 4;
             // 
             // FrmSingleTransportWithMultipleBill
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(868, 746);
+            this.ClientSize = new System.Drawing.Size(760, 576);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.ftPanel);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimizeBox = false;
             this.Name = "FrmSingleTransportWithMultipleBill";
             this.ShowInTaskbar = false;

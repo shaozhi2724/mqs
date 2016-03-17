@@ -121,7 +121,7 @@
             // 
             // txtProduct
             // 
-            this.txtProduct.FormatQueryString = "[药品名称] LIKE \'%{0}%\' OR [药品名称Spell] LIKE \'%{0}%\' ";
+            this.txtProduct.FormatQueryString = "[产品名称] LIKE \'%{0}%\' OR [产品名称Spell] LIKE \'%{0}%\' ";
             this.txtProduct.Location = new System.Drawing.Point(75, 12);
             this.txtProduct.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtProduct.Name = "txtProduct";
@@ -150,11 +150,11 @@
             // layProduct
             // 
             this.layProduct.Control = this.txtProduct;
-            this.layProduct.CustomizationFormText = "药品名称";
+            this.layProduct.CustomizationFormText = "产品名称";
             this.layProduct.Location = new System.Drawing.Point(0, 0);
             this.layProduct.Name = "layProduct";
             this.layProduct.Size = new System.Drawing.Size(451, 49);
-            this.layProduct.Text = "药品名称";
+            this.layProduct.Text = "产品名称";
             this.layProduct.TextSize = new System.Drawing.Size(60, 20);
             // 
             // layoutControlItem2

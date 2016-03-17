@@ -9,6 +9,7 @@ using DevExpress.XtraEditors;
 using DQS.Module.Entities;
 using DQS.Common;
 using ORMSCore;
+using System.Data.SqlClient;
 
 namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
 {
@@ -78,7 +79,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
 
                     List<EntityBase> children = this.popupGrid.GetEntities();
                     if (!this.ValidateAmount()) return;
-                    if (!this.ValidateBatchNo()) return;
+                    //if (!this.ValidateBatchNo()) return;
                     if (!this.ValidateBatchDate()) return;
 
                     entity.LastModifyDate = DateTime.Now;
@@ -121,10 +122,11 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
 
                         List<EntityBase> children = this.popupGrid.GetEntities();
                         if (!this.ValidateAmount()) return;
-                        if (!this.ValidateBatchNo()) return;
+                        //if (!this.ValidateBatchNo()) return;
                         if (!this.ValidateBatchDate()) return;
 
                         entity.IsBillIn = false;
+                        entity.Reservation1 = "2";
                         entity.CreateDate = DateTime.Now;
                         entity.LastModifyDate = DateTime.Now;
                         entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
@@ -144,6 +146,25 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                             child.Save();
                             //更新库存价格
                             //UpdateStoreDetailPrice(child, storeDetailBelongDepartmentId);
+                        }
+                        string sql = "UPDATE dbo.BUS_StoreBill SET Reservation1 = NULL WHERE StoreID = " + entity.StoreID;
+                        using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                        {
+                            conn.Open(); //连接数据库
+                            //必须为SqlCommand指定数据库连接和登记的事务
+                            SqlCommand cmd = new SqlCommand(sql, conn);
+                            try
+                            {
+                                cmd.ExecuteNonQuery();
+                            }
+                            catch (Exception ex)
+                            {
+                                XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            finally
+                            {
+                                conn.Close();
+                            }
                         }
 
                         #endregion
@@ -295,7 +316,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                 object amount = this.popupGrid.PopupView.GetFocusedRowCellValue("订单数量");
                 if (amount != null && amount != DBNull.Value)
                 {
-                    //订单中的原始药品不可删除
+                    //订单中的原始产品不可删除
                     return;
                 }
 
@@ -336,14 +357,14 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                     object amount = this.popupGrid.PopupView.GetFocusedRowCellValue("订单数量");
                     if (amount != null && amount != DBNull.Value)
                     {
-                        //订单中的原始药品不须弹出窗体进行选择
+                        //订单中的原始产品不须弹出窗体进行选择
                         e.Cancel = true;
                     }
 
                     List<string> productIDs = new List<string>();
                     for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
                     {
-                        object productID = this.popupGrid.PopupView.GetRowCellValue(i, "药品ID");
+                        object productID = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
                         if (productID != null && productID != DBNull.Value)
                         {
                             productIDs.Add(productID.ToString());
@@ -352,7 +373,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
 
                     if (productIDs.Count > 0)
                     {
-                        e.ActiveOperationColumn.PopupForm.Filter = String.Format("[药品ID] IN ({0}) ", string.Join(",", productIDs.ToArray()));
+                        e.ActiveOperationColumn.PopupForm.Filter = String.Format("[产品ID] IN ({0}) ", string.Join(",", productIDs.ToArray()));
                     }
                     else
                     {
@@ -364,11 +385,11 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
 
                 if (e.ActiveOperationColumn.PopupForm.Name == "ProductBatch")
                 {
-                    object productID = this.popupGrid.PopupView.GetFocusedRowCellValue("药品ID");
+                    object productID = this.popupGrid.PopupView.GetFocusedRowCellValue("产品ID");
                     if (productID != null && productID != DBNull.Value)
                     {
-                        //选择完药品才可选择批号
-                        e.ActiveOperationColumn.PopupForm.Filter = String.Format("[药品ID] = {0}", productID);
+                        //选择完产品才可选择批号
+                        e.ActiveOperationColumn.PopupForm.Filter = String.Format("[产品ID] = {0}", productID);
                     }
                     else
                     {
@@ -406,9 +427,9 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
             {
                 object amount = this.popupGrid.PopupView.GetRowCellValue(i, "订单数量");
-                object productName = this.popupGrid.PopupView.GetRowCellValue(i, "药品名称");
-                object productSpec = this.popupGrid.PopupView.GetRowCellValue(i, "规格");
-                object packageSpec = this.popupGrid.PopupView.GetRowCellValue(i, "包装规格");
+                object productName = this.popupGrid.PopupView.GetRowCellValue(i, "产品名称");
+                object productSpec = this.popupGrid.PopupView.GetRowCellValue(i, "规格型号");
+                object packageSpec = this.popupGrid.PopupView.GetRowCellValue(i, "包装规格型号");
 
                 if (amount != null && amount != DBNull.Value)
                 {
@@ -416,9 +437,9 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
 
                     for (int j = 0; j < this.popupGrid.PopupView.RowCount; j++)
                     {
-                        object productName2 = this.popupGrid.PopupView.GetRowCellValue(j, "药品名称");//同一药品比较
-                        object productSpec2 = this.popupGrid.PopupView.GetRowCellValue(j, "规格");
-                        object packageSpec2 = this.popupGrid.PopupView.GetRowCellValue(j, "包装规格");
+                        object productName2 = this.popupGrid.PopupView.GetRowCellValue(j, "产品名称");//同一产品比较
+                        object productSpec2 = this.popupGrid.PopupView.GetRowCellValue(j, "规格型号");
+                        object packageSpec2 = this.popupGrid.PopupView.GetRowCellValue(j, "包装规格型号");
                         if (productName.ToString().Trim() == productName2.ToString().Trim()
                             && productSpec.ToString().Trim() == productSpec2.ToString().Trim()
                             && packageSpec.ToString().Trim() == packageSpec2.ToString().Trim())
@@ -426,7 +447,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                             object batchNo = this.popupGrid.PopupView.GetRowCellValue(j, "批号");
                             if (batchNos.Contains(batchNo.ToString().Trim()))
                             {
-                                XtraMessageBox.Show(String.Format("药品‘{0}’存在相同的批号{1}。", productName, batchNo), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                XtraMessageBox.Show(String.Format("产品‘{0}’存在相同的批号{1}。", productName, batchNo), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 return false;
                             }
                             else
@@ -453,7 +474,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                 {
                     if (Convert.ToDateTime(validateDate) <= Convert.ToDateTime(produceDate))
                     {
-                        XtraMessageBox.Show(String.Format("第{0}行，药品的有效期至必须大于生产日期。", (i + 1)), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        XtraMessageBox.Show(String.Format("第{0}行，产品的有效期至必须大于生产日期。", (i + 1)), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return false;
 
                     }

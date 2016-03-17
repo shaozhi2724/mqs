@@ -84,7 +84,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                 if (!ValidateAmount()) return;
                 BUSProductUnqualifiedEntity entity = this.ftPanel.GetEntity() as BUSProductUnqualifiedEntity;
 
-                entity.IsCutAmount = Convert.ToBoolean(this.rdgIsCutAmount.SelectedIndex);
+                //entity.IsCutAmount = Convert.ToBoolean(this.rdgIsCutAmount.SelectedIndex);
+                entity.IsCutAmount = true;
                 /*if (this.rdgIsCutAmount.Enabled)
                 {
                     if (entity.IsCutAmount)
@@ -145,7 +146,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
                         if (data.Rows.Count <= 0)
                         {
-                            XtraMessageBox.Show("系统未设置您的审批流程，无法进行不合格药品处理。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            XtraMessageBox.Show("系统未设置您的审批流程，无法进行不合格产品处理。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return;
                         }
                         List<EntityBase> children = this.popupGrid.GetEntities();
@@ -166,8 +167,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                         Dictionary<int, string> selectedProducts = new Dictionary<int, string>();
                         for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
                         {
-                            object productID = this.popupGrid.PopupView.GetRowCellValue(i, "药品ID");
-                            object productName = this.popupGrid.PopupView.GetRowCellValue(i, "药品名称");
+                            object productID = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
+                            object productName = this.popupGrid.PopupView.GetRowCellValue(i, "产品名称");
 
                             if (productID != null && productID != DBNull.Value && productName != null && productName != DBNull.Value)
                             {
@@ -180,7 +181,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                             child.UnqualifiedID = entity.UnqualifiedID;
                             child.Save();
 
-                            message.AppendLine(string.Format("{0}. 药品：{1}，批号：{2}，数量：{3}",
+                            message.AppendLine(string.Format("{0}. 产品：{1}，批号：{2}，数量：{3}",
                                 index,
                                 selectedProducts[child.ProductID],
                                 child.BatchNo,
@@ -197,8 +198,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                             approveEntity.InternalNo = "SH-" + entity.UnqualifiedCode.Substring(2);
                             approveEntity.DocumentCode = "ProductUnqualified";
                             approveEntity.BillCode = entity.UnqualifiedCode;
-                            approveEntity.ApproveTitle = string.Format("不合格药品处理，编号：{0}", entity.UnqualifiedCode);
-                            approveEntity.ApprovalContent = String.Format("不合格药品处理 {0}:{2}{1}{2} 申请审批。", entity.UnqualifiedCode, message.ToString(), Environment.NewLine);
+                            approveEntity.ApproveTitle = string.Format("不合格产品处理，编号：{0}", entity.UnqualifiedCode);
+                            approveEntity.ApprovalContent = String.Format("不合格产品处理 {0}:{2}{1}{2} 申请审批。", entity.UnqualifiedCode, message.ToString(), Environment.NewLine);
                             approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                             approveEntity.CreateDate = DateTime.Now;
                             approveEntity.IsApprovaled = false;
@@ -224,7 +225,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                                 notification.TargetID = entity.UnqualifiedID;
                                 notification.TargetCode = entity.UnqualifiedCode;
                                 notification.ApproveCode = approveCode;
-                                notification.Message = string.Format("{0} 于 {1} 申请处理不合格药品（单号 {2}）。请您审批。", userName,
+                                notification.Message = string.Format("{0} 于 {1} 申请处理不合格产品（单号 {2}）。请您审批。", userName,
                                     DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.UnqualifiedCode);
                                 notification.OwnerUserID = approvalUserId;
                                 notification.Save();
@@ -261,11 +262,11 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
         private void popupGrid_PopupClosed(object sender, DQS.Controls.CommonCode.PopupFormClosedArgs e)
         {
-            string fieldName = "药品ID";
+            string fieldName = "产品ID";
             string fieldName2 = "批号";
             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
             {
-                object fieldValue = this.popupGrid.PopupView.GetRowCellValue(i, "药品ID");
+                object fieldValue = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
                 object fieldValue2 = this.popupGrid.PopupView.GetRowCellValue(i, fieldName2);
                 if (fieldValue != null && fieldValue != DBNull.Value)
                 {
@@ -273,7 +274,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                     {
                         if (fieldValue.ToString().Trim() == e.PopupRow[fieldName].ToString().Trim() && fieldValue2.ToString().Trim() == e.PopupRow[fieldName2].ToString().Trim())
                         {
-                            XtraMessageBox.Show("该批号药品已存在。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            XtraMessageBox.Show("该批号产品已存在。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             this.popupGrid.PopupView.FocusedRowHandle = i;
                             e.Cancel = true;
                         }

@@ -102,5 +102,10 @@ namespace DQS.AppViews.OtherOperation.Finance
 
             }  
         }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

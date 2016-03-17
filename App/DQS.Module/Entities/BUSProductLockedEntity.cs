@@ -152,6 +152,12 @@ namespace DQS.Module.Entities
 			set { this.SetValue("LockedRemark", value); } 
 		}
 
+        public int InStoreID
+        {
+            get { return (int)this.GetValue("InStoreID"); }
+            set { this.SetValue("InStoreID", value); }
+        }
+
 		public string Reservation1
 		{
 			get { return (string)this.GetValue("Reservation1"); } 
@@ -239,6 +245,7 @@ namespace DQS.Module.Entities
 			this.Fields.Add("LastModifyUserID", BUSProductLockedEntityFields.LastModifyUserID);
 			this.Fields.Add("LastModifyDate", BUSProductLockedEntityFields.LastModifyDate);
 			this.Fields.Add("LockedRemark", BUSProductLockedEntityFields.LockedRemark);
+            this.Fields.Add("InStoreID", BUSProductLockedEntityFields.InStoreID);
 			this.Fields.Add("Reservation1", BUSProductLockedEntityFields.Reservation1);
 			this.Fields.Add("Reservation2", BUSProductLockedEntityFields.Reservation2);
 			this.Fields.Add("Reservation3", BUSProductLockedEntityFields.Reservation3);
@@ -371,54 +378,59 @@ namespace DQS.Module.Entities
 			get { return new EntityField("BUS_ProductLocked", 22, "LockedRemark", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
+        public static EntityField InStoreID
+		{
+            get { return new EntityField("BUS_ProductLocked", 23, "InStoreID", SqlDbType.Int, false, false, false, true); }
+		}
+
 		public static EntityField Reservation1
 		{
-			get { return new EntityField("BUS_ProductLocked", 23, "Reservation1", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductLocked", 24, "Reservation1", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation2
 		{
-			get { return new EntityField("BUS_ProductLocked", 24, "Reservation2", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductLocked", 25, "Reservation2", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation3
 		{
-			get { return new EntityField("BUS_ProductLocked", 25, "Reservation3", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductLocked", 26, "Reservation3", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation4
 		{
-			get { return new EntityField("BUS_ProductLocked", 26, "Reservation4", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductLocked", 27, "Reservation4", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation5
 		{
-			get { return new EntityField("BUS_ProductLocked", 27, "Reservation5", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductLocked", 28, "Reservation5", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation6
 		{
-			get { return new EntityField("BUS_ProductLocked", 28, "Reservation6", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductLocked", 29, "Reservation6", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation7
 		{
-			get { return new EntityField("BUS_ProductLocked", 29, "Reservation7", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductLocked", 30, "Reservation7", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation8
 		{
-			get { return new EntityField("BUS_ProductLocked", 30, "Reservation8", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductLocked", 31, "Reservation8", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation9
 		{
-			get { return new EntityField("BUS_ProductLocked", 31, "Reservation9", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductLocked", 32, "Reservation9", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation10
 		{
-			get { return new EntityField("BUS_ProductLocked", 32, "Reservation10", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_ProductLocked", 33, "Reservation10", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 	}
@@ -474,6 +486,8 @@ namespace DQS.Module.Entities
 		LastModifyDate,
 
 		LockedRemark,
+
+        InStoreID,
 
 		Reservation1,
 
