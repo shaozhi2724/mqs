@@ -11,6 +11,9 @@ using DQS.Module.Entities;
 using DQS.Common;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Data.SqlClient;
+using System.IO;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
 
 namespace DQS.AppViews.StoreAndCuring.StockManager
 {
@@ -142,12 +145,12 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                     string productName = Inventorylist[i].ProductName;
                     string batchNo = Inventorylist[i].BatchNo;
                     DateTime produceDate = Convert.ToDateTime(Inventorylist[i].ProduceDate);
-                    if (Inventorylist[i].ValidateDate != "")
+                    if (Inventorylist[i].ValidateDate.Trim() != "")
                     {
                         beginInventory.ValidateDate = Convert.ToDateTime(Inventorylist[i].ValidateDate);
                     }
                     string sterilizationBatchNo = Inventorylist[i].SterilizationBatchNo;
-                    if (Inventorylist[i].SterilizationDate != "")
+                    if (Inventorylist[i].SterilizationDate.Trim() != "")
                     {
                         beginInventory.SterilizationDate = Convert.ToDateTime(Inventorylist[i].SterilizationDate);
                     }
@@ -292,6 +295,78 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                 DevExpress.XtraEditors.XtraMessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }  
+        }
+
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+            openFileDialog.ShowDialog(this);
+        }
+
+        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            var file = openFileDialog.FileName;
+            //txtFile.Text = file;
+
+            LoadExcelData(file);
+            grdInventoryList.DataSource = Inventorylist;
+            gvInventoryList.BestFitColumns();
+            grdInventoryList.RefreshDataSource();
+        }
+
+        private void LoadExcelData(string filename)
+        {
+            DataTable table = new DataTable();
+
+            try
+            {
+                using (FileStream file = new FileStream(filename, FileMode.Open, FileAccess.Read))
+                {
+                    HSSFWorkbook hssfworkbook = new HSSFWorkbook(file);
+                    ISheet sheet1 = hssfworkbook.GetSheet("Sheet1");
+                    int rowCount = (sheet1 as HSSFSheet).LastRowNum;
+
+                    //获取sheet的首行
+                    HSSFRow headerRow = (sheet1.GetRow(0) as HSSFRow);
+
+                    //一行最后一个方格的编号 即总的列数
+                    int cellCount = headerRow.LastCellNum;
+
+                    //for (int i = headerRow.FirstCellNum; i < cellCount; i++)
+                    //{
+                    //    DataColumn column = new DataColumn(headerRow.GetCell(i).StringCellValue);
+                    //    table.Columns.Add(column);
+                    //}
+
+                    for (int i = (sheet1.FirstRowNum + 1); i <= rowCount; i++)
+                    {
+                        HSSFRow row = (sheet1.GetRow(i) as HSSFRow);
+                        BeginInventoryEntityModel dataRow = new BeginInventoryEntityModel();
+                        string ProductID = row.GetCell(0).ToString();
+                        string BatchNo = row.GetCell(1).ToString();
+                        string ProductName = row.GetCell(2).ToString();
+                        string ProduceDate = row.GetCell(3).ToString();
+                        string ValidateDate = row.GetCell(4).ToString();
+                        string SterilizationBatchNo = row.GetCell(5).ToString();
+                        string SterilizationDate = row.GetCell(6).ToString();
+                        string Amount = row.GetCell(7).ToString();
+                        string UnitPrice = row.GetCell(8).ToString();
+                        dataRow.ProductID = Convert.ToInt32(ProductID);
+                        dataRow.BatchNo = BatchNo;
+                        dataRow.ProductName = ProductName;
+                        dataRow.ProduceDate = ProduceDate;
+                        dataRow.ValidateDate = ValidateDate;
+                        dataRow.SterilizationBatchNo = SterilizationBatchNo;
+                        dataRow.SterilizationDate = SterilizationDate;
+                        dataRow.Amount = Convert.ToInt32(Amount);
+                        dataRow.UnitPrice = Convert.ToDecimal(UnitPrice);
+                        Inventorylist.Add((BeginInventoryEntityModel) dataRow);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
         }
     }
     public class BeginInventoryEntityModel

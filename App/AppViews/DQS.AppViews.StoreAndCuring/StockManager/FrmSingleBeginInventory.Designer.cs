@@ -49,6 +49,7 @@
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.panAddPrice = new DevExpress.XtraEditors.GroupControl();
             this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
+            this.btnExcel = new DevExpress.XtraEditors.SimpleButton();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.ftPanel = new DQS.Controls.FieldTextBoxPanel();
             this.layControl = new DevExpress.XtraLayout.LayoutControl();
@@ -80,6 +81,7 @@
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.panPriceList)).BeginInit();
             this.panPriceList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdInventoryList)).BeginInit();
@@ -333,6 +335,7 @@
             this.panAddPrice.AppearanceCaption.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.panAddPrice.AppearanceCaption.Options.UseFont = true;
             this.panAddPrice.Controls.Add(this.btnDelete);
+            this.panAddPrice.Controls.Add(this.btnExcel);
             this.panAddPrice.Controls.Add(this.btnAdd);
             this.panAddPrice.Controls.Add(this.ftPanel);
             this.panAddPrice.Dock = System.Windows.Forms.DockStyle.Top;
@@ -355,6 +358,19 @@
             this.btnDelete.TabIndex = 11;
             this.btnDelete.Text = "删除";
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnExcel
+            // 
+            this.btnExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExcel.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcel.Appearance.Options.UseFont = true;
+            this.btnExcel.Location = new System.Drawing.Point(220, 204);
+            this.btnExcel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnExcel.Name = "btnExcel";
+            this.btnExcel.Size = new System.Drawing.Size(75, 28);
+            this.btnExcel.TabIndex = 10;
+            this.btnExcel.Text = "导入";
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
             // 
             // btnAdd
             // 
@@ -752,6 +768,11 @@
             this.layoutControlItem8.Text = "数量：";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(84, 17);
             // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+            this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
+            // 
             // FrmSingleBeginInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -869,6 +890,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colSterilizationDate;
         private DevExpress.XtraGrid.Columns.GridColumn colAmount;
         private DevExpress.XtraEditors.SimpleButton btnExport;
+        private DevExpress.XtraEditors.SimpleButton btnExcel;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
 
 
 
