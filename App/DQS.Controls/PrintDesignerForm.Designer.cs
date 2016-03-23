@@ -28,25 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.stiDesignerControl1 = new Stimulsoft.Report.Design.StiDesignerControl();
+            this.stiDesignerControl = new Stimulsoft.Report.Design.StiDesignerControl();
             this.SuspendLayout();
             // 
-            // stiDesignerControl1
+            // stiDesignerControl
             // 
-            this.stiDesignerControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(221)))), ((int)(((byte)(238)))));
-            this.stiDesignerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.stiDesignerControl1.Location = new System.Drawing.Point(0, 0);
-            this.stiDesignerControl1.Name = "stiDesignerControl1";
-            this.stiDesignerControl1.ShowMainMenu = false;
-            this.stiDesignerControl1.Size = new System.Drawing.Size(988, 611);
-            this.stiDesignerControl1.TabIndex = 0;
+            this.stiDesignerControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(221)))), ((int)(((byte)(238)))));
+            this.stiDesignerControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.stiDesignerControl.Location = new System.Drawing.Point(0, 0);
+            this.stiDesignerControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.stiDesignerControl.Name = "stiDesignerControl";
+            this.stiDesignerControl.ShowMainMenu = false;
+            this.stiDesignerControl.ShowPanelReportTree = false;
+            this.stiDesignerControl.ShowToolbarLayout = false;
+            this.stiDesignerControl.ShowToolbarStatusBar = false;
+            this.stiDesignerControl.ShowToolbarStyle = false;
+            this.stiDesignerControl.ShowToolbarDockStyle = false;
+            this.stiDesignerControl.ShowToolbarTextFormat = false;
+            this.stiDesignerControl.ShowToolbarTools = false;
+            this.stiDesignerControl.Size = new System.Drawing.Size(864, 475);
+            this.stiDesignerControl.TabIndex = 0;
             // 
             // PrintDesignerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(988, 611);
-            this.Controls.Add(this.stiDesignerControl1);
+            this.ClientSize = new System.Drawing.Size(864, 475);
+            this.Controls.Add(this.stiDesignerControl);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "PrintDesignerForm";
             this.Text = "设计模版窗体";
             this.ResumeLayout(false);
@@ -55,6 +64,6 @@
 
         #endregion
 
-        private Stimulsoft.Report.Design.StiDesignerControl stiDesignerControl1;
+        private Stimulsoft.Report.Design.StiDesignerControl stiDesignerControl;
     }
 }
