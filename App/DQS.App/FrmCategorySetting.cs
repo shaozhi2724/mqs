@@ -33,7 +33,7 @@ namespace DQS.App
             this.panelAdd.Visible = false;
             this.btnSaveNew.Enabled = false;
             this.btnCancelAdd.Enabled = false;
-            string categorySql = "SELECT CategoryName FROM dbo.SYS_Category WHERE CategoryName IN ('证书类型(供应商)','证书类型(供应商人员)','往来单位企业性质','证书类型(内部员工)','付款方式','制剂类型','证书类型(产品)','医疗机构诊疗科目','产品类型','证书类型(客户)','证书类型(客户人员)','员工岗位分类') GROUP BY CategoryName";
+            string categorySql = "SELECT CategoryName FROM dbo.SYS_Category WHERE CategoryName NOT LIKE '%状态%' AND CategoryName != '订单类型' AND CategoryName != '往来单位类型' AND CategoryName NOT LIKE '%结构%' GROUP BY CategoryName";
             using (DataSet dataSet = new DataSet())
             {
                 using (SqlDataAdapter adapter = new SqlDataAdapter(categorySql, GlobalItem.g_DbConnectStrings))
@@ -42,6 +42,7 @@ namespace DQS.App
                 }
 
                 this.cboType.Properties.NullText = "请选择……";
+                cboType.Properties.Items.Clear();
                 for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
                 {
                     this.cboType.Properties.Items.Add(dataSet.Tables[0].Rows[i][0].ToString());

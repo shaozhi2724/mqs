@@ -1529,10 +1529,15 @@ WHERE BillID={1}
             var gridview = this.popupGrid.MainView as GridView;
             if (gridview.RowCount > 0)
             {
-                int productID = (int)gridview.GetFocusedRowCellValue("产品ID");
+                var productID = gridview.GetFocusedRowCellValue("产品ID");
+                if (null == productID || productID.ToString() == "")
+                {
+                    XtraMessageBox.Show("请选择产品。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 string productName = gridview.GetFocusedRowCellValue("产品名称").ToString();
                 string batchNo = gridview.GetFocusedRowCellValue("批号").ToString();
-                using (FrmStoreInRecord fsir=new FrmStoreInRecord(productID,productName,batchNo))
+                using (FrmStoreInRecord fsir=new FrmStoreInRecord((int)productID,productName,batchNo))
                 {
                     DialogResult dr = fsir.ShowDialog(this);
                     if (dr == DialogResult.OK)

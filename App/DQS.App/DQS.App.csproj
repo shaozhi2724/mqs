@@ -41,7 +41,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;SoftFileLicense</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;RockeyLicense</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
@@ -363,6 +363,7 @@
     <None Include="收货单.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="期初库存导入模板.xls" />
     <None Include="运输单.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
