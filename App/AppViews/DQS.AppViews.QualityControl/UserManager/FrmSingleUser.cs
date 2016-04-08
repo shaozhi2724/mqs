@@ -49,6 +49,7 @@ namespace DQS.AppViews.QualityControl.UserManager
                 this.layPassword.Visibility = LayoutVisibility.Never;
                 this.layPassword2.Visibility = LayoutVisibility.Never;
                 btnRePassword.Visible = GlobalItem.g_CurrentUser.UserCode == "admin" || GlobalItem.g_CurrentUser.UserCode == "root" ? true : false;
+                tbPage2.PageVisible = GlobalItem.g_CurrentUser.UserCode == "admin" || GlobalItem.g_CurrentUser.UserCode == "root" ? true : false;
 
 
                 this.m_id = new Guid(this.Tag.ToString());

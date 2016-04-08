@@ -47,6 +47,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
             this.cboSaleTax.InitSource();
             this.cbxProductCycleStyle.InitSource();
             this.cbxIsForeignDrug.Checked = false;
+            tabGrantedPerson.PageVisible = GlobalItem.g_CurrentUser.UserCode == "admin" || GlobalItem.g_CurrentUser.UserCode == "root" ? true : false; 
             if (this.Tag != null)
             {
                 this.m_id = Convert.ToInt32(this.Tag);
