@@ -897,6 +897,8 @@ WHERE BillID={1}
                         //新添加，验证特殊产品数量不能超过
                         if (!this.Amount()) return;
                         if (!this.MonthAmount()) return;
+                        if (!this.checkPersonRange()) return;//验证客户采购员的经营范围
+                        if (!this.checkEmployeeRange()) return;//验证本企业业务员的经营范围
 
                         #region 新建
 
@@ -1537,6 +1539,7 @@ WHERE BillID={1}
                 if (m_id == null)
                 {
                     this.txtOperator.Text = GlobalItem.g_CurrentEmployee.EmployeeName;
+                    this.txtOperator.SetMemberValue(GlobalItem.g_CurrentEmployee.EmployeeID);
                 }
             }
 
@@ -1690,7 +1693,7 @@ WHERE BillID={1}
 
         private void BandSaleMan(int dealerID)
         {
-            string sql = "SELECT TOP 1 SalesmanName,MobilePhone FROM dbo.BFI_Salesman WHERE DealerID = " + dealerID;
+            string sql = "SELECT TOP 1 SalesmanID,SalesmanName,MobilePhone FROM dbo.BFI_Salesman WHERE DealerID = " + dealerID;
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 conn.Open(); //连接数据库
@@ -1701,6 +1704,7 @@ WHERE BillID={1}
                     sda.Fill(ds, "TableBill");
                     if (ds.Tables["TableBill"].Rows.Count > 0)
                     {
+                        txtBusinessPerson.Tag = ds.Tables["TableBill"].Rows[0]["SalesmanID"].ToString();
                         txtBusinessPerson.Text = ds.Tables["TableBill"].Rows[0]["SalesmanName"].ToString();
                         txtBusinessPhone.Text = ds.Tables["TableBill"].Rows[0]["MobilePhone"].ToString();
                     }
@@ -2423,6 +2427,7 @@ WHERE BillID={1}
         {
             if (this.txtBusinessPerson.EditData != null)
             {
+                this.txtBusinessPerson.Tag = (this.txtBusinessPerson.EditData as DataRow)["人员ID"].ToString();
                 this.txtBusinessPhone.Text = (this.txtBusinessPerson.EditData as DataRow)["手机"].ToString();
             }
         }
@@ -2537,6 +2542,10 @@ WHERE BillID={1}
 
         private void txtOperator_PopupClosing(object sender, EventArgs e)
         {
+            if (this.txtOperator.EditData != null)
+            {
+                txtOperator.SetMemberValue((this.txtOperator.EditData as DataRow)["员工ID"].ToString());
+            }
             if (txtOperator.Text.Trim() != txtOperator.Tag.ToString())
             {
                 popupGrid.ClearGrid();
@@ -3136,6 +3145,205 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
         private void txtReservation6_PopupClosing(object sender, EventArgs e)
         {
 
+        }
+
+        private bool checkPersonRange()
+        {
+            EntityCollection<BFIPersonRangeEntity> ranges = new EntityCollection<BFIPersonRangeEntity>();
+            ranges.Fetch(BFIPersonRangeEntityFields.PersonType == "客户"
+                & BFIPersonRangeEntityFields.PersonID == Convert.ToInt32(txtBusinessPerson.Tag)
+                & BFIPersonRangeEntityFields.CheckType == "产品");
+
+            int rowCount = this.popupGrid.PopupView.RowCount;
+            if (ranges.Count > 0)
+            {
+                for (int i = 0; i < rowCount; i++)
+                {
+                    object code = this.popupGrid.PopupView.GetRowCellValue(i, "产品编号");
+                    if (code != null && code != DBNull.Value)
+                    {
+                        bool isHava = false;
+                        foreach (BFIPersonRangeEntity q in ranges)
+                        {
+                            if (code.ToString() == q.CheckValue)
+                            {
+                                isHava = true;
+                                break;
+                            }
+                        }
+
+                        if (!isHava)//不存在则超出经营范围
+                        {
+                            XtraMessageBox.Show(String.Format("表格中第{0}行产品超出客户采购人员{1}的经营范围，无法生成订单，请修改！", (i + 1), txtBusinessPerson.Text.Trim()), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                ranges.Fetch(BFIPersonRangeEntityFields.PersonType == "客户"
+                    & BFIPersonRangeEntityFields.PersonID == Convert.ToInt32(txtBusinessPerson.Tag)
+                    & BFIPersonRangeEntityFields.CheckType == "明细");
+                if (ranges.Count > 0)
+                {
+                    for (int i = 0; i < rowCount; i++)
+                    {
+                        object code = this.popupGrid.PopupView.GetRowCellValue(i, "产品类别");
+                        if (code != null && code != DBNull.Value)
+                        {
+                            bool isHava = false;
+                            foreach (BFIPersonRangeEntity q in ranges)
+                            {
+                                if (code.ToString() == q.CheckValue)
+                                {
+                                    isHava = true;
+                                    break;
+                                }
+                            }
+
+                            if (!isHava)//不存在则超出经营范围
+                            {
+                                XtraMessageBox.Show(String.Format("表格中第{0}行产品超出客户采购人员{1}的经营范围，无法生成订单，请修改！", (i + 1), txtBusinessPerson.Text.Trim()), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return false;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    ranges.Fetch(BFIPersonRangeEntityFields.PersonType == "客户"
+                        & BFIPersonRangeEntityFields.PersonID == Convert.ToInt32(txtBusinessPerson.Tag)
+                        & BFIPersonRangeEntityFields.CheckType == "大类");
+                    if (ranges.Count > 0)
+                    {
+                        for (int i = 0; i < rowCount; i++)
+                        {
+                            object code = this.popupGrid.PopupView.GetRowCellValue(i, "产品大类");
+                            if (code != null && code != DBNull.Value)
+                            {
+                                bool isHava = false;
+                                foreach (BFIPersonRangeEntity q in ranges)
+                                {
+                                    if (code.ToString() == q.CheckValue)
+                                    {
+                                        isHava = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!isHava)//不存在则超出经营范围
+                                {
+                                    XtraMessageBox.Show(String.Format("表格中第{0}行产品超出客户采购人员{1}的经营范围，无法生成订单，请修改！", (i + 1), txtBusinessPerson.Text.Trim()), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            //没有选择则不控制
+            return true;
+        }
+
+        private bool checkEmployeeRange()
+        {
+            int value = Convert.ToInt32(txtOperator.SelectedValue);
+            EntityCollection<BFIPersonRangeEntity> ranges = new EntityCollection<BFIPersonRangeEntity>();
+            ranges.Fetch(BFIPersonRangeEntityFields.PersonType == "员工"
+                & BFIPersonRangeEntityFields.PersonID == value
+                & BFIPersonRangeEntityFields.CheckType == "产品");
+
+            int rowCount = this.popupGrid.PopupView.RowCount;
+            if (ranges.Count > 0)
+            {
+                for (int i = 0; i < rowCount; i++)
+                {
+                    object code = this.popupGrid.PopupView.GetRowCellValue(i, "产品编号");
+                    if (code != null && code != DBNull.Value)
+                    {
+                        bool isHava = false;
+                        foreach (BFIPersonRangeEntity q in ranges)
+                        {
+                            if (code.ToString() == q.CheckValue)
+                            {
+                                isHava = true;
+                                break;
+                            }
+                        }
+
+                        if (!isHava)//不存在则超出经营范围
+                        {
+                            XtraMessageBox.Show(String.Format("表格中第{0}行产品超出本企业业务员{1}的经营范围，无法生成订单，请修改！", (i + 1), txtOperator.Text.Trim()), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                ranges.Fetch(BFIPersonRangeEntityFields.PersonType == "员工"
+                    & BFIPersonRangeEntityFields.PersonID == value
+                    & BFIPersonRangeEntityFields.CheckType == "明细");
+                if (ranges.Count > 0)
+                {
+                    for (int i = 0; i < rowCount; i++)
+                    {
+                        object code = this.popupGrid.PopupView.GetRowCellValue(i, "产品类别");
+                        if (code != null && code != DBNull.Value)
+                        {
+                            bool isHava = false;
+                            foreach (BFIPersonRangeEntity q in ranges)
+                            {
+                                if (code.ToString() == q.CheckValue)
+                                {
+                                    isHava = true;
+                                    break;
+                                }
+                            }
+
+                            if (!isHava)//不存在则超出经营范围
+                            {
+                                XtraMessageBox.Show(String.Format("表格中第{0}行产品超出本企业业务员{1}的经营范围，无法生成订单，请修改！", (i + 1), txtOperator.Text.Trim()), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return false;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    ranges.Fetch(BFIPersonRangeEntityFields.PersonType == "员工"
+                        & BFIPersonRangeEntityFields.PersonID == value
+                        & BFIPersonRangeEntityFields.CheckType == "大类");
+                    if (ranges.Count > 0)
+                    {
+                        for (int i = 0; i < rowCount; i++)
+                        {
+                            object code = this.popupGrid.PopupView.GetRowCellValue(i, "产品大类");
+                            if (code != null && code != DBNull.Value)
+                            {
+                                bool isHava = false;
+                                foreach (BFIPersonRangeEntity q in ranges)
+                                {
+                                    if (code.ToString() == q.CheckValue)
+                                    {
+                                        isHava = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!isHava)//不存在则超出经营范围
+                                {
+                                    XtraMessageBox.Show(String.Format("表格中第{0}行产品超出本企业业务员{1}的经营范围，无法生成订单，请修改！", (i + 1), txtOperator.Text.Trim()), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            //没有选择则不控制
+            return true;
         }
     }
 }

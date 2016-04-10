@@ -501,6 +501,11 @@ namespace DQS.Module
         {
             get { return new BUSBeginInventoryEntity(); }
         }
+
+        public static EntityBase BFIPersonRangeEntity
+        {
+            get { return new BFIPersonRangeEntity(); }
+        }
     }
 
     #region EntityType2
@@ -695,7 +700,9 @@ namespace DQS.Module
 
         WMSRegulatoryCodeEntity,
 
-        BUSBeginInventoryEntity
+        BUSBeginInventoryEntity,
+
+        BFIPersonRangeEntity
 
     }
 

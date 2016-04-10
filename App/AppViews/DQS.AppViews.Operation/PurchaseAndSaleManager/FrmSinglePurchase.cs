@@ -442,6 +442,7 @@ WHERE BillID={1}
                         if (!this.ValidateDealerQualification()) return;//验证供货商的电子档案
                         if (!this.ValidateProductQualification()) return;//验证所有产品的电子档案
                         if (!this.ValidateDealerRange()) return;//验证供货商经营范围
+                        if (!this.checkPersonRange()) return;//验证供应商销售员的经营范围
 
                         if (Settings.Default.IsUseDepartment)
                         {
@@ -990,7 +991,107 @@ WHERE BillID={1}
             if (this.txtBusinessPerson.EditData != null)
             {
                 this.txtBusinessPhone.Text = (this.txtBusinessPerson.EditData as DataRow)["手机"].ToString();
+                this.txtBusinessPerson.Tag = (this.txtBusinessPerson.EditData as DataRow)["人员ID"].ToString();
             }
+        }
+
+        private bool checkPersonRange()
+        {
+            EntityCollection<BFIPersonRangeEntity> ranges = new EntityCollection<BFIPersonRangeEntity>();
+            ranges.Fetch(BFIPersonRangeEntityFields.PersonType == "供应商"
+                & BFIPersonRangeEntityFields.PersonID == Convert.ToInt32(txtBusinessPerson.Tag)
+                & BFIPersonRangeEntityFields.CheckType == "产品");
+
+            int rowCount = this.popupGrid.PopupView.RowCount;
+            if (ranges.Count > 0)
+            {
+                for (int i = 0; i < rowCount; i++)
+                {
+                    object code = this.popupGrid.PopupView.GetRowCellValue(i, "产品编号");
+                    if (code != null && code != DBNull.Value)
+                    {
+                        bool isHava = false;
+                        foreach (BFIPersonRangeEntity q in ranges)
+                        {
+                            if (code.ToString() == q.CheckValue)
+                            {
+                                isHava = true;
+                                break;
+                            }
+                        }
+
+                        if (!isHava)//不存在则超出经营范围
+                        {
+                            XtraMessageBox.Show(String.Format("表格中第{0}行产品超出供应商销售人员{1}的经营范围，无法生成订单，请修改！", (i + 1),txtBusinessPerson.Text.Trim()), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                ranges.Fetch(BFIPersonRangeEntityFields.PersonType == "供应商"
+                    & BFIPersonRangeEntityFields.PersonID == Convert.ToInt32(txtBusinessPerson.Tag)
+                    & BFIPersonRangeEntityFields.CheckType == "明细");
+                if (ranges.Count > 0)
+                {
+                    for (int i = 0; i < rowCount; i++)
+                    {
+                        object code = this.popupGrid.PopupView.GetRowCellValue(i, "产品类别");
+                        if (code != null && code != DBNull.Value)
+                        {
+                            bool isHava = false;
+                            foreach (BFIPersonRangeEntity q in ranges)
+                            {
+                                if (code.ToString() == q.CheckValue)
+                                {
+                                    isHava = true;
+                                    break;
+                                }
+                            }
+
+                            if (!isHava)//不存在则超出经营范围
+                            {
+                                XtraMessageBox.Show(String.Format("表格中第{0}行产品超出供应商销售人员{1}的经营范围，无法生成订单，请修改！", (i + 1), txtBusinessPerson.Text.Trim()), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return false;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    ranges.Fetch(BFIPersonRangeEntityFields.PersonType == "供应商"
+                        & BFIPersonRangeEntityFields.PersonID == Convert.ToInt32(txtBusinessPerson.Tag)
+                        & BFIPersonRangeEntityFields.CheckType == "大类");
+                    if (ranges.Count > 0)
+                    {
+                        for (int i = 0; i < rowCount; i++)
+                        {
+                            object code = this.popupGrid.PopupView.GetRowCellValue(i, "产品大类");
+                            if (code != null && code != DBNull.Value)
+                            {
+                                bool isHava = false;
+                                foreach (BFIPersonRangeEntity q in ranges)
+                                {
+                                    if (code.ToString() == q.CheckValue)
+                                    {
+                                        isHava = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!isHava)//不存在则超出经营范围
+                                {
+                                    XtraMessageBox.Show(String.Format("表格中第{0}行产品超出供应商销售人员{1}的经营范围，无法生成订单，请修改！", (i + 1), txtBusinessPerson.Text.Trim()), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            //没有选择则不控制
+            return true;
         }
 
         private void btnViewHistory_Click(object sender, EventArgs e)
@@ -1086,7 +1187,7 @@ WHERE BillID={1}
 
         private void BandSaleMan(int dealerID)
         {
-            string sql = "SELECT TOP 1 SalesmanName,MobilePhone FROM dbo.BFI_Salesman WHERE DealerID = " + dealerID;
+            string sql = "SELECT TOP 1 SalesmanID,SalesmanName,MobilePhone FROM dbo.BFI_Salesman WHERE DealerID = " + dealerID;
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 conn.Open(); //连接数据库
@@ -1097,6 +1198,7 @@ WHERE BillID={1}
                     sda.Fill(ds, "TableBill");
                     if (ds.Tables["TableBill"].Rows.Count > 0)
                     {
+                        txtBusinessPerson.Tag = ds.Tables["TableBill"].Rows[0]["SalesmanID"].ToString();
                         txtBusinessPerson.Text = ds.Tables["TableBill"].Rows[0]["SalesmanName"].ToString();
                         txtBusinessPhone.Text = ds.Tables["TableBill"].Rows[0]["MobilePhone"].ToString();
                     }

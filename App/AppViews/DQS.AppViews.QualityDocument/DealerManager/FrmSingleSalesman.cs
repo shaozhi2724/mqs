@@ -8,6 +8,9 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DQS.Module.Entities;
 using DQS.Common;
+using DevExpress.XtraEditors.Controls;
+using ORMSCore;
+using DQS.Controls;
 
 namespace DQS.AppViews.QualityDocument.DealerManager
 {
@@ -24,6 +27,10 @@ namespace DQS.AppViews.QualityDocument.DealerManager
         {
             this.cbxSalesmanJob.InitSource();
 
+            BindPhysicTypes();
+            BindProductStyles();
+            BindProducts();
+
             if (this.Tag != null)
             {
                 this.m_id = Convert.ToInt32(this.Tag);
@@ -36,6 +43,91 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                 this.txtSalesmanCode.Enabled = false;
 
                 this.CustomGetEntity(entity);
+
+                EntityCollection<BFIPersonRangeEntity> ranges = new EntityCollection<BFIPersonRangeEntity>();
+                ranges.Fetch(BFIPersonRangeEntityFields.PersonType == "供应商"
+                    & BFIPersonRangeEntityFields.PersonID == entity.SalesmanID
+                    & BFIPersonRangeEntityFields.CheckType == "大类");
+
+                if (ranges.Count > 0)
+                {
+                    this.chkBCType.UnCheckAll();//先全部清空
+
+                    foreach (BFIPersonRangeEntity range in ranges)
+                    {
+                        foreach (CheckedListBoxItem item in this.chkBCType.Items)
+                        {
+                            SYSCategoryEntity category = (item.Value as ListEntityItem).Key as SYSCategoryEntity;
+
+                            if (category.ItemName == range.CheckValue)
+                            {
+                                this.chkBCType.SelectedItem = item;
+                                item.CheckState = CheckState.Checked;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    this.chkBCType.SelectedIndex = 0;
+                    this.chkBCType.UnCheckAll();
+                }
+                ranges.Fetch(BFIPersonRangeEntityFields.PersonType == "供应商"
+                    & BFIPersonRangeEntityFields.PersonID == entity.SalesmanID
+                    & BFIPersonRangeEntityFields.CheckType == "明细");
+
+                if (ranges.Count > 0)
+                {
+                    this.chkBCTypeDetail.UnCheckAll();//先全部清空
+
+                    foreach (BFIPersonRangeEntity range in ranges)
+                    {
+                        foreach (CheckedListBoxItem item in this.chkBCTypeDetail.Items)
+                        {
+                            SYSCategoryEntity category = (item.Value as ListEntityItem).Key as SYSCategoryEntity;
+
+                            if (category.ItemName == range.CheckValue)
+                            {
+                                this.chkBCTypeDetail.SelectedItem = item;
+                                item.CheckState = CheckState.Checked;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    this.chkBCTypeDetail.SelectedIndex = 0;
+                    this.chkBCTypeDetail.UnCheckAll();
+                }
+                ranges.Fetch(BFIPersonRangeEntityFields.PersonType == "供应商"
+                    & BFIPersonRangeEntityFields.PersonID == entity.SalesmanID
+                    & BFIPersonRangeEntityFields.CheckType == "产品");
+
+                if (ranges.Count > 0)
+                {
+                    this.chkBCProduct.UnCheckAll();//先全部清空
+
+                    foreach (BFIPersonRangeEntity range in ranges)
+                    {
+                        foreach (CheckedListBoxItem item in this.chkBCProduct.Items)
+                        {
+
+                            if (item.Value.ToString() == range.Remark)
+                            {
+                                this.chkBCProduct.SelectedItem = item;
+                                item.CheckState = CheckState.Checked;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    this.chkBCProduct.SelectedIndex = 0;
+                    this.chkBCProduct.UnCheckAll();
+                }
             }
             else
             {
@@ -57,6 +149,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                 entity.LastModifyDate = DateTime.Now;
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.Update();
+                SaveProductStyles(m_id.Value);
             }
             else
             {
@@ -67,6 +160,8 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Save();
+                    entity.Fetch();
+                    SaveProductStyles(entity.SalesmanID);
                 }
                 else
                 {
@@ -150,6 +245,115 @@ namespace DQS.AppViews.QualityDocument.DealerManager
             }
         }
 
+        private void BindPhysicTypes()
+        {
+            EntityCollection<SYSCategoryEntity> categories = new EntityCollection<SYSCategoryEntity>();
+            categories.Fetch(SYSCategoryEntityFields.CategoryCode == "PhysicType");
 
+            foreach (SYSCategoryEntity c in categories)
+            {
+                this.chkBCType.Items.Add(new ListEntityItem(c, c.ItemName));
+            }
+        }
+
+        private void BindProductStyles()
+        {
+            EntityCollection<SYSCategoryEntity> categories = new EntityCollection<SYSCategoryEntity>();
+            categories.Fetch(SYSCategoryEntityFields.CategoryCode == "ProductStyle");
+
+            foreach (SYSCategoryEntity c in categories)
+            {
+                this.chkBCTypeDetail.Items.Add(new ListEntityItem(c, c.ItemName));
+            }
+        }
+
+        private void BindProducts()
+        {
+            EntityCollection<BFIProductEntity> products = new EntityCollection<BFIProductEntity>();
+            products.Fetch(BFIProductEntityFields.BusinessStatus != 0);
+
+            foreach (BFIProductEntity c in products)
+            {
+                this.chkBCProduct.Items.Add(new ListEntityItem(c, c.ProductCode + "-" + c.ProductName));
+            }
+        }
+
+        private void SaveProductStyles(int personID)
+        {
+
+            BFIPersonRangeEntity range = new BFIPersonRangeEntity { PersonType = "供应商", PersonID = personID };
+            range.DeleteByCommonly();
+
+            range.PersonType = "供应商";
+            range.PersonID = personID;
+            range.CreateDate = DateTime.Now;
+            range.LastModifyDate = DateTime.Now;
+            range.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+            range.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
+            foreach (CheckedListBoxItem productStyle in this.chkBCType.CheckedItems)
+            {
+                range.CheckType = "大类";
+                range.CheckValue = productStyle.Value.ToString();
+                range.Remark = "";
+                range.Save();
+            }
+            foreach (CheckedListBoxItem productStyle in this.chkBCTypeDetail.CheckedItems)
+            {
+                range.CheckType = "明细";
+                range.CheckValue = productStyle.Value.ToString();
+                range.Remark = "";
+                range.Save();
+            }
+            foreach (CheckedListBoxItem productStyle in this.chkBCProduct.CheckedItems)
+            {
+                string productCode = productStyle.Value.ToString();
+                string[] sArray = productCode.Split('-');
+                range.CheckType = "产品";
+                range.CheckValue = sArray[0];
+                range.Remark = productStyle.Value.ToString();
+                range.Save();
+            }
+        }
+        private void checkTypeAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkTypeAll.Checked)
+            {
+                checkTypeAll.Text = "反选";
+                this.chkBCType.CheckAll();
+            }
+            else
+            {
+                checkTypeAll.Text = "全选";
+                this.chkBCType.UnCheckAll();
+            }
+        }
+
+        private void checkTypeDetailAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkTypeDetailAll.Checked)
+            {
+                checkTypeDetailAll.Text = "反选";
+                this.chkBCTypeDetail.CheckAll();
+            }
+            else
+            {
+                checkTypeDetailAll.Text = "全选";
+                this.chkBCTypeDetail.UnCheckAll();
+            }
+        }
+
+        private void checkProductAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkProductAll.Checked)
+            {
+                checkProductAll.Text = "反选";
+                this.chkBCProduct.CheckAll();
+            }
+            else
+            {
+                checkProductAll.Text = "全选";
+                this.chkBCProduct.UnCheckAll();
+            }
+        }
     }
 }

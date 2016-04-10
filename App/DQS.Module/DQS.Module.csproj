@@ -84,6 +84,7 @@
     <Compile Include="Entities\BFIEnterpriseLicenseLockHistoryEntity.cs" />
     <Compile Include="Entities\BFIEnterpriseTradeLicenseLockHistoryEntity.cs" />
     <Compile Include="Entities\BFILabelStructureEntity.cs" />
+    <Compile Include="Entities\BFIPersonRangeEntity.cs" />
     <Compile Include="Entities\BFIPriceListEntity.cs" />
     <Compile Include="Entities\BFIPriceListItemEntity.cs" />
     <Compile Include="Entities\BFIPriceListVersionEntity.cs" />
