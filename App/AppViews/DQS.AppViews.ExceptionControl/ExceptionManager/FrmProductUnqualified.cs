@@ -81,7 +81,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
             //base.CustomPrint();
         }
 
-        public static void ApproveAndUpdateStoreDetail(int entityID)
+        public void ApproveAndUpdateStoreDetail(int entityID)
         {
 
             BUSProductUnqualifiedEntity entity = new BUSProductUnqualifiedEntity { UnqualifiedID = entityID };
@@ -124,6 +124,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                         if (result == 1)
                         {
                             XtraMessageBox.Show("明细中有药品库存不够，请检查。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            rollback();
                             return;
                         }
                     }
@@ -185,6 +186,26 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                 entity.UnqualifiedStatusID = 2;
                 entity.UnqualifiedStatus = "已审核";
                 entity.Update();
+            }
+        }
+
+        private void rollback()
+        {
+            object approveStatus = this.gvData.GetFocusedRowCellValue("审批状态");
+            object unqualifiedCode = this.gvData.GetFocusedRowCellValue("记录编号");
+            if (unqualifiedCode != null && unqualifiedCode != DBNull.Value && approveStatus != null && approveStatus != DBNull.Value)
+            {
+                EntityCollection<ATCApproveEntity> approves = new EntityCollection<ATCApproveEntity>();
+                PredicateExpression pe = new PredicateExpression();
+                pe.Add(ATCApproveEntityFields.DocumentCode == "ProductUnqualified");
+                pe.Add(ATCApproveEntityFields.BillCode == unqualifiedCode.ToString());
+                approves.Fetch(pe);
+                foreach (ATCApproveEntity item in approves)
+                {
+                    item.IsApprovaled = false;
+                    item.IsPass = false;
+                    item.Update();
+                }
             }
         }
     }

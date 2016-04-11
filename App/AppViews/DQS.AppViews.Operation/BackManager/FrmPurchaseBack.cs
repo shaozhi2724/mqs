@@ -182,13 +182,11 @@ UPDATE dbo.BUS_Bill SET BillStatus=9,BillStatusName='已删除',LastModifyDate=G
                             else
                             {
                                 //将销售单减掉的业务库存加回来
-                                string sql = @"SELECT DetailID FROM dbo.BUS_BillDetail WHERE BillID = " + entity.BillID;
                                 string Updatesql = @"
 UPDATE dbo.BUS_Bill SET BillStatus=9,BillStatusName='已删除',LastModifyDate=GETDATE(),LastModifyUserID='{1}',Reservation5='已删除。操作员：'+(SELECT UserName FROM dbo.ATC_User WHERE UserID = '{1}')+'于'+CONVERT(varchar(100), GETDATE(), 20)+'删除，删除原因为：'+'{2}' WHERE BillID='{0}'";
                                 string DelNewsql = "EXEC sp_NewStoreDetailDeleteBill ";
                                 using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
                                 {
-                                    SqlDataAdapter sdad = new SqlDataAdapter(sql, conn);
                                     DataSet ds = new DataSet();
                                     conn.Open();
                                     try
@@ -196,13 +194,8 @@ UPDATE dbo.BUS_Bill SET BillStatus=9,BillStatusName='已删除',LastModifyDate=G
                                         Updatesql = string.Format(Updatesql, entity.BillID, GlobalItem.g_CurrentUser.UserID, reason);
                                         SqlCommand Bcommand = new SqlCommand(Updatesql, conn);
                                         Bcommand.ExecuteNonQuery();
-                                        sdad.Fill(ds, "Table");
-                                        for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
-                                        {
-                                            int DetailID = Convert.ToInt32(ds.Tables["Table"].Rows[i]["DetailID"]);
-                                            SqlCommand comm = new SqlCommand(DelNewsql + DetailID.ToString(), conn);
+                                        SqlCommand comm = new SqlCommand(DelNewsql + entity.BillID, conn);
                                             comm.ExecuteNonQuery();
-                                        }
                                     }
                                     catch (Exception ex)
                                     {

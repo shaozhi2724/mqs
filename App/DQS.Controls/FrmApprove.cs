@@ -201,19 +201,6 @@ namespace DQS.Controls
                 departmentID = employee.DepartmentID;
             }
             //将销售单减掉的业务库存加回来
-            /*
-            string sql = @"
-UPDATE SD
-    SET SD.Amount = SD.Amount + BD.Amount
-FROM dbo.BUS_BillDetail AS BD
-LEFT JOIN dbo.BUS_StoreDetail AS SD
-ON BD.ProductID = SD.ProductID
-AND BD.BatchNo = SD.BatchNo
-WHERE BD.BillID='{0}' AND SD.DepartmentID='{1}'
-
-UPDATE dbo.BUS_Bill SET BillStatus=10,BillStatusName='未批准',ReceiveID=NULL,ReviewCode=NULL,AcceptID=NULL,AcceptCode=NULL,Reservation10='未批准' WHERE BillID='{0}'
-";
-             */
             string sql = @"
 
 DELETE BUS_OutStoreDetail WHERE BillID = '{0}'
