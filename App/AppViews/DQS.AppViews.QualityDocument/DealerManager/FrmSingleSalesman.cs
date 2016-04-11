@@ -274,7 +274,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
 
             foreach (BFIProductEntity c in products)
             {
-                this.chkBCProduct.Items.Add(new ListEntityItem(c, c.ProductCode + "-" + c.ProductName));
+                this.chkBCProduct.Items.Add(new ListEntityItem(c, c.ProductCode + "-" + c.ProductName + "-" + c.ProductSpec + "-" + c.ProducerName));
             }
         }
 

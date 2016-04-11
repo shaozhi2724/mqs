@@ -1236,31 +1236,38 @@ WHERE BillID={1}
                 }
                 if (popupFormName == "Product")
                 {
-                    //if (null != e.PopupRow["StyleID"])
-                    //{
+                    if (Settings.Default.IsBillCategory)
+                    {
+                        if (null != e.PopupRow["StyleID"])
+                        {
 
-                    //    string style = e.PopupRow["StyleID"].ToString();
-                    //    if (style != "0")
-                    //    {
-                    //        if (lblStyleID.Text == "")
-                    //        {
-                    //            lblStyleID.Text = e.PopupRow["StyleID"].ToString();
-                    //            lblStyleName.Text = e.PopupRow["StyleName"].ToString();
-                    //        }
-                    //        else
-                    //        {
-                    //            if (!style.Equals(lblStyleID.Text))
-                    //            {
-                    //                XtraMessageBox.Show(
-                    //                                    "该产品为" + e.PopupRow["StyleName"].ToString() + "，该单据属于" +
-                    //                                    lblStyleName.Text + "单据，不能混开，需要重新下单。点击确定后，请按Del键删除此产品。",
-                    //                                    "系统提示",
-                    //                                    MessageBoxButtons.OK,
-                    //                                    MessageBoxIcon.Warning);
-                    //            }
-                    //        }
-                    //    }
-                    //}
+                            string style = e.PopupRow["StyleID"].ToString();
+                            if (style != "0")
+                            {
+                                if (lblStyleID.Text == "")
+                                {
+                                    lblStyleID.Text = e.PopupRow["StyleID"].ToString();
+                                    lblStyleName.Text = e.PopupRow["StyleName"].ToString();
+                                }
+                                else
+                                {
+                                    if (style != (lblStyleID.Text))
+                                    {
+                                        XtraMessageBox.Show(
+                                                            "该产品为" + e.PopupRow["StyleName"].ToString() + "，该单据属于" +
+                                                            lblStyleName.Text + "单据，不能混开，需要重新下单。点击确定后，请按Del键删除此产品。",
+                                                            "系统提示",
+                                                            MessageBoxButtons.OK,
+                                                            MessageBoxIcon.Warning);
+                                        e.PopupRow.Delete();
+                                        e.Cancel = true;
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     if (null != e.PopupRow["批发价"])
                     {
                         this.popupGrid.PopupView.SetFocusedRowCellValue("批发价", e.PopupRow["批发价"]);
