@@ -474,6 +474,7 @@
             this.btnReviewRecord.Size = new System.Drawing.Size(75, 23);
             this.btnReviewRecord.TabIndex = 3;
             this.btnReviewRecord.Text = "复核记录(&R)";
+            this.btnReviewRecord.Visible = false;
             this.btnReviewRecord.Click += new System.EventHandler(this.btnReviewRecord_Click);
             // 
             // btnCancel

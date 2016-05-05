@@ -35,6 +35,7 @@
             this.tbProduct = new DevExpress.XtraTab.XtraTabControl();
             this.tbPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.layControl = new DevExpress.XtraLayout.LayoutControl();
+            this.txtProductSpell = new DQS.Controls.BFIProductEntityTextBox();
             this.cboSaleTax = new DQS.Controls.ComboBoxCategoryEx();
             this.cboPurchaseTax = new DQS.Controls.ComboBoxCategoryEx();
             this.txtProductionOriginAddress = new DQS.Controls.BFIProductEntityTextBox();
@@ -76,40 +77,43 @@
             this.layTradeName = new DevExpress.XtraLayout.LayoutControlItem();
             this.layCommonName = new DevExpress.XtraLayout.LayoutControlItem();
             this.layProductName = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layPackageSpec = new DevExpress.XtraLayout.LayoutControlItem();
             this.layAuthorizedNo = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layProductionAddress = new DevExpress.XtraLayout.LayoutControlItem();
             this.layProductionPhone = new DevExpress.XtraLayout.LayoutControlItem();
             this.layContactPerson = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layProductBarCode = new DevExpress.XtraLayout.LayoutControlItem();
             this.layProductSpec = new DevExpress.XtraLayout.LayoutControlItem();
             this.layProductUnit = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layProducerName = new DevExpress.XtraLayout.LayoutControlItem();
             this.layProductionPostalCode = new DevExpress.XtraLayout.LayoutControlItem();
             this.layProductionFaxNo = new DevExpress.XtraLayout.LayoutControlItem();
             this.layContactPhone = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layPhysicType = new DevExpress.XtraLayout.LayoutControlItem();
             this.layProductStyle = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layProductRemrk = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layStockCondition = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layRegisterNo = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layPerformanceStandard = new DevExpress.XtraLayout.LayoutControlItem();
             this.layTreatmentFor = new DevExpress.XtraLayout.LayoutControlItem();
             this.layCharacter = new DevExpress.XtraLayout.LayoutControlItem();
             this.laySuperviseSignBar = new DevExpress.XtraLayout.LayoutControlItem();
             this.layBatchPreWarningDays = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layValidateYears = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layFirstDealerName = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layEnglishName = new DevExpress.XtraLayout.LayoutControlItem();
             this.layProductStatus = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layProductCycleStyle = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layStockFilter = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layProductionOriginAddress = new DevExpress.XtraLayout.LayoutControlItem();
             this.layPurchaseTax = new DevExpress.XtraLayout.LayoutControlItem();
             this.laySaleTax = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layEnglishName = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProductBarCode = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layPackageSpec = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layPhysicType = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProducerName = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layValidateYears = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProductionAddress = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProductionOriginAddress = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layFirstDealerName = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layStockCondition = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layStockFilter = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProductCycleStyle = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layPerformanceStandard = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layRegisterNo = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProductRemrk = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProductSpell = new DevExpress.XtraLayout.LayoutControlItem();
             this.tbPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.layControl2 = new DevExpress.XtraLayout.LayoutControl();
+            this.bfiProductEntityTextBox1 = new DQS.Controls.BFIProductEntityTextBox();
+            this.txtSpecialNum = new DQS.Controls.BFIProductEntityTextBox();
             this.chkBoxUseDescription = new DevExpress.XtraEditors.CheckedListBoxControl();
             this.txtAcceptAgingTime = new DQS.Controls.BFIProductEntityTextBox();
             this.txtPackagingProportion = new DQS.Controls.BFIProductEntityTextBox();
@@ -147,13 +151,11 @@
             this.layScatteredCargoSpaceMinimum = new DevExpress.XtraLayout.LayoutControlItem();
             this.layPackagingProportion = new DevExpress.XtraLayout.LayoutControlItem();
             this.layEntireCargoSpaceMaximum = new DevExpress.XtraLayout.LayoutControlItem();
+            this.laySpecialNum = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProductEntityTextBox1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tabGrantedPerson = new DevExpress.XtraTab.XtraTabPage();
             this.popupGrid = new DQS.Controls.PopupGrid();
             this.rdbtnIsUseToPregnantYes = new System.Windows.Forms.RadioButton();
-            this.txtSpecialNum = new DQS.Controls.BFIProductEntityTextBox();
-            this.laySpecialNum = new DevExpress.XtraLayout.LayoutControlItem();
-            this.bfiProductEntityTextBox1 = new DQS.Controls.BFIProductEntityTextBox();
-            this.layProductEntityTextBox1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.pnOperating)).BeginInit();
             this.pnOperating.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
@@ -163,6 +165,7 @@
             this.tbPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
             this.layControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductSpell.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSaleTax.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboPurchaseTax.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionOriginAddress.Properties)).BeginInit();
@@ -204,41 +207,44 @@
             ((System.ComponentModel.ISupportInitialize)(this.layTradeName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layCommonName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layPackageSpec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layAuthorizedNo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductionAddress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductionPhone)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layContactPerson)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductBarCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductSpec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductUnit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProducerName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductionPostalCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductionFaxNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layContactPhone)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layPhysicType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductStyle)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductRemrk)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layStockCondition)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layRegisterNo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layPerformanceStandard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layTreatmentFor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layCharacter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.laySuperviseSignBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layBatchPreWarningDays)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layValidateYears)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layFirstDealerName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layEnglishName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductStatus)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductCycleStyle)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layStockFilter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductionOriginAddress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layPurchaseTax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.laySaleTax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layEnglishName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductBarCode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPackageSpec)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPhysicType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProducerName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layValidateYears)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductionAddress)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductionOriginAddress)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layFirstDealerName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layStockCondition)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layStockFilter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductCycleStyle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPerformanceStandard)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layRegisterNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductRemrk)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductSpell)).BeginInit();
             this.tbPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl2)).BeginInit();
             this.layControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bfiProductEntityTextBox1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSpecialNum.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkBoxUseDescription)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAcceptAgingTime.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPackagingProportion.Properties)).BeginInit();
@@ -276,12 +282,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layScatteredCargoSpaceMinimum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layPackagingProportion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layEntireCargoSpaceMaximum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.laySpecialNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductEntityTextBox1)).BeginInit();
             this.tabGrantedPerson.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.popupGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSpecialNum.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.laySpecialNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bfiProductEntityTextBox1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductEntityTextBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnOperating
@@ -355,6 +359,7 @@
             // 
             // layControl
             // 
+            this.layControl.Controls.Add(this.txtProductSpell);
             this.layControl.Controls.Add(this.cboSaleTax);
             this.layControl.Controls.Add(this.cboPurchaseTax);
             this.layControl.Controls.Add(this.txtProductionOriginAddress);
@@ -398,6 +403,20 @@
             this.layControl.Size = new System.Drawing.Size(815, 448);
             this.layControl.TabIndex = 0;
             this.layControl.Text = "layControl";
+            // 
+            // txtProductSpell
+            // 
+            this.txtProductSpell.AlphabeticFiled = "ProductSpell";
+            this.txtProductSpell.EntityField = DQS.Module.Entities.BFIProductEntityFields2.ProductSpell;
+            this.txtProductSpell.IsIntegerOnly = false;
+            this.txtProductSpell.IsNullString = "";
+            this.txtProductSpell.IsNullValidate = false;
+            this.txtProductSpell.IsTransferAlphabetic = true;
+            this.txtProductSpell.Location = new System.Drawing.Point(500, 87);
+            this.txtProductSpell.Name = "txtProductSpell";
+            this.txtProductSpell.Size = new System.Drawing.Size(286, 21);
+            this.txtProductSpell.StyleController = this.layControl;
+            this.txtProductSpell.TabIndex = 53;
             // 
             // cboSaleTax
             // 
@@ -649,7 +668,7 @@
             // 
             // txtProductName
             // 
-            this.txtProductName.AlphabeticFiled = "ProductSpell";
+            this.txtProductName.AlphabeticFiled = null;
             this.txtProductName.EntityField = DQS.Module.Entities.BFIProductEntityFields2.ProductName;
             this.txtProductName.IsIntegerOnly = false;
             this.txtProductName.IsNullString = "产品名称不能为空。";
@@ -930,7 +949,7 @@
             this.cbxIsForeignDrug.Properties.Appearance.Options.UseFont = true;
             this.cbxIsForeignDrug.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
             this.cbxIsForeignDrug.Properties.Caption = "进口产品";
-            this.cbxIsForeignDrug.Size = new System.Drawing.Size(774, 22);
+            this.cbxIsForeignDrug.Size = new System.Drawing.Size(385, 22);
             this.cbxIsForeignDrug.StyleController = this.layControl;
             this.cbxIsForeignDrug.TabIndex = 4;
             // 
@@ -977,7 +996,8 @@
             this.layProductCycleStyle,
             this.layPerformanceStandard,
             this.layRegisterNo,
-            this.layProductRemrk});
+            this.layProductRemrk,
+            this.layProductSpell});
             this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(798, 521);
@@ -1025,16 +1045,6 @@
             this.layProductName.Text = "产品名称";
             this.layProductName.TextSize = new System.Drawing.Size(96, 17);
             // 
-            // layPackageSpec
-            // 
-            this.layPackageSpec.Control = this.txtPackageSpec;
-            this.layPackageSpec.CustomizationFormText = "包装规格型号";
-            this.layPackageSpec.Location = new System.Drawing.Point(389, 101);
-            this.layPackageSpec.Name = "layPackageSpec";
-            this.layPackageSpec.Size = new System.Drawing.Size(389, 25);
-            this.layPackageSpec.Text = "包装规格";
-            this.layPackageSpec.TextSize = new System.Drawing.Size(96, 17);
-            // 
             // layAuthorizedNo
             // 
             this.layAuthorizedNo.Control = this.txtAuthorizedNo;
@@ -1044,16 +1054,6 @@
             this.layAuthorizedNo.Size = new System.Drawing.Size(387, 25);
             this.layAuthorizedNo.Text = "注册证号";
             this.layAuthorizedNo.TextSize = new System.Drawing.Size(96, 17);
-            // 
-            // layProductionAddress
-            // 
-            this.layProductionAddress.Control = this.txtProductionAddress;
-            this.layProductionAddress.CustomizationFormText = "生产地址";
-            this.layProductionAddress.Location = new System.Drawing.Point(0, 276);
-            this.layProductionAddress.Name = "layProductionAddress";
-            this.layProductionAddress.Size = new System.Drawing.Size(389, 25);
-            this.layProductionAddress.Text = "生产地址";
-            this.layProductionAddress.TextSize = new System.Drawing.Size(96, 17);
             // 
             // layProductionPhone
             // 
@@ -1075,16 +1075,6 @@
             this.layContactPerson.Text = "联系人";
             this.layContactPerson.TextSize = new System.Drawing.Size(96, 17);
             // 
-            // layProductBarCode
-            // 
-            this.layProductBarCode.Control = this.txtProductBarCode;
-            this.layProductBarCode.CustomizationFormText = "商品条码";
-            this.layProductBarCode.Location = new System.Drawing.Point(389, 50);
-            this.layProductBarCode.Name = "layProductBarCode";
-            this.layProductBarCode.Size = new System.Drawing.Size(389, 25);
-            this.layProductBarCode.Text = "商品条码";
-            this.layProductBarCode.TextSize = new System.Drawing.Size(96, 17);
-            // 
             // layProductSpec
             // 
             this.layProductSpec.Control = this.txtProductSpec;
@@ -1104,16 +1094,6 @@
             this.layProductUnit.Size = new System.Drawing.Size(389, 25);
             this.layProductUnit.Text = "包装单位";
             this.layProductUnit.TextSize = new System.Drawing.Size(96, 17);
-            // 
-            // layProducerName
-            // 
-            this.layProducerName.Control = this.txtProducerName;
-            this.layProducerName.CustomizationFormText = "生产厂商";
-            this.layProducerName.Location = new System.Drawing.Point(0, 251);
-            this.layProducerName.Name = "layProducerName";
-            this.layProducerName.Size = new System.Drawing.Size(389, 25);
-            this.layProducerName.Text = "生产厂商";
-            this.layProducerName.TextSize = new System.Drawing.Size(96, 17);
             // 
             // layProductionPostalCode
             // 
@@ -1145,16 +1125,6 @@
             this.layContactPhone.Text = "联系人电话";
             this.layContactPhone.TextSize = new System.Drawing.Size(96, 17);
             // 
-            // layPhysicType
-            // 
-            this.layPhysicType.Control = this.cbxPhysicType;
-            this.layPhysicType.CustomizationFormText = "制剂类型";
-            this.layPhysicType.Location = new System.Drawing.Point(0, 126);
-            this.layPhysicType.Name = "layPhysicType";
-            this.layPhysicType.Size = new System.Drawing.Size(389, 25);
-            this.layPhysicType.Text = "产品大类";
-            this.layPhysicType.TextSize = new System.Drawing.Size(96, 17);
-            // 
             // layProductStyle
             // 
             this.layProductStyle.Control = this.cbxProductStyle;
@@ -1164,46 +1134,6 @@
             this.layProductStyle.Size = new System.Drawing.Size(778, 25);
             this.layProductStyle.Text = "产品类别";
             this.layProductStyle.TextSize = new System.Drawing.Size(96, 17);
-            // 
-            // layProductRemrk
-            // 
-            this.layProductRemrk.Control = this.txtProductRemrk;
-            this.layProductRemrk.CustomizationFormText = "备注";
-            this.layProductRemrk.Location = new System.Drawing.Point(389, 426);
-            this.layProductRemrk.Name = "layProductRemrk";
-            this.layProductRemrk.Size = new System.Drawing.Size(389, 25);
-            this.layProductRemrk.Text = "备注";
-            this.layProductRemrk.TextSize = new System.Drawing.Size(96, 17);
-            // 
-            // layStockCondition
-            // 
-            this.layStockCondition.Control = this.cbxStockCondition;
-            this.layStockCondition.CustomizationFormText = "储存库区";
-            this.layStockCondition.Location = new System.Drawing.Point(0, 301);
-            this.layStockCondition.Name = "layStockCondition";
-            this.layStockCondition.Size = new System.Drawing.Size(389, 25);
-            this.layStockCondition.Text = "储存库区";
-            this.layStockCondition.TextSize = new System.Drawing.Size(96, 17);
-            // 
-            // layRegisterNo
-            // 
-            this.layRegisterNo.Control = this.txtRegisterNo;
-            this.layRegisterNo.CustomizationFormText = "注册商标";
-            this.layRegisterNo.Location = new System.Drawing.Point(0, 351);
-            this.layRegisterNo.Name = "layRegisterNo";
-            this.layRegisterNo.Size = new System.Drawing.Size(389, 25);
-            this.layRegisterNo.Text = "注册商标";
-            this.layRegisterNo.TextSize = new System.Drawing.Size(96, 17);
-            // 
-            // layPerformanceStandard
-            // 
-            this.layPerformanceStandard.Control = this.txtPerformanceStandard;
-            this.layPerformanceStandard.CustomizationFormText = "执行标准";
-            this.layPerformanceStandard.Location = new System.Drawing.Point(389, 326);
-            this.layPerformanceStandard.Name = "layPerformanceStandard";
-            this.layPerformanceStandard.Size = new System.Drawing.Size(389, 25);
-            this.layPerformanceStandard.Text = "执行标准";
-            this.layPerformanceStandard.TextSize = new System.Drawing.Size(96, 17);
             // 
             // layTreatmentFor
             // 
@@ -1247,36 +1177,6 @@
             this.layBatchPreWarningDays.Text = "效期提前预警天数";
             this.layBatchPreWarningDays.TextSize = new System.Drawing.Size(96, 17);
             // 
-            // layValidateYears
-            // 
-            this.layValidateYears.Control = this.txtValidateYears;
-            this.layValidateYears.CustomizationFormText = "效期";
-            this.layValidateYears.Location = new System.Drawing.Point(387, 226);
-            this.layValidateYears.Name = "layValidateYears";
-            this.layValidateYears.Size = new System.Drawing.Size(391, 25);
-            this.layValidateYears.Text = "效期";
-            this.layValidateYears.TextSize = new System.Drawing.Size(96, 17);
-            // 
-            // layFirstDealerName
-            // 
-            this.layFirstDealerName.Control = this.txtFirstDealerName;
-            this.layFirstDealerName.CustomizationFormText = "供货商";
-            this.layFirstDealerName.Location = new System.Drawing.Point(389, 276);
-            this.layFirstDealerName.Name = "layFirstDealerName";
-            this.layFirstDealerName.Size = new System.Drawing.Size(389, 25);
-            this.layFirstDealerName.Text = "供货商";
-            this.layFirstDealerName.TextSize = new System.Drawing.Size(96, 17);
-            // 
-            // layEnglishName
-            // 
-            this.layEnglishName.Control = this.txtEnglishName;
-            this.layEnglishName.CustomizationFormText = "英文名称";
-            this.layEnglishName.Location = new System.Drawing.Point(0, 50);
-            this.layEnglishName.Name = "layEnglishName";
-            this.layEnglishName.Size = new System.Drawing.Size(389, 25);
-            this.layEnglishName.Text = "英文名称";
-            this.layEnglishName.TextSize = new System.Drawing.Size(96, 17);
-            // 
             // layProductStatus
             // 
             this.layProductStatus.Control = this.cbbProductStatus;
@@ -1287,47 +1187,17 @@
             this.layProductStatus.Text = "状态";
             this.layProductStatus.TextSize = new System.Drawing.Size(96, 17);
             // 
-            // layProductCycleStyle
-            // 
-            this.layProductCycleStyle.Control = this.cbxProductCycleStyle;
-            this.layProductCycleStyle.CustomizationFormText = "产品养护";
-            this.layProductCycleStyle.Location = new System.Drawing.Point(0, 326);
-            this.layProductCycleStyle.Name = "layProductCycleStyle";
-            this.layProductCycleStyle.Size = new System.Drawing.Size(389, 25);
-            this.layProductCycleStyle.Text = "产品养护";
-            this.layProductCycleStyle.TextSize = new System.Drawing.Size(96, 17);
-            // 
-            // layStockFilter
-            // 
-            this.layStockFilter.Control = this.txtStockFilter;
-            this.layStockFilter.CustomizationFormText = "贮藏条件";
-            this.layStockFilter.Location = new System.Drawing.Point(389, 301);
-            this.layStockFilter.Name = "layStockFilter";
-            this.layStockFilter.Size = new System.Drawing.Size(389, 25);
-            this.layStockFilter.Text = "贮藏条件";
-            this.layStockFilter.TextSize = new System.Drawing.Size(96, 17);
-            // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.cbxIsForeignDrug;
             this.layoutControlItem1.CustomizationFormText = "进口产品";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 75);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(778, 26);
+            this.layoutControlItem1.Size = new System.Drawing.Size(389, 26);
             this.layoutControlItem1.Text = "进口产品";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // layProductionOriginAddress
-            // 
-            this.layProductionOriginAddress.Control = this.txtProductionOriginAddress;
-            this.layProductionOriginAddress.CustomizationFormText = "产地";
-            this.layProductionOriginAddress.Location = new System.Drawing.Point(389, 251);
-            this.layProductionOriginAddress.Name = "layProductionOriginAddress";
-            this.layProductionOriginAddress.Size = new System.Drawing.Size(389, 25);
-            this.layProductionOriginAddress.Text = "产地";
-            this.layProductionOriginAddress.TextSize = new System.Drawing.Size(96, 17);
             // 
             // layPurchaseTax
             // 
@@ -1348,6 +1218,166 @@
             this.laySaleTax.Size = new System.Drawing.Size(391, 25);
             this.laySaleTax.Text = "销项税";
             this.laySaleTax.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layEnglishName
+            // 
+            this.layEnglishName.Control = this.txtEnglishName;
+            this.layEnglishName.CustomizationFormText = "英文名称";
+            this.layEnglishName.Location = new System.Drawing.Point(0, 50);
+            this.layEnglishName.Name = "layEnglishName";
+            this.layEnglishName.Size = new System.Drawing.Size(389, 25);
+            this.layEnglishName.Text = "英文名称";
+            this.layEnglishName.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layProductBarCode
+            // 
+            this.layProductBarCode.Control = this.txtProductBarCode;
+            this.layProductBarCode.CustomizationFormText = "商品条码";
+            this.layProductBarCode.Location = new System.Drawing.Point(389, 50);
+            this.layProductBarCode.Name = "layProductBarCode";
+            this.layProductBarCode.Size = new System.Drawing.Size(389, 25);
+            this.layProductBarCode.Text = "商品条码";
+            this.layProductBarCode.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layPackageSpec
+            // 
+            this.layPackageSpec.Control = this.txtPackageSpec;
+            this.layPackageSpec.CustomizationFormText = "包装规格型号";
+            this.layPackageSpec.Location = new System.Drawing.Point(389, 101);
+            this.layPackageSpec.Name = "layPackageSpec";
+            this.layPackageSpec.Size = new System.Drawing.Size(389, 25);
+            this.layPackageSpec.Text = "包装规格";
+            this.layPackageSpec.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layPhysicType
+            // 
+            this.layPhysicType.Control = this.cbxPhysicType;
+            this.layPhysicType.CustomizationFormText = "制剂类型";
+            this.layPhysicType.Location = new System.Drawing.Point(0, 126);
+            this.layPhysicType.Name = "layPhysicType";
+            this.layPhysicType.Size = new System.Drawing.Size(389, 25);
+            this.layPhysicType.Text = "产品大类";
+            this.layPhysicType.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layProducerName
+            // 
+            this.layProducerName.Control = this.txtProducerName;
+            this.layProducerName.CustomizationFormText = "生产厂商";
+            this.layProducerName.Location = new System.Drawing.Point(0, 251);
+            this.layProducerName.Name = "layProducerName";
+            this.layProducerName.Size = new System.Drawing.Size(389, 25);
+            this.layProducerName.Text = "生产厂商";
+            this.layProducerName.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layValidateYears
+            // 
+            this.layValidateYears.Control = this.txtValidateYears;
+            this.layValidateYears.CustomizationFormText = "效期";
+            this.layValidateYears.Location = new System.Drawing.Point(387, 226);
+            this.layValidateYears.Name = "layValidateYears";
+            this.layValidateYears.Size = new System.Drawing.Size(391, 25);
+            this.layValidateYears.Text = "效期";
+            this.layValidateYears.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layProductionAddress
+            // 
+            this.layProductionAddress.Control = this.txtProductionAddress;
+            this.layProductionAddress.CustomizationFormText = "生产地址";
+            this.layProductionAddress.Location = new System.Drawing.Point(0, 276);
+            this.layProductionAddress.Name = "layProductionAddress";
+            this.layProductionAddress.Size = new System.Drawing.Size(389, 25);
+            this.layProductionAddress.Text = "生产地址";
+            this.layProductionAddress.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layProductionOriginAddress
+            // 
+            this.layProductionOriginAddress.Control = this.txtProductionOriginAddress;
+            this.layProductionOriginAddress.CustomizationFormText = "产地";
+            this.layProductionOriginAddress.Location = new System.Drawing.Point(389, 251);
+            this.layProductionOriginAddress.Name = "layProductionOriginAddress";
+            this.layProductionOriginAddress.Size = new System.Drawing.Size(389, 25);
+            this.layProductionOriginAddress.Text = "产地";
+            this.layProductionOriginAddress.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layFirstDealerName
+            // 
+            this.layFirstDealerName.Control = this.txtFirstDealerName;
+            this.layFirstDealerName.CustomizationFormText = "供货商";
+            this.layFirstDealerName.Location = new System.Drawing.Point(389, 276);
+            this.layFirstDealerName.Name = "layFirstDealerName";
+            this.layFirstDealerName.Size = new System.Drawing.Size(389, 25);
+            this.layFirstDealerName.Text = "供货商";
+            this.layFirstDealerName.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layStockCondition
+            // 
+            this.layStockCondition.Control = this.cbxStockCondition;
+            this.layStockCondition.CustomizationFormText = "储存库区";
+            this.layStockCondition.Location = new System.Drawing.Point(0, 301);
+            this.layStockCondition.Name = "layStockCondition";
+            this.layStockCondition.Size = new System.Drawing.Size(389, 25);
+            this.layStockCondition.Text = "储存库区";
+            this.layStockCondition.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layStockFilter
+            // 
+            this.layStockFilter.Control = this.txtStockFilter;
+            this.layStockFilter.CustomizationFormText = "贮藏条件";
+            this.layStockFilter.Location = new System.Drawing.Point(389, 301);
+            this.layStockFilter.Name = "layStockFilter";
+            this.layStockFilter.Size = new System.Drawing.Size(389, 25);
+            this.layStockFilter.Text = "贮藏条件";
+            this.layStockFilter.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layProductCycleStyle
+            // 
+            this.layProductCycleStyle.Control = this.cbxProductCycleStyle;
+            this.layProductCycleStyle.CustomizationFormText = "产品养护";
+            this.layProductCycleStyle.Location = new System.Drawing.Point(0, 326);
+            this.layProductCycleStyle.Name = "layProductCycleStyle";
+            this.layProductCycleStyle.Size = new System.Drawing.Size(389, 25);
+            this.layProductCycleStyle.Text = "产品养护";
+            this.layProductCycleStyle.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layPerformanceStandard
+            // 
+            this.layPerformanceStandard.Control = this.txtPerformanceStandard;
+            this.layPerformanceStandard.CustomizationFormText = "执行标准";
+            this.layPerformanceStandard.Location = new System.Drawing.Point(389, 326);
+            this.layPerformanceStandard.Name = "layPerformanceStandard";
+            this.layPerformanceStandard.Size = new System.Drawing.Size(389, 25);
+            this.layPerformanceStandard.Text = "执行标准";
+            this.layPerformanceStandard.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layRegisterNo
+            // 
+            this.layRegisterNo.Control = this.txtRegisterNo;
+            this.layRegisterNo.CustomizationFormText = "注册商标";
+            this.layRegisterNo.Location = new System.Drawing.Point(0, 351);
+            this.layRegisterNo.Name = "layRegisterNo";
+            this.layRegisterNo.Size = new System.Drawing.Size(389, 25);
+            this.layRegisterNo.Text = "注册商标";
+            this.layRegisterNo.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layProductRemrk
+            // 
+            this.layProductRemrk.Control = this.txtProductRemrk;
+            this.layProductRemrk.CustomizationFormText = "备注";
+            this.layProductRemrk.Location = new System.Drawing.Point(389, 426);
+            this.layProductRemrk.Name = "layProductRemrk";
+            this.layProductRemrk.Size = new System.Drawing.Size(389, 25);
+            this.layProductRemrk.Text = "备注";
+            this.layProductRemrk.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layProductSpell
+            // 
+            this.layProductSpell.Control = this.txtProductSpell;
+            this.layProductSpell.CustomizationFormText = "助记码";
+            this.layProductSpell.Location = new System.Drawing.Point(389, 75);
+            this.layProductSpell.Name = "layProductSpell";
+            this.layProductSpell.Size = new System.Drawing.Size(389, 26);
+            this.layProductSpell.Text = "助记码";
+            this.layProductSpell.TextSize = new System.Drawing.Size(96, 17);
             // 
             // tbPage2
             // 
@@ -1385,6 +1415,38 @@
             this.layControl2.Size = new System.Drawing.Size(815, 448);
             this.layControl2.TabIndex = 0;
             this.layControl2.Text = "layoutControl2";
+            // 
+            // bfiProductEntityTextBox1
+            // 
+            this.bfiProductEntityTextBox1.AlphabeticFiled = null;
+            this.bfiProductEntityTextBox1.EditValue = "0";
+            this.bfiProductEntityTextBox1.EntityField = DQS.Module.Entities.BFIProductEntityFields2.MSpecialNum;
+            this.bfiProductEntityTextBox1.IsIntegerOnly = false;
+            this.bfiProductEntityTextBox1.IsNullString = "规格型号不能为空。";
+            this.bfiProductEntityTextBox1.IsNullValidate = false;
+            this.bfiProductEntityTextBox1.IsTransferAlphabetic = false;
+            this.bfiProductEntityTextBox1.Location = new System.Drawing.Point(492, 137);
+            this.bfiProductEntityTextBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.bfiProductEntityTextBox1.Name = "bfiProductEntityTextBox1";
+            this.bfiProductEntityTextBox1.Size = new System.Drawing.Size(311, 21);
+            this.bfiProductEntityTextBox1.StyleController = this.layControl2;
+            this.bfiProductEntityTextBox1.TabIndex = 55;
+            // 
+            // txtSpecialNum
+            // 
+            this.txtSpecialNum.AlphabeticFiled = null;
+            this.txtSpecialNum.EditValue = "0";
+            this.txtSpecialNum.EntityField = DQS.Module.Entities.BFIProductEntityFields2.DSpecialNum;
+            this.txtSpecialNum.IsIntegerOnly = false;
+            this.txtSpecialNum.IsNullString = "规格型号不能为空。";
+            this.txtSpecialNum.IsNullValidate = false;
+            this.txtSpecialNum.IsTransferAlphabetic = false;
+            this.txtSpecialNum.Location = new System.Drawing.Point(111, 137);
+            this.txtSpecialNum.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSpecialNum.Name = "txtSpecialNum";
+            this.txtSpecialNum.Size = new System.Drawing.Size(278, 21);
+            this.txtSpecialNum.StyleController = this.layControl2;
+            this.txtSpecialNum.TabIndex = 54;
             // 
             // chkBoxUseDescription
             // 
@@ -1872,6 +1934,26 @@
             this.layEntireCargoSpaceMaximum.Text = "整货最大存放数量";
             this.layEntireCargoSpaceMaximum.TextSize = new System.Drawing.Size(96, 17);
             // 
+            // laySpecialNum
+            // 
+            this.laySpecialNum.Control = this.txtSpecialNum;
+            this.laySpecialNum.CustomizationFormText = "当天限购数量";
+            this.laySpecialNum.Location = new System.Drawing.Point(0, 125);
+            this.laySpecialNum.Name = "laySpecialNum";
+            this.laySpecialNum.Size = new System.Drawing.Size(381, 25);
+            this.laySpecialNum.Text = "当天限购数量";
+            this.laySpecialNum.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layProductEntityTextBox1
+            // 
+            this.layProductEntityTextBox1.Control = this.bfiProductEntityTextBox1;
+            this.layProductEntityTextBox1.CustomizationFormText = "当月限购数量";
+            this.layProductEntityTextBox1.Location = new System.Drawing.Point(381, 125);
+            this.layProductEntityTextBox1.Name = "layProductEntityTextBox1";
+            this.layProductEntityTextBox1.Size = new System.Drawing.Size(414, 25);
+            this.layProductEntityTextBox1.Text = "当月限购数量";
+            this.layProductEntityTextBox1.TextSize = new System.Drawing.Size(96, 17);
+            // 
             // tabGrantedPerson
             // 
             this.tabGrantedPerson.Controls.Add(this.popupGrid);
@@ -1900,58 +1982,6 @@
             this.rdbtnIsUseToPregnantYes.Text = "是";
             this.rdbtnIsUseToPregnantYes.UseVisualStyleBackColor = true;
             // 
-            // txtSpecialNum
-            // 
-            this.txtSpecialNum.AlphabeticFiled = null;
-            this.txtSpecialNum.EditValue = "0";
-            this.txtSpecialNum.EntityField = DQS.Module.Entities.BFIProductEntityFields2.DSpecialNum;
-            this.txtSpecialNum.IsIntegerOnly = false;
-            this.txtSpecialNum.IsNullString = "规格型号不能为空。";
-            this.txtSpecialNum.IsNullValidate = false;
-            this.txtSpecialNum.IsTransferAlphabetic = false;
-            this.txtSpecialNum.Location = new System.Drawing.Point(111, 137);
-            this.txtSpecialNum.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtSpecialNum.Name = "txtSpecialNum";
-            this.txtSpecialNum.Size = new System.Drawing.Size(278, 21);
-            this.txtSpecialNum.StyleController = this.layControl2;
-            this.txtSpecialNum.TabIndex = 54;
-            // 
-            // laySpecialNum
-            // 
-            this.laySpecialNum.Control = this.txtSpecialNum;
-            this.laySpecialNum.CustomizationFormText = "当天限购数量";
-            this.laySpecialNum.Location = new System.Drawing.Point(0, 125);
-            this.laySpecialNum.Name = "laySpecialNum";
-            this.laySpecialNum.Size = new System.Drawing.Size(381, 25);
-            this.laySpecialNum.Text = "当天限购数量";
-            this.laySpecialNum.TextSize = new System.Drawing.Size(96, 17);
-            // 
-            // bfiProductEntityTextBox1
-            // 
-            this.bfiProductEntityTextBox1.AlphabeticFiled = null;
-            this.bfiProductEntityTextBox1.EditValue = "0";
-            this.bfiProductEntityTextBox1.EntityField = DQS.Module.Entities.BFIProductEntityFields2.MSpecialNum;
-            this.bfiProductEntityTextBox1.IsIntegerOnly = false;
-            this.bfiProductEntityTextBox1.IsNullString = "规格型号不能为空。";
-            this.bfiProductEntityTextBox1.IsNullValidate = false;
-            this.bfiProductEntityTextBox1.IsTransferAlphabetic = false;
-            this.bfiProductEntityTextBox1.Location = new System.Drawing.Point(492, 137);
-            this.bfiProductEntityTextBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.bfiProductEntityTextBox1.Name = "bfiProductEntityTextBox1";
-            this.bfiProductEntityTextBox1.Size = new System.Drawing.Size(311, 21);
-            this.bfiProductEntityTextBox1.StyleController = this.layControl2;
-            this.bfiProductEntityTextBox1.TabIndex = 55;
-            // 
-            // layProductEntityTextBox1
-            // 
-            this.layProductEntityTextBox1.Control = this.bfiProductEntityTextBox1;
-            this.layProductEntityTextBox1.CustomizationFormText = "当月限购数量";
-            this.layProductEntityTextBox1.Location = new System.Drawing.Point(381, 125);
-            this.layProductEntityTextBox1.Name = "layProductEntityTextBox1";
-            this.layProductEntityTextBox1.Size = new System.Drawing.Size(414, 25);
-            this.layProductEntityTextBox1.Text = "当月限购数量";
-            this.layProductEntityTextBox1.TextSize = new System.Drawing.Size(96, 17);
-            // 
             // FrmSingleProduct
             // 
             this.AcceptButton = this.btnSave;
@@ -1977,6 +2007,7 @@
             this.tbPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).EndInit();
             this.layControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductSpell.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSaleTax.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboPurchaseTax.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionOriginAddress.Properties)).EndInit();
@@ -2018,41 +2049,44 @@
             ((System.ComponentModel.ISupportInitialize)(this.layTradeName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layCommonName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layPackageSpec)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layAuthorizedNo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductionAddress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductionPhone)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layContactPerson)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductBarCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductSpec)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductUnit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProducerName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductionPostalCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductionFaxNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layContactPhone)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layPhysicType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductStyle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductRemrk)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layStockCondition)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layRegisterNo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layPerformanceStandard)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layTreatmentFor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layCharacter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.laySuperviseSignBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layBatchPreWarningDays)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layValidateYears)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layFirstDealerName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layEnglishName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductStatus)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductCycleStyle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layStockFilter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductionOriginAddress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layPurchaseTax)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.laySaleTax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layEnglishName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductBarCode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPackageSpec)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPhysicType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProducerName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layValidateYears)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductionAddress)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductionOriginAddress)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layFirstDealerName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layStockCondition)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layStockFilter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductCycleStyle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPerformanceStandard)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layRegisterNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductRemrk)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductSpell)).EndInit();
             this.tbPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl2)).EndInit();
             this.layControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bfiProductEntityTextBox1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSpecialNum.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkBoxUseDescription)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAcceptAgingTime.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPackagingProportion.Properties)).EndInit();
@@ -2090,12 +2124,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layScatteredCargoSpaceMinimum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layPackagingProportion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layEntireCargoSpaceMaximum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.laySpecialNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductEntityTextBox1)).EndInit();
             this.tabGrantedPerson.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.popupGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSpecialNum.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.laySpecialNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bfiProductEntityTextBox1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductEntityTextBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2228,5 +2260,7 @@
         private Controls.BFIProductEntityTextBox txtSpecialNum;
         private DevExpress.XtraLayout.LayoutControlItem laySpecialNum;
         private DevExpress.XtraLayout.LayoutControlItem layProductEntityTextBox1;
+        private Controls.BFIProductEntityTextBox txtProductSpell;
+        private DevExpress.XtraLayout.LayoutControlItem layProductSpell;
     }
 }

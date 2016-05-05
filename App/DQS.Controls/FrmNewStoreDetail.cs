@@ -24,15 +24,17 @@ namespace DQS.Controls
 
         private void FrmNewStoreDetail_Load(object sender, EventArgs e)
         {
+            string code = txtProductCode.Text.Trim();
+            gcLatelyInPrice.Visible = false;
             txtProductCode.Focus();
-            Grid1Load();
+            Grid1Load(code);
         }
 
-        private void Grid1Load()
+        private void Grid1Load(string code)
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sql = @"EXEC sp_ProductDetail '" + txtProductCode.Text.Trim() + "'";
+                string sql = @"EXEC sp_ProductDetail '" + code + "'";
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 try
@@ -199,12 +201,13 @@ namespace DQS.Controls
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            Grid1Load();
+            string code = txtProductCode.Text.Trim();
+            Grid1Load(code);
             if (gridView1.RowCount < 1)
             {
-                gridControl2.DataSource = null;
-                gridControl3.DataSource = null;
-                gridControl4.DataSource = null;
+                gridView2.Columns.Clear();
+                gridView3.Columns.Clear();
+                gridView4.Columns.Clear();
                 return;
             }
             int ProductID = Convert.ToInt32(gridView1.GetDataRow(gridView1.FocusedRowHandle)["ProductID"]);
@@ -221,14 +224,15 @@ namespace DQS.Controls
 
         private void txtProductCode_KeyPress(object sender, KeyPressEventArgs e)
         {
+            string code = txtProductCode.Text.Trim();
             if (e.KeyChar == (char)13)
             {
-                Grid1Load();
+                Grid1Load(code);
                 if (gridView1.RowCount < 1)
                 {
-                    gridControl2.DataSource = null;
-                    gridControl3.DataSource = null;
-                    gridControl4.DataSource = null;
+                    gridView2.Columns.Clear();
+                    gridView3.Columns.Clear();
+                    gridView4.Columns.Clear();
                     return;
                 }
                 int ProductID = Convert.ToInt32(gridView1.GetDataRow(gridView1.FocusedRowHandle)["ProductID"]);
@@ -247,6 +251,10 @@ namespace DQS.Controls
 
         private void gridView1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
+            if (gridView1.RowCount <= 0)
+            {
+                return;
+            }
             int ProductID = Convert.ToInt32(gridView1.GetDataRow(gridView1.FocusedRowHandle)["ProductID"]);
             Grid2Load(ProductID);
             Grid3Load(ProductID);

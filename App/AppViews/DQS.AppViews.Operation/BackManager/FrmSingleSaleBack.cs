@@ -120,9 +120,32 @@ namespace DQS.AppViews.Operation.BackManager
             }
         }
 
+        private bool TotalPrice()
+        {
+            for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
+            {
+                object unitprice = this.popupGrid.PopupView.GetRowCellValue(i, "单价");
+                object amount = this.popupGrid.PopupView.GetRowCellValue(i, "数量");
+                object ttprice = this.popupGrid.PopupView.GetRowCellValue(i, "金额");
+
+                if (unitprice == DBNull.Value || unitprice == null)
+                {
+                    break;
+                }
+                if (Convert.ToDecimal(unitprice) * Convert.ToDecimal(amount) != Convert.ToDecimal(ttprice))
+                {
+                    XtraMessageBox.Show(String.Format("第{0}行，产品的金额不正确，请确认。", (i + 1)), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+
+                }
+            }
+            return true;
+        }
+
         public string alter;
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (!this.TotalPrice()) return;
             try
             {
                 if (!this.ftPanel.ValidateIsNullFields()) return;
@@ -786,6 +809,7 @@ WHERE BillID={1}
                             this.popupGrid.PopupView.SetFocusedRowCellValue("有效期至", frmReviewRecord.EditRow["有效期至"]);
                             this.popupGrid.PopupView.SetFocusedRowCellValue("复核数量", frmReviewRecord.EditRow["复核数量"]);
                             this.popupGrid.PopupView.SetFocusedRowCellValue("单价", frmReviewRecord.EditRow["单价"]);
+                            this.popupGrid.PopupView.SetFocusedRowCellValue("入库ID", frmReviewRecord.EditRow["入库ID"]);
 
                             _operator = frmReviewRecord.EditRow["业务员"].ToString();
                             this.txtSaleBillCode.Text = frmReviewRecord.SaleBillCode;

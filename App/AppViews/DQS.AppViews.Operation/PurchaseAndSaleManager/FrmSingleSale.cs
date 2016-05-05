@@ -3036,23 +3036,16 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
 
         private bool CheckNewStoreDetail(int InStoreID, int Amount, string BatchNo)
         {
+            string sql = "EXEC sp_CheckStoreDetail {0},{1}";
+            sql = string.Format(sql, InStoreID, Amount);
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 conn.Open(); //连接数据库
+                //必须为SqlCommand指定数据库连接和登记的事务
+                SqlCommand cmd = new SqlCommand(sql, conn);
                 try
                 {
-                    int returnValue = 0;
-                    SqlCommand cmd = new SqlCommand("sp_CheckStoreDetail", conn);
-
-                    cmd.Parameters.Add(new SqlParameter("@InStoreBillID", InStoreID));
-                    cmd.Parameters.Add(new SqlParameter("@Amount", Amount));
-                    cmd.Parameters.Add(new SqlParameter("@return", SqlDbType.Int, 0, ParameterDirection.ReturnValue,
-                      true, 0, 0, string.Empty, DataRowVersion.Default, DBNull.Value));
-
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.ExecuteScalar();
-                    returnValue = (int)cmd.Parameters["@return"].Value;
+                    int returnValue = Convert.ToInt32(cmd.ExecuteScalar());
                     if (returnValue == 1)
                     {
                         return false;

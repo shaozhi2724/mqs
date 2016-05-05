@@ -215,6 +215,11 @@ namespace DQS.App
             {
                 GlobalMethod.AllowNoReviewSaleBack = true;
             }
+            if (keyData == Keys.F3)
+            {
+                new FrmPriceSearch().ShowDialog(this);
+                return true;
+            }
             return base.ProcessDialogKey(keyData);
         }
         

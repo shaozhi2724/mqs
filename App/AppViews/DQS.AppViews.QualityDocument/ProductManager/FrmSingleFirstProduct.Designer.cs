@@ -35,6 +35,7 @@
             this.tbProduct = new DevExpress.XtraTab.XtraTabControl();
             this.tbPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.layControl = new DevExpress.XtraLayout.LayoutControl();
+            this.txtProductSpell = new DQS.Controls.BFIProductEntityTextBox();
             this.cboSaleTax = new DQS.Controls.ComboBoxCategoryEx();
             this.cboPurchaseTax = new DQS.Controls.ComboBoxCategoryEx();
             this.txtProductionOriginAddress = new DQS.Controls.BFIProductEntityTextBox();
@@ -106,6 +107,7 @@
             this.layRegisterNo = new DevExpress.XtraLayout.LayoutControlItem();
             this.layProductCycleStyle = new DevExpress.XtraLayout.LayoutControlItem();
             this.layProductionPostalCode = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProductSpell = new DevExpress.XtraLayout.LayoutControlItem();
             this.tbPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.layControl2 = new DevExpress.XtraLayout.LayoutControl();
             this.bfiProductEntityTextBox1 = new DQS.Controls.BFIProductEntityTextBox();
@@ -161,6 +163,7 @@
             this.tbPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
             this.layControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductSpell.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSaleTax.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboPurchaseTax.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionOriginAddress.Properties)).BeginInit();
@@ -232,6 +235,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layRegisterNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductCycleStyle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductionPostalCode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductSpell)).BeginInit();
             this.tbPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl2)).BeginInit();
             this.layControl2.SuspendLayout();
@@ -351,6 +355,7 @@
             // 
             // layControl
             // 
+            this.layControl.Controls.Add(this.txtProductSpell);
             this.layControl.Controls.Add(this.cboSaleTax);
             this.layControl.Controls.Add(this.cboPurchaseTax);
             this.layControl.Controls.Add(this.txtProductionOriginAddress);
@@ -393,6 +398,20 @@
             this.layControl.Size = new System.Drawing.Size(848, 428);
             this.layControl.TabIndex = 0;
             this.layControl.Text = "layControl";
+            // 
+            // txtProductSpell
+            // 
+            this.txtProductSpell.AlphabeticFiled = "ProductSpell";
+            this.txtProductSpell.EntityField = DQS.Module.Entities.BFIProductEntityFields2.ProductSpell;
+            this.txtProductSpell.IsIntegerOnly = false;
+            this.txtProductSpell.IsNullString = "";
+            this.txtProductSpell.IsNullValidate = false;
+            this.txtProductSpell.IsTransferAlphabetic = true;
+            this.txtProductSpell.Location = new System.Drawing.Point(516, 87);
+            this.txtProductSpell.Name = "txtProductSpell";
+            this.txtProductSpell.Size = new System.Drawing.Size(303, 21);
+            this.txtProductSpell.StyleController = this.layControl;
+            this.txtProductSpell.TabIndex = 52;
             // 
             // cboSaleTax
             // 
@@ -455,7 +474,7 @@
             this.cbxIsForeignDrug.Properties.Appearance.Options.UseFont = true;
             this.cbxIsForeignDrug.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
             this.cbxIsForeignDrug.Properties.Caption = "进口产品";
-            this.cbxIsForeignDrug.Size = new System.Drawing.Size(807, 22);
+            this.cbxIsForeignDrug.Size = new System.Drawing.Size(401, 22);
             this.cbxIsForeignDrug.StyleController = this.layControl;
             this.cbxIsForeignDrug.TabIndex = 4;
             // 
@@ -749,7 +768,7 @@
             // 
             // txtProducerName
             // 
-            this.txtProducerName.AlphabeticFiled = "ProducerSpell";
+            this.txtProducerName.AlphabeticFiled = null;
             this.txtProducerName.EntityField = DQS.Module.Entities.BFIProductEntityFields2.ProducerName;
             this.txtProducerName.IsIntegerOnly = false;
             this.txtProducerName.IsNullString = "生产厂商不能为空。";
@@ -957,7 +976,8 @@
             this.layTreatmentFor,
             this.layRegisterNo,
             this.layProductCycleStyle,
-            this.layProductionPostalCode});
+            this.layProductionPostalCode,
+            this.layProductSpell});
             this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(831, 521);
@@ -1122,7 +1142,7 @@
             this.layoutControlItem1.CustomizationFormText = "进口产品";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 75);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(811, 26);
+            this.layoutControlItem1.Size = new System.Drawing.Size(405, 26);
             this.layoutControlItem1.Text = "进口产品";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
@@ -1318,6 +1338,16 @@
             this.layProductionPostalCode.Size = new System.Drawing.Size(406, 25);
             this.layProductionPostalCode.Text = "邮政编码";
             this.layProductionPostalCode.TextSize = new System.Drawing.Size(96, 17);
+            // 
+            // layProductSpell
+            // 
+            this.layProductSpell.Control = this.txtProductSpell;
+            this.layProductSpell.CustomizationFormText = "助记码";
+            this.layProductSpell.Location = new System.Drawing.Point(405, 75);
+            this.layProductSpell.Name = "layProductSpell";
+            this.layProductSpell.Size = new System.Drawing.Size(406, 26);
+            this.layProductSpell.Text = "助记码";
+            this.layProductSpell.TextSize = new System.Drawing.Size(96, 17);
             // 
             // tbPage2
             // 
@@ -1947,6 +1977,7 @@
             this.tbPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).EndInit();
             this.layControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductSpell.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSaleTax.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboPurchaseTax.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionOriginAddress.Properties)).EndInit();
@@ -2018,6 +2049,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layRegisterNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductCycleStyle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductionPostalCode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductSpell)).EndInit();
             this.tbPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl2)).EndInit();
             this.layControl2.ResumeLayout(false);
@@ -2194,5 +2226,7 @@
         private Controls.BFIProductEntityTextBox txtSpecialNum;
         private DevExpress.XtraLayout.LayoutControlItem laySpecialNum;
         private DevExpress.XtraLayout.LayoutControlItem layProductEntityTextBox1;
+        private Controls.BFIProductEntityTextBox txtProductSpell;
+        private DevExpress.XtraLayout.LayoutControlItem layProductSpell;
     }
 }

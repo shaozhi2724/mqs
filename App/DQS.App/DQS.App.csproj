@@ -41,7 +41,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;RockeyLicense</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;SoftFileLicense</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
@@ -247,6 +247,24 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmPriceSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPriceSearch.Designer.cs">
+      <DependentUpon>FrmPriceSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUpdateBatchNo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUpdateBatchNo.Designer.cs">
+      <DependentUpon>FrmUpdateBatchNo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUpdateViewPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUpdateViewPrice.Designer.cs">
+      <DependentUpon>FrmUpdateViewPrice.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmWarningMessage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -284,6 +302,16 @@
     <EmbeddedResource Include="FrmCategorySetting.resx">
       <DependentUpon>FrmCategorySetting.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmPriceSearch.resx">
+      <DependentUpon>FrmPriceSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUpdateBatchNo.resx">
+      <DependentUpon>FrmUpdateBatchNo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUpdateViewPrice.resx">
+      <DependentUpon>FrmUpdateViewPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="UpdateForm.resx">
       <DependentUpon>UpdateForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -363,7 +391,9 @@
     <None Include="收货单.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="期初库存导入模板.xls" />
+    <None Include="期初库存导入模板.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="运输单.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

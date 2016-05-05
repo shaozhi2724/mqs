@@ -28,11 +28,19 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
             object id = this.gvData.GetFocusedRowCellValue("产品ID");
             if (id != null && id != DBNull.Value)
             {
-                XtraMessageBox.Show("期初不能新增、修改、删除", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return;
+                //XtraMessageBox.Show("期初不能新增、修改、删除", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //return;
                 //base.CustomAdd();
             }
             base.CustomAdd();
+        }
+
+        protected override void CustomModify()
+        {
+            using (FrmUpdateBeginInventory frm = new FrmUpdateBeginInventory())
+            {
+                frm.ShowDialog();
+            }
         }
     }
 }

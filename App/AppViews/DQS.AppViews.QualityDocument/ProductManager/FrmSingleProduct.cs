@@ -334,6 +334,10 @@ WHERE UP.ProductID = {0}", productID);
                 entity.SaleTaxID = Convert.ToInt32(this.cboSaleTax.SelectedValue);
                 entity.SaleTax = this.cboSaleTax.Text.Trim();
             }
+            if (this.txtProductSpell.Text.Trim() == "")
+            {
+                entity.ProductSpell = GlobalMethod.GetAlphabetic(txtProductName.Text.Trim());
+            }
             entity.IsUseToChildren = chkBoxUseDescription.Items[0].CheckState == CheckState.Checked ? true : false;
             entity.IsUseToOldPeople = chkBoxUseDescription.Items[1].CheckState == CheckState.Checked ? true : false;
             entity.IsUseToPregnant = chkBoxUseDescription.Items[2].CheckState == CheckState.Checked ? true : false;

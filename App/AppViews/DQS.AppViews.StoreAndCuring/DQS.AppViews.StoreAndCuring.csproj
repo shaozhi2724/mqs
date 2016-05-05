@@ -208,6 +208,12 @@
     <Compile Include="StockManager\FrmUnStockDetail.Designer.cs">
       <DependentUpon>FrmUnStockDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="StockManager\FrmUpdateBeginInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmUpdateBeginInventory.Designer.cs">
+      <DependentUpon>FrmUpdateBeginInventory.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CuringManager\FrmCuringCycle.resx">
@@ -262,6 +268,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StockManager\FrmUnStockDetail.resx">
       <DependentUpon>FrmUnStockDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmUpdateBeginInventory.resx">
+      <DependentUpon>FrmUpdateBeginInventory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
