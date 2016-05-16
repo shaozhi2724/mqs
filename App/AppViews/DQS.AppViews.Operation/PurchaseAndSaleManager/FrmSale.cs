@@ -173,8 +173,8 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
                     {
                         if (DialogResult.Yes == fr.ShowDialog())
                         {
-                            if (!Settings.Default.IsNewStoreDetail)
-                            {
+                            //if (!Settings.Default.IsNewStoreDetail)
+                            //{
                                 //将销售单减掉的业务库存加回来
                                 string sql = @"
 UPDATE SD
@@ -212,6 +212,7 @@ UPDATE dbo.BUS_Bill SET BillStatus=9,BillStatusName='已删除',LastModifyDate=G
                                     }
                                 }
                                 this.pageNavigator.ShowData();
+                            /*
                             }
                             else
                             {
@@ -241,6 +242,7 @@ UPDATE dbo.BUS_Bill SET BillStatus=9,BillStatusName='已删除',LastModifyDate=G
                                 }
                                 this.pageNavigator.ShowData();
                             }
+                            */
                         }
                     }
                 }

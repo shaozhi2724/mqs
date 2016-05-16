@@ -730,6 +730,18 @@ WHERE BillID={1}
 
         private void popupGrid_BeforePopupFormShow(object sender, DQS.Controls.CommonCode.BeforePopupFormShowArgs e)
         {
+            if (Settings.Default.IsUseDepartment)
+            {
+                if (cboDepartment.Text == "")
+                {
+                    XtraMessageBox.Show("选择项部门不能为空。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    e.Cancel = true;
+                }
+                else
+                {
+                    cboDepartment.Properties.ReadOnly = true;
+                }
+            }
             if (!this.ValidateDealerQualification())
             {
                 e.Cancel = true;

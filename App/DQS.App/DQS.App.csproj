@@ -311,7 +311,6 @@
     <EmbeddedResource Include="FrmUpdateViewPrice.resx">
       <DependentUpon>FrmUpdateViewPrice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="UpdateForm.resx">
       <DependentUpon>UpdateForm.cs</DependentUpon>
     </EmbeddedResource>

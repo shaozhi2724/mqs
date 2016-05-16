@@ -798,8 +798,8 @@ WHERE BillID={1}
                             }
                             entity.Update();
 
-                            if (Settings.Default.IsNewStoreDetail)
-                            {
+                            //if (Settings.Default.IsNewStoreDetail)
+                            //{
                                 entity.Fetch();
                                 //删除所有相关明细
                                 DelBill(entity.BillID);
@@ -819,7 +819,7 @@ WHERE BillID={1}
                                     XtraMessageBox.Show(message, "销售数据错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     return;
                                 }
-
+                            /*
                             }
                             else
                             {
@@ -857,6 +857,7 @@ WHERE BillID={1}
                                     }
                                 }
                             }
+                            */
                         }
                     }
                     #endregion
@@ -891,10 +892,10 @@ WHERE BillID={1}
                         entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
-                        if (Settings.Default.IsNewStoreDetail)
-                        {
+                        //if (Settings.Default.IsNewStoreDetail)
+                        //{
                             CheckStoreDetail(departmentID);
-                        }
+                        //}
                         //只要有一条库存错误信息，就不能保存销售单
                         if (_amountErrors.Any())
                         {
@@ -907,14 +908,15 @@ WHERE BillID={1}
                         //查询出其ID
                         entity.Fetch();
 
-                        if (Settings.Default.IsNewStoreDetail)
-                        {
+                        //if (Settings.Default.IsNewStoreDetail)
+                        //{
                             InsertBillDetail(list, entity.BillID);
                             //新库存
                             if (!UpdateNewStoreDetail(entity.BillID, entity.BillCode))
                             {
                                 CheckStoreDetail(departmentID);
                             }
+                        /*
                         }
                         else
                         {
@@ -933,6 +935,7 @@ WHERE BillID={1}
                                 UpdateStoreDetail(child, departmentID);
                             }
                         }
+                        */
                         #endregion
 
                         //只要有一条库存错误信息，就不能保存销售单

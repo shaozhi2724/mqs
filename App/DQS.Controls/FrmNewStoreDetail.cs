@@ -15,6 +15,11 @@ namespace DQS.Controls
 {
     public partial class FrmNewStoreDetail : XtraForm
     {
+
+        public int EmployeeID;
+
+        public int Department;
+
         public FrmNewStoreDetail()
         {
             InitializeComponent();
@@ -34,7 +39,15 @@ namespace DQS.Controls
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sql = @"EXEC sp_ProductDetail '" + code + "'";
+                string sql;
+                if (Settings.Default.IsUseDepartment)
+                {
+                    sql = @"EXEC sp_ProductDetailDepartment '" + code + "'," + Department;
+                }
+                else
+                {
+                    sql = @"EXEC sp_ProductDetail '" + code + "'," + EmployeeID;
+                }
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 try
@@ -272,6 +285,50 @@ namespace DQS.Controls
         private void gridView4_KeyPress(object sender, KeyPressEventArgs e)
         {
             SelectProduct();
+        }
+
+        private void gridView1_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+        {
+            if (e.Info.IsRowIndicator)
+            {
+                if (e.RowHandle >= 0)
+                {
+                    e.Info.DisplayText = (e.RowHandle + 1).ToString();
+                }
+            }
+        }
+
+        private void gridView3_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+        {
+            if (e.Info.IsRowIndicator)
+            {
+                if (e.RowHandle >= 0)
+                {
+                    e.Info.DisplayText = (e.RowHandle + 1).ToString();
+                }
+            }
+        }
+
+        private void gridView2_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+        {
+            if (e.Info.IsRowIndicator)
+            {
+                if (e.RowHandle >= 0)
+                {
+                    e.Info.DisplayText = (e.RowHandle + 1).ToString();
+                }
+            }
+        }
+
+        private void gridView4_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+        {
+            if (e.Info.IsRowIndicator)
+            {
+                if (e.RowHandle >= 0)
+                {
+                    e.Info.DisplayText = (e.RowHandle + 1).ToString();
+                }
+            }
         }
     }
 }

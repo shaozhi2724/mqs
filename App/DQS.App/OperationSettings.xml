@@ -330,6 +330,7 @@
         <Column Name="当月限购数量" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="当月限购数量"/>
         <Column Name="StyleID" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="StyleID"/>
         <Column Name="StyleName" FieldType="System.String" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="StyleName"/>
+        <Column Name="价格预警" FieldType="System.Int32" Visible="false" AllowEdit="false" PopupForm="Product" PopupField="价格预警"/>
       </Columns>
     </Grid>
     <Report>
@@ -432,7 +433,7 @@
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="贮藏条件"/>
         <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品类别"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="单位"/>
-        <Column Name="入库ID" EntityField="Reservation2" FieldType="System.Int32" Visible="true" AllowEdit="false"/>
+        <Column Name="入库ID" EntityField="Reservation2" FieldType="System.Int32" Visible="true" Nullable="true" AllowEdit="false"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="true"/>
         <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="true"/>
         <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="true"/>

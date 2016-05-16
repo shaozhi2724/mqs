@@ -175,11 +175,11 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                                 //更新旧库存表
                             //UpdateStoreDetail(child, storeDetailBelongDepartmentId, productPrice.PurchasePrice);
                         }
-                        if (Settings.Default.IsNewStoreDetail)
-                        {
+                        //if (Settings.Default.IsNewStoreDetail)
+                        //{
                             //新库存
                             UpdateNewStoreDetail(entity.StoreID, entity.StoreCode, storeDetailBelongDepartmentId);
-                        }
+                        //}
                         #endregion
 
                     }

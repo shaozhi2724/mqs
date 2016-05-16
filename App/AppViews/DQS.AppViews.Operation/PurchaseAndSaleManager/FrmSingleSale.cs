@@ -38,6 +38,8 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
         UpdateBillDetail ubd;
         SaleViewDetail svd;
 
+        List<GetDepartment> departments = new List<GetDepartment>();
+        GetDepartment department = new GetDepartment();
 
         public string alter;
 
@@ -59,6 +61,13 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
             RepositoryItemComboBox cbo = new RepositoryItemComboBox();
             cbo.Items.Add("是");
             this.popupGrid.PopupView.Columns["是否打印检报"].ColumnEdit = cbo;
+
+
+            if (Settings.Default.IsUseDepartment)
+            {
+                this.layDepartment.Visibility = LayoutVisibility.Always;
+                LoadDepartment();
+            }
 
             this.popupGrid.PopupView.KeyDown += PopupView_KeyDown;
 
@@ -158,6 +167,7 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                     {
                         this.txtOperator.Text = GlobalItem.g_CurrentEmployee.EmployeeName;
                         txtOperator.SetMemberValue(GlobalItem.g_CurrentEmployee.EmployeeID);
+                        popupGrid.EmployeeID = Convert.ToInt32(txtOperator.SelectedValue);
                     }
                 }
                 this.txtReservation6.Text = GlobalItem.g_CurrentEmployee.EmployeeName;
@@ -173,6 +183,38 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
             this.SetProductAmount(false);
             this.btnFix.Visible = false;
         }
+
+        private void LoadDepartment()
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                string sqlBill = @"SELECT DepartmentID,DepartmentName FROM dbo.BFI_Department WHERE DepartmentName LIKE '%业务%'";
+
+                SqlDataAdapter sdad = new SqlDataAdapter(sqlBill, conn);
+                DataSet ds = new DataSet();
+                try
+                {
+                    sdad.Fill(ds, "Table");
+                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                    {
+                        department = new GetDepartment();
+                        department.departmentID = Convert.ToInt32(ds.Tables["Table"].Rows[i]["DepartmentID"]);
+                        department.departmentName = ds.Tables["Table"].Rows[i]["DepartmentName"].ToString();
+                        departments.Add(department);
+                        cboDepartment.Properties.Items.Add(department.departmentName);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.ToString(), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
         private void BindPrices()
         {
             EntityCollection<BFIPriceListEntity> prices = new EntityCollection<BFIPriceListEntity>();
@@ -304,6 +346,35 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                     XtraMessageBox.Show(String.Format("第{0}行，产品的金额不正确，请确认。", (i + 1)), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return false;
 
+                }
+            }
+            return true;
+        }
+
+        private bool CheckUnitPrice()
+        {
+            for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
+            {
+                object ProductID = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
+                object Unitprice = this.popupGrid.PopupView.GetRowCellValue(i, "单价");
+                object PurchasePrice = this.popupGrid.PopupView.GetRowCellValue(i, "进货价");
+                object Pprice = this.popupGrid.PopupView.GetRowCellValue(i, "价格预警");
+
+                if (ProductID == DBNull.Value || ProductID == null)
+                {
+                    break;
+                }
+                if (Pprice == DBNull.Value || Pprice == null || Convert.ToInt32(Pprice) == 0)
+                {
+                    break;
+                }
+                if (Convert.ToDecimal(Unitprice) > (Convert.ToDecimal(PurchasePrice) * ((Convert.ToDecimal(Pprice) / 100) + 1)))
+                {
+                    DialogResult dr = XtraMessageBox.Show(String.Format("第{0}行，产品的单价超出采购价的 {1}%，是否继续？", (i + 1), Convert.ToInt32(Pprice)), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+                    if (dr == DialogResult.Cancel)
+                    {
+                        return false;
+                    }
                 }
             }
             return true;
@@ -474,6 +545,8 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (!this.TotalPrice()) return;
+            //检查单价是否超过设定的百分比
+            if (!this.CheckUnitPrice()) return;
             _amountErrors = new List<string>();
             //using (TransactionScope tx = new TransactionScope())
             //{
@@ -789,8 +862,8 @@ WHERE BillID={1}
                             entity.Update();
 
 
-                            if (Settings.Default.IsNewStoreDetail)
-                            {
+                            //if (Settings.Default.IsNewStoreDetail)
+                            //{
                                 entity.Fetch();
                                 //删除所有相关明细
                                 DelBill(entity.BillID);
@@ -809,6 +882,7 @@ WHERE BillID={1}
                                     XtraMessageBox.Show(message, "销售数据错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     return;
                                 }
+                            /*
                             }
                             else
                             {
@@ -872,6 +946,7 @@ WHERE BillID={1}
                                     UpdateStoreDetail(child, departmentID);
                                 }
                             }
+                            */
                         }
                     }
 
@@ -881,10 +956,10 @@ WHERE BillID={1}
                 {
                     if (entity.IsNew())
                     {
-                        if (!Settings.Default.IsNewStoreDetail)
-                        {
-                            if (!this.ValidateBatchNo()) return;
-                        }
+                        //if (!Settings.Default.IsNewStoreDetail)
+                        //{
+                        //    if (!this.ValidateBatchNo()) return;
+                        //}
                         if (!this.ValidateDealerRange()) return; //验证客户经营范围
                         if (!this.ValidateDealerQualification()) return; //验证客户的电子档案
                         //if (!this.ValidateSaleAmount()) return; //验证库存和销售数量
@@ -902,6 +977,50 @@ WHERE BillID={1}
 
                         #region 新建
 
+                        if (Settings.Default.IsUseDepartment)
+                        {
+                            if (cboDepartment.Text == "")
+                            {
+                                XtraMessageBox.Show("选择项部门不能为空。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            else
+                            {
+                                foreach (GetDepartment depart in departments)
+                                {
+                                    if (depart.departmentName == cboDepartment.Text)
+                                    {
+                                        departmentID = depart.departmentID;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //int employeeID = Convert.ToInt32(txtOperator.SelectedValue);
+                            int employeeID = GlobalItem.g_CurrentEmployee.EmployeeID;
+                            if (employeeID == 0)
+                            {
+
+                                BFIEmployeeEntity employee = GlobalItem.g_CurrentEmployee;
+                                if (null != employee
+                                    && !employee.IsNullField("DepartmentID"))
+                                {
+                                    departmentID = employee.DepartmentID;
+                                }
+                            }
+                            else
+                            {
+                                BFIEmployeeEntity employee = new BFIEmployeeEntity { EmployeeID = employeeID };
+                                employee.Fetch();
+
+                                if (!employee.IsNullField("DepartmentID"))
+                                {
+                                    departmentID = employee.DepartmentID;
+                                }
+                            }
+                        }
+                        /*
                         if (Settings.Default.IsUseDepartment)
                         {
                             int employeeId = GlobalItem.g_CurrentEmployee.EmployeeID;
@@ -947,6 +1066,8 @@ WHERE BillID={1}
                                 }
                             }
                         }
+                        */
+
                         entity.IsBillIn = false; //出库订单
                         entity.BillTypeID = 1;
                         entity.BillTypeName = "销售出货";
@@ -958,21 +1079,21 @@ WHERE BillID={1}
 
 
 
-                        if (!Settings.Default.IsNewStoreDetail)
-                        {
-                            //保存单据前检测库存是否足够出库
+                        //if (!Settings.Default.IsNewStoreDetail)
+                        //{
+                        //    //保存单据前检测库存是否足够出库
 
-                            foreach (EntityBase childEntity in children)
-                            {
-                                BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
-                                ValidateStoreDetails(child, departmentID);
-                            }
-                        }
-                        else
-                        {
+                        //    foreach (EntityBase childEntity in children)
+                        //    {
+                        //        BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
+                        //        ValidateStoreDetails(child, departmentID);
+                        //    }
+                        //}
+                        //else
+                        //{
                             //新库存
                             CheckStoreDetail(departmentID);
-                        }
+                        //}
 
 
                         //只要有一条库存错误信息，就不能保存销售单
@@ -993,7 +1114,7 @@ WHERE BillID={1}
                         //查询出其ID
                         entity.Fetch();
 
-
+                        /*
                         if (!Settings.Default.IsNewStoreDetail)
                         {
                             List<string> errors = new List<string>();
@@ -1033,13 +1154,14 @@ WHERE BillID={1}
                         }
                         else
                         {
+                        */
                             InsertBillDetail(list, entity.BillID);
                             //新库存
                             if (!UpdateNewStoreDetail(entity.BillID, entity.BillCode))
                             {
                                 CheckStoreDetail(departmentID);
                             }
-                        }
+                        //}
 
                         //只要有一条库存错误信息，就不能保存销售单
                         if (_amountErrors.Any())
@@ -1522,6 +1644,20 @@ WHERE BillID={1}
         /// <param name="entity">实体</param>
         protected virtual void CustomGetEntity(BUSBillEntity entity)
         {
+            if (Settings.Default.IsUseDepartment)
+            {
+                if (!entity.IsNullField("DepartmentID"))
+                {
+                    foreach (GetDepartment depart in departments)
+                    {
+                        if (depart.departmentID == entity.DepartmentID)
+                        {
+                            cboDepartment.Text = depart.departmentName;
+                        }
+                    }
+                }
+            }
+
             if (!entity.IsNullField("DealerID"))
             {
                 this.txtDealerName.SetMemberValue(entity.DealerID);
@@ -1599,6 +1735,19 @@ WHERE BillID={1}
         /// <param name="entity">实体</param>
         protected virtual void CustomSetEntity(BUSBillEntity entity)
         {
+            if (Settings.Default.IsUseDepartment)
+            {
+                if (cboDepartment.Text != "")
+                {
+                    foreach (GetDepartment depart in departments)
+                    {
+                        if (depart.departmentName == cboDepartment.Text)
+                        {
+                            entity.DepartmentID = depart.departmentID;
+                        }
+                    }
+                }
+            }
 
             if (this.txtDealerName.SelectedValue != null)
             {
@@ -1744,6 +1893,25 @@ WHERE BillID={1}
                 XtraMessageBox.Show(string.Format("请先选择{0}！", layDealerName.CustomizationFormText), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 e.Cancel = true;
             }
+            if (Settings.Default.IsUseDepartment)
+            {
+                if (cboDepartment.Text == "")
+                {
+                    XtraMessageBox.Show("选择项部门不能为空。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    e.Cancel = true;
+                }
+                else
+                {
+                    foreach (GetDepartment depart in departments)
+                    {
+                        if (depart.departmentName == cboDepartment.Text)
+                        {
+                            popupGrid.DepartmentID = depart.departmentID;
+                        }
+                    }
+                    cboDepartment.Properties.ReadOnly = true;
+                }
+            }
             if (!this.ValidateDealerQualification())
             {
                 e.Cancel = true;
@@ -1786,6 +1954,7 @@ WHERE BillID={1}
                         }
                     }
                     //新逻辑 - 按所选择业务员对应授权产品进行产品过滤
+                    /*
                     if (e.ActiveOperationColumn.PopupForm.Name == "Product")
                     {
                         //2015-05-04:lnj
@@ -1867,6 +2036,8 @@ WHERE BillID={1}
                             }
                         }
                     }
+                    * 
+                    */
                 }
             }
         }
@@ -2557,6 +2728,7 @@ WHERE BillID={1}
             {
                 popupGrid.ClearGrid();
             }
+            popupGrid.EmployeeID = Convert.ToInt32(txtOperator.SelectedValue);
             SendKeys.Send("{TAB}");
         }
 
@@ -2623,6 +2795,8 @@ WHERE BillID={1}
         private void btnSaveAndOut_Click(object sender, EventArgs e)
         {
             if (!this.TotalPrice()) return;
+            //检查单价是否超过设定的百分比
+            if (!this.CheckUnitPrice()) return;
             _amountErrors = new List<string>();
             try
             {
@@ -2636,10 +2810,10 @@ WHERE BillID={1}
 
                 if (entity.IsNew())
                 {
-                    if (!Settings.Default.IsNewStoreDetail)
-                    {
-                        if (!this.ValidateBatchNo()) return;
-                    }
+                    //if (!Settings.Default.IsNewStoreDetail)
+                    //{
+                    //    if (!this.ValidateBatchNo()) return;
+                    //}
                     if (!this.ValidateDealerRange()) return; //验证客户经营范围
                     if (!this.ValidateDealerQualification()) return; //验证客户的电子档案
                     //if (!this.ValidateSaleAmount()) return; //验证库存和销售数量
@@ -2657,21 +2831,11 @@ WHERE BillID={1}
 
                     if (Settings.Default.IsUseDepartment)
                     {
-                        int employeeId = GlobalItem.g_CurrentEmployee.EmployeeID;
-                        ATCUserEntity user = GlobalItem.g_CurrentUser;
-
-                        if (null != user)
+                        foreach (GetDepartment depart in departments)
                         {
-                            Guid userID = user.UserID;
-                            if (employeeId > 0)
+                            if (depart.departmentName == cboDepartment.Text)
                             {
-                                BFIEmployeeEntity employee = new BFIEmployeeEntity { EmployeeID = employeeId };
-                                employee.Fetch();
-
-                                if (!employee.IsNullField("DepartmentID"))
-                                {
-                                    departmentID = employee.DepartmentID;
-                                }
+                                departmentID = depart.departmentID;
                             }
                         }
                     }
@@ -2710,21 +2874,21 @@ WHERE BillID={1}
                     List<EntityBase> children = this.popupGrid.GetEntities();
 
 
-                    if (!Settings.Default.IsNewStoreDetail)
-                    {
-                        //保存单据前检测库存是否足够出库
+                    //if (!Settings.Default.IsNewStoreDetail)
+                    //{
+                    //    //保存单据前检测库存是否足够出库
 
-                        foreach (EntityBase childEntity in children)
-                        {
-                            BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
-                            ValidateStoreDetails(child, departmentID);
-                        }
-                    }
-                    else
-                    {
+                    //    foreach (EntityBase childEntity in children)
+                    //    {
+                    //        BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
+                    //        ValidateStoreDetails(child, departmentID);
+                    //    }
+                    //}
+                    //else
+                    //{
                         //新库存
                         CheckStoreDetail(departmentID);
-                    }
+                    //}
 
 
                     //只要有一条库存错误信息，就不能保存销售单
@@ -2745,7 +2909,7 @@ WHERE BillID={1}
 
                     //查询出其ID
                     entity.Fetch();
-
+                    /*
                     if (!Settings.Default.IsNewStoreDetail)
                     {
                         List<string> errors = new List<string>();
@@ -2783,13 +2947,14 @@ WHERE BillID={1}
                     }
                     else
                     {
+                    */
                         InsertBillDetail(list, entity.BillID);
                         //新库存
                         if (!UpdateNewStoreDetail(entity.BillID, entity.BillCode))
                         {
                             CheckStoreDetail(departmentID);
                         }
-                    }
+                    //}
 
                     //只要有一条库存错误信息，就不能保存销售单
                     if (_amountErrors.Any())

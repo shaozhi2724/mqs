@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ftPanel = new DQS.Controls.FieldTextBoxPanel();
             this.layControl = new DevExpress.XtraLayout.LayoutControl();
             this.txtAcceptDate = new DQS.Controls.BUSAcceptEntityTextBox();
@@ -45,7 +46,7 @@
             this.layDealerName = new DevExpress.XtraLayout.LayoutControlItem();
             this.layAcceptRemark = new DevExpress.XtraLayout.LayoutControlItem();
             this.layAcceptDate = new DevExpress.XtraLayout.LayoutControlItem();
-            this.barPopManager = new DevExpress.XtraBars.BarManager();
+            this.barPopManager = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -60,7 +61,7 @@
             this.btnSaveAndIn = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnOneKeyFinish = new DevExpress.XtraEditors.SimpleButton();
-            this.popupMenuSampling = new DevExpress.XtraBars.PopupMenu();
+            this.popupMenuSampling = new DevExpress.XtraBars.PopupMenu(this.components);
             this.gpcSampling = new DevExpress.XtraEditors.GroupControl();
             this.popupGridSampling = new DQS.Controls.PopupGrid();
             this.splitterControl1 = new DevExpress.XtraEditors.SplitterControl();

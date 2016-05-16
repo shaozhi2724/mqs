@@ -46,7 +46,11 @@ namespace DQS.Controls
         private GridView gridPopupView;
         private DataTable m_EmptySource;
 
+
+        //销售界面传参
         public int DealerID;
+        public int EmployeeID;
+        public int DepartmentID;
 
         /// <summary>
         /// OperationSettings 配置文件中的 OperationName
@@ -237,27 +241,28 @@ namespace DQS.Controls
                 {
                     if (this.OperationName == "Sale" && (col.PopupForm.ViewName == "vw_BusinessStoreDetailForSale" || col.PopupForm.ViewName == "vw_BusinessStoreDetailForOutSale"))
                     {
-                        if (!Settings.Default.IsNewStoreDetail)
-                        {
-                            ShowSingleProductSelectionPopupQuery(isPopupClosed, col);
-                        }
-                        else
-                        {
+                        //if (!Settings.Default.IsNewStoreDetail)
+                        //{
+                        //    ShowSingleProductSelectionPopupQuery(isPopupClosed, col);
+                        //}
+                        //else
+                        //{
                             //新库存
                             ShowSingleProductSelectionNew(isPopupClosed, col);
-                        }
+                        //}
                     }
                     else
                     {
-                        if (this.OperationName == "PurchaseBack" && Settings.Default.IsNewStoreDetail)
+                        //if (this.OperationName == "PurchaseBack" && Settings.Default.IsNewStoreDetail)
+                        if (this.OperationName == "PurchaseBack")
                         {
                             //新库存
                             ShowSingleProductSelectionNew(isPopupClosed, col);
                         }
-                        else
-                        {
-                            ShowSingleSelectionPopupQuery(isPopupClosed, col);
-                        }
+                        //else
+                        //{
+                        //    ShowSingleSelectionPopupQuery(isPopupClosed, col);
+                        //}
                     }
                 }
 
@@ -268,6 +273,9 @@ namespace DQS.Controls
         {
             using (FrmNewStoreDetail frmnsd = new FrmNewStoreDetail())
             {
+                DepartmentID = 0;
+                frmnsd.EmployeeID = EmployeeID;
+                frmnsd.Department = DepartmentID;
                 frmnsd.Tag = this.Tag;
                 if (frmnsd.ShowDialog() == DialogResult.OK)
                 {

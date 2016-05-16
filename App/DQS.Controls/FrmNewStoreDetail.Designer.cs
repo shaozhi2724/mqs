@@ -137,7 +137,7 @@
             // splitterControl2
             // 
             this.splitterControl2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitterControl2.Location = new System.Drawing.Point(652, 2);
+            this.splitterControl2.Location = new System.Drawing.Point(660, 2);
             this.splitterControl2.Name = "splitterControl2";
             this.splitterControl2.Size = new System.Drawing.Size(6, 221);
             this.splitterControl2.TabIndex = 4;
@@ -149,7 +149,7 @@
             this.gcLatelyOutPrice.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcLatelyOutPrice.Location = new System.Drawing.Point(638, 2);
             this.gcLatelyOutPrice.Name = "gcLatelyOutPrice";
-            this.gcLatelyOutPrice.Size = new System.Drawing.Size(20, 221);
+            this.gcLatelyOutPrice.Size = new System.Drawing.Size(28, 221);
             this.gcLatelyOutPrice.TabIndex = 3;
             this.gcLatelyOutPrice.Text = "最近销价";
             // 
@@ -159,7 +159,7 @@
             this.gridControl2.Location = new System.Drawing.Point(2, 23);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(16, 196);
+            this.gridControl2.Size = new System.Drawing.Size(24, 196);
             this.gridControl2.TabIndex = 1;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -171,14 +171,15 @@
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsView.ColumnAutoWidth = false;
             this.gridView2.OptionsView.ShowGroupPanel = false;
+            this.gridView2.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView2_CustomDrawRowIndicator);
             // 
             // gcLatelyInPrice
             // 
             this.gcLatelyInPrice.Controls.Add(this.gridControl3);
             this.gcLatelyInPrice.Dock = System.Windows.Forms.DockStyle.Right;
-            this.gcLatelyInPrice.Location = new System.Drawing.Point(658, 2);
+            this.gcLatelyInPrice.Location = new System.Drawing.Point(666, 2);
             this.gcLatelyInPrice.Name = "gcLatelyInPrice";
-            this.gcLatelyInPrice.Size = new System.Drawing.Size(243, 221);
+            this.gcLatelyInPrice.Size = new System.Drawing.Size(235, 221);
             this.gcLatelyInPrice.TabIndex = 2;
             this.gcLatelyInPrice.Text = "最近进价";
             // 
@@ -188,7 +189,7 @@
             this.gridControl3.Location = new System.Drawing.Point(2, 23);
             this.gridControl3.MainView = this.gridView3;
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(239, 196);
+            this.gridControl3.Size = new System.Drawing.Size(231, 196);
             this.gridControl3.TabIndex = 1;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -200,6 +201,7 @@
             this.gridView3.Name = "gridView3";
             this.gridView3.OptionsView.ColumnAutoWidth = false;
             this.gridView3.OptionsView.ShowGroupPanel = false;
+            this.gridView3.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView3_CustomDrawRowIndicator);
             // 
             // splitterControl1
             // 
@@ -237,6 +239,7 @@
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ColumnAutoWidth = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView1_CustomDrawRowIndicator);
             this.gridView1.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView1_FocusedRowChanged);
             this.gridView1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.gridView1_KeyPress);
             this.gridView1.Click += new System.EventHandler(this.gridView1_Click);
@@ -289,6 +292,7 @@
             this.gridView4.OptionsBehavior.ReadOnly = true;
             this.gridView4.OptionsView.ColumnAutoWidth = false;
             this.gridView4.OptionsView.ShowGroupPanel = false;
+            this.gridView4.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView4_CustomDrawRowIndicator);
             this.gridView4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.gridView4_KeyPress);
             this.gridView4.DoubleClick += new System.EventHandler(this.gridView4_DoubleClick);
             // 
