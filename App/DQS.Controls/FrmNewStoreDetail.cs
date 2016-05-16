@@ -78,6 +78,10 @@ namespace DQS.Controls
 
         private void gridView1_Click(object sender, EventArgs e)
         {
+            if (gridView1.RowCount <= 0)
+            {
+                return;
+            }
             int ProductID = Convert.ToInt32(gridView1.GetDataRow(gridView1.FocusedRowHandle)["ProductID"]);
             Grid2Load(ProductID);
             Grid3Load(ProductID);

@@ -259,10 +259,10 @@ namespace DQS.Controls
                             //新库存
                             ShowSingleProductSelectionNew(isPopupClosed, col);
                         }
-                        //else
-                        //{
-                        //    ShowSingleSelectionPopupQuery(isPopupClosed, col);
-                        //}
+                        else
+                        {
+                            ShowSingleSelectionPopupQuery(isPopupClosed, col);
+                        }
                     }
                 }
 
