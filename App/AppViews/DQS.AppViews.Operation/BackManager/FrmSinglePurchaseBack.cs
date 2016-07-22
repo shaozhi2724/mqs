@@ -62,6 +62,7 @@ namespace DQS.AppViews.Operation.BackManager
             this.cbxPaymentType.InitSource();
             this.popupGrid.InitGrid();
             this.popupGrid.PopupView.KeyDown += PopupView_KeyDown;
+            popupGrid.Tag = "0$0";
 
             if (this.Tag != null)
             {

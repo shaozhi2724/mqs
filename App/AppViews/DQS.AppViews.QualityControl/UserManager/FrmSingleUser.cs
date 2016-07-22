@@ -49,7 +49,7 @@ namespace DQS.AppViews.QualityControl.UserManager
                 this.layPassword.Visibility = LayoutVisibility.Never;
                 this.layPassword2.Visibility = LayoutVisibility.Never;
                 btnRePassword.Visible = GlobalItem.g_CurrentUser.UserCode == "admin" || GlobalItem.g_CurrentUser.UserCode == "root" ? true : false;
-                tbPage2.PageVisible = GlobalItem.g_CurrentUser.UserCode == "admin" || GlobalItem.g_CurrentUser.UserCode == "root" ? true : false;
+                //tbPage2.PageVisible = GlobalItem.g_CurrentUser.UserCode == "admin" || GlobalItem.g_CurrentUser.UserCode == "root" ? true : false;
 
 
                 this.m_id = new Guid(this.Tag.ToString());
@@ -366,7 +366,7 @@ namespace DQS.AppViews.QualityControl.UserManager
     ProductCategoryName AS [产品类别],
     up.ProductID AS [产品ID],
     p.ProductName AS [产品名称],
-    p.PackageSpec AS [包装规格],
+    p.PackageSpec AS [包装规格型号],
     p.ProducerName AS [生产厂家]
 FROM
     dbo.ATC_UserProduct up
@@ -578,7 +578,7 @@ VALUES");
     ProductCategoryName AS [产品类别],
     up.ProductID AS [产品ID],
     p.ProductName AS [产品名称],
-    p.PackageSpec AS [包装规格],
+    p.PackageSpec AS [包装规格型号],
     p.ProducerName AS [生产厂家],
     (SELECT aup.UserName FROM dbo.ATC_UserProduct aup WHERE aup.ProductID = up.ProductID AND aup.IsBelong = 1) AS [归属人]
 FROM

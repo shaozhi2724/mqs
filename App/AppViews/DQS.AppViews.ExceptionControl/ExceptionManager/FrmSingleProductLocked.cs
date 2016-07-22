@@ -299,7 +299,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                     & BUSProductLockedEntityFields.IsUnLocked == false);
                 if (pl.Count > 0)
                 {
-                    XtraMessageBox.Show("该药品已锁定，不能重复锁定", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    XtraMessageBox.Show("该产品已锁定，不能重复锁定", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -310,7 +310,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                     & BUSProductLockedEntityFields.IsUnLocked == false);
                 if (pl.Count > 0)
                 {
-                    XtraMessageBox.Show("该药品已锁定，不能重复锁定", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    XtraMessageBox.Show("该产品已锁定，不能重复锁定", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }

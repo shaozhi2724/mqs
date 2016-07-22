@@ -331,15 +331,22 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
 
         private bool TotalPrice()
         {
+            decimal totalPrice = 0;
             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
             {
+                object productid = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
                 object unitprice = this.popupGrid.PopupView.GetRowCellValue(i, "单价");
                 object amount = this.popupGrid.PopupView.GetRowCellValue(i, "数量");
                 object ttprice = this.popupGrid.PopupView.GetRowCellValue(i, "金额");
 
-                if (unitprice == DBNull.Value || unitprice == null)
+                if (productid == DBNull.Value || productid == null)
                 {
                     break;
+                }
+                if (unitprice == DBNull.Value || unitprice == null)
+                {
+                    XtraMessageBox.Show(String.Format("第{0}行，产品的单价不正确，请确认。", (i + 1)), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
                 }
                 if (Convert.ToDecimal(unitprice) * Convert.ToDecimal(amount) != Convert.ToDecimal(ttprice))
                 {
@@ -347,6 +354,12 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                     return false;
 
                 }
+                totalPrice += Convert.ToDecimal(ttprice);
+            }
+            if (Convert.ToDecimal(txtTotalPrice.Text) != totalPrice)
+            {
+                    XtraMessageBox.Show(String.Format("总金额不对，请随意更改单价或数量后还原。"), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
             }
             return true;
         }
@@ -819,8 +832,10 @@ WHERE BillID={1}
                             //    return; //验证库存和销售数量
                             if (!this.ValidateBatchDate())
                                 return;
-                            if (!ValidateUnitPrice())
-                                return;
+                            for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
+                            {
+                                if (!ValidateUnitPrice(i)) return;
+                            }
 
                             if (!this.Amount())
                                 return;
@@ -830,7 +845,7 @@ WHERE BillID={1}
                             BUSBillEntity bill = new BUSBillEntity { BillID = m_id.Value };
                             bill.Fetch();
 
-                            CorrectStockAmount();
+                            //CorrectStockAmount();
 
                             Guid billCreateUserId = bill.CreateUserID;
                             if (!bill.IsNullField("Reservation10"))
@@ -963,7 +978,10 @@ WHERE BillID={1}
                         if (!this.ValidateDealerRange()) return; //验证客户经营范围
                         if (!this.ValidateDealerQualification()) return; //验证客户的电子档案
                         //if (!this.ValidateSaleAmount()) return; //验证库存和销售数量
-                        if (!ValidateUnitPrice()) return;
+                        for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
+                        {
+                            if (!ValidateUnitPrice(i)) return;
+                        }
                         if (!this.ProductStyle()) return;//验证现金交易
 
                         if (!this.ValidateBatchDate()) return;
@@ -1636,6 +1654,25 @@ WHERE BillID={1}
         private void popupGrid_TotalPriceChanged(object sender, DQS.Controls.CommonCode.TotalPriceChangedArgs e)
         {
             this.txtTotalPrice.Text = e.TotalPrice + "";
+
+        }
+
+        private string GetPercent()
+        {
+            double Percent = 0.0;
+            double totalPrice = 0.0;
+            for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
+            {
+                object price = this.popupGrid.PopupView.GetRowCellValue(i, "进货价");
+                object unitprice = this.popupGrid.PopupView.GetRowCellValue(i, "单价");
+                object amount = this.popupGrid.PopupView.GetRowCellValue(i, "数量");
+                if (price != null && price != DBNull.Value && amount != null && amount != DBNull.Value && unitprice != null && unitprice != DBNull.Value)
+                {
+                    Percent += Convert.ToDouble(price) * Convert.ToDouble(amount);
+                    totalPrice += Convert.ToDouble(unitprice) * Convert.ToDouble(amount);
+                }
+            }
+            return Math.Round((totalPrice-Percent)/totalPrice,2)*100+"%";
         }
 
         /// <summary>
@@ -2105,10 +2142,10 @@ WHERE BillID={1}
         }
 
         //验证价格
-        private bool ValidateUnitPrice()
+        private bool ValidateUnitPrice(int i)
         {
-            for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
-            {
+            //for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
+            //{
                 object unitPrice = this.popupGrid.PopupView.GetRowCellValue(i, "单价");
                 object purchasePrice = this.popupGrid.PopupView.GetRowCellValue(i, "进货价");
                 object tradePrice = this.popupGrid.PopupView.GetRowCellValue(i, "批发价");
@@ -2146,7 +2183,7 @@ WHERE BillID={1}
                         }
                     }
                 }
-            }
+            //}
             return true;
         }
 
@@ -2751,7 +2788,7 @@ WHERE BillID={1}
                 && (!(ActiveControl is BaseButton))
                 && (!(ActiveControl is GridControl)))
                 {
-                    if (popupGrid.PopupView.FocusedColumn.FieldName == "数量")
+                    if (popupGrid.PopupView.FocusedColumn.FieldName == "单价")
                     {
                         popupGrid.PopupView.FocusedRowHandle = popupGrid.PopupView.FocusedRowHandle + 1;
                         popupGrid.PopupView.FocusedColumn = popupGrid.PopupView.Columns["产品名称"];
@@ -2817,7 +2854,10 @@ WHERE BillID={1}
                     if (!this.ValidateDealerRange()) return; //验证客户经营范围
                     if (!this.ValidateDealerQualification()) return; //验证客户的电子档案
                     //if (!this.ValidateSaleAmount()) return; //验证库存和销售数量
-                    if (!ValidateUnitPrice()) return;
+                    for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
+                    {
+                        if (!ValidateUnitPrice(i)) return;
+                    }
                     if (!this.ProductStyle()) return;//验证现金交易
 
                     if (!this.ValidateBatchDate()) return;
@@ -2826,16 +2866,26 @@ WHERE BillID={1}
                     //新添加，验证特殊产品数量不能超过
                     if (!this.Amount()) return;
                     if (!this.MonthAmount()) return;
+                    if (!this.checkPersonRange()) return;//验证客户采购员的经营范围
+                    if (!this.checkEmployeeRange()) return;//验证本企业业务员的经营范围
 
                     #region 新建
 
                     if (Settings.Default.IsUseDepartment)
                     {
-                        foreach (GetDepartment depart in departments)
+                        if (cboDepartment.Text == "")
                         {
-                            if (depart.departmentName == cboDepartment.Text)
+                            XtraMessageBox.Show("选择项部门不能为空。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        else
+                        {
+                            foreach (GetDepartment depart in departments)
                             {
-                                departmentID = depart.departmentID;
+                                if (depart.departmentName == cboDepartment.Text)
+                                {
+                                    departmentID = depart.departmentID;
+                                }
                             }
                         }
                     }
@@ -2864,6 +2914,7 @@ WHERE BillID={1}
                             }
                         }
                     }
+
                     entity.IsBillIn = false; //出库订单
                     entity.BillTypeID = 1;
                     entity.BillTypeName = "销售出货";
@@ -2872,6 +2923,7 @@ WHERE BillID={1}
                     entity.BillStatusName = "已下单";
 
                     List<EntityBase> children = this.popupGrid.GetEntities();
+
 
 
                     //if (!Settings.Default.IsNewStoreDetail)
@@ -2886,8 +2938,8 @@ WHERE BillID={1}
                     //}
                     //else
                     //{
-                        //新库存
-                        CheckStoreDetail(departmentID);
+                    //新库存
+                    CheckStoreDetail(departmentID);
                     //}
 
 
@@ -2898,7 +2950,6 @@ WHERE BillID={1}
                         XtraMessageBox.Show(message, "销售数据错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-
 
                     entity.BillDate = DateTime.Now;
                     entity.CreateDate = DateTime.Now;
@@ -2948,12 +2999,12 @@ WHERE BillID={1}
                     else
                     {
                     */
-                        InsertBillDetail(list, entity.BillID);
-                        //新库存
-                        if (!UpdateNewStoreDetail(entity.BillID, entity.BillCode))
-                        {
-                            CheckStoreDetail(departmentID);
-                        }
+                    InsertBillDetail(list, entity.BillID);
+                    //新库存
+                    if (!UpdateNewStoreDetail(entity.BillID, entity.BillCode))
+                    {
+                        CheckStoreDetail(departmentID);
+                    }
                     //}
 
                     //只要有一条库存错误信息，就不能保存销售单
@@ -2974,6 +3025,54 @@ WHERE BillID={1}
 
                     if (data.Rows.Count > 0)
                     {
+                        //按审批顺序排序
+                        data.DefaultView.Sort = "ApprovalSort";
+                        data = data.DefaultView.ToTable();
+
+                        ATCApproveEntity approveEntity = new ATCApproveEntity();
+                        approveEntity.InternalNo = "XSCH" + entity.BillCode.Substring(2);
+                        approveEntity.DocumentCode = "SaleBill";
+                        approveEntity.BillCode = entity.BillCode;
+                        approveEntity.ApproveTitle = string.Format("{0}({1})，编号：{2}", entity.BillTypeName,
+                            entity.BillStyle, entity.BillCode);
+                        approveEntity.ApprovalContent = String.Format("{0}({1}) {2} 申请审批。", entity.BillTypeName,
+                            entity.BillStyle, entity.BillCode);
+                        approveEntity.ApprovalDate = DateTime.Now;
+                        approveEntity.IsApprovaled = true;
+                        approveEntity.IsPass = true;
+                        approveEntity.ApprovalSuggestion = "";
+                        approveEntity.ApprovalResult = "";
+                        approveEntity.ApprovalRemark = "";
+                        approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+                        approveEntity.CreateDate = DateTime.Now;
+                        approveEntity.IsApprovaled = false;
+                        for (int i = 0; i < data.Rows.Count; i++)
+                        {
+                            var approveCode = approveEntity.InternalNo + (i + 1).ToString("00");
+                            approveEntity.ApproveCode = approveCode;
+                            approveEntity.IsWhole = Convert.ToBoolean(data.Rows[i]["IsWhole"]);
+                            approveEntity.ApproveOrder = Convert.ToInt32(data.Rows[i]["ApprovalSort"]);
+                            var approvalUserId = new Guid(data.Rows[i]["ApprovalUserID"].ToString());
+                            approveEntity.ApprovalUserID = approvalUserId;
+                            approveEntity.Save();
+
+                            //添加消息提醒
+                            ATCApproveNotificationEntity notification = new ATCApproveNotificationEntity();
+                            notification.CreateUserID = approveEntity.CreateUserID;
+                            var userName = GlobalItem.g_CurrentEmployee == null
+                                ? GlobalItem.g_CurrentUser.UserName
+                                : GlobalItem.g_CurrentEmployee.EmployeeName;
+                            notification.CreateUserName = userName;
+                            notification.FormClass = "SaleBill";
+                            notification.IsRead = true;
+                            notification.TargetID = entity.BillID;
+                            notification.TargetCode = entity.BillCode;
+                            notification.ApproveCode = approveCode;
+                            notification.Message = string.Format("{0} 于 {1} 申请产品销售（单号 {2}）。请您审批。", userName,
+                                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.BillCode);
+                            notification.OwnerUserID = approvalUserId;
+                            notification.Save();
+                        }
                     }
                     else
                     {
@@ -3034,12 +3133,22 @@ WHERE BillID={1}
                 {
                     storebilldetail.ProductID = (int)productid;
                     storebilldetail.BatchNo = this.popupGrid.PopupView.GetRowCellValue(i, "批号").ToString();
-                    storebilldetail.ProduceDate = (DateTime)this.popupGrid.PopupView.GetRowCellValue(i, "生产日期");
-                    storebilldetail.ValidateDate = (DateTime)this.popupGrid.PopupView.GetRowCellValue(i, "有效期至");
                     storebilldetail.SterilizationBatchNo = popupGrid.PopupView.GetRowCellValue(i, "灭菌批号").ToString();
+                    if (popupGrid.PopupView.GetRowCellValue(i, "生产日期").ToString() != "")
+                    {
+                        storebilldetail.ProduceDate = (DateTime)popupGrid.PopupView.GetRowCellValue(i, "生产日期");
+                    }
+                    if (popupGrid.PopupView.GetRowCellValue(i, "有效期至").ToString() != "")
+                    {
+                        storebilldetail.ValidateDate = (DateTime)popupGrid.PopupView.GetRowCellValue(i, "有效期至");
+                    }
                     if (popupGrid.PopupView.GetRowCellValue(i, "灭菌日期").ToString() != "")
                     {
                         storebilldetail.SterilizationDate = (DateTime)popupGrid.PopupView.GetRowCellValue(i, "灭菌日期");
+                    }
+                    if (popupGrid.PopupView.GetRowCellValue(i, "入库ID").ToString() != "")
+                    {
+                        storebilldetail.Reservation3 = popupGrid.PopupView.GetRowCellValue(i, "入库ID").ToString();
                     }
                     storebilldetail.BillAmount = (int)this.popupGrid.PopupView.GetRowCellValue(i, "数量");
                     storebilldetail.Amount = (int)this.popupGrid.PopupView.GetRowCellValue(i, "数量");
@@ -3509,6 +3618,11 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
             }
             //没有选择则不控制
             return true;
+        }
+
+        private void txtInvoiceContent_Click(object sender, EventArgs e)
+        {
+            this.txtInvoiceContent.Text = GetPercent();
         }
     }
 }

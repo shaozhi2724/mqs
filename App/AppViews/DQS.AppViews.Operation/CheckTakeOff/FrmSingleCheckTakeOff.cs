@@ -67,7 +67,7 @@ namespace DQS.AppViews.Operation.CheckTakeOff
 	ss.StructureCode AS [货位编码],
 	ss.StructureName AS [货位名称],
 	cssd.ProductID,
-	p.ProductName AS [药品名称],
+	p.ProductName AS [产品名称],
 	cssd.ProductBatchNumber AS [批号],
 	cssd.ProductionDate AS [生产日期],
 	cssd.ProductValidDate AS [有效期至],
@@ -116,7 +116,7 @@ WHERE (p.ProductCode LIKE '%" + txtProduct.Text.Trim() + "%' OR p.ProductName LI
             string StructureCode = gridView1.GetFocusedDataRow()["货位编码"].ToString();
             string StructureName = gridView1.GetFocusedDataRow()["货位名称"].ToString();
             int ProductID = Convert.ToInt32(gridView1.GetFocusedDataRow()["ProductID"]);
-            string ProductName = gridView1.GetFocusedDataRow()["药品名称"].ToString();
+            string ProductName = gridView1.GetFocusedDataRow()["产品名称"].ToString();
             string BatchNo = gridView1.GetFocusedDataRow()["批号"].ToString();
             DateTime ProductionDate = (DateTime)gridView1.GetFocusedDataRow()["生产日期"];
             DateTime ProductValidDate = (DateTime)gridView1.GetFocusedDataRow()["有效期至"];

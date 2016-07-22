@@ -237,6 +237,12 @@
     <Compile Include="FrmProgressing.Designer.cs">
       <DependentUpon>FrmProgressing.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmPurchasePrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPurchasePrice.Designer.cs">
+      <DependentUpon>FrmPurchasePrice.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmQualification.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -378,6 +384,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmProgressing.resx">
       <DependentUpon>FrmProgressing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPurchasePrice.resx">
+      <DependentUpon>FrmPurchasePrice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmQualification.resx">
       <DependentUpon>FrmQualification.cs</DependentUpon>

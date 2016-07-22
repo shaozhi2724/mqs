@@ -607,7 +607,14 @@ WHERE BillID={1}
                     }
                     else
                     {
-                        this.popupGrid.PopupView.SetFocusedRowCellValue("单价", null);
+                        BFIProductPriceEntity pprice = new BFIProductPriceEntity { ProductID = productID, PriceID = 1 };
+                        pprice.Fetch();
+                        double price = 0.0;
+                        if (!pprice.IsNew())
+                        {
+                            price = pprice.Price;
+                        }
+                        this.popupGrid.PopupView.SetFocusedRowCellValue("单价", price);
                     }
                 }
             }

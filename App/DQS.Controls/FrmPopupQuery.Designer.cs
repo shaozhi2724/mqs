@@ -151,6 +151,7 @@
             this.gvData.OptionsNavigation.EnterMoveNextColumn = true;
             this.gvData.OptionsView.EnableAppearanceEvenRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
+            this.gvData.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gvData_RowClick);
             this.gvData.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gvData_CustomDrawRowIndicator);
             this.gvData.DoubleClick += new System.EventHandler(this.gvData_DoubleClick);
             // 

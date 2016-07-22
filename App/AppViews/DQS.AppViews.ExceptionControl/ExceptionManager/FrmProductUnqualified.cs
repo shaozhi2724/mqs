@@ -123,7 +123,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                         result = Convert.ToInt32(cmd.ExecuteScalar());
                         if (result == 1)
                         {
-                            XtraMessageBox.Show("明细中有药品库存不够，请检查。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            XtraMessageBox.Show("明细中有产品库存不够，请检查。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             rollback();
                             return;
                         }

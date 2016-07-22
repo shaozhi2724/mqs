@@ -40,15 +40,17 @@
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.ceAll = new DevExpress.XtraEditors.CheckEdit();
             this.deStartDate = new DevExpress.XtraEditors.DateEdit();
+            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.btnReSet = new DevExpress.XtraEditors.SimpleButton();
             this.txtBillCode = new DevExpress.XtraEditors.TextEdit();
             this.txtDealerCode = new DevExpress.XtraEditors.TextEdit();
+            this.lblAgio = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.cboAgio = new DevExpress.XtraEditors.ComboBoxEdit();
             this.gCDetails = new DevExpress.XtraGrid.GridControl();
             this.gVDetails = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gCBill)).BeginInit();
@@ -62,6 +64,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.deStartDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBillCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealerCode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboAgio.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gCDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gVDetails)).BeginInit();
             this.SuspendLayout();
@@ -76,14 +79,14 @@
             this.panelControl2.Controls.Add(this.labelControl10);
             this.panelControl2.Location = new System.Drawing.Point(3, 422);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(944, 56);
+            this.panelControl2.Size = new System.Drawing.Size(1034, 56);
             this.panelControl2.TabIndex = 11;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(835, 16);
+            this.btnCancel.Location = new System.Drawing.Point(925, 16);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(87, 27);
             this.btnCancel.TabIndex = 0;
@@ -92,7 +95,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(696, 16);
+            this.btnSave.Location = new System.Drawing.Point(786, 16);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(87, 27);
             this.btnSave.TabIndex = 0;
@@ -125,7 +128,7 @@
             this.gCBill.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1,
             this.repositoryItemCheckEdit1});
-            this.gCBill.Size = new System.Drawing.Size(944, 219);
+            this.gCBill.Size = new System.Drawing.Size(1034, 219);
             this.gCBill.TabIndex = 10;
             this.gCBill.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gVBill});
@@ -161,18 +164,20 @@
             this.panelControl1.Controls.Add(this.btnReSet);
             this.panelControl1.Controls.Add(this.txtBillCode);
             this.panelControl1.Controls.Add(this.txtDealerCode);
+            this.panelControl1.Controls.Add(this.lblAgio);
             this.panelControl1.Controls.Add(this.labelControl3);
             this.panelControl1.Controls.Add(this.labelControl2);
             this.panelControl1.Controls.Add(this.labelControl1);
+            this.panelControl1.Controls.Add(this.cboAgio);
             this.panelControl1.Location = new System.Drawing.Point(3, 3);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(944, 58);
+            this.panelControl1.Size = new System.Drawing.Size(1034, 58);
             this.panelControl1.TabIndex = 9;
             // 
             // ceAll
             // 
             this.ceAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ceAll.Location = new System.Drawing.Point(872, 20);
+            this.ceAll.Location = new System.Drawing.Point(962, 20);
             this.ceAll.Name = "ceAll";
             this.ceAll.Properties.Caption = "全选";
             this.ceAll.Size = new System.Drawing.Size(50, 19);
@@ -193,11 +198,20 @@
             this.deStartDate.TabIndex = 4;
             this.deStartDate.TextChanged += new System.EventHandler(this.txtDealerCode_TextChanged);
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(656, 16);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(57, 27);
+            this.btnSearch.TabIndex = 0;
+            this.btnSearch.Text = "查询";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // btnReSet
             // 
-            this.btnReSet.Location = new System.Drawing.Point(749, 16);
+            this.btnReSet.Location = new System.Drawing.Point(719, 16);
             this.btnReSet.Name = "btnReSet";
-            this.btnReSet.Size = new System.Drawing.Size(87, 27);
+            this.btnReSet.Size = new System.Drawing.Size(57, 27);
             this.btnReSet.TabIndex = 0;
             this.btnReSet.Text = "重置";
             this.btnReSet.Click += new System.EventHandler(this.btnReSet_Click);
@@ -217,6 +231,15 @@
             this.txtDealerCode.Size = new System.Drawing.Size(162, 21);
             this.txtDealerCode.TabIndex = 3;
             this.txtDealerCode.TextChanged += new System.EventHandler(this.txtDealerCode_TextChanged);
+            // 
+            // lblAgio
+            // 
+            this.lblAgio.Location = new System.Drawing.Point(782, 21);
+            this.lblAgio.Name = "lblAgio";
+            this.lblAgio.Size = new System.Drawing.Size(36, 14);
+            this.lblAgio.TabIndex = 2;
+            this.lblAgio.Text = "扣率：";
+            this.lblAgio.Visible = false;
             // 
             // labelControl3
             // 
@@ -242,6 +265,20 @@
             this.labelControl1.TabIndex = 2;
             this.labelControl1.Text = "往来单位：";
             // 
+            // cboAgio
+            // 
+            this.cboAgio.Location = new System.Drawing.Point(824, 18);
+            this.cboAgio.Name = "cboAgio";
+            this.cboAgio.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboAgio.Properties.NullText = "100";
+            this.cboAgio.Properties.ReadOnly = true;
+            this.cboAgio.Properties.ShowDropDown = DevExpress.XtraEditors.Controls.ShowDropDown.DoubleClick;
+            this.cboAgio.Size = new System.Drawing.Size(72, 21);
+            this.cboAgio.TabIndex = 3;
+            this.cboAgio.Visible = false;
+            this.cboAgio.TextChanged += new System.EventHandler(this.cboAgio_TextChanged);
+            // 
             // gCDetails
             // 
             this.gCDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -250,7 +287,7 @@
             this.gCDetails.Location = new System.Drawing.Point(3, 284);
             this.gCDetails.MainView = this.gVDetails;
             this.gCDetails.Name = "gCDetails";
-            this.gCDetails.Size = new System.Drawing.Size(944, 136);
+            this.gCDetails.Size = new System.Drawing.Size(1034, 136);
             this.gCDetails.TabIndex = 12;
             this.gCDetails.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gVDetails});
@@ -263,20 +300,11 @@
             this.gVDetails.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gVDetails_CustomDrawRowIndicator);
             this.gVDetails.Click += new System.EventHandler(this.gVDetails_Click);
             // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(656, 16);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(87, 27);
-            this.btnSearch.TabIndex = 0;
-            this.btnSearch.Text = "查询";
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
             // FrmChooseBill
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(951, 482);
+            this.ClientSize = new System.Drawing.Size(1041, 482);
             this.Controls.Add(this.gCDetails);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.gCBill);
@@ -302,6 +330,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.deStartDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBillCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealerCode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboAgio.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gCDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gVDetails)).EndInit();
             this.ResumeLayout(false);
@@ -331,5 +360,7 @@
         private DevExpress.XtraEditors.SimpleButton btnReSet;
         private DevExpress.XtraEditors.CheckEdit ceAll;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
+        public DevExpress.XtraEditors.LabelControl lblAgio;
+        public DevExpress.XtraEditors.ComboBoxEdit cboAgio;
     }
 }

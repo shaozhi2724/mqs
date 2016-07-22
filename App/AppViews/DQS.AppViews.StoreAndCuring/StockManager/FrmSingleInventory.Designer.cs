@@ -242,6 +242,7 @@
             this.btnExport.Size = new System.Drawing.Size(112, 23);
             this.btnExport.TabIndex = 5;
             this.btnExport.Text = "导出盘点明细(&E)";
+            this.btnExport.Visible = false;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnImport
@@ -254,6 +255,7 @@
             this.btnImport.Size = new System.Drawing.Size(112, 23);
             this.btnImport.TabIndex = 4;
             this.btnImport.Text = "导入盘点结果(&I)";
+            this.btnImport.Visible = false;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // btnUpdateStoreAmount

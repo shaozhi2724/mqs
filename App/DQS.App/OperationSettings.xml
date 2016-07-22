@@ -302,8 +302,8 @@
         <Column Name="进货价" FieldType="System.Double" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="进货价"/>
         <Column Name="批发价" EntityField="TradePrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price1" PopupField="批发价"/>
         <Column Name="零售价" EntityField="RetailPrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price2" PopupField="零售价"/>
-        <Column Name="单价" EntityField="UnitPrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price3" PopupField="价格"/>
         <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
+        <Column Name="单价" EntityField="UnitPrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price3" PopupField="价格"/>
         <Column Name="金额" EntityField="TotalPrice" FieldType="System.Double"  Visible="true" AllowEdit="false" />
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="批号"/>
         <Column Name="销项税" EntityField="Reservation1" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="销项税"/>
@@ -752,6 +752,7 @@
         <Column Name="金额" FieldType="System.Double" Visible="true"/>
         <Column Name="收货ID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
         <Column Name="收货单号" FieldType="System.String" Visible="false" AllowEdit="false"/>
+        <Column Name="入库ID" EntityField="Reservation3" FieldType="System.String" Nullable="true" Visible="false" AllowEdit="false"/>
       </Columns>
     </Grid>
     <Report>

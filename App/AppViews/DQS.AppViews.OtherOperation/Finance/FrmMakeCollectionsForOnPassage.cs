@@ -100,6 +100,7 @@ namespace DQS.AppViews.OtherOperation.Finance
             {
                 fmb.FrmSql = "fn_ShowMakeCollectionsOnPassage";
                 fmb.FrmDetailSql = "fn_ShowMakeCollectionsOnPassageDetail";
+                fmb.isIn = 1;
                 fmb.BillList = BillList;
                 fmb.DetailList = DetailList;
                 fmb.TotalPrice = TotalPrice;
@@ -190,6 +191,8 @@ namespace DQS.AppViews.OtherOperation.Finance
 	onp.BatchNo AS [批号],
 	onp.Amount AS [数量],
 	onp.TotalPrice AS [金额],
+	onp.AgioPrice AS [折扣金额],
+	onp.AgioLastPrice AS [返金额],
 	onp.PackageSpec AS [包装规格],
 	onp.ProducerName AS [生产厂商],
 	onp.ProductStyle AS [类别],

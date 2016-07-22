@@ -30,7 +30,7 @@ namespace DQS.Controls
         private void FrmNewStoreDetail_Load(object sender, EventArgs e)
         {
             string code = txtProductCode.Text.Trim();
-            gcLatelyInPrice.Visible = false;
+            gcLatelyInPrice.Visible = Settings.Default.IsViewPurchaseModel;
             txtProductCode.Focus();
             Grid1Load(code);
         }
@@ -92,7 +92,8 @@ namespace DQS.Controls
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sql = @"EXEC sp_LatelyOutPrice " + ProductID;
+                int dealerID = int.Parse(this.Tag.ToString().Split('$')[0]);
+                string sql = @"EXEC sp_LatelyOutPrice " + ProductID +", "+dealerID;
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 try
@@ -272,6 +273,7 @@ namespace DQS.Controls
             {
                 return;
             }
+            gridView1.GetFocusedRow();
             int ProductID = Convert.ToInt32(gridView1.GetDataRow(gridView1.FocusedRowHandle)["ProductID"]);
             Grid2Load(ProductID);
             Grid3Load(ProductID);

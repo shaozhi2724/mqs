@@ -12,10 +12,12 @@ namespace DQS.App.Licenser
     {
         /// <summary>
         /// 枚举注册文件，注册类型包含:
+        /// Demo - 演示版. 不检测计算机ID
         /// NodeLocked - 特定节点注册
         /// </summary>
         public enum LicenseType
         {
+            Demo,
             NodeLocked
         }
 

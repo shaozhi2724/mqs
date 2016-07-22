@@ -8,6 +8,8 @@ namespace DQS.Controls.CommonCode
     public class TotalPriceChangedArgs
     {
         private double m_TotalPrice;
+
+        private double m_Percent;
         public TotalPriceChangedArgs(double totalPrice)
         {
             this.m_TotalPrice = totalPrice;

@@ -6,6 +6,7 @@ using Stimulsoft.Report;
 using Stimulsoft.Report.Dictionary;
 using System.Data.SqlClient;
 using DQS.Common;
+using DQS.Module.Entities;
 
 namespace DQS.Controls
 {
@@ -41,6 +42,10 @@ namespace DQS.Controls
                     stiReport.Pages[1].Enabled = CheckCludeStrMa(id);
                     stiReport.Pages[2].Enabled = CheckCludeStrLeng(id);
                 }
+                BUSBillEntity bill = new BUSBillEntity { BillID = id };
+                bill.Fetch();
+                bill.Reservation8 = (int.Parse(bill.Reservation8) + 1).ToString();
+                bill.Update();
             }
 
             stiReport.Save(reportFile);

@@ -664,10 +664,10 @@ namespace DQS.Common
                     adapter.Fill(dataSet, "客户电子档案到期预警");
                 }
 
-                querySql = "SELECT 药品编号, 药品名称,包装规格,生产厂商, 档案编号, 档案名称, 证书类型, 证书编号, 发证机关, 发证日期, 到期日期, 到期状态 FROM vw_ProductQualificationWithParent WHERE 到期状态 IN ('已过期','即将过期')";
+                querySql = "SELECT 产品编号, 产品名称,包装规格,生产厂商, 档案编号, 档案名称, 证书类型, 证书编号, 发证机关, 发证日期, 到期日期, 到期状态 FROM vw_ProductQualificationWithParent WHERE 到期状态 IN ('已过期','即将过期')";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
                 {
-                    adapter.Fill(dataSet, "药品电子档案到期预警");
+                    adapter.Fill(dataSet, "产品电子档案到期预警");
                 }
 
                 querySql = "SELECT OldLicenseValidateDate AS 原到期日期, NewLicenseValidateDate AS 新到期日期, ActionName AS 状态, LockDate AS 锁定日期, UnLockDate AS 解锁日期, CreateUserName AS 操作人 FROM dbo.BFI_EnterpriseLicenseLockHistory ORDER BY EnterpriseLicenseLockHistoryID DESC";

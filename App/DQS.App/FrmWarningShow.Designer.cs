@@ -39,15 +39,15 @@
             this.gridLock = new DQS.Controls.StandardGrid();
             this.xtbQualificationWaning = new DevExpress.XtraTab.XtraTabPage();
             this.gridQualification = new DQS.Controls.StandardGrid();
+            this.xtbProviderQualificationWaning = new DevExpress.XtraTab.XtraTabPage();
+            this.gridProvider = new DQS.Controls.StandardGrid();
+            this.xtbProductQualificationWaning = new DevExpress.XtraTab.XtraTabPage();
+            this.gridProduct = new DQS.Controls.StandardGrid();
             this.xtbTransport = new DevExpress.XtraTab.XtraTabPage();
             this.gridTransport = new DQS.Controls.StandardGrid();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.xtbProviderQualificationWaning = new DevExpress.XtraTab.XtraTabPage();
-            this.xtbProductQualificationWaning = new DevExpress.XtraTab.XtraTabPage();
-            this.gridProduct = new DQS.Controls.StandardGrid();
-            this.gridProvider = new DQS.Controls.StandardGrid();
             ((System.ComponentModel.ISupportInitialize)(this.xtcMain)).BeginInit();
             this.xtcMain.SuspendLayout();
             this.xtbBatchWaning.SuspendLayout();
@@ -60,16 +60,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridLock)).BeginInit();
             this.xtbQualificationWaning.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridQualification)).BeginInit();
+            this.xtbProviderQualificationWaning.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridProvider)).BeginInit();
+            this.xtbProductQualificationWaning.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridProduct)).BeginInit();
             this.xtbTransport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridTransport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
-            this.xtbProviderQualificationWaning.SuspendLayout();
-            this.xtbProductQualificationWaning.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridProduct)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // xtcMain
@@ -177,6 +177,40 @@
             this.gridQualification.TabIndex = 2;
             this.gridQualification.ViewName = null;
             // 
+            // xtbProviderQualificationWaning
+            // 
+            this.xtbProviderQualificationWaning.Controls.Add(this.gridProvider);
+            this.xtbProviderQualificationWaning.Name = "xtbProviderQualificationWaning";
+            this.xtbProviderQualificationWaning.Size = new System.Drawing.Size(1054, 508);
+            this.xtbProviderQualificationWaning.Text = "客户电子档案到期预警";
+            // 
+            // gridProvider
+            // 
+            this.gridProvider.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridProvider.Filter = null;
+            this.gridProvider.Location = new System.Drawing.Point(0, 0);
+            this.gridProvider.Name = "gridProvider";
+            this.gridProvider.Size = new System.Drawing.Size(1054, 508);
+            this.gridProvider.TabIndex = 4;
+            this.gridProvider.ViewName = null;
+            // 
+            // xtbProductQualificationWaning
+            // 
+            this.xtbProductQualificationWaning.Controls.Add(this.gridProduct);
+            this.xtbProductQualificationWaning.Name = "xtbProductQualificationWaning";
+            this.xtbProductQualificationWaning.Size = new System.Drawing.Size(1054, 508);
+            this.xtbProductQualificationWaning.Text = "产品电子档案到期预警";
+            // 
+            // gridProduct
+            // 
+            this.gridProduct.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridProduct.Filter = null;
+            this.gridProduct.Location = new System.Drawing.Point(0, 0);
+            this.gridProduct.Name = "gridProduct";
+            this.gridProduct.Size = new System.Drawing.Size(1054, 508);
+            this.gridProduct.TabIndex = 4;
+            this.gridProduct.ViewName = null;
+            // 
             // xtbTransport
             // 
             this.xtbTransport.Controls.Add(this.gridTransport);
@@ -221,40 +255,6 @@
             this.panelControl2.Size = new System.Drawing.Size(1065, 542);
             this.panelControl2.TabIndex = 1;
             // 
-            // xtbProviderQualificationWaning
-            // 
-            this.xtbProviderQualificationWaning.Controls.Add(this.gridProvider);
-            this.xtbProviderQualificationWaning.Name = "xtbProviderQualificationWaning";
-            this.xtbProviderQualificationWaning.Size = new System.Drawing.Size(1054, 508);
-            this.xtbProviderQualificationWaning.Text = "客户电子档案到期预警";
-            // 
-            // xtbProductQualificationWaning
-            // 
-            this.xtbProductQualificationWaning.Controls.Add(this.gridProduct);
-            this.xtbProductQualificationWaning.Name = "xtbProductQualificationWaning";
-            this.xtbProductQualificationWaning.Size = new System.Drawing.Size(1054, 508);
-            this.xtbProductQualificationWaning.Text = "药品电子档案到期预警";
-            // 
-            // gridProduct
-            // 
-            this.gridProduct.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridProduct.Filter = null;
-            this.gridProduct.Location = new System.Drawing.Point(0, 0);
-            this.gridProduct.Name = "gridProduct";
-            this.gridProduct.Size = new System.Drawing.Size(1054, 508);
-            this.gridProduct.TabIndex = 4;
-            this.gridProduct.ViewName = null;
-            // 
-            // gridProvider
-            // 
-            this.gridProvider.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridProvider.Filter = null;
-            this.gridProvider.Location = new System.Drawing.Point(0, 0);
-            this.gridProvider.Name = "gridProvider";
-            this.gridProvider.Size = new System.Drawing.Size(1054, 508);
-            this.gridProvider.TabIndex = 4;
-            this.gridProvider.ViewName = null;
-            // 
             // FrmWarningShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -279,16 +279,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridLock)).EndInit();
             this.xtbQualificationWaning.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridQualification)).EndInit();
+            this.xtbProviderQualificationWaning.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridProvider)).EndInit();
+            this.xtbProductQualificationWaning.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridProduct)).EndInit();
             this.xtbTransport.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridTransport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
-            this.xtbProviderQualificationWaning.ResumeLayout(false);
-            this.xtbProductQualificationWaning.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridProduct)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridProvider)).EndInit();
             this.ResumeLayout(false);
 
         }

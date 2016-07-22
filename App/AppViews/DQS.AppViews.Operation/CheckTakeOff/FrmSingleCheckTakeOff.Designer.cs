@@ -220,7 +220,7 @@
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(96, 14);
             this.labelControl4.TabIndex = 0;
-            this.labelControl4.Text = "药品编号或名称：";
+            this.labelControl4.Text = "产品编号或名称：";
             // 
             // groupControl2
             // 
@@ -330,7 +330,7 @@
             // 
             // ProductName
             // 
-            this.ProductName.Caption = "药品名称";
+            this.ProductName.Caption = "产品名称";
             this.ProductName.FieldName = "ProductName";
             this.ProductName.Name = "ProductName";
             this.ProductName.OptionsColumn.AllowEdit = false;

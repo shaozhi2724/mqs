@@ -269,5 +269,35 @@ DELETE FIN_MakeCollectionsOnPassageDetail WHERE BusinessBillID = '{0}'
         {
             gridLoad();
         }
+
+        private void btnChooseBillAgio_Click(object sender, EventArgs e)
+        {
+            LastInventoryDate();
+            if (IsInventory())
+            {
+                XtraMessageBox.Show("请完成期初数据", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return;
+            }
+            using (FrmChooseBill fb = new FrmChooseBill())
+            {
+                fb.storeBill = "fn_MakeCollectionsOnPassageForAgio";
+                fb.storeBillDetail = "fn_MakeCollectionsOnPassageDetailForAgio";
+                fb.storeBillSave = "fn_InsertOnPassageForAgio";
+                fb.isIn = 1;
+                fb.lblAgio.Visible = true;
+                fb.cboAgio.Visible = true;
+                fb.cboAgio.Properties.ReadOnly = false;
+                fb.stringDate = stringDate;
+                fb.DealerCode = DealerCode;
+                fb.BillCode = BillCode;
+                DialogResult dr = fb.ShowDialog();
+                if (dr == DialogResult.Yes)
+                {
+                    DealerCode = fb.DealerCode;
+                    BillCode = fb.BillCode;
+                    gridLoad();
+                }
+            }
+        }
     }
 }

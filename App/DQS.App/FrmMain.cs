@@ -217,8 +217,11 @@ namespace DQS.App
             }
             if (keyData == Keys.F3)
             {
-                new FrmPriceSearch().ShowDialog(this);
-                return true;
+                if (GlobalItem.g_CurrentUser.UserCode == "admin")
+                {
+                    new FrmPriceSearch().ShowDialog(this);
+                    return true;
+                }
             }
             return base.ProcessDialogKey(keyData);
         }

@@ -24,6 +24,8 @@ namespace DQS.Controls
         private string _defaultFilter;
         public string GroupColumn { get; set; }
 
+        public string _OperationName;
+
         bool vw = false;
         public FrmPopupQuery()
         {
@@ -227,6 +229,26 @@ namespace DQS.Controls
         private void txtQuery_TextChanged(object sender, EventArgs e)
         {
             this.btnQuery_Click(null, null);
+        }
+
+        private void gvData_RowClick(object sender, RowClickEventArgs e)
+        {
+            if (_OperationName == "Purchase")
+            {
+                if (e.Clicks == 1 && e.Button == MouseButtons.Right)
+                {
+                    DataRow selectRow = gvData.GetFocusedDataRow();
+                    if (selectRow != null)
+                    {
+                        var selectedProductID = int.Parse(selectRow["产品ID"].ToString());
+                        using (FrmPurchasePrice frm = new FrmPurchasePrice())
+                        {
+                            frm.GridLoad(selectedProductID);
+                            frm.ShowDialog();
+                        }
+                    }
+                }
+            }
         }
     }
 }

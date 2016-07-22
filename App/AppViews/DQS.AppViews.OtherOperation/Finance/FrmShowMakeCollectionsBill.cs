@@ -60,6 +60,9 @@ namespace DQS.AppViews.OtherOperation.Finance
                     gridView.BestFitColumns();
                     gridView.OptionsView.ShowGroupPanel = false;
 
+                    gridView.Columns["含税金额"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                    gridView.Columns["含税金额"].SummaryItem.DisplayFormat = "合计: {0}";
+
                     for (int i = 0; i < gridView.Columns.Count; i++)
                     {
                         string ColumnName = gridView.Columns[i].ToString();
@@ -179,6 +182,31 @@ DELETE dbo.FIN_MakeCollectionsBillDetail WHERE {0}";
             {
                 fs.sqlConditions = sql;
                 DialogResult dr = fs.ShowDialog();
+            }
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            saveFileDialog.Title = "导出Excel";
+
+            saveFileDialog.Filter = "Excel文件(*.xls)|*.xls";
+
+            DialogResult dialogResult = saveFileDialog.ShowDialog(this);
+
+            if (dialogResult == DialogResult.OK)
+            {
+
+                DevExpress.XtraPrinting.XlsExportOptions options = new DevExpress.XtraPrinting.XlsExportOptions();
+
+                //gridControl1.ExportToXls(saveFileDialog.FileName, options);  
+
+                //gridControl.ExportToExcelOld(saveFileDialog.FileName);
+                gridControl.ExportToXls(saveFileDialog.FileName);
+
+                DevExpress.XtraEditors.XtraMessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
         }
     }

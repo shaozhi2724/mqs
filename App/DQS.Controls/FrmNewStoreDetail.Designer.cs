@@ -219,7 +219,7 @@
             this.gcProduct.Name = "gcProduct";
             this.gcProduct.Size = new System.Drawing.Size(630, 221);
             this.gcProduct.TabIndex = 0;
-            this.gcProduct.Text = "药品信息";
+            this.gcProduct.Text = "产品信息";
             // 
             // gridControl1
             // 

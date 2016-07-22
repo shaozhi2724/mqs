@@ -49,6 +49,7 @@
             this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
             this.btnDel = new DevExpress.XtraEditors.SimpleButton();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
@@ -83,6 +84,7 @@
             this.gridView.GridControl = this.gridControl;
             this.gridView.IndicatorWidth = 40;
             this.gridView.Name = "gridView";
+            this.gridView.OptionsView.ShowFooter = true;
             this.gridView.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
             this.gridView.DoubleClick += new System.EventHandler(this.gridView_DoubleClick);
             // 
@@ -238,6 +240,7 @@
             // 
             this.panelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelControl1.Controls.Add(this.btnExport);
             this.panelControl1.Controls.Add(this.btnPrint);
             this.panelControl1.Controls.Add(this.btnDel);
             this.panelControl1.Controls.Add(this.btnAdd);
@@ -272,6 +275,15 @@
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "新建";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(318, 11);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(79, 27);
+            this.btnExport.TabIndex = 0;
+            this.btnExport.Text = "导出";
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // FrmShowMakeCollectionsBill
             // 
@@ -327,6 +339,7 @@
         private DevExpress.XtraEditors.SimpleButton btnDel;
         private DevExpress.XtraEditors.SimpleButton btnAdd;
         private DevExpress.XtraEditors.SimpleButton btnPrint;
+        private DevExpress.XtraEditors.SimpleButton btnExport;
 
     }
 }

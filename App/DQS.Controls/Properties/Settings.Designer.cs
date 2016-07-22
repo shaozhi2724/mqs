@@ -34,5 +34,17 @@ namespace DQS.Controls.Properties {
                 this["IsUseDepartment"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsViewPurchaseModel {
+            get {
+                return ((bool)(this["IsViewPurchaseModel"]));
+            }
+            set {
+                this["IsViewPurchaseModel"] = value;
+            }
+        }
     }
 }

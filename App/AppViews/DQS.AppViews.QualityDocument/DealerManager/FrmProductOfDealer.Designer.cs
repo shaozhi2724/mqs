@@ -96,7 +96,7 @@
             this.Name = "FrmProductOfDealer";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "关联药品";
+            this.Text = "关联产品";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmProductOfDealer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl)).EndInit();

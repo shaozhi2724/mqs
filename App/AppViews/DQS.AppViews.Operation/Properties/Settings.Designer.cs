@@ -106,5 +106,17 @@ namespace DQS.AppViews.Operation.Properties {
                 this["IsBillCategory"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsControlProductForDealer {
+            get {
+                return ((bool)(this["IsControlProductForDealer"]));
+            }
+            set {
+                this["IsControlProductForDealer"] = value;
+            }
+        }
     }
 }

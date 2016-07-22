@@ -449,7 +449,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "MQS医疗器械经营质量管理系统";
+            this.Text = "MQS-医药保-经营质量管理系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);

@@ -83,7 +83,7 @@
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(96, 14);
             this.labelControl1.TabIndex = 2;
-            this.labelControl1.Text = "药品编号或名称：";
+            this.labelControl1.Text = "产品编号或名称：";
             // 
             // txtProduct
             // 

@@ -782,7 +782,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
                     if (isHava)//存在则产品过期
                     {
-                        XtraMessageBox.Show(String.Format("表格中第{0}行药品的电子档案存在已过期档案，无法生成收货单，请修改！", (i + 1)), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show(String.Format("表格中第{0}行产品的电子档案存在已过期档案，无法生成收货单，请修改！", (i + 1)), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
                 }

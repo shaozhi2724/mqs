@@ -177,6 +177,18 @@
     <Compile Include="FinanceManager\FrmSinglePayReceivable.Designer.cs">
       <DependentUpon>FrmSinglePayReceivable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Finance\FrmAdvance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmAdvance.Designer.cs">
+      <DependentUpon>FrmAdvance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\FrmChooseAdvanceBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmChooseAdvanceBill.Designer.cs">
+      <DependentUpon>FrmChooseAdvanceBill.cs</DependentUpon>
+    </Compile>
     <Compile Include="Finance\FrmChooseBill.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -381,6 +393,12 @@
     <Compile Include="Finance\FrmShowSecond.Designer.cs">
       <DependentUpon>FrmShowSecond.cs</DependentUpon>
     </Compile>
+    <Compile Include="Finance\FrmSingleAdvance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmSingleAdvance.Designer.cs">
+      <DependentUpon>FrmSingleAdvance.cs</DependentUpon>
+    </Compile>
     <Compile Include="Finance\FrmStoreInventory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -501,6 +519,12 @@
     <EmbeddedResource Include="FinanceManager\FrmSinglePayReceivable.resx">
       <DependentUpon>FrmSinglePayReceivable.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmAdvance.resx">
+      <DependentUpon>FrmAdvance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmChooseAdvanceBill.resx">
+      <DependentUpon>FrmChooseAdvanceBill.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Finance\FrmChooseBill.resx">
       <DependentUpon>FrmChooseBill.cs</DependentUpon>
     </EmbeddedResource>
@@ -602,6 +626,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Finance\FrmShowSecond.resx">
       <DependentUpon>FrmShowSecond.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmSingleAdvance.resx">
+      <DependentUpon>FrmSingleAdvance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Finance\FrmStoreInventory.resx">
       <DependentUpon>FrmStoreInventory.cs</DependentUpon>

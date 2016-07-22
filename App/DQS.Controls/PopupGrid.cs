@@ -417,6 +417,7 @@ namespace DQS.Controls
                 col.PopupForm.Filter,
                 col.PopupForm.PageSize))
             {
+                frmPopupQuery._OperationName = this.OperationName;
                 frmPopupQuery.Tag = this.Tag;
                 if (frmPopupQuery.ShowDialog() == DialogResult.OK)
                 {

@@ -49,6 +49,7 @@
             this.btnChooseBill = new DevExpress.XtraEditors.SimpleButton();
             this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridControl = new DevExpress.XtraGrid.GridControl();
+            this.btnChooseBillAgio = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties.VistaTimeProperties)).BeginInit();
@@ -83,6 +84,7 @@
             this.panelControl1.Controls.Add(this.btnSearch);
             this.panelControl1.Controls.Add(this.btnReSet);
             this.panelControl1.Controls.Add(this.btnDel);
+            this.panelControl1.Controls.Add(this.btnChooseBillAgio);
             this.panelControl1.Controls.Add(this.btnChooseBill);
             this.panelControl1.Location = new System.Drawing.Point(3, 3);
             this.panelControl1.Name = "panelControl1";
@@ -270,6 +272,15 @@
             this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView});
             // 
+            // btnChooseBillAgio
+            // 
+            this.btnChooseBillAgio.Location = new System.Drawing.Point(530, 11);
+            this.btnChooseBillAgio.Name = "btnChooseBillAgio";
+            this.btnChooseBillAgio.Size = new System.Drawing.Size(69, 27);
+            this.btnChooseBillAgio.TabIndex = 2;
+            this.btnChooseBillAgio.Text = "选择单据";
+            this.btnChooseBillAgio.Click += new System.EventHandler(this.btnChooseBillAgio_Click);
+            // 
             // FrmMakeCollectionsOnPassage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -320,6 +331,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl6;
         private DevExpress.XtraEditors.LabelControl labelControl7;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
+        private DevExpress.XtraEditors.SimpleButton btnChooseBillAgio;
 
     }
 }

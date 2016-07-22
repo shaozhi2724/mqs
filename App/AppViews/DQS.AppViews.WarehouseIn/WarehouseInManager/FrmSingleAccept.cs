@@ -1242,7 +1242,12 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     }
                     if (Convert.ToDateTime(produceDate) > DateTime.Today)
                     {
-                        XtraMessageBox.Show("生产日期不正确，请重新填写！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        XtraMessageBox.Show("生产日期不正确，不能超出当前日期，请重新填写！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return false;
+                    }
+                    if (Convert.ToDateTime(produceDate).Year < 1753 || Convert.ToDateTime(validateDate).Year < 1753)
+                    {
+                        XtraMessageBox.Show(String.Format("第{0}行，生产日期或有效期不正确，请重新填写！", (i + 1)), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return false;
                     }
                     if (Convert.ToDateTime(validateDate) < DateTime.Today)
