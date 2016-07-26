@@ -118,5 +118,17 @@ namespace DQS.AppViews.Operation.Properties {
                 this["IsControlProductForDealer"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsCanPurchaseBackUnStore {
+            get {
+                return ((bool)(this["IsCanPurchaseBackUnStore"]));
+            }
+            set {
+                this["IsCanPurchaseBackUnStore"] = value;
+            }
+        }
     }
 }

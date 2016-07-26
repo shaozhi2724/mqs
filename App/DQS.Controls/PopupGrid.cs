@@ -52,6 +52,10 @@ namespace DQS.Controls
         public int EmployeeID;
         public int DepartmentID;
 
+        //采退界面传参
+        public bool IsQualified;
+
+
         /// <summary>
         /// OperationSettings 配置文件中的 OperationName
         /// </summary>
@@ -256,8 +260,15 @@ namespace DQS.Controls
                         //if (this.OperationName == "PurchaseBack" && Settings.Default.IsNewStoreDetail)
                         if (this.OperationName == "PurchaseBack")
                         {
-                            //新库存
-                            ShowSingleProductSelectionNew(isPopupClosed, col);
+                            if (IsQualified)
+                            {
+                                //新库存
+                                ShowSingleProductSelectionNew(isPopupClosed, col);
+                            }
+                            else
+                            {
+                                ShowSingleSelectionPopupQuery(isPopupClosed, col);
+                            }
                         }
                         else
                         {
@@ -265,7 +276,6 @@ namespace DQS.Controls
                         }
                     }
                 }
-
             }
         }
 
@@ -406,10 +416,16 @@ namespace DQS.Controls
 
         private void ShowSingleSelectionPopupQuery(bool isPopupClosed, OperationGridColumn col)
         {
-                if (col.PopupForm.ViewName == "vw_ProductForDealer")
-                {
-                    col.PopupForm.Filter = "([状态] is  null or [状态] = '正常') and [单位ID] = " + DealerID;
-                }
+            if (col.PopupForm.ViewName == "vw_ProductForDealer")
+            {
+                col.PopupForm.Filter = "([状态] is  null or [状态] = '正常') and [单位ID] = " + DealerID;
+            }
+
+            if (this.OperationName == "PurchaseBack" && !IsQualified)
+            {
+                col.PopupForm.ViewName = "vw_ProductForUnQualified";
+            }
+
             using (FrmPopupQuery frmPopupQuery = new FrmPopupQuery(col.PopupForm.FormatQueryString,
                 col.PopupForm.ViewName,
                 col.PopupForm.PrimaryField,

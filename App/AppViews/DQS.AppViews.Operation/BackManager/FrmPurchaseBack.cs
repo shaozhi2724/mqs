@@ -137,15 +137,14 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
                     {
                         if (DialogResult.Yes == fr.ShowDialog())
                         {
-                            /*
-                            if (!Settings.Default.IsNewStoreDetail)
+                            if (entity.ContractNo == "不合格")
                             {
                                 //将销售单减掉的业务库存加回来
                                 string sql = @"
 UPDATE SD
     SET SD.Amount = SD.Amount + BD.Amount
 FROM dbo.BUS_BillDetail AS BD
-LEFT JOIN dbo.BUS_StoreDetail AS SD
+LEFT JOIN dbo.BUS_UnqualifiedStoreDetail AS SD
 ON BD.ProductID = SD.ProductID
 AND BD.BatchNo = SD.BatchNo
 WHERE BD.BillID='{0}'
@@ -182,7 +181,6 @@ UPDATE dbo.BUS_Bill SET BillStatus=9,BillStatusName='已删除',LastModifyDate=G
                             }
                             else
                             {
-                            */
                                 //将销售单减掉的业务库存加回来
                                 string Updatesql = @"
 UPDATE dbo.BUS_Bill SET BillStatus=9,BillStatusName='已删除',LastModifyDate=GETDATE(),LastModifyUserID='{1}',Reservation5='已删除。操作员：'+(SELECT UserName FROM dbo.ATC_User WHERE UserID = '{1}')+'于'+CONVERT(varchar(100), GETDATE(), 20)+'删除，删除原因为：'+'{2}' WHERE BillID='{0}'";
@@ -209,7 +207,7 @@ UPDATE dbo.BUS_Bill SET BillStatus=9,BillStatusName='已删除',LastModifyDate=G
                                     }
                                 }
                                 this.pageNavigator.ShowData();
-                            //}
+                            }
                         }
                     }
                 }

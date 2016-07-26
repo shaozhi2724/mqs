@@ -56,8 +56,21 @@ namespace DQS.AppViews.Operation.BackManager
             }
             return base.ProcessDialogKey(keyData);
         }
+
+        private void LoadCboQualified()
+        {
+            cboQualified.Properties.Items.Add("合格");
+            cboQualified.Properties.Items.Add("不合格");
+            //cboQualified.Text = "";
+        }
+
         private void FrmSinglePurchaseBack_Load(object sender, EventArgs e)
         {
+            LoadCboQualified();
+            if (Settings.Default.IsCanPurchaseBackUnStore)
+            {
+                layQualified.Visibility = LayoutVisibility.Always;
+            }
             this.cbxDeliveryType.InitSource();
             this.cbxPaymentType.InitSource();
             this.popupGrid.InitGrid();
@@ -893,10 +906,10 @@ WHERE BillID={1}
                         entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
-                        //if (Settings.Default.IsNewStoreDetail)
-                        //{
+                        if (cboQualified.Text == "合格" ? true : false)
+                        {
                             CheckStoreDetail(departmentID);
-                        //}
+                        }
                         //只要有一条库存错误信息，就不能保存销售单
                         if (_amountErrors.Any())
                         {
@@ -909,15 +922,14 @@ WHERE BillID={1}
                         //查询出其ID
                         entity.Fetch();
 
-                        //if (Settings.Default.IsNewStoreDetail)
-                        //{
+                        if (cboQualified.Text == "合格" ? true : false)
+                        {
                             InsertBillDetail(list, entity.BillID);
                             //新库存
                             if (!UpdateNewStoreDetail(entity.BillID, entity.BillCode))
                             {
                                 CheckStoreDetail(departmentID);
                             }
-                        /*
                         }
                         else
                         {
@@ -933,10 +945,9 @@ WHERE BillID={1}
                             foreach (EntityBase childEntity in children)
                             {
                                 BUSBillDetailEntity child = childEntity as BUSBillDetailEntity;
-                                UpdateStoreDetail(child, departmentID);
+                                UpdateUnStoreDetail(child, departmentID);
                             }
                         }
-                        */
                         #endregion
 
                         //只要有一条库存错误信息，就不能保存销售单
@@ -1291,6 +1302,11 @@ WHERE BillID={1}
                 rdgBillStyle.SelectedIndex = 0;
             }
 
+            if (!entity.IsNullField("ContractNo"))
+            {
+                this.cboQualified.Text = entity.ContractNo;
+            }
+
         }
 
         /// <summary>
@@ -1334,6 +1350,11 @@ WHERE BillID={1}
 
             entity.BillStyle = this.rdgBillStyle.Properties.Items[rdgBillStyle.SelectedIndex].Value.ToString();
 
+
+            if (this.cboQualified.Text != "")
+            {
+                entity.ContractNo = this.cboQualified.Text.Trim();
+            }
 
         }
 
@@ -1393,6 +1414,8 @@ WHERE BillID={1}
                     }
                     e.ActiveOperationColumn.PopupForm.Filter = String.Format("[所属部门ID] = {0}", departmentID);
                 }
+                popupGrid.IsQualified = cboQualified.Text == "合格" ? true : false;
+                cboQualified.Properties.ReadOnly = true;
             }
         }
 
@@ -1490,6 +1513,34 @@ WHERE BillID={1}
             {
                 this.txtBusinessPhone.Text = (this.txtBusinessPerson.EditData as DataRow)["手机"].ToString();
             }
+        }
+
+        //更新不合格库存
+        public static void UpdateUnStoreDetail(BUSBillDetailEntity billDetail, int storeDetailBelongDepartmentId)
+        {
+            EntityCollection<BUSUnqualifiedStoreDetailEntity> storeDetails = new EntityCollection<BUSUnqualifiedStoreDetailEntity>();
+            storeDetails.Fetch(BUSUnqualifiedStoreDetailEntityFields.ProductID == billDetail.ProductID
+                & BUSUnqualifiedStoreDetailEntityFields.BatchNo == billDetail.BatchNo);
+            BUSUnqualifiedStoreDetailEntity storeDetail = new BUSUnqualifiedStoreDetailEntity
+            {
+                StoreDetailID = (storeDetails[0] as BUSUnqualifiedStoreDetailEntity).StoreDetailID
+            };
+            //更新库存
+            storeDetail.Fetch();
+            storeDetail.LastStoreID = billDetail.BillID;
+            storeDetail.LastModifyDate = DateTime.Now;
+            storeDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
+            if (storeDetail.IsNullField("Amount"))
+            {
+                throw new Exception(String.Format("ID号为{0}的产品没有批号为{1}库存信息。", billDetail.ProductID, billDetail.BatchNo));
+            }
+            storeDetail.Amount = storeDetail.Amount - billDetail.Amount;
+            if (storeDetail.Amount < 0)
+            {
+                throw new Exception(String.Format("ID号为{0}的产品库存不足。", billDetail.ProductID));
+            }
+            storeDetail.Update();
+
         }
 
         //更新库存
