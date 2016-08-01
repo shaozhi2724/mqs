@@ -51,6 +51,7 @@ namespace DQS.Controls
         public int DealerID;
         public int EmployeeID;
         public int DepartmentID;
+        public string AcceptCode;
 
         //采退界面传参
         public bool IsQualified;
@@ -424,6 +425,12 @@ namespace DQS.Controls
             if (this.OperationName == "PurchaseBack" && !IsQualified)
             {
                 col.PopupForm.ViewName = "vw_ProductForUnQualified";
+            }
+
+            if (this.OperationName == "Accept")
+            {
+                col.PopupForm.ViewName = "vw_ProductForAccept";
+                col.PopupForm.Filter = "单号 = '" + AcceptCode + "'";
             }
 
             using (FrmPopupQuery frmPopupQuery = new FrmPopupQuery(col.PopupForm.FormatQueryString,

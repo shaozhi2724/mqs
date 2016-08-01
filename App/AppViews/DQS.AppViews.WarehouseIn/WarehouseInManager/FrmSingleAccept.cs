@@ -430,6 +430,12 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                             if (busAcceptDetailEntity.IsNullField("ReceiveAmount"))
                             {
                                 busAcceptDetailEntity.ReceiveAmount = 0;
+                                busAcceptDetailEntity.Reservation2 = "0";
+                            }
+                            else
+                            {
+                                busAcceptDetailEntity.Reservation2 = (busAcceptDetailEntity.ReceiveAmount *
+                                    double.Parse(busAcceptDetailEntity.Reservation1)).ToString();
                             }
 
                             if (busAcceptDetailEntity.IsNullField("QualifiedAmount"))
@@ -1444,6 +1450,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     if (productIDs.Count > 0)
                     {
                         e.ActiveOperationColumn.PopupForm.Filter = String.Format("[产品ID] IN ({0}) ", string.Join(",", productIDs.ToArray()));
+                        popupGrid.AcceptCode = txtAcceptCode.Text.Trim();
                     }
                     else
                     {
