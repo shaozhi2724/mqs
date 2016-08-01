@@ -631,7 +631,7 @@
           <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_AllProduct</ViewName>
           <PrimaryField>产品ID</PrimaryField>
-          <Fields>产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,单价,金额</Fields>
+          <Fields>产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>

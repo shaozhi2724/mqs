@@ -106,10 +106,22 @@ namespace DQS.Module.Entities
             set { this.SetValue("InAmount", value); }
         }
 
-        public double InUnitPrice
+        public decimal InUnitPrice
         {
-            get { return (double)this.GetValue("InUnitPrice"); }
+            get { return (decimal)this.GetValue("InUnitPrice"); }
             set { this.SetValue("InUnitPrice", value); }
+        }
+
+        public decimal InTotalPrice
+        {
+            get { return (decimal)this.GetValue("InTotalPrice"); }
+            set { this.SetValue("InTotalPrice", value); }
+        }
+
+        public decimal ViewPrice
+        {
+            get { return (decimal)this.GetValue("ViewPrice"); }
+            set { this.SetValue("ViewPrice", value); }
         }
 
         public int Tax
@@ -150,6 +162,8 @@ namespace DQS.Module.Entities
             this.Fields.Add("UpDealerName", BUSInStoreDetailEntityFields.UpDealerName);
             this.Fields.Add("InAmount", BUSInStoreDetailEntityFields.InAmount);
             this.Fields.Add("InUnitPrice", BUSInStoreDetailEntityFields.InUnitPrice);
+            this.Fields.Add("InTotalPrice", BUSInStoreDetailEntityFields.InTotalPrice);
+            this.Fields.Add("ViewPrice", BUSInStoreDetailEntityFields.ViewPrice);
             this.Fields.Add("Tax", BUSInStoreDetailEntityFields.Tax);
             this.Fields.Add("DepartmentID", BUSInStoreDetailEntityFields.DepartmentID);
             this.Fields.Add("CuringDate", BUSInStoreDetailEntityFields.CuringDate);
@@ -238,22 +252,32 @@ namespace DQS.Module.Entities
 
         public static EntityField InUnitPrice
 		{
-            get { return new EntityField("BUS_InStoreDetail", 15, "InUnitPrice", SqlDbType.Float, false, false, false, true); }
+            get { return new EntityField("BUS_InStoreDetail", 15, "InUnitPrice", SqlDbType.Decimal, false, false, false, true); }
+		}
+
+        public static EntityField InTotalPrice
+		{
+            get { return new EntityField("BUS_InStoreDetail", 16, "InTotalPrice", SqlDbType.Decimal, false, false, false, true); }
+		}
+
+        public static EntityField ViewPrice
+		{
+            get { return new EntityField("BUS_InStoreDetail", 17, "ViewPrice", SqlDbType.Decimal, false, false, false, true); }
 		}
 
         public static EntityField Tax
 		{
-            get { return new EntityField("BUS_InStoreDetail", 16, "Tax", SqlDbType.Int, false, false, false, true); }
+            get { return new EntityField("BUS_InStoreDetail", 18, "Tax", SqlDbType.Int, false, false, false, true); }
 		}
 
         public static EntityField DepartmentID
 		{
-            get { return new EntityField("BUS_InStoreDetail", 17, "DepartmentID", SqlDbType.Int, false, false, false, true); }
+            get { return new EntityField("BUS_InStoreDetail", 19, "DepartmentID", SqlDbType.Int, false, false, false, true); }
 		}
 
         public static EntityField CuringDate
 		{
-            get { return new EntityField("BUS_InStoreDetail", 18, "CuringDate", SqlDbType.DateTime, false, false, false, true); }
+            get { return new EntityField("BUS_InStoreDetail", 20, "CuringDate", SqlDbType.DateTime, false, false, false, true); }
 		}
 
 	}
@@ -295,6 +319,10 @@ namespace DQS.Module.Entities
         InAmount,
         
         InUnitPrice,
+
+        InTotalPrice,
+
+        ViewPrice,
 
         Tax,
         

@@ -1424,6 +1424,7 @@ WHERE BillID={1}
                     {
                         int dealerID = int.Parse(dealer["单位ID"].ToString());
                         int productID = int.Parse(e.PopupRow["产品ID"].ToString());
+                        int InStoreID = int.Parse(e.PopupRow["入库ID"].ToString());
                         string batchNo = e.PopupRow["批号"].ToString();
                         string productCategory = e.PopupRow["产品类别"].ToString();
 
@@ -1559,23 +1560,16 @@ WHERE BillID={1}
                                                 if (priceStyleName == "上次进货价")
                                                 {
                                                     //上次的采购单价
-                                                    EntityCollection<BUSProductPurchasePriceEntity>
+                                                    EntityCollection<BUSInStoreDetailEntity>
                                                         purchasePriceEntities =
-                                                            new EntityCollection<BUSProductPurchasePriceEntity>();
+                                                            new EntityCollection<BUSInStoreDetailEntity>();
                                                     purchasePriceEntities.Fetch(
-                                                                                BUSProductPurchasePriceEntityFields
-                                                                                    .DealerID ==
-                                                                                dealerID &
-                                                                                BUSProductPurchasePriceEntityFields
-                                                                                    .ProductID == productID &
-                                                                                BUSProductPurchasePriceEntityFields
-                                                                                    .BatchNo ==
-                                                                                batchNo);
+                                                                                BUSInStoreDetailEntityFields.InStoreID == InStoreID);
                                                     Dictionary<int, double> prices = new Dictionary<int, double>();
                                                     foreach (var purchasePriceEntity in purchasePriceEntities)
                                                     {
-                                                        var price = purchasePriceEntity as BUSProductPurchasePriceEntity;
-                                                        prices.Add(price.ProductPurchasePriceID, price.PurchasePrice);
+                                                        var price = purchasePriceEntity as BUSInStoreDetailEntity;
+                                                        prices.Add(price.InStoreID, (double)price.InUnitPrice);
                                                     }
 
                                                     if (prices.Count > 0)
