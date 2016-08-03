@@ -248,6 +248,9 @@ namespace DQS.Controls
                 case "关联产品":
                     this.CustomProductForDealer();
                     break;
+                case "变更":
+                    this.CustomChangeStatus();
+                    break;
                 default:
                     break;
             }
@@ -713,6 +716,14 @@ namespace DQS.Controls
         protected virtual void CustomProductForDealer()
         {
             SaveDataLog("关联产品");
+        }
+
+        /// <summary>
+        /// 自定义关联产品（首营供应商用）
+        /// </summary>
+        protected virtual void CustomChangeStatus()
+        {
+            SaveDataLog("变更");
         }
 
         /// <summary>

@@ -406,5 +406,43 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
             }
             base.CustomModify();
         }
+        protected override void CustomChangeStatus()
+        {
+            object id = this.gvData.GetFocusedRowCellValue("销售单ID");
+            if (id != null && id != DBNull.Value)
+            {
+                BUSBillEntity entity = new BUSBillEntity { BillID = (int)id };
+                entity.Fetch();
+                if (entity.BillStatus > 2)
+                {
+                    XtraMessageBox.Show(string.Format("状态为{0}，不允许重置已下单状态！", entity.BillStatusName),
+                        "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    entity.BillStatus = 1;
+                    entity.BillStatusName = "已下单";
+                    entity.Update();
+                }
+
+
+                EntityCollection<ATCApproveEntity> approveEntitys = new EntityCollection<ATCApproveEntity>();
+                approveEntitys.Fetch(ATCApproveEntityFields.BillCode == entity.BillCode);
+
+                if (approveEntitys.Count > 0)
+                {
+                    foreach (var approveEntity in approveEntitys)
+                    {
+                        ATCApproveEntity approve = (ATCApproveEntity)approveEntity;
+                        approve.IsApprovaled = false;
+                        approve.IsPass = false;
+                        approve.Update();
+                    }
+                }
+            }
+            base.CustomChangeStatus();
+            this.pageNavigator.ShowData();
+        }
     }
 }
