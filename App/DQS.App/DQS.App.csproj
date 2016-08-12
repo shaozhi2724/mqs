@@ -41,7 +41,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;RockeyLicense</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;SoftFileLicense</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
@@ -229,6 +229,12 @@
     <Compile Include="FrmDbSetting.Designer.cs">
       <DependentUpon>FrmDbSetting.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmDownAttachment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDownAttachment.Designer.cs">
+      <DependentUpon>FrmDownAttachment.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmLicenserIdentification.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -307,6 +313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmUpdateBatchNo.resx">
       <DependentUpon>FrmUpdateBatchNo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDownAttachment.resx">
+      <DependentUpon>FrmDownAttachment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmUpdateViewPrice.resx">
       <DependentUpon>FrmUpdateViewPrice.cs</DependentUpon>
@@ -479,7 +488,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="OperationSettings.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
     <Content Include="ORMSCore.dll">

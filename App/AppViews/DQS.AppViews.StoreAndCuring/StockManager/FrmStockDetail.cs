@@ -75,5 +75,17 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                 }
             }
         }
+
+        protected override void CustomModify()
+        {
+            using (FrmSingleStoreDetail fa = new FrmSingleStoreDetail())
+            {
+                DialogResult dr = fa.ShowDialog();
+                if (dr == DialogResult.Yes)
+                {
+                    this.pageNavigator.ShowData();
+                }
+            }
+        }
     }
 }

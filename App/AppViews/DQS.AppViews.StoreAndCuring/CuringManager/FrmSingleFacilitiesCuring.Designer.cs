@@ -54,6 +54,7 @@
             this.colStyleName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCuringResult = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCuringRemark = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCuringRunTime = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -277,12 +278,14 @@
             this.colFacilityAddress,
             this.colFacilitySpec,
             this.colStyleName,
+            this.colCuringRunTime,
             this.colCuringResult,
             this.colCuringRemark});
             this.gridView.GridControl = this.gridControl;
             this.gridView.IndicatorWidth = 40;
             this.gridView.Name = "gridView";
             this.gridView.OptionsView.ShowGroupPanel = false;
+            this.gridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridView_KeyDown);
             // 
             // colID
             // 
@@ -347,7 +350,7 @@
             this.colCuringResult.FieldName = "CuringResult";
             this.colCuringResult.Name = "colCuringResult";
             this.colCuringResult.Visible = true;
-            this.colCuringResult.VisibleIndex = 5;
+            this.colCuringResult.VisibleIndex = 6;
             // 
             // colCuringRemark
             // 
@@ -355,7 +358,15 @@
             this.colCuringRemark.FieldName = "CuringRemark";
             this.colCuringRemark.Name = "colCuringRemark";
             this.colCuringRemark.Visible = true;
-            this.colCuringRemark.VisibleIndex = 6;
+            this.colCuringRemark.VisibleIndex = 7;
+            // 
+            // colCuringRunTime
+            // 
+            this.colCuringRunTime.Caption = "运行时间";
+            this.colCuringRunTime.FieldName = "CuringRunTime";
+            this.colCuringRunTime.Name = "colCuringRunTime";
+            this.colCuringRunTime.Visible = true;
+            this.colCuringRunTime.VisibleIndex = 5;
             // 
             // FrmSingleFacilitiesCuring
             // 
@@ -421,5 +432,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colStyleName;
         private DevExpress.XtraGrid.Columns.GridColumn colCuringResult;
         private DevExpress.XtraGrid.Columns.GridColumn colCuringRemark;
+        private DevExpress.XtraGrid.Columns.GridColumn colCuringRunTime;
     }
 }

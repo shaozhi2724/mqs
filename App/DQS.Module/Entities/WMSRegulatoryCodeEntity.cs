@@ -98,7 +98,7 @@ namespace DQS.Module.Entities
 
         public static EntityField ReviewCode
 		{
-            get { return new EntityField("WMS_RegulatoryCode", 3, "ReviewCode", SqlDbType.NVarChar, false, false, false, true); }
+            get { return new EntityField("WMS_RegulatoryCode", 3, "ReviewCode", SqlDbType.NVarChar, false, false, true, true); }
 		}
 
         public static EntityField StatusID
@@ -136,7 +136,7 @@ namespace DQS.Module.Entities
 
     #region WMSRegulatoryCodeEntityFields2
 
-    public enum WMSRegulatoryCode2
+    public enum WMSRegulatoryCodeEntityFields2
 	{
         Code,
 

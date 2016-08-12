@@ -17,6 +17,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
     {
 
         RepositoryItemComboBox cbo = new RepositoryItemComboBox();
+        RepositoryItemComboBox cboRunTime = new RepositoryItemComboBox();
         List<Facilities> facilities = new List<Facilities>();
         public FrmSingleFacilitiesCuring()
         {
@@ -27,8 +28,11 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
         {
             LoadCboType();
             gridView.Columns["CuringResult"].ColumnEdit = cbo;
+            LoadCboRunType();
+            gridView.Columns["CuringRunTime"].ColumnEdit = cboRunTime;
 
             LoadType();
+            cboDepartment.SelectedIndex = 0;
             txtCuringName.Text = GlobalItem.g_CurrentUser.UserName;
             txtCreateUser.Text = GlobalItem.g_CurrentUser.UserName;
             deCuringDate.Text = DateTime.Now.ToString("d");
@@ -83,6 +87,31 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
                 }
             }
         }
+        private void LoadCboRunType()
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                string sql = "SELECT CuringRunTime FROM dbo.BUS_FacilitiesCuring GROUP BY CuringRunTime";
+                SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
+                DataSet ds = new DataSet();
+                try
+                {
+                    sda.Fill(ds, "Table");
+                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                    {
+                        cboRunTime.Items.Add(ds.Tables["Table"].Rows[i]["CuringRunTime"].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
 
         private void btnAddFacilities_Click(object sender, EventArgs e)
         {
@@ -94,6 +123,8 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
                 {
                     foreach (var item in frm.selectedFacilities)
                     {
+                            item.CuringRunTime = cboRunTime.Items[0].ToString();
+                            item.CuringResult = cbo.Items[0].ToString();
                         if (!facilities.Select(p => p.ID).Contains(item.ID))
                         {
                             facilities.Add(item);
@@ -119,7 +150,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
             foreach (var item in facilities)
             {
                 if (!SaveCuring(item.ID, curingPerson, department, curingDate, item.CuringResult, 
-                    item.CuringRemark, createUser, DateTime.Now))
+                    item.CuringRunTime, item.CuringRemark, createUser, DateTime.Now))
                 {
                     XtraMessageBox.Show("保存失败！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -129,14 +160,14 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
         }
 
         private bool SaveCuring(int id,string curingPerson,string curingDepartment,DateTime curingDate,
-            string curingResult,string curingRemark,string createUser,DateTime createDate)
+            string curingResult, string curingRunTime, string curingRemark, string createUser, DateTime createDate)
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sql = @"INSERT dbo.BUS_FacilitiesCuring(FacilitiesID,CuringPerson,CuringDepartment,CuringDate,CuringResult,CuringRemark,CreateUser,CreateDate)
-VALUES ({0},N'{1}',N'{2}','{3}',N'{4}',N'{5}',N'{6}','{7}')";
+                string sql = @"INSERT dbo.BUS_FacilitiesCuring(FacilitiesID,CuringPerson,CuringDepartment,CuringDate,CuringResult,CuringRunTime,CuringRemark,CreateUser,CreateDate)
+VALUES ({0},N'{1}',N'{2}','{3}',N'{4}',N'{5}',N'{6}','{7}','{8}')";
                 sql = string.Format(sql, id, curingPerson, curingDepartment, curingDate,
-                    curingResult, curingRemark, createUser, createDate);
+                    curingResult, curingRunTime, curingRemark, createUser, createDate);
                 try
                 {
                     conn.Open();
@@ -155,6 +186,20 @@ VALUES ({0},N'{1}',N'{2}','{3}',N'{4}',N'{5}',N'{6}','{7}')";
                 }
             }
         }
+
+        private void gridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                DialogResult dr = XtraMessageBox.Show("确定删除该行数据吗？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    var item = gridView.GetFocusedRow() as Facilities;
+                    facilities.Remove(facilities.FirstOrDefault(p => p.ID == item.ID));
+                    LoadGrid();
+                }
+            }
+        }
     }
 
     public class Facilities
@@ -167,6 +212,7 @@ VALUES ({0},N'{1}',N'{2}','{3}',N'{4}',N'{5}',N'{6}','{7}')";
         public string StyleName { get; set; }
         public string CuringResult { get; set; }
         public string CuringRemark { get; set; }
+        public string CuringRunTime { get; set; }
 
         public Facilities() { }
 

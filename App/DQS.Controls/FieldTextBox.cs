@@ -520,5 +520,17 @@ namespace DQS.Controls
 		public SYSPageFunctionEntityFields2 EntityField { get; set; }
 	}
 
+    public class BUSReCheckBillEntityTextBox : TextBoxEx
+	{
+		[Description("实体中的属性名称")]
+        public BUSReCheckBillEntityFields2 EntityField { get; set; }
+	}
+
+    public class BUSReCheckBillDetailEntityTextBox : TextBoxEx
+	{
+		[Description("实体中的属性名称")]
+        public BUSReCheckBillDetailEntityFields2 EntityField { get; set; }
+	}
+
 
 }

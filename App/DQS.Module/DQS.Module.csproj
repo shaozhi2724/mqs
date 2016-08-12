@@ -150,6 +150,8 @@
     <Compile Include="Entities\BUSReceiveEntity.cs" />
     <Compile Include="Entities\BUSReceiveInspectionEntity.cs" />
     <Compile Include="Entities\BUSReceiveTemperatureAttachmentEntity.cs" />
+    <Compile Include="Entities\BUSReCheckBillDetailEntity.cs" />
+    <Compile Include="Entities\BUSReCheckBillEntity.cs" />
     <Compile Include="Entities\BUSReviewDetailEntity.cs" />
     <Compile Include="Entities\BUSReviewEntity.cs" />
     <Compile Include="Entities\BUSSamplingEntity.cs" />

@@ -11,6 +11,7 @@ using DQS.Module.Views;
 using ORMSCore;
 using DQS.Common;
 using DQS.Controls;
+using System.IO;
 
 namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 {
@@ -31,6 +32,8 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             {
                 this.m_id = Convert.ToInt32(this.Tag);
 
+                this.btnReCheck.Enabled = false;
+
                 BUSReceiveEntity entity = new BUSReceiveEntity { ReceiveID = m_id.Value };
                 entity.Fetch();
 
@@ -46,6 +49,9 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             }
             else
             {
+                this.dateTransportDate.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                this.txtArriveTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
                 this.txtReceiveCode.Text = "SH" + DateTime.Now.ToString("yyyyMMddHHmmss");
                 this.txtReceiveCode.Select(this.txtReceiveCode.Text.Length, 0);
 
@@ -217,21 +223,41 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
                     if (!busReceiveDetailEntities.Any() || busReceiveDetailEntities.TrueForAll(p => p.ReceiveAmount == 0))
                     {
-                        entity.ReceiveStatusID = 2;
-                        entity.ReceiveStatus = "拒收";
-                        entity.ReceiveStatusSpell = "js";
 
-                        //更新订单状态
-                        BUSBillEntity billEntity = new BUSBillEntity
+                        BUSBillEntity bill = new BUSBillEntity { BillID = entity.BillID, };
+                        bill.Fetch();
+                        if (bill.BillStatusName != "收货复查")
                         {
-                            BillID = entity.BillID,
-                            BillStatus = 6,
-                            BillStatusName = "拒收"
-                        };
-                        billEntity.Update();
+                            entity.ReceiveStatusID = 2;
+                            entity.ReceiveStatus = "拒收";
+                            entity.ReceiveStatusSpell = "js";
+
+                            //更新订单状态
+                            BUSBillEntity billEntity = new BUSBillEntity
+                            {
+                                BillID = entity.BillID,
+                                BillStatus = 6,
+                                BillStatusName = "拒收"
+                            };
+                            billEntity.Update();
+                        }
                     }
                     else
                     {
+                        if (!busReceiveDetailEntities.Any(p => p.ReceiveAmount < p.Amount))
+                        {
+                            BUSDeclinedEntity dec = new BUSDeclinedEntity { DeclinedCode = "SHJS-" + entity.ReceiveCode };
+                            dec.Fetch();
+                            if (!dec.IsNullField("DeclinedID"))
+                            {
+                                //删除拒收明细
+                                BUSDeclinedDetailEntity decDelete = new BUSDeclinedDetailEntity { DeclinedID = dec.DeclinedID };
+                                decDelete.DeleteByCommonly();
+                                //删除拒收单
+                                dec.Delete();
+                            }
+                        }
+
                         entity.Update();
 
                         //先删除
@@ -241,7 +267,9 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         //后加
                         foreach (BUSReceiveDetailEntity child in busReceiveDetailEntities)
                         {
+
                             child.ReceiveID = m_id.Value;
+                            child.Reservation2 = (child.ReceiveAmount * double.Parse(child.Reservation1)).ToString();
                             child.Save();
                         }
 
@@ -250,10 +278,14 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                             //更新订单状态
                             BUSBillEntity billEntity = new BUSBillEntity
                             {
-                                BillID = entity.BillID,
-                                BillStatus = 3,
-                                BillStatusName = "已收货"
+                                BillID = entity.BillID
                             };
+                            billEntity.Fetch();
+                            if (billEntity.BillStatusName != "收货复查")
+                            {
+                                billEntity.BillStatus = 3;
+                                billEntity.BillStatusName = "已收货";
+                            }
                             billEntity.ReceiveID = m_id.Value;
                             billEntity.ReceiveCode = entity.ReceiveCode;
                             billEntity.Update();
@@ -270,6 +302,11 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 }
                 else
                 {
+                    if (Convert.ToInt32(txtTransportTime.Text) > Convert.ToInt32(txtTimeLimit.Text))
+                    {
+                        XtraMessageBox.Show("在途时间超过运输时限，不允许收货。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     if (entity.IsNew(BUSReceiveEntityFields.ReceiveCode == entity.ReceiveCode))
                     {
                         #region 新建
@@ -339,6 +376,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                             foreach (BUSReceiveDetailEntity child in busReceiveDetailEntities)
                             {
                                 child.ReceiveID = entity.ReceiveID;
+                                child.Reservation2 = (child.ReceiveAmount * double.Parse(child.Reservation1)).ToString();
                                 child.Save();
                             }
 
@@ -575,6 +613,11 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 this.txtTransportTool.Text = entity.TransportTool;
             }
 
+            if (!entity.IsNullField("Reservation3"))
+            {
+                this.dateTransportDate.Text = entity.Reservation3;
+            }
+
         }
 
         /// <summary>
@@ -613,6 +656,10 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             {
                 entity.TransportCode = txtTransportType.Text.Trim();
             }
+            if (!string.IsNullOrWhiteSpace(dateTransportDate.Text))
+            {
+                entity.Reservation3 = dateTransportDate.Text;
+            }
             this.SetReceiveStatus(entity);
         }
 
@@ -624,7 +671,28 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 this.txtDealerName.Text = (this.txtBillCode.EditData as DataRow)["往来单位名称"].ToString();
                 this.txtDealerName.Tag = (this.txtBillCode.EditData as DataRow)["往来单位ID"].ToString();
                 this.txtDealerAddress.Text = (this.txtBillCode.EditData as DataRow)["往来单位仓库地址"].ToString();
-                this.txtCarryCompnay.Focus();
+                this.txtCarryCompnay.Text = (this.txtBillCode.EditData as DataRow)["承运方"].ToString();
+                this.txtTransportType.Text = (this.txtBillCode.EditData as DataRow)["运输方式"].ToString();
+                this.txtTransportTool.Text = (this.txtBillCode.EditData as DataRow)["运输工具"].ToString();
+                this.txtTimeLimit.Text = (this.txtBillCode.EditData as DataRow)["运输时限"].ToString();
+                this.dateTransportDate.Text = (this.txtBillCode.EditData as DataRow)["下单日期"].ToString();
+                string deliveryTypeName = (this.txtBillCode.EditData as DataRow)["配送方式"].ToString();
+                if (DQS.Controls.Properties.Settings.Default.IsThird)
+                {
+                    if (deliveryTypeName == "第三方物流")
+                    {
+                        txtTimeLimit.Properties.ReadOnly = true;
+                    }
+                    else
+                    {
+                        txtTimeLimit.Properties.ReadOnly = false;
+                    }
+                }
+                else
+                {
+                    txtTimeLimit.Properties.ReadOnly = false;
+                }
+                this.dateTransportDate.Focus();
 
                 if (txtBillTypeName.Text.Trim() == "采购进货")
                 {
@@ -666,6 +734,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     if (!string.IsNullOrEmpty(amount.ToString()))
                     {
                         this.popupGrid.PopupView.SetRowCellValue(i, "收货数量", amount);
+                        this.popupGrid.PopupView.SetRowCellValue(i, "拒收数量", 0);
                     }
                 }
             }
@@ -789,6 +858,196 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             }
 
             return true;
+        }
+
+        private void btnReCheck_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = XtraMessageBox.Show("是否提交复查？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.No)
+            {
+                return;
+            }
+
+            try
+            {
+                if (!this.ftPanel.ValidateIsNullFields()) return;
+                if (string.IsNullOrWhiteSpace(txtTransportType.Text))
+                {
+                    XtraMessageBox.Show(txtTransportType.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    txtTransportType.Focus();
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(txtTransportTool.Text))
+                {
+                    XtraMessageBox.Show(txtTransportTool.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    txtTransportTool.Focus();
+                    return;
+                }
+                if (!ValidateDealerQualification()) return;
+                if (txtBillTypeName.Text.Trim() != "销售退货")
+                {
+                    if (!ValidateProductQualification()) return;
+                }
+
+                SaveLookupData();
+                BUSReceiveEntity entity = this.ftPanel.GetEntity() as BUSReceiveEntity;
+
+                this.CustomSetEntity(entity);
+
+
+                #region 新建
+
+                string reason;
+                using (FrmReCheckReason frm = new FrmReCheckReason())
+                {
+                    DialogResult drs = frm.ShowDialog();
+                    if (drs == DialogResult.Yes)
+                    {
+                        reason = frm.reason;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+                List<EntityBase> children = this.popupGrid.GetEntities();
+                List<BUSReceiveDetailEntity> busReceiveDetailEntities = children.Cast<BUSReceiveDetailEntity>().ToList();
+                if (busReceiveDetailEntities.Any(p => p.ReceiveAmount > p.Amount))
+                {
+                    XtraMessageBox.Show("收货数量不能大于订单数量。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                if (busReceiveDetailEntities.Any(p => p.ReceiveAmount < p.Amount))
+                {
+                    var dialogResult = XtraMessageBox.Show("是否走拒收流程", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    switch (dialogResult)
+                    {
+                        //选择“否”，不保存，手动修改
+                        case DialogResult.Cancel:
+                        case DialogResult.No:
+                            return;
+                        //选择是，提示：“收货数量与订单数量不符，是否拒收，选择是，生成拒收单，选择否，自动更改收货数量与订单数量一致”，自动保存。
+                        case DialogResult.Yes:
+                            var dialogResult2 = XtraMessageBox.Show("收货数量与订单数量不符，是否拒收，选择是，生成拒收单，选择否，自动更改收货数量与订单数量一致", "警告", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                            if (DialogResult.Cancel == dialogResult2)
+                            {
+                                return;
+                            }
+
+                            if (DialogResult.Yes == dialogResult2) //生成拒收单
+                            {
+                                GenerateDeclinedBill(entity, busReceiveDetailEntities);
+                                busReceiveDetailEntities.RemoveAll(p => p.ReceiveAmount == 0 || p.Amount == 0);
+                            }
+                            else if (DialogResult.No == dialogResult2)
+                            {
+                                ChangeReceiveAmountToAmount(busReceiveDetailEntities); //自动更改收货数量与订单数量一致
+                            }
+                            break;
+                    }
+                }
+                entity.ReceiveDate = DateTime.Now;
+                entity.CreateDate = DateTime.Now;
+                entity.LastModifyDate = DateTime.Now;
+                entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+                entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
+                entity.Reservation7 = reason;
+                if (!busReceiveDetailEntities.Any() || busReceiveDetailEntities.TrueForAll(p => p.ReceiveAmount == 0))
+                {
+                    entity.Reservation5 = "2";
+                    entity.Reservation6 = "拒收";
+                    //entity.ReceiveStatusSpell = "js";
+
+                    //更新订单状态
+                    BUSBillEntity billEntity = new BUSBillEntity { BillID = entity.BillID, BillStatus = 7, BillStatusName = "收货复查" };
+                    billEntity.Update();
+                }
+                else
+                {
+                    entity.Reservation5 = "3";
+                    entity.Reservation6 = "已收货";
+                    entity.Save();
+
+                    //BUSBillEntity bill = new BUSBillEntity { BillID = entity.BillID, BillStatus = 3, BillStatusName = "已收货" };
+                    //bill.Update();
+
+                    //查询出其ID
+                    entity.Fetch();
+
+                    foreach (BUSReceiveDetailEntity child in busReceiveDetailEntities)
+                    {
+                        child.ReceiveID = entity.ReceiveID;
+                        child.Reservation2 = (child.ReceiveAmount * double.Parse(child.Reservation1)).ToString();
+                        child.Save();
+                    }
+
+                    if (entity.ReceiveStatusID == 1)
+                    {
+                        //更新订单状态
+                        BUSBillEntity billEntity = new BUSBillEntity
+                        {
+
+                            BillID = entity.BillID,
+                            BillStatus = 7,
+                            BillStatusName = "收货复查"
+                        };
+                        billEntity.ReceiveID = entity.ReceiveID;
+                        billEntity.ReceiveCode = entity.ReceiveCode;
+                        billEntity.Update();
+                    }
+                    else
+                    {
+                        //更新订单状态
+                        BUSBillEntity billEntity = new BUSBillEntity { BillID = entity.BillID, BillStatus = 7, BillStatusName = "收货复查" };
+                        billEntity.Update();
+                    }
+
+                }
+
+                #endregion
+
+
+                DialogResult dia = XtraMessageBox.Show("是否打印报告单？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dia == DialogResult.Yes)
+                {
+                    string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "收货报告单.mrt");
+                    if (File.Exists(fileName))
+                    {
+                        PrintPreviewForm printPreview = new PrintPreviewForm(fileName, Convert.ToInt32(entity.ReceiveID));
+                        printPreview.ShowDialog(this);
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show("找不到文件。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            this.DialogResult = DialogResult.OK;
+        }
+
+        private void dateTransportDate_TextChanged(object sender, EventArgs e)
+        {
+            if (this.Tag == null)
+            {
+                TimeSpan span = DateTime.Now - dateTransportDate.DateTime;
+                txtTransportTime.Text = Convert.ToInt32(span.TotalHours).ToString();
+            }
+        }
+
+        private void txtTimeLimit_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                txtTimeLimit.Properties.ReadOnly = false;
+            }
         }
     }
 }

@@ -130,5 +130,29 @@ namespace DQS.AppViews.Operation.Properties {
                 this["IsCanPurchaseBackUnStore"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AllowNoCodeStoreBackIn {
+            get {
+                return ((bool)(this["AllowNoCodeStoreBackIn"]));
+            }
+            set {
+                this["AllowNoCodeStoreBackIn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AllowNoCodeStoreBackOut {
+            get {
+                return ((bool)(this["AllowNoCodeStoreBackOut"]));
+            }
+            set {
+                this["AllowNoCodeStoreBackOut"] = value;
+            }
+        }
     }
 }

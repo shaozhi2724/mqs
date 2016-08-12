@@ -538,6 +538,7 @@
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="订单数量" EntityField="Amount" FieldType="System.Int32" Visible="true"/>
         <Column Name="收货数量" EntityField="ReceiveAmount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
+        <Column Name="拒收数量" EntityField="Reservation5" FieldType="System.Int32" Visible="true" AllowEdit="false" />
         <Column Name="单价" EntityField="Reservation1" FieldType="System.Double" Nullable="true" Visible="true"/>
         <Column Name="金额" EntityField="Reservation2" FieldType="System.Double" Nullable="true" Visible="true"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="false"/>
@@ -652,6 +653,7 @@
         <Column Name="验收数量" EntityField="ReceiveAmount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
         <Column Name="验收合格数量" EntityField="QualifiedAmount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
         <Column Name="验收不合格数量" EntityField="UnqualifiedAmount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
+        <Column Name="拒收数量" EntityField="Reservation5" FieldType="System.Int32" Visible="true" Nullable="true" AllowEdit="false" />
         <Column Name="验收结果" EntityField="AcceptResult" FieldType="System.String" Visible="true" AllowEdit="true" />
         <Column Name="不合格事项及处置措施" EntityField="DetailRemark" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="true" />
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装比例"/>

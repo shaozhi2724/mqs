@@ -861,7 +861,7 @@ WHERE BillID={1}
 
         private void btnPrint_BeforePrint(EventArgs e)
         {
-            if (Settings.Default.AllowNoCodeStoreIn)
+            if (Settings.Default.AllowNoCodeStoreBackIn)
             {
                 CheckAndSaveCode(this.txtBillCode.Text);
             }

@@ -223,6 +223,11 @@ namespace DQS.App
                     return true;
                 }
             }
+            if (keyData == Keys.F4)
+            {
+                new FrmDownAttachment().Show();
+                return true;
+            }
             return base.ProcessDialogKey(keyData);
         }
         

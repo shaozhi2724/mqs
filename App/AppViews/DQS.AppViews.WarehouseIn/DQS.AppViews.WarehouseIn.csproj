@@ -158,6 +158,18 @@
     <Compile Include="WarehouseInManager\FrmReceive.Designer.cs">
       <DependentUpon>FrmReceive.cs</DependentUpon>
     </Compile>
+    <Compile Include="WarehouseInManager\FrmReCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmReCheck.Designer.cs">
+      <DependentUpon>FrmReCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmReCheckReason.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmReCheckReason.Designer.cs">
+      <DependentUpon>FrmReCheckReason.cs</DependentUpon>
+    </Compile>
     <Compile Include="WarehouseInManager\FrmSampling.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +205,12 @@
     </Compile>
     <Compile Include="WarehouseInManager\FrmSingleReceiveInspection.designer.cs">
       <DependentUpon>FrmSingleReceiveInspection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSingleReCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmSingleReCheck.Designer.cs">
+      <DependentUpon>FrmSingleReCheck.cs</DependentUpon>
     </Compile>
     <Compile Include="WarehouseInManager\FrmSingleSampling.cs">
       <SubType>Form</SubType>
@@ -252,6 +270,9 @@
     <EmbeddedResource Include="WarehouseInManager\FrmReceive.resx">
       <DependentUpon>FrmReceive.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmReCheckReason.resx">
+      <DependentUpon>FrmReCheckReason.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WarehouseInManager\FrmSampling.resx">
       <DependentUpon>FrmSampling.cs</DependentUpon>
     </EmbeddedResource>
@@ -269,6 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WarehouseInManager\FrmSingleReceiveInspection.resx">
       <DependentUpon>FrmSingleReceiveInspection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmSingleReCheck.resx">
+      <DependentUpon>FrmSingleReCheck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WarehouseInManager\FrmSingleSampling.resx">
       <DependentUpon>FrmSingleSampling.cs</DependentUpon>

@@ -30,6 +30,8 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
 
         private void FrmSinglePurchase_Load(object sender, EventArgs e)
         {
+
+            BindLookupData();
             this.cbxDeliveryType.InitSource();
             this.cbxPaymentType.InitSource();
             this.popupGrid.InitGrid();
@@ -112,6 +114,48 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
 
         }
 
+        private void BindLookupData()
+        {
+            EntityCollection<BFITransportTypeEntity> transportTypes = new EntityCollection<BFITransportTypeEntity>();
+            transportTypes.Fetch();
+            foreach (var transportType in transportTypes)
+            {
+                txtTransportType.Properties.Items.Add(
+                    (transportType as BFITransportTypeEntity).TransportTypeName);
+            }
+
+            EntityCollection<BFITransportToolEntity> transportTools = new EntityCollection<BFITransportToolEntity>();
+            transportTools.Fetch();
+            foreach (var transportTool in transportTools)
+            {
+                txtTransportTool.Properties.Items.Add(
+                    (transportTool as BFITransportToolEntity).TransportToolName);
+            }
+        }
+
+        private void SaveLookupData()
+        {
+            string transportToolName = txtTransportTool.Text.Trim();
+            EntityCollection<BFITransportToolEntity> transportTools = new EntityCollection<BFITransportToolEntity>();
+            transportTools.Fetch(BFITransportToolEntityFields.TransportToolName == transportToolName);
+            if (transportTools.Count == 0)
+            {
+                BFITransportToolEntity entity = new BFITransportToolEntity();
+                entity.TransportToolName = transportToolName;
+                entity.Save();
+            }
+            string transportTypeName = txtTransportType.Text.Trim();
+            EntityCollection<BFITransportTypeEntity> transportTypes = new EntityCollection<BFITransportTypeEntity>();
+            transportTypes.Fetch(BFITransportTypeEntityFields.TransportTypeName == transportTypeName);
+            if (transportTypes.Count == 0)
+            {
+                BFITransportTypeEntity entity = new BFITransportTypeEntity();
+                entity.TransportTypeName = transportTypeName;
+                entity.Save();
+            }
+
+        }
+
         private void LoadDepartment()
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
@@ -151,6 +195,8 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                 if (!this.ftPanel.ValidateIsNullFields()) return;
 
                 BUSBillEntity entity = this.ftPanel.GetEntity() as BUSBillEntity;
+
+                SaveLookupData();
 
                 this.CustomSetEntity(entity);
 
@@ -444,6 +490,34 @@ WHERE BillID={1}
                         if (!this.ValidateDealerRange()) return;//验证供货商经营范围
                         if (!this.checkPersonRange()) return;//验证供应商销售员的经营范围
 
+                        if (DQS.Controls.Properties.Settings.Default.IsThird)
+                        {
+                            if (string.IsNullOrWhiteSpace(txtTransportType.Text))
+                            {
+                                XtraMessageBox.Show(txtTransportType.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                txtTransportType.Focus();
+                                return;
+                            }
+                            if (string.IsNullOrWhiteSpace(txtTransportTool.Text))
+                            {
+                                XtraMessageBox.Show(txtTransportTool.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                txtTransportTool.Focus();
+                                return;
+                            }
+                            if (string.IsNullOrWhiteSpace(txtCarryCompnay.Text))
+                            {
+                                XtraMessageBox.Show(txtCarryCompnay.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                txtCarryCompnay.Focus();
+                                return;
+                            }
+                            if (string.IsNullOrWhiteSpace(txtTimeLimit.Text))
+                            {
+                                XtraMessageBox.Show(txtTimeLimit.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                txtTimeLimit.Focus();
+                                return;
+                            }
+                        }
+
                         if (Settings.Default.IsUseDepartment)
                         {
                             if (cboDepartment.Text == "")
@@ -670,6 +744,16 @@ WHERE BillID={1}
                 this.cbxPaymentType.SelectedValue = entity.PaymentTypeID;
             }
 
+            if (!entity.IsNullField("TransportCode"))
+            {
+                this.txtTransportType.Text = entity.TransportCode;
+            }
+
+            if (!entity.IsNullField("Reservation6"))
+            {
+                this.txtTransportTool.Text = entity.Reservation6;
+            }
+
             if (!entity.IsNullField("BillStyle"))
             {
                 var index = rdgBillStyle.Properties.Items.GetItemIndexByValue(entity.BillStyle);
@@ -724,6 +808,15 @@ WHERE BillID={1}
             {
                 entity.DeliveryTypeID = Convert.ToInt32(this.cbxDeliveryType.SelectedValue);
                 entity.DeliveryTypeName = this.cbxDeliveryType.Text.Trim();
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtTransportTool.Text))
+            {
+                entity.Reservation6 = txtTransportTool.Text.Trim();
+            }
+            if (!string.IsNullOrWhiteSpace(txtTransportType.Text))
+            {
+                entity.TransportCode = txtTransportType.Text.Trim();
             }
 
             if (this.cbxPaymentType.SelectedValue != null)
@@ -1235,6 +1328,37 @@ WHERE BillID={1}
                 {
                     conn.Close();
                 }
+            }
+        }
+
+        private void cbxDeliveryType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (DQS.Controls.Properties.Settings.Default.IsThird)
+            {
+                if (cbxDeliveryType.Text.Trim() == "第三方物流")
+                {
+                    this.layTransportType.Visibility = LayoutVisibility.Always;
+                    this.layTransportTool.Visibility = LayoutVisibility.Always;
+                    this.layTimeLimit.Visibility = LayoutVisibility.Always;
+                    this.layCarryCompnay.Visibility = LayoutVisibility.Always;
+                    this.layoutControlItem1.Visibility = LayoutVisibility.Always;
+                }
+                else
+                {
+                    this.layTransportType.Visibility = LayoutVisibility.Never;
+                    this.layTransportTool.Visibility = LayoutVisibility.Never;
+                    this.layTimeLimit.Visibility = LayoutVisibility.Never;
+                    this.layCarryCompnay.Visibility = LayoutVisibility.Never;
+                    this.layoutControlItem1.Visibility = LayoutVisibility.Never;
+                }
+            }
+            else
+            {
+                this.layTransportType.Visibility = LayoutVisibility.Never;
+                this.layTransportTool.Visibility = LayoutVisibility.Never;
+                this.layTimeLimit.Visibility = LayoutVisibility.Never;
+                this.layCarryCompnay.Visibility = LayoutVisibility.Never;
+                this.layoutControlItem1.Visibility = LayoutVisibility.Never;
             }
         }
     }

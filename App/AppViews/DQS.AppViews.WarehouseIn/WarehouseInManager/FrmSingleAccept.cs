@@ -8,6 +8,7 @@ using ORMSCore;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -38,6 +39,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             if (this.Tag != null)
             {
                 this.btnSaveAndIn.Enabled = false;
+                this.btnReAccept.Enabled = false;
                 this.m_id = Convert.ToInt32(this.Tag);
 
                 BUSAcceptEntity entity = new BUSAcceptEntity { AcceptID = m_id.Value };
@@ -241,6 +243,12 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         if (busAcceptDetailEntity.IsNullField("ReceiveAmount"))
                         {
                             busAcceptDetailEntity.ReceiveAmount = 0;
+                            busAcceptDetailEntity.Reservation2 = "0";
+                        }
+                        else
+                        {
+                            busAcceptDetailEntity.Reservation2 = (busAcceptDetailEntity.ReceiveAmount *
+                                double.Parse(busAcceptDetailEntity.Reservation1)).ToString();
                         }
 
                         if (busAcceptDetailEntity.IsNullField("QualifiedAmount"))
@@ -253,20 +261,32 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                             busAcceptDetailEntity.UnqualifiedAmount = 0;
                         }
                     }
+                    var deAcceptDetails = from a in acceptDetails
+                                               group a by a.ProductID
+                                                   into g
+                                                   select new
+                                                   {
+                                                       ProductID = g.Key,
+                                                       TotalBillAmount = g.Sum(p => p.Amount),
+                                                       TotalReceiveAmount = g.Sum(p => p.ReceiveAmount),
+                                                       TotalQualifiedAmount = g.Sum(p => p.QualifiedAmount),
+                                                       TotalUnqualifiedAmount = g.Sum(p => p.ReceiveAmount) - g.Sum(p => p.QualifiedAmount),
+                                                   };
                     var countedAcceptDetails = from a in acceptDetails
-                        group a by a.ProductID
-                        into g
-                        select new
-                        {
-                            ProductID = g.Key,
-                            TotalBillAmount = g.Sum(p => p.Amount),
-                            TotalReceiveAmount = g.Sum(p => p.ReceiveAmount),
-                            TotalQualifiedAmount = g.Sum(p => p.QualifiedAmount),
-                            TotalUnqualifiedAmount = g.Sum(p => p.ReceiveAmount) - g.Sum(p => p.QualifiedAmount),
-                        };
+                                               group a by new { a.ProductID, a.BatchNo }
+                                                   into g
+                                                   select new
+                                                   {
+                                                       ProductID = g.Key.ProductID,
+                                                       BatchNo = g.Key.BatchNo,
+                                                       TotalBillAmount = g.Sum(p => p.Amount),
+                                                       TotalReceiveAmount = g.Sum(p => p.ReceiveAmount),
+                                                       TotalQualifiedAmount = g.Sum(p => p.QualifiedAmount),
+                                                       TotalUnqualifiedAmount = g.Sum(p => p.ReceiveAmount) - g.Sum(p => p.QualifiedAmount),
+                                                   };
                     var rejectedDetails =
-                        countedAcceptDetails.Where(p => p.TotalReceiveAmount < p.TotalBillAmount).ToList();
-                    var unqualifiedDetails = countedAcceptDetails.Where(p => p.TotalUnqualifiedAmount >0).ToList();
+                        deAcceptDetails.Where(p => p.TotalReceiveAmount < p.TotalBillAmount).ToList();
+                    var unqualifiedDetails = countedAcceptDetails.Where(p => p.TotalUnqualifiedAmount > 0).ToList();
                     //1 - 收货数 < 订单数: 拒收提示
                     //2 - 不合格品数 > 0: 不合格平入库提示
                     if (rejectedDetails.Any())
@@ -311,19 +331,61 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                             }
                         }
                     }
+                    else
+                    {
+                        BUSDeclinedEntity dec = new BUSDeclinedEntity { DeclinedCode = "YSJS-" + entity.AcceptCode };
+                        dec.Fetch();
+                        if (!dec.IsNullField("DeclinedID"))
+                        {
+                            //删除拒收明细
+                            BUSDeclinedDetailEntity decDelete = new BUSDeclinedDetailEntity { DeclinedID = dec.DeclinedID };
+                            decDelete.DeleteByCommonly();
+                            //删除拒收单
+                            dec.Delete();
+                        }
+                    }
                     if (unqualifiedDetails.Any())
                     {
+                        //如果之前有不合格品单据，在删除前，先把不合格品库存删除
+                        BUSStoreBillEntity sbill=new BUSStoreBillEntity{StoreCode = "BRK" + txtBillCode.Text.Substring(2) };
+                        sbill.Fetch();
+                        if (!sbill.IsNullField("StoreID"))
+                        {
+                            EntityCollection<BUSStoreBillDetailEntity> storeBillDetails = new EntityCollection<BUSStoreBillDetailEntity>();
+                            PredicateExpression pe = new PredicateExpression();
+                            pe.Add(BUSStoreBillDetailEntityFields.StoreID == sbill.StoreID);
+                            storeBillDetails.Fetch(pe);
+                            if (storeBillDetails.Count > 0)
+                            {
+                                foreach (var item in storeBillDetails)
+                                {
+                                    var billDetail = item as BUSStoreBillDetailEntity;
+                                    BUSUnqualifiedStoreDetailEntity storeDetail = new BUSUnqualifiedStoreDetailEntity { ProductID = billDetail.ProductID, BatchNo = billDetail.BatchNo };
+
+                                    if (!storeDetail.IsNew(BUSUnqualifiedStoreDetailEntityFields.ProductID == storeDetail.ProductID & BUSUnqualifiedStoreDetailEntityFields.BatchNo == storeDetail.BatchNo))
+                                    {
+                                        //更新不合格品库存
+                                        storeDetail.Fetch();
+                                        storeDetail.Amount = storeDetail.Amount - billDetail.Amount;
+                                        storeDetail.Update();
+                                    }
+                                }
+                            }
+                        }
+
+
                         List<BUSAcceptDetailEntity> unqualifiedAcceptDetails = new List<BUSAcceptDetailEntity>();
                         foreach (var unqualifiedDetail in unqualifiedDetails)
                         {
-                            var detail = acceptDetails.FirstOrDefault(p => p.ProductID == unqualifiedDetail.ProductID);
+                            var detail = acceptDetails.FirstOrDefault(p => p.ProductID == unqualifiedDetail.ProductID && p.BatchNo == unqualifiedDetail.BatchNo);
                             if (null != detail)
                             {
                                 var busAcceptDetailEntity = new BUSAcceptDetailEntity
                                 {
                                     ProductID = detail.ProductID,
+                                    BatchNo = detail.BatchNo,
                                     Amount = unqualifiedDetail.TotalBillAmount,
-                                    ReceiveAmount = unqualifiedDetail.TotalReceiveAmount,
+                                    ReceiveAmount = unqualifiedDetail.TotalUnqualifiedAmount,
                                     QualifiedAmount = unqualifiedDetail.TotalQualifiedAmount,
                                     UnqualifiedAmount = unqualifiedDetail.TotalUnqualifiedAmount
                                 };
@@ -347,8 +409,54 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                             GenerateUnqualifiedStoreBill(entity, unqualifiedAcceptDetails);
                         }
                     }
+                    else
+                    {
+                        BUSStoreBillEntity store = new BUSStoreBillEntity { StoreCode = "BRK" + txtBillCode.Text.Substring(2) };
+                        store.Fetch();
+                        if (!store.IsNullField("StoreID"))
+                        {
+                            //先删除原先的库存
+                            EntityCollection<BUSStoreBillDetailEntity> storeBillDetails = new EntityCollection<BUSStoreBillDetailEntity>();
+                            PredicateExpression pe = new PredicateExpression();
+                            pe.Add(BUSStoreBillDetailEntityFields.StoreID == store.StoreID);
+                            storeBillDetails.Fetch(pe);
+                            if (storeBillDetails.Count > 0)
+                            {
+                                foreach (var item in storeBillDetails)
+                                {
+                                    var billDetail = item as BUSStoreBillDetailEntity;
+                                    BUSUnqualifiedStoreDetailEntity storeDetail = new BUSUnqualifiedStoreDetailEntity { ProductID = billDetail.ProductID, BatchNo = billDetail.BatchNo };
+
+                                    if (!storeDetail.IsNew(BUSUnqualifiedStoreDetailEntityFields.ProductID == storeDetail.ProductID & BUSUnqualifiedStoreDetailEntityFields.BatchNo == storeDetail.BatchNo))
+                                    {
+                                        //更新不合格品库存
+                                        storeDetail.Fetch();
+                                        storeDetail.Amount = storeDetail.Amount - billDetail.Amount;
+                                        storeDetail.Update();
+                                    }
+                                }
+                            }
+
+                            //删除不合格品入库明细
+                            BUSStoreBillDetailEntity storeDelete = new BUSStoreBillDetailEntity { StoreID = store.StoreID };
+                            storeDelete.DeleteByCommonly();
+                            //删除不合格品入库
+                            store.Delete();
+                        }
+                    }
                     entity.LastModifyDate = DateTime.Now;
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
+                    if (!countedAcceptDetails.Any() ||
+                        countedAcceptDetails.ToList().TrueForAll(p => p.TotalReceiveAmount == 0))
+                    {
+                        entity.Reservation3 = "6";
+                        entity.Reservation4 = "拒收";
+                    }
+                    else
+                    {
+                        entity.Reservation3 = "4";
+                        entity.Reservation4 = "已验收";
+                    }
                     entity.Update();
                     //先删除
                     BUSAcceptDetailEntity childToDelete = new BUSAcceptDetailEntity { AcceptID = m_id.Value };
@@ -365,20 +473,23 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     //更新订单状态
                     BUSBillEntity bill = new BUSBillEntity { BillID = entity.BillID, };
                     bill.Fetch();
-                    if (!countedAcceptDetails.Any() ||
-                        countedAcceptDetails.ToList().TrueForAll(p => p.TotalReceiveAmount == 0))
+                    if (bill.BillStatusName != "验收复查")
                     {
-                        bill.BillStatus = 6;
-                        bill.BillStatusName = "拒收";
+                        if (!deAcceptDetails.Any() ||
+                            deAcceptDetails.ToList().TrueForAll(p => p.TotalReceiveAmount == 0))
+                        {
+                            bill.BillStatus = 6;
+                            bill.BillStatusName = "拒收";
+                        }
+                        else
+                        {
+                            bill.BillStatus = 4;
+                            bill.BillStatusName = "已验收";
+                            bill.AcceptID = entity.AcceptID;
+                            bill.AcceptCode = entity.AcceptCode;
+                        }
+                        bill.Update();
                     }
-                    else
-                    {
-                        bill.BillStatus = 4;
-                        bill.BillStatusName = "已验收";
-                        bill.AcceptID = entity.AcceptID;
-                        bill.AcceptCode = entity.AcceptCode;
-                    }
-                    bill.Update();
                     //存在则修改
                     if (this.popupGridSampling.PopupView.GetRowCellValue(0, this.popupGridSampling.PopupView.Columns[0]) != null && this.popupGridSampling.PopupView.GetRowCellValue(0, this.popupGridSampling.PopupView.Columns[0]) != DBNull.Value)
                     {
@@ -1420,6 +1531,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     //txtAcceptCode.Text = "YS" + txtBillCode.Text.Substring(2);
                     txtAcceptCode.Text = txtBillCode.Text;
                 }
+                popupGrid.IsPurchase = txtBillTypeName.Text == "采购进货" ? true : false;
             }
         }
 
@@ -1673,6 +1785,436 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
         {
             //saveandin = 1;
             //btnSave_Click(null, null);
+        }
+
+
+        private void btnReAccept_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = XtraMessageBox.Show("是否提交复查？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.No)
+            {
+                return;
+            }
+
+            BUSAcceptEntity entity = this.ftPanel.GetEntity() as BUSAcceptEntity;
+            this.CustomSetEntity(entity);
+            List<EntityBase> children = this.popupGrid.GetEntities();
+            List<BUSAcceptDetailEntity> acceptDetails = children.Cast<BUSAcceptDetailEntity>().ToList();
+
+            entity.AcceptDate = DateTime.Now;
+            if (!this.ValidateAmount()) return;
+            if (!this.ValidateBatchNo()) return;
+            if (!this.ValidateBatchDate()) return;
+            if (!this.ValidateSamplingAmount()) return;
+
+            string reason;
+            using (FrmReCheckReason frm = new FrmReCheckReason())
+            {
+                DialogResult drs = frm.ShowDialog();
+                if (drs == DialogResult.Yes)
+                {
+                    reason = frm.reason;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            foreach (var busAcceptDetailEntity in acceptDetails)
+            {
+                if (busAcceptDetailEntity.IsNullField("Amount"))
+                {
+                    busAcceptDetailEntity.Amount = 0;
+                }
+
+                if (busAcceptDetailEntity.IsNullField("ReceiveAmount"))
+                {
+                    busAcceptDetailEntity.ReceiveAmount = 0;
+                    busAcceptDetailEntity.Reservation2 = "0";
+                }
+                else
+                {
+                    busAcceptDetailEntity.Reservation2 = (busAcceptDetailEntity.ReceiveAmount *
+                        double.Parse(busAcceptDetailEntity.Reservation1)).ToString();
+                }
+
+                if (busAcceptDetailEntity.IsNullField("QualifiedAmount"))
+                {
+                    busAcceptDetailEntity.QualifiedAmount = 0;
+                }
+
+                if (busAcceptDetailEntity.IsNullField("UnqualifiedAmount"))
+                {
+                    busAcceptDetailEntity.UnqualifiedAmount = 0;
+                }
+            }
+            if (txtBillTypeName.Text.Trim() == "销售退货")
+            {
+                var countedAcceptDetails = from a in acceptDetails
+                                           group a by new { a.ProductID, a.BatchNo }
+                                               into g
+                                               select new
+                                               {
+                                                   ProductID = g.Key.ProductID,
+                                                   BatchNo = g.Key.BatchNo,
+                                                   TotalBillAmount = g.Sum(p => p.Amount),
+                                                   TotalReceiveAmount = g.Sum(p => p.ReceiveAmount),
+                                                   TotalQualifiedAmount = g.Sum(p => p.QualifiedAmount),
+                                                   TotalUnqualifiedAmount = g.Sum(p => p.ReceiveAmount) - g.Sum(p => p.QualifiedAmount),
+                                               };
+                var rejectedDetails =
+                    countedAcceptDetails.Where(p => p.TotalReceiveAmount < p.TotalBillAmount).ToList();
+                var unqualifiedDetails = countedAcceptDetails.Where(p => p.TotalUnqualifiedAmount > 0).ToList();
+                //1 - 收货数 < 订单数: 拒收提示
+                //2 - 不合格品数 > 0: 不合格平入库提示
+                if (rejectedDetails.Any() || unqualifiedDetails.Any())
+                {
+                    var message = string.Empty;
+                    if (rejectedDetails.Any() && unqualifiedDetails.Any())
+                    {
+                        message = "收货数量与验收数量不符，是否生成拒收记录？\n验收合格数量与验收到货数量不符，是否生成不合格品记录？";
+                    }
+                    else if (rejectedDetails.Any())
+                    {
+                        message = "收货数量与验收数量不符，是否生成拒收记录？";
+                    }
+                    else if (unqualifiedDetails.Any())
+                    {
+                        message = "验收合格数量与验收数量不符，是否生成不合格品记录？";
+                    }
+                    var dialogResult = XtraMessageBox.Show(message, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                    if (dialogResult == DialogResult.No)
+                    {
+                        return;
+                    }
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        List<BUSAcceptDetailEntity> rejectedAcceptDetails = new List<BUSAcceptDetailEntity>();
+                        foreach (var rejectedDetail in rejectedDetails)
+                        {
+                            var detail = acceptDetails.FirstOrDefault(p => p.ProductID == rejectedDetail.ProductID);
+                            if (null != detail)
+                            {
+                                var busAcceptDetailEntity = new BUSAcceptDetailEntity
+                                {
+                                    ProductID = detail.ProductID,
+                                    Amount = rejectedDetail.TotalBillAmount,
+                                    ReceiveAmount = rejectedDetail.TotalReceiveAmount
+                                };
+                                if (!detail.IsNullField("ProduceDate"))
+                                {
+                                    busAcceptDetailEntity.ProduceDate = detail.ProduceDate;
+                                }
+                                if (!detail.IsNullField("ValidateDate"))
+                                {
+                                    busAcceptDetailEntity.ValidateDate = detail.ValidateDate;
+                                }
+                                if (!detail.IsNullField("BatchNo"))
+                                {
+                                    busAcceptDetailEntity.BatchNo = detail.BatchNo;
+                                }
+                                rejectedAcceptDetails.Add(busAcceptDetailEntity);
+                            }
+                        }
+                        if (rejectedAcceptDetails.Any())
+                        {
+                            GenerateDeclinedBill(entity, rejectedAcceptDetails);
+                        }
+
+                        List<BUSAcceptDetailEntity> unqualifiedAcceptDetails = new List<BUSAcceptDetailEntity>();
+                        foreach (var unqualifiedDetail in unqualifiedDetails)
+                        {
+                            var detail = acceptDetails.FirstOrDefault(p => p.ProductID == unqualifiedDetail.ProductID && p.BatchNo == unqualifiedDetail.BatchNo);
+                            if (null != detail)
+                            {
+                                var busAcceptDetailEntity = new BUSAcceptDetailEntity
+                                {
+                                    ProductID = detail.ProductID,
+                                    BatchNo = detail.BatchNo,
+                                    Amount = unqualifiedDetail.TotalBillAmount,
+                                    ReceiveAmount = unqualifiedDetail.TotalUnqualifiedAmount,
+                                    QualifiedAmount = unqualifiedDetail.TotalQualifiedAmount,
+                                    UnqualifiedAmount = unqualifiedDetail.TotalUnqualifiedAmount
+                                };
+                                if (!detail.IsNullField("ProduceDate"))
+                                {
+                                    busAcceptDetailEntity.ProduceDate = detail.ProduceDate;
+                                }
+                                if (!detail.IsNullField("ValidateDate"))
+                                {
+                                    busAcceptDetailEntity.ValidateDate = detail.ValidateDate;
+                                }
+                                if (!detail.IsNullField("BatchNo"))
+                                {
+                                    busAcceptDetailEntity.BatchNo = detail.BatchNo;
+                                }
+                                unqualifiedAcceptDetails.Add(busAcceptDetailEntity);
+                            }
+                        }
+                        if (unqualifiedAcceptDetails.Any())
+                        {
+                            GenerateUnqualifiedStoreBill(entity, unqualifiedAcceptDetails);
+                        }
+                    }
+                }
+                entity.CreateDate = DateTime.Now;
+                entity.LastModifyDate = DateTime.Now;
+                entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+                entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
+                entity.Reservation1 = reason;
+                if (!countedAcceptDetails.Any() ||
+                    countedAcceptDetails.ToList().TrueForAll(p => p.TotalReceiveAmount == 0))
+                {
+                    entity.Reservation3 = "6";
+                    entity.Reservation4 = "拒收";
+                }
+                else
+                {
+                    entity.Reservation3 = "4";
+                    entity.Reservation4 = "已验收";
+                }
+                entity.Save();
+                //查询出其ID
+                entity.Fetch();
+
+                BUSBillEntity bill = new BUSBillEntity { BillID = entity.BillID };
+                bill.BillStatus = 7;
+                bill.BillStatusName = "验收复查";
+                bill.AcceptID = entity.AcceptID;
+                bill.AcceptCode = entity.AcceptCode;
+                bill.Update();
+                foreach (EntityBase childEntity in children)
+                {
+                    BUSAcceptDetailEntity child = childEntity as BUSAcceptDetailEntity;
+                    child.AcceptID = entity.AcceptID;
+                    child.Save();
+                }
+                //存在则添加
+                if (this.popupGridSampling.PopupView.GetRowCellValue(0, this.popupGridSampling.PopupView.Columns[0]) != null && this.popupGridSampling.PopupView.GetRowCellValue(0, this.popupGridSampling.PopupView.Columns[0]) != DBNull.Value)
+                {
+                    List<EntityBase> samplings = this.popupGridSampling.GetEntities();
+                    //添加抽检记录
+                    foreach (EntityBase samplingEntity in samplings)
+                    {
+                        BUSSamplingEntity sampling = samplingEntity as BUSSamplingEntity;
+                        sampling.SamplingCode = Guid.NewGuid().ToString();
+                        sampling.SamplingDate = DateTime.Now;
+                        sampling.AcceptID = entity.AcceptID;
+                        sampling.BillCode = entity.BillCode;
+                        sampling.BillDate = entity.BillDate;
+                        sampling.BillID = entity.BillID;
+                        sampling.BillTypeID = entity.BillTypeID;
+                        sampling.BillTypeName = entity.BillTypeName;
+                        sampling.BillTypeSpell = entity.BillTypeSpell;
+                        sampling.DealerID = entity.DealerID;
+                        sampling.DealerCode = entity.DealerCode;
+                        sampling.DealerName = entity.DealerName;
+                        sampling.Inspector = this.txtAcceptPerson.Text.Trim();
+                        sampling.InspectorSpell = GlobalMethod.GetAlphabetic(this.txtAcceptPerson.Text.Trim());
+                        sampling.Save();
+                    }
+                }
+            }
+            else
+            {
+                var countedAcceptDetails = from a in acceptDetails
+                                           group a by a.ProductID
+                                               into g
+                                               select new
+                                               {
+                                                   ProductID = g.Key,
+                                                   TotalBillAmount = g.Sum(p => p.Amount),
+                                                   TotalReceiveAmount = g.Sum(p => p.ReceiveAmount),
+                                                   TotalQualifiedAmount = g.Sum(p => p.QualifiedAmount),
+                                                   TotalUnqualifiedAmount = g.Sum(p => p.ReceiveAmount) - g.Sum(p => p.QualifiedAmount),
+                                               };
+                var countedAcceptDetailsAll = from a in acceptDetails
+                                              select new
+                                              {
+                                                  ProductID = a.ProductID,
+                                                  BatchNo = a.BatchNo,
+                                                  ReceiveAmount = a.ReceiveAmount,
+                                                  QualifiedAmount = a.QualifiedAmount,
+                                                  UnqualifiedAmount = a.UnqualifiedAmount
+                                              };
+
+                var rejectedDetails =
+                    countedAcceptDetails.Where(p => p.TotalReceiveAmount < p.TotalBillAmount).ToList();
+                var unqualifiedDetails = countedAcceptDetailsAll.Where(p => p.UnqualifiedAmount > 0).ToList();
+                //1 - 收货数 < 订单数: 拒收提示
+                //2 - 不合格品数 > 0: 不合格平入库提示
+                if (rejectedDetails.Any() || unqualifiedDetails.Any())
+                {
+                    var message = string.Empty;
+                    if (rejectedDetails.Any() && unqualifiedDetails.Any())
+                    {
+                        message = "收货数量与验收数量不符，是否生成拒收记录？\n验收合格数量与验收到货数量不符，是否生成不合格品记录？";
+                    }
+                    else if (rejectedDetails.Any())
+                    {
+                        message = "收货数量与验收数量不符，是否生成拒收记录？";
+                    }
+                    else if (unqualifiedDetails.Any())
+                    {
+                        message = "验收合格数量与验收数量不符，是否生成不合格品记录？";
+                    }
+                    var dialogResult = XtraMessageBox.Show(message, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                    if (dialogResult == DialogResult.No)
+                    {
+                        return;
+                    }
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        List<BUSAcceptDetailEntity> rejectedAcceptDetails = new List<BUSAcceptDetailEntity>();
+                        foreach (var rejectedDetail in rejectedDetails)
+                        {
+                            var detail = acceptDetails.FirstOrDefault(p => p.ProductID == rejectedDetail.ProductID);
+                            if (null != detail)
+                            {
+                                var busAcceptDetailEntity = new BUSAcceptDetailEntity
+                                {
+                                    ProductID = detail.ProductID,
+                                    Amount = rejectedDetail.TotalBillAmount,
+                                    ReceiveAmount = rejectedDetail.TotalReceiveAmount
+                                };
+                                if (!detail.IsNullField("ProduceDate"))
+                                {
+                                    busAcceptDetailEntity.ProduceDate = detail.ProduceDate;
+                                }
+                                if (!detail.IsNullField("ValidateDate"))
+                                {
+                                    busAcceptDetailEntity.ValidateDate = detail.ValidateDate;
+                                }
+                                if (!detail.IsNullField("BatchNo"))
+                                {
+                                    busAcceptDetailEntity.BatchNo = detail.BatchNo;
+                                }
+                                rejectedAcceptDetails.Add(busAcceptDetailEntity);
+                            }
+                        }
+                        if (rejectedAcceptDetails.Any())
+                        {
+                            GenerateDeclinedBill(entity, rejectedAcceptDetails);
+                        }
+
+                        List<BUSAcceptDetailEntity> unqualifiedAcceptDetails = new List<BUSAcceptDetailEntity>();
+                        foreach (var unqualifiedDetail in unqualifiedDetails)
+                        {
+                            var detail = acceptDetails.FirstOrDefault(p => p.ProductID == unqualifiedDetail.ProductID && p.BatchNo == unqualifiedDetail.BatchNo);
+                            if (null != detail)
+                            {
+
+                                var ReceiveAmountList = (from a in acceptDetails.Where(p => p.ProductID == detail.ProductID && p.BatchNo.Equals(detail.BatchNo))
+                                                         group a by a.ProductID
+                                                             into g
+                                                             select new
+                                                             {
+                                                                 ReceiveAmount = g.Sum(p => p.ReceiveAmount)
+                                                             }).ToList();
+                                var busAcceptDetailEntity = new BUSAcceptDetailEntity
+                                {
+                                    ProductID = detail.ProductID,
+                                    Amount = unqualifiedDetail.UnqualifiedAmount,
+                                    ReceiveAmount = ReceiveAmountList[0].ReceiveAmount,
+                                    QualifiedAmount = unqualifiedDetail.QualifiedAmount,
+                                    UnqualifiedAmount = unqualifiedDetail.UnqualifiedAmount
+                                };
+                                if (!detail.IsNullField("ProduceDate"))
+                                {
+                                    busAcceptDetailEntity.ProduceDate = detail.ProduceDate;
+                                }
+                                if (!detail.IsNullField("ValidateDate"))
+                                {
+                                    busAcceptDetailEntity.ValidateDate = detail.ValidateDate;
+                                }
+                                if (!detail.IsNullField("BatchNo"))
+                                {
+                                    busAcceptDetailEntity.BatchNo = detail.BatchNo;
+                                }
+                                unqualifiedAcceptDetails.Add(busAcceptDetailEntity);
+                            }
+                        }
+                        if (unqualifiedAcceptDetails.Any())
+                        {
+                            GenerateUnqualifiedStoreBill(entity, unqualifiedAcceptDetails);
+                        }
+                    }
+                }
+                entity.CreateDate = DateTime.Now;
+                entity.LastModifyDate = DateTime.Now;
+                entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+                entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
+                entity.Reservation1 = reason;
+                if (!countedAcceptDetails.Any() ||
+                    countedAcceptDetails.ToList().TrueForAll(p => p.TotalReceiveAmount == 0))
+                {
+                    entity.Reservation3 = "6";
+                    entity.Reservation4 = "拒收";
+                }
+                else
+                {
+                    entity.Reservation3 = "4";
+                    entity.Reservation4 = "已验收";
+                }
+                entity.Save();
+                //查询出其ID
+                entity.Fetch();
+
+                BUSBillEntity bill = new BUSBillEntity { BillID = entity.BillID };
+                
+                bill.BillStatus = 7;
+                bill.BillStatusName = "验收复查";
+                bill.AcceptID = entity.AcceptID;
+                bill.AcceptCode = entity.AcceptCode;
+                bill.Update();
+                foreach (EntityBase childEntity in children)
+                {
+                    BUSAcceptDetailEntity child = childEntity as BUSAcceptDetailEntity;
+                    child.AcceptID = entity.AcceptID;
+                    child.Save();
+                }
+                //存在则添加
+                if (this.popupGridSampling.PopupView.GetRowCellValue(0, this.popupGridSampling.PopupView.Columns[0]) != null && this.popupGridSampling.PopupView.GetRowCellValue(0, this.popupGridSampling.PopupView.Columns[0]) != DBNull.Value)
+                {
+                    List<EntityBase> samplings = this.popupGridSampling.GetEntities();
+                    //添加抽检记录
+                    foreach (EntityBase samplingEntity in samplings)
+                    {
+                        BUSSamplingEntity sampling = samplingEntity as BUSSamplingEntity;
+                        sampling.SamplingCode = Guid.NewGuid().ToString();
+                        sampling.SamplingDate = DateTime.Now;
+                        sampling.AcceptID = entity.AcceptID;
+                        sampling.BillCode = entity.BillCode;
+                        sampling.BillDate = entity.BillDate;
+                        sampling.BillID = entity.BillID;
+                        sampling.BillTypeID = entity.BillTypeID;
+                        sampling.BillTypeName = entity.BillTypeName;
+                        sampling.BillTypeSpell = entity.BillTypeSpell;
+                        sampling.DealerID = entity.DealerID;
+                        sampling.DealerCode = entity.DealerCode;
+                        sampling.DealerName = entity.DealerName;
+                        sampling.Inspector = this.txtAcceptPerson.Text.Trim();
+                        sampling.InspectorSpell = GlobalMethod.GetAlphabetic(this.txtAcceptPerson.Text.Trim());
+                        sampling.Save();
+                    }
+                }
+            }
+            DialogResult dia = XtraMessageBox.Show("是否打印报告单？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dia == DialogResult.Yes)
+            {
+                string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "验收报告单.mrt");
+                if (File.Exists(fileName))
+                {
+                    PrintPreviewForm printPreview = new PrintPreviewForm(fileName, Convert.ToInt32(entity.AcceptID));
+                    printPreview.ShowDialog(this);
+                }
+                else
+                {
+                    XtraMessageBox.Show("找不到文件。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            this.DialogResult = DialogResult.OK;
         }
     }
 }

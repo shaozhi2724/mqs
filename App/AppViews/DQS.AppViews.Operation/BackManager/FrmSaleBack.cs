@@ -266,5 +266,20 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
             base.CustomChangeStatus();
             this.pageNavigator.ShowData();
         }
+
+        protected override void CustomRegulatoryCode()
+        {
+            object id = this.gvData.GetFocusedRowCellValue("退货单ID");
+            if (id != null && id != DBNull.Value)
+            {
+                string code = this.gvData.GetFocusedRowCellValue("退货单编号").ToString();
+                using (FrmViewRegulatoryCode frm = new FrmViewRegulatoryCode())
+                {
+                    frm._Code = code;
+                    frm.ShowDialog();
+                }
+            }
+            base.CustomRegulatoryCode();
+        }
     }
 }

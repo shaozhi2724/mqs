@@ -56,6 +56,8 @@ namespace DQS.Controls
         //采退界面传参
         public bool IsQualified;
 
+        //验收界面传单据类型
+        public bool IsPurchase;
 
         /// <summary>
         /// OperationSettings 配置文件中的 OperationName
@@ -68,6 +70,12 @@ namespace DQS.Controls
         /// </summary>
         [Description("是否计算价格，如果有")]
         public bool IsCalculatePrice { get; set; }
+
+        /// <summary>
+        /// 是否计算数量，如果有
+        /// </summary>
+        [Description("是否计算价格，如果有")]
+        public bool IsCompute { get; set; }
 
         /// <summary>
         /// 表格
@@ -574,6 +582,11 @@ namespace DQS.Controls
                     this.gridPopupView.CellValueChanging += this.gridPopupView_CellValueChanging;
                 }
 
+                if (this.IsCompute)
+                {
+                    this.gridPopupView.CellValueChanging += this.gridPopupView_CellValueChanging;
+                }
+
                 int visibleCount = columns.FindAll(g => g.Visible == false).Count;
 
                 for (int i = 0; i < columns.Count; i++)
@@ -619,6 +632,199 @@ namespace DQS.Controls
         //计算金额
         private void gridPopupView_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
+            if (this.IsCompute)
+            {
+                if (e.Column.Caption == "收货数量")
+                {
+                    int receiveAmount = 0;
+                    try
+                    {
+                        if (e.Value.ToString().Trim() != "")
+                        {
+                            receiveAmount = Convert.ToInt32(e.Value);
+                        }
+                    }
+                    catch
+                    {
+                        XtraMessageBox.Show("收货数量输入格式错误.", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+
+                    object amount = this.gridPopupView.GetFocusedRowCellValue("订单数量");
+                    if (amount != null && amount != DBNull.Value)
+                    {
+                        try
+                        {
+                            this.gridPopupView.SetFocusedRowCellValue("拒收数量", Convert.ToInt32(amount) - receiveAmount);
+                        }
+                        catch
+                        {
+                            XtraMessageBox.Show("计算拒收数量发生错误.", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            this.gridPopupView.SetFocusedRowCellValue("拒收数量", 0);
+                        }
+                    }
+                }
+                if (e.Column.Caption == "验收数量")
+                {
+                    int receiveAmount = 0;
+                    try
+                    {
+                        if (e.Value.ToString().Trim() != "")
+                        {
+                            receiveAmount = Convert.ToInt32(e.Value);
+                        }
+                    }
+                    catch
+                    {
+                        XtraMessageBox.Show("验收数量输入格式错误.", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                    if (IsPurchase)
+                    {
+                        List<BUSAcceptDetailEntity> acceptDetails = new List<BUSAcceptDetailEntity>();
+                        for (int i = 0; i < this.gridPopupView.RowCount; i++)
+                        {
+                            BUSAcceptDetailEntity acceptDetail = new BUSAcceptDetailEntity();
+                            object id = this.gridPopupView.GetDataRow(i)["产品ID"];
+                            object Amount = this.gridPopupView.GetDataRow(i)["收货数量"];
+                            object recAmount = this.gridPopupView.GetDataRow(i)["验收数量"];
+                            if (id != null && id != DBNull.Value)
+                            {
+                                if (Amount == null || Amount == DBNull.Value)
+                                {
+                                    Amount = 0;
+                                }
+                                if (recAmount == null || recAmount == DBNull.Value)
+                                {
+                                    recAmount = 0;
+                                }
+                                if (this.PopupView.FocusedRowHandle == i)
+                                {
+                                    recAmount = receiveAmount;
+                                }
+                                acceptDetail.ProductID = Convert.ToInt32(id);
+                                acceptDetail.Amount = Convert.ToInt32(Amount);
+                                acceptDetail.ReceiveAmount = Convert.ToInt32(recAmount);
+                                acceptDetails.Add(acceptDetail);
+                            }
+                        }
+
+                        var deAcceptDetails = (from a in acceptDetails
+                                               group a by a.ProductID
+                                                   into g
+                                                   select new
+                                                   {
+                                                       ProductID = g.Key,
+                                                       TotalBillAmount = g.Sum(p => p.Amount),
+                                                       TotalReceiveAmount = g.Sum(p => p.ReceiveAmount),
+                                                       TotalDeclinedAmount = g.Sum(p => p.Amount) - g.Sum(p => p.ReceiveAmount),
+                                                   }).ToList();
+                        foreach (var item in deAcceptDetails)
+                        {
+                            int productID = item.ProductID;
+                            int billAmount = item.TotalBillAmount;
+                            int DeclinedAmount = item.TotalDeclinedAmount;
+                            for (int i = 0; i < this.gridPopupView.RowCount; i++)
+                            {
+                                object id = this.gridPopupView.GetDataRow(i)["产品ID"];
+                                object Amount = this.gridPopupView.GetDataRow(i)["收货数量"];
+                                if (id != null && id != DBNull.Value && Amount != null && Amount != DBNull.Value)
+                                {
+                                    if (Convert.ToInt32(Amount) == 0)
+                                    {
+                                        continue;
+                                    }
+                                    if (productID == Convert.ToInt32(id))
+                                    {
+                                        this.gridPopupView.SetRowCellValue(i, "拒收数量", DeclinedAmount);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        List<BUSAcceptDetailEntity> acceptDetails = new List<BUSAcceptDetailEntity>();
+                        for (int i = 0; i < this.gridPopupView.RowCount; i++)
+                        {
+                            BUSAcceptDetailEntity acceptDetail = new BUSAcceptDetailEntity();
+                            object id = this.gridPopupView.GetDataRow(i)["产品ID"];
+                            object batchNo = this.gridPopupView.GetDataRow(i)["批号"];
+                            object Amount = this.gridPopupView.GetDataRow(i)["收货数量"];
+                            object recAmount = this.gridPopupView.GetDataRow(i)["验收数量"];
+                            if (id != null && id != DBNull.Value)
+                            {
+                                if (Amount == null || Amount == DBNull.Value)
+                                {
+                                    Amount = 0;
+                                }
+                                if (recAmount == null || recAmount == DBNull.Value)
+                                {
+                                    recAmount = 0;
+                                }
+                                if (this.PopupView.FocusedRowHandle == i)
+                                {
+                                    recAmount = receiveAmount;
+                                }
+                                acceptDetail.ProductID = Convert.ToInt32(id);
+                                acceptDetail.BatchNo = batchNo.ToString();
+                                acceptDetail.Amount = Convert.ToInt32(Amount);
+                                acceptDetail.ReceiveAmount = Convert.ToInt32(recAmount);
+                                acceptDetails.Add(acceptDetail);
+                            }
+                        }
+
+                        var deAcceptDetails = (from a in acceptDetails
+                                               group a by new { a.ProductID, a.BatchNo }
+                                                   into g
+                                                   select new
+                                                   {
+                                                       ProductID = g.Key.ProductID,
+                                                       BatchNo = g.Key.BatchNo,
+                                                       TotalBillAmount = g.Sum(p => p.Amount),
+                                                       TotalReceiveAmount = g.Sum(p => p.ReceiveAmount),
+                                                       TotalDeclinedAmount = g.Sum(p => p.Amount) - g.Sum(p => p.ReceiveAmount),
+                                                   }).ToList();
+                        foreach (var item in deAcceptDetails)
+                        {
+                            int productID = item.ProductID;
+                            string batchNo = item.BatchNo;
+                            int billAmount = item.TotalBillAmount;
+                            int DeclinedAmount = item.TotalDeclinedAmount;
+                            for (int i = 0; i < this.gridPopupView.RowCount; i++)
+                            {
+                                object id = this.gridPopupView.GetDataRow(i)["产品ID"];
+                                object baNo = this.gridPopupView.GetDataRow(i)["批号"];
+                                object Amount = this.gridPopupView.GetDataRow(i)["收货数量"];
+                                if (id != null && id != DBNull.Value && Amount != null && Amount != DBNull.Value)
+                                {
+                                    if (Convert.ToInt32(Amount) == 0)
+                                    {
+                                        continue;
+                                    }
+                                    if (productID == Convert.ToInt32(id) && batchNo == baNo.ToString())
+                                    {
+                                        this.gridPopupView.SetRowCellValue(i, "拒收数量", DeclinedAmount);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    //object amount = this.gridPopupView.GetFocusedRowCellValue("收货数量");
+                    //if (amount != null && amount != DBNull.Value)
+                    //{
+                    //    try
+                    //    {
+                    //        this.gridPopupView.SetFocusedRowCellValue("拒收数量", Convert.ToInt32(amount) - receiveAmount);
+                    //    }
+                    //    catch
+                    //    {
+                    //        XtraMessageBox.Show("计算拒收数量发生错误.", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    //        this.gridPopupView.SetFocusedRowCellValue("拒收数量", 0);
+                    //    }
+                    //}
+                }
+            }
             if (this.IsCalculatePrice)
             {
                 if (e.Column.Caption == "单价")

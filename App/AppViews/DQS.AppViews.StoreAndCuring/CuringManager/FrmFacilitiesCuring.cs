@@ -19,7 +19,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
 
         private void FrmFacilitiesCuring_Load(object sender, EventArgs e)
         {
-            this.pageNavigator.SortField = "设备ID";
+            this.pageNavigator.SortField = "创建日期";
             this.pageNavigator.SortType = "DESC";
             base.InitPage();
         }

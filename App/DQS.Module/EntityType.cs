@@ -506,6 +506,16 @@ namespace DQS.Module
         {
             get { return new BFIPersonRangeEntity(); }
         }
+
+        public static EntityBase BUSReCheckBillEntity
+        {
+            get { return new BUSReCheckBillEntity(); }
+        }
+
+        public static EntityBase BUSReCheckBillDetailEntity
+        {
+            get { return new BUSReCheckBillDetailEntity(); }
+        }
     }
 
     #region EntityType2
@@ -702,7 +712,11 @@ namespace DQS.Module
 
         BUSBeginInventoryEntity,
 
-        BFIPersonRangeEntity
+        BFIPersonRangeEntity,
+
+        BUSReCheckBillEntity,
+
+        BUSReCheckBillDetailEntity
 
     }
 

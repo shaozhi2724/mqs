@@ -251,6 +251,12 @@ namespace DQS.Controls
                 case "变更":
                     this.CustomChangeStatus();
                     break;
+                case "复查":
+                    this.CustomReCheck();
+                    break;
+                case "电子监管码":
+                    this.CustomRegulatoryCode();
+                    break;
                 default:
                     break;
             }
@@ -719,11 +725,27 @@ namespace DQS.Controls
         }
 
         /// <summary>
-        /// 自定义关联产品（首营供应商用）
+        /// 单据状态返回已下单
         /// </summary>
         protected virtual void CustomChangeStatus()
         {
             SaveDataLog("变更");
+        }
+
+        /// <summary>
+        /// 收货、验收，发现有疑问后
+        /// </summary>
+        protected virtual void CustomReCheck()
+        {
+            SaveDataLog("复查");
+        }
+
+        /// <summary>
+        /// 单据查看流通监管码
+        /// </summary>
+        protected virtual void CustomRegulatoryCode()
+        {
+            SaveDataLog("电子监管码");
         }
 
         /// <summary>

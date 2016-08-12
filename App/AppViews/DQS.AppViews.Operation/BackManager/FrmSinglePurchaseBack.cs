@@ -1619,7 +1619,7 @@ WHERE BillID={1}
 
         private void btnPrint_BeforePrint(EventArgs e)
         {
-            if (Settings.Default.AllowNoCodeStoreOut)
+            if (Settings.Default.AllowNoCodeStoreBackOut)
             {
                 CheckAndSaveCode(this.txtBillCode.Text);
             }

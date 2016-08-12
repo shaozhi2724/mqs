@@ -67,6 +67,7 @@
             this.splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
             this.gpcButtom = new DevExpress.XtraEditors.GroupControl();
             this.popupGrid = new DQS.Controls.PopupGrid();
+            this.btnReAccept = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
             this.ftPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
@@ -391,6 +392,7 @@
             this.pnlAction.Controls.Add(this.btnProductQualification);
             this.pnlAction.Controls.Add(this.btnPrint);
             this.pnlAction.Controls.Add(this.btnCancel);
+            this.pnlAction.Controls.Add(this.btnReAccept);
             this.pnlAction.Controls.Add(this.btnSaveAndIn);
             this.pnlAction.Controls.Add(this.btnSave);
             this.pnlAction.Controls.Add(this.btnOneKeyFinish);
@@ -554,12 +556,25 @@
             // 
             this.popupGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.popupGrid.IsCalculatePrice = false;
+            this.popupGrid.IsCompute = true;
             this.popupGrid.Location = new System.Drawing.Point(2, 25);
             this.popupGrid.Name = "popupGrid";
             this.popupGrid.OperationName = "Accept";
             this.popupGrid.Size = new System.Drawing.Size(868, 128);
             this.popupGrid.TabIndex = 3;
             this.popupGrid.BeforePopupFormShow += new DQS.Controls.PopupGrid.OnBeforePopupFormShowEventHandler(this.popupGrid_BeforePopupFormShow);
+            // 
+            // btnReAccept
+            // 
+            this.btnReAccept.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReAccept.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReAccept.Appearance.Options.UseFont = true;
+            this.btnReAccept.Location = new System.Drawing.Point(578, 13);
+            this.btnReAccept.Name = "btnReAccept";
+            this.btnReAccept.Size = new System.Drawing.Size(69, 23);
+            this.btnReAccept.TabIndex = 0;
+            this.btnReAccept.Text = "复查";
+            this.btnReAccept.Click += new System.EventHandler(this.btnReAccept_Click);
             // 
             // FrmSingleAccept
             // 
@@ -655,5 +670,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layAcceptDate;
         private DevExpress.XtraEditors.SimpleButton btnAttachment;
         private DevExpress.XtraEditors.SimpleButton btnSaveAndIn;
+        private DevExpress.XtraEditors.SimpleButton btnReAccept;
     }
 }

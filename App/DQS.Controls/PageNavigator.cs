@@ -472,6 +472,38 @@ namespace DQS.Controls
 
                         #endregion
                     }
+                    if (ViewName == "vw_AllReceive")
+                    {
+                        #region 收货复查的高亮显示
+
+                        StyleFormatCondition sfcDeleted = new StyleFormatCondition();
+                        sfcDeleted.Appearance.BackColor = Color.Red;
+                        sfcDeleted.Appearance.Options.UseBackColor = true;
+                        sfcDeleted.ApplyToRow = true;
+                        sfcDeleted.Column = view.Columns["单据状态"];
+                        sfcDeleted.Condition = FormatConditionEnum.Equal;
+                        sfcDeleted.Value1 = "收货复查";
+
+                        view.FormatConditions.AddRange(new DevExpress.XtraGrid.StyleFormatCondition[] { sfcDeleted });
+
+                        #endregion
+                    }
+                    if (ViewName == "vw_AllAccept")
+                    {
+                        #region 验收复查的高亮显示
+
+                        StyleFormatCondition sfcDeleted = new StyleFormatCondition();
+                        sfcDeleted.Appearance.BackColor = Color.Red;
+                        sfcDeleted.Appearance.Options.UseBackColor = true;
+                        sfcDeleted.ApplyToRow = true;
+                        sfcDeleted.Column = view.Columns["状态"];
+                        sfcDeleted.Condition = FormatConditionEnum.Equal;
+                        sfcDeleted.Value1 = "验收复查";
+
+                        view.FormatConditions.AddRange(new DevExpress.XtraGrid.StyleFormatCondition[] { sfcDeleted });
+
+                        #endregion
+                    }
                 }
             }
             catch (Exception ex)
