@@ -492,29 +492,32 @@ WHERE BillID={1}
 
                         if (DQS.Controls.Properties.Settings.Default.IsThird)
                         {
-                            if (string.IsNullOrWhiteSpace(txtTransportType.Text))
+                            if (cbxDeliveryType.Text.Trim() == "第三方物流")
                             {
-                                XtraMessageBox.Show(txtTransportType.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                txtTransportType.Focus();
-                                return;
-                            }
-                            if (string.IsNullOrWhiteSpace(txtTransportTool.Text))
-                            {
-                                XtraMessageBox.Show(txtTransportTool.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                txtTransportTool.Focus();
-                                return;
-                            }
-                            if (string.IsNullOrWhiteSpace(txtCarryCompnay.Text))
-                            {
-                                XtraMessageBox.Show(txtCarryCompnay.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                txtCarryCompnay.Focus();
-                                return;
-                            }
-                            if (string.IsNullOrWhiteSpace(txtTimeLimit.Text))
-                            {
-                                XtraMessageBox.Show(txtTimeLimit.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                txtTimeLimit.Focus();
-                                return;
+                                if (string.IsNullOrWhiteSpace(txtTransportType.Text))
+                                {
+                                    XtraMessageBox.Show(txtTransportType.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    txtTransportType.Focus();
+                                    return;
+                                }
+                                if (string.IsNullOrWhiteSpace(txtTransportTool.Text))
+                                {
+                                    XtraMessageBox.Show(txtTransportTool.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    txtTransportTool.Focus();
+                                    return;
+                                }
+                                if (string.IsNullOrWhiteSpace(txtCarryCompnay.Text))
+                                {
+                                    XtraMessageBox.Show(txtCarryCompnay.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    txtCarryCompnay.Focus();
+                                    return;
+                                }
+                                if (string.IsNullOrWhiteSpace(txtTimeLimit.Text))
+                                {
+                                    XtraMessageBox.Show(txtTimeLimit.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    txtTimeLimit.Focus();
+                                    return;
+                                }
                             }
                         }
 

@@ -11,11 +11,16 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Xml;
 using ORMSCore;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace DQS.App
 {
     public partial class FrmLogin : XtraForm
     {
+
+        List<SYSConnection> conns = new List<SYSConnection>();
         public FrmLogin()
         {
             InitializeComponent();
@@ -40,8 +45,55 @@ namespace DQS.App
                 }
             }
         }
+
+        private void LoadCbo()
+        {
+            conns.Clear();
+            cboConn.Properties.Items.Clear();
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                string sql = "SELECT * FROM dbo.SYS_Connection";
+                SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
+                DataSet ds = new DataSet();
+                try
+                {
+                    sda.Fill(ds, "Table");
+                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                    {
+                        SYSConnection connDB = new SYSConnection();
+                        connDB.ID = int.Parse(ds.Tables["Table"].Rows[i]["ID"].ToString());
+                        connDB.ConnName = ds.Tables["Table"].Rows[i]["ConnName"].ToString();
+                        connDB.ServerName = ds.Tables["Table"].Rows[i]["ServerName"].ToString();
+                        connDB.DBName = ds.Tables["Table"].Rows[i]["DBName"].ToString();
+                        connDB.UserID = ds.Tables["Table"].Rows[i]["UserID"].ToString();
+                        connDB.PWD = ds.Tables["Table"].Rows[i]["PWD"].ToString();
+                        connDB.Remark = ds.Tables["Table"].Rows[i]["Remark"].ToString();
+                        conns.Add(connDB);
+                        cboConn.Properties.Items.Add(connDB.ConnName);
+                    }
+
+                    foreach (var item in conns)
+                    {
+                        if (item.ServerName == conn.DataSource && item.DBName == conn.Database)
+                        {
+                            cboConn.Text = item.ConnName;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
         private void FrmLogin_Load(object sender, EventArgs e)
         {
+            this.Text = "登录";
             if (Settings.Default.AutoCheckForUpdate)
             {
                 ThreadPool.QueueUserWorkItem((w) => Updater.CheckForUpdate(ShowUpdateDialog));
@@ -52,6 +104,14 @@ namespace DQS.App
             BFIEnterpriseEntity enterprise = new BFIEnterpriseEntity { EnterpriseID = 1 };
             enterprise.Fetch();
             this.Text += " - " + enterprise.EnterpriseName;
+            bool isVisible = enterprise.Reservation10 == "True" ? true : false;
+            this.lblConn.Visible = isVisible;
+            this.cboConn.Visible = isVisible;
+            this.btnConn.Visible = isVisible;
+            if (isVisible)
+            {
+                LoadCbo();
+            }
         }
 
         private void txtUserCode_TextChanged(object sender, EventArgs e)
@@ -198,5 +258,66 @@ namespace DQS.App
             }
         }
 
+        private void cboConn_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnConn_Click(object sender, EventArgs e)
+        {
+            string ConnectionString = "";
+            foreach (var item in conns)
+            {
+                if (item.ConnName == cboConn.Text.Trim())
+                {
+                    ConnectionString = new SqlConnectionStringBuilder
+                    {
+                        DataSource = item.ServerName,
+                        InitialCatalog = item.DBName,
+                        IntegratedSecurity = false,
+                        UserID = item.UserID,
+                        Password = item.PWD,
+                        ConnectTimeout = 120
+                    }.ConnectionString;
+                    break;
+                }
+            }
+
+            XmlDocument myDoc = new XmlDocument();
+            myDoc.Load(Application.ExecutablePath + ".config");
+            XmlNode myNode = myDoc.SelectSingleNode("//connectionStrings");
+            XmlElement myXmlElement = (XmlElement)myNode.SelectSingleNode("//add [@name='DbConnectStrings']");
+            myXmlElement.SetAttribute("connectionString", ConnectionString);
+            myDoc.Save(Application.ExecutablePath + ".config");
+            ConfigurationManager.RefreshSection("connectionStrings");
+            //保存数据库连接
+            GlobalItem.g_DbConnectStrings = ConnectionString;
+            CommonSettings.DbConnectStrings = ConnectionString;
+
+            FrmLogin_Load(null, null);
+        }
+    }
+    public class SYSConnection
+    {
+        public int ID { get; set; }
+        public string ConnName { get; set; }
+        public string ServerName { get; set; }
+        public string DBName { get; set; }
+        public string UserID { get; set; }
+        public string PWD { get; set; }
+        public string Remark { get; set; }
+
+        public SYSConnection() { }
+
+        public SYSConnection(int id,string connName,string serverName,string dbName,string userID,string pwd,string remark)
+        {
+            this.ID = id;
+            this.ConnName = connName;
+            this.ServerName = serverName;
+            this.DBName = dbName;
+            this.UserID = userID;
+            this.PWD = pwd;
+            this.Remark = remark;
+        }
     }
 }

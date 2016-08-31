@@ -12,6 +12,7 @@ namespace DQS.Common
     public class GlobalItem
     {
         public static DataTable g_Functions;
+
         public static string g_DbConnectStrings;
 
         public static ATCUserEntity g_CurrentUser;
@@ -36,7 +37,5 @@ namespace DQS.Common
 
             }
         }
-
-
     }
 }

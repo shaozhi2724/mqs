@@ -56,6 +56,8 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
                 this.popupGridSampling.SetGridData(m_id.Value, false);
 
+                popupGrid.IsPurchase = txtBillTypeName.Text == "采购进货" ? true : false;
+
             }
             else
             {
