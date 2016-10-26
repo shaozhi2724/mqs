@@ -98,6 +98,12 @@ namespace DQS.Module.Entities
 			set { this.SetValue("CuringManSpell", value); } 
 		}
 
+		public int CuringDays
+		{
+            get { return (int)this.GetValue("CuringDays"); }
+            set { this.SetValue("CuringDays", value); } 
+		}
+
 		public DateTime CheckDate
 		{
 			get { return (DateTime)this.GetValue("CheckDate"); } 
@@ -254,6 +260,7 @@ namespace DQS.Module.Entities
 			this.Fields.Add("UnqualifiedAmount", BUSCuringRecordEntityFields.UnqualifiedAmount);
 			this.Fields.Add("CuringMan", BUSCuringRecordEntityFields.CuringMan);
 			this.Fields.Add("CuringManSpell", BUSCuringRecordEntityFields.CuringManSpell);
+            this.Fields.Add("CuringDays", BUSCuringRecordEntityFields.CuringDays);
 			this.Fields.Add("CheckDate", BUSCuringRecordEntityFields.CheckDate);
 			this.Fields.Add("CheckItem", BUSCuringRecordEntityFields.CheckItem);
 			this.Fields.Add("QualityCondition", BUSCuringRecordEntityFields.QualityCondition);
@@ -352,109 +359,114 @@ namespace DQS.Module.Entities
 			get { return new EntityField("BUS_CuringRecord", 13, "CuringManSpell", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
+        public static EntityField CuringDays
+		{
+            get { return new EntityField("BUS_CuringRecord", 14, "CuringDays", SqlDbType.Int, false, false, false, true); }
+		}
+
 		public static EntityField CheckDate
 		{
-			get { return new EntityField("BUS_CuringRecord", 14, "CheckDate", SqlDbType.DateTime, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 15, "CheckDate", SqlDbType.DateTime, false, false, false, true); }
 		}
 
 		public static EntityField CheckItem
 		{
-			get { return new EntityField("BUS_CuringRecord", 15, "CheckItem", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 16, "CheckItem", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField QualityCondition
 		{
-			get { return new EntityField("BUS_CuringRecord", 16, "QualityCondition", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 17, "QualityCondition", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField CuringMeasure
 		{
-			get { return new EntityField("BUS_CuringRecord", 17, "CuringMeasure", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 18, "CuringMeasure", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField CuringResult
 		{
-			get { return new EntityField("BUS_CuringRecord", 18, "CuringResult", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 19, "CuringResult", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
         public static EntityField InStoreID
         {
-            get { return new EntityField("BUS_CuringRecord", 19, "InStoreID", SqlDbType.Int, false, false, false, true); }
+            get { return new EntityField("BUS_CuringRecord", 20, "InStoreID", SqlDbType.Int, false, false, false, true); }
         }
 
 		public static EntityField CreateUserID
 		{
-			get { return new EntityField("BUS_CuringRecord", 20, "CreateUserID", SqlDbType.UniqueIdentifier, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 21, "CreateUserID", SqlDbType.UniqueIdentifier, false, false, false, true); }
 		}
 
 		public static EntityField CreateDate
 		{
-			get { return new EntityField("BUS_CuringRecord", 21, "CreateDate", SqlDbType.DateTime, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 22, "CreateDate", SqlDbType.DateTime, false, false, false, true); }
 		}
 
 		public static EntityField LastModifyUserID
 		{
-			get { return new EntityField("BUS_CuringRecord", 22, "LastModifyUserID", SqlDbType.UniqueIdentifier, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 23, "LastModifyUserID", SqlDbType.UniqueIdentifier, false, false, false, true); }
 		}
 
 		public static EntityField LastModifyDate
 		{
-			get { return new EntityField("BUS_CuringRecord", 23, "LastModifyDate", SqlDbType.DateTime, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 24, "LastModifyDate", SqlDbType.DateTime, false, false, false, true); }
 		}
 
 		public static EntityField CuringRemrk
 		{
-			get { return new EntityField("BUS_CuringRecord", 24, "CuringRemrk", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 25, "CuringRemrk", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation1
 		{
-			get { return new EntityField("BUS_CuringRecord", 25, "Reservation1", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 26, "Reservation1", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation2
 		{
-			get { return new EntityField("BUS_CuringRecord", 26, "Reservation2", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 27, "Reservation2", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation3
 		{
-			get { return new EntityField("BUS_CuringRecord", 27, "Reservation3", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 28, "Reservation3", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation4
 		{
-			get { return new EntityField("BUS_CuringRecord", 28, "Reservation4", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 29, "Reservation4", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation5
 		{
-			get { return new EntityField("BUS_CuringRecord", 29, "Reservation5", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 30, "Reservation5", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation6
 		{
-			get { return new EntityField("BUS_CuringRecord", 30, "Reservation6", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 31, "Reservation6", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation7
 		{
-			get { return new EntityField("BUS_CuringRecord", 31, "Reservation7", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 32, "Reservation7", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation8
 		{
-			get { return new EntityField("BUS_CuringRecord", 32, "Reservation8", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 33, "Reservation8", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation9
 		{
-			get { return new EntityField("BUS_CuringRecord", 33, "Reservation9", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 34, "Reservation9", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation10
 		{
-			get { return new EntityField("BUS_CuringRecord", 34, "Reservation10", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_CuringRecord", 35, "Reservation10", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 	}
@@ -492,6 +504,8 @@ namespace DQS.Module.Entities
 		CuringMan,
 
 		CuringManSpell,
+
+        CuringDays,
 
 		CheckDate,
 

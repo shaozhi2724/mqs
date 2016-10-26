@@ -46,6 +46,9 @@ namespace DQS.AppViews.OtherOperation.Finance
         //单位简拼
         string saveDealerSpell = "";
 
+        //记录选择内容
+        List<ViewMakeCollectionsOnPassage> views = new List<ViewMakeCollectionsOnPassage>();
+
         private void LoadTax()
         {
             if (cboTax.Text.Trim() == "")
@@ -70,19 +73,74 @@ namespace DQS.AppViews.OtherOperation.Finance
             {
                 fmb.FrmSql = "fn_ShowMakeCollectionsBillOnPassage";
                 fmb.FrmDetailSql = "fn_ShowMakeCollectionsBillDetailOnPassage";
-                fmb.BillList = BillList;
-                fmb.DetailList = DetailList;
+                fmb.BillList.Clear();
+                if (BillList.Any())
+                {
+                    foreach (var item in BillList)
+                    {
+                        fmb.BillList.Add(item);
+                    }
+                }
+                fmb.DetailList.Clear();
+                if (DetailList.Any())
+                {
+                    foreach (var item in DetailList)
+                    {
+                        fmb.DetailList.Add(item);
+                    }
+                }
                 fmb.TotalPrice = TotalPrice;
                 fmb.dealerCode = txtDealerName.Text.Trim();
                 fmb.billCode = billCode;
                 DialogResult dr = fmb.ShowDialog();
                 if (dr == DialogResult.Yes)
                 {
-                    BillList = fmb.BillList;
-                    DetailList = fmb.DetailList;
+                    if (fmb.BillList.Any())
+                    {
+                        foreach (var item in fmb.BillList)
+                        {
+                            if (!BillList.Contains(item))
+                            {
+                                BillList.Add(item);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        BillList.Clear();
+                    }
+
+                    if (fmb.DetailList.Any())
+                    {
+                        foreach (var item in fmb.DetailList)
+                        {
+                            if (!DetailList.Contains(item))
+                            {
+                                DetailList.Add(item);
+                                GainDataList(item);
+                            }
+                        }
+
+                        List<int> ComDetailList = new List<int>();
+                        foreach (var item in DetailList)
+                        {
+                            ComDetailList.Add(item);
+                        }
+                        foreach (var item in ComDetailList)
+                        {
+                            if (!fmb.DetailList.Contains(item))
+                            {
+                                DetailList.Remove(item);
+                                views.Remove(views.FirstOrDefault(p => p.DetailID == item));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        DetailList.Clear();
+                    }
                     TotalPrice = fmb.TotalPrice;
-                    lblTotalPrice.Text = TotalPrice.ToString();
-                    txtIncludeTaxPrice.Text = TotalPrice.ToString();
+                    GetTotalPrice();
                     dealerCode = fmb.dealerCode;
                     billCode = fmb.billCode;
                     LoadTax();
@@ -90,6 +148,16 @@ namespace DQS.AppViews.OtherOperation.Finance
                     valDealer();
                 }
             }
+        }
+        private void GetTotalPrice()
+        {
+            double total = 0;
+            foreach (var item in views)
+            {
+                total += Convert.ToDouble(item.HTotalPrice);
+            }
+            lblTotalPrice.Text = total.ToString();
+            txtIncludeTaxPrice.Text = total.ToString();
         }
 
         //加载在途所有往来单位
@@ -121,62 +189,13 @@ namespace DQS.AppViews.OtherOperation.Finance
             }
         }
         */
-
-        /// <summary>
-        /// 加载gCBill、gVBill，单据信息
-        /// </summary>
-        private void GainData()
+        private void GainDataList(int detailID)
         {
-            string StoreID = "0";
-            if (DetailList.Count > 0)
-            {
-                StoreID = "";
-                for (int i = 0; i < DetailList.Count; i++)
-                {
-                    StoreID += DetailList[i].ToString() + ",";
-                }
-                StoreID = StoreID.Substring(0, StoreID.Length - 1);
-            }
+
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sql = @"SELECT  b.BillID AS StoreID,
-		BillCode AS [单据编码],
-		DealerCode AS [单位编码],
-		DealerName AS [单位名称],
-		b.Reservation6 AS [开票员],
-		b.Operator AS [业务员],
-		b.BillDate AS [下单日期],
-		bd.DetailID,
-		ProductName AS [产品名称],
-		BatchNo AS [批号],
-		CASE b.IsBillIn
-		WHEN 0 THEN Amount
-		ELSE -Amount
-		END AS [数量],
-		UnitPrice AS [单价],
-		CASE b.IsBillIn
-		WHEN 0 THEN bd.TotalPrice
-		ELSE -bd.TotalPrice
-		END AS [含税金额],
-		CONVERT(DECIMAL(18,2), 
-        CASE b.IsBillIn
-		WHEN 0 THEN bd.TotalPrice
-		ELSE -bd.TotalPrice
-		END/{1}) AS [不含税金额],
-		{0} AS [税率],
-		CONVERT(DECIMAL(18,2), 
-        CASE b.IsBillIn
-		WHEN 0 THEN bd.TotalPrice
-		ELSE -bd.TotalPrice
-		END/{1}*{2}) AS [税额],
-		ProducerName AS [生产厂商],
-		ProductUnit AS [单位],
-		PackageSpec AS [包装规格]
-FROM dbo.BUS_Bill b
-INNER JOIN dbo.BUS_BillDetail bd ON b.BillID = bd.BillID
-INNER JOIN dbo.BFI_Product p ON bd.ProductID = p.ProductID
-WHERE bd.DetailID IN (" + StoreID + ")";
-                sql = String.Format(sql, tax, taxadd, taxabate);
+                string sql = @"EXEC sp_MakeCollectionsDetailForBill '{0}'";
+                sql = String.Format(sql, " AND BusinessBillDetailID IN (" + detailID + ")");
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 try
@@ -184,19 +203,30 @@ WHERE bd.DetailID IN (" + StoreID + ")";
                     sda.Fill(ds, "Table");
                     //ds.Tables["Table"].Columns.Add("选择", System.Type.GetType("System.Boolean"));
 
-                    gridControl.DataSource = ds.Tables["Table"];
-                    gridView.OptionsView.ColumnAutoWidth = false;
-                    gridView.BestFitColumns();
-                    gridView.OptionsView.ShowGroupPanel = false;
-                    for (int i = 0; i < gridView.Columns.Count; i++)
-                    {
-                        string ColumnName = gridView.Columns[i].ToString();
-                        if (ColumnName.Contains("ID") || ColumnName.Contains("往来单位"))
-                        {
-                            gridView.Columns[i].Visible = false;
-                        }
-                        gridView.Columns[i].OptionsColumn.AllowEdit = false;
-                    }
+                    ViewMakeCollectionsOnPassage vmconpassage = new ViewMakeCollectionsOnPassage();
+                    vmconpassage.StoreID = int.Parse(ds.Tables["Table"].Rows[0]["StoreID"].ToString());
+                    vmconpassage.BillCode = ds.Tables["Table"].Rows[0]["BillCode"].ToString();
+                    vmconpassage.DealerCode = ds.Tables["Table"].Rows[0]["DealerCode"].ToString();
+                    vmconpassage.DealerName = ds.Tables["Table"].Rows[0]["DealerName"].ToString();
+                    vmconpassage.Operator = ds.Tables["Table"].Rows[0]["Operator"].ToString();
+                    vmconpassage.BillDate = DateTime.Parse(ds.Tables["Table"].Rows[0]["BillDate"].ToString());
+                    vmconpassage.DetailID = int.Parse(ds.Tables["Table"].Rows[0]["DetailID"].ToString());
+                    vmconpassage.ProductName = ds.Tables["Table"].Rows[0]["ProductName"].ToString();
+                    vmconpassage.BatchNo = ds.Tables["Table"].Rows[0]["BatchNo"].ToString();
+                    vmconpassage.Amount = int.Parse(ds.Tables["Table"].Rows[0]["Amount"].ToString());
+                    vmconpassage.UnitPrice = decimal.Parse(ds.Tables["Table"].Rows[0]["UnitPrice"].ToString());
+                    vmconpassage.HTotalPrice = decimal.Parse(ds.Tables["Table"].Rows[0]["HTotalPrice"].ToString());
+                    vmconpassage.Tax = tax;
+                    vmconpassage.UTotalPrice = Fix(vmconpassage.HTotalPrice / taxadd);
+                    vmconpassage.TaxPrice = Fix(vmconpassage.HTotalPrice / taxadd * taxabate);
+                    vmconpassage.ProducerName = ds.Tables["Table"].Rows[0]["ProducerName"].ToString();
+                    vmconpassage.ProductUnit = ds.Tables["Table"].Rows[0]["ProductUnit"].ToString();
+                    vmconpassage.ProductSpec = ds.Tables["Table"].Rows[0]["ProductSpec"].ToString();
+                    vmconpassage.PackageSpec = ds.Tables["Table"].Rows[0]["PackageSpec"].ToString();
+                    vmconpassage.BillAmount = int.Parse(ds.Tables["Table"].Rows[0]["Amount"].ToString());
+                    vmconpassage.GotAmount = 0;
+                    views.Add(vmconpassage);
+
                 }
                 catch (Exception ex)
                 {
@@ -207,6 +237,86 @@ WHERE bd.DetailID IN (" + StoreID + ")";
                     conn.Close();
                 }
             }
+        }
+
+        /// <summary>
+        /// 加载gCBill、gVBill，单据信息
+        /// </summary>
+        private void GainData()
+        {
+
+            gridControl.DataSource = views;
+            gridControl.RefreshDataSource();
+
+            for (int i = 0; i < gridView.Columns.Count; i++)
+            {
+                string ColumnName = gridView.Columns[i].ToString();
+                if (ColumnName.Contains("ID") || ColumnName.Contains("往来单位"))
+                {
+                    gridView.Columns[i].Visible = false;
+                }
+                if (ColumnName.Contains("数量") || ColumnName.Contains("备注"))
+                {
+                    gridView.Columns[i].OptionsColumn.AllowEdit = true;
+                }
+                else
+                {
+                    gridView.Columns[i].OptionsColumn.AllowEdit = false;
+                }
+            }
+            //gridView.RefreshData();
+            //string StoreID = "0";
+            //if (DetailList.Count > 0)
+            //{
+            //    StoreID = "";
+            //    for (int i = 0; i < DetailList.Count; i++)
+            //    {
+            //        StoreID += DetailList[i].ToString() + ",";
+            //    }
+            //    StoreID = StoreID.Substring(0, StoreID.Length - 1);
+            //}
+            //using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            //{
+            //    string sql = @"EXEC sp_MakeCollectionsDetailForBill '{0}','{1}','{2}','{3}'";
+            //    sql = String.Format(sql, tax, taxadd, taxabate, " AND BusinessBillDetailID IN (" + StoreID + ")");
+            //    SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
+            //    DataSet ds = new DataSet();
+            //    try
+            //    {
+            //        sda.Fill(ds, "Table");
+            //        //ds.Tables["Table"].Columns.Add("选择", System.Type.GetType("System.Boolean"));
+
+            //        for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+            //        {
+                        
+            //        }
+
+            //        gridControl.DataSource = ds.Tables["Table"];
+            //        gridView.OptionsView.ColumnAutoWidth = false;
+            //        gridView.BestFitColumns();
+            //        gridView.OptionsView.ShowGroupPanel = false;
+            //        for (int i = 0; i < gridView.Columns.Count; i++)
+            //        {
+            //            string ColumnName = gridView.Columns[i].ToString();
+            //            if (ColumnName.Contains("ID") || ColumnName.Contains("往来单位"))
+            //            {
+            //                gridView.Columns[i].Visible = false;
+            //            }
+            //            if (!ColumnName.Contains("数量"))
+            //            {
+            //                gridView.Columns[i].OptionsColumn.AllowEdit = false;
+            //            }
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.ToString());
+            //    }
+            //    finally
+            //    {
+            //        conn.Close();
+            //    }
+            //}
         }
         private void valDealer()
         {
@@ -369,17 +479,41 @@ WHERE bd.DetailID IN (" + StoreID + ")";
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 string insertBill = "EXEC fn_InsertMakeCollectionsBill '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}'";
-                string insertBillDetail = "EXEC fn_InsertMakeCollectionsBillDetail '{0}','{1}','{2}','{3}','{4}'";
+                string insertBillDetail = "EXEC fn_InsertMakeCollectionsBillDetail '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}'";
                 try
                 {
                     conn.Open();
                     SqlCommand command;
-                    insertBill = String.Format(insertBill, MakeCollectionsBillCode, txtTaxCode.Text, saveDealerCode, txtDealerName.Text.Trim(), saveDealerSpell, txtVoucherCode.Text, cboBillingType.Text.Trim(), deBillDate.Text.Trim(), Convert.ToDecimal(txtIncludeTaxPrice.Text), Convert.ToDecimal(txtNotIncludeTaxPrice.Text), cboTax.Text.Trim(), Convert.ToDecimal(txtTaxPrice.Text), "");
+                    insertBill = String.Format(insertBill, 
+                        MakeCollectionsBillCode, 
+                        txtTaxCode.Text, 
+                        saveDealerCode, 
+                        txtDealerName.Text.Trim(), 
+                        saveDealerSpell, 
+                        txtVoucherCode.Text, 
+                        cboBillingType.Text.Trim(), 
+                        deBillDate.Text.Trim(), 
+                        Convert.ToDecimal(txtIncludeTaxPrice.Text), 
+                        Convert.ToDecimal(txtNotIncludeTaxPrice.Text), 
+                        cboTax.Text.Trim(), 
+                        Convert.ToDecimal(txtTaxPrice.Text), 
+                        "");
                     command = new SqlCommand(insertBill, conn);
                     command.ExecuteNonQuery();
-                    foreach (int detailid in DetailList)
+                    foreach (var item in views)
                     {
-                        command = new SqlCommand(String.Format(insertBillDetail, MakeCollectionsBillCode, detailid, tax, taxadd, taxabate), conn);
+                        command = new SqlCommand(String.Format(insertBillDetail, 
+                            MakeCollectionsBillCode, 
+                            item.DetailID,
+                            item.Amount,
+                            item.HTotalPrice,
+                            item.Tax,
+                            item.HTotalPrice,
+                            item.UTotalPrice,
+                            item.TaxPrice,
+                            item.Remark,
+                            item.GotAmount
+                            ), conn);
                         command.ExecuteNonQuery();
                     }
                 }
@@ -450,7 +584,18 @@ WHERE bd.DetailID IN (" + StoreID + ")";
         private void cboTax_TextChanged(object sender, EventArgs e)
         {
             LoadTax();
+            ChangeTax();
             GainData();
+        }
+
+        private void ChangeTax()
+        {
+            foreach (var item in views)
+            {
+                item.Tax = tax;
+                item.UTotalPrice = Fix(item.HTotalPrice / taxadd);
+                item.TaxPrice = Fix(item.HTotalPrice / taxadd * taxabate);
+            }
         }
 
         private void txtDealerName_Click(object sender, EventArgs e)
@@ -470,5 +615,90 @@ WHERE bd.DetailID IN (" + StoreID + ")";
                 }
             }
         }
+
+        private void gridView_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            if (e.Column.Caption == "数量")
+            {
+                int Amount = 0;
+                try
+                {
+                    if (e.Value.ToString().Trim() != "")
+                    {
+                        Amount = Convert.ToInt32(e.Value);
+                    }
+                }
+                catch
+                {
+                    XtraMessageBox.Show("数量输入格式错误.", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                object DetailID = this.gridView.GetFocusedRowCellValue("DetailID");
+
+                if (DetailID != null && DetailID != DBNull.Value)
+                {
+                    var data = views.FirstOrDefault(p => p.DetailID == int.Parse(DetailID.ToString()));
+                    data.Amount = Amount;
+                    data.HTotalPrice = Amount * data.UnitPrice;
+                    data.Tax = tax;
+                    data.UTotalPrice = Fix(data.HTotalPrice / taxadd);
+                    data.TaxPrice = Fix(data.HTotalPrice / taxadd * taxabate);
+                    data.GotAmount = data.BillAmount - Amount;
+                }
+                gridView.RefreshRow(e.RowHandle);
+                GetTotalPrice(); 
+                LoadTax();
+            }
+        }
+        public decimal Fix(decimal value)
+        {
+            var x = value;
+            var i = 2;
+            var t = decimal.Round(x, i);
+            x = t;
+            return x;
+            /*
+            var x = value;
+            var i = 28;
+            while (i >= 0)
+            {
+                var t = decimal.Round(x, i);
+                if (t != x)
+                {
+                    return x;
+                }
+                x = t;
+                i--;
+            }
+            return x;
+            */
+        }
+    }
+    public class ViewMakeCollectionsOnPassage
+    {
+        public int StoreID { get; set; }
+        public string BillCode { get; set; }
+        public string DealerCode { get; set; }
+        public string DealerName { get; set; }
+        public string CreateUser { get; set; }
+        public string Operator { get; set; }
+        public DateTime BillDate { get; set; }
+        public int DetailID { get; set; }
+        public string ProductName { get; set; }
+        public string BatchNo { get; set; }
+        public int Amount { get; set; }
+        public decimal UnitPrice { get; set; }
+        public decimal HTotalPrice { get; set; }
+        public decimal UTotalPrice { get; set; }
+        public decimal Tax { get; set; }
+        public decimal TaxPrice { get; set; }
+        public string ProducerName { get; set; }
+        public string ProductUnit { get; set; }
+        public string ProductSpec { get; set; }
+        public string PackageSpec { get; set; }
+        public int BillAmount { get; set; }
+        public int GotAmount { get; set; }
+        public string Remark { get; set; }
     }
 }

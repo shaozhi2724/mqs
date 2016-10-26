@@ -1,6 +1,6 @@
 ﻿namespace DQS.AppViews.StoreAndCuring.CuringManager
 {
-    partial class FrmSingleFacilitiesCuring
+    partial class FrmSingleFacilitiesCuringResult
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
-            this.btnAddFacilities = new DevExpress.XtraEditors.SimpleButton();
-            this.btnSave = new DevExpress.XtraEditors.SimpleButton();
+            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.gridControl = new DevExpress.XtraGrid.GridControl();
+            this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFacilityCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFacilityName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFacilityAddress = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFacilitySpec = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStyleName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCuringResult = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCuringRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.txtCreateUser = new DevExpress.XtraEditors.TextEdit();
@@ -43,20 +50,14 @@
             this.layDepartment = new DevExpress.XtraLayout.LayoutControlItem();
             this.layCuringDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.layCreateUser = new DevExpress.XtraLayout.LayoutControlItem();
-            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.gridControl = new DevExpress.XtraGrid.GridControl();
-            this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colFacilityCode = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colFacilityName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colFacilityAddress = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colFacilitySpec = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colStyleName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCuringRunTime = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCuringResult = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCuringRemark = new DevExpress.XtraGrid.Columns.GridColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAddFacilities = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSave = new DevExpress.XtraEditors.SimpleButton();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
+            this.groupControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -71,58 +72,120 @@
             ((System.ComponentModel.ISupportInitialize)(this.layDepartment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layCuringDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layCreateUser)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
-            this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panelControl1
+            // groupControl2
             // 
-            this.panelControl1.Controls.Add(this.btnCancel);
-            this.panelControl1.Controls.Add(this.btnAddFacilities);
-            this.panelControl1.Controls.Add(this.btnSave);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl1.Location = new System.Drawing.Point(0, 397);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(619, 50);
-            this.panelControl1.TabIndex = 0;
+            this.groupControl2.Controls.Add(this.gridControl);
+            this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl2.Location = new System.Drawing.Point(0, 100);
+            this.groupControl2.Name = "groupControl2";
+            this.groupControl2.Size = new System.Drawing.Size(619, 297);
+            this.groupControl2.TabIndex = 5;
+            this.groupControl2.Text = "设备信息";
             // 
-            // btnCancel
+            // gridControl
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Appearance.Options.UseFont = true;
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(532, 15);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "取消(&C)";
+            this.gridControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl.Location = new System.Drawing.Point(2, 23);
+            this.gridControl.MainView = this.gridView;
+            this.gridControl.Name = "gridControl";
+            this.gridControl.Size = new System.Drawing.Size(615, 272);
+            this.gridControl.TabIndex = 0;
+            this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView});
             // 
-            // btnAddFacilities
+            // gridView
             // 
-            this.btnAddFacilities.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddFacilities.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddFacilities.Appearance.Options.UseFont = true;
-            this.btnAddFacilities.Location = new System.Drawing.Point(313, 15);
-            this.btnAddFacilities.Name = "btnAddFacilities";
-            this.btnAddFacilities.Size = new System.Drawing.Size(104, 23);
-            this.btnAddFacilities.TabIndex = 2;
-            this.btnAddFacilities.Text = "添加设备信息";
-            this.btnAddFacilities.Click += new System.EventHandler(this.btnAddFacilities_Click);
+            this.gridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colID,
+            this.colFacilityCode,
+            this.colFacilityName,
+            this.colFacilityAddress,
+            this.colFacilitySpec,
+            this.colStyleName,
+            this.colCuringResult,
+            this.colCuringRemark});
+            this.gridView.GridControl = this.gridControl;
+            this.gridView.IndicatorWidth = 40;
+            this.gridView.Name = "gridView";
+            this.gridView.OptionsView.ShowGroupPanel = false;
+            this.gridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridView_KeyDown);
             // 
-            // btnSave
+            // colID
             // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Appearance.Options.UseFont = true;
-            this.btnSave.Location = new System.Drawing.Point(444, 15);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 2;
-            this.btnSave.Text = "保存(&S)";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.colID.Caption = "ID";
+            this.colID.Name = "colID";
+            this.colID.OptionsColumn.AllowEdit = false;
+            this.colID.OptionsColumn.ReadOnly = true;
+            // 
+            // colFacilityCode
+            // 
+            this.colFacilityCode.Caption = "编号";
+            this.colFacilityCode.FieldName = "FacilityCode";
+            this.colFacilityCode.Name = "colFacilityCode";
+            this.colFacilityCode.OptionsColumn.AllowEdit = false;
+            this.colFacilityCode.OptionsColumn.ReadOnly = true;
+            this.colFacilityCode.Visible = true;
+            this.colFacilityCode.VisibleIndex = 0;
+            // 
+            // colFacilityName
+            // 
+            this.colFacilityName.Caption = "名称";
+            this.colFacilityName.FieldName = "FacilityName";
+            this.colFacilityName.Name = "colFacilityName";
+            this.colFacilityName.OptionsColumn.AllowEdit = false;
+            this.colFacilityName.OptionsColumn.ReadOnly = true;
+            this.colFacilityName.Visible = true;
+            this.colFacilityName.VisibleIndex = 1;
+            // 
+            // colFacilityAddress
+            // 
+            this.colFacilityAddress.Caption = "地址";
+            this.colFacilityAddress.FieldName = "FacilityAddress";
+            this.colFacilityAddress.Name = "colFacilityAddress";
+            this.colFacilityAddress.OptionsColumn.AllowEdit = false;
+            this.colFacilityAddress.OptionsColumn.ReadOnly = true;
+            this.colFacilityAddress.Visible = true;
+            this.colFacilityAddress.VisibleIndex = 2;
+            // 
+            // colFacilitySpec
+            // 
+            this.colFacilitySpec.Caption = "规格";
+            this.colFacilitySpec.FieldName = "FacilitySpec";
+            this.colFacilitySpec.Name = "colFacilitySpec";
+            this.colFacilitySpec.OptionsColumn.AllowEdit = false;
+            this.colFacilitySpec.OptionsColumn.ReadOnly = true;
+            this.colFacilitySpec.Visible = true;
+            this.colFacilitySpec.VisibleIndex = 3;
+            // 
+            // colStyleName
+            // 
+            this.colStyleName.Caption = "类型";
+            this.colStyleName.FieldName = "StyleName";
+            this.colStyleName.Name = "colStyleName";
+            this.colStyleName.OptionsColumn.AllowEdit = false;
+            this.colStyleName.OptionsColumn.ReadOnly = true;
+            this.colStyleName.Visible = true;
+            this.colStyleName.VisibleIndex = 4;
+            // 
+            // colCuringResult
+            // 
+            this.colCuringResult.Caption = "保养结果";
+            this.colCuringResult.FieldName = "CuringResult";
+            this.colCuringResult.Name = "colCuringResult";
+            this.colCuringResult.Visible = true;
+            this.colCuringResult.VisibleIndex = 5;
+            // 
+            // colCuringRemark
+            // 
+            this.colCuringRemark.Caption = "备注";
+            this.colCuringRemark.FieldName = "CuringRemark";
+            this.colCuringRemark.Name = "colCuringRemark";
+            this.colCuringRemark.Visible = true;
+            this.colCuringRemark.VisibleIndex = 7;
             // 
             // groupControl1
             // 
@@ -131,7 +194,7 @@
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(619, 100);
-            this.groupControl1.TabIndex = 1;
+            this.groupControl1.TabIndex = 4;
             this.groupControl1.Text = "明细";
             // 
             // layoutControl1
@@ -203,7 +266,7 @@
             this.layCreateUser});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(615, 75);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(615, 84);
             this.layoutControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
@@ -235,7 +298,7 @@
             this.layCuringDate.Location = new System.Drawing.Point(0, 25);
             this.layCuringDate.Name = "layCuringDate";
             this.layCuringDate.Size = new System.Drawing.Size(297, 30);
-            this.layCuringDate.Text = "运行日期";
+            this.layCuringDate.Text = "保养日期";
             this.layCuringDate.TextSize = new System.Drawing.Size(48, 14);
             // 
             // layCreateUser
@@ -248,127 +311,54 @@
             this.layCreateUser.Text = "创建人";
             this.layCreateUser.TextSize = new System.Drawing.Size(48, 14);
             // 
-            // groupControl2
+            // panelControl1
             // 
-            this.groupControl2.Controls.Add(this.gridControl);
-            this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(0, 100);
-            this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(619, 297);
-            this.groupControl2.TabIndex = 2;
-            this.groupControl2.Text = "设备信息";
+            this.panelControl1.Controls.Add(this.btnCancel);
+            this.panelControl1.Controls.Add(this.btnAddFacilities);
+            this.panelControl1.Controls.Add(this.btnSave);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelControl1.Location = new System.Drawing.Point(0, 397);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(619, 50);
+            this.panelControl1.TabIndex = 3;
             // 
-            // gridControl
+            // btnCancel
             // 
-            this.gridControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl.Location = new System.Drawing.Point(2, 23);
-            this.gridControl.MainView = this.gridView;
-            this.gridControl.Name = "gridControl";
-            this.gridControl.Size = new System.Drawing.Size(615, 272);
-            this.gridControl.TabIndex = 0;
-            this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView});
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Appearance.Options.UseFont = true;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(530, 15);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 6;
+            this.btnCancel.Text = "取消(&C)";
             // 
-            // gridView
+            // btnAddFacilities
             // 
-            this.gridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colID,
-            this.colFacilityCode,
-            this.colFacilityName,
-            this.colFacilityAddress,
-            this.colFacilitySpec,
-            this.colStyleName,
-            this.colCuringRunTime,
-            this.colCuringResult,
-            this.colCuringRemark});
-            this.gridView.GridControl = this.gridControl;
-            this.gridView.IndicatorWidth = 40;
-            this.gridView.Name = "gridView";
-            this.gridView.OptionsView.ShowGroupPanel = false;
-            this.gridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridView_KeyDown);
+            this.btnAddFacilities.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddFacilities.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddFacilities.Appearance.Options.UseFont = true;
+            this.btnAddFacilities.Location = new System.Drawing.Point(311, 15);
+            this.btnAddFacilities.Name = "btnAddFacilities";
+            this.btnAddFacilities.Size = new System.Drawing.Size(104, 23);
+            this.btnAddFacilities.TabIndex = 4;
+            this.btnAddFacilities.Text = "添加设备信息";
+            this.btnAddFacilities.Click += new System.EventHandler(this.btnAddFacilities_Click);
             // 
-            // colID
+            // btnSave
             // 
-            this.colID.Caption = "ID";
-            this.colID.Name = "colID";
-            this.colID.OptionsColumn.AllowEdit = false;
-            this.colID.OptionsColumn.ReadOnly = true;
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Appearance.Options.UseFont = true;
+            this.btnSave.Location = new System.Drawing.Point(442, 15);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 5;
+            this.btnSave.Text = "保存(&S)";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // colFacilityCode
-            // 
-            this.colFacilityCode.Caption = "编号";
-            this.colFacilityCode.FieldName = "FacilityCode";
-            this.colFacilityCode.Name = "colFacilityCode";
-            this.colFacilityCode.OptionsColumn.AllowEdit = false;
-            this.colFacilityCode.OptionsColumn.ReadOnly = true;
-            this.colFacilityCode.Visible = true;
-            this.colFacilityCode.VisibleIndex = 0;
-            // 
-            // colFacilityName
-            // 
-            this.colFacilityName.Caption = "名称";
-            this.colFacilityName.FieldName = "FacilityName";
-            this.colFacilityName.Name = "colFacilityName";
-            this.colFacilityName.OptionsColumn.AllowEdit = false;
-            this.colFacilityName.OptionsColumn.ReadOnly = true;
-            this.colFacilityName.Visible = true;
-            this.colFacilityName.VisibleIndex = 1;
-            // 
-            // colFacilityAddress
-            // 
-            this.colFacilityAddress.Caption = "地址";
-            this.colFacilityAddress.FieldName = "FacilityAddress";
-            this.colFacilityAddress.Name = "colFacilityAddress";
-            this.colFacilityAddress.OptionsColumn.AllowEdit = false;
-            this.colFacilityAddress.OptionsColumn.ReadOnly = true;
-            this.colFacilityAddress.Visible = true;
-            this.colFacilityAddress.VisibleIndex = 2;
-            // 
-            // colFacilitySpec
-            // 
-            this.colFacilitySpec.Caption = "规格";
-            this.colFacilitySpec.FieldName = "FacilitySpec";
-            this.colFacilitySpec.Name = "colFacilitySpec";
-            this.colFacilitySpec.OptionsColumn.AllowEdit = false;
-            this.colFacilitySpec.OptionsColumn.ReadOnly = true;
-            this.colFacilitySpec.Visible = true;
-            this.colFacilitySpec.VisibleIndex = 3;
-            // 
-            // colStyleName
-            // 
-            this.colStyleName.Caption = "类型";
-            this.colStyleName.FieldName = "StyleName";
-            this.colStyleName.Name = "colStyleName";
-            this.colStyleName.OptionsColumn.AllowEdit = false;
-            this.colStyleName.OptionsColumn.ReadOnly = true;
-            this.colStyleName.Visible = true;
-            this.colStyleName.VisibleIndex = 4;
-            // 
-            // colCuringRunTime
-            // 
-            this.colCuringRunTime.Caption = "运行时间";
-            this.colCuringRunTime.FieldName = "CuringRunTime";
-            this.colCuringRunTime.Name = "colCuringRunTime";
-            this.colCuringRunTime.Visible = true;
-            this.colCuringRunTime.VisibleIndex = 5;
-            // 
-            // colCuringResult
-            // 
-            this.colCuringResult.Caption = "运行结果";
-            this.colCuringResult.FieldName = "CuringResult";
-            this.colCuringResult.Name = "colCuringResult";
-            this.colCuringResult.Visible = true;
-            this.colCuringResult.VisibleIndex = 6;
-            // 
-            // colCuringRemark
-            // 
-            this.colCuringRemark.Caption = "备注";
-            this.colCuringRemark.FieldName = "CuringRemark";
-            this.colCuringRemark.Name = "colCuringRemark";
-            this.colCuringRemark.Visible = true;
-            this.colCuringRemark.VisibleIndex = 7;
-            // 
-            // FrmSingleFacilitiesCuring
+            // FrmSingleFacilitiesCuringResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -376,12 +366,14 @@
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.panelControl1);
-            this.Name = "FrmSingleFacilitiesCuring";
+            this.Name = "FrmSingleFacilitiesCuringResult";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "设备运行记录";
-            this.Load += new System.EventHandler(this.FrmSingleFacilitiesCuring_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
+            this.Text = "设备养护记录";
+            this.Load += new System.EventHandler(this.FrmSingleFacilitiesCuringResult_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
+            this.groupControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
@@ -396,34 +388,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.layDepartment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layCuringDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layCreateUser)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
-            this.groupControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevExpress.XtraEditors.PanelControl panelControl1;
-        private DevExpress.XtraEditors.GroupControl groupControl1;
-        private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraGrid.GridControl gridControl;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView;
-        private DevExpress.XtraEditors.SimpleButton btnCancel;
-        private DevExpress.XtraEditors.SimpleButton btnSave;
-        private DevExpress.XtraEditors.TextEdit txtCreateUser;
-        private DevExpress.XtraEditors.TextEdit txtCuringName;
-        private DevExpress.XtraEditors.DateEdit deCuringDate;
-        private DevExpress.XtraEditors.ComboBoxEdit cboDepartment;
-        private DevExpress.XtraLayout.LayoutControlItem layCuringName;
-        private DevExpress.XtraLayout.LayoutControlItem layDepartment;
-        private DevExpress.XtraLayout.LayoutControlItem layCuringDate;
-        private DevExpress.XtraLayout.LayoutControlItem layCreateUser;
-        private DevExpress.XtraEditors.SimpleButton btnAddFacilities;
         private DevExpress.XtraGrid.Columns.GridColumn colID;
         private DevExpress.XtraGrid.Columns.GridColumn colFacilityCode;
         private DevExpress.XtraGrid.Columns.GridColumn colFacilityName;
@@ -432,6 +407,20 @@
         private DevExpress.XtraGrid.Columns.GridColumn colStyleName;
         private DevExpress.XtraGrid.Columns.GridColumn colCuringResult;
         private DevExpress.XtraGrid.Columns.GridColumn colCuringRemark;
-        private DevExpress.XtraGrid.Columns.GridColumn colCuringRunTime;
+        private DevExpress.XtraEditors.GroupControl groupControl1;
+        private DevExpress.XtraLayout.LayoutControl layoutControl1;
+        private DevExpress.XtraEditors.TextEdit txtCreateUser;
+        private DevExpress.XtraEditors.TextEdit txtCuringName;
+        private DevExpress.XtraEditors.DateEdit deCuringDate;
+        private DevExpress.XtraEditors.ComboBoxEdit cboDepartment;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
+        private DevExpress.XtraLayout.LayoutControlItem layCuringName;
+        private DevExpress.XtraLayout.LayoutControlItem layDepartment;
+        private DevExpress.XtraLayout.LayoutControlItem layCuringDate;
+        private DevExpress.XtraLayout.LayoutControlItem layCreateUser;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private DevExpress.XtraEditors.SimpleButton btnCancel;
+        private DevExpress.XtraEditors.SimpleButton btnAddFacilities;
+        private DevExpress.XtraEditors.SimpleButton btnSave;
     }
 }

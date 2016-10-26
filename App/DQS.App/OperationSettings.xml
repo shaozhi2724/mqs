@@ -7,7 +7,7 @@
           <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_AllProduct</ViewName>
           <PrimaryField>产品ID</PrimaryField>
-          <Fields>产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品大类,产品类别,单位,进项税</Fields>
+          <Fields>产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品大类,产品类别,单位,进项税,过期状态</Fields>
           <Filter>[状态] is  null or [状态] = '正常'</Filter>
           <PageSize>100</PageSize>
         </PopupForm>
@@ -541,6 +541,7 @@
         <Column Name="拒收数量" EntityField="Reservation5" FieldType="System.Int32" Visible="true" AllowEdit="false" />
         <Column Name="单价" EntityField="Reservation1" FieldType="System.Double" Nullable="true" Visible="true"/>
         <Column Name="金额" EntityField="Reservation2" FieldType="System.Double" Nullable="true" Visible="true"/>
+        <Column Name="件数" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="false"/>
         <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Nullable="true" Visible="true" AllowEdit="false"/>
         <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Nullable="true" Visible="true" AllowEdit="false"/>
@@ -647,24 +648,25 @@
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="true" />
         <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="true" />
         <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="true" />
-        <Column Name="灭菌批号" EntityField="SterilizationBatchNo" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="true" />
-        <Column Name="灭菌日期" EntityField="SterilizationDate" FieldType="System.DateTime" Nullable="true" Visible="true" AllowEdit="true" />
         <Column Name="收货数量" EntityField="Amount" FieldType="System.Int32" Visible="true" Nullable="true" AllowEdit="false" />
         <Column Name="验收数量" EntityField="ReceiveAmount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
+        <Column Name="件数" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="验收合格数量" EntityField="QualifiedAmount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
         <Column Name="验收不合格数量" EntityField="UnqualifiedAmount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
         <Column Name="拒收数量" EntityField="Reservation5" FieldType="System.Int32" Visible="true" Nullable="true" AllowEdit="false" />
         <Column Name="验收结果" EntityField="AcceptResult" FieldType="System.String" Visible="true" AllowEdit="true" />
         <Column Name="不合格事项及处置措施" EntityField="DetailRemark" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="true" />
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装比例"/>
-        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="注册证号"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="贮藏条件"/>
         <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品类别"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="单位"/>
+        <Column Name="注册证号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="注册证号"/>
         <Column Name="单价" EntityField="Reservation1" FieldType="System.Double" Nullable="true" Visible="true" PopupForm="Product" PopupField="单价"/>
         <Column Name="金额" EntityField="Reservation2" FieldType="System.Double" Nullable="true" Visible="true"/>
         <Column Name="入库ID" EntityField="Reservation3" FieldType="System.Double" Nullable="true" Visible="false"/>
         <Column Name="税率" EntityField="Reservation4" FieldType="System.String" Nullable="true" Visible="false"/>
+        <Column Name="灭菌批号" EntityField="SterilizationBatchNo" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="true" />
+        <Column Name="灭菌日期" EntityField="SterilizationDate" FieldType="System.DateTime" Nullable="true" Visible="true" AllowEdit="true" />
       </Columns>
     </Grid>
     <Report>

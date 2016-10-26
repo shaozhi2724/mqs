@@ -959,11 +959,11 @@ WHERE UP.ProductID = {0}", productID);
                 //{
                 //    isDefaultQuatificate = isDefaultQuatificate && _defaultProductCertifications.ContainsKey(certificate);
                 //}
-                //if (isDefaultQuatificate)
-                //{
-                //    XtraMessageBox.Show("该证书不允许删除", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                //    return;
-                //}
+                if (!DQS.Controls.Properties.Settings.Default.IsDelDefault && isDefaultQuatificate)
+                {
+                    XtraMessageBox.Show("该证书不允许删除", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    return;
+                }
                 DialogResult result = XtraMessageBox.Show("删除证书将连带附件和属性信息一起删除，确定要删除该证书信息吗？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.OK)
                 {

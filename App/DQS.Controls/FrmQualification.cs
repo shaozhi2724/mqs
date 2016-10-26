@@ -238,7 +238,7 @@ namespace DQS.Controls
                 StyleFormatCondition sfcRequiredExpression = new StyleFormatCondition();
                 sfcRequiredExpression.Appearance.ForeColor = Color.Red;
                 sfcRequiredExpression.Appearance.Options.UseBackColor = true;
-                sfcRequiredExpression.Appearance.Options.UseForeColor = true;
+                //sfcRequiredExpression.Appearance.Options.UseForeColor = true;
                 sfcRequiredExpression.ApplyToRow = true;
                 sfcRequiredExpression.Column = view.Columns["档案编号"];
                 sfcRequiredExpression.Condition = FormatConditionEnum.Expression;

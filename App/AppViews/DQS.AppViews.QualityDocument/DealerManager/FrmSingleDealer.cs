@@ -12,12 +12,14 @@ using DQS.Controls;
 using DQS.Module.Entities;
 using DQS.Common;
 using ORMSCore;
+using System.Data.SqlClient;
 
 namespace DQS.AppViews.QualityDocument.DealerManager
 {
     public partial class FrmSingleDealer : DevExpress.XtraEditors.XtraForm
     {
         private int? m_id;
+
 
         public FrmSingleDealer()
         {
@@ -30,6 +32,8 @@ namespace DQS.AppViews.QualityDocument.DealerManager
             this.cbxDealerType.Text = "供应商";
             this.cbxDealerType.Enabled = false;
             this.cbxDealerStyle.InitSource();
+
+            
             this.cbxIndustryStyle.InitSource();//SYSCategoryEntityFields.ItemID <= 2);
             if (this.Tag != null)
             {
@@ -46,7 +50,6 @@ namespace DQS.AppViews.QualityDocument.DealerManager
             }
             RenderRequiredFields();
         }
-
         private void RenderRequiredFields()
         {
             foreach (Control control in layControl.Controls)
@@ -184,7 +187,6 @@ namespace DQS.AppViews.QualityDocument.DealerManager
             {
                 entity.DealerStatus = this.cbbDealerStatus.Text.Trim();
             }
-
         }
     }
 }

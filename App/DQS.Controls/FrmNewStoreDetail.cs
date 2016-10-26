@@ -18,7 +18,7 @@ namespace DQS.Controls
 
         public int EmployeeID;
 
-        public int Department;
+        public int Department = 0;
 
         public FrmNewStoreDetail()
         {
@@ -162,7 +162,7 @@ namespace DQS.Controls
                 string sql = "";
                 if (Settings.Default.IsUseDepartment)
                 {
-                    sql = @"EXEC sp_SelectedStoreDetailDepartment " + ProductID + "" + Convert.ToInt32(GlobalItem.g_CurrentEmployee.DepartmentID);
+                    sql = @"EXEC sp_SelectedStoreDetailDepartment " + ProductID + "," + Department;
                 }
                 else
                 {

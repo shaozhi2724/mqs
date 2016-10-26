@@ -254,8 +254,14 @@ namespace DQS.Controls
                 case "复查":
                     this.CustomReCheck();
                     break;
-                case "电子监管码":
+                case "流通监管码":
                     this.CustomRegulatoryCode();
+                    break;
+                case "添加复核记录":
+                    this.CustomOldStoreOut();
+                    break;
+                case "添加入库记录":
+                    this.CustomOldStoreIn();
                     break;
                 default:
                     break;
@@ -745,7 +751,23 @@ namespace DQS.Controls
         /// </summary>
         protected virtual void CustomRegulatoryCode()
         {
-            SaveDataLog("电子监管码");
+            SaveDataLog("流通监管码");
+        }
+
+        /// <summary>
+        /// 添加旧系统复核数据
+        /// </summary>
+        protected virtual void CustomOldStoreOut()
+        {
+            SaveDataLog("添加复核记录");
+        }
+
+        /// <summary>
+        /// 添加旧系统入库数据
+        /// </summary>
+        protected virtual void CustomOldStoreIn()
+        {
+            SaveDataLog("添加入库记录");
         }
 
         /// <summary>

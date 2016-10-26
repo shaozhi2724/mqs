@@ -37,6 +37,7 @@
             this.gpcRecord = new DevExpress.XtraEditors.GroupControl();
             this.ftPanel = new DQS.Controls.FieldTextBoxPanel();
             this.layControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.txtcuringDays = new DQS.Controls.BUSCuringRecordEntityTextBox();
             this.txtInStoreID = new DQS.Controls.BUSCuringRecordEntityTextBox();
             this.txtSterilizationDate = new DQS.Controls.BUSCuringRecordEntityTextBox();
             this.txtSterilizationBatchNo = new DQS.Controls.BUSCuringRecordEntityTextBox();
@@ -69,7 +70,9 @@
             this.layValidateDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.laySterilizationBatchNo = new DevExpress.XtraLayout.LayoutControlItem();
             this.laySterilizationDate = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layCuringDays = new DevExpress.XtraLayout.LayoutControlItem();
             this.layInStoreID = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtStockCondition = new DQS.Controls.TextBoxEx();
             this.txtProducerName = new DQS.Controls.TextBoxEx();
             this.txtAuthorizedNo = new DQS.Controls.TextBoxEx();
             this.txtPackageSpec = new DQS.Controls.TextBoxEx();
@@ -88,6 +91,7 @@
             this.layPackageSpec = new DevExpress.XtraLayout.LayoutControlItem();
             this.layAuthorizedNo = new DevExpress.XtraLayout.LayoutControlItem();
             this.layProducerName = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layStockCondition = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.pnOperating)).BeginInit();
             this.pnOperating.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gpcProduct)).BeginInit();
@@ -101,6 +105,7 @@
             this.ftPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl1)).BeginInit();
             this.layControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtcuringDays.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtInStoreID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSterilizationDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSterilizationBatchNo.Properties)).BeginInit();
@@ -133,7 +138,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layValidateDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.laySterilizationBatchNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.laySterilizationDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layCuringDays)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layInStoreID)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStockCondition.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProducerName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAuthorizedNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPackageSpec.Properties)).BeginInit();
@@ -152,6 +159,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layPackageSpec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layAuthorizedNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProducerName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layStockCondition)).BeginInit();
             this.SuspendLayout();
             // 
             // pnOperating
@@ -203,6 +211,7 @@
             // 
             // layControl
             // 
+            this.layControl.Controls.Add(this.txtStockCondition);
             this.layControl.Controls.Add(this.txtProducerName);
             this.layControl.Controls.Add(this.txtAuthorizedNo);
             this.layControl.Controls.Add(this.txtPackageSpec);
@@ -234,7 +243,8 @@
             this.layProductStyle,
             this.layPackageSpec,
             this.layAuthorizedNo,
-            this.layProducerName});
+            this.layProducerName,
+            this.layStockCondition});
             this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(627, 146);
@@ -264,6 +274,7 @@
             // 
             // layControl1
             // 
+            this.layControl1.Controls.Add(this.txtcuringDays);
             this.layControl1.Controls.Add(this.txtInStoreID);
             this.layControl1.Controls.Add(this.txtSterilizationDate);
             this.layControl1.Controls.Add(this.txtSterilizationBatchNo);
@@ -288,6 +299,20 @@
             this.layControl1.TabIndex = 0;
             this.layControl1.Text = "layoutControl1";
             // 
+            // txtcuringDays
+            // 
+            this.txtcuringDays.AlphabeticFiled = null;
+            this.txtcuringDays.EntityField = DQS.Module.Entities.BUSCuringRecordEntityFields2.CuringDays;
+            this.txtcuringDays.IsIntegerOnly = false;
+            this.txtcuringDays.IsNullString = null;
+            this.txtcuringDays.IsNullValidate = false;
+            this.txtcuringDays.IsTransferAlphabetic = false;
+            this.txtcuringDays.Location = new System.Drawing.Point(371, 138);
+            this.txtcuringDays.Name = "txtcuringDays";
+            this.txtcuringDays.Size = new System.Drawing.Size(223, 21);
+            this.txtcuringDays.StyleController = this.layControl1;
+            this.txtcuringDays.TabIndex = 9;
+            // 
             // txtInStoreID
             // 
             this.txtInStoreID.AlphabeticFiled = null;
@@ -296,9 +321,9 @@
             this.txtInStoreID.IsNullString = null;
             this.txtInStoreID.IsNullValidate = false;
             this.txtInStoreID.IsTransferAlphabetic = false;
-            this.txtInStoreID.Location = new System.Drawing.Point(372, 163);
+            this.txtInStoreID.Location = new System.Drawing.Point(75, 163);
             this.txtInStoreID.Name = "txtInStoreID";
-            this.txtInStoreID.Size = new System.Drawing.Size(222, 21);
+            this.txtInStoreID.Size = new System.Drawing.Size(519, 21);
             this.txtInStoreID.StyleController = this.layControl1;
             this.txtInStoreID.TabIndex = 8;
             // 
@@ -310,7 +335,7 @@
             this.txtSterilizationDate.IsNullString = null;
             this.txtSterilizationDate.IsNullValidate = false;
             this.txtSterilizationDate.IsTransferAlphabetic = false;
-            this.txtSterilizationDate.Location = new System.Drawing.Point(371, 88);
+            this.txtSterilizationDate.Location = new System.Drawing.Point(371, 63);
             this.txtSterilizationDate.Name = "txtSterilizationDate";
             this.txtSterilizationDate.Properties.ReadOnly = true;
             this.txtSterilizationDate.Size = new System.Drawing.Size(223, 21);
@@ -325,7 +350,7 @@
             this.txtSterilizationBatchNo.IsNullString = null;
             this.txtSterilizationBatchNo.IsNullValidate = false;
             this.txtSterilizationBatchNo.IsTransferAlphabetic = false;
-            this.txtSterilizationBatchNo.Location = new System.Drawing.Point(75, 88);
+            this.txtSterilizationBatchNo.Location = new System.Drawing.Point(75, 63);
             this.txtSterilizationBatchNo.Name = "txtSterilizationBatchNo";
             this.txtSterilizationBatchNo.Properties.ReadOnly = true;
             this.txtSterilizationBatchNo.Size = new System.Drawing.Size(229, 21);
@@ -340,7 +365,7 @@
             this.txtValidateDate.IsNullString = null;
             this.txtValidateDate.IsNullValidate = false;
             this.txtValidateDate.IsTransferAlphabetic = false;
-            this.txtValidateDate.Location = new System.Drawing.Point(371, 63);
+            this.txtValidateDate.Location = new System.Drawing.Point(371, 38);
             this.txtValidateDate.Name = "txtValidateDate";
             this.txtValidateDate.Properties.ReadOnly = true;
             this.txtValidateDate.Size = new System.Drawing.Size(223, 21);
@@ -355,7 +380,7 @@
             this.txtAmount.IsNullString = null;
             this.txtAmount.IsNullValidate = false;
             this.txtAmount.IsTransferAlphabetic = false;
-            this.txtAmount.Location = new System.Drawing.Point(75, 63);
+            this.txtAmount.Location = new System.Drawing.Point(75, 38);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Properties.ReadOnly = true;
             this.txtAmount.Size = new System.Drawing.Size(229, 21);
@@ -370,7 +395,7 @@
             this.txtProduceDate.IsNullString = null;
             this.txtProduceDate.IsNullValidate = false;
             this.txtProduceDate.IsTransferAlphabetic = false;
-            this.txtProduceDate.Location = new System.Drawing.Point(371, 38);
+            this.txtProduceDate.Location = new System.Drawing.Point(371, 13);
             this.txtProduceDate.Name = "txtProduceDate";
             this.txtProduceDate.Properties.ReadOnly = true;
             this.txtProduceDate.Size = new System.Drawing.Size(223, 21);
@@ -385,7 +410,7 @@
             this.txtBatchNo.IsNullString = null;
             this.txtBatchNo.IsNullValidate = false;
             this.txtBatchNo.IsTransferAlphabetic = false;
-            this.txtBatchNo.Location = new System.Drawing.Point(75, 38);
+            this.txtBatchNo.Location = new System.Drawing.Point(75, 13);
             this.txtBatchNo.Name = "txtBatchNo";
             this.txtBatchNo.Properties.ReadOnly = true;
             this.txtBatchNo.Size = new System.Drawing.Size(229, 21);
@@ -401,7 +426,7 @@
             this.txtUnqualifiedAmount.IsNullString = null;
             this.txtUnqualifiedAmount.IsNullValidate = false;
             this.txtUnqualifiedAmount.IsTransferAlphabetic = false;
-            this.txtUnqualifiedAmount.Location = new System.Drawing.Point(371, 113);
+            this.txtUnqualifiedAmount.Location = new System.Drawing.Point(371, 88);
             this.txtUnqualifiedAmount.Name = "txtUnqualifiedAmount";
             this.txtUnqualifiedAmount.Properties.ReadOnly = true;
             this.txtUnqualifiedAmount.Size = new System.Drawing.Size(223, 21);
@@ -416,9 +441,9 @@
             this.txtCuringRemrk.IsNullString = null;
             this.txtCuringRemrk.IsNullValidate = false;
             this.txtCuringRemrk.IsTransferAlphabetic = false;
-            this.txtCuringRemrk.Location = new System.Drawing.Point(75, 163);
+            this.txtCuringRemrk.Location = new System.Drawing.Point(75, 138);
             this.txtCuringRemrk.Name = "txtCuringRemrk";
-            this.txtCuringRemrk.Size = new System.Drawing.Size(230, 21);
+            this.txtCuringRemrk.Size = new System.Drawing.Size(229, 21);
             this.txtCuringRemrk.StyleController = this.layControl1;
             this.txtCuringRemrk.TabIndex = 7;
             // 
@@ -430,7 +455,7 @@
             this.txtQualifiedAmount.IsNullString = "合格数量不能为空。";
             this.txtQualifiedAmount.IsNullValidate = true;
             this.txtQualifiedAmount.IsTransferAlphabetic = false;
-            this.txtQualifiedAmount.Location = new System.Drawing.Point(75, 113);
+            this.txtQualifiedAmount.Location = new System.Drawing.Point(75, 88);
             this.txtQualifiedAmount.Name = "txtQualifiedAmount";
             this.txtQualifiedAmount.Size = new System.Drawing.Size(229, 21);
             this.txtQualifiedAmount.StyleController = this.layControl1;
@@ -445,7 +470,7 @@
             this.txtCuringMan.IsNullString = "养护人不能为空";
             this.txtCuringMan.IsNullValidate = true;
             this.txtCuringMan.IsTransferAlphabetic = true;
-            this.txtCuringMan.Location = new System.Drawing.Point(371, -12);
+            this.txtCuringMan.Location = new System.Drawing.Point(371, -37);
             this.txtCuringMan.Name = "txtCuringMan";
             this.txtCuringMan.Size = new System.Drawing.Size(223, 21);
             this.txtCuringMan.StyleController = this.layControl1;
@@ -459,7 +484,7 @@
             this.txtCuringCode.IsNullString = "记录编号不能为空。";
             this.txtCuringCode.IsNullValidate = true;
             this.txtCuringCode.IsTransferAlphabetic = false;
-            this.txtCuringCode.Location = new System.Drawing.Point(75, -12);
+            this.txtCuringCode.Location = new System.Drawing.Point(75, -37);
             this.txtCuringCode.Name = "txtCuringCode";
             this.txtCuringCode.Size = new System.Drawing.Size(229, 21);
             this.txtCuringCode.StyleController = this.layControl1;
@@ -467,7 +492,7 @@
             // 
             // txtCheckItem
             // 
-            this.txtCheckItem.Location = new System.Drawing.Point(75, 13);
+            this.txtCheckItem.Location = new System.Drawing.Point(75, -12);
             this.txtCheckItem.Name = "txtCheckItem";
             this.txtCheckItem.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -477,7 +502,7 @@
             // 
             // txtQualityCondition
             // 
-            this.txtQualityCondition.Location = new System.Drawing.Point(371, 13);
+            this.txtQualityCondition.Location = new System.Drawing.Point(371, -12);
             this.txtQualityCondition.Name = "txtQualityCondition";
             this.txtQualityCondition.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -487,7 +512,7 @@
             // 
             // txtCuringMeasure
             // 
-            this.txtCuringMeasure.Location = new System.Drawing.Point(75, 138);
+            this.txtCuringMeasure.Location = new System.Drawing.Point(75, 113);
             this.txtCuringMeasure.Name = "txtCuringMeasure";
             this.txtCuringMeasure.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -497,7 +522,7 @@
             // 
             // txtCuringResult
             // 
-            this.txtCuringResult.Location = new System.Drawing.Point(371, 138);
+            this.txtCuringResult.Location = new System.Drawing.Point(371, 113);
             this.txtCuringResult.Name = "txtCuringResult";
             this.txtCuringResult.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -526,10 +551,11 @@
             this.layValidateDate,
             this.laySterilizationBatchNo,
             this.laySterilizationDate,
+            this.layCuringDays,
             this.layInStoreID});
-            this.layControlGroup1.Location = new System.Drawing.Point(0, -24);
+            this.layControlGroup1.Location = new System.Drawing.Point(0, -49);
             this.layControlGroup1.Name = "layControlGroup1";
-            this.layControlGroup1.Size = new System.Drawing.Size(606, 220);
+            this.layControlGroup1.Size = new System.Drawing.Size(606, 245);
             this.layControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layControlGroup1.Text = "养护记录信息";
             this.layControlGroup1.TextVisible = false;
@@ -600,7 +626,7 @@
             this.layCuringRemrk.CustomizationFormText = "备注";
             this.layCuringRemrk.Location = new System.Drawing.Point(0, 175);
             this.layCuringRemrk.Name = "layCuringRemrk";
-            this.layCuringRemrk.Size = new System.Drawing.Size(297, 25);
+            this.layCuringRemrk.Size = new System.Drawing.Size(296, 25);
             this.layCuringRemrk.Text = "备注";
             this.layCuringRemrk.TextSize = new System.Drawing.Size(60, 14);
             // 
@@ -684,16 +710,40 @@
             this.laySterilizationDate.Text = "灭菌日期";
             this.laySterilizationDate.TextSize = new System.Drawing.Size(60, 14);
             // 
+            // layCuringDays
+            // 
+            this.layCuringDays.Control = this.txtcuringDays;
+            this.layCuringDays.CustomizationFormText = "layoutControlItem1";
+            this.layCuringDays.Location = new System.Drawing.Point(296, 175);
+            this.layCuringDays.Name = "layCuringDays";
+            this.layCuringDays.Size = new System.Drawing.Size(290, 25);
+            this.layCuringDays.Text = "周期";
+            this.layCuringDays.TextSize = new System.Drawing.Size(60, 14);
+            // 
             // layInStoreID
             // 
             this.layInStoreID.Control = this.txtInStoreID;
             this.layInStoreID.CustomizationFormText = "layoutControlItem1";
-            this.layInStoreID.Location = new System.Drawing.Point(297, 175);
+            this.layInStoreID.Location = new System.Drawing.Point(0, 200);
             this.layInStoreID.Name = "layInStoreID";
-            this.layInStoreID.Size = new System.Drawing.Size(289, 25);
+            this.layInStoreID.Size = new System.Drawing.Size(586, 25);
             this.layInStoreID.Text = "入库ID";
             this.layInStoreID.TextSize = new System.Drawing.Size(60, 14);
             this.layInStoreID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            // 
+            // txtStockCondition
+            // 
+            this.txtStockCondition.AlphabeticFiled = null;
+            this.txtStockCondition.IsIntegerOnly = false;
+            this.txtStockCondition.IsNullString = null;
+            this.txtStockCondition.IsNullValidate = false;
+            this.txtStockCondition.IsTransferAlphabetic = false;
+            this.txtStockCondition.Location = new System.Drawing.Point(87, 112);
+            this.txtStockCondition.Name = "txtStockCondition";
+            this.txtStockCondition.Properties.ReadOnly = true;
+            this.txtStockCondition.Size = new System.Drawing.Size(230, 21);
+            this.txtStockCondition.StyleController = this.layControl;
+            this.txtStockCondition.TabIndex = 8;
             // 
             // txtProducerName
             // 
@@ -702,10 +752,10 @@
             this.txtProducerName.IsNullString = null;
             this.txtProducerName.IsNullValidate = false;
             this.txtProducerName.IsTransferAlphabetic = false;
-            this.txtProducerName.Location = new System.Drawing.Point(87, 112);
+            this.txtProducerName.Location = new System.Drawing.Point(396, 112);
             this.txtProducerName.Name = "txtProducerName";
             this.txtProducerName.Properties.ReadOnly = true;
-            this.txtProducerName.Size = new System.Drawing.Size(528, 21);
+            this.txtProducerName.Size = new System.Drawing.Size(219, 21);
             this.txtProducerName.StyleController = this.layControl;
             this.txtProducerName.TabIndex = 8;
             // 
@@ -905,11 +955,21 @@
             // 
             this.layProducerName.Control = this.txtProducerName;
             this.layProducerName.CustomizationFormText = "生产厂商";
-            this.layProducerName.Location = new System.Drawing.Point(0, 100);
+            this.layProducerName.Location = new System.Drawing.Point(309, 100);
             this.layProducerName.Name = "layProducerName";
-            this.layProducerName.Size = new System.Drawing.Size(607, 26);
+            this.layProducerName.Size = new System.Drawing.Size(298, 26);
             this.layProducerName.Text = "生产厂商";
             this.layProducerName.TextSize = new System.Drawing.Size(72, 14);
+            // 
+            // layStockCondition
+            // 
+            this.layStockCondition.Control = this.txtStockCondition;
+            this.layStockCondition.CustomizationFormText = "存储库区";
+            this.layStockCondition.Location = new System.Drawing.Point(0, 100);
+            this.layStockCondition.Name = "layStockCondition";
+            this.layStockCondition.Size = new System.Drawing.Size(309, 26);
+            this.layStockCondition.Text = "存储库区";
+            this.layStockCondition.TextSize = new System.Drawing.Size(72, 14);
             // 
             // FrmSingleCuringRecord
             // 
@@ -942,6 +1002,7 @@
             this.ftPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl1)).EndInit();
             this.layControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtcuringDays.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtInStoreID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSterilizationDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSterilizationBatchNo.Properties)).EndInit();
@@ -974,7 +1035,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layValidateDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.laySterilizationBatchNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.laySterilizationDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layCuringDays)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layInStoreID)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStockCondition.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProducerName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAuthorizedNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPackageSpec.Properties)).EndInit();
@@ -993,6 +1056,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layPackageSpec)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layAuthorizedNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProducerName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layStockCondition)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1059,5 +1123,9 @@
         private DevExpress.XtraLayout.LayoutControlItem laySterilizationDate;
         private DevExpress.XtraLayout.LayoutControlItem layInStoreID;
         public Controls.BUSCuringRecordEntityTextBox txtInStoreID;
+        public Controls.TextBoxEx txtStockCondition;
+        private DevExpress.XtraLayout.LayoutControlItem layStockCondition;
+        public Controls.BUSCuringRecordEntityTextBox txtcuringDays;
+        private DevExpress.XtraLayout.LayoutControlItem layCuringDays;
     }
 }

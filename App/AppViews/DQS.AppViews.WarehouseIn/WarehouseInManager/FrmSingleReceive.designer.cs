@@ -196,7 +196,7 @@
             // 
             this.txtTimeLimit.AlphabeticFiled = null;
             this.txtTimeLimit.EditValue = "0";
-            this.txtTimeLimit.EntityField = DQS.Module.Entities.BUSReceiveEntityFields2.Reservation5;
+            this.txtTimeLimit.EntityField = DQS.Module.Entities.BUSReceiveEntityFields2.Reservation8;
             this.txtTimeLimit.IsIntegerOnly = false;
             this.txtTimeLimit.IsNullString = null;
             this.txtTimeLimit.IsNullValidate = false;

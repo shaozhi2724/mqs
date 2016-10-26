@@ -12,12 +12,14 @@ using DQS.Controls;
 using DQS.Module.Entities;
 using DQS.Common;
 using ORMSCore;
+using System.Data.SqlClient;
 
 namespace DQS.AppViews.QualityDocument.ProviderManager
 {
     public partial class FrmSingleProvider : DevExpress.XtraEditors.XtraForm
     {
         private int? m_id;
+        List<string> operators = new List<string>();
 
         public FrmSingleProvider()
         {
@@ -33,6 +35,9 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
 
             this.cbxDealerStyle.InitSource();
             this.cbxIndustryStyle.InitSource();//SYSCategoryEntityFields.ItemID > 1);
+
+            LoadOperators();
+
             BindArea();
             if (this.Tag != null)
             {
@@ -48,6 +53,33 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                 this.CustomGetEntity(entity);
             }
             RenderRequiredFields();
+        }
+        private void LoadOperators()
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                string sqlBill = @"SELECT EmployeeName FROM dbo.BFI_Employee WHERE PostName = '业务员'";
+
+                SqlDataAdapter sdad = new SqlDataAdapter(sqlBill, conn);
+                DataSet ds = new DataSet();
+                try
+                {
+                    sdad.Fill(ds, "Table");
+                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                    {
+                        operators.Add(ds.Tables["Table"].Rows[i]["EmployeeName"].ToString());
+                        cboOperator.Properties.Items.Add(ds.Tables["Table"].Rows[i]["EmployeeName"].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.ToString(), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
 
         private void BindArea()
@@ -180,6 +212,11 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                 this.cbbDealerStatus.Text = entity.DealerStatus;
             }
 
+            if (!entity.IsNullField("Reservation5"))
+            {
+                this.cboOperator.Text = entity.Reservation5;
+            }
+
         }
 
         /// <summary>
@@ -214,6 +251,11 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
             }
 
             entity.DealerArea = txtDealerArea.Text.Trim();
+
+            if (this.cboOperator.Text != "")
+            {
+                entity.Reservation5 = this.cboOperator.Text;
+            }
         }
     }
 }

@@ -34,6 +34,10 @@
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.ftPanel = new DQS.Controls.FieldTextBoxPanel();
             this.layControl = new DevExpress.XtraLayout.LayoutControl();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtReservation4 = new DQS.Controls.BFIDealerEntityTextBox();
+            this.txtReservation3 = new DQS.Controls.BFIDealerEntityTextBox();
             this.cbxPrice = new DevExpress.XtraEditors.LookUpEdit();
             this.gpcRight = new DevExpress.XtraEditors.GroupControl();
             this.chklbcProductStyle = new DevExpress.XtraEditors.CheckedListBoxControl();
@@ -101,12 +105,18 @@
             this.layBusinessRange = new DevExpress.XtraLayout.LayoutControlItem();
             this.layPrice = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.layReservation3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layReservation4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.pnOperating)).BeginInit();
             this.pnOperating.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
             this.ftPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
             this.layControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReservation4.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReservation3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpcRight)).BeginInit();
             this.gpcRight.SuspendLayout();
@@ -176,6 +186,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layBusinessRange)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layReservation3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layReservation4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
             // 
             // pnOperating
@@ -246,6 +260,10 @@
             // 
             // layControl
             // 
+            this.layControl.Controls.Add(this.label2);
+            this.layControl.Controls.Add(this.label1);
+            this.layControl.Controls.Add(this.txtReservation4);
+            this.layControl.Controls.Add(this.txtReservation3);
             this.layControl.Controls.Add(this.cbxPrice);
             this.layControl.Controls.Add(this.gpcRight);
             this.layControl.Controls.Add(this.txtDealerCode);
@@ -285,6 +303,52 @@
             this.layControl.Size = new System.Drawing.Size(855, 471);
             this.layControl.TabIndex = 0;
             this.layControl.Text = "layControl";
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(535, 237);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 21);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "天";
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(819, 237);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(24, 21);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "元";
+            // 
+            // txtReservation4
+            // 
+            this.txtReservation4.AlphabeticFiled = null;
+            this.txtReservation4.EntityField = DQS.Module.Entities.BFIDealerEntityFields2.Reservation4;
+            this.txtReservation4.IsIntegerOnly = false;
+            this.txtReservation4.IsNullString = null;
+            this.txtReservation4.IsNullValidate = false;
+            this.txtReservation4.IsTransferAlphabetic = false;
+            this.txtReservation4.Location = new System.Drawing.Point(655, 237);
+            this.txtReservation4.Name = "txtReservation4";
+            this.txtReservation4.Size = new System.Drawing.Size(160, 21);
+            this.txtReservation4.StyleController = this.layControl;
+            this.txtReservation4.TabIndex = 24;
+            // 
+            // txtReservation3
+            // 
+            this.txtReservation3.AlphabeticFiled = null;
+            this.txtReservation3.EntityField = DQS.Module.Entities.BFIDealerEntityFields2.Reservation3;
+            this.txtReservation3.IsIntegerOnly = false;
+            this.txtReservation3.IsNullString = null;
+            this.txtReservation3.IsNullValidate = false;
+            this.txtReservation3.IsTransferAlphabetic = false;
+            this.txtReservation3.Location = new System.Drawing.Point(378, 237);
+            this.txtReservation3.Name = "txtReservation3";
+            this.txtReservation3.Size = new System.Drawing.Size(153, 21);
+            this.txtReservation3.StyleController = this.layControl;
+            this.txtReservation3.TabIndex = 25;
             // 
             // cbxPrice
             // 
@@ -489,7 +553,7 @@
             this.txtEmployeeNum.IsTransferAlphabetic = false;
             this.txtEmployeeNum.Location = new System.Drawing.Point(99, 237);
             this.txtEmployeeNum.Name = "txtEmployeeNum";
-            this.txtEmployeeNum.Size = new System.Drawing.Size(744, 21);
+            this.txtEmployeeNum.Size = new System.Drawing.Size(188, 21);
             this.txtEmployeeNum.StyleController = this.layControl;
             this.txtEmployeeNum.TabIndex = 24;
             // 
@@ -812,7 +876,11 @@
             this.layEmployeeNum,
             this.layBusinessRange,
             this.layPrice,
-            this.emptySpaceItem1});
+            this.emptySpaceItem1,
+            this.layReservation3,
+            this.layReservation4,
+            this.layoutControlItem1,
+            this.layoutControlItem2});
             this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(855, 471);
@@ -1108,7 +1176,7 @@
             this.layEmployeeNum.CustomizationFormText = "从业人数";
             this.layEmployeeNum.Location = new System.Drawing.Point(0, 225);
             this.layEmployeeNum.Name = "layEmployeeNum";
-            this.layEmployeeNum.Size = new System.Drawing.Size(835, 25);
+            this.layEmployeeNum.Size = new System.Drawing.Size(279, 25);
             this.layEmployeeNum.Text = "从业人数";
             this.layEmployeeNum.TextSize = new System.Drawing.Size(84, 17);
             // 
@@ -1143,6 +1211,50 @@
             this.emptySpaceItem1.Text = "emptySpaceItem1";
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
+            // layReservation3
+            // 
+            this.layReservation3.Control = this.txtReservation3;
+            this.layReservation3.CustomizationFormText = "周期";
+            this.layReservation3.Location = new System.Drawing.Point(279, 225);
+            this.layReservation3.Name = "layReservation3";
+            this.layReservation3.Size = new System.Drawing.Size(244, 25);
+            this.layReservation3.Text = "周期";
+            this.layReservation3.TextSize = new System.Drawing.Size(84, 17);
+            // 
+            // layReservation4
+            // 
+            this.layReservation4.Control = this.txtReservation4;
+            this.layReservation4.CustomizationFormText = "金额";
+            this.layReservation4.Location = new System.Drawing.Point(556, 225);
+            this.layReservation4.Name = "layReservation4";
+            this.layReservation4.Size = new System.Drawing.Size(251, 25);
+            this.layReservation4.Text = "金额";
+            this.layReservation4.TextSize = new System.Drawing.Size(84, 17);
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.label1;
+            this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
+            this.layoutControlItem1.Location = new System.Drawing.Point(807, 225);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(28, 25);
+            this.layoutControlItem1.Text = "layoutControlItem1";
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextToControlDistance = 0;
+            this.layoutControlItem1.TextVisible = false;
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.label2;
+            this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
+            this.layoutControlItem2.Location = new System.Drawing.Point(523, 225);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(33, 25);
+            this.layoutControlItem2.Text = "layoutControlItem2";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem2.TextToControlDistance = 0;
+            this.layoutControlItem2.TextVisible = false;
+            // 
             // FrmSingleFirstDealer
             // 
             this.AcceptButton = this.btnSave;
@@ -1166,6 +1278,8 @@
             this.ftPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).EndInit();
             this.layControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtReservation4.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReservation3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpcRight)).EndInit();
             this.gpcRight.ResumeLayout(false);
@@ -1235,6 +1349,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layBusinessRange)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layReservation3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layReservation4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1314,5 +1432,13 @@
         private DevExpress.XtraEditors.LookUpEdit cbxPrice;
         private DevExpress.XtraLayout.LayoutControlItem layPrice;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+        private System.Windows.Forms.Label label1;
+        private Controls.BFIDealerEntityTextBox txtReservation4;
+        private Controls.BFIDealerEntityTextBox txtReservation3;
+        private DevExpress.XtraLayout.LayoutControlItem layReservation3;
+        private DevExpress.XtraLayout.LayoutControlItem layReservation4;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private System.Windows.Forms.Label label2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
     }
 }

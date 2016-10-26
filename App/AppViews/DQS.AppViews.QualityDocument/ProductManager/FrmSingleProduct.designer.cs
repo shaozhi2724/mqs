@@ -35,6 +35,7 @@
             this.tbProduct = new DevExpress.XtraTab.XtraTabControl();
             this.tbPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.layControl = new DevExpress.XtraLayout.LayoutControl();
+            this.txtPricePercent = new DQS.Controls.BFIProductEntityTextBox();
             this.txtProductSpell = new DQS.Controls.BFIProductEntityTextBox();
             this.cboSaleTax = new DQS.Controls.ComboBoxCategoryEx();
             this.cboPurchaseTax = new DQS.Controls.ComboBoxCategoryEx();
@@ -110,6 +111,7 @@
             this.layRegisterNo = new DevExpress.XtraLayout.LayoutControlItem();
             this.layProductRemrk = new DevExpress.XtraLayout.LayoutControlItem();
             this.layProductSpell = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layPricePercent = new DevExpress.XtraLayout.LayoutControlItem();
             this.tbPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.layControl2 = new DevExpress.XtraLayout.LayoutControl();
             this.bfiProductEntityTextBox1 = new DQS.Controls.BFIProductEntityTextBox();
@@ -156,8 +158,6 @@
             this.tabGrantedPerson = new DevExpress.XtraTab.XtraTabPage();
             this.popupGrid = new DQS.Controls.PopupGrid();
             this.rdbtnIsUseToPregnantYes = new System.Windows.Forms.RadioButton();
-            this.txtPricePercent = new DQS.Controls.BFIProductEntityTextBox();
-            this.layPricePercent = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.pnOperating)).BeginInit();
             this.pnOperating.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
@@ -167,6 +167,7 @@
             this.tbPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
             this.layControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPricePercent.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductSpell.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSaleTax.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboPurchaseTax.Properties)).BeginInit();
@@ -242,6 +243,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layRegisterNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductRemrk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductSpell)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPricePercent)).BeginInit();
             this.tbPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl2)).BeginInit();
             this.layControl2.SuspendLayout();
@@ -288,8 +290,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layProductEntityTextBox1)).BeginInit();
             this.tabGrantedPerson.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.popupGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPricePercent.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layPricePercent)).BeginInit();
             this.SuspendLayout();
             // 
             // pnOperating
@@ -409,6 +409,20 @@
             this.layControl.TabIndex = 0;
             this.layControl.Text = "layControl";
             // 
+            // txtPricePercent
+            // 
+            this.txtPricePercent.AlphabeticFiled = null;
+            this.txtPricePercent.EntityField = DQS.Module.Entities.BFIProductEntityFields2.Reservation3;
+            this.txtPricePercent.IsIntegerOnly = false;
+            this.txtPricePercent.IsNullString = null;
+            this.txtPricePercent.IsNullValidate = false;
+            this.txtPricePercent.IsTransferAlphabetic = false;
+            this.txtPricePercent.Location = new System.Drawing.Point(431, 438);
+            this.txtPricePercent.Name = "txtPricePercent";
+            this.txtPricePercent.Size = new System.Drawing.Size(133, 21);
+            this.txtPricePercent.StyleController = this.layControl;
+            this.txtPricePercent.TabIndex = 53;
+            // 
             // txtProductSpell
             // 
             this.txtProductSpell.AlphabeticFiled = "ProductSpell";
@@ -417,9 +431,9 @@
             this.txtProductSpell.IsNullString = "";
             this.txtProductSpell.IsNullValidate = false;
             this.txtProductSpell.IsTransferAlphabetic = true;
-            this.txtProductSpell.Location = new System.Drawing.Point(500, 14);
+            this.txtProductSpell.Location = new System.Drawing.Point(508, 87);
             this.txtProductSpell.Name = "txtProductSpell";
-            this.txtProductSpell.Size = new System.Drawing.Size(286, 21);
+            this.txtProductSpell.Size = new System.Drawing.Size(278, 21);
             this.txtProductSpell.StyleController = this.layControl;
             this.txtProductSpell.TabIndex = 53;
             // 
@@ -429,7 +443,7 @@
             this.cboSaleTax.CategoryCode = "SaleTax";
             this.cboSaleTax.FirstDefaultItemText = null;
             this.cboSaleTax.FormatQueryString = null;
-            this.cboSaleTax.Location = new System.Drawing.Point(498, 115);
+            this.cboSaleTax.Location = new System.Drawing.Point(506, 188);
             this.cboSaleTax.Name = "cboSaleTax";
             this.cboSaleTax.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cboSaleTax.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -438,7 +452,7 @@
             this.cboSaleTax.Properties.NullValuePromptShowForEmptyValue = true;
             this.cboSaleTax.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cboSaleTax.SelectedValue = null;
-            this.cboSaleTax.Size = new System.Drawing.Size(288, 21);
+            this.cboSaleTax.Size = new System.Drawing.Size(280, 21);
             this.cboSaleTax.StyleController = this.layControl;
             this.cboSaleTax.TabIndex = 53;
             // 
@@ -448,7 +462,7 @@
             this.cboPurchaseTax.CategoryCode = "PurchaseTax";
             this.cboPurchaseTax.FirstDefaultItemText = null;
             this.cboPurchaseTax.FormatQueryString = null;
-            this.cboPurchaseTax.Location = new System.Drawing.Point(111, 115);
+            this.cboPurchaseTax.Location = new System.Drawing.Point(119, 188);
             this.cboPurchaseTax.Name = "cboPurchaseTax";
             this.cboPurchaseTax.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cboPurchaseTax.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -457,7 +471,7 @@
             this.cboPurchaseTax.Properties.NullValuePromptShowForEmptyValue = true;
             this.cboPurchaseTax.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cboPurchaseTax.SelectedValue = null;
-            this.cboPurchaseTax.Size = new System.Drawing.Size(284, 21);
+            this.cboPurchaseTax.Size = new System.Drawing.Size(276, 21);
             this.cboPurchaseTax.StyleController = this.layControl;
             this.cboPurchaseTax.TabIndex = 53;
             // 
@@ -469,9 +483,9 @@
             this.txtProductionOriginAddress.IsNullString = "产地不能为空。";
             this.txtProductionOriginAddress.IsNullValidate = false;
             this.txtProductionOriginAddress.IsTransferAlphabetic = false;
-            this.txtProductionOriginAddress.Location = new System.Drawing.Point(500, 190);
+            this.txtProductionOriginAddress.Location = new System.Drawing.Point(508, 263);
             this.txtProductionOriginAddress.Name = "txtProductionOriginAddress";
-            this.txtProductionOriginAddress.Size = new System.Drawing.Size(286, 21);
+            this.txtProductionOriginAddress.Size = new System.Drawing.Size(278, 21);
             this.txtProductionOriginAddress.StyleController = this.layControl;
             this.txtProductionOriginAddress.TabIndex = 54;
             // 
@@ -483,9 +497,9 @@
             this.txtStockFilter.IsNullString = "贮藏条件不能为空。";
             this.txtStockFilter.IsNullValidate = true;
             this.txtStockFilter.IsTransferAlphabetic = false;
-            this.txtStockFilter.Location = new System.Drawing.Point(500, 240);
+            this.txtStockFilter.Location = new System.Drawing.Point(508, 313);
             this.txtStockFilter.Name = "txtStockFilter";
-            this.txtStockFilter.Size = new System.Drawing.Size(286, 21);
+            this.txtStockFilter.Size = new System.Drawing.Size(278, 21);
             this.txtStockFilter.StyleController = this.layControl;
             this.txtStockFilter.TabIndex = 31;
             // 
@@ -495,7 +509,7 @@
             this.cbxProductCycleStyle.CategoryCode = "ProductCycleStyle";
             this.cbxProductCycleStyle.FirstDefaultItemText = null;
             this.cbxProductCycleStyle.FormatQueryString = null;
-            this.cbxProductCycleStyle.Location = new System.Drawing.Point(111, 265);
+            this.cbxProductCycleStyle.Location = new System.Drawing.Point(119, 338);
             this.cbxProductCycleStyle.Name = "cbxProductCycleStyle";
             this.cbxProductCycleStyle.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cbxProductCycleStyle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -504,14 +518,14 @@
             this.cbxProductCycleStyle.Properties.NullValuePromptShowForEmptyValue = true;
             this.cbxProductCycleStyle.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbxProductCycleStyle.SelectedValue = null;
-            this.cbxProductCycleStyle.Size = new System.Drawing.Size(286, 21);
+            this.cbxProductCycleStyle.Size = new System.Drawing.Size(278, 21);
             this.cbxProductCycleStyle.StyleController = this.layControl;
             this.cbxProductCycleStyle.TabIndex = 29;
             // 
             // cbbProductStatus
             // 
             this.cbbProductStatus.EditValue = "正常";
-            this.cbbProductStatus.Location = new System.Drawing.Point(111, 365);
+            this.cbbProductStatus.Location = new System.Drawing.Point(119, 438);
             this.cbbProductStatus.Name = "cbbProductStatus";
             this.cbbProductStatus.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cbbProductStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -521,7 +535,7 @@
             "禁用"});
             this.cbbProductStatus.Properties.NullValuePrompt = "请选择状态";
             this.cbbProductStatus.Properties.NullValuePromptShowForEmptyValue = true;
-            this.cbbProductStatus.Size = new System.Drawing.Size(209, 21);
+            this.cbbProductStatus.Size = new System.Drawing.Size(201, 21);
             this.cbbProductStatus.StyleController = this.layControl;
             this.cbbProductStatus.TabIndex = 25;
             // 
@@ -533,9 +547,9 @@
             this.txtFirstDealerName.IsNullString = "供货商不能为空。";
             this.txtFirstDealerName.IsNullValidate = false;
             this.txtFirstDealerName.IsTransferAlphabetic = false;
-            this.txtFirstDealerName.Location = new System.Drawing.Point(500, 215);
+            this.txtFirstDealerName.Location = new System.Drawing.Point(508, 288);
             this.txtFirstDealerName.Name = "txtFirstDealerName";
-            this.txtFirstDealerName.Size = new System.Drawing.Size(286, 21);
+            this.txtFirstDealerName.Size = new System.Drawing.Size(278, 21);
             this.txtFirstDealerName.StyleController = this.layControl;
             this.txtFirstDealerName.TabIndex = 17;
             // 
@@ -547,9 +561,9 @@
             this.txtValidateYears.IsNullString = "效期不能为空。";
             this.txtValidateYears.IsNullValidate = false;
             this.txtValidateYears.IsTransferAlphabetic = false;
-            this.txtValidateYears.Location = new System.Drawing.Point(498, 165);
+            this.txtValidateYears.Location = new System.Drawing.Point(506, 238);
             this.txtValidateYears.Name = "txtValidateYears";
-            this.txtValidateYears.Size = new System.Drawing.Size(288, 21);
+            this.txtValidateYears.Size = new System.Drawing.Size(280, 21);
             this.txtValidateYears.StyleController = this.layControl;
             this.txtValidateYears.TabIndex = 16;
             // 
@@ -559,7 +573,7 @@
             this.cbxStockCondition.CategoryCode = "StockConditionType";
             this.cbxStockCondition.FirstDefaultItemText = null;
             this.cbxStockCondition.FormatQueryString = null;
-            this.cbxStockCondition.Location = new System.Drawing.Point(111, 240);
+            this.cbxStockCondition.Location = new System.Drawing.Point(119, 313);
             this.cbxStockCondition.Name = "cbxStockCondition";
             this.cbxStockCondition.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cbxStockCondition.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -568,7 +582,7 @@
             this.cbxStockCondition.Properties.NullValuePromptShowForEmptyValue = true;
             this.cbxStockCondition.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbxStockCondition.SelectedValue = null;
-            this.cbxStockCondition.Size = new System.Drawing.Size(286, 21);
+            this.cbxStockCondition.Size = new System.Drawing.Size(278, 21);
             this.cbxStockCondition.StyleController = this.layControl;
             this.cbxStockCondition.TabIndex = 24;
             // 
@@ -580,9 +594,9 @@
             this.txtPerformanceStandard.IsNullString = "执行标准不能为空。";
             this.txtPerformanceStandard.IsNullValidate = false;
             this.txtPerformanceStandard.IsTransferAlphabetic = false;
-            this.txtPerformanceStandard.Location = new System.Drawing.Point(500, 265);
+            this.txtPerformanceStandard.Location = new System.Drawing.Point(508, 338);
             this.txtPerformanceStandard.Name = "txtPerformanceStandard";
-            this.txtPerformanceStandard.Size = new System.Drawing.Size(286, 21);
+            this.txtPerformanceStandard.Size = new System.Drawing.Size(278, 21);
             this.txtPerformanceStandard.StyleController = this.layControl;
             this.txtPerformanceStandard.TabIndex = 27;
             // 
@@ -595,9 +609,9 @@
             this.txtBatchPreWarningDays.IsNullString = "效期提前预警天数不能为空。";
             this.txtBatchPreWarningDays.IsNullValidate = true;
             this.txtBatchPreWarningDays.IsTransferAlphabetic = false;
-            this.txtBatchPreWarningDays.Location = new System.Drawing.Point(498, 140);
+            this.txtBatchPreWarningDays.Location = new System.Drawing.Point(506, 213);
             this.txtBatchPreWarningDays.Name = "txtBatchPreWarningDays";
-            this.txtBatchPreWarningDays.Size = new System.Drawing.Size(288, 21);
+            this.txtBatchPreWarningDays.Size = new System.Drawing.Size(280, 21);
             this.txtBatchPreWarningDays.StyleController = this.layControl;
             this.txtBatchPreWarningDays.TabIndex = 15;
             // 
@@ -609,9 +623,9 @@
             this.txtSuperviseSignBar.IsNullString = null;
             this.txtSuperviseSignBar.IsNullValidate = false;
             this.txtSuperviseSignBar.IsTransferAlphabetic = false;
-            this.txtSuperviseSignBar.Location = new System.Drawing.Point(111, 165);
+            this.txtSuperviseSignBar.Location = new System.Drawing.Point(119, 238);
             this.txtSuperviseSignBar.Name = "txtSuperviseSignBar";
-            this.txtSuperviseSignBar.Size = new System.Drawing.Size(284, 21);
+            this.txtSuperviseSignBar.Size = new System.Drawing.Size(276, 21);
             this.txtSuperviseSignBar.StyleController = this.layControl;
             this.txtSuperviseSignBar.TabIndex = 14;
             // 
@@ -623,9 +637,9 @@
             this.txtCharacter.IsNullString = "性状不能为空。";
             this.txtCharacter.IsNullValidate = false;
             this.txtCharacter.IsTransferAlphabetic = false;
-            this.txtCharacter.Location = new System.Drawing.Point(111, 415);
+            this.txtCharacter.Location = new System.Drawing.Point(119, 488);
             this.txtCharacter.Name = "txtCharacter";
-            this.txtCharacter.Size = new System.Drawing.Size(675, 21);
+            this.txtCharacter.Size = new System.Drawing.Size(667, 21);
             this.txtCharacter.StyleController = this.layControl;
             this.txtCharacter.TabIndex = 30;
             // 
@@ -637,9 +651,9 @@
             this.txtTreatmentFor.IsNullString = null;
             this.txtTreatmentFor.IsNullValidate = false;
             this.txtTreatmentFor.IsTransferAlphabetic = false;
-            this.txtTreatmentFor.Location = new System.Drawing.Point(111, 390);
+            this.txtTreatmentFor.Location = new System.Drawing.Point(119, 463);
             this.txtTreatmentFor.Name = "txtTreatmentFor";
-            this.txtTreatmentFor.Size = new System.Drawing.Size(675, 21);
+            this.txtTreatmentFor.Size = new System.Drawing.Size(667, 21);
             this.txtTreatmentFor.StyleController = this.layControl;
             this.txtTreatmentFor.TabIndex = 28;
             // 
@@ -651,9 +665,9 @@
             this.txtRegisterNo.IsNullString = "注册商标不能为空。";
             this.txtRegisterNo.IsNullValidate = false;
             this.txtRegisterNo.IsTransferAlphabetic = false;
-            this.txtRegisterNo.Location = new System.Drawing.Point(111, 290);
+            this.txtRegisterNo.Location = new System.Drawing.Point(119, 363);
             this.txtRegisterNo.Name = "txtRegisterNo";
-            this.txtRegisterNo.Size = new System.Drawing.Size(286, 21);
+            this.txtRegisterNo.Size = new System.Drawing.Size(278, 21);
             this.txtRegisterNo.StyleController = this.layControl;
             this.txtRegisterNo.TabIndex = 26;
             // 
@@ -665,9 +679,9 @@
             this.txtProductCode.IsNullString = "产品编号不能为空。";
             this.txtProductCode.IsNullValidate = true;
             this.txtProductCode.IsTransferAlphabetic = false;
-            this.txtProductCode.Location = new System.Drawing.Point(111, -61);
+            this.txtProductCode.Location = new System.Drawing.Point(119, 12);
             this.txtProductCode.Name = "txtProductCode";
-            this.txtProductCode.Size = new System.Drawing.Size(284, 21);
+            this.txtProductCode.Size = new System.Drawing.Size(276, 21);
             this.txtProductCode.StyleController = this.layControl;
             this.txtProductCode.TabIndex = 0;
             // 
@@ -679,9 +693,9 @@
             this.txtProductName.IsNullString = "产品名称不能为空。";
             this.txtProductName.IsNullValidate = true;
             this.txtProductName.IsTransferAlphabetic = true;
-            this.txtProductName.Location = new System.Drawing.Point(498, -61);
+            this.txtProductName.Location = new System.Drawing.Point(506, 12);
             this.txtProductName.Name = "txtProductName";
-            this.txtProductName.Size = new System.Drawing.Size(288, 21);
+            this.txtProductName.Size = new System.Drawing.Size(280, 21);
             this.txtProductName.StyleController = this.layControl;
             this.txtProductName.TabIndex = 1;
             // 
@@ -693,9 +707,9 @@
             this.txtProductRemrk.IsNullString = null;
             this.txtProductRemrk.IsNullValidate = false;
             this.txtProductRemrk.IsTransferAlphabetic = false;
-            this.txtProductRemrk.Location = new System.Drawing.Point(667, 365);
+            this.txtProductRemrk.Location = new System.Drawing.Point(675, 438);
             this.txtProductRemrk.Name = "txtProductRemrk";
-            this.txtProductRemrk.Size = new System.Drawing.Size(119, 21);
+            this.txtProductRemrk.Size = new System.Drawing.Size(111, 21);
             this.txtProductRemrk.StyleController = this.layControl;
             this.txtProductRemrk.TabIndex = 32;
             // 
@@ -705,7 +719,7 @@
             this.cbxProductStyle.CategoryCode = "ProductStyle";
             this.cbxProductStyle.FirstDefaultItemText = null;
             this.cbxProductStyle.FormatQueryString = null;
-            this.cbxProductStyle.Location = new System.Drawing.Point(111, 90);
+            this.cbxProductStyle.Location = new System.Drawing.Point(119, 163);
             this.cbxProductStyle.Name = "cbxProductStyle";
             this.cbxProductStyle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -713,7 +727,7 @@
             this.cbxProductStyle.Properties.NullValuePromptShowForEmptyValue = true;
             this.cbxProductStyle.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbxProductStyle.SelectedValue = null;
-            this.cbxProductStyle.Size = new System.Drawing.Size(675, 21);
+            this.cbxProductStyle.Size = new System.Drawing.Size(667, 21);
             this.cbxProductStyle.StyleController = this.layControl;
             this.cbxProductStyle.TabIndex = 11;
             // 
@@ -723,7 +737,7 @@
             this.cbxPhysicType.CategoryCode = "PhysicType";
             this.cbxPhysicType.FirstDefaultItemText = null;
             this.cbxPhysicType.FormatQueryString = null;
-            this.cbxPhysicType.Location = new System.Drawing.Point(111, 65);
+            this.cbxPhysicType.Location = new System.Drawing.Point(119, 138);
             this.cbxPhysicType.Name = "cbxPhysicType";
             this.cbxPhysicType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -731,7 +745,7 @@
             this.cbxPhysicType.Properties.NullValuePromptShowForEmptyValue = true;
             this.cbxPhysicType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbxPhysicType.SelectedValue = null;
-            this.cbxPhysicType.Size = new System.Drawing.Size(286, 21);
+            this.cbxPhysicType.Size = new System.Drawing.Size(278, 21);
             this.cbxPhysicType.StyleController = this.layControl;
             this.cbxPhysicType.TabIndex = 10;
             // 
@@ -743,9 +757,9 @@
             this.txtCommonName.IsNullString = "通用名称不能为空。";
             this.txtCommonName.IsNullValidate = false;
             this.txtCommonName.IsTransferAlphabetic = false;
-            this.txtCommonName.Location = new System.Drawing.Point(111, -36);
+            this.txtCommonName.Location = new System.Drawing.Point(119, 37);
             this.txtCommonName.Name = "txtCommonName";
-            this.txtCommonName.Size = new System.Drawing.Size(284, 21);
+            this.txtCommonName.Size = new System.Drawing.Size(276, 21);
             this.txtCommonName.StyleController = this.layControl;
             this.txtCommonName.TabIndex = 2;
             // 
@@ -757,9 +771,9 @@
             this.txtProductionAddress.IsNullString = null;
             this.txtProductionAddress.IsNullValidate = false;
             this.txtProductionAddress.IsTransferAlphabetic = false;
-            this.txtProductionAddress.Location = new System.Drawing.Point(111, 215);
+            this.txtProductionAddress.Location = new System.Drawing.Point(119, 288);
             this.txtProductionAddress.Name = "txtProductionAddress";
-            this.txtProductionAddress.Size = new System.Drawing.Size(286, 21);
+            this.txtProductionAddress.Size = new System.Drawing.Size(278, 21);
             this.txtProductionAddress.StyleController = this.layControl;
             this.txtProductionAddress.TabIndex = 18;
             // 
@@ -771,9 +785,9 @@
             this.txtContactPhone.IsNullString = "联系人电话不能为空。";
             this.txtContactPhone.IsNullValidate = false;
             this.txtContactPhone.IsTransferAlphabetic = false;
-            this.txtContactPhone.Location = new System.Drawing.Point(498, 340);
+            this.txtContactPhone.Location = new System.Drawing.Point(506, 413);
             this.txtContactPhone.Name = "txtContactPhone";
-            this.txtContactPhone.Size = new System.Drawing.Size(288, 21);
+            this.txtContactPhone.Size = new System.Drawing.Size(280, 21);
             this.txtContactPhone.StyleController = this.layControl;
             this.txtContactPhone.TabIndex = 23;
             // 
@@ -785,9 +799,9 @@
             this.txtProducerName.IsNullString = "生产厂商不能为空。";
             this.txtProducerName.IsNullValidate = false;
             this.txtProducerName.IsTransferAlphabetic = true;
-            this.txtProducerName.Location = new System.Drawing.Point(111, 190);
+            this.txtProducerName.Location = new System.Drawing.Point(119, 263);
             this.txtProducerName.Name = "txtProducerName";
-            this.txtProducerName.Size = new System.Drawing.Size(286, 21);
+            this.txtProducerName.Size = new System.Drawing.Size(278, 21);
             this.txtProducerName.StyleController = this.layControl;
             this.txtProducerName.TabIndex = 13;
             // 
@@ -799,9 +813,9 @@
             this.txtContactPerson.IsNullString = "联系人不能为空。";
             this.txtContactPerson.IsNullValidate = false;
             this.txtContactPerson.IsTransferAlphabetic = true;
-            this.txtContactPerson.Location = new System.Drawing.Point(111, 340);
+            this.txtContactPerson.Location = new System.Drawing.Point(119, 413);
             this.txtContactPerson.Name = "txtContactPerson";
-            this.txtContactPerson.Size = new System.Drawing.Size(284, 21);
+            this.txtContactPerson.Size = new System.Drawing.Size(276, 21);
             this.txtContactPerson.StyleController = this.layControl;
             this.txtContactPerson.TabIndex = 22;
             // 
@@ -813,9 +827,9 @@
             this.txtProductionFaxNo.IsNullString = null;
             this.txtProductionFaxNo.IsNullValidate = false;
             this.txtProductionFaxNo.IsTransferAlphabetic = false;
-            this.txtProductionFaxNo.Location = new System.Drawing.Point(498, 315);
+            this.txtProductionFaxNo.Location = new System.Drawing.Point(506, 388);
             this.txtProductionFaxNo.Name = "txtProductionFaxNo";
-            this.txtProductionFaxNo.Size = new System.Drawing.Size(288, 21);
+            this.txtProductionFaxNo.Size = new System.Drawing.Size(280, 21);
             this.txtProductionFaxNo.StyleController = this.layControl;
             this.txtProductionFaxNo.TabIndex = 21;
             // 
@@ -827,9 +841,9 @@
             this.txtAuthorizedNo.IsNullString = "注册证号不能为空。";
             this.txtAuthorizedNo.IsNullValidate = false;
             this.txtAuthorizedNo.IsTransferAlphabetic = false;
-            this.txtAuthorizedNo.Location = new System.Drawing.Point(111, 140);
+            this.txtAuthorizedNo.Location = new System.Drawing.Point(119, 213);
             this.txtAuthorizedNo.Name = "txtAuthorizedNo";
-            this.txtAuthorizedNo.Size = new System.Drawing.Size(284, 21);
+            this.txtAuthorizedNo.Size = new System.Drawing.Size(276, 21);
             this.txtAuthorizedNo.StyleController = this.layControl;
             this.txtAuthorizedNo.TabIndex = 12;
             // 
@@ -841,9 +855,9 @@
             this.txtProductionPhone.IsNullString = null;
             this.txtProductionPhone.IsNullValidate = false;
             this.txtProductionPhone.IsTransferAlphabetic = false;
-            this.txtProductionPhone.Location = new System.Drawing.Point(111, 315);
+            this.txtProductionPhone.Location = new System.Drawing.Point(119, 388);
             this.txtProductionPhone.Name = "txtProductionPhone";
-            this.txtProductionPhone.Size = new System.Drawing.Size(284, 21);
+            this.txtProductionPhone.Size = new System.Drawing.Size(276, 21);
             this.txtProductionPhone.StyleController = this.layControl;
             this.txtProductionPhone.TabIndex = 20;
             // 
@@ -855,9 +869,9 @@
             this.txtEnglishName.IsNullString = null;
             this.txtEnglishName.IsNullValidate = false;
             this.txtEnglishName.IsTransferAlphabetic = false;
-            this.txtEnglishName.Location = new System.Drawing.Point(111, -11);
+            this.txtEnglishName.Location = new System.Drawing.Point(119, 62);
             this.txtEnglishName.Name = "txtEnglishName";
-            this.txtEnglishName.Size = new System.Drawing.Size(286, 21);
+            this.txtEnglishName.Size = new System.Drawing.Size(278, 21);
             this.txtEnglishName.StyleController = this.layControl;
             this.txtEnglishName.TabIndex = 5;
             // 
@@ -869,9 +883,9 @@
             this.txtProductionPostalCode.IsNullString = null;
             this.txtProductionPostalCode.IsNullValidate = false;
             this.txtProductionPostalCode.IsTransferAlphabetic = false;
-            this.txtProductionPostalCode.Location = new System.Drawing.Point(500, 290);
+            this.txtProductionPostalCode.Location = new System.Drawing.Point(508, 363);
             this.txtProductionPostalCode.Name = "txtProductionPostalCode";
-            this.txtProductionPostalCode.Size = new System.Drawing.Size(286, 21);
+            this.txtProductionPostalCode.Size = new System.Drawing.Size(278, 21);
             this.txtProductionPostalCode.StyleController = this.layControl;
             this.txtProductionPostalCode.TabIndex = 19;
             // 
@@ -883,9 +897,9 @@
             this.txtTradeName.IsNullString = null;
             this.txtTradeName.IsNullValidate = false;
             this.txtTradeName.IsTransferAlphabetic = false;
-            this.txtTradeName.Location = new System.Drawing.Point(498, -36);
+            this.txtTradeName.Location = new System.Drawing.Point(506, 37);
             this.txtTradeName.Name = "txtTradeName";
-            this.txtTradeName.Size = new System.Drawing.Size(288, 21);
+            this.txtTradeName.Size = new System.Drawing.Size(280, 21);
             this.txtTradeName.StyleController = this.layControl;
             this.txtTradeName.TabIndex = 3;
             // 
@@ -897,9 +911,9 @@
             this.txtPackageSpec.IsNullString = "包装规格不能为空。";
             this.txtPackageSpec.IsNullValidate = false;
             this.txtPackageSpec.IsTransferAlphabetic = false;
-            this.txtPackageSpec.Location = new System.Drawing.Point(500, 40);
+            this.txtPackageSpec.Location = new System.Drawing.Point(508, 113);
             this.txtPackageSpec.Name = "txtPackageSpec";
-            this.txtPackageSpec.Size = new System.Drawing.Size(286, 21);
+            this.txtPackageSpec.Size = new System.Drawing.Size(278, 21);
             this.txtPackageSpec.StyleController = this.layControl;
             this.txtPackageSpec.TabIndex = 8;
             // 
@@ -911,9 +925,9 @@
             this.txtProductBarCode.IsNullString = null;
             this.txtProductBarCode.IsNullValidate = false;
             this.txtProductBarCode.IsTransferAlphabetic = false;
-            this.txtProductBarCode.Location = new System.Drawing.Point(500, -11);
+            this.txtProductBarCode.Location = new System.Drawing.Point(508, 62);
             this.txtProductBarCode.Name = "txtProductBarCode";
-            this.txtProductBarCode.Size = new System.Drawing.Size(286, 21);
+            this.txtProductBarCode.Size = new System.Drawing.Size(278, 21);
             this.txtProductBarCode.StyleController = this.layControl;
             this.txtProductBarCode.TabIndex = 6;
             // 
@@ -925,9 +939,9 @@
             this.txtProductUnit.IsNullString = null;
             this.txtProductUnit.IsNullValidate = false;
             this.txtProductUnit.IsTransferAlphabetic = false;
-            this.txtProductUnit.Location = new System.Drawing.Point(500, 65);
+            this.txtProductUnit.Location = new System.Drawing.Point(508, 138);
             this.txtProductUnit.Name = "txtProductUnit";
-            this.txtProductUnit.Size = new System.Drawing.Size(286, 21);
+            this.txtProductUnit.Size = new System.Drawing.Size(278, 21);
             this.txtProductUnit.StyleController = this.layControl;
             this.txtProductUnit.TabIndex = 9;
             // 
@@ -939,16 +953,16 @@
             this.txtProductSpec.IsNullString = "规格型号不能为空。";
             this.txtProductSpec.IsNullValidate = false;
             this.txtProductSpec.IsTransferAlphabetic = false;
-            this.txtProductSpec.Location = new System.Drawing.Point(111, 40);
+            this.txtProductSpec.Location = new System.Drawing.Point(119, 113);
             this.txtProductSpec.Name = "txtProductSpec";
-            this.txtProductSpec.Size = new System.Drawing.Size(286, 21);
+            this.txtProductSpec.Size = new System.Drawing.Size(278, 21);
             this.txtProductSpec.StyleController = this.layControl;
             this.txtProductSpec.TabIndex = 7;
             // 
             // cbxIsForeignDrug
             // 
             this.cbxIsForeignDrug.EditValue = null;
-            this.cbxIsForeignDrug.Location = new System.Drawing.Point(12, 14);
+            this.cbxIsForeignDrug.Location = new System.Drawing.Point(12, 87);
             this.cbxIsForeignDrug.Name = "cbxIsForeignDrug";
             this.cbxIsForeignDrug.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbxIsForeignDrug.Properties.Appearance.Options.UseFont = true;
@@ -1004,7 +1018,7 @@
             this.layProductRemrk,
             this.layProductSpell,
             this.layPricePercent});
-            this.layControlGroup.Location = new System.Drawing.Point(0, -73);
+            this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(798, 521);
             this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
@@ -1019,7 +1033,7 @@
             this.layProductCode.Name = "layProductCode";
             this.layProductCode.Size = new System.Drawing.Size(387, 25);
             this.layProductCode.Text = "产品编号";
-            this.layProductCode.TextSize = new System.Drawing.Size(96, 17);
+            this.layProductCode.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layTradeName
             // 
@@ -1029,7 +1043,7 @@
             this.layTradeName.Name = "layTradeName";
             this.layTradeName.Size = new System.Drawing.Size(391, 25);
             this.layTradeName.Text = "商品名称";
-            this.layTradeName.TextSize = new System.Drawing.Size(96, 17);
+            this.layTradeName.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layCommonName
             // 
@@ -1039,7 +1053,7 @@
             this.layCommonName.Name = "layCommonName";
             this.layCommonName.Size = new System.Drawing.Size(387, 25);
             this.layCommonName.Text = "通用名称";
-            this.layCommonName.TextSize = new System.Drawing.Size(96, 17);
+            this.layCommonName.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layProductName
             // 
@@ -1049,7 +1063,7 @@
             this.layProductName.Name = "layProductName";
             this.layProductName.Size = new System.Drawing.Size(391, 25);
             this.layProductName.Text = "产品名称";
-            this.layProductName.TextSize = new System.Drawing.Size(96, 17);
+            this.layProductName.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layAuthorizedNo
             // 
@@ -1058,8 +1072,8 @@
             this.layAuthorizedNo.Location = new System.Drawing.Point(0, 201);
             this.layAuthorizedNo.Name = "layAuthorizedNo";
             this.layAuthorizedNo.Size = new System.Drawing.Size(387, 25);
-            this.layAuthorizedNo.Text = "注册证号";
-            this.layAuthorizedNo.TextSize = new System.Drawing.Size(96, 17);
+            this.layAuthorizedNo.Text = "注册证号(批准文号)";
+            this.layAuthorizedNo.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layProductionPhone
             // 
@@ -1069,7 +1083,7 @@
             this.layProductionPhone.Name = "layProductionPhone";
             this.layProductionPhone.Size = new System.Drawing.Size(387, 25);
             this.layProductionPhone.Text = "电话";
-            this.layProductionPhone.TextSize = new System.Drawing.Size(96, 17);
+            this.layProductionPhone.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layContactPerson
             // 
@@ -1079,7 +1093,7 @@
             this.layContactPerson.Name = "layContactPerson";
             this.layContactPerson.Size = new System.Drawing.Size(387, 25);
             this.layContactPerson.Text = "联系人";
-            this.layContactPerson.TextSize = new System.Drawing.Size(96, 17);
+            this.layContactPerson.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layProductSpec
             // 
@@ -1089,7 +1103,7 @@
             this.layProductSpec.Name = "layProductSpec";
             this.layProductSpec.Size = new System.Drawing.Size(389, 25);
             this.layProductSpec.Text = "规格型号";
-            this.layProductSpec.TextSize = new System.Drawing.Size(96, 17);
+            this.layProductSpec.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layProductUnit
             // 
@@ -1099,7 +1113,7 @@
             this.layProductUnit.Name = "layProductUnit";
             this.layProductUnit.Size = new System.Drawing.Size(389, 25);
             this.layProductUnit.Text = "包装单位";
-            this.layProductUnit.TextSize = new System.Drawing.Size(96, 17);
+            this.layProductUnit.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layProductionPostalCode
             // 
@@ -1109,7 +1123,7 @@
             this.layProductionPostalCode.Name = "layProductionPostalCode";
             this.layProductionPostalCode.Size = new System.Drawing.Size(389, 25);
             this.layProductionPostalCode.Text = "邮政编码";
-            this.layProductionPostalCode.TextSize = new System.Drawing.Size(96, 17);
+            this.layProductionPostalCode.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layProductionFaxNo
             // 
@@ -1119,7 +1133,7 @@
             this.layProductionFaxNo.Name = "layProductionFaxNo";
             this.layProductionFaxNo.Size = new System.Drawing.Size(391, 25);
             this.layProductionFaxNo.Text = "传真";
-            this.layProductionFaxNo.TextSize = new System.Drawing.Size(96, 17);
+            this.layProductionFaxNo.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layContactPhone
             // 
@@ -1129,7 +1143,7 @@
             this.layContactPhone.Name = "layContactPhone";
             this.layContactPhone.Size = new System.Drawing.Size(391, 25);
             this.layContactPhone.Text = "联系人电话";
-            this.layContactPhone.TextSize = new System.Drawing.Size(96, 17);
+            this.layContactPhone.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layProductStyle
             // 
@@ -1139,7 +1153,7 @@
             this.layProductStyle.Name = "layProductStyle";
             this.layProductStyle.Size = new System.Drawing.Size(778, 25);
             this.layProductStyle.Text = "产品类别";
-            this.layProductStyle.TextSize = new System.Drawing.Size(96, 17);
+            this.layProductStyle.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layTreatmentFor
             // 
@@ -1149,7 +1163,7 @@
             this.layTreatmentFor.Name = "layTreatmentFor";
             this.layTreatmentFor.Size = new System.Drawing.Size(778, 25);
             this.layTreatmentFor.Text = "适应症";
-            this.layTreatmentFor.TextSize = new System.Drawing.Size(96, 17);
+            this.layTreatmentFor.TextSize = new System.Drawing.Size(104, 17);
             this.layTreatmentFor.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // layCharacter
@@ -1160,7 +1174,7 @@
             this.layCharacter.Name = "layCharacter";
             this.layCharacter.Size = new System.Drawing.Size(778, 25);
             this.layCharacter.Text = "性状";
-            this.layCharacter.TextSize = new System.Drawing.Size(96, 17);
+            this.layCharacter.TextSize = new System.Drawing.Size(104, 17);
             this.layCharacter.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // laySuperviseSignBar
@@ -1171,7 +1185,7 @@
             this.laySuperviseSignBar.Name = "laySuperviseSignBar";
             this.laySuperviseSignBar.Size = new System.Drawing.Size(387, 25);
             this.laySuperviseSignBar.Text = "监管标识条码";
-            this.laySuperviseSignBar.TextSize = new System.Drawing.Size(96, 17);
+            this.laySuperviseSignBar.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layBatchPreWarningDays
             // 
@@ -1181,7 +1195,7 @@
             this.layBatchPreWarningDays.Name = "layBatchPreWarningDays";
             this.layBatchPreWarningDays.Size = new System.Drawing.Size(391, 25);
             this.layBatchPreWarningDays.Text = "效期提前预警天数";
-            this.layBatchPreWarningDays.TextSize = new System.Drawing.Size(96, 17);
+            this.layBatchPreWarningDays.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layProductStatus
             // 
@@ -1191,7 +1205,7 @@
             this.layProductStatus.Name = "layProductStatus";
             this.layProductStatus.Size = new System.Drawing.Size(312, 25);
             this.layProductStatus.Text = "状态";
-            this.layProductStatus.TextSize = new System.Drawing.Size(96, 17);
+            this.layProductStatus.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layoutControlItem1
             // 
@@ -1213,7 +1227,7 @@
             this.layPurchaseTax.Name = "layPurchaseTax";
             this.layPurchaseTax.Size = new System.Drawing.Size(387, 25);
             this.layPurchaseTax.Text = "进项税";
-            this.layPurchaseTax.TextSize = new System.Drawing.Size(96, 17);
+            this.layPurchaseTax.TextSize = new System.Drawing.Size(104, 17);
             // 
             // laySaleTax
             // 
@@ -1223,7 +1237,7 @@
             this.laySaleTax.Name = "laySaleTax";
             this.laySaleTax.Size = new System.Drawing.Size(391, 25);
             this.laySaleTax.Text = "销项税";
-            this.laySaleTax.TextSize = new System.Drawing.Size(96, 17);
+            this.laySaleTax.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layEnglishName
             // 
@@ -1233,7 +1247,7 @@
             this.layEnglishName.Name = "layEnglishName";
             this.layEnglishName.Size = new System.Drawing.Size(389, 25);
             this.layEnglishName.Text = "英文名称";
-            this.layEnglishName.TextSize = new System.Drawing.Size(96, 17);
+            this.layEnglishName.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layProductBarCode
             // 
@@ -1243,7 +1257,7 @@
             this.layProductBarCode.Name = "layProductBarCode";
             this.layProductBarCode.Size = new System.Drawing.Size(389, 25);
             this.layProductBarCode.Text = "商品条码";
-            this.layProductBarCode.TextSize = new System.Drawing.Size(96, 17);
+            this.layProductBarCode.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layPackageSpec
             // 
@@ -1253,7 +1267,7 @@
             this.layPackageSpec.Name = "layPackageSpec";
             this.layPackageSpec.Size = new System.Drawing.Size(389, 25);
             this.layPackageSpec.Text = "包装规格";
-            this.layPackageSpec.TextSize = new System.Drawing.Size(96, 17);
+            this.layPackageSpec.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layPhysicType
             // 
@@ -1263,7 +1277,7 @@
             this.layPhysicType.Name = "layPhysicType";
             this.layPhysicType.Size = new System.Drawing.Size(389, 25);
             this.layPhysicType.Text = "产品大类";
-            this.layPhysicType.TextSize = new System.Drawing.Size(96, 17);
+            this.layPhysicType.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layProducerName
             // 
@@ -1273,7 +1287,7 @@
             this.layProducerName.Name = "layProducerName";
             this.layProducerName.Size = new System.Drawing.Size(389, 25);
             this.layProducerName.Text = "生产厂商";
-            this.layProducerName.TextSize = new System.Drawing.Size(96, 17);
+            this.layProducerName.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layValidateYears
             // 
@@ -1283,7 +1297,7 @@
             this.layValidateYears.Name = "layValidateYears";
             this.layValidateYears.Size = new System.Drawing.Size(391, 25);
             this.layValidateYears.Text = "效期";
-            this.layValidateYears.TextSize = new System.Drawing.Size(96, 17);
+            this.layValidateYears.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layProductionAddress
             // 
@@ -1293,7 +1307,7 @@
             this.layProductionAddress.Name = "layProductionAddress";
             this.layProductionAddress.Size = new System.Drawing.Size(389, 25);
             this.layProductionAddress.Text = "生产地址";
-            this.layProductionAddress.TextSize = new System.Drawing.Size(96, 17);
+            this.layProductionAddress.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layProductionOriginAddress
             // 
@@ -1303,7 +1317,7 @@
             this.layProductionOriginAddress.Name = "layProductionOriginAddress";
             this.layProductionOriginAddress.Size = new System.Drawing.Size(389, 25);
             this.layProductionOriginAddress.Text = "产地";
-            this.layProductionOriginAddress.TextSize = new System.Drawing.Size(96, 17);
+            this.layProductionOriginAddress.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layFirstDealerName
             // 
@@ -1313,7 +1327,7 @@
             this.layFirstDealerName.Name = "layFirstDealerName";
             this.layFirstDealerName.Size = new System.Drawing.Size(389, 25);
             this.layFirstDealerName.Text = "供货商";
-            this.layFirstDealerName.TextSize = new System.Drawing.Size(96, 17);
+            this.layFirstDealerName.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layStockCondition
             // 
@@ -1323,7 +1337,7 @@
             this.layStockCondition.Name = "layStockCondition";
             this.layStockCondition.Size = new System.Drawing.Size(389, 25);
             this.layStockCondition.Text = "储存库区";
-            this.layStockCondition.TextSize = new System.Drawing.Size(96, 17);
+            this.layStockCondition.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layStockFilter
             // 
@@ -1333,7 +1347,7 @@
             this.layStockFilter.Name = "layStockFilter";
             this.layStockFilter.Size = new System.Drawing.Size(389, 25);
             this.layStockFilter.Text = "贮藏条件";
-            this.layStockFilter.TextSize = new System.Drawing.Size(96, 17);
+            this.layStockFilter.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layProductCycleStyle
             // 
@@ -1343,7 +1357,7 @@
             this.layProductCycleStyle.Name = "layProductCycleStyle";
             this.layProductCycleStyle.Size = new System.Drawing.Size(389, 25);
             this.layProductCycleStyle.Text = "产品养护";
-            this.layProductCycleStyle.TextSize = new System.Drawing.Size(96, 17);
+            this.layProductCycleStyle.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layPerformanceStandard
             // 
@@ -1353,7 +1367,7 @@
             this.layPerformanceStandard.Name = "layPerformanceStandard";
             this.layPerformanceStandard.Size = new System.Drawing.Size(389, 25);
             this.layPerformanceStandard.Text = "执行标准";
-            this.layPerformanceStandard.TextSize = new System.Drawing.Size(96, 17);
+            this.layPerformanceStandard.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layRegisterNo
             // 
@@ -1363,7 +1377,7 @@
             this.layRegisterNo.Name = "layRegisterNo";
             this.layRegisterNo.Size = new System.Drawing.Size(389, 25);
             this.layRegisterNo.Text = "注册商标";
-            this.layRegisterNo.TextSize = new System.Drawing.Size(96, 17);
+            this.layRegisterNo.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layProductRemrk
             // 
@@ -1373,7 +1387,7 @@
             this.layProductRemrk.Name = "layProductRemrk";
             this.layProductRemrk.Size = new System.Drawing.Size(222, 25);
             this.layProductRemrk.Text = "备注";
-            this.layProductRemrk.TextSize = new System.Drawing.Size(96, 17);
+            this.layProductRemrk.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layProductSpell
             // 
@@ -1383,7 +1397,17 @@
             this.layProductSpell.Name = "layProductSpell";
             this.layProductSpell.Size = new System.Drawing.Size(389, 26);
             this.layProductSpell.Text = "助记码";
-            this.layProductSpell.TextSize = new System.Drawing.Size(96, 17);
+            this.layProductSpell.TextSize = new System.Drawing.Size(104, 17);
+            // 
+            // layPricePercent
+            // 
+            this.layPricePercent.Control = this.txtPricePercent;
+            this.layPricePercent.CustomizationFormText = "价格预警比例";
+            this.layPricePercent.Location = new System.Drawing.Point(312, 426);
+            this.layPricePercent.Name = "layPricePercent";
+            this.layPricePercent.Size = new System.Drawing.Size(244, 25);
+            this.layPricePercent.Text = "价格预警比例";
+            this.layPricePercent.TextSize = new System.Drawing.Size(104, 17);
             // 
             // tbPage2
             // 
@@ -1972,6 +1996,7 @@
             // 
             this.popupGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.popupGrid.IsCalculatePrice = false;
+            this.popupGrid.IsCompute = false;
             this.popupGrid.Location = new System.Drawing.Point(0, 0);
             this.popupGrid.Name = "popupGrid";
             this.popupGrid.OperationName = "";
@@ -1987,30 +2012,6 @@
             this.rdbtnIsUseToPregnantYes.TabStop = true;
             this.rdbtnIsUseToPregnantYes.Text = "是";
             this.rdbtnIsUseToPregnantYes.UseVisualStyleBackColor = true;
-            // 
-            // txtPricePercent
-            // 
-            this.txtPricePercent.AlphabeticFiled = null;
-            this.txtPricePercent.EntityField = DQS.Module.Entities.BFIProductEntityFields2.Reservation3;
-            this.txtPricePercent.IsIntegerOnly = false;
-            this.txtPricePercent.IsNullString = null;
-            this.txtPricePercent.IsNullValidate = false;
-            this.txtPricePercent.IsTransferAlphabetic = false;
-            this.txtPricePercent.Location = new System.Drawing.Point(423, 365);
-            this.txtPricePercent.Name = "txtPricePercent";
-            this.txtPricePercent.Size = new System.Drawing.Size(141, 21);
-            this.txtPricePercent.StyleController = this.layControl;
-            this.txtPricePercent.TabIndex = 53;
-            // 
-            // layPricePercent
-            // 
-            this.layPricePercent.Control = this.txtPricePercent;
-            this.layPricePercent.CustomizationFormText = "价格预警比例";
-            this.layPricePercent.Location = new System.Drawing.Point(312, 426);
-            this.layPricePercent.Name = "layPricePercent";
-            this.layPricePercent.Size = new System.Drawing.Size(244, 25);
-            this.layPricePercent.Text = "价格预警比例";
-            this.layPricePercent.TextSize = new System.Drawing.Size(96, 17);
             // 
             // FrmSingleProduct
             // 
@@ -2037,6 +2038,7 @@
             this.tbPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).EndInit();
             this.layControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtPricePercent.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductSpell.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSaleTax.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboPurchaseTax.Properties)).EndInit();
@@ -2112,6 +2114,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layRegisterNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductRemrk)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductSpell)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPricePercent)).EndInit();
             this.tbPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl2)).EndInit();
             this.layControl2.ResumeLayout(false);
@@ -2158,8 +2161,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layProductEntityTextBox1)).EndInit();
             this.tabGrantedPerson.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.popupGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPricePercent.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layPricePercent)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -94,9 +94,19 @@ namespace DQS.Controls
 
                 if (null != notification)
                 {
-                    notification.IsRead = true;
-                    notification.ReadTime = DateTime.Now;
-                    notification.Update();
+                    EntityCollection<ATCApproveNotificationEntity> notifs = new EntityCollection<ATCApproveNotificationEntity>();
+                    PredicateExpression pes = new PredicateExpression();
+                    pes.Add(ATCApproveNotificationEntityFields.FormClass == m_AllApproveView.DocumentCode);
+                    pes.Add(ATCApproveNotificationEntityFields.TargetCode == m_AllApproveView.BillCode);
+                    notifs.Fetch(pes);
+                    foreach (var item in notifs)
+                    {
+                        ATCApproveNotificationEntity notifica = item as ATCApproveNotificationEntity;
+
+                        notifica.IsRead = true;
+                        notifica.ReadTime = DateTime.Now;
+                        notifica.Update();
+                    }
                 }
                 this.DialogResult = DialogResult.Yes;
             }

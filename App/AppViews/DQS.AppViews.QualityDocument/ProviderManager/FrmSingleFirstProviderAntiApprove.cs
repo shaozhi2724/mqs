@@ -25,6 +25,7 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
     public partial class FrmSingleFirstProviderAntiApprove : DevExpress.XtraEditors.XtraForm
     {
         private int? m_id;
+        List<string> operators = new List<string>();
 
         const string tableName = "BFI_Dealer";
         const string fieldName = "DealerID";
@@ -48,6 +49,9 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
 
             this.cbxDealerStyle.InitSource();
             this.cbxIndustryStyle.InitSource();//SYSCategoryEntityFields.ItemID > 1);
+
+            LoadOperators();
+
             BindArea();
             BindPrices();
             if (this.Tag != null)
@@ -90,6 +94,33 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
             }
             cbxPrice.Properties.DataSource = prices;
 
+        }
+        private void LoadOperators()
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                string sqlBill = @"SELECT EmployeeName FROM dbo.BFI_Employee WHERE PostName = '业务员'";
+
+                SqlDataAdapter sdad = new SqlDataAdapter(sqlBill, conn);
+                DataSet ds = new DataSet();
+                try
+                {
+                    sdad.Fill(ds, "Table");
+                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                    {
+                        operators.Add(ds.Tables["Table"].Rows[i]["EmployeeName"].ToString());
+                        cboOperator.Properties.Items.Add(ds.Tables["Table"].Rows[i]["EmployeeName"].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.ToString(), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
 
         private void BindArea()
@@ -272,6 +303,8 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                 needComparedControls.Add("BusinessRange", chklbcProductStyle.Name);
                 needComparedFields.Add("SalePriceListID", layControl.GetItemByControl(cbxPrice).Text);
                 needComparedControls.Add("SalePriceListID", cbxPrice.Name);
+                needComparedFields.Add("Reservation5", layControl.GetItemByControl(cboOperator).Text);
+                needComparedControls.Add("Reservation5", cboOperator.Name);
 
                 EntityCollection<BFIBusinessRangeEntity> oldRanges = new EntityCollection<BFIBusinessRangeEntity>();
                 oldRanges.Fetch(BFIBusinessRangeEntityFields.DealerID == m_id.Value);
@@ -566,6 +599,11 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
             {
                 cbxPrice.EditValue = entity.SalePriceListID;
             }
+
+            if (!entity.IsNullField("Reservation5"))
+            {
+                this.cboOperator.Text = entity.Reservation5;
+            }
         }
 
         /// <summary>
@@ -596,6 +634,11 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
 
             entity.DealerArea = txtDealerArea.Text.Trim();
             entity.SalePriceListID = Convert.ToInt32(cbxPrice.EditValue);
+
+            if (this.cboOperator.Text != "")
+            {
+                entity.Reservation5 = this.cboOperator.Text;
+            }
         }
 
         private void chkCheck_CheckedChanged(object sender, EventArgs e)
@@ -995,11 +1038,11 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                 //{
                 //    isDefaultQuatificate = isDefaultQuatificate && _defaultProductCertifications.ContainsKey(certificate);
                 //}
-                //if (isDefaultQuatificate)
-                //{
-                //    XtraMessageBox.Show("该证书不允许删除", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                //    return;
-                //}
+                if (!DQS.Controls.Properties.Settings.Default.IsDelDefault && isDefaultQuatificate)
+                {
+                    XtraMessageBox.Show("该证书不允许删除", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    return;
+                }
                 DialogResult result = XtraMessageBox.Show("删除证书将连带附件和属性信息一起删除，确定要删除该证书信息吗？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.OK)
                 {

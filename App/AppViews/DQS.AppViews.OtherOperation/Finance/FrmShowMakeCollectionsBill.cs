@@ -116,12 +116,11 @@ namespace DQS.AppViews.OtherOperation.Finance
 
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string Delsql = @"DELETE dbo.FIN_MakeCollectionsBill WHERE {0}
-DELETE dbo.FIN_MakeCollectionsBillDetail WHERE {0}";
+                string Delsql = @"EXEC sp_DelMakeCollectionsBill '{0}'";
                 if (dr == DialogResult.Yes)
                 {
                     string code = gridView.GetDataRow(gridView.FocusedRowHandle)["自动生成单号"].ToString();
-                    Delsql = String.Format(Delsql, "MakeCollectionsBillCode = '" + code + "'");
+                    Delsql = String.Format(Delsql, code);
                 }
 
                 try

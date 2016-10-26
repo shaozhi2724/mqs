@@ -200,7 +200,6 @@ namespace DQS.AppViews.StatReport.StatManager
                         gridView.OptionsView.ColumnAutoWidth = false;
                         gridView.BestFitColumns();
                         gridView.OptionsView.ShowGroupPanel = false;
-
                         for (int i = 0; i < gridView.Columns.Count; i++)
                         {
                             string ColumnName = gridView.Columns[i].ToString();
@@ -209,6 +208,22 @@ namespace DQS.AppViews.StatReport.StatManager
                                 gridView.Columns[i].Visible = false;
                             }
                             gridView.Columns[i].OptionsColumn.AllowEdit = false;
+                        }
+                        if (!sysPage.IsNullField("Reservation5"))
+                        {
+                            if (sysPage.Reservation5.Contains(","))
+                            {
+                                string s = sysPage.Reservation5;
+                                string[] sArray = s.Split(',');
+                                foreach (string i in sArray)
+                                {
+                                    gridView.Columns[i].OptionsColumn.AllowEdit = true;
+                                }
+                            }
+                            else
+                            {
+                                gridView.Columns[0].OptionsColumn.AllowEdit = true;
+                            }
                         }
                     }
                     catch (Exception ex)

@@ -17,12 +17,14 @@ using DQS.Controls;
 using DQS.Module.Entities;
 using ORMSCore;
 using DQS.Common;
+using System.Data.SqlClient;
 
 namespace DQS.AppViews.QualityDocument.ProviderManager
 {
     public partial class FrmSingleFirstProviderChangeDetail : DevExpress.XtraEditors.XtraForm
     {
         private int? m_id;
+        List<string> operators = new List<string>();
 
         const string tableName = "BFI_Dealer";
         const string fieldName = "DealerID";
@@ -45,6 +47,9 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
             this.cbxDealerStyle.InitSource();
 
             cbxIndustryStyle.InitSource();
+
+            LoadOperators();
+
             //if (!string.IsNullOrEmpty(cbxIndustryStyle.CategoryCode))
             //{
             //    EntityCollection<SYSCategoryEntity> categories = new EntityCollection<SYSCategoryEntity>();
@@ -77,6 +82,34 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                 BindQualification();
             }
             RenderRequiredFields();
+        }
+
+        private void LoadOperators()
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                string sqlBill = @"SELECT EmployeeName FROM dbo.BFI_Employee WHERE PostName = '业务员'";
+
+                SqlDataAdapter sdad = new SqlDataAdapter(sqlBill, conn);
+                DataSet ds = new DataSet();
+                try
+                {
+                    sdad.Fill(ds, "Table");
+                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                    {
+                        operators.Add(ds.Tables["Table"].Rows[i]["EmployeeName"].ToString());
+                        cboOperator.Properties.Items.Add(ds.Tables["Table"].Rows[i]["EmployeeName"].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.ToString(), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
         private void BindPrices()
         {
@@ -241,6 +274,11 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
             if(!entity.IsNullField("SalePriceListID"))
             {
                 cbxPrice.EditValue = entity.SalePriceListID;
+            }
+
+            if (!entity.IsNullField("Reservation5"))
+            {
+                this.cboOperator.Text = entity.Reservation5;
             }
         }
 

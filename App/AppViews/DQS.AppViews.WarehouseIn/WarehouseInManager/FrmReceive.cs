@@ -75,9 +75,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             {
                 BUSReceiveEntity receive = new BUSReceiveEntity { ReceiveID = Convert.ToInt32(id) };
                 receive.Fetch();
-                BUSBillEntity bill = new BUSBillEntity { BillID = receive.BillID };
-                bill.Fetch();
-                if (bill.BillStatusName == "收货复查")
+                if (!receive.IsNullField("Reservation10") && receive.Reservation10 == "复查单据")
                 {
                     string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "收货报告单.mrt");
                     if (File.Exists(fileName))
@@ -95,6 +93,37 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 {
                     XtraMessageBox.Show("该打印按钮为打印复查通知单按钮，该单不是复查单据。请重新选择。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
+                }
+            }
+        }
+
+        protected override void CustomApprove()
+        {
+            object id = this.gvData.GetFocusedRowCellValue("收货单ID");
+            if (id != null && id != DBNull.Value)
+            {
+                BUSReceiveEntity receive = new BUSReceiveEntity { ReceiveID = Convert.ToInt32(id) };
+                receive.Fetch();
+
+                //string statusName = gvData.GetFocusedRowCellValue("状态").ToString();
+                //if (statusName == "未批准")
+                //{
+                //    XtraMessageBox.Show("该单据已作废，不允许再次审批", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    return;
+                //}
+                DialogResult dr = base.BaseApprove();
+                if (dr == DialogResult.Yes)
+                {
+                    //更新销售单状态
+                    BUSBillEntity entity = new BUSBillEntity { BillID = receive.BillID };
+                    entity.Fetch();
+                    if (entity.BillStatus == 7)
+                    {
+                        entity.BillStatus = int.Parse(receive.Reservation5);
+                        entity.BillStatusName = receive.Reservation6;
+                        entity.Update();
+                    }
+                    this.pageNavigator.ShowData();
                 }
             }
         }

@@ -23,6 +23,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
 {
     public partial class FrmSingleFirstDealerAntiApprove : DevExpress.XtraEditors.XtraForm
     {
+
         private int? m_id;
 
         const string tableName = "BFI_Dealer";
@@ -549,7 +550,6 @@ namespace DQS.AppViews.QualityDocument.DealerManager
             }
 
             entity.PurchasePriceListID = Convert.ToInt32(cbxPrice.EditValue);
-
         }
 
         private void chkCheck_CheckedChanged(object sender, EventArgs e)
@@ -949,11 +949,11 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                 //{
                 //    isDefaultQuatificate = isDefaultQuatificate && _defaultProductCertifications.ContainsKey(certificate);
                 //}
-                //if (isDefaultQuatificate)
-                //{
-                //    XtraMessageBox.Show("该证书不允许删除", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                //    return;
-                //}
+                if (!DQS.Controls.Properties.Settings.Default.IsDelDefault && isDefaultQuatificate)
+                {
+                    XtraMessageBox.Show("该证书不允许删除", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    return;
+                }
                 DialogResult result = XtraMessageBox.Show("删除证书将连带附件和属性信息一起删除，确定要删除该证书信息吗？", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.OK)
                 {

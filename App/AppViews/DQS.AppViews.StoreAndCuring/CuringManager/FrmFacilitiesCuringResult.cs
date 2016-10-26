@@ -13,14 +13,14 @@ using System.Windows.Forms;
 
 namespace DQS.AppViews.StoreAndCuring.CuringManager
 {
-    public partial class FrmFacilitiesCuring : StandardForm
+    public partial class FrmFacilitiesCuringResult : StandardForm
     {
-        public FrmFacilitiesCuring()
+        public FrmFacilitiesCuringResult()
         {
             InitializeComponent();
         }
 
-        private void FrmFacilitiesCuring_Load(object sender, EventArgs e)
+        private void FrmFacilitiesCuringResult_Load(object sender, EventArgs e)
         {
             this.pageNavigator.SortField = "创建日期";
             this.pageNavigator.SortType = "DESC";
@@ -29,7 +29,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
 
         protected override void CustomDelete()
         {
-            object CuringResultID = this.gvData.GetFocusedRowCellValue("运行ID");
+            object CuringResultID = this.gvData.GetFocusedRowCellValue("养护ID");
             if (CuringResultID != null && CuringResultID != DBNull.Value)
             {
                 DialogResult dr = XtraMessageBox.Show("确定删除该记录？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -37,7 +37,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
                 {
                     using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
                     {
-                        string sql = @"DELETE BUS_FacilitiesCuring WHERE ID = " + int.Parse(CuringResultID.ToString());
+                        string sql = @"DELETE BUS_FacilitiesCuringResult WHERE ID = " + int.Parse(CuringResultID.ToString());
                         try
                         {
                             conn.Open();

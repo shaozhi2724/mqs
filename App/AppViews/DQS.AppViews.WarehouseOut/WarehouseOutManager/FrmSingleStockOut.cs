@@ -341,7 +341,14 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                 if (id != null)
                 {
                     //根据订单设置表格数据
-                    this.popupGrid.SetGridData("vw_AllWarehouseOutBillDetail", "订单ID", id, false);
+                    if (DQS.Controls.Properties.Settings.Default.IsUseWMS)
+                    {
+                        this.popupGrid.SetGridData("vw_AllWarehouseOutBillDetailWithWMS", "订单ID", id, false);
+                    }
+                    else
+                    {
+                        this.popupGrid.SetGridData("vw_AllWarehouseOutBillDetail", "订单ID", id, false);
+                    }
                     //txtStoreCode.Text = (this.txtBillCode.EditData as DataRow)["订单编号"].ToString().Substring(0, 2) + "CK" + txtBillCode.Text.Substring(2);
                     txtStoreCode.Text = txtBillCode.Text;
                 }

@@ -8,6 +8,7 @@ using ORMSCore;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -29,12 +30,38 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             this.popupGrid.PopupView.MouseUp += PopupView_MouseUp;
 
             this.popupGridSampling.InitGrid();
+            this.popupGridSampling.PopupView.KeyDown += SamplingPopupView_KeyDown;
 
             RepositoryItemComboBox cbo = new RepositoryItemComboBox();
             cbo.Items.Add("合格");
             cbo.Items.Add("不合格");
             this.popupGrid.PopupView.Columns["验收结果"].ColumnEdit = cbo;
 
+            RepositoryItemComboBox cboresult = new RepositoryItemComboBox();
+
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                string sql = "SELECT DetailRemark FROM BUS_AcceptDetail GROUP BY DetailRemark";
+                SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
+                DataSet ds = new DataSet();
+                try
+                {
+                    sda.Fill(ds, "Table");
+                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                    {
+                        cboresult.Items.Add(ds.Tables["Table"].Rows[i]["DetailRemark"].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            this.popupGrid.PopupView.Columns["不合格事项及处置措施"].ColumnEdit = cboresult;
 
             if (this.Tag != null)
             {
@@ -1582,7 +1609,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
             if (e.KeyCode == Keys.Delete)
             {
-                object amount = this.popupGrid.PopupView.GetFocusedRowCellValue("订单数量");
+                object amount = this.popupGrid.PopupView.GetFocusedRowCellValue("收货数量");
                 if (amount != null && amount != DBNull.Value)
                 {
                     //订单中的原始产品不可删除
@@ -1593,6 +1620,20 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 if (dr == DialogResult.OK)
                 {
                     this.popupGrid.ClearGrid(this.popupGrid.PopupView.FocusedRowHandle);
+                }
+            }
+        }
+
+        //删除抽检列表中多余数据
+        private void SamplingPopupView_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.Delete)
+            {
+                DialogResult dr = XtraMessageBox.Show("确定要删除此行抽检数据吗？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (dr == DialogResult.OK)
+                {
+                    this.popupGridSampling.ClearGrid(this.popupGridSampling.PopupView.FocusedRowHandle);
                 }
             }
         }
@@ -1792,6 +1833,19 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
         private void btnReAccept_Click(object sender, EventArgs e)
         {
+
+            EntityCollection<ATCUserPageEntity> userPages = new EntityCollection<ATCUserPageEntity>();
+            PredicateExpression pe = new PredicateExpression();
+            pe.Add(ATCUserPageEntityFields.UserID == GlobalItem.g_CurrentUser.UserID);
+            pe.Add(ATCUserPageEntityFields.DocumentCode == "AcceptBill");
+            DataTable data = userPages.FetchTable(pe);
+
+            if (data.Rows.Count <= 0)
+            {
+                XtraMessageBox.Show("系统未设置您的审批流程，无法点击复查功能。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             DialogResult dr = XtraMessageBox.Show("是否提交复查？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.No)
             {
@@ -1809,19 +1863,19 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             if (!this.ValidateBatchDate()) return;
             if (!this.ValidateSamplingAmount()) return;
 
-            string reason;
-            using (FrmReCheckReason frm = new FrmReCheckReason())
-            {
-                DialogResult drs = frm.ShowDialog();
-                if (drs == DialogResult.Yes)
-                {
-                    reason = frm.reason;
-                }
-                else
-                {
-                    return;
-                }
-            }
+            //string reason;
+            //using (FrmReCheckReason frm = new FrmReCheckReason())
+            //{
+            //    DialogResult drs = frm.ShowDialog();
+            //    if (drs == DialogResult.Yes)
+            //    {
+            //        reason = frm.reason;
+            //    }
+            //    else
+            //    {
+            //        return;
+            //    }
+            //}
 
             foreach (var busAcceptDetailEntity in acceptDetails)
             {
@@ -1964,7 +2018,9 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 entity.LastModifyDate = DateTime.Now;
                 entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
-                entity.Reservation1 = reason;
+                //entity.Reservation1 = reason;
+                entity.Reservation1 = "";
+                entity.Reservation10 = "复查单据";
                 if (!countedAcceptDetails.Any() ||
                     countedAcceptDetails.ToList().TrueForAll(p => p.TotalReceiveAmount == 0))
                 {
@@ -2147,7 +2203,9 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 entity.LastModifyDate = DateTime.Now;
                 entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
-                entity.Reservation1 = reason;
+                //entity.Reservation1 = reason;
+                entity.Reservation1 = "";
+                entity.Reservation10 = "复查单据";
                 if (!countedAcceptDetails.Any() ||
                     countedAcceptDetails.ToList().TrueForAll(p => p.TotalReceiveAmount == 0))
                 {
@@ -2202,6 +2260,56 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     }
                 }
             }
+
+
+
+
+            if (data.Rows.Count > 0)
+            {
+                //按审批顺序排序
+                data.DefaultView.Sort = "ApprovalSort";
+                data = data.DefaultView.ToTable();
+
+                ATCApproveEntity approveEntity = new ATCApproveEntity();
+                approveEntity.InternalNo = "YS" + entity.ReceiveCode.Substring(2);
+                approveEntity.DocumentCode = "AcceptBill";
+                approveEntity.BillCode = entity.ReceiveCode;
+                approveEntity.ApproveTitle = string.Format("{0}--验收，编号：{1}", entity.BillTypeName,
+                    entity.ReceiveCode);
+                approveEntity.ApprovalContent = String.Format("{0} {1} --验收，申请审批。", entity.BillTypeName,
+                    entity.ReceiveCode);
+                approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+                approveEntity.CreateDate = DateTime.Now;
+                approveEntity.IsApprovaled = false;
+                for (int i = 0; i < data.Rows.Count; i++)
+                {
+                    var approveCode = approveEntity.InternalNo + (i + 1).ToString("00");
+                    approveEntity.ApproveCode = approveCode;
+                    approveEntity.IsWhole = Convert.ToBoolean(data.Rows[i]["IsWhole"]);
+                    approveEntity.ApproveOrder = Convert.ToInt32(data.Rows[i]["ApprovalSort"]);
+                    var approvalUserId = new Guid(data.Rows[i]["ApprovalUserID"].ToString());
+                    approveEntity.ApprovalUserID = approvalUserId;
+                    approveEntity.Save();
+
+                    //添加消息提醒
+                    ATCApproveNotificationEntity notification = new ATCApproveNotificationEntity();
+                    notification.CreateUserID = approveEntity.CreateUserID;
+                    var userName = GlobalItem.g_CurrentEmployee == null
+                        ? GlobalItem.g_CurrentUser.UserName
+                        : GlobalItem.g_CurrentEmployee.EmployeeName;
+                    notification.CreateUserName = userName;
+                    notification.FormClass = "AcceptBill";
+                    notification.IsRead = false;
+                    notification.TargetID = entity.BillID;
+                    notification.TargetCode = entity.BillCode;
+                    notification.ApproveCode = approveCode;
+                    notification.Message = string.Format("{0} 于 {1} 验收申请（单号 {2}）。请您审批。", userName,
+                        DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.BillCode);
+                    notification.OwnerUserID = approvalUserId;
+                    notification.Save();
+                }
+            }
+
             DialogResult dia = XtraMessageBox.Show("是否打印报告单？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dia == DialogResult.Yes)
             {

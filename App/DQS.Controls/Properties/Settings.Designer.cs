@@ -58,5 +58,29 @@ namespace DQS.Controls.Properties {
                 this["IsThird"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsUseWMS {
+            get {
+                return ((bool)(this["IsUseWMS"]));
+            }
+            set {
+                this["IsUseWMS"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsDelDefault {
+            get {
+                return ((bool)(this["IsDelDefault"]));
+            }
+            set {
+                this["IsDelDefault"] = value;
+            }
+        }
     }
 }

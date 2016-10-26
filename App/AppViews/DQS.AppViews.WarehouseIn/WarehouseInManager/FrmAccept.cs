@@ -33,9 +33,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             {
                 BUSAcceptEntity accept = new BUSAcceptEntity { AcceptID = Convert.ToInt32(id) };
                 accept.Fetch();
-                BUSBillEntity bill = new BUSBillEntity { BillID = accept.BillID };
-                bill.Fetch();
-                if (bill.BillStatusName == "验收复查")
+                if (!accept.IsNullField("Reservation10") && accept.Reservation10 == "复查单据")
                 {
                     string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "验收报告单.mrt");
                     if (File.Exists(fileName))
@@ -97,6 +95,37 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             }
             base.CustomReCheck();
             this.pageNavigator.ShowData();
+        }
+
+        protected override void CustomApprove()
+        {
+            object id = this.gvData.GetFocusedRowCellValue("验收单ID");
+            if (id != null && id != DBNull.Value)
+            {
+                BUSAcceptEntity accept = new BUSAcceptEntity { AcceptID = Convert.ToInt32(id) };
+                accept.Fetch();
+
+                //string statusName = gvData.GetFocusedRowCellValue("状态").ToString();
+                //if (statusName == "未批准")
+                //{
+                //    XtraMessageBox.Show("该单据已作废，不允许再次审批", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    return;
+                //}
+                DialogResult dr = base.BaseApprove();
+                if (dr == DialogResult.Yes)
+                {
+                    //更新销售单状态
+                    BUSBillEntity entity = new BUSBillEntity { BillID = accept.BillID };
+                    entity.Fetch();
+                    if (entity.BillStatus == 7)
+                    {
+                        entity.BillStatus = int.Parse(accept.Reservation3);
+                        entity.BillStatusName = accept.Reservation4;
+                        entity.Update();
+                    }
+                    this.pageNavigator.ShowData();
+                }
+            }
         }
     }
 }

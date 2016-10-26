@@ -136,6 +136,12 @@
     <Compile Include="CuringManager\FrmFacilitiesCuring.Designer.cs">
       <DependentUpon>FrmFacilitiesCuring.cs</DependentUpon>
     </Compile>
+    <Compile Include="CuringManager\FrmFacilitiesCuringResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmFacilitiesCuringResult.Designer.cs">
+      <DependentUpon>FrmFacilitiesCuringResult.cs</DependentUpon>
+    </Compile>
     <Compile Include="CuringManager\FrmSelectFacilities.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +171,12 @@
     </Compile>
     <Compile Include="CuringManager\FrmSingleFacilitiesCuring.Designer.cs">
       <DependentUpon>FrmSingleFacilitiesCuring.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuringManager\FrmSingleFacilitiesCuringResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmSingleFacilitiesCuringResult.Designer.cs">
+      <DependentUpon>FrmSingleFacilitiesCuringResult.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmStoreAndCuring.cs">
       <SubType>Form</SubType>
@@ -267,6 +279,9 @@
     <EmbeddedResource Include="CuringManager\FrmFacilitiesCuring.resx">
       <DependentUpon>FrmFacilitiesCuring.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmFacilitiesCuringResult.resx">
+      <DependentUpon>FrmFacilitiesCuringResult.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CuringManager\FrmSelectFacilities.resx">
       <DependentUpon>FrmSelectFacilities.cs</DependentUpon>
     </EmbeddedResource>
@@ -281,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CuringManager\FrmSingleFacilitiesCuring.resx">
       <DependentUpon>FrmSingleFacilitiesCuring.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmSingleFacilitiesCuringResult.resx">
+      <DependentUpon>FrmSingleFacilitiesCuringResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmStoreAndCuring.resx">
       <DependentUpon>FrmStoreAndCuring.cs</DependentUpon>

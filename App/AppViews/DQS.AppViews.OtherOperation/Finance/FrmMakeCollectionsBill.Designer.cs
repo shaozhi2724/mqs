@@ -55,6 +55,29 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.gridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colStoreID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colBillCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colDealerCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colDealerName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCreateUser = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colOperator = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colBillDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colDetailID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colProductName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colBatchNo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colUnitPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colHTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colUTotalPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTax = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTaxPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colProducerName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colProductUnit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colProductSpec = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPackageSpec = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colBillAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colGotAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deBillDate.Properties.VistaTimeProperties)).BeginInit();
@@ -98,7 +121,7 @@
             this.panelControl1.Controls.Add(this.labelControl3);
             this.panelControl1.Location = new System.Drawing.Point(3, 3);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(689, 104);
+            this.panelControl1.Size = new System.Drawing.Size(910, 104);
             this.panelControl1.TabIndex = 10;
             // 
             // deBillDate
@@ -267,14 +290,14 @@
             this.panelControl2.Controls.Add(this.labelControl1);
             this.panelControl2.Location = new System.Drawing.Point(3, 382);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(690, 48);
+            this.panelControl2.Size = new System.Drawing.Size(911, 48);
             this.panelControl2.TabIndex = 9;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(581, 11);
+            this.btnCancel.Location = new System.Drawing.Point(802, 11);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(87, 27);
             this.btnCancel.TabIndex = 0;
@@ -283,7 +306,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(442, 11);
+            this.btnSave.Location = new System.Drawing.Point(663, 11);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(87, 27);
             this.btnSave.TabIndex = 0;
@@ -313,22 +336,250 @@
             this.gridControl.Location = new System.Drawing.Point(3, 109);
             this.gridControl.MainView = this.gridView;
             this.gridControl.Name = "gridControl";
-            this.gridControl.Size = new System.Drawing.Size(689, 271);
+            this.gridControl.Size = new System.Drawing.Size(910, 271);
             this.gridControl.TabIndex = 8;
             this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView});
             // 
             // gridView
             // 
+            this.gridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colStoreID,
+            this.colBillCode,
+            this.colDealerCode,
+            this.colDealerName,
+            this.colCreateUser,
+            this.colOperator,
+            this.colBillDate,
+            this.colDetailID,
+            this.colProductName,
+            this.colBatchNo,
+            this.colAmount,
+            this.colUnitPrice,
+            this.colHTotalPrice,
+            this.colUTotalPrice,
+            this.colTax,
+            this.colTaxPrice,
+            this.colProducerName,
+            this.colProductUnit,
+            this.colProductSpec,
+            this.colPackageSpec,
+            this.colBillAmount,
+            this.colGotAmount,
+            this.colRemark});
             this.gridView.GridControl = this.gridControl;
             this.gridView.IndicatorWidth = 40;
             this.gridView.Name = "gridView";
+            this.gridView.OptionsView.ShowGroupPanel = false;
+            this.gridView.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
+            this.gridView.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView_CellValueChanging);
+            // 
+            // colStoreID
+            // 
+            this.colStoreID.Caption = "StoreID";
+            this.colStoreID.FieldName = "StoreID";
+            this.colStoreID.Name = "colStoreID";
+            // 
+            // colBillCode
+            // 
+            this.colBillCode.Caption = "单据编号";
+            this.colBillCode.FieldName = "BillCode";
+            this.colBillCode.Name = "colBillCode";
+            this.colBillCode.Visible = true;
+            this.colBillCode.VisibleIndex = 0;
+            this.colBillCode.Width = 41;
+            // 
+            // colDealerCode
+            // 
+            this.colDealerCode.Caption = "单位编码";
+            this.colDealerCode.FieldName = "DealerCode";
+            this.colDealerCode.Name = "colDealerCode";
+            this.colDealerCode.Visible = true;
+            this.colDealerCode.VisibleIndex = 1;
+            this.colDealerCode.Width = 41;
+            // 
+            // colDealerName
+            // 
+            this.colDealerName.Caption = "单位名称";
+            this.colDealerName.FieldName = "DealerName";
+            this.colDealerName.Name = "colDealerName";
+            this.colDealerName.Visible = true;
+            this.colDealerName.VisibleIndex = 2;
+            this.colDealerName.Width = 41;
+            // 
+            // colCreateUser
+            // 
+            this.colCreateUser.Caption = "开票员";
+            this.colCreateUser.FieldName = "CreateUser";
+            this.colCreateUser.Name = "colCreateUser";
+            this.colCreateUser.Visible = true;
+            this.colCreateUser.VisibleIndex = 3;
+            this.colCreateUser.Width = 41;
+            // 
+            // colOperator
+            // 
+            this.colOperator.Caption = "业务员";
+            this.colOperator.FieldName = "Operator";
+            this.colOperator.Name = "colOperator";
+            this.colOperator.Visible = true;
+            this.colOperator.VisibleIndex = 4;
+            this.colOperator.Width = 41;
+            // 
+            // colBillDate
+            // 
+            this.colBillDate.Caption = "下单日期";
+            this.colBillDate.FieldName = "BillDate";
+            this.colBillDate.Name = "colBillDate";
+            this.colBillDate.Visible = true;
+            this.colBillDate.VisibleIndex = 5;
+            this.colBillDate.Width = 41;
+            // 
+            // colDetailID
+            // 
+            this.colDetailID.Caption = "DetailID";
+            this.colDetailID.FieldName = "DetailID";
+            this.colDetailID.Name = "colDetailID";
+            // 
+            // colProductName
+            // 
+            this.colProductName.Caption = "产品名称";
+            this.colProductName.FieldName = "ProductName";
+            this.colProductName.Name = "colProductName";
+            this.colProductName.Visible = true;
+            this.colProductName.VisibleIndex = 6;
+            this.colProductName.Width = 41;
+            // 
+            // colBatchNo
+            // 
+            this.colBatchNo.Caption = "批号";
+            this.colBatchNo.FieldName = "BatchNo";
+            this.colBatchNo.Name = "colBatchNo";
+            this.colBatchNo.Visible = true;
+            this.colBatchNo.VisibleIndex = 7;
+            this.colBatchNo.Width = 41;
+            // 
+            // colAmount
+            // 
+            this.colAmount.Caption = "数量";
+            this.colAmount.FieldName = "Amount";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.Visible = true;
+            this.colAmount.VisibleIndex = 8;
+            this.colAmount.Width = 41;
+            // 
+            // colUnitPrice
+            // 
+            this.colUnitPrice.Caption = "单价";
+            this.colUnitPrice.FieldName = "UnitPrice";
+            this.colUnitPrice.Name = "colUnitPrice";
+            this.colUnitPrice.Visible = true;
+            this.colUnitPrice.VisibleIndex = 9;
+            this.colUnitPrice.Width = 41;
+            // 
+            // colHTotalPrice
+            // 
+            this.colHTotalPrice.Caption = "含税金额";
+            this.colHTotalPrice.FieldName = "HTotalPrice";
+            this.colHTotalPrice.Name = "colHTotalPrice";
+            this.colHTotalPrice.Visible = true;
+            this.colHTotalPrice.VisibleIndex = 10;
+            this.colHTotalPrice.Width = 41;
+            // 
+            // colUTotalPrice
+            // 
+            this.colUTotalPrice.Caption = "不含税金额";
+            this.colUTotalPrice.FieldName = "UTotalPrice";
+            this.colUTotalPrice.Name = "colUTotalPrice";
+            this.colUTotalPrice.Visible = true;
+            this.colUTotalPrice.VisibleIndex = 11;
+            this.colUTotalPrice.Width = 41;
+            // 
+            // colTax
+            // 
+            this.colTax.Caption = "税率";
+            this.colTax.FieldName = "Tax";
+            this.colTax.Name = "colTax";
+            this.colTax.Visible = true;
+            this.colTax.VisibleIndex = 12;
+            this.colTax.Width = 41;
+            // 
+            // colTaxPrice
+            // 
+            this.colTaxPrice.Caption = "税额";
+            this.colTaxPrice.FieldName = "TaxPrice";
+            this.colTaxPrice.Name = "colTaxPrice";
+            this.colTaxPrice.Visible = true;
+            this.colTaxPrice.VisibleIndex = 13;
+            this.colTaxPrice.Width = 41;
+            // 
+            // colProducerName
+            // 
+            this.colProducerName.Caption = "生产厂商";
+            this.colProducerName.FieldName = "ProducerName";
+            this.colProducerName.Name = "colProducerName";
+            this.colProducerName.Visible = true;
+            this.colProducerName.VisibleIndex = 14;
+            this.colProducerName.Width = 41;
+            // 
+            // colProductUnit
+            // 
+            this.colProductUnit.Caption = "单位";
+            this.colProductUnit.FieldName = "ProductUnit";
+            this.colProductUnit.Name = "colProductUnit";
+            this.colProductUnit.Visible = true;
+            this.colProductUnit.VisibleIndex = 15;
+            this.colProductUnit.Width = 41;
+            // 
+            // colProductSpec
+            // 
+            this.colProductSpec.Caption = "规格";
+            this.colProductSpec.FieldName = "ProductSpec";
+            this.colProductSpec.Name = "colProductSpec";
+            this.colProductSpec.Visible = true;
+            this.colProductSpec.VisibleIndex = 16;
+            this.colProductSpec.Width = 41;
+            // 
+            // colPackageSpec
+            // 
+            this.colPackageSpec.Caption = "包装规格";
+            this.colPackageSpec.FieldName = "PackageSpec";
+            this.colPackageSpec.Name = "colPackageSpec";
+            this.colPackageSpec.Visible = true;
+            this.colPackageSpec.VisibleIndex = 17;
+            this.colPackageSpec.Width = 41;
+            // 
+            // colBillAmount
+            // 
+            this.colBillAmount.Caption = "单据数量";
+            this.colBillAmount.FieldName = "BillAmount";
+            this.colBillAmount.Name = "colBillAmount";
+            this.colBillAmount.Visible = true;
+            this.colBillAmount.VisibleIndex = 18;
+            this.colBillAmount.Width = 44;
+            // 
+            // colGotAmount
+            // 
+            this.colGotAmount.Caption = "剩余数量";
+            this.colGotAmount.FieldName = "GotAmount";
+            this.colGotAmount.Name = "colGotAmount";
+            this.colGotAmount.Visible = true;
+            this.colGotAmount.VisibleIndex = 19;
+            this.colGotAmount.Width = 38;
+            // 
+            // colRemark
+            // 
+            this.colRemark.Caption = "备注";
+            this.colRemark.FieldName = "Remark";
+            this.colRemark.Name = "colRemark";
+            this.colRemark.Visible = true;
+            this.colRemark.VisibleIndex = 20;
+            this.colRemark.Width = 46;
             // 
             // FrmMakeCollectionsBill
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(696, 433);
+            this.ClientSize = new System.Drawing.Size(917, 433);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.gridControl);
@@ -389,6 +640,29 @@
         private DevExpress.XtraGrid.GridControl gridControl;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView;
         private DevExpress.XtraEditors.TextEdit txtDealerName;
+        private DevExpress.XtraGrid.Columns.GridColumn colStoreID;
+        private DevExpress.XtraGrid.Columns.GridColumn colBillCode;
+        private DevExpress.XtraGrid.Columns.GridColumn colDealerCode;
+        private DevExpress.XtraGrid.Columns.GridColumn colDealerName;
+        private DevExpress.XtraGrid.Columns.GridColumn colCreateUser;
+        private DevExpress.XtraGrid.Columns.GridColumn colOperator;
+        private DevExpress.XtraGrid.Columns.GridColumn colBillDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colDetailID;
+        private DevExpress.XtraGrid.Columns.GridColumn colProductName;
+        private DevExpress.XtraGrid.Columns.GridColumn colBatchNo;
+        private DevExpress.XtraGrid.Columns.GridColumn colAmount;
+        private DevExpress.XtraGrid.Columns.GridColumn colUnitPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn colHTotalPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn colUTotalPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn colTax;
+        private DevExpress.XtraGrid.Columns.GridColumn colTaxPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn colProducerName;
+        private DevExpress.XtraGrid.Columns.GridColumn colProductUnit;
+        private DevExpress.XtraGrid.Columns.GridColumn colPackageSpec;
+        private DevExpress.XtraGrid.Columns.GridColumn colBillAmount;
+        private DevExpress.XtraGrid.Columns.GridColumn colGotAmount;
+        private DevExpress.XtraGrid.Columns.GridColumn colRemark;
+        private DevExpress.XtraGrid.Columns.GridColumn colProductSpec;
 
 
     }

@@ -132,6 +132,11 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         bill.StoreInID = entity.StoreID;
                         bill.StoreInCode = entity.StoreCode;
                         bill.Update();
+                        if (DQS.Controls.Properties.Settings.Default.IsUseDepartment)
+                        {
+                            bill.Fetch();
+                            storeDetailBelongDepartmentId = bill.DepartmentID;
+                        }
 
                         List<BUSProductPurchasePriceEntity> productPrices = new List<BUSProductPurchasePriceEntity>();
                         for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)

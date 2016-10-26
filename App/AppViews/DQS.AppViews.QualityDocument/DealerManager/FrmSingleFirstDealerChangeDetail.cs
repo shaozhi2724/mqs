@@ -17,6 +17,7 @@ using DQS.Controls;
 using DQS.Module.Entities;
 using ORMSCore;
 using DQS.Common;
+using System.Data.SqlClient;
 
 namespace DQS.AppViews.QualityDocument.DealerManager
 {
@@ -194,6 +195,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
             {
                 cbxPrice.EditValue = entity.PurchasePriceListID;
             }
+
         }
 
         private void chkCheck_CheckedChanged(object sender, EventArgs e)

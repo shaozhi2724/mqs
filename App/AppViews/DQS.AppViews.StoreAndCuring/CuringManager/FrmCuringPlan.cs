@@ -34,6 +34,8 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
             object productStyle = this.gvData.GetFocusedRowCellValue("产品类别");
             object authorizedNo = this.gvData.GetFocusedRowCellValue("注册证号");
             object producerName = this.gvData.GetFocusedRowCellValue("生产厂商");
+            object stockCondition = this.gvData.GetFocusedRowCellValue("存储库区");
+            object curingDays = this.gvData.GetFocusedRowCellValue("养护周期");
 
 
             object batchNo = this.gvData.GetFocusedRowCellValue("批号");
@@ -87,6 +89,16 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
                     frmSingleCuringRecord.txtProducerName.Text = producerName.ToString();
                 }
 
+                if (stockCondition != null && stockCondition != DBNull.Value)
+                {
+                    frmSingleCuringRecord.txtStockCondition.Text = stockCondition.ToString();
+                }
+
+                if (curingDays != null && curingDays != DBNull.Value)
+                {
+                    frmSingleCuringRecord.txtcuringDays.Text = curingDays.ToString();
+                }
+
                 if (batchNo != null && batchNo != DBNull.Value)
                 {
                     frmSingleCuringRecord.txtBatchNo.Text = batchNo.ToString();
@@ -133,6 +145,8 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
             object productStyle = this.gvData.GetFocusedRowCellValue("产品类别");
             object authorizedNo = this.gvData.GetFocusedRowCellValue("注册证号");
             object producerName = this.gvData.GetFocusedRowCellValue("生产厂商");
+            object stockCondition = this.gvData.GetFocusedRowCellValue("存储库区");
+            object curingDays = this.gvData.GetFocusedRowCellValue("养护周期");
 
 
             object batchNo = this.gvData.GetFocusedRowCellValue("批号");
@@ -189,9 +203,19 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
                     frmSingleCuringRecord.txtProducerName.Text = producerName.ToString();
                 }
 
+                if (curingDays != null && curingDays != DBNull.Value)
+                {
+                    frmSingleCuringRecord.txtcuringDays.Text = curingDays.ToString();
+                }
+
                 if (batchNo != null && batchNo != DBNull.Value)
                 {
                     frmSingleCuringRecord.txtBatchNo.Text = batchNo.ToString();
+                }
+
+                if (stockCondition != null && stockCondition != DBNull.Value)
+                {
+                    frmSingleCuringRecord.txtStockCondition.Text = stockCondition.ToString();
                 }
 
                 if (amount != null && amount != DBNull.Value)

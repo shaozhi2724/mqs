@@ -47,7 +47,7 @@ namespace DQS.Controls
             this.pageNavigator.PageSize = popupBox.PageSize == 0 ? 100 : popupBox.PageSize;
 
             _defaultFilter = pageNavigator.Filter;
-            if (this.pageNavigator.ViewName == "vw_AllDealer" || this.pageNavigator.ViewName == "vw_AllProvider")
+            if (this.pageNavigator.ViewName == "vw_AllDealer" || this.pageNavigator.ViewName == "vw_AllProvider" || this.pageNavigator.ViewName == "vw_AllProduct")
             {
                 vw = true;
             }
@@ -66,7 +66,7 @@ namespace DQS.Controls
             this.pageNavigator.PageSize = pageSize == 0 ? 100 : pageSize;
             _defaultFilter = pageNavigator.Filter;
 
-            if (viewName == "vw_AllDealer" || viewName == "vw_AllProvider")
+            if (viewName == "vw_AllDealer" || viewName == "vw_AllProvider" || viewName == "vw_AllProduct")
             {
                 vw = true;
             }

@@ -12,12 +12,15 @@ using DQS.Controls;
 using DQS.Module.Entities;
 using ORMSCore;
 using DQS.Common;
+using System.Data.SqlClient;
 
 namespace DQS.AppViews.QualityDocument.DealerManager
 {
     public partial class FrmSingleFirstDealer : DevExpress.XtraEditors.XtraForm
     {
         private int? m_id;
+
+
 
         public FrmSingleFirstDealer()
         {
@@ -30,7 +33,6 @@ namespace DQS.AppViews.QualityDocument.DealerManager
             this.cbxDealerType.Text = "供应商";
             this.cbxDealerType.Enabled = false;
             this.cbxDealerStyle.InitSource();
-
             //供应商只能是生产厂商和批发
             cbxIndustryStyle.InitSource(SYSCategoryEntityFields.ItemID <= 2);
 
@@ -318,6 +320,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
             {
                 cbxPrice.EditValue = entity.PurchasePriceListID;
             }
+
         }
 
         /// <summary>
@@ -347,6 +350,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
             }
 
             entity.PurchasePriceListID = Convert.ToInt32(cbxPrice.EditValue);
+
         }
 
         private void chkCheck_CheckedChanged(object sender, EventArgs e)

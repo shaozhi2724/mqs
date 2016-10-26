@@ -385,7 +385,7 @@
             // rdgBillStyle
             // 
             this.rdgBillStyle.EditValue = "正常";
-            this.rdgBillStyle.Location = new System.Drawing.Point(470, 12);
+            this.rdgBillStyle.Location = new System.Drawing.Point(471, 12);
             this.rdgBillStyle.Name = "rdgBillStyle";
             this.rdgBillStyle.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.rdgBillStyle.Properties.Appearance.Options.UseBackColor = true;
@@ -393,7 +393,7 @@
             this.rdgBillStyle.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem("正常", "正常"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("直调", "直调")});
-            this.rdgBillStyle.Size = new System.Drawing.Size(142, 29);
+            this.rdgBillStyle.Size = new System.Drawing.Size(141, 29);
             this.rdgBillStyle.StyleController = this.layControl;
             this.rdgBillStyle.TabIndex = 1;
             // 
@@ -513,7 +513,7 @@
             this.txtBillCode.IsTransferAlphabetic = false;
             this.txtBillCode.Location = new System.Drawing.Point(75, 12);
             this.txtBillCode.Name = "txtBillCode";
-            this.txtBillCode.Size = new System.Drawing.Size(328, 21);
+            this.txtBillCode.Size = new System.Drawing.Size(329, 21);
             this.txtBillCode.StyleController = this.layControl;
             this.txtBillCode.TabIndex = 0;
             // 
@@ -549,7 +549,7 @@
             // 
             this.txtDealerName.AlphabeticFiled = "DealerSpell";
             this.txtDealerName.EditData = null;
-            this.txtDealerName.Fields = "单位ID,单位编号,单位名称,业务联系人,业务联系电话,所属销售区域,区县,通讯地址,单位类型,单位名称Spell,过期状态";
+            this.txtDealerName.Fields = "单位ID,单位编号,单位名称,业务联系人,业务联系电话,所属销售区域,区县,通讯地址,单位类型,单位名称Spell,业务员,过期状态";
             this.txtDealerName.Filter = "[状态] is  null or [状态] = \'正常\'";
             this.txtDealerName.FormatQueryString = "[单位编号] LIKE \'%{0}%\' OR ([单位名称] LIKE \'%{0}%\' OR [单位名称Spell] LIKE \'%{0}%\')";
             this.txtDealerName.GroupColumn = "区县";
@@ -690,7 +690,7 @@
             this.layBillCode.CustomizationFormText = "销售单号";
             this.layBillCode.Location = new System.Drawing.Point(0, 0);
             this.layBillCode.Name = "layBillCode";
-            this.layBillCode.Size = new System.Drawing.Size(395, 33);
+            this.layBillCode.Size = new System.Drawing.Size(396, 33);
             this.layBillCode.Text = "销售单号";
             this.layBillCode.TextSize = new System.Drawing.Size(60, 17);
             // 
@@ -821,10 +821,10 @@
             // 
             this.layBillStyle.Control = this.rdgBillStyle;
             this.layBillStyle.CustomizationFormText = "类型";
-            this.layBillStyle.Location = new System.Drawing.Point(395, 0);
+            this.layBillStyle.Location = new System.Drawing.Point(396, 0);
             this.layBillStyle.MinSize = new System.Drawing.Size(147, 33);
             this.layBillStyle.Name = "layBillStyle";
-            this.layBillStyle.Size = new System.Drawing.Size(209, 33);
+            this.layBillStyle.Size = new System.Drawing.Size(208, 33);
             this.layBillStyle.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layBillStyle.Text = "类型";
             this.layBillStyle.TextSize = new System.Drawing.Size(60, 17);
@@ -1080,6 +1080,7 @@
             // 
             this.popupGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.popupGrid.IsCalculatePrice = true;
+            this.popupGrid.IsCompute = false;
             this.popupGrid.Location = new System.Drawing.Point(2, 25);
             this.popupGrid.Name = "popupGrid";
             this.popupGrid.OperationName = "Sale";

@@ -119,23 +119,18 @@ FROM dbo.FIN_MakeCollections m WHERE m.MakeCollectionsCode LIKE 'ZTSK%' AND (m.D
 
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string Delsql = @"
-DELETE dbo.FIN_Receivables FROM dbo.FIN_Receivables nr
-WHERE EXISTS(SELECT * FROM FIN_MakeCollectionsDetail WHERE {0} AND BusinessBillCode = nr.BusinessBillCode AND nr.IsAutoCreate = 1)
-DELETE dbo.FIN_ReceivablesDetail FROM dbo.FIN_ReceivablesDetail nr
-WHERE EXISTS(SELECT * FROM FIN_MakeCollectionsDetail WHERE {0} AND BusinessBillCode = nr.BusinessBillCode AND nr.IsAutoCreate = 1)
-DELETE dbo.FIN_MakeCollections WHERE {0}
-DELETE dbo.FIN_MakeCollectionsDetail WHERE {0}";
+                string Delsql = @"EXEC fn_DelMakeCollections '{0}','{1}'";
+
+                string code = gridView.GetDataRow(gridView.FocusedRowHandle)["收款单号"].ToString();
+                string dealercode = gridView.GetDataRow(gridView.FocusedRowHandle)["往来单位编号"].ToString();
+
                 if (dr == DialogResult.Yes)
                 {
-                    string code = gridView.GetDataRow(gridView.FocusedRowHandle)["收款单号"].ToString();
-                    Delsql = String.Format(Delsql, "MakeCollectionsCode = '" + code + "'");
+                    Delsql = String.Format(Delsql, code, "");
                 }
                 else if (dr == DialogResult.No)
                 {
-                    string code = gridView.GetDataRow(gridView.FocusedRowHandle)["收款单号"].ToString();
-                    string dealercode = gridView.GetDataRow(gridView.FocusedRowHandle)["往来单位编号"].ToString();
-                    Delsql = String.Format(Delsql, "MakeCollectionsCode = '" + code + "' AND DealerCode = '" + dealercode + "'");
+                    Delsql = String.Format(Delsql, code, dealercode);
                 }
 
                 try

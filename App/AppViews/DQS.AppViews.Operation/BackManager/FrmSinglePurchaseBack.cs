@@ -16,6 +16,7 @@ using DevExpress.XtraLayout.Utils;
 using DQS.AppViews.Operation.Properties;
 using DQS.Module;
 using DQS.Module.Views;
+using DQS.AppViews.Operation.PurchaseAndSaleManager;
 
 namespace DQS.AppViews.Operation.BackManager
 {
@@ -31,6 +32,8 @@ namespace DQS.AppViews.Operation.BackManager
         UpdateBillDetail ubd;
         SaleViewDetail svd;
 
+        List<GetDepartment> departments = new List<GetDepartment>();
+        GetDepartment department = new GetDepartment();
 
         public string alter;
         private string dealerCode;
@@ -64,6 +67,37 @@ namespace DQS.AppViews.Operation.BackManager
             //cboQualified.Text = "";
         }
 
+        private void LoadDepartment()
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                string sqlBill = @"SELECT DepartmentID,DepartmentName FROM dbo.BFI_Department WHERE DepartmentName LIKE '%业务%'";
+
+                SqlDataAdapter sdad = new SqlDataAdapter(sqlBill, conn);
+                DataSet ds = new DataSet();
+                try
+                {
+                    sdad.Fill(ds, "Table");
+                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                    {
+                        department = new GetDepartment();
+                        department.departmentID = Convert.ToInt32(ds.Tables["Table"].Rows[i]["DepartmentID"]);
+                        department.departmentName = ds.Tables["Table"].Rows[i]["DepartmentName"].ToString();
+                        departments.Add(department);
+                        cboDepartment.Properties.Items.Add(department.departmentName);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.ToString(), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
         private void FrmSinglePurchaseBack_Load(object sender, EventArgs e)
         {
             LoadCboQualified();
@@ -76,6 +110,13 @@ namespace DQS.AppViews.Operation.BackManager
             this.popupGrid.InitGrid();
             this.popupGrid.PopupView.KeyDown += PopupView_KeyDown;
             popupGrid.Tag = "0$0";
+
+
+            if (Settings.Default.IsUseDepartment)
+            {
+                this.layDepartment.Visibility = LayoutVisibility.Always;
+                LoadDepartment();
+            }
 
             if (this.Tag != null)
             {
@@ -884,12 +925,36 @@ WHERE BillID={1}
 
                         if (!this.ValidateLockStatus()) return; //锁定产品不能退回
                         #region 新建
-                        BFIEmployeeEntity employee = GlobalItem.g_CurrentEmployee;
-                        if (null != employee
-                            && !employee.IsNullField("DepartmentID"))
+
+
+                        if (cboQualified.Text == "合格" && Settings.Default.IsUseDepartment)
                         {
-                            departmentID = employee.DepartmentID;
+                            if (cboDepartment.Text == "")
+                            {
+                                XtraMessageBox.Show("选择项部门不能为空。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            else
+                            {
+                                foreach (GetDepartment depart in departments)
+                                {
+                                    if (depart.departmentName == cboDepartment.Text)
+                                    {
+                                        departmentID = depart.departmentID;
+                                    }
+                                }
+                            }
                         }
+                        else
+                        {
+                            BFIEmployeeEntity employee = GlobalItem.g_CurrentEmployee;
+                            if (null != employee
+                                && !employee.IsNullField("DepartmentID"))
+                            {
+                                departmentID = employee.DepartmentID;
+                            }
+                        }
+
                         entity.IsBillIn = false;//(采购退货)出库
                         entity.BillTypeID = 2;
                         entity.BillTypeName = "采购退货";
@@ -1136,7 +1201,7 @@ WHERE BillID={1}
                                 sql = String.Format(sql, InStoreID, Amount);
                                 SqlCommand cmd = new SqlCommand(sql, conn);
                                 object result = cmd.ExecuteScalar();
-                                if (result == "NO")
+                                if (result.ToString() == "NO")
                                 {
                                     _amountErrors.Add(String.Format("第{0}行，{1} 批号为{2}库存不足。", i + 1, productEntity.ProductName, BatchNo));
                                 }
@@ -1268,6 +1333,20 @@ WHERE BillID={1}
         /// <param name="entity">实体</param>
         protected virtual void CustomGetEntity(BUSBillEntity entity)
         {
+            if (Settings.Default.IsUseDepartment)
+            {
+                if (entity.ContractNo == "合格" && !entity.IsNullField("DepartmentID"))
+                {
+                    foreach (GetDepartment depart in departments)
+                    {
+                        if (depart.departmentID == entity.DepartmentID)
+                        {
+                            cboDepartment.Text = depart.departmentName;
+                        }
+                    }
+                }
+            }
+
             if (!entity.IsNullField("DealerID"))
             {
                 this.txtDealerName2.Tag = entity.DealerID;
@@ -1315,6 +1394,19 @@ WHERE BillID={1}
         /// <param name="entity">实体</param>
         protected virtual void CustomSetEntity(BUSBillEntity entity)
         {
+            if (Settings.Default.IsUseDepartment)
+            {
+                if (this.cboQualified.Text == "合格" && cboDepartment.Text != "")
+                {
+                    foreach (GetDepartment depart in departments)
+                    {
+                        if (depart.departmentName == cboDepartment.Text)
+                        {
+                            entity.DepartmentID = depart.departmentID;
+                        }
+                    }
+                }
+            }
 
             if (this.txtDealerName2.Text.Trim() != null)
             {
@@ -1414,8 +1506,30 @@ WHERE BillID={1}
                     }
                     e.ActiveOperationColumn.PopupForm.Filter = String.Format("[所属部门ID] = {0}", departmentID);
                 }
+
+                if (cboQualified.Text == "合格" && Settings.Default.IsUseDepartment)
+                {
+                    if (cboDepartment.Text == "")
+                    {
+                        XtraMessageBox.Show("选择项部门不能为空。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        e.Cancel = true;
+                    }
+                    else
+                    {
+                        foreach (GetDepartment depart in departments)
+                        {
+                            if (depart.departmentName == cboDepartment.Text)
+                            {
+                                popupGrid.DepartmentID = depart.departmentID;
+                            }
+                        }
+                        cboDepartment.Properties.ReadOnly = true;
+                    }
+                }
+
                 popupGrid.IsQualified = cboQualified.Text == "合格" ? true : false;
                 cboQualified.Properties.ReadOnly = true;
+
             }
         }
 
@@ -1677,6 +1791,18 @@ WHERE BillID={1}
                 }
             }
             return true;
+        }
+
+        private void cboQualified_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboQualified.Text == "合格")
+            {
+                layDepartment.Visibility = LayoutVisibility.Always;
+            }
+            else
+            {
+                layDepartment.Visibility = LayoutVisibility.Never;
+            }
         }
     }
 }

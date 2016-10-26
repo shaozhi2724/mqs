@@ -30,6 +30,7 @@
         {
             this.ftPanel = new DQS.Controls.FieldTextBoxPanel();
             this.layControl = new DevExpress.XtraLayout.LayoutControl();
+            this.cboDepartment = new DQS.Controls.ComboBoxCategoryEx();
             this.cboQualified = new DQS.Controls.ComboBoxCategoryEx();
             this.txtPurchaseBillCode = new DQS.Controls.BUSBillEntityTextBox();
             this.txtDealerName2 = new DQS.Controls.BUSBillEntityTextBox();
@@ -60,6 +61,7 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layQualified = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layDepartment = new DevExpress.XtraLayout.LayoutControlItem();
             this.panelAction = new DevExpress.XtraEditors.PanelControl();
             this.btnStoreInRecord = new DevExpress.XtraEditors.SimpleButton();
             this.btnViewHistory = new DevExpress.XtraEditors.SimpleButton();
@@ -72,6 +74,7 @@
             this.ftPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
             this.layControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cboDepartment.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboQualified.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPurchaseBillCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealerName2.Properties)).BeginInit();
@@ -102,6 +105,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layQualified)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layDepartment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelAction)).BeginInit();
             this.panelAction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl)).BeginInit();
@@ -121,6 +125,7 @@
             // 
             // layControl
             // 
+            this.layControl.Controls.Add(this.cboDepartment);
             this.layControl.Controls.Add(this.cboQualified);
             this.layControl.Controls.Add(this.txtPurchaseBillCode);
             this.layControl.Controls.Add(this.txtDealerName2);
@@ -143,6 +148,22 @@
             this.layControl.TabIndex = 0;
             this.layControl.Text = "layControl";
             // 
+            // cboDepartment
+            // 
+            this.cboDepartment.AddFirstDefaultItem = false;
+            this.cboDepartment.CategoryCode = "PaymentType";
+            this.cboDepartment.FirstDefaultItemText = null;
+            this.cboDepartment.FormatQueryString = null;
+            this.cboDepartment.Location = new System.Drawing.Point(700, 108);
+            this.cboDepartment.Name = "cboDepartment";
+            this.cboDepartment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboDepartment.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cboDepartment.SelectedValue = null;
+            this.cboDepartment.Size = new System.Drawing.Size(139, 21);
+            this.cboDepartment.StyleController = this.layControl;
+            this.cboDepartment.TabIndex = 103;
+            // 
             // cboQualified
             // 
             this.cboQualified.AddFirstDefaultItem = false;
@@ -156,9 +177,10 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboQualified.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cboQualified.SelectedValue = null;
-            this.cboQualified.Size = new System.Drawing.Size(337, 21);
+            this.cboQualified.Size = new System.Drawing.Size(119, 21);
             this.cboQualified.StyleController = this.layControl;
             this.cboQualified.TabIndex = 14;
+            this.cboQualified.SelectedIndexChanged += new System.EventHandler(this.cboQualified_SelectedIndexChanged);
             // 
             // txtPurchaseBillCode
             // 
@@ -402,7 +424,8 @@
             this.layDealerName,
             this.layoutControlItem1,
             this.layoutControlItem2,
-            this.layQualified});
+            this.layQualified,
+            this.layDepartment});
             this.layControlGroup.Location = new System.Drawing.Point(0, -58);
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(851, 224);
@@ -557,10 +580,21 @@
             this.layQualified.CustomizationFormText = "库存";
             this.layQualified.Location = new System.Drawing.Point(415, 154);
             this.layQualified.Name = "layQualified";
-            this.layQualified.Size = new System.Drawing.Size(416, 25);
+            this.layQualified.Size = new System.Drawing.Size(198, 25);
             this.layQualified.Text = "库存";
             this.layQualified.TextSize = new System.Drawing.Size(72, 17);
             this.layQualified.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            // 
+            // layDepartment
+            // 
+            this.layDepartment.Control = this.cboDepartment;
+            this.layDepartment.CustomizationFormText = "部门";
+            this.layDepartment.Location = new System.Drawing.Point(613, 154);
+            this.layDepartment.Name = "layDepartment";
+            this.layDepartment.Size = new System.Drawing.Size(218, 25);
+            this.layDepartment.Text = "部门";
+            this.layDepartment.TextSize = new System.Drawing.Size(72, 17);
+            this.layDepartment.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // panelAction
             // 
@@ -655,6 +689,7 @@
             // 
             this.popupGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.popupGrid.IsCalculatePrice = true;
+            this.popupGrid.IsCompute = false;
             this.popupGrid.Location = new System.Drawing.Point(2, 25);
             this.popupGrid.Name = "popupGrid";
             this.popupGrid.OperationName = "PurchaseBack";
@@ -683,6 +718,7 @@
             this.ftPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).EndInit();
             this.layControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cboDepartment.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboQualified.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPurchaseBillCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealerName2.Properties)).EndInit();
@@ -713,6 +749,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layQualified)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layDepartment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelAction)).EndInit();
             this.panelAction.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl)).EndInit();
@@ -764,5 +801,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private Controls.ComboBoxCategoryEx cboQualified;
         private DevExpress.XtraLayout.LayoutControlItem layQualified;
+        private Controls.ComboBoxCategoryEx cboDepartment;
+        private DevExpress.XtraLayout.LayoutControlItem layDepartment;
     }
 }

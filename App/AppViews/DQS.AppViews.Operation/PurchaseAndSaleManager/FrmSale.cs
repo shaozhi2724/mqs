@@ -460,5 +460,14 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
             }
             base.CustomRegulatoryCode();
         }
+
+        protected override void CustomOldStoreOut()
+        {
+            using (FrmAddOldSaleBill frm = new FrmAddOldSaleBill())
+            {
+                frm.ShowDialog();
+            }
+            base.CustomOldStoreOut();
+        }
     }
 }

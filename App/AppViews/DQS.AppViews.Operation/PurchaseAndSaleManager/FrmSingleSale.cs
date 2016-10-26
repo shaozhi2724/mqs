@@ -43,6 +43,10 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
 
         public string alter;
 
+        bool saveBill = false;
+        float billTotalPrice = 0;
+        bool checkTotalPrice = false;
+
         public FrmSingleSale()
         {
             InitializeComponent();
@@ -555,6 +559,101 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
             }
         }
 
+        private bool IsTimeOutCycle(int dealerID)
+        {
+            string sql = "SELECT dbo.fn_IsTimeOutCycle({0})";
+            sql = string.Format(sql, dealerID);
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                conn.Open(); //连接数据库
+                //必须为SqlCommand指定数据库连接和登记的事务
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                try
+                {
+                    int returnValue = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (returnValue > 0)
+                    {
+                        DialogResult dr = XtraMessageBox.Show(string.Format("该单位有单据超过收款周期未收款，超过天数为：{0}，是否继续？",returnValue), "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dr == DialogResult.Yes)
+                        {
+                            saveBill = true;
+                            return IsMoreTotalPrice(dealerID);
+                        }
+                        else
+                        {
+                            saveBill = false;
+                            return false;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            return true;
+        }
+
+        private bool IsMoreTotalPrice(int dealerID)
+        {
+            string sql = "SELECT dbo.fn_IsMoreTotalPrice({0})";
+            sql = string.Format(sql, dealerID);
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                conn.Open(); //连接数据库
+                //必须为SqlCommand指定数据库连接和登记的事务
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                try
+                {
+                    float returnValue = float.Parse(cmd.ExecuteScalar().ToString());
+                    if (returnValue > 0)
+                    {
+                        DialogResult dr = XtraMessageBox.Show(string.Format("该单位未收款单据金额超出信用额度金额：{0} 元，是否继续？",returnValue), "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dr == DialogResult.Yes)
+                        {
+                            saveBill = true;
+                            checkTotalPrice = false;
+                            return true;
+                        }
+                        else
+                        {
+                            saveBill = false;
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        DialogResult dr = XtraMessageBox.Show(string.Format("该单位未收款单据金额未超出信用额度金额：{0} 元，是否继续？", -returnValue), "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dr == DialogResult.Yes)
+                        {
+                            saveBill = true;
+                            checkTotalPrice = true;
+                            billTotalPrice = -returnValue;
+                            return true;
+                        }
+                        else
+                        {
+                            saveBill = false;
+                            return false;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            return true;
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (!this.TotalPrice()) return;
@@ -566,6 +665,8 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
             try
             {
                 if (!this.ftPanel.ValidateIsNullFields()) return;
+
+
                 SaveDealerAddress();
                 BUSBillEntity entity = this.ftPanel.GetEntity() as BUSBillEntity;
 
@@ -994,6 +1095,20 @@ WHERE BillID={1}
                         if (!this.checkEmployeeRange()) return;//验证本企业业务员的经营范围
 
                         #region 新建
+
+
+                        //是否限制开单金额
+                        if (Settings.Default.IsRestriction)
+                        {
+                            if (checkTotalPrice)
+                            {
+                                if (float.Parse(txtTotalPrice.Text) > billTotalPrice)
+                                {
+                                    XtraMessageBox.Show(string.Format("单据金额不能超过可开金额：{0}。",billTotalPrice), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return;
+                                }
+                            }
+                        }
 
                         if (Settings.Default.IsUseDepartment)
                         {
@@ -1871,8 +1986,19 @@ WHERE BillID={1}
                     }
                     this.txtDealerAddress.Text = dataRow["通讯地址"].ToString();
                     this.txtDealerCode.Text = dataRow["单位编号"].ToString();
+                    if (Settings.Default.SettingBusinessPersonWithDealer)
+                    {
+                        this.txtOperator.Text = dataRow["业务员"].ToString();
+                    }
                     popupGrid.Tag = dataRow["单位ID"].ToString() + "$" + dataRow["单位名称"].ToString();
                     BandSaleMan(dealerID);
+
+
+                    //是否限制还款周期
+                    if (Settings.Default.IsRestriction)
+                    {
+                        if (!IsTimeOutCycle(dealerID)) return;
+                    }
                 }
             }
             if (!this.ValidateDealerQualification()) return;
@@ -1943,6 +2069,13 @@ WHERE BillID={1}
                     cboDepartment.Properties.ReadOnly = true;
                 }
             }
+
+            if (Settings.Default.IsRestriction && !saveBill)
+            {
+                XtraMessageBox.Show("超出周期或信用额度，不允许开单。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Cancel = true;
+            }
+
             if (!this.ValidateDealerQualification())
             {
                 e.Cancel = true;

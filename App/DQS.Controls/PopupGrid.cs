@@ -50,7 +50,7 @@ namespace DQS.Controls
         //销售界面传参
         public int DealerID;
         public int EmployeeID;
-        public int DepartmentID;
+        public int DepartmentID = 0;
         public string AcceptCode;
 
         //采退界面传参
@@ -292,7 +292,6 @@ namespace DQS.Controls
         {
             using (FrmNewStoreDetail frmnsd = new FrmNewStoreDetail())
             {
-                DepartmentID = 0;
                 frmnsd.EmployeeID = EmployeeID;
                 frmnsd.Department = DepartmentID;
                 frmnsd.Tag = this.Tag;
@@ -433,6 +432,7 @@ namespace DQS.Controls
             if (this.OperationName == "PurchaseBack" && !IsQualified)
             {
                 col.PopupForm.ViewName = "vw_ProductForUnQualified";
+                col.PopupForm.Filter = "";
             }
 
             if (this.OperationName == "Accept")
@@ -598,10 +598,14 @@ namespace DQS.Controls
                         Name = "col" + columns[i].ColumnName,
                         Tag = columns[i]
                     };
-
                     if (colField.Caption.Length > 4)//设置列宽
                     {
                         colField.Width = 16 * colField.Caption.Length;
+                    }
+                    //设置批号，生产日期、有效期列宽
+                    if (colField.FieldName == "批号" || colField.FieldName == "生产日期" || colField.FieldName == "有效期至")
+                    {
+                        colField.Width = 80;
                     }
                     colField.OptionsColumn.AllowEdit = columns[i].AllowEdit;
 /*
@@ -624,8 +628,10 @@ namespace DQS.Controls
                 DataTable emptyData = OperationGridSetting.GetEmptyData(this.OperationName);
                 this.m_EmptySource = emptyData;
                 this.DataSource = emptyData;
-
-                gridPopupView.BestFitColumns();
+                if (this.OperationName != "Accept")
+                {
+                    gridPopupView.BestFitColumns();
+                }
             }
         }
 

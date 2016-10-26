@@ -86,10 +86,9 @@
             this.pnOperating.Controls.Add(this.btnCancel);
             this.pnOperating.Controls.Add(this.btnSave);
             this.pnOperating.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnOperating.Location = new System.Drawing.Point(0, 283);
-            this.pnOperating.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pnOperating.Location = new System.Drawing.Point(0, 220);
             this.pnOperating.Name = "pnOperating";
-            this.pnOperating.Size = new System.Drawing.Size(374, 55);
+            this.pnOperating.Size = new System.Drawing.Size(327, 43);
             this.pnOperating.TabIndex = 1;
             // 
             // btnCancel
@@ -99,10 +98,9 @@
             this.btnCancel.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Appearance.Options.UseFont = true;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(274, 12);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCancel.Location = new System.Drawing.Point(240, 9);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(86, 30);
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "取消(&C)";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -113,10 +111,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Appearance.Options.UseFont = true;
-            this.btnSave.Location = new System.Drawing.Point(174, 12);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnSave.Location = new System.Drawing.Point(152, 9);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(86, 30);
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "保存(&S)";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -127,9 +124,8 @@
             this.ftPanel.Controls.Add(this.layData);
             this.ftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ftPanel.Location = new System.Drawing.Point(0, 0);
-            this.ftPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ftPanel.Name = "ftPanel";
-            this.ftPanel.Size = new System.Drawing.Size(374, 283);
+            this.ftPanel.Size = new System.Drawing.Size(327, 220);
             this.ftPanel.TabIndex = 0;
             this.ftPanel.TypeOfEntity = DQS.Module.EntityType2.BFIQualificationEntity;
             // 
@@ -146,10 +142,9 @@
             this.layData.Controls.Add(this.chkNoEndDate);
             this.layData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layData.Location = new System.Drawing.Point(0, 0);
-            this.layData.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.layData.Name = "layData";
             this.layData.Root = this.layControlGroup;
-            this.layData.Size = new System.Drawing.Size(374, 283);
+            this.layData.Size = new System.Drawing.Size(327, 220);
             this.layData.TabIndex = 0;
             this.layData.Text = "layControl";
             // 
@@ -161,38 +156,35 @@
             this.txtQualificationRemark.IsNullString = null;
             this.txtQualificationRemark.IsNullValidate = false;
             this.txtQualificationRemark.IsTransferAlphabetic = false;
-            this.txtQualificationRemark.Location = new System.Drawing.Point(75, 244);
-            this.txtQualificationRemark.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtQualificationRemark.Location = new System.Drawing.Point(63, 213);
             this.txtQualificationRemark.Name = "txtQualificationRemark";
-            this.txtQualificationRemark.Size = new System.Drawing.Size(287, 25);
+            this.txtQualificationRemark.Size = new System.Drawing.Size(235, 21);
             this.txtQualificationRemark.StyleController = this.layData;
             this.txtQualificationRemark.TabIndex = 2;
             // 
             // dteValidateDate
             // 
             this.dteValidateDate.EditValue = null;
-            this.dteValidateDate.Location = new System.Drawing.Point(75, 186);
-            this.dteValidateDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dteValidateDate.Location = new System.Drawing.Point(63, 162);
             this.dteValidateDate.Name = "dteValidateDate";
             this.dteValidateDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dteValidateDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dteValidateDate.Size = new System.Drawing.Size(287, 25);
+            this.dteValidateDate.Size = new System.Drawing.Size(235, 21);
             this.dteValidateDate.StyleController = this.layData;
             this.dteValidateDate.TabIndex = 7;
             // 
             // dteIssuingDate
             // 
             this.dteIssuingDate.EditValue = null;
-            this.dteIssuingDate.Location = new System.Drawing.Point(75, 157);
-            this.dteIssuingDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dteIssuingDate.Location = new System.Drawing.Point(63, 137);
             this.dteIssuingDate.Name = "dteIssuingDate";
             this.dteIssuingDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dteIssuingDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dteIssuingDate.Size = new System.Drawing.Size(287, 25);
+            this.dteIssuingDate.Size = new System.Drawing.Size(235, 21);
             this.dteIssuingDate.StyleController = this.layData;
             this.dteIssuingDate.TabIndex = 6;
             // 
@@ -204,10 +196,9 @@
             this.txtIssuingAuthority.IsNullString = null;
             this.txtIssuingAuthority.IsNullValidate = false;
             this.txtIssuingAuthority.IsTransferAlphabetic = false;
-            this.txtIssuingAuthority.Location = new System.Drawing.Point(75, 128);
-            this.txtIssuingAuthority.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtIssuingAuthority.Location = new System.Drawing.Point(63, 112);
             this.txtIssuingAuthority.Name = "txtIssuingAuthority";
-            this.txtIssuingAuthority.Size = new System.Drawing.Size(287, 25);
+            this.txtIssuingAuthority.Size = new System.Drawing.Size(235, 21);
             this.txtIssuingAuthority.StyleController = this.layData;
             this.txtIssuingAuthority.TabIndex = 2;
             // 
@@ -219,24 +210,25 @@
             this.txtCertificateNo.IsNullString = null;
             this.txtCertificateNo.IsNullValidate = false;
             this.txtCertificateNo.IsTransferAlphabetic = false;
-            this.txtCertificateNo.Location = new System.Drawing.Point(75, 99);
-            this.txtCertificateNo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCertificateNo.Location = new System.Drawing.Point(63, 87);
             this.txtCertificateNo.Name = "txtCertificateNo";
-            this.txtCertificateNo.Size = new System.Drawing.Size(287, 25);
+            this.txtCertificateNo.Size = new System.Drawing.Size(235, 21);
             this.txtCertificateNo.StyleController = this.layData;
             this.txtCertificateNo.TabIndex = 2;
             // 
             // cbxCertificateStyle
             // 
+            this.cbxCertificateStyle.AddFirstDefaultItem = false;
             this.cbxCertificateStyle.CategoryCode = "";
-            this.cbxCertificateStyle.Location = new System.Drawing.Point(75, 70);
-            this.cbxCertificateStyle.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cbxCertificateStyle.FirstDefaultItemText = null;
+            this.cbxCertificateStyle.FormatQueryString = null;
+            this.cbxCertificateStyle.Location = new System.Drawing.Point(63, 62);
             this.cbxCertificateStyle.Name = "cbxCertificateStyle";
             this.cbxCertificateStyle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbxCertificateStyle.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbxCertificateStyle.SelectedValue = null;
-            this.cbxCertificateStyle.Size = new System.Drawing.Size(287, 25);
+            this.cbxCertificateStyle.Size = new System.Drawing.Size(235, 21);
             this.cbxCertificateStyle.StyleController = this.layData;
             this.cbxCertificateStyle.TabIndex = 5;
             this.cbxCertificateStyle.SelectedIndexChanged += new System.EventHandler(this.cbxCertificateStyle_SelectedIndexChanged);
@@ -249,10 +241,9 @@
             this.txtQualificationName.IsNullString = "档案名称不能为空";
             this.txtQualificationName.IsNullValidate = true;
             this.txtQualificationName.IsTransferAlphabetic = true;
-            this.txtQualificationName.Location = new System.Drawing.Point(75, 41);
-            this.txtQualificationName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtQualificationName.Location = new System.Drawing.Point(63, 37);
             this.txtQualificationName.Name = "txtQualificationName";
-            this.txtQualificationName.Size = new System.Drawing.Size(287, 25);
+            this.txtQualificationName.Size = new System.Drawing.Size(235, 21);
             this.txtQualificationName.StyleController = this.layData;
             this.txtQualificationName.TabIndex = 2;
             // 
@@ -264,24 +255,22 @@
             this.txtQualificationCode.IsNullString = "档案编号不能为空";
             this.txtQualificationCode.IsNullValidate = true;
             this.txtQualificationCode.IsTransferAlphabetic = false;
-            this.txtQualificationCode.Location = new System.Drawing.Point(75, 12);
-            this.txtQualificationCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtQualificationCode.Location = new System.Drawing.Point(63, 12);
             this.txtQualificationCode.Name = "txtQualificationCode";
-            this.txtQualificationCode.Size = new System.Drawing.Size(287, 25);
+            this.txtQualificationCode.Size = new System.Drawing.Size(235, 21);
             this.txtQualificationCode.StyleController = this.layData;
             this.txtQualificationCode.TabIndex = 4;
             // 
             // chkNoEndDate
             // 
             this.chkNoEndDate.EditValue = null;
-            this.chkNoEndDate.Location = new System.Drawing.Point(12, 215);
-            this.chkNoEndDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.chkNoEndDate.Location = new System.Drawing.Point(12, 187);
             this.chkNoEndDate.Name = "chkNoEndDate";
             this.chkNoEndDate.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkNoEndDate.Properties.Appearance.Options.UseFont = true;
             this.chkNoEndDate.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
             this.chkNoEndDate.Properties.Caption = "无限期";
-            this.chkNoEndDate.Size = new System.Drawing.Size(350, 25);
+            this.chkNoEndDate.Size = new System.Drawing.Size(286, 22);
             this.chkNoEndDate.StyleController = this.layData;
             this.chkNoEndDate.TabIndex = 3;
             this.chkNoEndDate.CheckedChanged += new System.EventHandler(this.chkNoEndDate_CheckedChanged);
@@ -305,7 +294,7 @@
             this.layoutControlItem1});
             this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
-            this.layControlGroup.Size = new System.Drawing.Size(374, 283);
+            this.layControlGroup.Size = new System.Drawing.Size(310, 246);
             this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layControlGroup.Text = "证书信息";
             this.layControlGroup.TextVisible = false;
@@ -316,87 +305,87 @@
             this.layQualificationCode.CustomizationFormText = "档案编号";
             this.layQualificationCode.Location = new System.Drawing.Point(0, 0);
             this.layQualificationCode.Name = "layQualificationCode";
-            this.layQualificationCode.Size = new System.Drawing.Size(354, 29);
+            this.layQualificationCode.Size = new System.Drawing.Size(290, 25);
             this.layQualificationCode.Text = "档案编号";
-            this.layQualificationCode.TextSize = new System.Drawing.Size(60, 20);
+            this.layQualificationCode.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layQualificationName
             // 
             this.layQualificationName.Control = this.txtQualificationName;
             this.layQualificationName.CustomizationFormText = "档案名称";
-            this.layQualificationName.Location = new System.Drawing.Point(0, 29);
+            this.layQualificationName.Location = new System.Drawing.Point(0, 25);
             this.layQualificationName.Name = "layQualificationName";
-            this.layQualificationName.Size = new System.Drawing.Size(354, 29);
+            this.layQualificationName.Size = new System.Drawing.Size(290, 25);
             this.layQualificationName.Text = "档案名称";
-            this.layQualificationName.TextSize = new System.Drawing.Size(60, 20);
+            this.layQualificationName.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layCertificateStyle
             // 
             this.layCertificateStyle.Control = this.cbxCertificateStyle;
             this.layCertificateStyle.CustomizationFormText = "证书类型";
-            this.layCertificateStyle.Location = new System.Drawing.Point(0, 58);
+            this.layCertificateStyle.Location = new System.Drawing.Point(0, 50);
             this.layCertificateStyle.Name = "layCertificateStyle";
-            this.layCertificateStyle.Size = new System.Drawing.Size(354, 29);
+            this.layCertificateStyle.Size = new System.Drawing.Size(290, 25);
             this.layCertificateStyle.Text = "证书类型";
-            this.layCertificateStyle.TextSize = new System.Drawing.Size(60, 20);
+            this.layCertificateStyle.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layCertificateNo
             // 
             this.layCertificateNo.Control = this.txtCertificateNo;
             this.layCertificateNo.CustomizationFormText = "证书编号";
-            this.layCertificateNo.Location = new System.Drawing.Point(0, 87);
+            this.layCertificateNo.Location = new System.Drawing.Point(0, 75);
             this.layCertificateNo.Name = "layCertificateNo";
-            this.layCertificateNo.Size = new System.Drawing.Size(354, 29);
+            this.layCertificateNo.Size = new System.Drawing.Size(290, 25);
             this.layCertificateNo.Text = "证书编号";
-            this.layCertificateNo.TextSize = new System.Drawing.Size(60, 20);
+            this.layCertificateNo.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layIssuingAuthority
             // 
             this.layIssuingAuthority.Control = this.txtIssuingAuthority;
             this.layIssuingAuthority.CustomizationFormText = "发证机关";
-            this.layIssuingAuthority.Location = new System.Drawing.Point(0, 116);
+            this.layIssuingAuthority.Location = new System.Drawing.Point(0, 100);
             this.layIssuingAuthority.Name = "layIssuingAuthority";
-            this.layIssuingAuthority.Size = new System.Drawing.Size(354, 29);
+            this.layIssuingAuthority.Size = new System.Drawing.Size(290, 25);
             this.layIssuingAuthority.Text = "发证机关";
-            this.layIssuingAuthority.TextSize = new System.Drawing.Size(60, 20);
+            this.layIssuingAuthority.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layIssuingDate
             // 
             this.layIssuingDate.Control = this.dteIssuingDate;
             this.layIssuingDate.CustomizationFormText = "发证日期";
-            this.layIssuingDate.Location = new System.Drawing.Point(0, 145);
+            this.layIssuingDate.Location = new System.Drawing.Point(0, 125);
             this.layIssuingDate.Name = "layIssuingDate";
-            this.layIssuingDate.Size = new System.Drawing.Size(354, 29);
+            this.layIssuingDate.Size = new System.Drawing.Size(290, 25);
             this.layIssuingDate.Text = "发证日期";
-            this.layIssuingDate.TextSize = new System.Drawing.Size(60, 20);
+            this.layIssuingDate.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layValidateDate
             // 
             this.layValidateDate.Control = this.dteValidateDate;
             this.layValidateDate.CustomizationFormText = "到期日期";
-            this.layValidateDate.Location = new System.Drawing.Point(0, 174);
+            this.layValidateDate.Location = new System.Drawing.Point(0, 150);
             this.layValidateDate.Name = "layValidateDate";
-            this.layValidateDate.Size = new System.Drawing.Size(354, 29);
+            this.layValidateDate.Size = new System.Drawing.Size(290, 25);
             this.layValidateDate.Text = "到期日期";
-            this.layValidateDate.TextSize = new System.Drawing.Size(60, 20);
+            this.layValidateDate.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layQualificationRemark
             // 
             this.layQualificationRemark.Control = this.txtQualificationRemark;
             this.layQualificationRemark.CustomizationFormText = "备注";
-            this.layQualificationRemark.Location = new System.Drawing.Point(0, 232);
+            this.layQualificationRemark.Location = new System.Drawing.Point(0, 201);
             this.layQualificationRemark.Name = "layQualificationRemark";
-            this.layQualificationRemark.Size = new System.Drawing.Size(354, 31);
+            this.layQualificationRemark.Size = new System.Drawing.Size(290, 25);
             this.layQualificationRemark.Text = "备注";
-            this.layQualificationRemark.TextSize = new System.Drawing.Size(60, 20);
+            this.layQualificationRemark.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.chkNoEndDate;
             this.layoutControlItem1.CustomizationFormText = "无限期";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 203);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 175);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(354, 29);
+            this.layoutControlItem1.Size = new System.Drawing.Size(290, 26);
             this.layoutControlItem1.Text = "无限期";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
@@ -405,14 +394,13 @@
             // FrmQualificationChange
             // 
             this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(374, 338);
+            this.ClientSize = new System.Drawing.Size(327, 263);
             this.Controls.Add(this.ftPanel);
             this.Controls.Add(this.pnOperating);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmQualificationChange";
