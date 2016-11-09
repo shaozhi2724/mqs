@@ -91,7 +91,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sql = "SELECT CuringRunTime FROM dbo.BUS_FacilitiesCuring GROUP BY CuringRunTime";
+                string sql = "SELECT CuringRunTime FROM dbo.BUS_FacilitiesCuring GROUP BY CuringRunTime ORDER BY CuringRunTime";
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 try
@@ -128,16 +128,16 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
                 {
                     foreach (var item in frm.selectedFacilities)
                     {
-                        if (cboRunTime.Items.Count > 0)
-                        {
-                            item.CuringRunTime = cboRunTime.Items[0].ToString();
-                        }
-                        if (cbo.Items.Count > 0)
-                        {
-                            item.CuringResult = cbo.Items[0].ToString();
-                        }
                         if (!facilities.Select(p => p.ID).Contains(item.ID))
                         {
+                            if (cboRunTime.Items.Count > 0)
+                            {
+                                item.CuringRunTime = cboRunTime.Items[0].ToString();
+                            }
+                            if (cbo.Items.Count > 0)
+                            {
+                                item.CuringResult = cbo.Items[0].ToString();
+                            }
                             facilities.Add(item);
                         }
                     }

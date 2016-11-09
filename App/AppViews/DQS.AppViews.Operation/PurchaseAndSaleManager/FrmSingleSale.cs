@@ -347,6 +347,11 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                 {
                     break;
                 }
+                if (amount == DBNull.Value || amount == null || int.Parse(amount.ToString()) == 0)
+                {
+                    XtraMessageBox.Show(String.Format("第{0}行，产品的数量不正确，请确认。", (i + 1)), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
                 if (unitprice == DBNull.Value || unitprice == null)
                 {
                     XtraMessageBox.Show(String.Format("第{0}行，产品的单价不正确，请确认。", (i + 1)), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

@@ -58,6 +58,7 @@
             this.btnProductQualification = new DevExpress.XtraEditors.SimpleButton();
             this.btnPrint = new DQS.Controls.StiPrintButtonEx();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnReAccept = new DevExpress.XtraEditors.SimpleButton();
             this.btnSaveAndIn = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnOneKeyFinish = new DevExpress.XtraEditors.SimpleButton();
@@ -67,7 +68,6 @@
             this.splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
             this.gpcButtom = new DevExpress.XtraEditors.GroupControl();
             this.popupGrid = new DQS.Controls.PopupGrid();
-            this.btnReAccept = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
             this.ftPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
@@ -450,6 +450,7 @@
             this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 5;
             this.btnPrint.Text = "打印(&P)";
+            this.btnPrint.BeforePrint += new DQS.Controls.StiPrintButtonEx.OnBeforePrint(this.btnPrint_BeforePrint);
             // 
             // btnCancel
             // 
@@ -463,6 +464,18 @@
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "取消(&C)";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnReAccept
+            // 
+            this.btnReAccept.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReAccept.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReAccept.Appearance.Options.UseFont = true;
+            this.btnReAccept.Location = new System.Drawing.Point(578, 13);
+            this.btnReAccept.Name = "btnReAccept";
+            this.btnReAccept.Size = new System.Drawing.Size(69, 23);
+            this.btnReAccept.TabIndex = 0;
+            this.btnReAccept.Text = "复查";
+            this.btnReAccept.Click += new System.EventHandler(this.btnReAccept_Click);
             // 
             // btnSaveAndIn
             // 
@@ -524,6 +537,7 @@
             // 
             this.popupGridSampling.Dock = System.Windows.Forms.DockStyle.Fill;
             this.popupGridSampling.IsCalculatePrice = false;
+            this.popupGridSampling.IsCompute = false;
             this.popupGridSampling.Location = new System.Drawing.Point(2, 25);
             this.popupGridSampling.Name = "popupGridSampling";
             this.popupGridSampling.OperationName = "Sampling";
@@ -563,18 +577,6 @@
             this.popupGrid.Size = new System.Drawing.Size(868, 128);
             this.popupGrid.TabIndex = 3;
             this.popupGrid.BeforePopupFormShow += new DQS.Controls.PopupGrid.OnBeforePopupFormShowEventHandler(this.popupGrid_BeforePopupFormShow);
-            // 
-            // btnReAccept
-            // 
-            this.btnReAccept.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReAccept.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReAccept.Appearance.Options.UseFont = true;
-            this.btnReAccept.Location = new System.Drawing.Point(578, 13);
-            this.btnReAccept.Name = "btnReAccept";
-            this.btnReAccept.Size = new System.Drawing.Size(69, 23);
-            this.btnReAccept.TabIndex = 0;
-            this.btnReAccept.Text = "复查";
-            this.btnReAccept.Click += new System.EventHandler(this.btnReAccept_Click);
             // 
             // FrmSingleAccept
             // 

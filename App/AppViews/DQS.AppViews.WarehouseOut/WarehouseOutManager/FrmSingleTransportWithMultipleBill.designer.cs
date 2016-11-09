@@ -317,7 +317,7 @@
             this.txtBillCode.AlphabeticFiled = "";
             this.txtBillCode.EditData = null;
             this.txtBillCode.Fields = "";
-            this.txtBillCode.Filter = "[状态] = \'已复核\'";
+            this.txtBillCode.Filter = "[状态] = \'已复核\' AND [订单类型] = \'销售出货\'";
             this.txtBillCode.FormatQueryString = "[订单编号] LIKE \'%{0}%\'";
             this.txtBillCode.GroupColumn = "线路";
             this.txtBillCode.IsIntegerOnly = false;
@@ -855,6 +855,7 @@
             // 
             this.popupGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.popupGrid.IsCalculatePrice = false;
+            this.popupGrid.IsCompute = false;
             this.popupGrid.Location = new System.Drawing.Point(2, 25);
             this.popupGrid.Name = "popupGrid";
             this.popupGrid.OperationName = "Transport";

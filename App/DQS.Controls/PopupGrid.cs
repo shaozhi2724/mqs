@@ -1261,9 +1261,20 @@ namespace DQS.Controls
                 foreach (DataColumn col in data.Columns)
                 {
                     this.gridPopupView.SetRowCellValue(i, col.ColumnName, data.Rows[i][col]);
+                    if (!string.IsNullOrEmpty(this.OperationName) && this.OperationName == "Accept")
+                    {
+                        //设置批号，生产日期、有效期列宽
+                        if (col.ColumnName == "批号" || col.ColumnName == "生产日期" || col.ColumnName == "有效期至")
+                        {
+                            this.gridPopupView.Columns[col.ColumnName].Width = 80;
+                        }
+                    }
                 }
             }
-            gridPopupView.BestFitColumns();
+            if (!string.IsNullOrEmpty(this.OperationName) && this.OperationName != "Accept")
+            {
+                gridPopupView.BestFitColumns();
+            }
         }
 
         /// <summary>

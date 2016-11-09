@@ -2326,5 +2326,17 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             }
             this.DialogResult = DialogResult.OK;
         }
+
+        private void btnPrint_BeforePrint(EventArgs e)
+        {
+            if (txtBillTypeName.Text == "采购进货")
+            {
+                btnPrint.ReportName = "验收单";
+            }
+            else
+            {
+                btnPrint.ReportName = "销退验收单";
+            }
+        }
     }
 }
