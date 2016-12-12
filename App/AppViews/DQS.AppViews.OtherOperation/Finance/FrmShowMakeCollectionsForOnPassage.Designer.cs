@@ -51,6 +51,7 @@
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.btnDel = new DevExpress.XtraEditors.SimpleButton();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
+            this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
@@ -256,6 +257,7 @@
             // 
             this.panelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelControl1.Controls.Add(this.btnPrint);
             this.panelControl1.Controls.Add(this.btnExport);
             this.panelControl1.Controls.Add(this.btnDel);
             this.panelControl1.Controls.Add(this.btnAdd);
@@ -290,6 +292,15 @@
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "新建";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Location = new System.Drawing.Point(318, 11);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(79, 27);
+            this.btnPrint.TabIndex = 1;
+            this.btnPrint.Text = "打印";
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // FrmShowMakeCollectionsForOnPassage
             // 
@@ -347,6 +358,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl7;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.TextEdit txtBusinessPerson;
+        private DevExpress.XtraEditors.SimpleButton btnPrint;
 
     }
 }

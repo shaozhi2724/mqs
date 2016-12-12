@@ -128,7 +128,8 @@
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false"/>
-        <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="false" />
+        <Column Name="原数量" EntityField="OldAmount" FieldType="System.Int32" Visible="true" AllowEdit="false" />
+        <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
         <Column Name="单价" EntityField="OldUnitPrice" FieldType="System.Double" Visible="true" AllowEdit="false"/>
         <Column Name="金额" EntityField="OldTotalPrice" FieldType="System.Double" Visible="true" AllowEdit="false" />
         <Column Name="调整单价" EntityField="NewUnitPrice" FieldType="System.Double" Visible="true" AllowEdit="true"/>
@@ -387,7 +388,8 @@
         <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false"/>
         <Column Name="过期状态" FieldType="System.String" Visible="false" AllowEdit="false"/>
         <Column Name="锁定状态" FieldType="System.String" Visible="false" AllowEdit="false"/>
-        <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="false" />
+        <Column Name="原数量" EntityField="OldAmount" FieldType="System.Int32" Visible="true" AllowEdit="false" />
+        <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
         <Column Name="件数" FieldType="System.Double" Visible="true" AllowEdit="false" />
         <Column Name="进货价" FieldType="System.Double" Visible="true" AllowEdit="false"/>
         <Column Name="批发价" FieldType="System.Double" Visible="true" AllowEdit="false"/>

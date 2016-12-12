@@ -140,6 +140,12 @@ namespace DQS.Module.Entities
 			set { this.SetValue("CreateDate", value); } 
 		}
 
+        public int OldAmount
+		{
+            get { return (int)this.GetValue("OldAmount"); }
+            set { this.SetValue("OldAmount", value); } 
+		}
+
 		public BUSBillPriceHistoryDetailEntity()
 		{
 			this.TableName = "BUS_BillPriceHistoryDetail";
@@ -165,6 +171,7 @@ namespace DQS.Module.Entities
 			this.Fields.Add("NewRetailPrice", BUSBillPriceHistoryDetailEntityFields.NewRetailPrice);
 			this.Fields.Add("CreateUserName", BUSBillPriceHistoryDetailEntityFields.CreateUserName);
 			this.Fields.Add("CreateDate", BUSBillPriceHistoryDetailEntityFields.CreateDate);
+            this.Fields.Add("OldAmount", BUSBillPriceHistoryDetailEntityFields.OldAmount);
 		}
 	}
 
@@ -277,6 +284,11 @@ namespace DQS.Module.Entities
 			get { return new EntityField("BUS_BillPriceHistoryDetail", 20, "CreateDate", SqlDbType.DateTime, false, false, false, false); }
 		}
 
+        public static EntityField OldAmount
+		{
+            get { return new EntityField("BUS_BillPriceHistoryDetail", 21, "OldAmount", SqlDbType.Int, false, false, false, false); }
+		}
+
 	}
 
 	#endregion
@@ -326,6 +338,8 @@ namespace DQS.Module.Entities
 		CreateUserName,
 
 		CreateDate,
+
+        OldAmount,
 
 	}
 

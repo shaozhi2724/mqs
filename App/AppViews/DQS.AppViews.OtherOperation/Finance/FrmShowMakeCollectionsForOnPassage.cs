@@ -1,11 +1,13 @@
 ﻿using DevExpress.XtraEditors;
 using DQS.Common;
+using DQS.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -205,6 +207,25 @@ FROM dbo.FIN_MakeCollections m WHERE m.MakeCollectionsCode LIKE 'ZTSK%' AND (m.D
                     fs.sqlConditions = vcode;
                 }
                 DialogResult dr = fs.ShowDialog();
+            }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+
+            object id = gridView.GetFocusedRowCellValue("MakeCollectionsID");
+            if (id != null)
+            {
+                string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "收款单据明细.mrt");
+                if (File.Exists(fileName))
+                {
+                    PrintPreviewForm printPreview = new PrintPreviewForm(fileName, Convert.ToInt32(id));
+                    printPreview.ShowDialog(this);
+                }
+                else
+                {
+                    XtraMessageBox.Show("找不到文件。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }
