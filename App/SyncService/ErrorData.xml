@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Table>
+  <Column>
+    <ERP_RECEIVE_ID>2016030901</ERP_RECEIVE_ID>
+    <ERROR> QUANTITY数值为空</ERROR >
+  </Column>
+  <Column>
+    <ERP_RECEIVE_ID>$2016030902</ERP_RECEIVE_ID>
+    <ERROR> QUANTITY数值格式不是数字类型</ERROR >
+  </Column>
+  <Column>
+    <ERP_RECEIVE_ID>2016030903</ERP_RECEIVE_ID>
+    <ERROR> QUANTITY数量必须大于零</ERROR >
+  </Column>
+  <Column>
+    <ERP_RECEIVE_ID>2016030904</ERP_RECEIVE_ID>
+    <ERROR> VALID_DATE不是正确的日期格式类型</ERROR >
+  </Column>
+  <Column>
+    <ERP_RECEIVE_ID>2016030905</ERP_RECEIVE_ID>
+    <ERROR> 已上传过相同发货记录ID的数据</ERROR >
+  </Column>
+  <Column>
+    <ERP_RECEIVE_ID>2016030906</ERP_RECEIVE_ID>
+    <ERROR> 订单明细关联的产品id不匹配</ERROR >
+  </Column>
+  <Column>
+    <ERP_RECEIVE_ID>2016030906</ERP_RECEIVE_ID>
+    <ERROR> 订单明细不存在</ERROR >
+  </Column>
+  <Column>
+    <ERP_RECEIVE_ID>2016030906</ERP_RECEIVE_ID>
+    <ERROR> 执行目标sql出错</ERROR >
+  </Column>
+</Table>

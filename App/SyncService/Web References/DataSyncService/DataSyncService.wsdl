@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetServerDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="verify" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="connFlag" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetServerDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetServerDateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSyncData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="verify" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="auth" type="tns:AuthenticationPT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AuthenticationPT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PlatId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrgId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrgName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Spare_1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Spare_2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Spare_3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Spare_4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Spare_5" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSyncDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSyncDataResult" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadSyncData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="verify" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xmldata" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="auth" type="tns:AuthenticationPT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadSyncDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UploadSyncDataResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="xmlerrordata" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PT_ValidUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="verify" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="auth" type="tns:AuthenticationPT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PT_ValidUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PT_ValidUserResult" type="tns:AuthenticationPT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetServerDateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetServerDate" />
+  </wsdl:message>
+  <wsdl:message name="GetServerDateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetServerDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSyncDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSyncData" />
+  </wsdl:message>
+  <wsdl:message name="GetSyncDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSyncDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadSyncDataSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadSyncData" />
+  </wsdl:message>
+  <wsdl:message name="UploadSyncDataSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadSyncDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="PT_ValidUserSoapIn">
+    <wsdl:part name="parameters" element="tns:PT_ValidUser" />
+  </wsdl:message>
+  <wsdl:message name="PT_ValidUserSoapOut">
+    <wsdl:part name="parameters" element="tns:PT_ValidUserResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DataSyncWSSoap">
+    <wsdl:operation name="GetServerDate">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取服务器时间</wsdl:documentation>
+      <wsdl:input message="tns:GetServerDateSoapIn" />
+      <wsdl:output message="tns:GetServerDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSyncData">
+      <wsdl:input message="tns:GetSyncDataSoapIn" />
+      <wsdl:output message="tns:GetSyncDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadSyncData">
+      <wsdl:input message="tns:UploadSyncDataSoapIn" />
+      <wsdl:output message="tns:UploadSyncDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PT_ValidUser">
+      <wsdl:input message="tns:PT_ValidUserSoapIn" />
+      <wsdl:output message="tns:PT_ValidUserSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DataSyncWSSoap" type="tns:DataSyncWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetServerDate">
+      <soap:operation soapAction="http://tempuri.org/GetServerDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSyncData">
+      <soap:operation soapAction="http://tempuri.org/GetSyncData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadSyncData">
+      <soap:operation soapAction="http://tempuri.org/UploadSyncData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PT_ValidUser">
+      <soap:operation soapAction="http://tempuri.org/PT_ValidUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DataSyncWSSoap12" type="tns:DataSyncWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetServerDate">
+      <soap12:operation soapAction="http://tempuri.org/GetServerDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSyncData">
+      <soap12:operation soapAction="http://tempuri.org/GetSyncData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadSyncData">
+      <soap12:operation soapAction="http://tempuri.org/UploadSyncData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PT_ValidUser">
+      <soap12:operation soapAction="http://tempuri.org/PT_ValidUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DataSyncWS">
+    <wsdl:port name="DataSyncWSSoap" binding="tns:DataSyncWSSoap">
+      <soap:address location="http://124.193.157.37:8067/DataSyncService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DataSyncWSSoap12" binding="tns:DataSyncWSSoap12">
+      <soap12:address location="http://124.193.157.37:8067/DataSyncService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Table" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="Table" msdata:IsDataSet="true" msdata:Locale="en-US">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Column">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ERP_RECEIVE_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="ORDER_ITEM_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="PRODUCT_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="QUANTITY" type="xs:string" minOccurs="0" />
+              <xs:element name="BATCH_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="VALID_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="ORG_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="PROOF_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="PROOF_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_AMOUNT" type="xs:string" minOccurs="0" />
+              <xs:element name="ORD_ORDER_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="UP_PATITION" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
