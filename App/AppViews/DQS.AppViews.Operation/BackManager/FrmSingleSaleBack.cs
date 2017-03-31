@@ -527,6 +527,27 @@ WHERE BillID={1}
                                 notification.OwnerUserID = approvalUserId;
                                 notification.Save();
                             }
+
+
+                            string sql = "EXEC sp_SaleBackForFin " + entity.BillID;
+                            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                            {
+                                conn.Open(); //连接数据库
+                                //必须为SqlCommand指定数据库连接和登记的事务
+                                SqlCommand cmd = new SqlCommand(sql, conn);
+                                try
+                                {
+                                    cmd.ExecuteNonQuery();
+                                }
+                                catch (Exception ex)
+                                {
+                                    XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                                finally
+                                {
+                                    conn.Close();
+                                }
+                            }
                         }
                         else
                         {
@@ -726,6 +747,15 @@ WHERE BillID={1}
             {
                 rdgBillStyle.SelectedIndex = 0;
             }
+            if (!entity.IsNullField("InvoiceTypeName"))
+            {
+                var index = rdgPaymentType.Properties.Items.GetItemIndexByValue(entity.InvoiceTypeName);
+                rdgPaymentType.SelectedIndex = index;
+            }
+            else
+            {
+                rdgPaymentType.SelectedIndex = 0;
+            }
 
         }
 
@@ -765,12 +795,24 @@ WHERE BillID={1}
                 entity.PaymentTypeName = this.cbxPaymentType.Text.Trim();
             }
             entity.BillStyle = this.rdgBillStyle.Properties.Items[rdgBillStyle.SelectedIndex].Value.ToString();
+            entity.InvoiceTypeName = this.rdgPaymentType.Properties.Items[rdgPaymentType.SelectedIndex].Value.ToString();
 
 
         }
 
         private void popupGrid_BeforePopupFormShow(object sender, DQS.Controls.CommonCode.BeforePopupFormShowArgs e)
         {
+
+            if (this.txtDealerName.Text != "")
+            {
+                object dealerID = (this.txtDealerName.EditData as DataRow)["单位ID"];
+                popupGrid.DealerID = Convert.ToInt32(dealerID);
+            }
+            else
+            {
+                XtraMessageBox.Show("请先选择客户！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Cancel = true;
+            }
             if (e.ActiveOperationColumn.PopupForm != null)
             {
                 if (e.ActiveOperationColumn.PopupForm.Name == "Price")
@@ -814,6 +856,8 @@ WHERE BillID={1}
                             _operator = frmReviewRecord.EditRow["业务员"].ToString();
                             this.txtSaleBillCode.Text = frmReviewRecord.SaleBillCode;
                             this.txtReviewCode.Text = frmReviewRecord.ReviewCode;
+
+                            popupGrid.PopupView.Columns["批号"].OptionsColumn.AllowEdit = DQS.Controls.Properties.Settings.Default.IsModifyBatchNoForSaleBack;
 
                         }
                     }
@@ -950,6 +994,7 @@ WHERE BillID={1}
                 if(dr == DialogResult.OK)
                 {
                     BindSelectedReviewDetails(doc);
+                    popupGrid.PopupView.Columns["批号"].OptionsColumn.AllowEdit = DQS.Controls.Properties.Settings.Default.IsModifyBatchNoForSaleBack;
                 }
             }
             else
@@ -959,6 +1004,7 @@ WHERE BillID={1}
                 if(dr == DialogResult.OK)
                 {
                     BindSelectedReviewDetails(doc);
+                    popupGrid.PopupView.Columns["批号"].OptionsColumn.AllowEdit = DQS.Controls.Properties.Settings.Default.IsModifyBatchNoForSaleBack;
                 }
             }
         }

@@ -42,6 +42,10 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.DXCore.Controls.Data.v6.3, Version=10.1.6.0, Culture=neutral, PublicKeyToken=35c9f04b7764aa3d" />
+    <Reference Include="DevExpress.DXCore.Controls.Utils.v6.3, Version=10.1.6.0, Culture=neutral, PublicKeyToken=35c9f04b7764aa3d" />
+    <Reference Include="DevExpress.DXCore.Controls.XtraEditors.v6.3, Version=10.1.6.0, Culture=neutral, PublicKeyToken=35c9f04b7764aa3d" />
+    <Reference Include="DevExpress.DXCore.Controls.XtraLayout.v6.3, Version=10.1.6.0, Culture=neutral, PublicKeyToken=35c9f04b7764aa3d, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v10.1, Version=10.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
@@ -94,6 +98,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
@@ -142,6 +147,18 @@
     <Compile Include="CuringManager\FrmFacilitiesCuringResult.Designer.cs">
       <DependentUpon>FrmFacilitiesCuringResult.cs</DependentUpon>
     </Compile>
+    <Compile Include="CuringManager\FrmFacilitiesService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmFacilitiesService.Designer.cs">
+      <DependentUpon>FrmFacilitiesService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuringManager\FrmFacilitiesVerification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmFacilitiesVerification.Designer.cs">
+      <DependentUpon>FrmFacilitiesVerification.cs</DependentUpon>
+    </Compile>
     <Compile Include="CuringManager\FrmSelectFacilities.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +195,24 @@
     <Compile Include="CuringManager\FrmSingleFacilitiesCuringResult.Designer.cs">
       <DependentUpon>FrmSingleFacilitiesCuringResult.cs</DependentUpon>
     </Compile>
+    <Compile Include="CuringManager\FrmSingleFacilitiesService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmSingleFacilitiesService.Designer.cs">
+      <DependentUpon>FrmSingleFacilitiesService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuringManager\FrmSingleFacilitiesVerification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmSingleFacilitiesVerification.Designer.cs">
+      <DependentUpon>FrmSingleFacilitiesVerification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuringManager\FrmTemperatureFacilities.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmTemperatureFacilities.Designer.cs">
+      <DependentUpon>FrmTemperatureFacilities.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmStoreAndCuring.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +236,12 @@
     </Compile>
     <Compile Include="StockManager\FrmBeginInventory.Designer.cs">
       <DependentUpon>FrmBeginInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StockManager\FrmChooseStoreDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmChooseStoreDetails.Designer.cs">
+      <DependentUpon>FrmChooseStoreDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="StockManager\FrmInitInventory.cs">
       <SubType>Form</SubType>
@@ -238,17 +279,41 @@
     <Compile Include="StockManager\FrmSingleInventory.Designer.cs">
       <DependentUpon>FrmSingleInventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="StockManager\FrmSingleStoreDepartmentAdjust.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmSingleStoreDepartmentAdjust.Designer.cs">
+      <DependentUpon>FrmSingleStoreDepartmentAdjust.cs</DependentUpon>
+    </Compile>
     <Compile Include="StockManager\FrmSingleStoreDetail.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="StockManager\FrmSingleStoreDetail.Designer.cs">
       <DependentUpon>FrmSingleStoreDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="StockManager\FrmSingleStoreDetailChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmSingleStoreDetailChange.Designer.cs">
+      <DependentUpon>FrmSingleStoreDetailChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="StockManager\FrmStockDetail.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="StockManager\FrmStockDetail.Designer.cs">
       <DependentUpon>FrmStockDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StockManager\FrmStoreDepartmentAdjust.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmStoreDepartmentAdjust.Designer.cs">
+      <DependentUpon>FrmStoreDepartmentAdjust.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StockManager\FrmStoreDetailChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmStoreDetailChange.Designer.cs">
+      <DependentUpon>FrmStoreDetailChange.cs</DependentUpon>
     </Compile>
     <Compile Include="StockManager\FrmUnStockDetail.cs">
       <SubType>Form</SubType>
@@ -262,6 +327,7 @@
     <Compile Include="StockManager\FrmUpdateBeginInventory.Designer.cs">
       <DependentUpon>FrmUpdateBeginInventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="StockManager\GetDepartment.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CuringManager\FrmCuringCycle.resx">
@@ -282,6 +348,12 @@
     <EmbeddedResource Include="CuringManager\FrmFacilitiesCuringResult.resx">
       <DependentUpon>FrmFacilitiesCuringResult.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmFacilitiesService.resx">
+      <DependentUpon>FrmFacilitiesService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmFacilitiesVerification.resx">
+      <DependentUpon>FrmFacilitiesVerification.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CuringManager\FrmSelectFacilities.resx">
       <DependentUpon>FrmSelectFacilities.cs</DependentUpon>
     </EmbeddedResource>
@@ -300,6 +372,15 @@
     <EmbeddedResource Include="CuringManager\FrmSingleFacilitiesCuringResult.resx">
       <DependentUpon>FrmSingleFacilitiesCuringResult.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmSingleFacilitiesService.resx">
+      <DependentUpon>FrmSingleFacilitiesService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmSingleFacilitiesVerification.resx">
+      <DependentUpon>FrmSingleFacilitiesVerification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmTemperatureFacilities.resx">
+      <DependentUpon>FrmTemperatureFacilities.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmStoreAndCuring.resx">
       <DependentUpon>FrmStoreAndCuring.cs</DependentUpon>
     </EmbeddedResource>
@@ -313,6 +394,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StockManager\FrmBeginInventory.resx">
       <DependentUpon>FrmBeginInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmChooseStoreDetails.resx">
+      <DependentUpon>FrmChooseStoreDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StockManager\FrmInitInventory.resx">
       <DependentUpon>FrmInitInventory.cs</DependentUpon>
@@ -332,11 +416,23 @@
     <EmbeddedResource Include="StockManager\FrmSingleInventory.resx">
       <DependentUpon>FrmSingleInventory.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmSingleStoreDepartmentAdjust.resx">
+      <DependentUpon>FrmSingleStoreDepartmentAdjust.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StockManager\FrmSingleStoreDetail.resx">
       <DependentUpon>FrmSingleStoreDetail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmSingleStoreDetailChange.resx">
+      <DependentUpon>FrmSingleStoreDetailChange.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StockManager\FrmStockDetail.resx">
       <DependentUpon>FrmStockDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmStoreDepartmentAdjust.resx">
+      <DependentUpon>FrmStoreDepartmentAdjust.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmStoreDetailChange.resx">
+      <DependentUpon>FrmStoreDetailChange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StockManager\FrmUnStockDetail.resx">
       <DependentUpon>FrmUnStockDetail.cs</DependentUpon>

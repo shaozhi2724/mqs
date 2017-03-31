@@ -52,6 +52,7 @@ namespace DQS.Controls
         public int EmployeeID;
         public int DepartmentID = 0;
         public string AcceptCode;
+        public string AcceptType;
 
         //采退界面传参
         public bool IsQualified;
@@ -434,8 +435,18 @@ namespace DQS.Controls
                 col.PopupForm.ViewName = "vw_ProductForUnQualified";
                 col.PopupForm.Filter = "";
             }
+            if (this.OperationName == "SaleBack" && col.PopupForm.ViewName == "vw_AllProductForSaleBack")
+            {
+                col.PopupForm.Filter = "DealerID = " + DealerID;
+            }
 
-            if (this.OperationName == "Accept")
+            if (this.OperationName == "Accept" && AcceptType == "销售退货")
+            {
+                col.PopupForm.ViewName = "vw_ProductForAcceptForBack";
+                //col.PopupForm.Fields += ",批号,生产日期,有效期至";
+                col.PopupForm.Filter = "单号 = '" + AcceptCode + "'";
+            }
+            else if (this.OperationName == "Accept")
             {
                 col.PopupForm.ViewName = "vw_ProductForAccept";
                 col.PopupForm.Filter = "单号 = '" + AcceptCode + "'";

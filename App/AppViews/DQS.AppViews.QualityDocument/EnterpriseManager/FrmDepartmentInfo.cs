@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DQS.Controls;
 using DQS.Module.Entities;
+using DQS.AppViews.QualityDocument.DealerManager;
 
 namespace DQS.AppViews.QualityDocument.EnterpriseManager
 {
@@ -21,6 +22,21 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
         private void FrmDepartmentInfo_Load(object sender, EventArgs e)
         {
             base.InitPage();
+        }
+        protected override void CustomProductForDealer()
+        {
+            using (FrmProductOfDealer pod = new FrmProductOfDealer())
+            {
+                object id = gvData.GetFocusedRowCellValue("部门ID");
+                if (id != null)
+                {
+                    pod.SearchID = Convert.ToInt32(id);
+                    pod.SelectSql = "SELECT ProductID FROM BUS_DepartmentVSProduct WHERE DepartmentID = ";
+                    pod.DelSql = "sp_DelDepartmentVSProduct";
+                    pod.InSql = "sp_SaveDepartmentVSProduct";
+                }
+                pod.ShowDialog();
+            }
         }
 
         //protected override void CustomQuery()

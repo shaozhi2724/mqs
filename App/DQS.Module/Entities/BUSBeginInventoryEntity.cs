@@ -66,14 +66,25 @@ namespace DQS.Module.Entities
 		}
 		public decimal UnitPrice
 		{
-			get { return (decimal)this.GetValue("UnitPrice"); } 
+            get { return (decimal)this.GetValue("UnitPrice"); } 
 			set { this.SetValue("UnitPrice", value); } 
 		}
-		public decimal TotalPrice
+		public float TotalPrice
 		{
-			get { return (decimal)this.GetValue("TotalPrice"); } 
+			get { return (float)this.GetValue("TotalPrice"); } 
 			set { this.SetValue("TotalPrice", value); } 
 		}
+        public int DepartmentID
+		{
+            get { return (int)this.GetValue("DepartmentID"); }
+            set { this.SetValue("DepartmentID", value); } 
+		}
+        public string DepartmentName
+		{
+            get { return (string)this.GetValue("DepartmentName"); }
+            set { this.SetValue("DepartmentName", value); } 
+		}
+
 
         public BUSBeginInventoryEntity()
 		{
@@ -89,6 +100,8 @@ namespace DQS.Module.Entities
             this.Fields.Add("SterilizationDate", BUSBeginInventoryEntityFields.SterilizationDate);
             this.Fields.Add("Amount", BUSBeginInventoryEntityFields.Amount);
             this.Fields.Add("UnitPrice", BUSBeginInventoryEntityFields.UnitPrice);
+            this.Fields.Add("DepartmentID", BUSBeginInventoryEntityFields.DepartmentID);
+            this.Fields.Add("DepartmentName", BUSBeginInventoryEntityFields.DepartmentName);
 		}
 	}
 
@@ -138,7 +151,15 @@ namespace DQS.Module.Entities
         }
         public static EntityField TotalPrice
         {
-            get { return new EntityField("BUS_BeginInventory", 10, "TotalPrice", SqlDbType.Decimal, false, false, false, true); }
+            get { return new EntityField("BUS_BeginInventory", 10, "TotalPrice", SqlDbType.Float, false, false, false, true); }
+        }
+        public static EntityField DepartmentID
+        {
+            get { return new EntityField("BUS_BeginInventory", 11, "DepartmentID", SqlDbType.Int, false, false, false, true); }
+        }
+        public static EntityField DepartmentName
+        {
+            get { return new EntityField("BUS_BeginInventory", 12, "DepartmentName", SqlDbType.NVarChar, false, false, false, true); }
         }
 	}
 
@@ -168,7 +189,11 @@ namespace DQS.Module.Entities
 
         UnitPrice,
 
-        TotalPrice
+        TotalPrice,
+
+        DepartmentID,
+
+        DepartmentName
 	}
 
 	#endregion

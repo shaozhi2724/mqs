@@ -95,6 +95,8 @@ namespace DQS.AppViews.OtherOperation.Finance
 
                     gridView.Columns["总金额"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
                     gridView.Columns["总金额"].SummaryItem.DisplayFormat = "合计: {0}";
+                    gridView.Columns["折扣金额"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                    gridView.Columns["折扣金额"].SummaryItem.DisplayFormat = "合计: {0}";
 
                     for (int i = 0; i < gridView.Columns.Count; i++)
                     {

@@ -151,6 +151,64 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
 
                         //查询出其ID
                         entity.Fetch();
+
+                        EntityCollection<ATCUserPageEntity> userPages = new EntityCollection<ATCUserPageEntity>();
+                        PredicateExpression pe = new PredicateExpression();
+                        pe.Add(ATCUserPageEntityFields.UserID == GlobalItem.g_CurrentUser.UserID);
+                        pe.Add(ATCUserPageEntityFields.DocumentCode == "InventoryBill");
+                        DataTable data = userPages.FetchTable(pe);
+
+                        if (data.Rows.Count > 0)
+                        {
+                            //按审批顺序排序
+                            data.DefaultView.Sort = "ApprovalSort";
+                            data = data.DefaultView.ToTable();
+
+                            ATCApproveEntity approveEntity = new ATCApproveEntity();
+                            approveEntity.InternalNo = entity.InventoryCode;
+                            approveEntity.DocumentCode = "InventoryBill";
+                            approveEntity.BillCode = entity.InventoryCode;
+                            approveEntity.ApproveTitle = string.Format("盘点单-编号：{0}",entity.InventoryCode);
+                            approveEntity.ApprovalContent = String.Format("盘点单-{0} 申请审批。",entity.InventoryCode);
+                            approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+                            approveEntity.CreateDate = DateTime.Now;
+                            approveEntity.IsApprovaled = false;
+                            for (int i = 0; i < data.Rows.Count; i++)
+                            {
+                                var approveCode = approveEntity.InternalNo + (i + 1).ToString("00");
+                                approveEntity.ApproveCode = approveCode;
+                                approveEntity.IsWhole = Convert.ToBoolean(data.Rows[i]["IsWhole"]);
+                                approveEntity.ApproveOrder = Convert.ToInt32(data.Rows[i]["ApprovalSort"]);
+                                var approvalUserId = new Guid(data.Rows[i]["ApprovalUserID"].ToString());
+                                approveEntity.ApprovalUserID = approvalUserId;
+                                approveEntity.Save();
+
+                                //添加消息提醒
+                                ATCApproveNotificationEntity notification = new ATCApproveNotificationEntity();
+                                notification.CreateUserID = approveEntity.CreateUserID;
+                                var userName = GlobalItem.g_CurrentEmployee == null
+                                    ? GlobalItem.g_CurrentUser.UserName
+                                    : GlobalItem.g_CurrentEmployee.EmployeeName;
+                                notification.CreateUserName = userName;
+                                notification.FormClass = "InventoryBill";
+                                notification.IsRead = false;
+                                notification.TargetID = entity.InventoryID;
+                                notification.TargetCode = entity.InventoryCode;
+                                notification.ApproveCode = approveCode;
+                                notification.Message = string.Format("{0} 于 {1} 申请盘点单（单号 {2}）。请您审批。", userName,
+                                    DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.InventoryCode);
+                                notification.OwnerUserID = approvalUserId;
+                                notification.Save();
+                            }
+                        }
+                        else
+                        {
+                            entity.StatusID = 2;
+                            entity.StatusName = "已处理";
+                            entity.Update();
+                        }
+
+
                         m_id = entity.InventoryID;
 
                         foreach (EntityBase childEntity in children)

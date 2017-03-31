@@ -60,23 +60,23 @@
             // gpcQuery
             // 
             this.gpcQuery.Controls.Add(this.layControl);
-            this.gpcQuery.Location = new System.Drawing.Point(0, 38);
-            this.gpcQuery.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gpcQuery.Size = new System.Drawing.Size(930, 98);
+            this.gpcQuery.Location = new System.Drawing.Point(0, 32);
+            this.gpcQuery.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gpcQuery.Size = new System.Drawing.Size(698, 83);
             // 
             // pageNavigator
             // 
             this.pageNavigator.Appearance.Font = new System.Drawing.Font("微软雅黑", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pageNavigator.Appearance.Options.UseFont = true;
-            this.pageNavigator.Location = new System.Drawing.Point(0, 136);
-            this.pageNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.pageNavigator.MinimumSize = new System.Drawing.Size(914, 54);
-            this.pageNavigator.Size = new System.Drawing.Size(930, 54);
+            this.pageNavigator.Location = new System.Drawing.Point(0, 115);
+            this.pageNavigator.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.pageNavigator.MinimumSize = new System.Drawing.Size(686, 45);
+            this.pageNavigator.Size = new System.Drawing.Size(698, 45);
             // 
             // toolBarPanel
             // 
-            this.toolBarPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.toolBarPanel.Size = new System.Drawing.Size(930, 38);
+            this.toolBarPanel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.toolBarPanel.Size = new System.Drawing.Size(698, 32);
             // 
             // layControl
             // 
@@ -85,11 +85,11 @@
             this.layControl.Controls.Add(this.dteStart);
             this.layControl.Controls.Add(this.txtStoreCode);
             this.layControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layControl.Location = new System.Drawing.Point(2, 27);
-            this.layControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.layControl.Location = new System.Drawing.Point(2, 23);
+            this.layControl.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.layControl.Name = "layControl";
             this.layControl.Root = this.layControlGroup;
-            this.layControl.Size = new System.Drawing.Size(926, 69);
+            this.layControl.Size = new System.Drawing.Size(694, 58);
             this.layControl.TabIndex = 8;
             this.layControl.Text = "layControl";
             // 
@@ -97,24 +97,24 @@
             // 
             this.dteEnd.EditValue = null;
             this.dteEnd.FormatQueryString = "[复核日期] <= \'{0} 23:59:59\'";
-            this.dteEnd.Location = new System.Drawing.Point(755, 12);
-            this.dteEnd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dteEnd.Location = new System.Drawing.Point(569, 12);
+            this.dteEnd.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.dteEnd.Name = "dteEnd";
             this.dteEnd.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dteEnd.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dteEnd.Size = new System.Drawing.Size(159, 25);
+            this.dteEnd.Size = new System.Drawing.Size(113, 21);
             this.dteEnd.StyleController = this.layControl;
             this.dteEnd.TabIndex = 7;
             // 
             // txtDealer
             // 
             this.txtDealer.FormatQueryString = "[往来单位名称] LIKE \'%{0}%\' ";
-            this.txtDealer.Location = new System.Drawing.Point(301, 12);
-            this.txtDealer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDealer.Location = new System.Drawing.Point(231, 12);
+            this.txtDealer.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtDealer.Name = "txtDealer";
-            this.txtDealer.Size = new System.Drawing.Size(160, 25);
+            this.txtDealer.Size = new System.Drawing.Size(114, 21);
             this.txtDealer.StyleController = this.layControl;
             this.txtDealer.TabIndex = 6;
             // 
@@ -122,24 +122,24 @@
             // 
             this.dteStart.EditValue = null;
             this.dteStart.FormatQueryString = "[复核日期] >= \'{0} 00:00:00\'";
-            this.dteStart.Location = new System.Drawing.Point(528, 12);
-            this.dteStart.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dteStart.Location = new System.Drawing.Point(400, 12);
+            this.dteStart.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.dteStart.Name = "dteStart";
             this.dteStart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dteStart.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dteStart.Size = new System.Drawing.Size(160, 25);
+            this.dteStart.Size = new System.Drawing.Size(114, 21);
             this.dteStart.StyleController = this.layControl;
             this.dteStart.TabIndex = 5;
             // 
             // txtStoreCode
             // 
             this.txtStoreCode.FormatQueryString = "[复核单号] = \'{0}\'";
-            this.txtStoreCode.Location = new System.Drawing.Point(75, 12);
-            this.txtStoreCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtStoreCode.Location = new System.Drawing.Point(63, 12);
+            this.txtStoreCode.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtStoreCode.Name = "txtStoreCode";
-            this.txtStoreCode.Size = new System.Drawing.Size(159, 25);
+            this.txtStoreCode.Size = new System.Drawing.Size(113, 21);
             this.txtStoreCode.StyleController = this.layControl;
             this.txtStoreCode.TabIndex = 4;
             // 
@@ -157,7 +157,7 @@
             this.layEnd});
             this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
-            this.layControlGroup.Size = new System.Drawing.Size(926, 69);
+            this.layControlGroup.Size = new System.Drawing.Size(694, 58);
             this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layControlGroup.Text = "查询";
             this.layControlGroup.TextVisible = false;
@@ -168,48 +168,48 @@
             this.layStoreCode.CustomizationFormText = "复核单号";
             this.layStoreCode.Location = new System.Drawing.Point(0, 0);
             this.layStoreCode.Name = "layStoreCode";
-            this.layStoreCode.Size = new System.Drawing.Size(226, 49);
+            this.layStoreCode.Size = new System.Drawing.Size(168, 38);
             this.layStoreCode.Text = "复核单号";
-            this.layStoreCode.TextSize = new System.Drawing.Size(60, 20);
+            this.layStoreCode.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layStart
             // 
             this.layStart.Control = this.dteStart;
             this.layStart.CustomizationFormText = "复核日期";
-            this.layStart.Location = new System.Drawing.Point(453, 0);
+            this.layStart.Location = new System.Drawing.Point(337, 0);
             this.layStart.Name = "layStart";
-            this.layStart.Size = new System.Drawing.Size(227, 49);
+            this.layStart.Size = new System.Drawing.Size(169, 38);
             this.layStart.Text = "复核日期";
-            this.layStart.TextSize = new System.Drawing.Size(60, 20);
+            this.layStart.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layDealer
             // 
             this.layDealer.Control = this.txtDealer;
             this.layDealer.CustomizationFormText = "往来单位";
-            this.layDealer.Location = new System.Drawing.Point(226, 0);
+            this.layDealer.Location = new System.Drawing.Point(168, 0);
             this.layDealer.Name = "layDealer";
-            this.layDealer.Size = new System.Drawing.Size(227, 49);
+            this.layDealer.Size = new System.Drawing.Size(169, 38);
             this.layDealer.Text = "往来单位";
-            this.layDealer.TextSize = new System.Drawing.Size(60, 20);
+            this.layDealer.TextSize = new System.Drawing.Size(48, 17);
             // 
             // layEnd
             // 
             this.layEnd.Control = this.dteEnd;
             this.layEnd.CustomizationFormText = "至";
-            this.layEnd.Location = new System.Drawing.Point(680, 0);
+            this.layEnd.Location = new System.Drawing.Point(506, 0);
             this.layEnd.Name = "layEnd";
-            this.layEnd.Size = new System.Drawing.Size(226, 49);
+            this.layEnd.Size = new System.Drawing.Size(168, 38);
             this.layEnd.Text = "至";
-            this.layEnd.TextSize = new System.Drawing.Size(60, 20);
+            this.layEnd.TextSize = new System.Drawing.Size(48, 17);
             // 
             // FrmReview
             // 
             this.Appearance.Font = new System.Drawing.Font("微软雅黑", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Appearance.Options.UseFont = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(930, 654);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ClientSize = new System.Drawing.Size(698, 551);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "FrmReview";
             this.Text = "FrmReview";
             this.Load += new System.EventHandler(this.FrmReview_Load);

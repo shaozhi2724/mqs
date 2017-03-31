@@ -87,6 +87,39 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
             BUSProductUnqualifiedEntity entity = new BUSProductUnqualifiedEntity { UnqualifiedID = entityID };
             entity.Fetch();
 
+            //自动解锁
+
+            EntityCollection<BUSProductUnqualifiedDetailEntity> entityDetail = new EntityCollection<BUSProductUnqualifiedDetailEntity>();
+            entityDetail.Fetch(BUSProductUnqualifiedDetailEntityFields.UnqualifiedID == entityID);
+
+            foreach (EntityBase item in entityDetail)
+            {
+                BUSProductUnqualifiedDetailEntity child = item as BUSProductUnqualifiedDetailEntity;
+                EntityCollection<BUSProductLockedEntity> pl = new EntityCollection<BUSProductLockedEntity>();
+                pl.Fetch(BUSProductLockedEntityFields.InStoreID == child.InStoreID
+                    & BUSProductLockedEntityFields.IsUnLocked == false);
+                if (pl.Count > 0)
+                {
+                    foreach (var plitem in pl)
+                    {
+                        BUSProductLockedEntity entitypl = new BUSProductLockedEntity { LockedID = (plitem as BUSProductLockedEntity).LockedID };
+                        entitypl.Fetch();
+                        entitypl.IsUnLocked = true;
+                        if (GlobalItem.g_CurrentEmployee != null)
+                        {
+                            entitypl.UnLockedUser = GlobalItem.g_CurrentEmployee.EmployeeName;
+                        }
+                        else
+                        {
+                            entitypl.UnLockedUser = GlobalItem.g_CurrentUser.UserName;
+                        }
+                        entitypl.DealResult = entity.DealSuggestion;
+                        entitypl.UnLockedDate = DateTime.Now;
+                        entitypl.Update();
+                    }
+                }
+            }
+
             Guid billCreateUserId = entity.CreateUserID;
             ATCUserEntity userEntity = new ATCUserEntity { UserID = billCreateUserId };
             userEntity.Fetch();

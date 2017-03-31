@@ -46,6 +46,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
 
                 BFIDealerEntity entity = new BFIDealerEntity { DealerID = m_id.Value };
                 entity.Fetch();
+            /*
                 EntityCollection<BFIBusinessRangeEntity> ranges = new EntityCollection<BFIBusinessRangeEntity>();
                 ranges.Fetch(BFIBusinessRangeEntityFields.DealerID == entity.DealerID);
 
@@ -73,6 +74,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                     this.chklbcProductStyle.SelectedIndex = 0;
                     this.chklbcProductStyle.UnCheckAll();
                 }
+             */
                 this.ftPanel.SetEntity(entity);
 
                 this.txtDealerCode.Enabled = false;
@@ -138,12 +140,86 @@ namespace DQS.AppViews.QualityDocument.DealerManager
 
         private void BindProductStyles()
         {
-            EntityCollection<SYSCategoryEntity> categories = new EntityCollection<SYSCategoryEntity>();
-            categories.Fetch(SYSCategoryEntityFields.CategoryCode == "ProductStyle");
+            //EntityCollection<SYSCategoryEntity> categories = new EntityCollection<SYSCategoryEntity>();
+            //categories.Fetch(SYSCategoryEntityFields.CategoryCode == "ProductStyle");
 
-            foreach (SYSCategoryEntity c in categories)
+            //foreach (SYSCategoryEntity c in categories)
+            //{
+            //    this.chklbcProductStyle.Items.Add(new ListEntityItem(c, c.ItemName));
+            //}
+
+            chklbcProductStyle.Items.Clear();
+            if (cbxIndustryStyle.Text == "生产厂商")
             {
-                this.chklbcProductStyle.Items.Add(new ListEntityItem(c, c.ItemName));
+                layBusinessRange.Text = "生产范围";
+                layBusinessRange.CustomizationFormText = "生产范围";
+                if (DQS.Controls.Properties.Settings.Default.IsControlDealerAsProductPhy)
+                {
+                    gpcRight.Text = "产品剂型清单";
+                    EntityCollection<SYSCategoryEntity> categories = new EntityCollection<SYSCategoryEntity>();
+                    categories.Fetch(SYSCategoryEntityFields.CategoryCode == "PhysicType");
+
+                    foreach (SYSCategoryEntity c in categories)
+                    {
+                        this.chklbcProductStyle.Items.Add(new ListEntityItem(c, c.ItemName));
+                    }
+                }
+                else
+                {
+                    gpcRight.Text = "产品类别清单";
+                    EntityCollection<SYSCategoryEntity> categories = new EntityCollection<SYSCategoryEntity>();
+                    categories.Fetch(SYSCategoryEntityFields.CategoryCode == "ProductStyle");
+
+                    foreach (SYSCategoryEntity c in categories)
+                    {
+                        this.chklbcProductStyle.Items.Add(new ListEntityItem(c, c.ItemName));
+                    }
+                }
+            }
+            else
+            {
+
+                layBusinessRange.Text = "经营范围";
+                layBusinessRange.CustomizationFormText = "经营范围";
+                gpcRight.Text = "产品类别清单";
+                EntityCollection<SYSCategoryEntity> categories = new EntityCollection<SYSCategoryEntity>();
+                categories.Fetch(SYSCategoryEntityFields.CategoryCode == "ProductStyle");
+
+                foreach (SYSCategoryEntity c in categories)
+                {
+                    this.chklbcProductStyle.Items.Add(new ListEntityItem(c, c.ItemName));
+                }
+            }
+
+            if (null != m_id)
+            {
+                EntityCollection<BFIBusinessRangeEntity> ranges = new EntityCollection<BFIBusinessRangeEntity>();
+                ranges.Fetch(BFIBusinessRangeEntityFields.DealerID == m_id.Value);
+
+                if (ranges.Count > 0)
+                {
+                    this.chklbcProductStyle.UnCheckAll();//先全部清空
+
+                    foreach (BFIBusinessRangeEntity range in ranges)
+                    {
+                        foreach (CheckedListBoxItem item in this.chklbcProductStyle.Items)
+                        {
+                            SYSCategoryEntity category = (item.Value as ListEntityItem).Key as SYSCategoryEntity;
+
+                            if (category.ItemName == range.ProductStyleName)
+                            {
+                                this.chklbcProductStyle.SelectedItem = item;
+                                item.CheckState = CheckState.Checked;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    this.chklbcProductStyle.SelectedIndex = 0;
+                    this.chklbcProductStyle.UnCheckAll();
+                }
             }
         }
         private void btnSave_Click(object sender, EventArgs e)
@@ -403,6 +479,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
 
         private void cbxIndustryStyle_SelectedIndexChanged(object sender, EventArgs e)
         {
+            BindProductStyles();
             if (cbxIndustryStyle.Text == "生产厂商")
             {
                 layBusinessRange.CustomizationFormText = "生产范围";

@@ -40,6 +40,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
         private void FrmSingleFirstProductChangeDetail_Load(object sender, EventArgs e)
         {
             antiApproveID = Guid.NewGuid();
+            this.cbxProductType.InitSource();
             this.cbxPhysicType.InitSource();
             this.cbxStockCondition.InitSource();
             this.cbxProductStyle.InitSource();
@@ -154,6 +155,10 @@ WHERE UP.ProductID = {0}", productID);
         /// <param name="entity">实体</param>
         protected virtual void CustomGetEntity(BFIProductEntity entity)
         {
+            if (!entity.IsNullField("Reservation1"))
+            {
+                this.cbxProductType.SelectedValue = entity.Reservation1;
+            }
             if (!entity.IsNullField("PhysicTypeID"))
             {
                 this.cbxPhysicType.SelectedValue = entity.PhysicTypeID;

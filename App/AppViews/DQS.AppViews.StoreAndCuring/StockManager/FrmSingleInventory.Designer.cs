@@ -268,6 +268,7 @@
             this.btnUpdateStoreAmount.Size = new System.Drawing.Size(132, 23);
             this.btnUpdateStoreAmount.TabIndex = 3;
             this.btnUpdateStoreAmount.Text = "保存并更新库存(&U)";
+            this.btnUpdateStoreAmount.Visible = false;
             this.btnUpdateStoreAmount.Click += new System.EventHandler(this.btnUpdateStoreAmount_Click);
             // 
             // btnCancel
@@ -323,6 +324,7 @@
             // 
             this.popupGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.popupGrid.IsCalculatePrice = false;
+            this.popupGrid.IsCompute = false;
             this.popupGrid.Location = new System.Drawing.Point(2, 25);
             this.popupGrid.Name = "popupGrid";
             this.popupGrid.OperationName = "Inventory";

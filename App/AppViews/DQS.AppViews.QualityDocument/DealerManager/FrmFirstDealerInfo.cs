@@ -98,7 +98,10 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                 object id = gvData.GetFocusedRowCellValue("单位ID");
                 if (id != null)
                 {
-                    pod.DealerID = Convert.ToInt32(id);
+                    pod.SearchID = Convert.ToInt32(id);
+                    pod.SelectSql = "SELECT ProductID FROM BUS_DealerVSProduct WHERE DealerID = ";
+                    pod.DelSql = "sp_DelDealerVSProduct";
+                    pod.InSql = "sp_SaveDealerVSProduct";
                 }
                 pod.ShowDialog();
             }

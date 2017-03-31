@@ -116,7 +116,7 @@
             // 
             this.picWarning.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picWarning.EditValue = global::DQS.App.Properties.Resources.jd;
-            this.picWarning.Location = new System.Drawing.Point(605, 2);
+            this.picWarning.Location = new System.Drawing.Point(582, 2);
             this.picWarning.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.picWarning.Name = "picWarning";
             this.picWarning.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
@@ -131,7 +131,7 @@
             // 
             this.hleWarning.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.hleWarning.EditValue = "预警信息";
-            this.hleWarning.Location = new System.Drawing.Point(639, 5);
+            this.hleWarning.Location = new System.Drawing.Point(616, 5);
             this.hleWarning.Name = "hleWarning";
             this.hleWarning.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.hleWarning.Properties.Appearance.Options.UseBackColor = true;
@@ -162,17 +162,17 @@
             this.pnlUserInfo.Controls.Add(this.lblDate);
             this.pnlUserInfo.Controls.Add(this.lblWelcome);
             this.pnlUserInfo.Controls.Add(this.lblUserName);
-            this.pnlUserInfo.Location = new System.Drawing.Point(740, 1);
+            this.pnlUserInfo.Location = new System.Drawing.Point(698, 1);
             this.pnlUserInfo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnlUserInfo.Name = "pnlUserInfo";
-            this.pnlUserInfo.Size = new System.Drawing.Size(230, 25);
+            this.pnlUserInfo.Size = new System.Drawing.Size(272, 25);
             this.pnlUserInfo.TabIndex = 2;
             // 
             // lblDate
             // 
             this.lblDate.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDate.Appearance.Options.UseFont = true;
-            this.lblDate.Location = new System.Drawing.Point(91, 5);
+            this.lblDate.Location = new System.Drawing.Point(125, 3);
             this.lblDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(136, 17);

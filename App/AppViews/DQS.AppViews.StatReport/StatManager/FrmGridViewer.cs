@@ -27,6 +27,16 @@ namespace DQS.AppViews.StatReport.StatManager
 
         private void FrmGridViewer_Load(object sender, EventArgs e)
         {
+            string pageName = this.Tag.ToString();
+            //设置数据
+            sysPage = GlobalMethod.GetFormPage(pageName);
+            if (sysPage != null)
+            {
+                if (!sysPage.IsNullField("IconName"))
+                {
+                    btnImport.Visible = sysPage.IconName == "1" ? true : false;
+                }
+            }
             deStartDate.Text = DateTime.Today.ToString("d");
             deEndDate.Text = DateTime.Today.ToString("d");
             gridLoad();
@@ -214,6 +224,18 @@ namespace DQS.AppViews.StatReport.StatManager
                 if (dr == DialogResult.Yes)
                 {
                     
+                }
+            }
+        }
+
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            using (FrmImport fcs = new FrmImport())
+            {
+                DialogResult dr = fcs.ShowDialog();
+                if (dr == DialogResult.Yes)
+                {
+                    gridLoad();
                 }
             }
         }

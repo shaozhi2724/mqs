@@ -53,7 +53,7 @@ namespace DQS.AppViews.OtherOperation.Finance
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-
+            gridLoad();
         }
 
         private void gridView_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
@@ -70,7 +70,7 @@ namespace DQS.AppViews.OtherOperation.Finance
 
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sqlBill = @"SELECT 
+                string sqlBill = @"SELECT ID,
 	a.DealerCode AS 单位编码,
 	a.DealerName AS 单位名称,
 	BillCode AS 单据编号,

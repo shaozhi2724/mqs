@@ -33,7 +33,27 @@
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.gpcProduct = new DevExpress.XtraEditors.GroupControl();
             this.layControl = new DevExpress.XtraLayout.LayoutControl();
+            this.txtStockCondition = new DQS.Controls.TextBoxEx();
+            this.txtProducerName = new DQS.Controls.TextBoxEx();
+            this.txtAuthorizedNo = new DQS.Controls.TextBoxEx();
+            this.txtPackageSpec = new DQS.Controls.TextBoxEx();
+            this.txtProductStyle = new DQS.Controls.TextBoxEx();
+            this.txtPhysicType = new DQS.Controls.TextBoxEx();
+            this.txtProductUnit = new DQS.Controls.TextBoxEx();
+            this.txtProductSpec = new DQS.Controls.TextBoxEx();
+            this.txtProductName = new DQS.Controls.TextBoxEx();
+            this.txtProductCode = new DQS.Controls.TextBoxEx();
             this.layControlGroup = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layProductCode = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProductName = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProductSpec = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProductUnit = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layPhysicType = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProductStyle = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layPackageSpec = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layAuthorizedNo = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProducerName = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layStockCondition = new DevExpress.XtraLayout.LayoutControlItem();
             this.gpcRecord = new DevExpress.XtraEditors.GroupControl();
             this.ftPanel = new DQS.Controls.FieldTextBoxPanel();
             this.layControl1 = new DevExpress.XtraLayout.LayoutControl();
@@ -72,33 +92,33 @@
             this.laySterilizationDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.layCuringDays = new DevExpress.XtraLayout.LayoutControlItem();
             this.layInStoreID = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtStockCondition = new DQS.Controls.TextBoxEx();
-            this.txtProducerName = new DQS.Controls.TextBoxEx();
-            this.txtAuthorizedNo = new DQS.Controls.TextBoxEx();
-            this.txtPackageSpec = new DQS.Controls.TextBoxEx();
-            this.txtProductStyle = new DQS.Controls.TextBoxEx();
-            this.txtPhysicType = new DQS.Controls.TextBoxEx();
-            this.txtProductUnit = new DQS.Controls.TextBoxEx();
-            this.txtProductSpec = new DQS.Controls.TextBoxEx();
-            this.txtProductName = new DQS.Controls.TextBoxEx();
-            this.txtProductCode = new DQS.Controls.TextBoxEx();
-            this.layProductCode = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layProductName = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layProductSpec = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layProductUnit = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layPhysicType = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layProductStyle = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layPackageSpec = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layAuthorizedNo = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layProducerName = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layStockCondition = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.pnOperating)).BeginInit();
             this.pnOperating.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gpcProduct)).BeginInit();
             this.gpcProduct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
             this.layControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStockCondition.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProducerName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAuthorizedNo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPackageSpec.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductStyle.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPhysicType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductUnit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductSpec.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layControlGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductCode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductSpec)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductUnit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPhysicType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductStyle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPackageSpec)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layAuthorizedNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProducerName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layStockCondition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpcRecord)).BeginInit();
             this.gpcRecord.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
@@ -140,26 +160,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.laySterilizationDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layCuringDays)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layInStoreID)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtStockCondition.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProducerName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAuthorizedNo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPackageSpec.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProductStyle.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPhysicType.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProductUnit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProductSpec.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProductName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProductCode.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductCode)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductSpec)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductUnit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layPhysicType)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductStyle)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layPackageSpec)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layAuthorizedNo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProducerName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layStockCondition)).BeginInit();
             this.SuspendLayout();
             // 
             // pnOperating
@@ -229,6 +229,146 @@
             this.layControl.TabIndex = 0;
             this.layControl.Text = "layoutControl1";
             // 
+            // txtStockCondition
+            // 
+            this.txtStockCondition.AlphabeticFiled = null;
+            this.txtStockCondition.IsIntegerOnly = false;
+            this.txtStockCondition.IsNullString = null;
+            this.txtStockCondition.IsNullValidate = false;
+            this.txtStockCondition.IsTransferAlphabetic = false;
+            this.txtStockCondition.Location = new System.Drawing.Point(87, 112);
+            this.txtStockCondition.Name = "txtStockCondition";
+            this.txtStockCondition.Properties.ReadOnly = true;
+            this.txtStockCondition.Size = new System.Drawing.Size(230, 21);
+            this.txtStockCondition.StyleController = this.layControl;
+            this.txtStockCondition.TabIndex = 8;
+            // 
+            // txtProducerName
+            // 
+            this.txtProducerName.AlphabeticFiled = null;
+            this.txtProducerName.IsIntegerOnly = false;
+            this.txtProducerName.IsNullString = null;
+            this.txtProducerName.IsNullValidate = false;
+            this.txtProducerName.IsTransferAlphabetic = false;
+            this.txtProducerName.Location = new System.Drawing.Point(396, 112);
+            this.txtProducerName.Name = "txtProducerName";
+            this.txtProducerName.Properties.ReadOnly = true;
+            this.txtProducerName.Size = new System.Drawing.Size(219, 21);
+            this.txtProducerName.StyleController = this.layControl;
+            this.txtProducerName.TabIndex = 8;
+            // 
+            // txtAuthorizedNo
+            // 
+            this.txtAuthorizedNo.AlphabeticFiled = null;
+            this.txtAuthorizedNo.IsIntegerOnly = false;
+            this.txtAuthorizedNo.IsNullString = null;
+            this.txtAuthorizedNo.IsNullValidate = false;
+            this.txtAuthorizedNo.IsTransferAlphabetic = false;
+            this.txtAuthorizedNo.Location = new System.Drawing.Point(396, 87);
+            this.txtAuthorizedNo.Name = "txtAuthorizedNo";
+            this.txtAuthorizedNo.Properties.ReadOnly = true;
+            this.txtAuthorizedNo.Size = new System.Drawing.Size(219, 21);
+            this.txtAuthorizedNo.StyleController = this.layControl;
+            this.txtAuthorizedNo.TabIndex = 7;
+            // 
+            // txtPackageSpec
+            // 
+            this.txtPackageSpec.AlphabeticFiled = null;
+            this.txtPackageSpec.IsIntegerOnly = false;
+            this.txtPackageSpec.IsNullString = null;
+            this.txtPackageSpec.IsNullValidate = false;
+            this.txtPackageSpec.IsTransferAlphabetic = false;
+            this.txtPackageSpec.Location = new System.Drawing.Point(87, 87);
+            this.txtPackageSpec.Name = "txtPackageSpec";
+            this.txtPackageSpec.Properties.ReadOnly = true;
+            this.txtPackageSpec.Size = new System.Drawing.Size(230, 21);
+            this.txtPackageSpec.StyleController = this.layControl;
+            this.txtPackageSpec.TabIndex = 6;
+            // 
+            // txtProductStyle
+            // 
+            this.txtProductStyle.AlphabeticFiled = null;
+            this.txtProductStyle.IsIntegerOnly = false;
+            this.txtProductStyle.IsNullString = null;
+            this.txtProductStyle.IsNullValidate = false;
+            this.txtProductStyle.IsTransferAlphabetic = false;
+            this.txtProductStyle.Location = new System.Drawing.Point(396, 62);
+            this.txtProductStyle.Name = "txtProductStyle";
+            this.txtProductStyle.Properties.ReadOnly = true;
+            this.txtProductStyle.Size = new System.Drawing.Size(219, 21);
+            this.txtProductStyle.StyleController = this.layControl;
+            this.txtProductStyle.TabIndex = 5;
+            // 
+            // txtPhysicType
+            // 
+            this.txtPhysicType.AlphabeticFiled = null;
+            this.txtPhysicType.IsIntegerOnly = false;
+            this.txtPhysicType.IsNullString = null;
+            this.txtPhysicType.IsNullValidate = false;
+            this.txtPhysicType.IsTransferAlphabetic = false;
+            this.txtPhysicType.Location = new System.Drawing.Point(87, 62);
+            this.txtPhysicType.Name = "txtPhysicType";
+            this.txtPhysicType.Properties.ReadOnly = true;
+            this.txtPhysicType.Size = new System.Drawing.Size(230, 21);
+            this.txtPhysicType.StyleController = this.layControl;
+            this.txtPhysicType.TabIndex = 4;
+            // 
+            // txtProductUnit
+            // 
+            this.txtProductUnit.AlphabeticFiled = null;
+            this.txtProductUnit.IsIntegerOnly = false;
+            this.txtProductUnit.IsNullString = null;
+            this.txtProductUnit.IsNullValidate = false;
+            this.txtProductUnit.IsTransferAlphabetic = false;
+            this.txtProductUnit.Location = new System.Drawing.Point(396, 37);
+            this.txtProductUnit.Name = "txtProductUnit";
+            this.txtProductUnit.Properties.ReadOnly = true;
+            this.txtProductUnit.Size = new System.Drawing.Size(219, 21);
+            this.txtProductUnit.StyleController = this.layControl;
+            this.txtProductUnit.TabIndex = 3;
+            // 
+            // txtProductSpec
+            // 
+            this.txtProductSpec.AlphabeticFiled = null;
+            this.txtProductSpec.IsIntegerOnly = false;
+            this.txtProductSpec.IsNullString = null;
+            this.txtProductSpec.IsNullValidate = false;
+            this.txtProductSpec.IsTransferAlphabetic = false;
+            this.txtProductSpec.Location = new System.Drawing.Point(87, 37);
+            this.txtProductSpec.Name = "txtProductSpec";
+            this.txtProductSpec.Properties.ReadOnly = true;
+            this.txtProductSpec.Size = new System.Drawing.Size(230, 21);
+            this.txtProductSpec.StyleController = this.layControl;
+            this.txtProductSpec.TabIndex = 2;
+            // 
+            // txtProductName
+            // 
+            this.txtProductName.AlphabeticFiled = null;
+            this.txtProductName.IsIntegerOnly = false;
+            this.txtProductName.IsNullString = null;
+            this.txtProductName.IsNullValidate = false;
+            this.txtProductName.IsTransferAlphabetic = false;
+            this.txtProductName.Location = new System.Drawing.Point(396, 12);
+            this.txtProductName.Name = "txtProductName";
+            this.txtProductName.Properties.ReadOnly = true;
+            this.txtProductName.Size = new System.Drawing.Size(219, 21);
+            this.txtProductName.StyleController = this.layControl;
+            this.txtProductName.TabIndex = 1;
+            // 
+            // txtProductCode
+            // 
+            this.txtProductCode.AlphabeticFiled = null;
+            this.txtProductCode.IsIntegerOnly = false;
+            this.txtProductCode.IsNullString = null;
+            this.txtProductCode.IsNullValidate = false;
+            this.txtProductCode.IsTransferAlphabetic = false;
+            this.txtProductCode.Location = new System.Drawing.Point(87, 12);
+            this.txtProductCode.Name = "txtProductCode";
+            this.txtProductCode.Properties.ReadOnly = true;
+            this.txtProductCode.Size = new System.Drawing.Size(230, 21);
+            this.txtProductCode.StyleController = this.layControl;
+            this.txtProductCode.TabIndex = 0;
+            // 
             // layControlGroup
             // 
             this.layControlGroup.CustomizationFormText = "产品信息";
@@ -251,6 +391,106 @@
             this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layControlGroup.Text = "产品信息";
             this.layControlGroup.TextVisible = false;
+            // 
+            // layProductCode
+            // 
+            this.layProductCode.Control = this.txtProductCode;
+            this.layProductCode.CustomizationFormText = "产品编号";
+            this.layProductCode.Location = new System.Drawing.Point(0, 0);
+            this.layProductCode.Name = "layProductCode";
+            this.layProductCode.Size = new System.Drawing.Size(309, 25);
+            this.layProductCode.Text = "产品编号";
+            this.layProductCode.TextSize = new System.Drawing.Size(72, 14);
+            // 
+            // layProductName
+            // 
+            this.layProductName.Control = this.txtProductName;
+            this.layProductName.CustomizationFormText = "产品名称";
+            this.layProductName.Location = new System.Drawing.Point(309, 0);
+            this.layProductName.Name = "layProductName";
+            this.layProductName.Size = new System.Drawing.Size(298, 25);
+            this.layProductName.Text = "产品名称";
+            this.layProductName.TextSize = new System.Drawing.Size(72, 14);
+            // 
+            // layProductSpec
+            // 
+            this.layProductSpec.Control = this.txtProductSpec;
+            this.layProductSpec.CustomizationFormText = "规格型号";
+            this.layProductSpec.Location = new System.Drawing.Point(0, 25);
+            this.layProductSpec.Name = "layProductSpec";
+            this.layProductSpec.Size = new System.Drawing.Size(309, 25);
+            this.layProductSpec.Text = "规格型号";
+            this.layProductSpec.TextSize = new System.Drawing.Size(72, 14);
+            // 
+            // layProductUnit
+            // 
+            this.layProductUnit.Control = this.txtProductUnit;
+            this.layProductUnit.CustomizationFormText = "单位";
+            this.layProductUnit.Location = new System.Drawing.Point(309, 25);
+            this.layProductUnit.Name = "layProductUnit";
+            this.layProductUnit.Size = new System.Drawing.Size(298, 25);
+            this.layProductUnit.Text = "单位";
+            this.layProductUnit.TextSize = new System.Drawing.Size(72, 14);
+            // 
+            // layPhysicType
+            // 
+            this.layPhysicType.Control = this.txtPhysicType;
+            this.layPhysicType.CustomizationFormText = "剂型";
+            this.layPhysicType.Location = new System.Drawing.Point(0, 50);
+            this.layPhysicType.Name = "layPhysicType";
+            this.layPhysicType.Size = new System.Drawing.Size(309, 25);
+            this.layPhysicType.Text = "剂型";
+            this.layPhysicType.TextSize = new System.Drawing.Size(72, 14);
+            // 
+            // layProductStyle
+            // 
+            this.layProductStyle.Control = this.txtProductStyle;
+            this.layProductStyle.CustomizationFormText = "产品类别";
+            this.layProductStyle.Location = new System.Drawing.Point(309, 50);
+            this.layProductStyle.Name = "layProductStyle";
+            this.layProductStyle.Size = new System.Drawing.Size(298, 25);
+            this.layProductStyle.Text = "产品类别";
+            this.layProductStyle.TextSize = new System.Drawing.Size(72, 14);
+            // 
+            // layPackageSpec
+            // 
+            this.layPackageSpec.Control = this.txtPackageSpec;
+            this.layPackageSpec.CustomizationFormText = "包装规格型号";
+            this.layPackageSpec.Location = new System.Drawing.Point(0, 75);
+            this.layPackageSpec.Name = "layPackageSpec";
+            this.layPackageSpec.Size = new System.Drawing.Size(309, 25);
+            this.layPackageSpec.Text = "包装规格型号";
+            this.layPackageSpec.TextSize = new System.Drawing.Size(72, 14);
+            // 
+            // layAuthorizedNo
+            // 
+            this.layAuthorizedNo.Control = this.txtAuthorizedNo;
+            this.layAuthorizedNo.CustomizationFormText = "注册证号";
+            this.layAuthorizedNo.Location = new System.Drawing.Point(309, 75);
+            this.layAuthorizedNo.Name = "layAuthorizedNo";
+            this.layAuthorizedNo.Size = new System.Drawing.Size(298, 25);
+            this.layAuthorizedNo.Text = "注册证号";
+            this.layAuthorizedNo.TextSize = new System.Drawing.Size(72, 14);
+            // 
+            // layProducerName
+            // 
+            this.layProducerName.Control = this.txtProducerName;
+            this.layProducerName.CustomizationFormText = "生产厂商";
+            this.layProducerName.Location = new System.Drawing.Point(309, 100);
+            this.layProducerName.Name = "layProducerName";
+            this.layProducerName.Size = new System.Drawing.Size(298, 26);
+            this.layProducerName.Text = "生产厂商";
+            this.layProducerName.TextSize = new System.Drawing.Size(72, 14);
+            // 
+            // layStockCondition
+            // 
+            this.layStockCondition.Control = this.txtStockCondition;
+            this.layStockCondition.CustomizationFormText = "存储库区";
+            this.layStockCondition.Location = new System.Drawing.Point(0, 100);
+            this.layStockCondition.Name = "layStockCondition";
+            this.layStockCondition.Size = new System.Drawing.Size(309, 26);
+            this.layStockCondition.Text = "存储库区";
+            this.layStockCondition.TextSize = new System.Drawing.Size(72, 14);
             // 
             // gpcRecord
             // 
@@ -307,7 +547,7 @@
             this.txtcuringDays.IsNullString = null;
             this.txtcuringDays.IsNullValidate = false;
             this.txtcuringDays.IsTransferAlphabetic = false;
-            this.txtcuringDays.Location = new System.Drawing.Point(371, 138);
+            this.txtcuringDays.Location = new System.Drawing.Point(371, 187);
             this.txtcuringDays.Name = "txtcuringDays";
             this.txtcuringDays.Size = new System.Drawing.Size(223, 21);
             this.txtcuringDays.StyleController = this.layControl1;
@@ -321,7 +561,7 @@
             this.txtInStoreID.IsNullString = null;
             this.txtInStoreID.IsNullValidate = false;
             this.txtInStoreID.IsTransferAlphabetic = false;
-            this.txtInStoreID.Location = new System.Drawing.Point(75, 163);
+            this.txtInStoreID.Location = new System.Drawing.Point(75, 212);
             this.txtInStoreID.Name = "txtInStoreID";
             this.txtInStoreID.Size = new System.Drawing.Size(519, 21);
             this.txtInStoreID.StyleController = this.layControl1;
@@ -335,7 +575,7 @@
             this.txtSterilizationDate.IsNullString = null;
             this.txtSterilizationDate.IsNullValidate = false;
             this.txtSterilizationDate.IsTransferAlphabetic = false;
-            this.txtSterilizationDate.Location = new System.Drawing.Point(371, 63);
+            this.txtSterilizationDate.Location = new System.Drawing.Point(371, 112);
             this.txtSterilizationDate.Name = "txtSterilizationDate";
             this.txtSterilizationDate.Properties.ReadOnly = true;
             this.txtSterilizationDate.Size = new System.Drawing.Size(223, 21);
@@ -350,7 +590,7 @@
             this.txtSterilizationBatchNo.IsNullString = null;
             this.txtSterilizationBatchNo.IsNullValidate = false;
             this.txtSterilizationBatchNo.IsTransferAlphabetic = false;
-            this.txtSterilizationBatchNo.Location = new System.Drawing.Point(75, 63);
+            this.txtSterilizationBatchNo.Location = new System.Drawing.Point(75, 112);
             this.txtSterilizationBatchNo.Name = "txtSterilizationBatchNo";
             this.txtSterilizationBatchNo.Properties.ReadOnly = true;
             this.txtSterilizationBatchNo.Size = new System.Drawing.Size(229, 21);
@@ -365,7 +605,7 @@
             this.txtValidateDate.IsNullString = null;
             this.txtValidateDate.IsNullValidate = false;
             this.txtValidateDate.IsTransferAlphabetic = false;
-            this.txtValidateDate.Location = new System.Drawing.Point(371, 38);
+            this.txtValidateDate.Location = new System.Drawing.Point(371, 87);
             this.txtValidateDate.Name = "txtValidateDate";
             this.txtValidateDate.Properties.ReadOnly = true;
             this.txtValidateDate.Size = new System.Drawing.Size(223, 21);
@@ -380,7 +620,7 @@
             this.txtAmount.IsNullString = null;
             this.txtAmount.IsNullValidate = false;
             this.txtAmount.IsTransferAlphabetic = false;
-            this.txtAmount.Location = new System.Drawing.Point(75, 38);
+            this.txtAmount.Location = new System.Drawing.Point(75, 87);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Properties.ReadOnly = true;
             this.txtAmount.Size = new System.Drawing.Size(229, 21);
@@ -395,7 +635,7 @@
             this.txtProduceDate.IsNullString = null;
             this.txtProduceDate.IsNullValidate = false;
             this.txtProduceDate.IsTransferAlphabetic = false;
-            this.txtProduceDate.Location = new System.Drawing.Point(371, 13);
+            this.txtProduceDate.Location = new System.Drawing.Point(371, 62);
             this.txtProduceDate.Name = "txtProduceDate";
             this.txtProduceDate.Properties.ReadOnly = true;
             this.txtProduceDate.Size = new System.Drawing.Size(223, 21);
@@ -410,7 +650,7 @@
             this.txtBatchNo.IsNullString = null;
             this.txtBatchNo.IsNullValidate = false;
             this.txtBatchNo.IsTransferAlphabetic = false;
-            this.txtBatchNo.Location = new System.Drawing.Point(75, 13);
+            this.txtBatchNo.Location = new System.Drawing.Point(75, 62);
             this.txtBatchNo.Name = "txtBatchNo";
             this.txtBatchNo.Properties.ReadOnly = true;
             this.txtBatchNo.Size = new System.Drawing.Size(229, 21);
@@ -426,7 +666,7 @@
             this.txtUnqualifiedAmount.IsNullString = null;
             this.txtUnqualifiedAmount.IsNullValidate = false;
             this.txtUnqualifiedAmount.IsTransferAlphabetic = false;
-            this.txtUnqualifiedAmount.Location = new System.Drawing.Point(371, 88);
+            this.txtUnqualifiedAmount.Location = new System.Drawing.Point(371, 137);
             this.txtUnqualifiedAmount.Name = "txtUnqualifiedAmount";
             this.txtUnqualifiedAmount.Properties.ReadOnly = true;
             this.txtUnqualifiedAmount.Size = new System.Drawing.Size(223, 21);
@@ -441,7 +681,7 @@
             this.txtCuringRemrk.IsNullString = null;
             this.txtCuringRemrk.IsNullValidate = false;
             this.txtCuringRemrk.IsTransferAlphabetic = false;
-            this.txtCuringRemrk.Location = new System.Drawing.Point(75, 138);
+            this.txtCuringRemrk.Location = new System.Drawing.Point(75, 187);
             this.txtCuringRemrk.Name = "txtCuringRemrk";
             this.txtCuringRemrk.Size = new System.Drawing.Size(229, 21);
             this.txtCuringRemrk.StyleController = this.layControl1;
@@ -455,7 +695,7 @@
             this.txtQualifiedAmount.IsNullString = "合格数量不能为空。";
             this.txtQualifiedAmount.IsNullValidate = true;
             this.txtQualifiedAmount.IsTransferAlphabetic = false;
-            this.txtQualifiedAmount.Location = new System.Drawing.Point(75, 88);
+            this.txtQualifiedAmount.Location = new System.Drawing.Point(75, 137);
             this.txtQualifiedAmount.Name = "txtQualifiedAmount";
             this.txtQualifiedAmount.Size = new System.Drawing.Size(229, 21);
             this.txtQualifiedAmount.StyleController = this.layControl1;
@@ -470,7 +710,7 @@
             this.txtCuringMan.IsNullString = "养护人不能为空";
             this.txtCuringMan.IsNullValidate = true;
             this.txtCuringMan.IsTransferAlphabetic = true;
-            this.txtCuringMan.Location = new System.Drawing.Point(371, -37);
+            this.txtCuringMan.Location = new System.Drawing.Point(371, 12);
             this.txtCuringMan.Name = "txtCuringMan";
             this.txtCuringMan.Size = new System.Drawing.Size(223, 21);
             this.txtCuringMan.StyleController = this.layControl1;
@@ -484,7 +724,7 @@
             this.txtCuringCode.IsNullString = "记录编号不能为空。";
             this.txtCuringCode.IsNullValidate = true;
             this.txtCuringCode.IsTransferAlphabetic = false;
-            this.txtCuringCode.Location = new System.Drawing.Point(75, -37);
+            this.txtCuringCode.Location = new System.Drawing.Point(75, 12);
             this.txtCuringCode.Name = "txtCuringCode";
             this.txtCuringCode.Size = new System.Drawing.Size(229, 21);
             this.txtCuringCode.StyleController = this.layControl1;
@@ -492,7 +732,7 @@
             // 
             // txtCheckItem
             // 
-            this.txtCheckItem.Location = new System.Drawing.Point(75, -12);
+            this.txtCheckItem.Location = new System.Drawing.Point(75, 37);
             this.txtCheckItem.Name = "txtCheckItem";
             this.txtCheckItem.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -502,7 +742,7 @@
             // 
             // txtQualityCondition
             // 
-            this.txtQualityCondition.Location = new System.Drawing.Point(371, -12);
+            this.txtQualityCondition.Location = new System.Drawing.Point(371, 37);
             this.txtQualityCondition.Name = "txtQualityCondition";
             this.txtQualityCondition.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -512,7 +752,7 @@
             // 
             // txtCuringMeasure
             // 
-            this.txtCuringMeasure.Location = new System.Drawing.Point(75, 113);
+            this.txtCuringMeasure.Location = new System.Drawing.Point(75, 162);
             this.txtCuringMeasure.Name = "txtCuringMeasure";
             this.txtCuringMeasure.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -522,7 +762,7 @@
             // 
             // txtCuringResult
             // 
-            this.txtCuringResult.Location = new System.Drawing.Point(371, 113);
+            this.txtCuringResult.Location = new System.Drawing.Point(371, 162);
             this.txtCuringResult.Name = "txtCuringResult";
             this.txtCuringResult.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -553,7 +793,7 @@
             this.laySterilizationDate,
             this.layCuringDays,
             this.layInStoreID});
-            this.layControlGroup1.Location = new System.Drawing.Point(0, -49);
+            this.layControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup1.Name = "layControlGroup1";
             this.layControlGroup1.Size = new System.Drawing.Size(606, 245);
             this.layControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
@@ -731,246 +971,6 @@
             this.layInStoreID.TextSize = new System.Drawing.Size(60, 14);
             this.layInStoreID.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
-            // txtStockCondition
-            // 
-            this.txtStockCondition.AlphabeticFiled = null;
-            this.txtStockCondition.IsIntegerOnly = false;
-            this.txtStockCondition.IsNullString = null;
-            this.txtStockCondition.IsNullValidate = false;
-            this.txtStockCondition.IsTransferAlphabetic = false;
-            this.txtStockCondition.Location = new System.Drawing.Point(87, 112);
-            this.txtStockCondition.Name = "txtStockCondition";
-            this.txtStockCondition.Properties.ReadOnly = true;
-            this.txtStockCondition.Size = new System.Drawing.Size(230, 21);
-            this.txtStockCondition.StyleController = this.layControl;
-            this.txtStockCondition.TabIndex = 8;
-            // 
-            // txtProducerName
-            // 
-            this.txtProducerName.AlphabeticFiled = null;
-            this.txtProducerName.IsIntegerOnly = false;
-            this.txtProducerName.IsNullString = null;
-            this.txtProducerName.IsNullValidate = false;
-            this.txtProducerName.IsTransferAlphabetic = false;
-            this.txtProducerName.Location = new System.Drawing.Point(396, 112);
-            this.txtProducerName.Name = "txtProducerName";
-            this.txtProducerName.Properties.ReadOnly = true;
-            this.txtProducerName.Size = new System.Drawing.Size(219, 21);
-            this.txtProducerName.StyleController = this.layControl;
-            this.txtProducerName.TabIndex = 8;
-            // 
-            // txtAuthorizedNo
-            // 
-            this.txtAuthorizedNo.AlphabeticFiled = null;
-            this.txtAuthorizedNo.IsIntegerOnly = false;
-            this.txtAuthorizedNo.IsNullString = null;
-            this.txtAuthorizedNo.IsNullValidate = false;
-            this.txtAuthorizedNo.IsTransferAlphabetic = false;
-            this.txtAuthorizedNo.Location = new System.Drawing.Point(396, 87);
-            this.txtAuthorizedNo.Name = "txtAuthorizedNo";
-            this.txtAuthorizedNo.Properties.ReadOnly = true;
-            this.txtAuthorizedNo.Size = new System.Drawing.Size(219, 21);
-            this.txtAuthorizedNo.StyleController = this.layControl;
-            this.txtAuthorizedNo.TabIndex = 7;
-            // 
-            // txtPackageSpec
-            // 
-            this.txtPackageSpec.AlphabeticFiled = null;
-            this.txtPackageSpec.IsIntegerOnly = false;
-            this.txtPackageSpec.IsNullString = null;
-            this.txtPackageSpec.IsNullValidate = false;
-            this.txtPackageSpec.IsTransferAlphabetic = false;
-            this.txtPackageSpec.Location = new System.Drawing.Point(87, 87);
-            this.txtPackageSpec.Name = "txtPackageSpec";
-            this.txtPackageSpec.Properties.ReadOnly = true;
-            this.txtPackageSpec.Size = new System.Drawing.Size(230, 21);
-            this.txtPackageSpec.StyleController = this.layControl;
-            this.txtPackageSpec.TabIndex = 6;
-            // 
-            // txtProductStyle
-            // 
-            this.txtProductStyle.AlphabeticFiled = null;
-            this.txtProductStyle.IsIntegerOnly = false;
-            this.txtProductStyle.IsNullString = null;
-            this.txtProductStyle.IsNullValidate = false;
-            this.txtProductStyle.IsTransferAlphabetic = false;
-            this.txtProductStyle.Location = new System.Drawing.Point(396, 62);
-            this.txtProductStyle.Name = "txtProductStyle";
-            this.txtProductStyle.Properties.ReadOnly = true;
-            this.txtProductStyle.Size = new System.Drawing.Size(219, 21);
-            this.txtProductStyle.StyleController = this.layControl;
-            this.txtProductStyle.TabIndex = 5;
-            // 
-            // txtPhysicType
-            // 
-            this.txtPhysicType.AlphabeticFiled = null;
-            this.txtPhysicType.IsIntegerOnly = false;
-            this.txtPhysicType.IsNullString = null;
-            this.txtPhysicType.IsNullValidate = false;
-            this.txtPhysicType.IsTransferAlphabetic = false;
-            this.txtPhysicType.Location = new System.Drawing.Point(87, 62);
-            this.txtPhysicType.Name = "txtPhysicType";
-            this.txtPhysicType.Properties.ReadOnly = true;
-            this.txtPhysicType.Size = new System.Drawing.Size(230, 21);
-            this.txtPhysicType.StyleController = this.layControl;
-            this.txtPhysicType.TabIndex = 4;
-            // 
-            // txtProductUnit
-            // 
-            this.txtProductUnit.AlphabeticFiled = null;
-            this.txtProductUnit.IsIntegerOnly = false;
-            this.txtProductUnit.IsNullString = null;
-            this.txtProductUnit.IsNullValidate = false;
-            this.txtProductUnit.IsTransferAlphabetic = false;
-            this.txtProductUnit.Location = new System.Drawing.Point(396, 37);
-            this.txtProductUnit.Name = "txtProductUnit";
-            this.txtProductUnit.Properties.ReadOnly = true;
-            this.txtProductUnit.Size = new System.Drawing.Size(219, 21);
-            this.txtProductUnit.StyleController = this.layControl;
-            this.txtProductUnit.TabIndex = 3;
-            // 
-            // txtProductSpec
-            // 
-            this.txtProductSpec.AlphabeticFiled = null;
-            this.txtProductSpec.IsIntegerOnly = false;
-            this.txtProductSpec.IsNullString = null;
-            this.txtProductSpec.IsNullValidate = false;
-            this.txtProductSpec.IsTransferAlphabetic = false;
-            this.txtProductSpec.Location = new System.Drawing.Point(87, 37);
-            this.txtProductSpec.Name = "txtProductSpec";
-            this.txtProductSpec.Properties.ReadOnly = true;
-            this.txtProductSpec.Size = new System.Drawing.Size(230, 21);
-            this.txtProductSpec.StyleController = this.layControl;
-            this.txtProductSpec.TabIndex = 2;
-            // 
-            // txtProductName
-            // 
-            this.txtProductName.AlphabeticFiled = null;
-            this.txtProductName.IsIntegerOnly = false;
-            this.txtProductName.IsNullString = null;
-            this.txtProductName.IsNullValidate = false;
-            this.txtProductName.IsTransferAlphabetic = false;
-            this.txtProductName.Location = new System.Drawing.Point(396, 12);
-            this.txtProductName.Name = "txtProductName";
-            this.txtProductName.Properties.ReadOnly = true;
-            this.txtProductName.Size = new System.Drawing.Size(219, 21);
-            this.txtProductName.StyleController = this.layControl;
-            this.txtProductName.TabIndex = 1;
-            // 
-            // txtProductCode
-            // 
-            this.txtProductCode.AlphabeticFiled = null;
-            this.txtProductCode.IsIntegerOnly = false;
-            this.txtProductCode.IsNullString = null;
-            this.txtProductCode.IsNullValidate = false;
-            this.txtProductCode.IsTransferAlphabetic = false;
-            this.txtProductCode.Location = new System.Drawing.Point(87, 12);
-            this.txtProductCode.Name = "txtProductCode";
-            this.txtProductCode.Properties.ReadOnly = true;
-            this.txtProductCode.Size = new System.Drawing.Size(230, 21);
-            this.txtProductCode.StyleController = this.layControl;
-            this.txtProductCode.TabIndex = 0;
-            // 
-            // layProductCode
-            // 
-            this.layProductCode.Control = this.txtProductCode;
-            this.layProductCode.CustomizationFormText = "产品编号";
-            this.layProductCode.Location = new System.Drawing.Point(0, 0);
-            this.layProductCode.Name = "layProductCode";
-            this.layProductCode.Size = new System.Drawing.Size(309, 25);
-            this.layProductCode.Text = "产品编号";
-            this.layProductCode.TextSize = new System.Drawing.Size(72, 14);
-            // 
-            // layProductName
-            // 
-            this.layProductName.Control = this.txtProductName;
-            this.layProductName.CustomizationFormText = "产品名称";
-            this.layProductName.Location = new System.Drawing.Point(309, 0);
-            this.layProductName.Name = "layProductName";
-            this.layProductName.Size = new System.Drawing.Size(298, 25);
-            this.layProductName.Text = "产品名称";
-            this.layProductName.TextSize = new System.Drawing.Size(72, 14);
-            // 
-            // layProductSpec
-            // 
-            this.layProductSpec.Control = this.txtProductSpec;
-            this.layProductSpec.CustomizationFormText = "规格型号";
-            this.layProductSpec.Location = new System.Drawing.Point(0, 25);
-            this.layProductSpec.Name = "layProductSpec";
-            this.layProductSpec.Size = new System.Drawing.Size(309, 25);
-            this.layProductSpec.Text = "规格型号";
-            this.layProductSpec.TextSize = new System.Drawing.Size(72, 14);
-            // 
-            // layProductUnit
-            // 
-            this.layProductUnit.Control = this.txtProductUnit;
-            this.layProductUnit.CustomizationFormText = "单位";
-            this.layProductUnit.Location = new System.Drawing.Point(309, 25);
-            this.layProductUnit.Name = "layProductUnit";
-            this.layProductUnit.Size = new System.Drawing.Size(298, 25);
-            this.layProductUnit.Text = "单位";
-            this.layProductUnit.TextSize = new System.Drawing.Size(72, 14);
-            // 
-            // layPhysicType
-            // 
-            this.layPhysicType.Control = this.txtPhysicType;
-            this.layPhysicType.CustomizationFormText = "剂型";
-            this.layPhysicType.Location = new System.Drawing.Point(0, 50);
-            this.layPhysicType.Name = "layPhysicType";
-            this.layPhysicType.Size = new System.Drawing.Size(309, 25);
-            this.layPhysicType.Text = "剂型";
-            this.layPhysicType.TextSize = new System.Drawing.Size(72, 14);
-            // 
-            // layProductStyle
-            // 
-            this.layProductStyle.Control = this.txtProductStyle;
-            this.layProductStyle.CustomizationFormText = "产品类别";
-            this.layProductStyle.Location = new System.Drawing.Point(309, 50);
-            this.layProductStyle.Name = "layProductStyle";
-            this.layProductStyle.Size = new System.Drawing.Size(298, 25);
-            this.layProductStyle.Text = "产品类别";
-            this.layProductStyle.TextSize = new System.Drawing.Size(72, 14);
-            // 
-            // layPackageSpec
-            // 
-            this.layPackageSpec.Control = this.txtPackageSpec;
-            this.layPackageSpec.CustomizationFormText = "包装规格型号";
-            this.layPackageSpec.Location = new System.Drawing.Point(0, 75);
-            this.layPackageSpec.Name = "layPackageSpec";
-            this.layPackageSpec.Size = new System.Drawing.Size(309, 25);
-            this.layPackageSpec.Text = "包装规格型号";
-            this.layPackageSpec.TextSize = new System.Drawing.Size(72, 14);
-            // 
-            // layAuthorizedNo
-            // 
-            this.layAuthorizedNo.Control = this.txtAuthorizedNo;
-            this.layAuthorizedNo.CustomizationFormText = "注册证号";
-            this.layAuthorizedNo.Location = new System.Drawing.Point(309, 75);
-            this.layAuthorizedNo.Name = "layAuthorizedNo";
-            this.layAuthorizedNo.Size = new System.Drawing.Size(298, 25);
-            this.layAuthorizedNo.Text = "注册证号";
-            this.layAuthorizedNo.TextSize = new System.Drawing.Size(72, 14);
-            // 
-            // layProducerName
-            // 
-            this.layProducerName.Control = this.txtProducerName;
-            this.layProducerName.CustomizationFormText = "生产厂商";
-            this.layProducerName.Location = new System.Drawing.Point(309, 100);
-            this.layProducerName.Name = "layProducerName";
-            this.layProducerName.Size = new System.Drawing.Size(298, 26);
-            this.layProducerName.Text = "生产厂商";
-            this.layProducerName.TextSize = new System.Drawing.Size(72, 14);
-            // 
-            // layStockCondition
-            // 
-            this.layStockCondition.Control = this.txtStockCondition;
-            this.layStockCondition.CustomizationFormText = "存储库区";
-            this.layStockCondition.Location = new System.Drawing.Point(0, 100);
-            this.layStockCondition.Name = "layStockCondition";
-            this.layStockCondition.Size = new System.Drawing.Size(309, 26);
-            this.layStockCondition.Text = "存储库区";
-            this.layStockCondition.TextSize = new System.Drawing.Size(72, 14);
-            // 
             // FrmSingleCuringRecord
             // 
             this.AcceptButton = this.btnSave;
@@ -995,7 +995,27 @@
             this.gpcProduct.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).EndInit();
             this.layControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtStockCondition.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProducerName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAuthorizedNo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPackageSpec.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductStyle.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPhysicType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductUnit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductSpec.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layControlGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductCode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductSpec)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductUnit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPhysicType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductStyle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPackageSpec)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layAuthorizedNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProducerName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layStockCondition)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpcRecord)).EndInit();
             this.gpcRecord.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).EndInit();
@@ -1037,26 +1057,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.laySterilizationDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layCuringDays)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layInStoreID)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtStockCondition.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProducerName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAuthorizedNo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPackageSpec.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProductStyle.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPhysicType.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProductUnit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProductSpec.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProductName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProductCode.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductCode)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductSpec)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductUnit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layPhysicType)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductStyle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layPackageSpec)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layAuthorizedNo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProducerName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layStockCondition)).EndInit();
             this.ResumeLayout(false);
 
         }

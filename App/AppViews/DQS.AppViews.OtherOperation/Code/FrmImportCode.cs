@@ -137,15 +137,6 @@ VALUES  ('{0}','{1}',0,N'未使用','{2}')";
                         conn.Close();
                     }
                 }
-                //WMSRegulatoryCodeEntity codeEntity = new WMSRegulatoryCodeEntity();
-                ////MessageBox.Show(codeViewModel);
-                //codeEntity.Code = codeViewModel;
-                //codeEntity.CorpCode = _CorpCode;
-                //codeEntity.StatusID = 0;
-                //codeEntity.StatusName = "未使用";
-                ////codeEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                //codeEntity.CreateDate = DateTime.Now;
-                //codeEntity.Save();
                 
             }
             return result;

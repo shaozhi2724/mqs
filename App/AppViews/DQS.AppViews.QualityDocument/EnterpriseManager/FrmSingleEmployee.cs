@@ -18,6 +18,8 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
     {
         private int? m_id;
 
+        List<chkProduct> chkproducts = new List<chkProduct>();
+
         public FrmSingleEmployee()
         {
             InitializeComponent();
@@ -31,6 +33,7 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
             BindPhysicTypes();
             BindProductStyles();
             BindProducts();
+            LoadchkProduct();
 
             if (this.Tag != null)
             {
@@ -102,6 +105,7 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
                     this.chkBCTypeDetail.SelectedIndex = 0;
                     this.chkBCTypeDetail.UnCheckAll();
                 }
+                /*
                 ranges.Fetch(BFIPersonRangeEntityFields.PersonType == "员工"
                     & BFIPersonRangeEntityFields.PersonID == entity.EmployeeID
                     & BFIPersonRangeEntityFields.CheckType == "产品");
@@ -128,6 +132,52 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
                 {
                     this.chkBCProduct.SelectedIndex = 0;
                     this.chkBCProduct.UnCheckAll();
+                }
+                */
+            }
+        }
+
+        private void LoadchkProduct()
+        {
+            if (this.Tag != null)
+            {
+                this.m_id = Convert.ToInt32(this.Tag);
+                BFIEmployeeEntity entity = new BFIEmployeeEntity { EmployeeID = m_id.Value };
+                entity.Fetch();
+
+                EntityCollection<BFIPersonRangeEntity> ranges = new EntityCollection<BFIPersonRangeEntity>();
+                ranges.Fetch(BFIPersonRangeEntityFields.PersonType == "员工"
+                    & BFIPersonRangeEntityFields.PersonID == entity.EmployeeID
+                    & BFIPersonRangeEntityFields.CheckType == "产品");
+
+                if (ranges.Count > 0)
+                {
+                    foreach (BFIPersonRangeEntity range in ranges)
+                    {
+                        foreach (var item in chkproducts)
+                        {
+                            if (item.product == range.Remark)
+                            {
+                                item.ischeck = 1;
+                                break;
+                            }
+                        }
+                    }
+                }
+                LoadchkProductDetail();
+            }
+            else
+            {
+                LoadchkProductDetail();
+            }
+        }
+        private void LoadchkProductDetail()
+        {
+            foreach (var item in chkproducts)
+            {
+                if (item.product.Contains(txtqk.Text.Trim()))
+                {
+                    chkBCProduct.Items.Add(item.product, item.ischeck == 1 ? true : false);
                 }
             }
         }
@@ -278,7 +328,10 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
 
             foreach (BFIProductEntity c in products)
             {
-                this.chkBCProduct.Items.Add(new ListEntityItem(c, c.ProductCode + "-" + c.ProductName + "-" + c.ProductSpec + "-" + c.ProducerName));
+                chkProduct chk = new chkProduct();
+                chk.product = c.ProductCode + "-" + c.ProductName + "-" + c.ProductSpec + "-" + c.ProducerName;
+                chk.ischeck = 0;
+                chkproducts.Add(chk);
             }
         }
 
@@ -308,14 +361,17 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
                 range.Remark = "";
                 range.Save();
             }
-            foreach (CheckedListBoxItem productStyle in this.chkBCProduct.CheckedItems)
+            foreach (var item in chkproducts)
             {
-                string productCode = productStyle.Value.ToString();
-                string[] sArray = productCode.Split('-');
-                range.CheckType = "产品";
-                range.CheckValue = sArray[0];
-                range.Remark = productStyle.Value.ToString();
-                range.Save();
+                if (item.ischeck == 1)
+                {
+                    string productCode = item.product;
+                    string[] sArray = productCode.Split('-');
+                    range.CheckType = "产品";
+                    range.CheckValue = sArray[0];
+                    range.Remark = item.product;
+                    range.Save();
+                }
             }
         }
 
@@ -353,12 +409,56 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
             {
                 checkProductAll.Text = "反选";
                 this.chkBCProduct.CheckAll();
+                foreach (var item in chkproducts)
+                {
+                    if (item.product.Contains(txtqk.Text.Trim()))
+                    {
+                        item.ischeck = 1;
+                    }
+                }
             }
             else
             {
                 checkProductAll.Text = "全选";
                 this.chkBCProduct.UnCheckAll();
+                foreach (var item in chkproducts)
+                {
+                    if (item.product.Contains(txtqk.Text.Trim()))
+                    {
+                        item.ischeck = 0;
+                    }
+                }
             }
         }
+        private void btnGO_Click(object sender, EventArgs e)
+        {
+            chkBCProduct.Items.Clear();
+            LoadchkProductDetail();
+        }
+
+        private void chkBCProduct_Click(object sender, EventArgs e)
+        {
+            var item = (CheckedListBoxItem)chkBCProduct.SelectedItem;
+            foreach (var product in chkproducts)
+            {
+                if (product.product == item.Value.ToString())
+                {
+                    product.ischeck = product.ischeck == 0 ? 1 : 0;
+                }
+            }
+            foreach (CheckedListBoxItem chkitem in chkBCProduct.Items)
+            {
+                if (chkitem.Value.ToString() == item.Value.ToString())
+                {
+                    chkitem.CheckState = item.CheckState;
+                    break;
+                }
+            }
+        }
+    }
+    public class chkProduct
+    {
+        public string product { get; set; }
+        public int ischeck { get; set; }
     }
 }

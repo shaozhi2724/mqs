@@ -163,6 +163,8 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                     beginInventory.SterilizationBatchNo = sterilizationBatchNo;
                     beginInventory.Amount = amount;
                     beginInventory.UnitPrice = unitPrice;
+                    beginInventory.DepartmentID = Inventorylist[i].DepartmentID;
+                    beginInventory.DepartmentName = Inventorylist[i].DepartmentName;
                     beginInventory.Save();
                 }
                 InsertNew();
@@ -350,6 +352,8 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                         string SterilizationDate = row.GetCell(6).ToString();
                         string Amount = row.GetCell(7).ToString();
                         string UnitPrice = row.GetCell(8).ToString();
+                        string DepartmentID = row.GetCell(9).ToString();
+                        string DepartmentName = row.GetCell(10).ToString();
                         dataRow.ProductID = Convert.ToInt32(ProductID);
                         dataRow.BatchNo = BatchNo;
                         dataRow.ProductName = ProductName;
@@ -359,6 +363,8 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                         dataRow.SterilizationDate = SterilizationDate;
                         dataRow.Amount = Convert.ToInt32(Amount);
                         dataRow.UnitPrice = Convert.ToDecimal(UnitPrice);
+                        dataRow.DepartmentID = Convert.ToInt32(DepartmentID);
+                        dataRow.DepartmentName = DepartmentName;
                         Inventorylist.Add((BeginInventoryEntityModel) dataRow);
                     }
                 }
@@ -380,5 +386,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
         public string SterilizationDate { get; set; }
         public int Amount { get; set; }
         public decimal UnitPrice { get; set; }
+        public int DepartmentID { get; set; }
+        public string DepartmentName { get; set; }
     }
 }

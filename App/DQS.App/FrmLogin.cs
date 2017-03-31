@@ -14,16 +14,20 @@ using ORMSCore;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
+using DQS.App.Services;
 
 namespace DQS.App
 {
     public partial class FrmLogin : XtraForm
     {
 
+        ILogin _login;
+
         List<SYSConnection> conns = new List<SYSConnection>();
         public FrmLogin()
         {
             InitializeComponent();
+            _login = new Login();
         }
         private void ShowUpdateDialog(Version appVersion, Version newVersion, XDocument doc)
         {
@@ -45,50 +49,17 @@ namespace DQS.App
                 }
             }
         }
-
+        //加载数据库选项
         private void LoadCbo()
         {
-            conns.Clear();
+            string cboText;
+            List<SYSConnection> conns = _login.getConnList(out cboText);
             cboConn.Properties.Items.Clear();
-            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            foreach (var item in conns)
             {
-                string sql = "SELECT * FROM dbo.SYS_Connection";
-                SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
-                DataSet ds = new DataSet();
-                try
-                {
-                    sda.Fill(ds, "Table");
-                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
-                    {
-                        SYSConnection connDB = new SYSConnection();
-                        connDB.ID = int.Parse(ds.Tables["Table"].Rows[i]["ID"].ToString());
-                        connDB.ConnName = ds.Tables["Table"].Rows[i]["ConnName"].ToString();
-                        connDB.ServerName = ds.Tables["Table"].Rows[i]["ServerName"].ToString();
-                        connDB.DBName = ds.Tables["Table"].Rows[i]["DBName"].ToString();
-                        connDB.UserID = ds.Tables["Table"].Rows[i]["UserID"].ToString();
-                        connDB.PWD = ds.Tables["Table"].Rows[i]["PWD"].ToString();
-                        connDB.Remark = ds.Tables["Table"].Rows[i]["Remark"].ToString();
-                        conns.Add(connDB);
-                        cboConn.Properties.Items.Add(connDB.ConnName);
-                    }
-
-                    foreach (var item in conns)
-                    {
-                        if (item.ServerName == conn.DataSource && item.DBName == conn.Database)
-                        {
-                            cboConn.Text = item.ConnName;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-                finally
-                {
-                    conn.Close();
-                }
+                cboConn.Properties.Items.Add(item.ConnName);
             }
+            cboConn.Text = cboText;
         }
 
         private void FrmLogin_Load(object sender, EventArgs e)
@@ -97,17 +68,22 @@ namespace DQS.App
             if (Settings.Default.AutoCheckForUpdate)
             {
                 ThreadPool.QueueUserWorkItem((w) => Updater.CheckForUpdate(ShowUpdateDialog));
-            }
+            } 
+            LoadVersion();
+        }
+
+        private void LoadVersion()
+        {
             this.lblUserError.Text = "";
             this.lblPasswordError.Text = "";
+            string EnterpriseName;
             this.Text += " - V " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            BFIEnterpriseEntity enterprise = new BFIEnterpriseEntity { EnterpriseID = 1 };
-            enterprise.Fetch();
-            this.Text += " - " + enterprise.EnterpriseName;
-            bool isVisible = enterprise.Reservation10 == "True" ? true : false;
+            bool isVisible = _login.isVisible(out EnterpriseName);
+            this.Text += " - " + EnterpriseName;
             this.lblConn.Visible = isVisible;
             this.cboConn.Visible = isVisible;
             this.btnConn.Visible = isVisible;
+
             if (isVisible)
             {
                 LoadCbo();
@@ -126,74 +102,60 @@ namespace DQS.App
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            //验证
+            if(!verificationLogintxt()) return;
+            //登录
+            loginSys();
+        }
+        //验证登录
+        private void loginSys()
+        {
             string userCode = this.txtUserCode.Text.Trim();
-            if (userCode.Length <= 0)
-            {
-                this.lblUserError.Text = "账号不能为空.";
-                this.txtUserCode.Focus();
-                return;
-            }
-
             string password = this.txtPassword.Text.Trim();
-            if (password.Length <= 0)
+            string UserError;
+            string PasswordError;
+            _login.Logintxt(userCode, out UserError, password, out PasswordError);
+
+            if (UserError.Length > 0)
             {
-                this.lblPasswordError.Text = "密码不能为空.";
-                this.txtPassword.Focus();
+                this.lblUserError.Text = UserError;
+                this.txtUserCode.Focus();
+                this.txtUserCode.Select(0, this.txtUserCode.Text.Length);
                 return;
             }
 
-            ATCUserEntity user = new ATCUserEntity { UserCode = userCode };
-
-            if (userCode == "root" && password == "bokesys.com.cn")//root最高权限
+            if (PasswordError.Length > 0)
             {
-                user.UserName = "特级管理员";
-                user.UserID = new Guid("00000000-0000-0000-0000-000000000000");
+                this.lblPasswordError.Text = PasswordError;
+                this.txtPassword.Focus();
+                this.txtPassword.Select(0, this.txtPassword.Text.Length);
+                return;
             }
-            else
-            {
-                if (!user.Fetch())
-                {
-                    this.lblUserError.Text = "账号不存在.";
-                    this.txtUserCode.Focus();
-                    this.txtUserCode.Select(this.txtUserCode.Text.Length, 0);
-                    return;
-                }
-
-                if (GlobalMethod.GetEncryptPassword(password) != user.UserPassword)
-                {
-                    this.lblPasswordError.Text = "密码错误.";
-                    this.txtPassword.Focus();
-                    this.txtPassword.Select(this.txtPassword.Text.Length, 0);
-                    return;
-                }
-
-                if (user.UserStatus == 2)
-                {
-                    this.lblUserError.Text = "账号已被禁用，无法登录。请联系管理员。";
-                    this.txtUserCode.Focus();
-                    this.txtUserCode.Select(this.txtUserCode.Text.Length, 0);
-                    return;
-                }
-            }
-
-            GlobalItem.g_CurrentUser = user;
-            GlobalItem.g_IsLoginIn = true;
-            if (userCode != "root") //root最高权限
-            {
-                BFIEmployeeEntity employee = new BFIEmployeeEntity {EmployeeID = user.EmployeeID};
-                if (employee.Fetch())
-                {
-                    GlobalItem.g_CurrentEmployee = employee;
-                }
-            }
-
-            SYSDateLogEntity sysDateLog = new SYSDateLogEntity();
-            sysDateLog.UserName = GlobalItem.g_CurrentUser.UserName;
-            sysDateLog.Operate = "登录系统";
-            sysDateLog.OperateDate = DateTime.Now;
-            sysDateLog.Save();
-
+            //关闭
             this.Close();
+        }
+        //验证文本框
+        private bool verificationLogintxt()
+        {
+            string userCode = this.txtUserCode.Text.Trim();
+            string password = this.txtPassword.Text.Trim();
+            string UserError;
+            string PasswordError;
+            _login.verificationLogintxt(userCode,out UserError,password,out PasswordError);
+            if (UserError.Length > 0)
+            {
+                this.lblUserError.Text = UserError;
+                this.txtUserCode.Focus();
+                return false;
+            }
+
+            if (PasswordError.Length > 0)
+            {
+                this.lblPasswordError.Text = PasswordError;
+                this.txtPassword.Focus();
+                return false;
+            }
+            return true;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -221,40 +183,11 @@ namespace DQS.App
 
         private void btnDbConnect_Click(object sender, EventArgs e)
         {
-            /*using (DataConnectionDialog dcDialog = new DataConnectionDialog())
-            {
-                dcDialog.DataSources.Add(DataSource.SqlDataSource);
-                dcDialog.SelectedDataSource = DataSource.SqlDataSource;
-                dcDialog.SelectedDataProvider = DataProvider.SqlDataProvider;
-                dcDialog.ConnectionString = GlobalItem.g_DbConnectStrings;
-                if (DataConnectionDialog.Show(dcDialog, this) == DialogResult.OK)
-                {
-                    //保存数据库连接
-                    GlobalItem.g_DbConnectStrings = dcDialog.ConnectionString;
-
-                    XmlDocument myDoc = new XmlDocument();
-                    myDoc.Load(Application.ExecutablePath + ".config");
-                    XmlNode myNode = myDoc.SelectSingleNode("//connectionStrings");
-                    XmlElement myXmlElement = (XmlElement)myNode.SelectSingleNode("//add [@name='DbConnectStrings']");
-                    myXmlElement.SetAttribute("connectionString", GlobalItem.g_DbConnectStrings);
-                    myDoc.Save(Application.ExecutablePath + ".config");
-                }
-            }*/
             FrmDbSetting dcDialog = new FrmDbSetting();
             dcDialog.ConnectionString = GlobalItem.g_DbConnectStrings;
             if (dcDialog.ShowDialog(this) == DialogResult.OK)
             {
-
-                XmlDocument myDoc = new XmlDocument();
-                myDoc.Load(Application.ExecutablePath + ".config");
-                XmlNode myNode = myDoc.SelectSingleNode("//connectionStrings");
-                XmlElement myXmlElement = (XmlElement)myNode.SelectSingleNode("//add [@name='DbConnectStrings']");
-                myXmlElement.SetAttribute("connectionString", dcDialog.ConnectionString);
-                myDoc.Save(Application.ExecutablePath + ".config");
-                ConfigurationManager.RefreshSection("connectionStrings");
-                //保存数据库连接
-                GlobalItem.g_DbConnectStrings = dcDialog.ConnectionString;
-                CommonSettings.DbConnectStrings = dcDialog.ConnectionString;
+                _login.SaveConfiguration(dcDialog.ConnectionString);
             }
         }
 
@@ -265,6 +198,8 @@ namespace DQS.App
 
         private void btnConn_Click(object sender, EventArgs e)
         {
+            string cboText = "";
+            List<SYSConnection> conns = _login.getConnList(out cboText);
             string ConnectionString = "";
             foreach (var item in conns)
             {
@@ -295,29 +230,6 @@ namespace DQS.App
             CommonSettings.DbConnectStrings = ConnectionString;
 
             FrmLogin_Load(null, null);
-        }
-    }
-    public class SYSConnection
-    {
-        public int ID { get; set; }
-        public string ConnName { get; set; }
-        public string ServerName { get; set; }
-        public string DBName { get; set; }
-        public string UserID { get; set; }
-        public string PWD { get; set; }
-        public string Remark { get; set; }
-
-        public SYSConnection() { }
-
-        public SYSConnection(int id,string connName,string serverName,string dbName,string userID,string pwd,string remark)
-        {
-            this.ID = id;
-            this.ConnName = connName;
-            this.ServerName = serverName;
-            this.DBName = dbName;
-            this.UserID = userID;
-            this.PWD = pwd;
-            this.Remark = remark;
         }
     }
 }

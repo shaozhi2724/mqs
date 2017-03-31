@@ -32,7 +32,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sql = "SELECT * FROM dbo.BFI_Facilities";
+                string sql = "SELECT * FROM dbo.BFI_Facilities WHERE StatusName = '启用' OR StatusName IS NULL";
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 try

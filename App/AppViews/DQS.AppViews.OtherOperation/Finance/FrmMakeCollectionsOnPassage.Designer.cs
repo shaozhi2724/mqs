@@ -46,10 +46,10 @@
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.btnReSet = new DevExpress.XtraEditors.SimpleButton();
             this.btnDel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnChooseBillAgio = new DevExpress.XtraEditors.SimpleButton();
             this.btnChooseBill = new DevExpress.XtraEditors.SimpleButton();
             this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridControl = new DevExpress.XtraGrid.GridControl();
-            this.btnChooseBillAgio = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties.VistaTimeProperties)).BeginInit();
@@ -241,6 +241,16 @@
             this.btnDel.Text = "删除单据";
             this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
+            // btnChooseBillAgio
+            // 
+            this.btnChooseBillAgio.Location = new System.Drawing.Point(530, 11);
+            this.btnChooseBillAgio.Name = "btnChooseBillAgio";
+            this.btnChooseBillAgio.Size = new System.Drawing.Size(69, 27);
+            this.btnChooseBillAgio.TabIndex = 2;
+            this.btnChooseBillAgio.Text = "选择单据";
+            this.btnChooseBillAgio.Visible = false;
+            this.btnChooseBillAgio.Click += new System.EventHandler(this.btnChooseBillAgio_Click);
+            // 
             // btnChooseBill
             // 
             this.btnChooseBill.Location = new System.Drawing.Point(10, 11);
@@ -271,15 +281,6 @@
             this.gridControl.TabIndex = 4;
             this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView});
-            // 
-            // btnChooseBillAgio
-            // 
-            this.btnChooseBillAgio.Location = new System.Drawing.Point(530, 11);
-            this.btnChooseBillAgio.Name = "btnChooseBillAgio";
-            this.btnChooseBillAgio.Size = new System.Drawing.Size(69, 27);
-            this.btnChooseBillAgio.TabIndex = 2;
-            this.btnChooseBillAgio.Text = "选择单据";
-            this.btnChooseBillAgio.Click += new System.EventHandler(this.btnChooseBillAgio_Click);
             // 
             // FrmMakeCollectionsOnPassage
             // 

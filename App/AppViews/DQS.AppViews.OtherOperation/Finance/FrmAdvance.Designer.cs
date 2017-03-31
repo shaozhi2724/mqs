@@ -42,11 +42,11 @@
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.txtDealerCode = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.gridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtBillCode.Properties)).BeginInit();
@@ -82,6 +82,7 @@
             this.btnDel.Size = new System.Drawing.Size(79, 27);
             this.btnDel.TabIndex = 0;
             this.btnDel.Text = "删除";
+            this.btnDel.Visible = false;
             this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
             // btnUpdate
@@ -91,6 +92,7 @@
             this.btnUpdate.Size = new System.Drawing.Size(79, 27);
             this.btnUpdate.TabIndex = 0;
             this.btnUpdate.Text = "修改";
+            this.btnUpdate.Visible = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnNew
@@ -202,6 +204,14 @@
             this.txtDealerCode.Size = new System.Drawing.Size(106, 21);
             this.txtDealerCode.TabIndex = 1;
             // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(370, 17);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(36, 14);
+            this.labelControl3.TabIndex = 0;
+            this.labelControl3.Text = "状态：";
+            // 
             // labelControl2
             // 
             this.labelControl2.Location = new System.Drawing.Point(192, 17);
@@ -239,14 +249,6 @@
             this.gridView.OptionsView.ShowFooter = true;
             this.gridView.OptionsView.ShowGroupPanel = false;
             this.gridView.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
-            // 
-            // labelControl3
-            // 
-            this.labelControl3.Location = new System.Drawing.Point(370, 17);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(36, 14);
-            this.labelControl3.TabIndex = 0;
-            this.labelControl3.Text = "状态：";
             // 
             // FrmAdvance
             // 

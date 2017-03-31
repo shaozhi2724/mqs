@@ -36,6 +36,9 @@
             this.tbProduct = new DevExpress.XtraTab.XtraTabControl();
             this.tbPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.layControl = new DevExpress.XtraLayout.LayoutControl();
+            this.txtPricePercent = new DQS.Controls.BFIProductEntityTextBox();
+            this.cbxProductType = new DQS.Controls.ComboBoxCategoryEx();
+            this.txtProductSpell = new DQS.Controls.BFIProductEntityTextBox();
             this.cboSaleTax = new DQS.Controls.ComboBoxCategoryEx();
             this.cboPurchaseTax = new DQS.Controls.ComboBoxCategoryEx();
             this.txtProductionOriginAddress = new DQS.Controls.BFIProductEntityTextBox();
@@ -107,6 +110,9 @@
             this.layProductCycleStyle = new DevExpress.XtraLayout.LayoutControlItem();
             this.layPerformanceStandard = new DevExpress.XtraLayout.LayoutControlItem();
             this.layRegisterNo = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProductSpell = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProductType = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layPricePercent = new DevExpress.XtraLayout.LayoutControlItem();
             this.tbPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.layControl2 = new DevExpress.XtraLayout.LayoutControl();
             this.bfiProductEntityTextBox1 = new DQS.Controls.BFIProductEntityTextBox();
@@ -186,6 +192,9 @@
             this.tbPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
             this.layControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPricePercent.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbxProductType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductSpell.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSaleTax.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboPurchaseTax.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionOriginAddress.Properties)).BeginInit();
@@ -257,6 +266,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layProductCycleStyle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layPerformanceStandard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layRegisterNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductSpell)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPricePercent)).BeginInit();
             this.tbPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl2)).BeginInit();
             this.layControl2.SuspendLayout();
@@ -389,6 +401,9 @@
             // 
             // layControl
             // 
+            this.layControl.Controls.Add(this.txtPricePercent);
+            this.layControl.Controls.Add(this.cbxProductType);
+            this.layControl.Controls.Add(this.txtProductSpell);
             this.layControl.Controls.Add(this.cboSaleTax);
             this.layControl.Controls.Add(this.cboPurchaseTax);
             this.layControl.Controls.Add(this.txtProductionOriginAddress);
@@ -431,6 +446,55 @@
             this.layControl.Size = new System.Drawing.Size(848, 428);
             this.layControl.TabIndex = 0;
             this.layControl.Text = "layControl";
+            // 
+            // txtPricePercent
+            // 
+            this.txtPricePercent.AlphabeticFiled = null;
+            this.txtPricePercent.EditValue = "0";
+            this.txtPricePercent.EntityField = DQS.Module.Entities.BFIProductEntityFields2.Reservation3;
+            this.txtPricePercent.IsIntegerOnly = true;
+            this.txtPricePercent.IsNullString = "不能为空。";
+            this.txtPricePercent.IsNullValidate = true;
+            this.txtPricePercent.IsTransferAlphabetic = false;
+            this.txtPricePercent.Location = new System.Drawing.Point(119, 488);
+            this.txtPricePercent.Name = "txtPricePercent";
+            this.txtPricePercent.Size = new System.Drawing.Size(294, 21);
+            this.txtPricePercent.StyleController = this.layControl;
+            this.txtPricePercent.TabIndex = 53;
+            // 
+            // cbxProductType
+            // 
+            this.cbxProductType.AddFirstDefaultItem = false;
+            this.cbxProductType.CategoryCode = "ProductType";
+            this.cbxProductType.EditValue = "";
+            this.cbxProductType.FirstDefaultItemText = null;
+            this.cbxProductType.FormatQueryString = null;
+            this.cbxProductType.Location = new System.Drawing.Point(229, 87);
+            this.cbxProductType.Name = "cbxProductType";
+            this.cbxProductType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.cbxProductType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbxProductType.Properties.NullValuePrompt = "请选择制剂类型";
+            this.cbxProductType.Properties.NullValuePromptShowForEmptyValue = true;
+            this.cbxProductType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbxProductType.SelectedValue = null;
+            this.cbxProductType.Size = new System.Drawing.Size(184, 21);
+            this.cbxProductType.StyleController = this.layControl;
+            this.cbxProductType.TabIndex = 53;
+            // 
+            // txtProductSpell
+            // 
+            this.txtProductSpell.AlphabeticFiled = "ProductSpell";
+            this.txtProductSpell.EntityField = DQS.Module.Entities.BFIProductEntityFields2.ProductSpell;
+            this.txtProductSpell.IsIntegerOnly = false;
+            this.txtProductSpell.IsNullString = "";
+            this.txtProductSpell.IsNullValidate = false;
+            this.txtProductSpell.IsTransferAlphabetic = false;
+            this.txtProductSpell.Location = new System.Drawing.Point(524, 87);
+            this.txtProductSpell.Name = "txtProductSpell";
+            this.txtProductSpell.Size = new System.Drawing.Size(295, 21);
+            this.txtProductSpell.StyleController = this.layControl;
+            this.txtProductSpell.TabIndex = 54;
             // 
             // cboSaleTax
             // 
@@ -493,7 +557,7 @@
             this.cbxIsForeignDrug.Properties.Appearance.Options.UseFont = true;
             this.cbxIsForeignDrug.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
             this.cbxIsForeignDrug.Properties.Caption = "进口产品";
-            this.cbxIsForeignDrug.Size = new System.Drawing.Size(807, 22);
+            this.cbxIsForeignDrug.Size = new System.Drawing.Size(106, 22);
             this.cbxIsForeignDrug.StyleController = this.layControl;
             this.cbxIsForeignDrug.TabIndex = 4;
             // 
@@ -698,9 +762,9 @@
             this.txtProductRemrk.IsNullString = null;
             this.txtProductRemrk.IsNullValidate = false;
             this.txtProductRemrk.IsTransferAlphabetic = false;
-            this.txtProductRemrk.Location = new System.Drawing.Point(119, 488);
+            this.txtProductRemrk.Location = new System.Drawing.Point(524, 488);
             this.txtProductRemrk.Name = "txtProductRemrk";
-            this.txtProductRemrk.Size = new System.Drawing.Size(700, 21);
+            this.txtProductRemrk.Size = new System.Drawing.Size(295, 21);
             this.txtProductRemrk.StyleController = this.layControl;
             this.txtProductRemrk.TabIndex = 31;
             // 
@@ -995,7 +1059,10 @@
             this.layStockFilter,
             this.layProductCycleStyle,
             this.layPerformanceStandard,
-            this.layRegisterNo});
+            this.layRegisterNo,
+            this.layProductSpell,
+            this.layProductType,
+            this.layPricePercent});
             this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(831, 521);
@@ -1137,9 +1204,9 @@
             // 
             this.layProductRemrk.Control = this.txtProductRemrk;
             this.layProductRemrk.CustomizationFormText = "备注";
-            this.layProductRemrk.Location = new System.Drawing.Point(0, 476);
+            this.layProductRemrk.Location = new System.Drawing.Point(405, 476);
             this.layProductRemrk.Name = "layProductRemrk";
-            this.layProductRemrk.Size = new System.Drawing.Size(811, 25);
+            this.layProductRemrk.Size = new System.Drawing.Size(406, 25);
             this.layProductRemrk.Text = "备注";
             this.layProductRemrk.TextSize = new System.Drawing.Size(104, 17);
             // 
@@ -1201,7 +1268,7 @@
             this.layoutControlItem1.CustomizationFormText = "进口产品";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 75);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(811, 26);
+            this.layoutControlItem1.Size = new System.Drawing.Size(110, 26);
             this.layoutControlItem1.Text = "进口产品";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
@@ -1264,7 +1331,7 @@
             this.layPhysicType.Location = new System.Drawing.Point(0, 126);
             this.layPhysicType.Name = "layPhysicType";
             this.layPhysicType.Size = new System.Drawing.Size(405, 25);
-            this.layPhysicType.Text = "产品大类";
+            this.layPhysicType.Text = "产品大类(剂型)";
             this.layPhysicType.TextSize = new System.Drawing.Size(104, 17);
             // 
             // layProducerName
@@ -1356,6 +1423,36 @@
             this.layRegisterNo.Size = new System.Drawing.Size(405, 25);
             this.layRegisterNo.Text = "注册商标";
             this.layRegisterNo.TextSize = new System.Drawing.Size(104, 17);
+            // 
+            // layProductSpell
+            // 
+            this.layProductSpell.Control = this.txtProductSpell;
+            this.layProductSpell.CustomizationFormText = "助记码";
+            this.layProductSpell.Location = new System.Drawing.Point(405, 75);
+            this.layProductSpell.Name = "layProductSpell";
+            this.layProductSpell.Size = new System.Drawing.Size(406, 26);
+            this.layProductSpell.Text = "助记码";
+            this.layProductSpell.TextSize = new System.Drawing.Size(104, 17);
+            // 
+            // layProductType
+            // 
+            this.layProductType.Control = this.cbxProductType;
+            this.layProductType.CustomizationFormText = "产品类型";
+            this.layProductType.Location = new System.Drawing.Point(110, 75);
+            this.layProductType.Name = "layProductType";
+            this.layProductType.Size = new System.Drawing.Size(295, 26);
+            this.layProductType.Text = "产品类型";
+            this.layProductType.TextSize = new System.Drawing.Size(104, 17);
+            // 
+            // layPricePercent
+            // 
+            this.layPricePercent.Control = this.txtPricePercent;
+            this.layPricePercent.CustomizationFormText = "价格预警比例";
+            this.layPricePercent.Location = new System.Drawing.Point(0, 476);
+            this.layPricePercent.Name = "layPricePercent";
+            this.layPricePercent.Size = new System.Drawing.Size(405, 25);
+            this.layPricePercent.Text = "价格预警比例";
+            this.layPricePercent.TextSize = new System.Drawing.Size(104, 17);
             // 
             // tbPage2
             // 
@@ -2207,6 +2304,9 @@
             this.tbPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).EndInit();
             this.layControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtPricePercent.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbxProductType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductSpell.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboSaleTax.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboPurchaseTax.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductionOriginAddress.Properties)).EndInit();
@@ -2278,6 +2378,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layProductCycleStyle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layPerformanceStandard)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layRegisterNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductSpell)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPricePercent)).EndInit();
             this.tbPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl2)).EndInit();
             this.layControl2.ResumeLayout(false);
@@ -2490,5 +2593,11 @@
         private DevExpress.XtraLayout.LayoutControlItem laySpecialNum;
         private Controls.BFIProductEntityTextBox bfiProductEntityTextBox1;
         private DevExpress.XtraLayout.LayoutControlItem layProductEntityTextBox1;
+        private Controls.ComboBoxCategoryEx cbxProductType;
+        private Controls.BFIProductEntityTextBox txtProductSpell;
+        private DevExpress.XtraLayout.LayoutControlItem layProductSpell;
+        private DevExpress.XtraLayout.LayoutControlItem layProductType;
+        private Controls.BFIProductEntityTextBox txtPricePercent;
+        private DevExpress.XtraLayout.LayoutControlItem layPricePercent;
     }
 }

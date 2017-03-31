@@ -99,6 +99,24 @@
     <Compile Include="WarehouseOutManager\FrmCar.Designer.cs">
       <DependentUpon>FrmCar.cs</DependentUpon>
     </Compile>
+    <Compile Include="WarehouseOutManager\FrmModifyReviewBackDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseOutManager\FrmModifyReviewBackDetail.Designer.cs">
+      <DependentUpon>FrmModifyReviewBackDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseOutManager\FrmReviewBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseOutManager\FrmReviewBack.Designer.cs">
+      <DependentUpon>FrmReviewBack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseOutManager\FrmSingleReviewBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseOutManager\FrmSingleReviewBack.Designer.cs">
+      <DependentUpon>FrmSingleReviewBack.cs</DependentUpon>
+    </Compile>
     <Compile Include="WarehouseOutManager\FrmTransportAttachment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,6 +194,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WarehouseOutManager\FrmCar.resx">
       <DependentUpon>FrmCar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseOutManager\FrmModifyReviewBackDetail.resx">
+      <DependentUpon>FrmModifyReviewBackDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseOutManager\FrmReviewBack.resx">
+      <DependentUpon>FrmReviewBack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseOutManager\FrmSingleReviewBack.resx">
+      <DependentUpon>FrmSingleReviewBack.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WarehouseOutManager\FrmTransportAttachment.resx">
       <DependentUpon>FrmTransportAttachment.cs</DependentUpon>

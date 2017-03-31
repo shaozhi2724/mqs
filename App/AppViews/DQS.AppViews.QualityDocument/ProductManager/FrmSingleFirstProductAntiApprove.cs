@@ -40,6 +40,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
         private void FrmSingleFirstProductAntiApprove_Load(object sender, EventArgs e)
         {
             antiApproveID = Guid.NewGuid();
+            this.cbxProductType.InitSource();
             this.cbxPhysicType.InitSource();
             this.cbxStockCondition.InitSource();
             this.cbxProductStyle.InitSource();
@@ -152,6 +153,12 @@ WHERE UP.ProductID = {0}", productID);
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (!this.ftPanel.ValidateIsNullFields()) return;
+            if (null == cbxProductType.SelectedValue)
+            {
+                XtraMessageBox.Show(cbxProductType.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                cbxProductType.Focus();
+                return;
+            }
             if (null == cbxPhysicType.SelectedValue)
             {
                 XtraMessageBox.Show(cbxPhysicType.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -224,6 +231,8 @@ WHERE UP.ProductID = {0}", productID);
                 needComparedFields.Add("ProductStyleID", layControl.GetItemByControl(cbxProductStyle).Text);
                 needComparedFields.Add("PhysicType", layControl.GetItemByControl(cbxPhysicType).Text);
                 needComparedFields.Add("ProductStyle", layControl.GetItemByControl(cbxProductStyle).Text);
+                needComparedFields.Add("Reservation1", layControl.GetItemByControl(cbxProductType).Text);
+                needComparedFields.Add("Reservation2", layControl.GetItemByControl(cbxProductType).Text);
                 needComparedFields.Add("PurchaseTaxID", layControl.GetItemByControl(cboPurchaseTax).Text);
                 needComparedFields.Add("PurchaseTax", layControl.GetItemByControl(cboPurchaseTax).Text);
                 needComparedFields.Add("SaleTaxID", layControl.GetItemByControl(cboSaleTax).Text);
@@ -245,6 +254,8 @@ WHERE UP.ProductID = {0}", productID);
                 needComparedControls.Add("ProductStyleID", cbxProductStyle.Name);
                 needComparedControls.Add("PhysicType", cbxPhysicType.Name);
                 needComparedControls.Add("ProductStyle", cbxProductStyle.Name);
+                needComparedControls.Add("Reservation1", cbxProductType.Name);
+                needComparedControls.Add("Reservation2", cbxProductType.Name);
                 needComparedControls.Add("PurchaseTaxID", cboPurchaseTax.Name);
                 needComparedControls.Add("PurchaseTax", cboPurchaseTax.Name);
                 needComparedControls.Add("SaleTaxID", cboSaleTax.Name);
@@ -512,6 +523,10 @@ WHERE UP.ProductID = {0}", productID);
         /// <param name="entity">实体</param>
         protected virtual void CustomGetEntity(BFIProductEntity entity)
         {
+            if (!entity.IsNullField("Reservation1"))
+            {
+                this.cbxProductType.SelectedValue = entity.Reservation1;
+            }
             if (!entity.IsNullField("PhysicTypeID"))
             {
                 this.cbxPhysicType.SelectedValue = entity.PhysicTypeID;
@@ -586,6 +601,11 @@ WHERE UP.ProductID = {0}", productID);
         /// <param name="entity">实体</param>
         protected virtual void CustomSetEntity(BFIProductEntity entity)
         {
+            if (this.cbxProductType.SelectedValue != null)
+            {
+                entity.Reservation1 = this.cbxProductType.SelectedValue.ToString();
+                entity.Reservation2 = this.cbxProductType.Text.Trim();
+            }
             if (this.cbxPhysicType.SelectedValue != null)
             {
                 entity.PhysicTypeID = Convert.ToInt32(this.cbxPhysicType.SelectedValue);
@@ -612,6 +632,14 @@ WHERE UP.ProductID = {0}", productID);
             if (this.cbxProductCycleStyle.SelectedValue != null)
             {
                 entity.CycleType = this.cbxProductCycleStyle.Text;
+            }
+            if (this.txtProductSpell.Text.Trim() == "")
+            {
+                entity.ProductSpell = GlobalMethod.GetAlphabetic(txtProductName.Text.Trim());
+            }
+            else
+            {
+                entity.ProductSpell = txtProductSpell.Text.Trim();
             }
             entity.IsUseToChildren = chkBoxUseDescription.Items[0].CheckState == CheckState.Checked ? true : false;
             entity.IsUseToOldPeople = chkBoxUseDescription.Items[1].CheckState == CheckState.Checked ? true : false;

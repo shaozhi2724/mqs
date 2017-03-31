@@ -363,13 +363,13 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_PaymentBillDetail nr WHERE onp.BusinessBi
             if (!validatetxt()) return;
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string insertBill = "EXEC fn_InsertPaymentBill '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}'";
+                string insertBill = "EXEC fn_InsertPaymentBill '{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}'";
                 string insertBillDetail = "EXEC fn_InsertPaymentBillDetail '{0}','{1}','{2}','{3}','{4}'";
                 try
                 {
                     conn.Open();
                     SqlCommand command;
-                    insertBill = String.Format(insertBill, PaymentBillCode, txtTaxCode.Text, saveDealerCode, txtDealerName.Text, saveDealerSpell,txtVoucherCode.Text,cboBillingType.Text.Trim(),deBillDate.Text.Trim(),Convert.ToDecimal(txtIncludeTaxPrice.Text),Convert.ToDecimal(txtNotIncludeTaxPrice.Text),cboTax.Text.Trim(),Convert.ToDecimal(txtTaxPrice.Text),"");
+                    insertBill = String.Format(insertBill, PaymentBillCode, txtTaxCode.Text, txtPaymentCode.Text, saveDealerCode, txtDealerName.Text, saveDealerSpell,txtVoucherCode.Text,cboBillingType.Text.Trim(),deBillDate.Text.Trim(),Convert.ToDecimal(txtIncludeTaxPrice.Text),Convert.ToDecimal(txtNotIncludeTaxPrice.Text),cboTax.Text.Trim(),Convert.ToDecimal(txtTaxPrice.Text),"");
                     command = new SqlCommand(insertBill, conn);
                     command.ExecuteNonQuery();
                     foreach (int detailid in DetailList)

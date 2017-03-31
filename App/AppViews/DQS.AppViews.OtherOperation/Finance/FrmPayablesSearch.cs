@@ -28,14 +28,7 @@ namespace DQS.AppViews.OtherOperation.Finance
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sqlBill = @"SELECT d.*,CONVERT(DECIMAL(18,3),d.期初)+CONVERT(DECIMAL(18,3),d.本期应付)-CONVERT(DECIMAL(18,3),d.本期实付) AS [余额] FROM (
-SELECT a.DealerCode AS [编号],a.DealerName AS [供应商名称],a.DealerSpell AS [供应商简拼],a.ThisInventoryPayables AS [期初],ISNULL(b.TotalPrice,0) AS [本期应付],ISNULL(c.TotalPrice,0) AS [本期实付] FROM
-(SELECT DealerCode,DealerName,DealerSpell,ThisInventoryPayables FROM dbo.FIN_InventoryDetail WHERE DealerType = '供应商') a
-FULL JOIN 
-(SELECT DealerCode,DealerName,DealerSpell,SUM(TotalPrice) AS TotalPrice FROM dbo.FIN_Payables GROUP BY DealerCode,DealerName,DealerSpell) b ON a.DealerCode = b.DealerCode AND a.DealerName = b.DealerName
-FULL JOIN 
-(SELECT DealerCode,DealerName,DealerSpell,SUM(TotalPrice) AS TotalPrice FROM dbo.FIN_Payment GROUP BY DealerCode,DealerName,DealerSpell) c ON a.DealerCode = c.DealerCode AND a.DealerName = c.DealerName) d
-WHERE (d.编号 LIKE '%" + txtDealerCode.Text.Trim() + "%' OR d.供应商名称 LIKE '%" + txtDealerCode.Text.Trim() + "%' OR d.供应商简拼 LIKE '%" + txtDealerCode.Text.Trim() + "%')";
+                string sqlBill = @"EXEC sp_PayablesSearch '" + txtDealerCode.Text.Trim() + "'";
 
                 SqlDataAdapter sda = new SqlDataAdapter(sqlBill, conn);
                 DataSet ds = new DataSet();

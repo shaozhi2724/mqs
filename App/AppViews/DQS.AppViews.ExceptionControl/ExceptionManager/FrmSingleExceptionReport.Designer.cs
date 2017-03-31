@@ -30,6 +30,7 @@
         {
             this.ftPanel = new DQS.Controls.FieldTextBoxPanel();
             this.layControl = new DevExpress.XtraLayout.LayoutControl();
+            this.cboResult = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txtDealResult = new DQS.Controls.BUSExceptionReportEntityTextBox();
             this.txtDealSuggestion = new DQS.Controls.BUSExceptionReportEntityTextBox();
             this.txtDealPerson = new DQS.Controls.BUSExceptionReportEntityTextBox();
@@ -55,18 +56,18 @@
             this.layDealPerson = new DevExpress.XtraLayout.LayoutControlItem();
             this.layDealSuggestion = new DevExpress.XtraLayout.LayoutControlItem();
             this.layDealResult = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layResult = new DevExpress.XtraLayout.LayoutControlItem();
             this.layDealDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.pnlAction = new DevExpress.XtraEditors.PanelControl();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.gpcButtom = new DevExpress.XtraEditors.GroupControl();
             this.popupGrid = new DQS.Controls.PopupGrid();
-            this.cboResult = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.layResult = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
             this.ftPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
             this.layControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cboResult.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealResult.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealSuggestion.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealPerson.Properties)).BeginInit();
@@ -94,14 +95,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.layDealPerson)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layDealSuggestion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layDealResult)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layResult)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layDealDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlAction)).BeginInit();
             this.pnlAction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gpcButtom)).BeginInit();
             this.gpcButtom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.popupGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboResult.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layResult)).BeginInit();
             this.SuspendLayout();
             // 
             // ftPanel
@@ -137,6 +137,17 @@
             this.layControl.TabIndex = 0;
             this.layControl.Text = "layControl";
             // 
+            // cboResult
+            // 
+            this.cboResult.Location = new System.Drawing.Point(75, 224);
+            this.cboResult.Name = "cboResult";
+            this.cboResult.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboResult.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cboResult.Size = new System.Drawing.Size(738, 21);
+            this.cboResult.StyleController = this.layControl;
+            this.cboResult.TabIndex = 2;
+            // 
             // txtDealResult
             // 
             this.txtDealResult.AlphabeticFiled = null;
@@ -145,7 +156,7 @@
             this.txtDealResult.IsNullString = null;
             this.txtDealResult.IsNullValidate = false;
             this.txtDealResult.IsTransferAlphabetic = false;
-            this.txtDealResult.Location = new System.Drawing.Point(75, 183);
+            this.txtDealResult.Location = new System.Drawing.Point(75, 199);
             this.txtDealResult.Name = "txtDealResult";
             this.txtDealResult.Size = new System.Drawing.Size(738, 21);
             this.txtDealResult.StyleController = this.layControl;
@@ -159,7 +170,7 @@
             this.txtDealSuggestion.IsNullString = null;
             this.txtDealSuggestion.IsNullValidate = false;
             this.txtDealSuggestion.IsTransferAlphabetic = false;
-            this.txtDealSuggestion.Location = new System.Drawing.Point(471, 158);
+            this.txtDealSuggestion.Location = new System.Drawing.Point(471, 174);
             this.txtDealSuggestion.Name = "txtDealSuggestion";
             this.txtDealSuggestion.Size = new System.Drawing.Size(342, 21);
             this.txtDealSuggestion.StyleController = this.layControl;
@@ -173,8 +184,9 @@
             this.txtDealPerson.IsNullString = null;
             this.txtDealPerson.IsNullValidate = false;
             this.txtDealPerson.IsTransferAlphabetic = true;
-            this.txtDealPerson.Location = new System.Drawing.Point(75, 158);
+            this.txtDealPerson.Location = new System.Drawing.Point(75, 174);
             this.txtDealPerson.Name = "txtDealPerson";
+            this.txtDealPerson.Properties.ReadOnly = true;
             this.txtDealPerson.Size = new System.Drawing.Size(341, 21);
             this.txtDealPerson.StyleController = this.layControl;
             this.txtDealPerson.TabIndex = 2;
@@ -182,7 +194,7 @@
             // tmeDealTime
             // 
             this.tmeDealTime.EditValue = new System.DateTime(2013, 10, 30, 0, 0, 0, 0);
-            this.tmeDealTime.Location = new System.Drawing.Point(561, 96);
+            this.tmeDealTime.Location = new System.Drawing.Point(561, 112);
             this.tmeDealTime.Name = "tmeDealTime";
             this.tmeDealTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -194,7 +206,7 @@
             // dteDealDate
             // 
             this.dteDealDate.EditValue = null;
-            this.dteDealDate.Location = new System.Drawing.Point(241, 96);
+            this.dteDealDate.Location = new System.Drawing.Point(241, 112);
             this.dteDealDate.Name = "dteDealDate";
             this.dteDealDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -213,7 +225,7 @@
             this.txtExceptionRemark.IsNullString = null;
             this.txtExceptionRemark.IsNullValidate = false;
             this.txtExceptionRemark.IsTransferAlphabetic = false;
-            this.txtExceptionRemark.Location = new System.Drawing.Point(63, 71);
+            this.txtExceptionRemark.Location = new System.Drawing.Point(63, 87);
             this.txtExceptionRemark.Name = "txtExceptionRemark";
             this.txtExceptionRemark.Size = new System.Drawing.Size(762, 21);
             this.txtExceptionRemark.StyleController = this.layControl;
@@ -224,10 +236,10 @@
             this.txtExceptionContent.AlphabeticFiled = null;
             this.txtExceptionContent.EntityField = DQS.Module.Entities.BUSExceptionReportEntityFields2.ExceptionContent;
             this.txtExceptionContent.IsIntegerOnly = false;
-            this.txtExceptionContent.IsNullString = null;
-            this.txtExceptionContent.IsNullValidate = false;
+            this.txtExceptionContent.IsNullString = "请填写异常内容。";
+            this.txtExceptionContent.IsNullValidate = true;
             this.txtExceptionContent.IsTransferAlphabetic = false;
-            this.txtExceptionContent.Location = new System.Drawing.Point(63, 46);
+            this.txtExceptionContent.Location = new System.Drawing.Point(63, 62);
             this.txtExceptionContent.Name = "txtExceptionContent";
             this.txtExceptionContent.Size = new System.Drawing.Size(762, 21);
             this.txtExceptionContent.StyleController = this.layControl;
@@ -236,7 +248,7 @@
             // tmeFinderTime
             // 
             this.tmeFinderTime.EditValue = new System.DateTime(2013, 10, 30, 0, 0, 0, 0);
-            this.tmeFinderTime.Location = new System.Drawing.Point(471, 21);
+            this.tmeFinderTime.Location = new System.Drawing.Point(471, 37);
             this.tmeFinderTime.Name = "tmeFinderTime";
             this.tmeFinderTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -248,7 +260,7 @@
             // dteFinderDate
             // 
             this.dteFinderDate.EditValue = null;
-            this.dteFinderDate.Location = new System.Drawing.Point(63, 21);
+            this.dteFinderDate.Location = new System.Drawing.Point(63, 37);
             this.dteFinderDate.Name = "dteFinderDate";
             this.dteFinderDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -267,7 +279,7 @@
             this.txtFinder.IsNullString = null;
             this.txtFinder.IsNullValidate = false;
             this.txtFinder.IsTransferAlphabetic = true;
-            this.txtFinder.Location = new System.Drawing.Point(471, -4);
+            this.txtFinder.Location = new System.Drawing.Point(471, 12);
             this.txtFinder.Name = "txtFinder";
             this.txtFinder.Properties.ReadOnly = true;
             this.txtFinder.Size = new System.Drawing.Size(354, 21);
@@ -282,7 +294,7 @@
             this.txtExceptionCode.IsNullString = "异常编号不能为空。";
             this.txtExceptionCode.IsNullValidate = true;
             this.txtExceptionCode.IsTransferAlphabetic = false;
-            this.txtExceptionCode.Location = new System.Drawing.Point(63, -4);
+            this.txtExceptionCode.Location = new System.Drawing.Point(63, 12);
             this.txtExceptionCode.Name = "txtExceptionCode";
             this.txtExceptionCode.Size = new System.Drawing.Size(353, 21);
             this.txtExceptionCode.StyleController = this.layControl;
@@ -291,7 +303,7 @@
             // rdgIsDeal
             // 
             this.rdgIsDeal.EditValue = false;
-            this.rdgIsDeal.Location = new System.Drawing.Point(63, 96);
+            this.rdgIsDeal.Location = new System.Drawing.Point(63, 112);
             this.rdgIsDeal.Name = "rdgIsDeal";
             this.rdgIsDeal.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.rdgIsDeal.Properties.Appearance.Options.UseBackColor = true;
@@ -321,7 +333,7 @@
             this.layDealTime,
             this.layControlGroupDeal,
             this.layDealDate});
-            this.layControlGroup.Location = new System.Drawing.Point(0, -16);
+            this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(837, 269);
             this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
@@ -451,6 +463,16 @@
             this.layDealResult.Text = "处理结果";
             this.layDealResult.TextSize = new System.Drawing.Size(48, 17);
             // 
+            // layResult
+            // 
+            this.layResult.Control = this.cboResult;
+            this.layResult.CustomizationFormText = "处理操作";
+            this.layResult.Location = new System.Drawing.Point(0, 50);
+            this.layResult.Name = "layResult";
+            this.layResult.Size = new System.Drawing.Size(793, 25);
+            this.layResult.Text = "处理操作";
+            this.layResult.TextSize = new System.Drawing.Size(48, 17);
+            // 
             // layDealDate
             // 
             this.layDealDate.Control = this.dteDealDate;
@@ -512,32 +534,13 @@
             // 
             this.popupGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.popupGrid.IsCalculatePrice = false;
+            this.popupGrid.IsCompute = false;
             this.popupGrid.Location = new System.Drawing.Point(2, 25);
             this.popupGrid.Name = "popupGrid";
             this.popupGrid.OperationName = "Exception";
             this.popupGrid.Size = new System.Drawing.Size(854, 199);
             this.popupGrid.TabIndex = 2;
             this.popupGrid.PopupClosed += new DQS.Controls.PopupGrid.OnPopupClosedEventHandler(this.popupGrid_PopupClosed);
-            // 
-            // cboResult
-            // 
-            this.cboResult.Location = new System.Drawing.Point(75, 208);
-            this.cboResult.Name = "cboResult";
-            this.cboResult.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboResult.Size = new System.Drawing.Size(738, 21);
-            this.cboResult.StyleController = this.layControl;
-            this.cboResult.TabIndex = 2;
-            // 
-            // layResult
-            // 
-            this.layResult.Control = this.cboResult;
-            this.layResult.CustomizationFormText = "处理操作";
-            this.layResult.Location = new System.Drawing.Point(0, 50);
-            this.layResult.Name = "layResult";
-            this.layResult.Size = new System.Drawing.Size(793, 25);
-            this.layResult.Text = "处理操作";
-            this.layResult.TextSize = new System.Drawing.Size(48, 17);
             // 
             // FrmSingleExceptionReport
             // 
@@ -558,6 +561,7 @@
             this.ftPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).EndInit();
             this.layControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cboResult.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealResult.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealSuggestion.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealPerson.Properties)).EndInit();
@@ -585,14 +589,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.layDealPerson)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layDealSuggestion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layDealResult)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layResult)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layDealDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlAction)).EndInit();
             this.pnlAction.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gpcButtom)).EndInit();
             this.gpcButtom.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.popupGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboResult.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layResult)).EndInit();
             this.ResumeLayout(false);
 
         }

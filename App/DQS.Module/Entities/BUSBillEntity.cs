@@ -350,6 +350,12 @@ namespace DQS.Module.Entities
             }
         }
 
+        public double Discount
+        {
+            get { return (double)this.GetValue("Discount"); }
+            set { this.SetValue("Discount", value); }
+        }
+
 		public Guid CreateUserID
 		{
 			get { return (Guid)this.GetValue("CreateUserID"); } 
@@ -528,6 +534,7 @@ namespace DQS.Module.Entities
 			this.Fields.Add("DepartmentID", BUSBillEntityFields.DepartmentID);
 			this.Fields.Add("PurchaseListID", BUSBillEntityFields.PurchasePriceListID);
             this.Fields.Add("SalePriceListID", BUSBillEntityFields.SalePriceListID);
+            this.Fields.Add("Discount", BUSBillEntityFields.Discount);
 			this.Fields.Add("CreateUserID", BUSBillEntityFields.CreateUserID);
 			this.Fields.Add("CreateDate", BUSBillEntityFields.CreateDate);
 			this.Fields.Add("LastModifyUserID", BUSBillEntityFields.LastModifyUserID);
@@ -817,118 +824,117 @@ namespace DQS.Module.Entities
 
         public static EntityField PurchasePriceListID
         {
-            get
-            {
-                return new EntityField("BUS_Bill", 52, "PurchasePriceListID", SqlDbType.Int, false, false, false, true);
-            }
+            get { return new EntityField("BUS_Bill", 52, "PurchasePriceListID", SqlDbType.Int, false, false, false, true); }
         }
 
         public static EntityField SalePriceListID
         {
-            get
-            {
-                return new EntityField("BUS_Bill", 53, "SalePriceListID", SqlDbType.Int, false, false, false, true);
-            }
+            get { return new EntityField("BUS_Bill", 53, "SalePriceListID", SqlDbType.Int, false, false, false, true); }
+        }
+
+        public static EntityField Discount
+        {
+            get { return new EntityField("BUS_Bill", 54, "Discount", SqlDbType.Float, false, false, false, true); }
         }
 
 		public static EntityField CreateUserID
 		{
-			get { return new EntityField("BUS_Bill", 54, "CreateUserID", SqlDbType.UniqueIdentifier, false, false, false, true); }
+			get { return new EntityField("BUS_Bill", 55, "CreateUserID", SqlDbType.UniqueIdentifier, false, false, false, true); }
 		}
 
 		public static EntityField CreateDate
 		{
-			get { return new EntityField("BUS_Bill", 55, "CreateDate", SqlDbType.DateTime, false, false, false, true); }
+			get { return new EntityField("BUS_Bill", 56, "CreateDate", SqlDbType.DateTime, false, false, false, true); }
 		}
 
 		public static EntityField LastModifyUserID
 		{
-			get { return new EntityField("BUS_Bill", 56, "LastModifyUserID", SqlDbType.UniqueIdentifier, false, false, false, true); }
+			get { return new EntityField("BUS_Bill", 57, "LastModifyUserID", SqlDbType.UniqueIdentifier, false, false, false, true); }
 		}
 
 		public static EntityField LastModifyDate
 		{
-			get { return new EntityField("BUS_Bill", 57, "LastModifyDate", SqlDbType.DateTime, false, false, false, true); }
+			get { return new EntityField("BUS_Bill", 58, "LastModifyDate", SqlDbType.DateTime, false, false, false, true); }
 		}
 
 		public static EntityField BillRemark
 		{
-			get { return new EntityField("BUS_Bill", 58, "BillRemark", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_Bill", 59, "BillRemark", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation1
 		{
-			get { return new EntityField("BUS_Bill", 59, "Reservation1", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_Bill", 60, "Reservation1", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation2
 		{
-			get { return new EntityField("BUS_Bill", 60, "Reservation2", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_Bill", 61, "Reservation2", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation3
 		{
-			get { return new EntityField("BUS_Bill", 61, "Reservation3", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_Bill", 62, "Reservation3", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation4
 		{
-			get { return new EntityField("BUS_Bill", 62, "Reservation4", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_Bill", 63, "Reservation4", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation5
 		{
-			get { return new EntityField("BUS_Bill", 63, "Reservation5", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_Bill", 64, "Reservation5", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation6
 		{
-			get { return new EntityField("BUS_Bill", 64, "Reservation6", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_Bill", 65, "Reservation6", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation7
 		{
-			get { return new EntityField("BUS_Bill", 65, "Reservation7", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_Bill", 66, "Reservation7", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation8
 		{
-			get { return new EntityField("BUS_Bill", 66, "Reservation8", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_Bill", 67, "Reservation8", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation9
 		{
-			get { return new EntityField("BUS_Bill", 67, "Reservation9", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_Bill", 68, "Reservation9", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
 		public static EntityField Reservation10
 		{
-			get { return new EntityField("BUS_Bill", 68, "Reservation10", SqlDbType.NVarChar, false, false, false, true); }
+			get { return new EntityField("BUS_Bill", 69, "Reservation10", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
         public static EntityField Reservation11
         {
-            get { return new EntityField("BUS_Bill", 69, "Reservation11", SqlDbType.NVarChar, false, false, false, true); }
+            get { return new EntityField("BUS_Bill", 70, "Reservation11", SqlDbType.NVarChar, false, false, false, true); }
         }
 
         public static EntityField Reservation12
         {
-            get { return new EntityField("BUS_Bill", 70, "Reservation12", SqlDbType.NVarChar, false, false, false, true); }
+            get { return new EntityField("BUS_Bill", 71, "Reservation12", SqlDbType.NVarChar, false, false, false, true); }
         }
 
         public static EntityField Reservation13
         {
-            get { return new EntityField("BUS_Bill", 71, "Reservation13", SqlDbType.NVarChar, false, false, false, true); }
+            get { return new EntityField("BUS_Bill", 72, "Reservation13", SqlDbType.NVarChar, false, false, false, true); }
         }
 
         public static EntityField Reservation14
         {
-            get { return new EntityField("BUS_Bill", 72, "Reservation14", SqlDbType.NVarChar, false, false, false, true); }
+            get { return new EntityField("BUS_Bill", 73, "Reservation14", SqlDbType.NVarChar, false, false, false, true); }
         }
 
         public static EntityField Reservation15
         {
-            get { return new EntityField("BUS_Bill", 73, "Reservation15", SqlDbType.NVarChar, false, false, false, true); }
+            get { return new EntityField("BUS_Bill", 74, "Reservation15", SqlDbType.NVarChar, false, false, false, true); }
         }
 
 	}
@@ -1046,6 +1052,8 @@ namespace DQS.Module.Entities
         PurchasePriceListID,
 
         SalePriceListID,
+
+        Discount,
 
 		CreateUserID,
 

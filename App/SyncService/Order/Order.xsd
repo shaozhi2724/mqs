@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Table">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="Column">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RECORDID" type="xs:string" />
+              <xs:element name="ORDER_ID" type="xs:string" />
+              <xs:element name="ORDERCODE" type="xs:string" />
+              <xs:element name="BUYERORGID" type="xs:string" />
+              <xs:element name="BUYERNAME" type="xs:string" />
+              <xs:element name="BUYEREASY" type="xs:string" />
+              <xs:element name="MEDICALNAME" type="xs:string" />
+              <xs:element name="PRODUCTID" type="xs:string" />
+              <xs:element name="PRODUCTNAME" type="xs:string" />
+              <xs:element name="MEDICALMODE" type="xs:string" />
+              <xs:element name="MEDICALSPEC" type="xs:string" />
+              <xs:element name="METRICNAME" type="xs:string" />
+              <xs:element name="FATORYID" type="xs:string" />
+              <xs:element name="FACTORYNAME" type="xs:string" />
+              <xs:element name="REQUESTQTY" type="xs:unsignedByte" />
+              <xs:element name="PRICE" type="xs:decimal" />
+              <xs:element name="CREATEDATE" type="xs:string" />
+              <xs:element name="DEGREE" type="xs:unsignedByte" />
+              <xs:element name="ORDERREMARK" type="xs:string" />
+              <xs:element name="REMARK" type="xs:string" />
+              <xs:element name="WAREHOUSENAME" type="xs:string" />
+              <xs:element name="COMPANY_ID" type="xs:string" />
+              <xs:element name="DEPART_NAME" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

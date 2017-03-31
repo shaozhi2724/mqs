@@ -195,7 +195,7 @@ namespace DQS.AppViews.OtherOperation.Finance
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 string sql = @"EXEC sp_MakeCollectionsDetailForBill '{0}'";
-                sql = String.Format(sql, " AND BusinessBillDetailID IN (" + detailID + ")");
+                sql = String.Format(sql, " AND BillDetailID IN (" + detailID + ")");
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 try

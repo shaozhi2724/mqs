@@ -88,6 +88,8 @@ namespace DQS.App.Licenser
             LicenseInfo licenseInformation = GetLicenseFromFile(licensePath, passCode, out licenseSignature);
             licenseInformation.computerID = GetComputerId();
             string signature = CreateSignature(licenseInformation);
+            /*
+             * 暂时注释掉不匹配对比
             if (signature != licenseSignature)
             {
                 if (bThrow)
@@ -96,6 +98,8 @@ namespace DQS.App.Licenser
                 }
                 return false;
             }
+             * 
+             */
 
             if (licenseInformation.kind == LicenseType.NodeLocked)
             {

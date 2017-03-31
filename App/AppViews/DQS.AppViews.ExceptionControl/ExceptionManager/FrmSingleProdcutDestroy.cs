@@ -39,6 +39,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
                 this.txtDestroyCode.Enabled = false;
 
+                popupGrid.PopupView.Columns["销毁数量"].OptionsColumn.AllowEdit = false;
+
                 this.popupGrid.SetGridData(m_id.Value);
                 if (entity.DestroyStatusID != 0)
                 {
@@ -109,6 +111,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                             return;
                         }
                         #region 新建
+
+                        if (!ValidateResultAmount()) return;
 
                         List<EntityBase> children = this.popupGrid.GetEntities();
 
@@ -219,6 +223,28 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
             }
 
             this.DialogResult = DialogResult.OK;
+        }
+
+        private bool ValidateResultAmount()
+        {
+            int rowCount = this.popupGrid.PopupView.RowCount;
+            for (int i = 0; i < rowCount; i++)
+            {
+                object lockAmout = this.popupGrid.PopupView.GetRowCellValue(i, "数量");
+                if (lockAmout != null && lockAmout != DBNull.Value)
+                {
+                    object Amount = this.popupGrid.PopupView.GetRowCellValue(i, "销毁数量");
+                    if (Amount != null && Amount != DBNull.Value)
+                    {
+                        if (Convert.ToInt32(Amount) > Convert.ToInt32(lockAmout))
+                        {
+                            XtraMessageBox.Show(String.Format("表格中第{0}行产品的销毁数量不能大于数量。", (i + 1)), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         private bool ValidateDestroyDate()

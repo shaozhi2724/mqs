@@ -115,6 +115,27 @@ namespace DQS.AppViews.Operation.BackManager
                             entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                             entity.Reservation5 = "已删除。操作员：" + userName + "于" + time + "删除，删除原因为：" + reason;
                             entity.Update();
+
+                            string delsql = "EXEC sp_SaleBackDelForFin " + entity.BillID;
+                            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                            {
+                                conn.Open(); //连接数据库
+                                //必须为SqlCommand指定数据库连接和登记的事务
+                                SqlCommand cmd = new SqlCommand(delsql, conn);
+                                try
+                                {
+                                    cmd.ExecuteNonQuery();
+                                }
+                                catch (Exception ex)
+                                {
+                                    XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                                finally
+                                {
+                                    conn.Close();
+                                }
+                            }
+
                             this.pageNavigator.ShowData();
                         }
                     }

@@ -258,10 +258,21 @@ namespace DQS.AppViews.OtherOperation.Finance
                 try
                 {
                     conn.Open();
-                    foreach (int storeid in BillList)
+                    if (storeBillSave == "fn_InsertPaymentOnPassage")
                     {
-                        SqlCommand command = new SqlCommand(String.Format(insertBill, storeid), conn);
-                        command.ExecuteNonQuery();
+                        foreach (int StoreID in BillList)
+                        {
+                            SqlCommand command = new SqlCommand(String.Format(insertBill, StoreID), conn);
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    else
+                    {
+                        foreach (int Detailid in DetailList)
+                        {
+                            SqlCommand command = new SqlCommand(String.Format(insertBill, Detailid), conn);
+                            command.ExecuteNonQuery();
+                        }
                     }
                 }
                 catch (Exception ex)

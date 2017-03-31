@@ -82,6 +82,8 @@
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.colDepartmentID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colDepartmentName = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panPriceList)).BeginInit();
             this.panPriceList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdInventoryList)).BeginInit();
@@ -183,7 +185,9 @@
             this.colSterilizationBatchNo,
             this.colSterilizationDate,
             this.colAmount,
-            this.colUnitPrice});
+            this.colUnitPrice,
+            this.colDepartmentID,
+            this.colDepartmentName});
             this.gvInventoryList.GridControl = this.grdInventoryList;
             this.gvInventoryList.IndicatorWidth = 40;
             this.gvInventoryList.Name = "gvInventoryList";
@@ -773,6 +777,20 @@
             this.openFileDialog.FileName = "openFileDialog";
             this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
             // 
+            // colDepartmentID
+            // 
+            this.colDepartmentID.Caption = "部门ID";
+            this.colDepartmentID.FieldName = "DepartmentID";
+            this.colDepartmentID.Name = "colDepartmentID";
+            // 
+            // colDepartmentName
+            // 
+            this.colDepartmentName.Caption = "部门名称";
+            this.colDepartmentName.FieldName = "DepartmentName";
+            this.colDepartmentName.Name = "colDepartmentName";
+            this.colDepartmentName.Visible = true;
+            this.colDepartmentName.VisibleIndex = 8;
+            // 
             // FrmSingleBeginInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -892,6 +910,8 @@
         private DevExpress.XtraEditors.SimpleButton btnExport;
         private DevExpress.XtraEditors.SimpleButton btnExcel;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private DevExpress.XtraGrid.Columns.GridColumn colDepartmentID;
+        private DevExpress.XtraGrid.Columns.GridColumn colDepartmentName;
 
 
 

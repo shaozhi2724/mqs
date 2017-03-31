@@ -109,9 +109,7 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                 {
                     this.txtOperator.Text = GlobalItem.g_CurrentEmployee.EmployeeName;
                 }
-                
             }
-
         }
 
         private void BindLookupData()
@@ -166,6 +164,12 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                 DataSet ds = new DataSet();
                 try
                 {
+                    bool isdefualtdepartment = DQS.Controls.Properties.Settings.Default.IsDefaultDepartment;
+                    bool islockdepartment = DQS.Controls.Properties.Settings.Default.IsLockDepartment;
+                    if (islockdepartment)
+                    {
+                        isdefualtdepartment = false;
+                    }
                     sdad.Fill(ds, "Table");
                     for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
                     {
@@ -174,6 +178,27 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                         department.departmentName = ds.Tables["Table"].Rows[i]["DepartmentName"].ToString();
                         departments.Add(department);
                         cboDepartment.Properties.Items.Add(department.departmentName);
+                        if (isdefualtdepartment && i == 0)
+                        {
+                            cboDepartment.Text = department.departmentName;
+                        }
+                    }
+                    if (islockdepartment)
+                    {
+                        this.cboDepartment.Properties.ReadOnly = true;
+                        var departmentid = GlobalItem.g_CurrentEmployee.DepartmentID;
+                        if (departmentid == 0)
+                        {
+                            XtraMessageBox.Show("没有找到相对应的部门，请核实。");
+                            return;
+                        }
+                        foreach (var item in departments)
+                        {
+                            if (item.departmentID == departmentid)
+                            {
+                                cboDepartment.Text = item.departmentName;
+                            }
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -485,7 +510,7 @@ WHERE BillID={1}
                     if (entity.IsNew())
                     {
                         if (!this.ValidateEnterpriseRange()) return;//验证本企业的经营范围
-                        if (!this.ValidateDealerQualification()) return;//验证供货商的电子档案
+                        if (!this.ValidateDealerQualificationfordetail()) return;//验证供货商的电子档案
                         if (!this.ValidateProductQualification()) return;//验证所有产品的电子档案
                         if (!this.ValidateDealerRange()) return;//验证供货商经营范围
                         if (!this.checkPersonRange()) return;//验证供应商销售员的经营范围
@@ -663,6 +688,9 @@ WHERE BillID={1}
 
             if (null != e.PopupRow)
             {
+                //检测选中品种的电子档案
+                if (!ValidateProductQualificationForGrid(int.Parse(e.PopupRow["产品ID"].ToString()))) e.Cancel = true;
+
                 DataRow dealer = txtDealerName.EditData as DataRow;
                 if (null != dealer && !dealer.IsNull("单位ID"))
                 {
@@ -766,6 +794,16 @@ WHERE BillID={1}
             {
                 rdgBillStyle.SelectedIndex = 0;
             }
+
+            if (!entity.IsNullField("InvoiceTypeName"))
+            {
+                var index = rdgPaymentType.Properties.Items.GetItemIndexByValue(entity.InvoiceTypeName);
+                rdgPaymentType.SelectedIndex = index;
+            }
+            else
+            {
+                rdgPaymentType.SelectedIndex = 0;
+            }
         }
 
         /// <summary>
@@ -828,6 +866,7 @@ WHERE BillID={1}
                 entity.PaymentTypeName = this.cbxPaymentType.Text.Trim();
             }
             entity.BillStyle = this.rdgBillStyle.Properties.Items[rdgBillStyle.SelectedIndex].Value.ToString();
+            entity.InvoiceTypeName = this.rdgPaymentType.Properties.Items[rdgPaymentType.SelectedIndex].Value.ToString();
 
         }
 
@@ -845,7 +884,7 @@ WHERE BillID={1}
                     cboDepartment.Properties.ReadOnly = true;
                 }
             }
-            if (!this.ValidateDealerQualification())
+            if (!this.ValidateDealerQualificationfordetail())
             {
                 e.Cancel = true;
             }
@@ -928,6 +967,38 @@ WHERE BillID={1}
                     }
                     return false;
                 }
+                else if (dealer.IndustryStyle == "生产厂商" && DQS.Controls.Properties.Settings.Default.IsControlDealerAsProductPhy)
+                {
+                    if (ranges.Count > 0)
+                    {
+                        int rowCount = this.popupGrid.PopupView.RowCount;
+                        for (int i = 0; i < rowCount; i++)
+                        {
+                            object productStyle = this.popupGrid.PopupView.GetRowCellValue(i, "剂型");
+                            if (productStyle != null && productStyle != DBNull.Value)
+                            {
+                                bool isHava = false;
+                                foreach (BFIBusinessRangeEntity range in ranges)
+                                {
+                                    if (productStyle.ToString().Trim() == range.ProductStyleName.Trim())
+                                    {
+                                        isHava = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!isHava) //不存在则超经营范围
+                                {
+                                    XtraMessageBox.Show(
+                                        String.Format("表格中第{0}行产品的剂型超出供货商“{1}”的经营范围，无法生成订单，请修改！", (i + 1),
+                                            this.txtDealerName.Text), "系统提示", MessageBoxButtons.OK,
+                                        MessageBoxIcon.Information);
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
                 else
                 {
                     if (ranges.Count > 0)
@@ -974,7 +1045,7 @@ WHERE BillID={1}
         /// 验证经销商的电子档案
         /// </summary>
         /// <returns></returns>
-        private bool ValidateDealerQualification()
+        private bool ValidateDealerQualificationfordetail()
         {
             //获取供货商的过期证书
             if (this.txtDealerName.SelectedValue != null)
@@ -988,10 +1059,41 @@ WHERE BillID={1}
                 pe.Add(AllQualificationViewFields.到期状态 == "已过期");
                 qualifications.Fetch(pe);
 
+                bool isgo = true;
+                string message = "";
+                foreach (var item in qualifications)
+                {
+                    var itemli = (AllQualificationView)item;
+                    if (itemli.到期状态 == "已过期")
+                    {
+                        isgo = false;
+                    }
+                    string validate = "";
+                    try
+                    {
+                        validate = itemli.到期日期.ToString("d");
+                    }
+                    catch (Exception)
+                    {
+                        validate = "空";
+                    }
+                    string mes = itemli.档案名称 + "--" + itemli.到期状态 + "--" + validate + "\r\n";
+                    message += mes;
+                }
+
+
                 if (qualifications.Count > 0)
                 {
-                    XtraMessageBox.Show(String.Format("供货商的{0}电子档案已过期，无法生成订单，请修改！", (qualifications[0] as AllQualificationView).档案名称), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return false;
+                    if (isgo)
+                    {
+                        XtraMessageBox.Show(String.Format("供货商的电子档案即将过期！\r\n{0}", message), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return true;
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show(String.Format("供货商的电子档案包含已过期，无法生成订单，请修改！\r\n{0}", message), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return false;
+                    }
                 }
                 return true;
             }
@@ -1000,6 +1102,125 @@ WHERE BillID={1}
                 XtraMessageBox.Show("请先选择往来单位", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
+        }
+
+        /// <summary>
+        /// 验证经销商的电子档案
+        /// </summary>
+        /// <returns></returns>
+        private bool ValidateDealerQualification()
+        {
+            //获取供货商的过期证书
+            if (this.txtDealerName.SelectedValue != null)
+            {
+                int dealerID = Convert.ToInt32(this.txtDealerName.SelectedValue);
+                ViewCollection<AllQualificationView> qualifications = new ViewCollection<AllQualificationView>();
+
+                PredicateExpression pe = new PredicateExpression();
+                pe.Add(AllQualificationViewFields.所属表ID == "BFI_Dealer");
+                pe.Add(AllQualificationViewFields.所属ID == dealerID);
+                pe.Add(AllQualificationViewFields.到期状态 == "已过期" | AllQualificationViewFields.到期状态 == "即将过期");
+                qualifications.Fetch(pe);
+
+                bool isgo = true;
+                string message = "";
+                foreach (var item in qualifications)
+                {
+                    var itemli = (AllQualificationView)item;
+                    if (itemli.到期状态 == "已过期")
+                    {
+                        isgo = false;
+                    }
+                    string validate = "";
+                    try
+                    {
+                        validate = itemli.到期日期.ToString("d");
+                    }
+                    catch (Exception)
+                    {
+                        validate = "空";
+                    }
+                    string mes = itemli.档案名称 + "--" + itemli.到期状态 + "--" + validate + "\r\n";
+                    message += mes;
+                }
+                
+
+                if (qualifications.Count > 0)
+                {
+                    if (isgo)
+                    {
+                        XtraMessageBox.Show(String.Format("供货商的电子档案即将过期！\r\n{0}", message), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return true;
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show(String.Format("供货商的电子档案包含已过期，无法生成订单，请修改！\r\n{0}", message), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return false;
+                    }
+                }
+                return true;
+            }
+            else
+            {
+                XtraMessageBox.Show("请先选择往来单位", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 验证产品的电子档案
+        /// </summary>
+        /// <returns></returns>
+        private bool ValidateProductQualificationForGrid(int productid)
+        {
+            //获取所有产品的过期证书
+            ViewCollection<AllQualificationView> qualifications = new ViewCollection<AllQualificationView>();
+
+            PredicateExpression pe = new PredicateExpression();
+            pe.Add(AllQualificationViewFields.所属表ID == "BFI_Product");
+            pe.Add(AllQualificationViewFields.所属ID == productid);
+            pe.Add(AllQualificationViewFields.到期状态 == "已过期" | AllQualificationViewFields.到期状态 == "即将过期");
+            qualifications.Fetch(pe);
+
+            bool isgo = true;
+            string message = "";
+            foreach (var item in qualifications)
+            {
+                var itemli = (AllQualificationView)item;
+                if (itemli.到期状态 == "已过期")
+                {
+                    isgo = false;
+                }
+                string validate = "";
+                try
+                {
+                    validate = itemli.到期日期.ToString("d");
+                }
+                catch (Exception)
+                {
+                    validate = "空";
+                }
+                string mes = itemli.档案名称 + "--" + itemli.到期状态 + "--" + validate + "\r\n";
+                message += mes;
+            }
+            BFIProductEntity product = new BFIProductEntity { ProductID = productid };
+            product.Fetch();
+
+            if (qualifications.Count > 0)
+            {
+                if (isgo)
+                {
+                    XtraMessageBox.Show(String.Format("产品：{0} 的电子档案即将过期！\r\n{1}",product.ProductName ,message), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return true;
+                }
+                else
+                {
+                    XtraMessageBox.Show(String.Format("产品：{0} 的电子档案包含已过期，无法生成订单，请修改！\r\n{1}", product.ProductName, message), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         /// <summary>

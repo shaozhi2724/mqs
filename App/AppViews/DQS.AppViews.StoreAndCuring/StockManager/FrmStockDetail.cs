@@ -78,12 +78,16 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
 
         protected override void CustomModify()
         {
-            using (FrmSingleStoreDetail fa = new FrmSingleStoreDetail())
+            object id = this.gvData.GetFocusedRowCellValue("InStoreID");
+            if (id != null && id != DBNull.Value)
             {
-                DialogResult dr = fa.ShowDialog();
-                if (dr == DialogResult.Yes)
+                using (FrmSingleStoreDetail fa = new FrmSingleStoreDetail(Convert.ToInt32(id)))
                 {
-                    this.pageNavigator.ShowData();
+                    DialogResult dr = fa.ShowDialog();
+                    if (dr == DialogResult.Yes)
+                    {
+
+                    }
                 }
             }
         }

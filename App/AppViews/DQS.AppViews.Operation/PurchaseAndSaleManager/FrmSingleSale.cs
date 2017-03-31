@@ -47,6 +47,9 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
         float billTotalPrice = 0;
         bool checkTotalPrice = false;
 
+
+        string operators = "";
+
         public FrmSingleSale()
         {
             InitializeComponent();
@@ -61,9 +64,11 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
             this.cbxDeliveryType.InitSource();
             this.cbxPaymentType.InitSource();
             this.popupGrid.InitGrid();
+            BindArea();
 
             RepositoryItemComboBox cbo = new RepositoryItemComboBox();
             cbo.Items.Add("是");
+            cbo.Items.Add("否");
             this.popupGrid.PopupView.Columns["是否打印检报"].ColumnEdit = cbo;
 
 
@@ -165,6 +170,8 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                 this.txtBillCode.Text = GlobalMethod.GenSaleBillCode("XS");
                 this.txtBillCode.Select(this.txtBillCode.Text.Length, 0);
 
+                this.btnAcceptReport.Enabled = false;
+
                 if (!Settings.Default.SettingBusinessPersonISNULL)
                 {
                     if (GlobalItem.g_CurrentEmployee != null)
@@ -188,6 +195,27 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
             this.btnFix.Visible = false;
         }
 
+        private void BindArea()
+        {
+            EntityCollection<BFIDealerEntity> dealers = new EntityCollection<BFIDealerEntity>();
+            dealers.Fetch();
+
+            List<string> dealerAreas =
+                dealers.Cast<BFIDealerEntity>().AsQueryable<BFIDealerEntity>().Select(p => p.DealerArea).Distinct().ToList();
+
+            EntityCollection<ATCUserAreaEntity> userAreas = new EntityCollection<ATCUserAreaEntity>();
+            userAreas.Fetch();
+            if (userAreas.Count > 0)
+            {
+                dealerAreas.AddRange(userAreas.Cast<ATCUserAreaEntity>().AsQueryable().Select(p => p.AreaName).Distinct().ToList());
+            }
+            List<string> areas = dealerAreas.Distinct().OrderBy(p => p).ToList();
+            foreach (var dealerArea in areas)
+            {
+                txtDealerArea.Properties.Items.Add(dealerArea);
+            }
+        }
+
         private void LoadDepartment()
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
@@ -198,6 +226,12 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                 DataSet ds = new DataSet();
                 try
                 {
+                    bool isdefualtdepartment = DQS.Controls.Properties.Settings.Default.IsDefaultDepartment;
+                    bool islockdepartment = DQS.Controls.Properties.Settings.Default.IsLockDepartment;
+                    if (islockdepartment)
+                    {
+                        isdefualtdepartment = false;
+                    }
                     sdad.Fill(ds, "Table");
                     for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
                     {
@@ -206,6 +240,27 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                         department.departmentName = ds.Tables["Table"].Rows[i]["DepartmentName"].ToString();
                         departments.Add(department);
                         cboDepartment.Properties.Items.Add(department.departmentName);
+                        if (isdefualtdepartment && i == 0)
+                        {
+                            cboDepartment.Text = department.departmentName;
+                        }
+                    }
+                    if (islockdepartment)
+                    {
+                        this.cboDepartment.Properties.ReadOnly = true;
+                        var departmentid = GlobalItem.g_CurrentEmployee.DepartmentID;
+                        if (departmentid == 0)
+                        {
+                            XtraMessageBox.Show("没有找到相对应的部门，请核实。");
+                            return;
+                        }
+                        foreach (var item in departments)
+                        {
+                            if (item.departmentID == departmentid)
+                            {
+                                cboDepartment.Text = item.departmentName;
+                            }
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -1082,7 +1137,7 @@ WHERE BillID={1}
                         //    if (!this.ValidateBatchNo()) return;
                         //}
                         if (!this.ValidateDealerRange()) return; //验证客户经营范围
-                        if (!this.ValidateDealerQualification()) return; //验证客户的电子档案
+                        if (!this.ValidateDealerQualificationfordetail()) return; //验证客户的电子档案
                         //if (!this.ValidateSaleAmount()) return; //验证库存和销售数量
                         for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
                         {
@@ -1741,6 +1796,7 @@ WHERE BillID={1}
                         }
 
                         this.popupGrid.PopupView.SetFocusedRowCellValue("单价", finalPrice);
+                        this.popupGrid.PopupView.SetFocusedRowCellValue("是否打印检报", DQS.Controls.Properties.Settings.Default.IsBillPrint ? "是" : "否");
 
                         #endregion
                     }
@@ -1872,10 +1928,24 @@ WHERE BillID={1}
             {
                 rdgBillStyle.SelectedIndex = 0;
             }
+            if (!entity.IsNullField("InvoiceTypeName"))
+            {
+                var index = rdgPaymentType.Properties.Items.GetItemIndexByValue(entity.InvoiceTypeName);
+                rdgPaymentType.SelectedIndex = index;
+            }
+            else
+            {
+                rdgPaymentType.SelectedIndex = 0;
+            }
 
             if (!entity.IsNullField("SalePriceListID"))
             {
                 cbxPrice.EditValue = entity.SalePriceListID;
+            }
+
+            if (!entity.IsNullField("Reservation4"))
+            {
+                txtDealerArea.Text = entity.Reservation4;
             }
 
         }
@@ -1959,8 +2029,14 @@ WHERE BillID={1}
                 entity.DealerAddress = txtDealerAddress.Text.Trim();
             }
             entity.BillStyle = this.rdgBillStyle.Properties.Items[rdgBillStyle.SelectedIndex].Value.ToString();
+            entity.InvoiceTypeName = this.rdgPaymentType.Properties.Items[rdgPaymentType.SelectedIndex].Value.ToString();
 
             entity.SalePriceListID = Convert.ToInt32(cbxPrice.EditValue);
+
+            if (this.txtDealerArea.Text.Trim() != "")
+            {
+                entity.Reservation4 = this.txtDealerArea.Text.Trim();
+            }
         }
 
         private void txtDealerName_PopupClosing(object sender, EventArgs e)
@@ -1985,12 +2061,29 @@ WHERE BillID={1}
                         this.layReservation14.Visibility = LayoutVisibility.Always;
                         this.layReservation15.Visibility = LayoutVisibility.Always;
                     }
+                    else
+                    {
+                        this.layReservation11.Visibility = LayoutVisibility.Never;
+                        this.layReservation12.Visibility = LayoutVisibility.Never;
+                        this.layReservation13.Visibility = LayoutVisibility.Never;
+                        this.layReservation14.Visibility = LayoutVisibility.Never;
+                        this.layReservation15.Visibility = LayoutVisibility.Never;
+                    }
                     if (!dealer.IsNullField("SalePriceListID"))
                     {
                         cbxPrice.EditValue = dealer.SalePriceListID;
                     }
+                    if (!dealer.IsNullField("Reservation5") && dealer.Reservation5 != "")
+                    {
+                        BandOper(dealer.Reservation5);
+                    }
+                    else
+                    {
+                        operators = "";
+                    }
                     this.txtDealerAddress.Text = dataRow["通讯地址"].ToString();
                     this.txtDealerCode.Text = dataRow["单位编号"].ToString();
+                    this.txtDealerArea.Text = dataRow["所属销售区域"].ToString();
                     if (Settings.Default.SettingBusinessPersonWithDealer)
                     {
                         this.txtOperator.Text = dataRow["业务员"].ToString();
@@ -2007,6 +2100,26 @@ WHERE BillID={1}
                 }
             }
             if (!this.ValidateDealerQualification()) return;
+        }
+
+        private void BandOper(string opers)
+        {
+            operators = "(";
+            if (opers.Contains(","))
+            {
+                string s = opers;
+                string[] sArray = s.Split(',');
+                foreach (string i in sArray)
+                {
+                    operators += "'" + i.ToString() + "',";
+                }
+                operators = operators.Substring(0, operators.Length - 1);
+                operators += ")";
+            }
+            else
+            {
+                operators += ("'" + opers + "')");
+            }
         }
 
         private void BandSaleMan(int dealerID)
@@ -2081,7 +2194,7 @@ WHERE BillID={1}
                 e.Cancel = true;
             }
 
-            if (!this.ValidateDealerQualification())
+            if (!this.ValidateDealerQualificationfordetail())
             {
                 e.Cancel = true;
             }
@@ -2495,7 +2608,7 @@ WHERE BillID={1}
         /// 验证客户的电子档案
         /// </summary>
         /// <returns></returns>
-        private bool ValidateDealerQualification()
+        private bool ValidateDealerQualificationfordetail()
         {
             //获取客户的过期证书
             if (this.txtDealerName.SelectedValue != null)
@@ -2509,10 +2622,104 @@ WHERE BillID={1}
                 pe.Add(AllQualificationViewFields.到期状态 == "已过期");
                 qualifications.Fetch(pe);
 
+                bool isgo = true;
+                string message = "";
+                foreach (var item in qualifications)
+                {
+                    var itemli = (AllQualificationView)item;
+                    if (itemli.到期状态 == "已过期")
+                    {
+                        isgo = false;
+                    }
+                    string validate = "";
+                    try
+                    {
+                        validate = itemli.到期日期.ToString("d");
+                    }
+                    catch (Exception)
+                    {
+                        validate = "空";
+                    }
+                    string mes = itemli.档案名称 + "--" + itemli.到期状态 + "--" + validate + "\r\n";
+                    message += mes;
+                }
+
                 if (qualifications.Count > 0)
                 {
-                    XtraMessageBox.Show(String.Format("客户的{0}电子档案已过期，无法生成订单，请修改！", (qualifications[0] as AllQualificationView).档案名称), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return false;
+                    if (isgo)
+                    {
+                        XtraMessageBox.Show(String.Format("客户的电子档案即将过期！\r\n{0}", message), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return true;
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show(String.Format("客户的电子档案已过期，无法生成订单，请修改！\r\n{0}", message), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            else
+            {
+                XtraMessageBox.Show("请先选择往来单位", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 验证客户的电子档案
+        /// </summary>
+        /// <returns></returns>
+        private bool ValidateDealerQualification()
+        {
+            //获取客户的过期证书
+            if (this.txtDealerName.SelectedValue != null)
+            {
+                int dealerID = Convert.ToInt32(this.txtDealerName.SelectedValue);
+                ViewCollection<AllQualificationView> qualifications = new ViewCollection<AllQualificationView>();
+
+                PredicateExpression pe = new PredicateExpression();
+                pe.Add(AllQualificationViewFields.所属表ID == "BFI_Dealer");
+                pe.Add(AllQualificationViewFields.所属ID == dealerID);
+                pe.Add(AllQualificationViewFields.到期状态 == "已过期" | AllQualificationViewFields.到期状态 == "即将过期");
+                qualifications.Fetch(pe);
+
+                bool isgo = true;
+                string message = "";
+                foreach (var item in qualifications)
+                {
+                    var itemli = (AllQualificationView)item;
+                    if (itemli.到期状态 == "已过期")
+                    {
+                        isgo = false;
+                    }
+                    string validate = "";
+                    try
+                    {
+                        validate = itemli.到期日期.ToString("d");
+                    }
+                    catch (Exception)
+                    {
+                        validate = "空";
+                    }
+                    string mes = itemli.档案名称 + "--" + itemli.到期状态 + "--" + validate + "\r\n";
+                    message += mes;
+                }
+
+
+                if (qualifications.Count > 0)
+                {
+                    if (isgo)
+                    {
+                        XtraMessageBox.Show(String.Format("客户的电子档案即将过期！\r\n{0}", message), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return true;
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show(String.Format("客户的电子档案已过期，无法生成订单，请修改！\r\n{0}", message), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return false;
+                    }
                 }
                 return true;
             }
@@ -2904,6 +3111,14 @@ WHERE BillID={1}
         private void txtOperator_BeforePopupShow(object sender, BeforePopupShowArgs e)
         {
             txtOperator.Tag = txtOperator.Text.Trim();
+            if (operators != "")
+            {
+                txtOperator.Filter += " and [员工姓名] in " + operators;
+            }
+            else
+            {
+                txtOperator.Filter = "[岗位名称] = '业务员'";
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -2984,7 +3199,7 @@ WHERE BillID={1}
                     //    if (!this.ValidateBatchNo()) return;
                     //}
                     if (!this.ValidateDealerRange()) return; //验证客户经营范围
-                    if (!this.ValidateDealerQualification()) return; //验证客户的电子档案
+                    if (!this.ValidateDealerQualificationfordetail()) return; //验证客户的电子档案
                     //if (!this.ValidateSaleAmount()) return; //验证库存和销售数量
                     for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
                     {
@@ -3255,6 +3470,7 @@ WHERE BillID={1}
             storebill.Reservation9 = "保存并出库";
             storebill.Save();
             storebill.Fetch();
+            /*
             BUSStoreBillDetailEntity storebilldetail = new BUSStoreBillDetailEntity();
             storebilldetail.StoreID = storebill.StoreID;
             int rowCount = this.popupGrid.PopupView.RowCount;
@@ -3288,7 +3504,8 @@ WHERE BillID={1}
                     storebilldetail.Save();
                 }
             }
-            string sql = "UPDATE dbo.BUS_StoreBill SET Reservation1 = NULL WHERE StoreID = " + storebill.StoreID;
+            */
+            string sql = "EXEC sp_BillForAutoStoreBillDetail " + bill.BillID + "," + storebill.StoreID;
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 conn.Open(); //连接数据库
@@ -3755,6 +3972,14 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
         private void txtInvoiceContent_Click(object sender, EventArgs e)
         {
             this.txtInvoiceContent.Text = GetPercent();
+        }
+
+        private void btnAcceptReport_Click(object sender, EventArgs e)
+        {
+            using (FrmAcceptReport frm = new FrmAcceptReport(m_id.Value))
+            {
+                frm.ShowDialog();
+            }
         }
     }
 }

@@ -80,6 +80,8 @@
             this.layControlGroupBatch = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layPopBatch = new DevExpress.XtraLayout.LayoutControlItem();
             this.layLockedAmount = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtReservation1 = new DQS.Controls.BUSProductLockedEntityTextBox();
+            this.layReservation1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.pnOperating)).BeginInit();
             this.pnOperating.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
@@ -135,6 +137,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layControlGroupBatch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layPopBatch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layLockedAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReservation1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layReservation1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnOperating
@@ -186,6 +190,7 @@
             // 
             // layControl
             // 
+            this.layControl.Controls.Add(this.txtReservation1);
             this.layControl.Controls.Add(this.txtLockedCode);
             this.layControl.Controls.Add(this.txtPopBatch);
             this.layControl.Controls.Add(this.txtPopupProduct);
@@ -359,9 +364,9 @@
             this.txtLockedRemark.IsNullString = null;
             this.txtLockedRemark.IsNullValidate = false;
             this.txtLockedRemark.IsTransferAlphabetic = false;
-            this.txtLockedRemark.Location = new System.Drawing.Point(87, 62);
+            this.txtLockedRemark.Location = new System.Drawing.Point(461, 62);
             this.txtLockedRemark.Name = "txtLockedRemark";
-            this.txtLockedRemark.Size = new System.Drawing.Size(669, 21);
+            this.txtLockedRemark.Size = new System.Drawing.Size(295, 21);
             this.txtLockedRemark.StyleController = this.layControl;
             this.txtLockedRemark.TabIndex = 4;
             // 
@@ -527,7 +532,7 @@
             this.txtLockedAmount.AlphabeticFiled = null;
             this.txtLockedAmount.EditValue = "0";
             this.txtLockedAmount.EntityField = DQS.Module.Entities.BUSProductLockedEntityFields2.LockedAmount;
-            this.txtLockedAmount.IsIntegerOnly = false;
+            this.txtLockedAmount.IsIntegerOnly = true;
             this.txtLockedAmount.IsNullString = null;
             this.txtLockedAmount.IsNullValidate = false;
             this.txtLockedAmount.IsTransferAlphabetic = false;
@@ -556,7 +561,8 @@
             this.layLockedTime,
             this.emptySpaceItem1,
             this.layLockedRemark,
-            this.layControlGroupBatch});
+            this.layControlGroupBatch,
+            this.layReservation1});
             this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(768, 509);
@@ -792,9 +798,9 @@
             // 
             this.layLockedRemark.Control = this.txtLockedRemark;
             this.layLockedRemark.CustomizationFormText = "备注";
-            this.layLockedRemark.Location = new System.Drawing.Point(0, 50);
+            this.layLockedRemark.Location = new System.Drawing.Point(374, 50);
             this.layLockedRemark.Name = "layLockedRemark";
-            this.layLockedRemark.Size = new System.Drawing.Size(748, 25);
+            this.layLockedRemark.Size = new System.Drawing.Size(374, 25);
             this.layLockedRemark.Text = "备注";
             this.layLockedRemark.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -828,6 +834,30 @@
             this.layLockedAmount.Size = new System.Drawing.Size(362, 25);
             this.layLockedAmount.Text = "数量";
             this.layLockedAmount.TextSize = new System.Drawing.Size(72, 14);
+            // 
+            // txtReservation1
+            // 
+            this.txtReservation1.AlphabeticFiled = null;
+            this.txtReservation1.EntityField = DQS.Module.Entities.BUSProductLockedEntityFields2.Reservation1;
+            this.txtReservation1.IsIntegerOnly = false;
+            this.txtReservation1.IsNullString = "请填写锁定原因。";
+            this.txtReservation1.IsNullValidate = true;
+            this.txtReservation1.IsTransferAlphabetic = false;
+            this.txtReservation1.Location = new System.Drawing.Point(87, 62);
+            this.txtReservation1.Name = "txtReservation1";
+            this.txtReservation1.Size = new System.Drawing.Size(295, 21);
+            this.txtReservation1.StyleController = this.layControl;
+            this.txtReservation1.TabIndex = 4;
+            // 
+            // layReservation1
+            // 
+            this.layReservation1.Control = this.txtReservation1;
+            this.layReservation1.CustomizationFormText = "原因";
+            this.layReservation1.Location = new System.Drawing.Point(0, 50);
+            this.layReservation1.Name = "layReservation1";
+            this.layReservation1.Size = new System.Drawing.Size(374, 25);
+            this.layReservation1.Text = "原因";
+            this.layReservation1.TextSize = new System.Drawing.Size(72, 14);
             // 
             // FrmSingleProductLocked
             // 
@@ -901,6 +931,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layControlGroupBatch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layPopBatch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layLockedAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReservation1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layReservation1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -959,5 +991,7 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private Controls.BUSProductLockedEntityTextBox txtLockedAmount;
         private DevExpress.XtraLayout.LayoutControlItem layLockedAmount;
+        private Controls.BUSProductLockedEntityTextBox txtReservation1;
+        private DevExpress.XtraLayout.LayoutControlItem layReservation1;
     }
 }

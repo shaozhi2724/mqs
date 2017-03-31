@@ -82,5 +82,89 @@ namespace DQS.Controls.Properties {
                 this["IsDelDefault"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsDefaultDepartment {
+            get {
+                return ((bool)(this["IsDefaultDepartment"]));
+            }
+            set {
+                this["IsDefaultDepartment"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsModifyBatchNoForSaleBack {
+            get {
+                return ((bool)(this["IsModifyBatchNoForSaleBack"]));
+            }
+            set {
+                this["IsModifyBatchNoForSaleBack"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsControlDealerAsProductPhy {
+            get {
+                return ((bool)(this["IsControlDealerAsProductPhy"]));
+            }
+            set {
+                this["IsControlDealerAsProductPhy"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsProductLockModify {
+            get {
+                return ((bool)(this["IsProductLockModify"]));
+            }
+            set {
+                this["IsProductLockModify"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsExceptionAutoDeal {
+            get {
+                return ((bool)(this["IsExceptionAutoDeal"]));
+            }
+            set {
+                this["IsExceptionAutoDeal"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsBillPrint {
+            get {
+                return ((bool)(this["IsBillPrint"]));
+            }
+            set {
+                this["IsBillPrint"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsLockDepartment {
+            get {
+                return ((bool)(this["IsLockDepartment"]));
+            }
+            set {
+                this["IsLockDepartment"] = value;
+            }
+        }
     }
 }

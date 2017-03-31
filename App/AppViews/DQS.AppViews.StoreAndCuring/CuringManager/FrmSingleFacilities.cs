@@ -22,6 +22,10 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
         private void FrmSingleFacilities_Load(object sender, EventArgs e)
         {
             LoadType();
+            LoadDepartment();
+
+            cboStatusName.Properties.Items.Add("启用");
+            cboStatusName.Properties.Items.Add("禁用");
             if (this.Tag != null)
             {
                 GetFacilities();
@@ -30,6 +34,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
             else
             {
                 txtCreateUser.Text = GlobalItem.g_CurrentUser.UserName;
+                cboStatusName.Text = "启用";
             }
         }
 
@@ -62,24 +67,49 @@ SET
 FacilityName = '{0}',
 FacilityAddress = '{1}',
 FacilitySpec = '{2}',
-StyleName = '{3}'
-WHERE ID = {4}";
+StyleName = '{3}',
+          ProducerName = '{4}' ,
+          ProduceDate = {5} ,
+          BuyDate = {6} ,
+          EnabledDate = {7} ,
+          StatusName = '{8}' ,
+          Principal = '{9}' ,
+          DepartmentName = '{10}',
+LastUser='{11}',
+LastDate='{12}'
+WHERE ID = {13}";
                     sql = string.Format(sql, 
                         txtName.Text.Trim(),
                         txtAddress.Text.Trim(),
                         txtSpec.Text.Trim(),
                         cboStyle.Text.Trim(),
+                        txtProducerName.Text.Trim(),
+                        dteProduceDate.Text == "" ? "NULL" : "'" + dteProduceDate.DateTime.ToString() + "'",
+                        dteBuyDate.Text == "" ? "NULL" : "'" + dteBuyDate.DateTime.ToString() + "'",
+                        dteEnabledDate.Text == "" ? "NULL" : "'" + dteEnabledDate.DateTime.ToString() + "'",
+                        cboStatusName.Text,
+                        txtPrincipal.Text,
+                        cboDepartmentName.Text,
+                        GlobalItem.g_CurrentUser.UserName,
+                        DateTime.Now,
                         (int)this.Tag);
                 }
                 else
                 {
-                    sql = @"INSERT BFI_Facilities(FacilityCode,FacilityName,FacilityAddress,FacilitySpec,StyleName,CreateUser,CreateDate)
-VALUES('{0}','{1}','{2}','{3}','{4}','{5}',GETDATE())";
+                    sql = @"INSERT BFI_Facilities(FacilityCode ,FacilityName ,FacilityAddress ,FacilitySpec ,StyleName ,ProducerName ,ProduceDate ,BuyDate ,EnabledDate ,StatusName ,Principal ,DepartmentName ,CreateUser ,CreateDate)
+VALUES('{0}','{1}','{2}','{3}','{4}','{5}',{6},{7},{8},'{9}','{10}','{11}','{12}',GETDATE())";
                     sql = string.Format(sql, txtCode.Text.Trim(),
                         txtName.Text.Trim(),
                         txtAddress.Text.Trim(),
                         txtSpec.Text.Trim(),
                         cboStyle.Text.Trim(),
+                        txtProducerName.Text.Trim(),
+                        dteProduceDate.Text == "" ? "NULL" : "'" + dteProduceDate.DateTime.ToString() + "'",
+                        dteBuyDate.Text == "" ? "NULL" : "'" + dteBuyDate.DateTime.ToString() + "'",
+                        dteEnabledDate.Text == "" ? "NULL" : "'" + dteEnabledDate.DateTime.ToString() + "'",
+                        cboStatusName.Text,
+                        txtPrincipal.Text,
+                        cboDepartmentName.Text,
                         txtCreateUser.Text.Trim());
                 }
                 try
@@ -137,7 +167,7 @@ VALUES('{0}','{1}','{2}','{3}','{4}','{5}',GETDATE())";
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sql = @"SELECT FacilityCode,FacilityName,FacilityAddress,FacilitySpec,StyleName,CreateUser 
+                string sql = @"SELECT FacilityCode,FacilityName,FacilityAddress,FacilitySpec,StyleName,ProducerName,ProduceDate,BuyDate,EnabledDate,StatusName,Principal,DepartmentName,CreateUser 
 FROM BFI_Facilities WHERE ID = {0}";
                 sql = string.Format(sql, (int)this.Tag);
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
@@ -153,6 +183,13 @@ FROM BFI_Facilities WHERE ID = {0}";
                         txtAddress.Text = ds.Tables["Table"].Rows[0]["FacilityAddress"].ToString();
                         txtSpec.Text = ds.Tables["Table"].Rows[0]["FacilitySpec"].ToString();
                         cboStyle.Text = ds.Tables["Table"].Rows[0]["StyleName"].ToString();
+                        txtProducerName.Text = ds.Tables["Table"].Rows[0]["ProducerName"].ToString();
+                        dteProduceDate.Text = ds.Tables["Table"].Rows[0]["ProduceDate"].ToString() == "" ? "" : Convert.ToDateTime(ds.Tables["Table"].Rows[0]["ProduceDate"]).ToShortDateString();
+                        dteBuyDate.Text = ds.Tables["Table"].Rows[0]["BuyDate"].ToString() == "" ? "" : Convert.ToDateTime(ds.Tables["Table"].Rows[0]["BuyDate"]).ToShortDateString();
+                        dteEnabledDate.Text = ds.Tables["Table"].Rows[0]["EnabledDate"].ToString() == "" ? "" : Convert.ToDateTime(ds.Tables["Table"].Rows[0]["EnabledDate"]).ToShortDateString();
+                        cboStatusName.Text = ds.Tables["Table"].Rows[0]["StatusName"].ToString();
+                        txtPrincipal.Text = ds.Tables["Table"].Rows[0]["Principal"].ToString();
+                        cboDepartmentName.Text = ds.Tables["Table"].Rows[0]["DepartmentName"].ToString();
                         txtCreateUser.Text = ds.Tables["Table"].Rows[0]["CreateUser"].ToString();
                     }
                 }
@@ -209,6 +246,31 @@ FROM BFI_Facilities WHERE ID = {0}";
                     for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
                     {
                         cboStyle.Properties.Items.Add(ds.Tables["Table"].Rows[i]["StyleName"].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+        private void LoadDepartment()
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                string sql = "SELECT DepartmentName FROM dbo.BFI_Department";
+                SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
+                DataSet ds = new DataSet();
+                try
+                {
+                    sda.Fill(ds, "Table");
+                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                    {
+                        cboDepartmentName.Properties.Items.Add(ds.Tables["Table"].Rows[i]["DepartmentName"].ToString());
                     }
                 }
                 catch (Exception ex)

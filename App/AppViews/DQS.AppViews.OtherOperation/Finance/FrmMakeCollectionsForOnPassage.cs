@@ -473,6 +473,12 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.Busine
                         command.ExecuteNonQuery();
                     }
 
+                    foreach (int detailid in DetailList)
+                    {
+                        command = new SqlCommand(String.Format(insertMakecollectionsDetail, detailid, txtMakeCollectionsCode.Text.Trim(),txtVoucherCode.Text.Trim()), conn);
+                        command.ExecuteNonQuery();
+                    }
+
                     if (cboChoose.Text == "按单据收款")
                     {
                         for (int i = 0; i < dt.Rows.Count; i++)
@@ -502,12 +508,6 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.Busine
                             saveDealerCode,
                             txtDealerName.Text.Trim(),
                             saveDealerSpell), conn);
-                        command.ExecuteNonQuery();
-                    }
-
-                    foreach (int detailid in DetailList)
-                    {
-                        command = new SqlCommand(String.Format(insertMakecollectionsDetail, detailid, txtMakeCollectionsCode.Text.Trim(),txtVoucherCode.Text.Trim()), conn);
                         command.ExecuteNonQuery();
                     }
                 }

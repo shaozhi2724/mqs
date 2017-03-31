@@ -31,6 +31,8 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
         const string certificateCategory = "ProviderCertificate";
         private string[] m_ImageType = new string[] { "BMP", "JPG", "GIF", "PNG", "PCX", "DCX", "EMF", "JIF", "JPE", "JFIF", "JPEG", "RLE", "DIB", "PCD", "DXF", "ICO", "WMF", "TIFF", "TGA" };
 
+        //string opers = "";
+
         private Guid antiApproveID;
         public FrmSingleFirstProviderChangeDetail()
         {
@@ -276,10 +278,11 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                 cbxPrice.EditValue = entity.SalePriceListID;
             }
 
-            if (!entity.IsNullField("Reservation5"))
-            {
-                this.cboOperator.Text = entity.Reservation5;
-            }
+            //if (!entity.IsNullField("Reservation5"))
+            //{
+            //    opers = entity.Reservation5;
+            //    this.cboOperator.Text = entity.Reservation5;
+            //}
         }
 
         private void chkCheck_CheckedChanged(object sender, EventArgs e)
@@ -639,6 +642,20 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
         private void cbxIndustryStyle_SelectedIndexChanged(object sender, EventArgs e)
         {
             BindProductStyles();
+        }
+
+        private void cboOperator_QueryCloseUp(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string txt = cboOperator.SelectedText;
+
+            if (txtOpers.Text == "")
+            {
+                txtOpers.Text = txt;
+            }
+            else if (!txtOpers.Text.Contains(txt))
+            {
+                txtOpers.Text += ("," + txt);
+            }
         }
     }
 }

@@ -20,6 +20,8 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
         private int? m_id;
         List<string> operators = new List<string>();
 
+        //string opers = "";
+
         public FrmSingleFirstProvider()
         {
             InitializeComponent();
@@ -406,10 +408,11 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                 cbxPrice.EditValue = entity.SalePriceListID;
             }
 
-            if (!entity.IsNullField("Reservation5"))
-            {
-                this.cboOperator.Text = entity.Reservation5;
-            }
+            //if (!entity.IsNullField("Reservation5"))
+            //{
+            //    opers = entity.Reservation5;
+            //    this.cboOperator.Text = entity.Reservation5;
+            //}
         }
 
         /// <summary>
@@ -441,10 +444,14 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
             }
             entity.SalePriceListID = Convert.ToInt32(cbxPrice.EditValue);
 
-            if (this.cboOperator.Text != "")
-            {
-                entity.Reservation5 = this.cboOperator.Text;
-            }
+            //if (this.cboOperator.Text != "")
+            //{
+            //    entity.Reservation5 = this.cboOperator.Text;
+            //}
+            //else
+            //{
+            //    entity.Reservation5 = "";
+            //}
         }
 
         private void chkCheck_CheckedChanged(object sender, EventArgs e)
@@ -507,6 +514,19 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
             {
                 layBusinessRange.CustomizationFormText = "经营范围";
                 layBusinessRange.Text = "经营范围";
+            }
+        }
+
+        private void cboOperator_QueryCloseUp(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string txt = cboOperator.SelectedText;
+            if (txtOpers.Text == "")
+            {
+                txtOpers.Text = txt;
+            }
+            else if (!txtOpers.Text.Contains(txt))
+            {
+                txtOpers.Text += ("," + txt);
             }
         }
     }

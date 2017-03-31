@@ -44,6 +44,7 @@
             this.txtIncludeTaxPrice = new DevExpress.XtraEditors.TextEdit();
             this.txtTaxPrice = new DevExpress.XtraEditors.TextEdit();
             this.txtNotIncludeTaxPrice = new DevExpress.XtraEditors.TextEdit();
+            this.txtDealerName = new DevExpress.XtraEditors.TextEdit();
             this.txtVoucherCode = new DevExpress.XtraEditors.TextEdit();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
@@ -54,7 +55,8 @@
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.txtDealerName = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
+            this.txtPaymentCode = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
@@ -69,8 +71,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtIncludeTaxPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTaxPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNotIncludeTaxPrice.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtVoucherCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealerName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtVoucherCode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPaymentCode.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl
@@ -81,7 +84,7 @@
             this.gridControl.Location = new System.Drawing.Point(3, 109);
             this.gridControl.MainView = this.gridView;
             this.gridControl.Name = "gridControl";
-            this.gridControl.Size = new System.Drawing.Size(689, 271);
+            this.gridControl.Size = new System.Drawing.Size(873, 271);
             this.gridControl.TabIndex = 3;
             this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView});
@@ -103,14 +106,14 @@
             this.panelControl2.Controls.Add(this.labelControl1);
             this.panelControl2.Location = new System.Drawing.Point(3, 382);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(690, 48);
+            this.panelControl2.Size = new System.Drawing.Size(874, 48);
             this.panelControl2.TabIndex = 5;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(581, 11);
+            this.btnCancel.Location = new System.Drawing.Point(765, 11);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(87, 27);
             this.btnCancel.TabIndex = 0;
@@ -119,7 +122,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(442, 11);
+            this.btnSave.Location = new System.Drawing.Point(626, 11);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(87, 27);
             this.btnSave.TabIndex = 0;
@@ -149,6 +152,7 @@
             this.panelControl1.Controls.Add(this.btnOnPassage);
             this.panelControl1.Controls.Add(this.cboBillingType);
             this.panelControl1.Controls.Add(this.cboTax);
+            this.panelControl1.Controls.Add(this.txtPaymentCode);
             this.panelControl1.Controls.Add(this.txtTaxCode);
             this.panelControl1.Controls.Add(this.txtIncludeTaxPrice);
             this.panelControl1.Controls.Add(this.txtTaxPrice);
@@ -158,6 +162,7 @@
             this.panelControl1.Controls.Add(this.labelControl10);
             this.panelControl1.Controls.Add(this.labelControl6);
             this.panelControl1.Controls.Add(this.labelControl9);
+            this.panelControl1.Controls.Add(this.labelControl11);
             this.panelControl1.Controls.Add(this.labelControl5);
             this.panelControl1.Controls.Add(this.labelControl8);
             this.panelControl1.Controls.Add(this.labelControl4);
@@ -166,7 +171,7 @@
             this.panelControl1.Controls.Add(this.labelControl3);
             this.panelControl1.Location = new System.Drawing.Point(3, 3);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(689, 104);
+            this.panelControl1.Size = new System.Drawing.Size(873, 104);
             this.panelControl1.TabIndex = 7;
             // 
             // deBillDate
@@ -201,7 +206,7 @@
             // 
             // cboTax
             // 
-            this.cboTax.Location = new System.Drawing.Point(581, 42);
+            this.cboTax.Location = new System.Drawing.Point(581, 43);
             this.cboTax.Name = "cboTax";
             this.cboTax.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -211,9 +216,9 @@
             // 
             // txtTaxCode
             // 
-            this.txtTaxCode.Location = new System.Drawing.Point(419, 42);
+            this.txtTaxCode.Location = new System.Drawing.Point(228, 42);
             this.txtTaxCode.Name = "txtTaxCode";
-            this.txtTaxCode.Size = new System.Drawing.Size(114, 21);
+            this.txtTaxCode.Size = new System.Drawing.Size(107, 21);
             this.txtTaxCode.TabIndex = 15;
             // 
             // txtIncludeTaxPrice
@@ -238,11 +243,19 @@
             this.txtNotIncludeTaxPrice.Size = new System.Drawing.Size(114, 21);
             this.txtNotIncludeTaxPrice.TabIndex = 15;
             // 
+            // txtDealerName
+            // 
+            this.txtDealerName.Location = new System.Drawing.Point(76, 11);
+            this.txtDealerName.Name = "txtDealerName";
+            this.txtDealerName.Size = new System.Drawing.Size(259, 21);
+            this.txtDealerName.TabIndex = 15;
+            this.txtDealerName.Click += new System.EventHandler(this.txtDealerName_Click);
+            // 
             // txtVoucherCode
             // 
             this.txtVoucherCode.Location = new System.Drawing.Point(76, 42);
             this.txtVoucherCode.Name = "txtVoucherCode";
-            this.txtVoucherCode.Size = new System.Drawing.Size(259, 21);
+            this.txtVoucherCode.Size = new System.Drawing.Size(104, 21);
             this.txtVoucherCode.TabIndex = 15;
             // 
             // labelControl10
@@ -271,7 +284,7 @@
             // 
             // labelControl5
             // 
-            this.labelControl5.Location = new System.Drawing.Point(341, 45);
+            this.labelControl5.Location = new System.Drawing.Point(186, 45);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(36, 14);
             this.labelControl5.TabIndex = 10;
@@ -317,19 +330,26 @@
             this.labelControl3.TabIndex = 11;
             this.labelControl3.Text = "往来单位：";
             // 
-            // txtDealerName
+            // labelControl11
             // 
-            this.txtDealerName.Location = new System.Drawing.Point(76, 11);
-            this.txtDealerName.Name = "txtDealerName";
-            this.txtDealerName.Size = new System.Drawing.Size(259, 21);
-            this.txtDealerName.TabIndex = 15;
-            this.txtDealerName.Click += new System.EventHandler(this.txtDealerName_Click);
+            this.labelControl11.Location = new System.Drawing.Point(341, 45);
+            this.labelControl11.Name = "labelControl11";
+            this.labelControl11.Size = new System.Drawing.Size(60, 14);
+            this.labelControl11.TabIndex = 10;
+            this.labelControl11.Text = "发票编码：";
+            // 
+            // txtPaymentCode
+            // 
+            this.txtPaymentCode.Location = new System.Drawing.Point(419, 42);
+            this.txtPaymentCode.Name = "txtPaymentCode";
+            this.txtPaymentCode.Size = new System.Drawing.Size(114, 21);
+            this.txtPaymentCode.TabIndex = 15;
             // 
             // FrmPaymentBill
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(696, 433);
+            this.ClientSize = new System.Drawing.Size(880, 433);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.gridControl);
@@ -355,8 +375,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtIncludeTaxPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTaxPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNotIncludeTaxPrice.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtVoucherCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDealerName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtVoucherCode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPaymentCode.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -390,5 +411,7 @@
         private DevExpress.XtraEditors.DateEdit deBillDate;
         private DevExpress.XtraEditors.LabelControl labelControl10;
         private DevExpress.XtraEditors.TextEdit txtDealerName;
+        private DevExpress.XtraEditors.TextEdit txtPaymentCode;
+        private DevExpress.XtraEditors.LabelControl labelControl11;
     }
 }

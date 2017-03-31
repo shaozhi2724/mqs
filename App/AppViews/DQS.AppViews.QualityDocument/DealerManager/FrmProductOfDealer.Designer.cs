@@ -29,19 +29,24 @@
         private void InitializeComponent()
         {
             this.panelControl = new DevExpress.XtraEditors.PanelControl();
-            this.btnSave = new DevExpress.XtraEditors.SimpleButton();
-            this.btnDel = new DevExpress.XtraEditors.SimpleButton();
             this.gridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.btnDel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSave = new DevExpress.XtraEditors.SimpleButton();
+            this.txtCode = new DevExpress.XtraEditors.TextEdit();
+            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl)).BeginInit();
             this.panelControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl
             // 
+            this.panelControl.Controls.Add(this.txtCode);
             this.panelControl.Controls.Add(this.gridControl);
+            this.panelControl.Controls.Add(this.btnSearch);
             this.panelControl.Controls.Add(this.btnDel);
             this.panelControl.Controls.Add(this.btnSave);
             this.panelControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -49,24 +54,6 @@
             this.panelControl.Name = "panelControl";
             this.panelControl.Size = new System.Drawing.Size(907, 472);
             this.panelControl.TabIndex = 0;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(18, 15);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "保存";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnDel
-            // 
-            this.btnDel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnDel.Location = new System.Drawing.Point(153, 15);
-            this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(75, 23);
-            this.btnDel.TabIndex = 0;
-            this.btnDel.Text = "取消";
             // 
             // gridControl
             // 
@@ -87,6 +74,40 @@
             this.gridView.Name = "gridView";
             this.gridView.Click += new System.EventHandler(this.gridView_Click);
             // 
+            // btnDel
+            // 
+            this.btnDel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnDel.Location = new System.Drawing.Point(153, 15);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(75, 23);
+            this.btnDel.TabIndex = 0;
+            this.btnDel.Text = "取消";
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(18, 15);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 0;
+            this.btnSave.Text = "保存";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // txtCode
+            // 
+            this.txtCode.Location = new System.Drawing.Point(280, 17);
+            this.txtCode.Name = "txtCode";
+            this.txtCode.Size = new System.Drawing.Size(150, 21);
+            this.txtCode.TabIndex = 2;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(447, 15);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 0;
+            this.btnSearch.Text = "查询";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // FrmProductOfDealer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -103,6 +124,7 @@
             this.panelControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -114,6 +136,8 @@
         private DevExpress.XtraEditors.SimpleButton btnSave;
         private DevExpress.XtraGrid.GridControl gridControl;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView;
+        private DevExpress.XtraEditors.TextEdit txtCode;
+        private DevExpress.XtraEditors.SimpleButton btnSearch;
 
     }
 }

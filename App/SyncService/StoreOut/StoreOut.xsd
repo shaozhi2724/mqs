@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Table">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="Column">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ERP_RECEIVE_ID" type="xs:unsignedLong" />
+              <xs:element name="ORDER_ITEM_ID" type="xs:unsignedLong" />
+              <xs:element name="PRODUCT_ID" type="xs:unsignedByte" />
+              <xs:element name="QUANTITY" type="xs:unsignedByte" />
+              <xs:element name="BATCH_NO" type="xs:unsignedShort" />
+              <xs:element name="VALID_DATE" type="xs:string" />
+              <xs:element name="ORG_ID" type="xs:string" />
+              <xs:element name="PROOF_ID" type="xs:unsignedByte" />
+              <xs:element name="PROOF_DATE" type="xs:string" />
+              <xs:element name="GOODS_AMOUNT" type="xs:unsignedByte" />
+              <xs:element name="ORD_ORDER_ID" type="xs:string" />
+              <xs:element name="UP_PATITION" type="xs:unsignedShort" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

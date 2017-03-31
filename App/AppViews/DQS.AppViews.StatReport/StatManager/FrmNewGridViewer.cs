@@ -336,5 +336,28 @@ namespace DQS.AppViews.StatReport.StatManager
         {
             panelControl.Height = 33;
         }
+
+        private void gridView_DoubleClick(object sender, EventArgs e)
+        {
+            string pageName = this.Tag.ToString();
+            //设置数据
+            sysPage = GlobalMethod.GetFormPage(pageName);
+            if (sysPage != null)
+            {
+                if (!sysPage.IsNullField("PageDescription") && sysPage.PageDescription != "")
+                {
+                    if (gridView.RowCount == 0)
+                    {
+                        return;
+                    }
+                    string sql = sysPage.PageDescription + gridView.GetDataRow(gridView.FocusedRowHandle)["ID"].ToString();
+                    using (FrmNewGridViewerDetail fs = new FrmNewGridViewerDetail())
+                    {
+                        fs.sqlConditions = sql;
+                        DialogResult dr = fs.ShowDialog();
+                    }
+                }
+            }
+        }
     }
 }

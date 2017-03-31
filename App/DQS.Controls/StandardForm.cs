@@ -263,6 +263,12 @@ namespace DQS.Controls
                 case "添加入库记录":
                     this.CustomOldStoreIn();
                     break;
+                case "维修":
+                    this.CustomFacilitiesService();
+                    break;
+                case "检定":
+                    this.CustomFacilitiesVerification();
+                    break;
                 default:
                     break;
             }
@@ -768,6 +774,22 @@ namespace DQS.Controls
         protected virtual void CustomOldStoreIn()
         {
             SaveDataLog("添加入库记录");
+        }
+
+        /// <summary>
+        /// 添加设备检定记录
+        /// </summary>
+        protected virtual void CustomFacilitiesVerification()
+        {
+            SaveDataLog("检定");
+        }
+
+        /// <summary>
+        /// 添加设备维修记录
+        /// </summary>
+        protected virtual void CustomFacilitiesService()
+        {
+            SaveDataLog("维修");
         }
 
         /// <summary>

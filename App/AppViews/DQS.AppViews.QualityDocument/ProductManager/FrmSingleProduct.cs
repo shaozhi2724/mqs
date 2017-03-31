@@ -27,6 +27,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         private void FrmSingleProduct_Load(object sender, EventArgs e)
         {
+            this.cbxProductType.InitSource();
             this.cbxPhysicType.InitSource();
             this.cbxStockCondition.InitSource();
             this.cbxProductStyle.InitSource();
@@ -133,6 +134,12 @@ WHERE UP.ProductID = {0}", productID);
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (!this.ftPanel.ValidateIsNullFields()) return;
+            if (null == cbxProductType.SelectedValue)
+            {
+                XtraMessageBox.Show(cbxProductType.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                cbxProductType.Focus();
+                return;
+            }
             if (null == cbxPhysicType.SelectedValue)
             {
                 XtraMessageBox.Show(cbxPhysicType.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -222,6 +229,10 @@ WHERE UP.ProductID = {0}", productID);
         /// <param name="entity">实体</param>
         protected virtual void CustomGetEntity(BFIProductEntity entity)
         {
+            if (!entity.IsNullField("Reservation1"))
+            {
+                this.cbxProductType.SelectedValue = entity.Reservation1;
+            }
             if (!entity.IsNullField("PhysicTypeID"))
             {
                 this.cbxPhysicType.SelectedValue = entity.PhysicTypeID;
@@ -301,6 +312,11 @@ WHERE UP.ProductID = {0}", productID);
         /// <param name="entity">实体</param>
         protected virtual void CustomSetEntity(BFIProductEntity entity)
         {
+            if (this.cbxProductType.SelectedValue != null)
+            {
+                entity.Reservation1 = this.cbxProductType.SelectedValue.ToString();
+                entity.Reservation2 = this.cbxProductType.Text.Trim();
+            }
             if (this.cbxPhysicType.SelectedValue != null)
             {
                 entity.PhysicTypeID = Convert.ToInt32(this.cbxPhysicType.SelectedValue);

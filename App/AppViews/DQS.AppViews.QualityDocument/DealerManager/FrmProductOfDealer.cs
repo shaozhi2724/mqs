@@ -19,26 +19,38 @@ namespace DQS.AppViews.QualityDocument.DealerManager
             InitializeComponent();
         }
 
-        public int DealerID = 0;
+        public int SearchID = 0;
+        public string SelectSql = "";
+        public string DelSql = "";
+        public string InSql = "";
+
+
 
         //记录选择的ID
         public List<int> BillList = new List<int>();
+
+        private void FrmProductOfDealer_Load(object sender, EventArgs e)
+        {
+            gridLoad();
+            getList();
+            ReadBillList();
+        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string del = @"EXEC sp_DelDealerVSProduct {0}";
-                string insertBill = @"EXEC sp_SaveDealerVSProduct {0},{1},'{2}'";
+                string del = @"EXEC " + DelSql + " {0}";
+                string insertBill = @"EXEC " + InSql + " {0},{1},'{2}'";
 
                 try
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(String.Format(del,DealerID),conn);
+                    SqlCommand cmd = new SqlCommand(String.Format(del, SearchID), conn);
                     cmd.ExecuteNonQuery();
                     foreach (int ProductID in BillList)
                     {
-                        SqlCommand command = new SqlCommand(String.Format(insertBill,DealerID, ProductID,GlobalItem.g_CurrentUser.UserName), conn);
+                        SqlCommand command = new SqlCommand(String.Format(insertBill, SearchID, ProductID, GlobalItem.g_CurrentUser.UserName), conn);
                         command.ExecuteNonQuery();
                     }
                     XtraMessageBox.Show("保存成功。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -61,9 +73,9 @@ namespace DQS.AppViews.QualityDocument.DealerManager
             {
                 string sqlBill = @"SELECT ProductID,ProductCode AS [编号],ProductName AS [名称],CommonName AS [通用名称],ProductSpec AS [规格],
 PackageSpec AS [包装规格],ProducerName AS [生产厂商],AuthorizedNo AS [批准文号]
-FROM dbo.BFI_Product";
+FROM dbo.BFI_Product where ProductCode like '%{0}%' or productname like '%{0}%' or productspell like '%{0}%' or producername like '%{0}%'";
 
-                SqlDataAdapter sdad = new SqlDataAdapter(sqlBill, conn);
+                SqlDataAdapter sdad = new SqlDataAdapter(string.Format(sqlBill,txtCode.Text.Trim()), conn);
                 DataSet ds = new DataSet();
                 try
                 {
@@ -127,7 +139,7 @@ FROM dbo.BFI_Product";
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sqlBill = @"SELECT ProductID FROM BUS_DealerVSProduct WHERE DealerID = " + DealerID;
+                string sqlBill = SelectSql + SearchID;
 
                 SqlDataAdapter sdad = new SqlDataAdapter(sqlBill, conn);
                 DataSet ds = new DataSet();
@@ -158,8 +170,8 @@ FROM dbo.BFI_Product";
         {
             for (int i = 0; i < gridView.RowCount; i++)
             {
-                int StoreID = Convert.ToInt32(gridView.GetRowCellValue(i, "ProductID"));
-                if (BillList.Contains(StoreID))
+                int ProductID = Convert.ToInt32(gridView.GetRowCellValue(i, "ProductID"));
+                if (BillList.Contains(ProductID))
                 {
                     gridView.SetRowCellValue(i, "选择", "True");
                 }
@@ -170,10 +182,9 @@ FROM dbo.BFI_Product";
             }
         }
 
-        private void FrmProductOfDealer_Load(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
             gridLoad();
-            getList();
             ReadBillList();
         }
     }

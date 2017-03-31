@@ -28,115 +28,156 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.layPhysicType = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtPhysicType = new DQS.Controls.TextBoxEx();
-            this.layControl = new DevExpress.XtraLayout.LayoutControl();
-            this.cbxDepartment = new DQS.Controls.ComboBoxEntityEx();
-            this.dteValidateDate = new DevExpress.XtraEditors.DateEdit();
-            this.dteProduceDate = new DevExpress.XtraEditors.DateEdit();
-            this.txtDetailRemark = new DQS.Controls.BUSStoreDetailEntityTextBox();
-            this.txtProducerName = new DQS.Controls.TextBoxEx();
-            this.txtAuthorizedNo = new DQS.Controls.TextBoxEx();
-            this.txtPackageSpec = new DQS.Controls.TextBoxEx();
-            this.txtProductStyle = new DQS.Controls.TextBoxEx();
-            this.txtProductUnit = new DQS.Controls.TextBoxEx();
-            this.txtProductSpec = new DQS.Controls.TextBoxEx();
-            this.txtProductName = new DQS.Controls.TextBoxEx();
-            this.txtProductCode = new DQS.Controls.TextBoxPopupEx();
-            this.speAmount = new DevExpress.XtraEditors.SpinEdit();
-            this.txtBatchNo = new DQS.Controls.BUSStoreDetailEntityTextBox();
-            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layProductSpec = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layProductUnit = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layProductStyle = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layPackageSpec = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layAuthorizedNo = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layProducerName = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layProductCode = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layProductName = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layBatchNo = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layDetailRemark = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layProduceDate = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layValidateDate = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layDepartment = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layAmount = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ftPanel = new DQS.Controls.FieldTextBoxPanel();
             this.layControlGroup = new DevExpress.XtraLayout.LayoutControlGroup();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            ((System.ComponentModel.ISupportInitialize)(this.layPhysicType)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPhysicType.Properties)).BeginInit();
+            this.ftPanel = new DQS.Controls.FieldTextBoxPanel();
+            this.layControl = new DevExpress.XtraLayout.LayoutControl();
+            this.txtBatchNo = new DQS.Controls.TextBoxEx();
+            this.txtCause = new DQS.Controls.TextBoxEx();
+            this.txtRemark = new DQS.Controls.TextBoxEx();
+            this.cbxDepartment = new DQS.Controls.ComboBoxEntityEx();
+            this.dteValidateDate = new DevExpress.XtraEditors.DateEdit();
+            this.dteProduceDate = new DevExpress.XtraEditors.DateEdit();
+            this.txtProducerName = new DQS.Controls.TextBoxEx();
+            this.txtAuthorizedNo = new DQS.Controls.TextBoxEx();
+            this.txtPackageSpec = new DQS.Controls.TextBoxEx();
+            this.txtProductStyle = new DQS.Controls.TextBoxEx();
+            this.txtPhysicType = new DQS.Controls.TextBoxEx();
+            this.txtProductUnit = new DQS.Controls.TextBoxEx();
+            this.txtProductSpec = new DQS.Controls.TextBoxEx();
+            this.txtProductName = new DQS.Controls.TextBoxEx();
+            this.speAmount = new DevExpress.XtraEditors.SpinEdit();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layProductSpec = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProductUnit = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layPhysicType = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProductStyle = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layPackageSpec = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layAuthorizedNo = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProducerName = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProductName = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layProduceDate = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layValidateDate = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layDepartment = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layAmount = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layBatchNo = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layRemark = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layCause = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtProductCode = new DQS.Controls.TextBoxEx();
+            this.layProductCode = new DevExpress.XtraLayout.LayoutControlItem();
+            ((System.ComponentModel.ISupportInitialize)(this.layControlGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
+            this.ftPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
             this.layControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBatchNo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCause.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxDepartment.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dteValidateDate.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dteValidateDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dteProduceDate.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dteProduceDate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDetailRemark.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProducerName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAuthorizedNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPackageSpec.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductStyle.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPhysicType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductUnit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductSpec.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProductCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.speAmount.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBatchNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductSpec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductUnit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPhysicType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductStyle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layPackageSpec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layAuthorizedNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProducerName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layBatchNo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layDetailRemark)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProduceDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layValidateDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layDepartment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
-            this.ftPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layControlGroup)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layBatchNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layRemark)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layCause)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductCode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductCode)).BeginInit();
             this.SuspendLayout();
             // 
-            // layPhysicType
+            // layControlGroup
             // 
-            this.layPhysicType.Control = this.txtPhysicType;
-            this.layPhysicType.CustomizationFormText = "剂型";
-            this.layPhysicType.Location = new System.Drawing.Point(0, 50);
-            this.layPhysicType.Name = "layPhysicType";
-            this.layPhysicType.Size = new System.Drawing.Size(271, 25);
-            this.layPhysicType.Text = "剂型";
-            this.layPhysicType.TextSize = new System.Drawing.Size(72, 14);
+            this.layControlGroup.AppearanceItemCaption.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layControlGroup.AppearanceItemCaption.Options.UseFont = true;
+            this.layControlGroup.CustomizationFormText = "基本信息";
+            this.layControlGroup.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layControlGroup.GroupBordersVisible = false;
+            this.layControlGroup.Location = new System.Drawing.Point(0, 0);
+            this.layControlGroup.Name = "layControlGroup";
+            this.layControlGroup.Size = new System.Drawing.Size(971, 558);
+            this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layControlGroup.Text = "基本信息";
+            this.layControlGroup.TextVisible = false;
             // 
-            // txtPhysicType
+            // btnCancel
             // 
-            this.txtPhysicType.AlphabeticFiled = null;
-            this.txtPhysicType.IsIntegerOnly = false;
-            this.txtPhysicType.IsNullString = null;
-            this.txtPhysicType.IsNullValidate = false;
-            this.txtPhysicType.IsTransferAlphabetic = false;
-            this.txtPhysicType.Location = new System.Drawing.Point(87, 62);
-            this.txtPhysicType.Name = "txtPhysicType";
-            this.txtPhysicType.Properties.ReadOnly = true;
-            this.txtPhysicType.Size = new System.Drawing.Size(192, 21);
-            this.txtPhysicType.StyleController = this.layControl;
-            this.txtPhysicType.TabIndex = 6;
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Appearance.Options.UseFont = true;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(478, 13);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 1;
+            this.btnCancel.Text = "取消(&C)";
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Appearance.Options.UseFont = true;
+            this.btnSave.Location = new System.Drawing.Point(373, 13);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 0;
+            this.btnSave.Text = "保存(&S)";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // panelControl1
+            // 
+            this.panelControl1.Controls.Add(this.btnCancel);
+            this.panelControl1.Controls.Add(this.btnSave);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelControl1.Location = new System.Drawing.Point(0, 249);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(567, 48);
+            this.panelControl1.TabIndex = 3;
+            // 
+            // ftPanel
+            // 
+            this.ftPanel.Controls.Add(this.layControl);
+            this.ftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ftPanel.Location = new System.Drawing.Point(0, 0);
+            this.ftPanel.Name = "ftPanel";
+            this.ftPanel.Size = new System.Drawing.Size(567, 249);
+            this.ftPanel.TabIndex = 4;
+            this.ftPanel.TypeOfEntity = DQS.Module.EntityType2.BUSStoreDetailEntity;
             // 
             // layControl
             // 
+            this.layControl.Controls.Add(this.txtProductCode);
+            this.layControl.Controls.Add(this.txtBatchNo);
+            this.layControl.Controls.Add(this.txtCause);
+            this.layControl.Controls.Add(this.txtRemark);
             this.layControl.Controls.Add(this.cbxDepartment);
             this.layControl.Controls.Add(this.dteValidateDate);
             this.layControl.Controls.Add(this.dteProduceDate);
-            this.layControl.Controls.Add(this.txtDetailRemark);
             this.layControl.Controls.Add(this.txtProducerName);
             this.layControl.Controls.Add(this.txtAuthorizedNo);
             this.layControl.Controls.Add(this.txtPackageSpec);
@@ -145,9 +186,7 @@
             this.layControl.Controls.Add(this.txtProductUnit);
             this.layControl.Controls.Add(this.txtProductSpec);
             this.layControl.Controls.Add(this.txtProductName);
-            this.layControl.Controls.Add(this.txtProductCode);
             this.layControl.Controls.Add(this.speAmount);
-            this.layControl.Controls.Add(this.txtBatchNo);
             this.layControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layControl.Location = new System.Drawing.Point(2, 2);
             this.layControl.Name = "layControl";
@@ -155,6 +194,45 @@
             this.layControl.Size = new System.Drawing.Size(563, 245);
             this.layControl.TabIndex = 0;
             this.layControl.Text = "layoutControl1";
+            // 
+            // txtBatchNo
+            // 
+            this.txtBatchNo.AlphabeticFiled = null;
+            this.txtBatchNo.IsIntegerOnly = false;
+            this.txtBatchNo.IsNullString = "批号不能为空";
+            this.txtBatchNo.IsNullValidate = true;
+            this.txtBatchNo.IsTransferAlphabetic = false;
+            this.txtBatchNo.Location = new System.Drawing.Point(87, 137);
+            this.txtBatchNo.Name = "txtBatchNo";
+            this.txtBatchNo.Size = new System.Drawing.Size(464, 21);
+            this.txtBatchNo.StyleController = this.layControl;
+            this.txtBatchNo.TabIndex = 8;
+            // 
+            // txtCause
+            // 
+            this.txtCause.AlphabeticFiled = null;
+            this.txtCause.IsIntegerOnly = false;
+            this.txtCause.IsNullString = "原因不可为空";
+            this.txtCause.IsNullValidate = true;
+            this.txtCause.IsTransferAlphabetic = false;
+            this.txtCause.Location = new System.Drawing.Point(87, 212);
+            this.txtCause.Name = "txtCause";
+            this.txtCause.Size = new System.Drawing.Size(192, 21);
+            this.txtCause.StyleController = this.layControl;
+            this.txtCause.TabIndex = 10;
+            // 
+            // txtRemark
+            // 
+            this.txtRemark.AlphabeticFiled = null;
+            this.txtRemark.IsIntegerOnly = false;
+            this.txtRemark.IsNullString = null;
+            this.txtRemark.IsNullValidate = false;
+            this.txtRemark.IsTransferAlphabetic = false;
+            this.txtRemark.Location = new System.Drawing.Point(358, 212);
+            this.txtRemark.Name = "txtRemark";
+            this.txtRemark.Size = new System.Drawing.Size(193, 21);
+            this.txtRemark.StyleController = this.layControl;
+            this.txtRemark.TabIndex = 10;
             // 
             // cbxDepartment
             // 
@@ -197,20 +275,6 @@
             this.dteProduceDate.Size = new System.Drawing.Size(192, 21);
             this.dteProduceDate.StyleController = this.layControl;
             this.dteProduceDate.TabIndex = 3;
-            // 
-            // txtDetailRemark
-            // 
-            this.txtDetailRemark.AlphabeticFiled = null;
-            this.txtDetailRemark.EntityField = DQS.Module.Entities.BUSStoreDetailEntityFields2.DetailRemark;
-            this.txtDetailRemark.IsIntegerOnly = false;
-            this.txtDetailRemark.IsNullString = null;
-            this.txtDetailRemark.IsNullValidate = false;
-            this.txtDetailRemark.IsTransferAlphabetic = false;
-            this.txtDetailRemark.Location = new System.Drawing.Point(87, 212);
-            this.txtDetailRemark.Name = "txtDetailRemark";
-            this.txtDetailRemark.Size = new System.Drawing.Size(464, 21);
-            this.txtDetailRemark.StyleController = this.layControl;
-            this.txtDetailRemark.TabIndex = 11;
             // 
             // txtProducerName
             // 
@@ -268,6 +332,20 @@
             this.txtProductStyle.StyleController = this.layControl;
             this.txtProductStyle.TabIndex = 7;
             // 
+            // txtPhysicType
+            // 
+            this.txtPhysicType.AlphabeticFiled = null;
+            this.txtPhysicType.IsIntegerOnly = false;
+            this.txtPhysicType.IsNullString = null;
+            this.txtPhysicType.IsNullValidate = false;
+            this.txtPhysicType.IsTransferAlphabetic = false;
+            this.txtPhysicType.Location = new System.Drawing.Point(87, 62);
+            this.txtPhysicType.Name = "txtPhysicType";
+            this.txtPhysicType.Properties.ReadOnly = true;
+            this.txtPhysicType.Size = new System.Drawing.Size(192, 21);
+            this.txtPhysicType.StyleController = this.layControl;
+            this.txtPhysicType.TabIndex = 6;
+            // 
             // txtProductUnit
             // 
             this.txtProductUnit.AlphabeticFiled = null;
@@ -310,33 +388,6 @@
             this.txtProductName.StyleController = this.layControl;
             this.txtProductName.TabIndex = 3;
             // 
-            // txtProductCode
-            // 
-            this.txtProductCode.AlphabeticFiled = null;
-            this.txtProductCode.EditData = null;
-            this.txtProductCode.Fields = "产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,单位,包装规格型号,产品类别,注册证号";
-            this.txtProductCode.Filter = null;
-            this.txtProductCode.FormatQueryString = "[产品编号] LIKE \'%{0}%\' OR [产品名称] LIKE \'%{0}%\' OR [产品名称Spell] LIKE \'%{0}%\'";
-            this.txtProductCode.GroupColumn = null;
-            this.txtProductCode.IsIntegerOnly = false;
-            this.txtProductCode.IsNullString = "产品编号不能为空。";
-            this.txtProductCode.IsNullValidate = true;
-            this.txtProductCode.IsTransferAlphabetic = false;
-            this.txtProductCode.Location = new System.Drawing.Point(87, 12);
-            this.txtProductCode.MemberText = "产品编号";
-            this.txtProductCode.MemberValue = "产品ID";
-            this.txtProductCode.Name = "txtProductCode";
-            this.txtProductCode.PageSize = 0;
-            this.txtProductCode.PrimaryField = "产品ID";
-            this.txtProductCode.Properties.Appearance.BackColor = System.Drawing.Color.White;
-            this.txtProductCode.Properties.Appearance.Options.UseBackColor = true;
-            this.txtProductCode.Properties.ReadOnly = true;
-            this.txtProductCode.Size = new System.Drawing.Size(192, 21);
-            this.txtProductCode.StyleController = this.layControl;
-            this.txtProductCode.TabIndex = 3;
-            this.txtProductCode.ViewName = "vw_NewProductStoreDetail";
-            this.txtProductCode.PopupClosing += new DQS.Controls.TextBoxPopupEx.OnPopupClosingDelegate(this.txtProductCode_PopupClosing);
-            // 
             // speAmount
             // 
             this.speAmount.EditValue = new decimal(new int[] {
@@ -355,20 +406,6 @@
             this.speAmount.StyleController = this.layControl;
             this.speAmount.TabIndex = 1;
             // 
-            // txtBatchNo
-            // 
-            this.txtBatchNo.AlphabeticFiled = null;
-            this.txtBatchNo.EntityField = DQS.Module.Entities.BUSStoreDetailEntityFields2.BatchNo;
-            this.txtBatchNo.IsIntegerOnly = false;
-            this.txtBatchNo.IsNullString = "批号不能为空。";
-            this.txtBatchNo.IsNullValidate = true;
-            this.txtBatchNo.IsTransferAlphabetic = false;
-            this.txtBatchNo.Location = new System.Drawing.Point(87, 137);
-            this.txtBatchNo.Name = "txtBatchNo";
-            this.txtBatchNo.Size = new System.Drawing.Size(464, 21);
-            this.txtBatchNo.StyleController = this.layControl;
-            this.txtBatchNo.TabIndex = 0;
-            // 
             // layoutControlGroup1
             // 
             this.layoutControlGroup1.CustomizationFormText = "期初入库";
@@ -382,14 +419,15 @@
             this.layPackageSpec,
             this.layAuthorizedNo,
             this.layProducerName,
-            this.layProductCode,
             this.layProductName,
-            this.layBatchNo,
-            this.layDetailRemark,
             this.layProduceDate,
             this.layValidateDate,
             this.layDepartment,
-            this.layAmount});
+            this.layAmount,
+            this.layBatchNo,
+            this.layRemark,
+            this.layCause,
+            this.layProductCode});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layControlGroup";
             this.layoutControlGroup1.Size = new System.Drawing.Size(563, 245);
@@ -416,6 +454,16 @@
             this.layProductUnit.Size = new System.Drawing.Size(272, 25);
             this.layProductUnit.Text = "单位";
             this.layProductUnit.TextSize = new System.Drawing.Size(72, 14);
+            // 
+            // layPhysicType
+            // 
+            this.layPhysicType.Control = this.txtPhysicType;
+            this.layPhysicType.CustomizationFormText = "剂型";
+            this.layPhysicType.Location = new System.Drawing.Point(0, 50);
+            this.layPhysicType.Name = "layPhysicType";
+            this.layPhysicType.Size = new System.Drawing.Size(271, 25);
+            this.layPhysicType.Text = "剂型";
+            this.layPhysicType.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layProductStyle
             // 
@@ -457,16 +505,6 @@
             this.layProducerName.Text = "生产厂商";
             this.layProducerName.TextSize = new System.Drawing.Size(72, 14);
             // 
-            // layProductCode
-            // 
-            this.layProductCode.Control = this.txtProductCode;
-            this.layProductCode.CustomizationFormText = "产品编号";
-            this.layProductCode.Location = new System.Drawing.Point(0, 0);
-            this.layProductCode.Name = "layProductCode";
-            this.layProductCode.Size = new System.Drawing.Size(271, 25);
-            this.layProductCode.Text = "产品编号";
-            this.layProductCode.TextSize = new System.Drawing.Size(72, 14);
-            // 
             // layProductName
             // 
             this.layProductName.Control = this.txtProductName;
@@ -476,26 +514,6 @@
             this.layProductName.Size = new System.Drawing.Size(272, 25);
             this.layProductName.Text = "产品名称";
             this.layProductName.TextSize = new System.Drawing.Size(72, 14);
-            // 
-            // layBatchNo
-            // 
-            this.layBatchNo.Control = this.txtBatchNo;
-            this.layBatchNo.CustomizationFormText = "批号";
-            this.layBatchNo.Location = new System.Drawing.Point(0, 125);
-            this.layBatchNo.Name = "layBatchNo";
-            this.layBatchNo.Size = new System.Drawing.Size(543, 25);
-            this.layBatchNo.Text = "批号";
-            this.layBatchNo.TextSize = new System.Drawing.Size(72, 14);
-            // 
-            // layDetailRemark
-            // 
-            this.layDetailRemark.Control = this.txtDetailRemark;
-            this.layDetailRemark.CustomizationFormText = "备注";
-            this.layDetailRemark.Location = new System.Drawing.Point(0, 200);
-            this.layDetailRemark.Name = "layDetailRemark";
-            this.layDetailRemark.Size = new System.Drawing.Size(543, 25);
-            this.layDetailRemark.Text = "备注";
-            this.layDetailRemark.TextSize = new System.Drawing.Size(72, 14);
             // 
             // layProduceDate
             // 
@@ -537,63 +555,59 @@
             this.layAmount.Text = "库存数量";
             this.layAmount.TextSize = new System.Drawing.Size(72, 14);
             // 
-            // ftPanel
+            // layBatchNo
             // 
-            this.ftPanel.Controls.Add(this.layControl);
-            this.ftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ftPanel.Location = new System.Drawing.Point(0, 0);
-            this.ftPanel.Name = "ftPanel";
-            this.ftPanel.Size = new System.Drawing.Size(567, 249);
-            this.ftPanel.TabIndex = 4;
-            this.ftPanel.TypeOfEntity = DQS.Module.EntityType2.BUSStoreDetailEntity;
+            this.layBatchNo.Control = this.txtBatchNo;
+            this.layBatchNo.CustomizationFormText = "批号";
+            this.layBatchNo.Location = new System.Drawing.Point(0, 125);
+            this.layBatchNo.Name = "layBatchNo";
+            this.layBatchNo.Size = new System.Drawing.Size(543, 25);
+            this.layBatchNo.Text = "批号";
+            this.layBatchNo.TextSize = new System.Drawing.Size(72, 14);
             // 
-            // layControlGroup
+            // layRemark
             // 
-            this.layControlGroup.AppearanceItemCaption.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layControlGroup.AppearanceItemCaption.Options.UseFont = true;
-            this.layControlGroup.CustomizationFormText = "基本信息";
-            this.layControlGroup.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.layControlGroup.GroupBordersVisible = false;
-            this.layControlGroup.Location = new System.Drawing.Point(0, 0);
-            this.layControlGroup.Name = "layControlGroup";
-            this.layControlGroup.Size = new System.Drawing.Size(971, 558);
-            this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layControlGroup.Text = "基本信息";
-            this.layControlGroup.TextVisible = false;
+            this.layRemark.Control = this.txtRemark;
+            this.layRemark.CustomizationFormText = "备注";
+            this.layRemark.Location = new System.Drawing.Point(271, 200);
+            this.layRemark.Name = "layRemark";
+            this.layRemark.Size = new System.Drawing.Size(272, 25);
+            this.layRemark.Text = "备注";
+            this.layRemark.TextSize = new System.Drawing.Size(72, 14);
             // 
-            // btnCancel
+            // layCause
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Appearance.Options.UseFont = true;
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(478, 13);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "取消(&C)";
+            this.layCause.Control = this.txtCause;
+            this.layCause.CustomizationFormText = "原因";
+            this.layCause.Location = new System.Drawing.Point(0, 200);
+            this.layCause.Name = "layCause";
+            this.layCause.Size = new System.Drawing.Size(271, 25);
+            this.layCause.Text = "原因";
+            this.layCause.TextSize = new System.Drawing.Size(72, 14);
             // 
-            // btnSave
+            // txtProductCode
             // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Appearance.Options.UseFont = true;
-            this.btnSave.Location = new System.Drawing.Point(373, 13);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "保存(&S)";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.txtProductCode.AlphabeticFiled = null;
+            this.txtProductCode.IsIntegerOnly = false;
+            this.txtProductCode.IsNullString = null;
+            this.txtProductCode.IsNullValidate = false;
+            this.txtProductCode.IsTransferAlphabetic = false;
+            this.txtProductCode.Location = new System.Drawing.Point(87, 12);
+            this.txtProductCode.Name = "txtProductCode";
+            this.txtProductCode.Properties.ReadOnly = true;
+            this.txtProductCode.Size = new System.Drawing.Size(192, 21);
+            this.txtProductCode.StyleController = this.layControl;
+            this.txtProductCode.TabIndex = 3;
             // 
-            // panelControl1
+            // layProductCode
             // 
-            this.panelControl1.Controls.Add(this.btnCancel);
-            this.panelControl1.Controls.Add(this.btnSave);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl1.Location = new System.Drawing.Point(0, 249);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(567, 48);
-            this.panelControl1.TabIndex = 3;
+            this.layProductCode.Control = this.txtProductCode;
+            this.layProductCode.CustomizationFormText = "编号";
+            this.layProductCode.Location = new System.Drawing.Point(0, 0);
+            this.layProductCode.Name = "layProductCode";
+            this.layProductCode.Size = new System.Drawing.Size(271, 25);
+            this.layProductCode.Text = "编号";
+            this.layProductCode.TextSize = new System.Drawing.Size(72, 14);
             // 
             // FrmSingleStoreDetail
             // 
@@ -607,46 +621,48 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "修改批号相关";
             this.Load += new System.EventHandler(this.FrmSingleStoreDetail_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.layPhysicType)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPhysicType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layControlGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).EndInit();
+            this.ftPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).EndInit();
             this.layControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtBatchNo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCause.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxDepartment.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dteValidateDate.Properties.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dteValidateDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dteProduceDate.Properties.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dteProduceDate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDetailRemark.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProducerName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAuthorizedNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPackageSpec.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductStyle.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPhysicType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductUnit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductSpec.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProductName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProductCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.speAmount.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBatchNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductSpec)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductUnit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPhysicType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductStyle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layPackageSpec)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layAuthorizedNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProducerName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layProductCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProductName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layBatchNo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layDetailRemark)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layProduceDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layValidateDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layDepartment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).EndInit();
-            this.ftPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layControlGroup)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.layBatchNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layRemark)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layCause)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductCode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layProductCode)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -659,7 +675,6 @@
         private Controls.ComboBoxEntityEx cbxDepartment;
         private DevExpress.XtraEditors.DateEdit dteValidateDate;
         private DevExpress.XtraEditors.DateEdit dteProduceDate;
-        private Controls.BUSStoreDetailEntityTextBox txtDetailRemark;
         public Controls.TextBoxEx txtProducerName;
         public Controls.TextBoxEx txtAuthorizedNo;
         public Controls.TextBoxEx txtPackageSpec;
@@ -667,9 +682,7 @@
         public Controls.TextBoxEx txtProductUnit;
         public Controls.TextBoxEx txtProductSpec;
         public Controls.TextBoxEx txtProductName;
-        public Controls.TextBoxPopupEx txtProductCode;
         private DevExpress.XtraEditors.SpinEdit speAmount;
-        private Controls.BUSStoreDetailEntityTextBox txtBatchNo;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraLayout.LayoutControlItem layProductSpec;
         private DevExpress.XtraLayout.LayoutControlItem layProductUnit;
@@ -677,10 +690,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layPackageSpec;
         private DevExpress.XtraLayout.LayoutControlItem layAuthorizedNo;
         private DevExpress.XtraLayout.LayoutControlItem layProducerName;
-        private DevExpress.XtraLayout.LayoutControlItem layProductCode;
         private DevExpress.XtraLayout.LayoutControlItem layProductName;
-        private DevExpress.XtraLayout.LayoutControlItem layBatchNo;
-        private DevExpress.XtraLayout.LayoutControlItem layDetailRemark;
         private DevExpress.XtraLayout.LayoutControlItem layProduceDate;
         private DevExpress.XtraLayout.LayoutControlItem layValidateDate;
         private DevExpress.XtraLayout.LayoutControlItem layDepartment;
@@ -690,6 +700,14 @@
         private DevExpress.XtraEditors.SimpleButton btnCancel;
         private DevExpress.XtraEditors.SimpleButton btnSave;
         private DevExpress.XtraEditors.PanelControl panelControl1;
+        public Controls.TextBoxEx txtBatchNo;
+        public Controls.TextBoxEx txtRemark;
+        private DevExpress.XtraLayout.LayoutControlItem layBatchNo;
+        private DevExpress.XtraLayout.LayoutControlItem layRemark;
+        public Controls.TextBoxEx txtCause;
+        private DevExpress.XtraLayout.LayoutControlItem layCause;
+        public Controls.TextBoxEx txtProductCode;
+        private DevExpress.XtraLayout.LayoutControlItem layProductCode;
 
 
     }

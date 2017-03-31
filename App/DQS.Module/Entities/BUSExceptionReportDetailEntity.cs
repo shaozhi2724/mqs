@@ -50,10 +50,22 @@ namespace DQS.Module.Entities
 			set { this.SetValue("ValidateDate", value); } 
 		}
 
+        public int LockAmount
+		{
+            get { return (int)this.GetValue("LockAmount"); }
+            set { this.SetValue("LockAmount", value); } 
+		}
+
 		public int Amount
 		{
 			get { return (int)this.GetValue("Amount"); } 
 			set { this.SetValue("Amount", value); } 
+		}
+
+        public int ResultAmount
+		{
+            get { return (int)this.GetValue("ResultAmount"); }
+            set { this.SetValue("ResultAmount", value); } 
 		}
 
 		public string DetailContent
@@ -162,7 +174,9 @@ namespace DQS.Module.Entities
 			this.Fields.Add("BatchNo", BUSExceptionReportDetailEntityFields.BatchNo);
 			this.Fields.Add("ProduceDate", BUSExceptionReportDetailEntityFields.ProduceDate);
 			this.Fields.Add("ValidateDate", BUSExceptionReportDetailEntityFields.ValidateDate);
+            this.Fields.Add("LockAmount", BUSExceptionReportDetailEntityFields.LockAmount);
 			this.Fields.Add("Amount", BUSExceptionReportDetailEntityFields.Amount);
+            this.Fields.Add("ResultAmount", BUSExceptionReportDetailEntityFields.ResultAmount);
 			this.Fields.Add("DetailContent", BUSExceptionReportDetailEntityFields.DetailContent);
 			this.Fields.Add("CreateUserID", BUSExceptionReportDetailEntityFields.CreateUserID);
 			this.Fields.Add("CreateDate", BUSExceptionReportDetailEntityFields.CreateDate);
@@ -216,9 +230,19 @@ namespace DQS.Module.Entities
 			get { return new EntityField("BUS_ExceptionReportDetail", 5, "ValidateDate", SqlDbType.DateTime, false, false, false, true); }
 		}
 
+        public static EntityField LockAmount
+		{
+            get { return new EntityField("BUS_ExceptionReportDetail", 6, "LockAmount", SqlDbType.Int, false, false, false, true); }
+		}
+
 		public static EntityField Amount
 		{
 			get { return new EntityField("BUS_ExceptionReportDetail", 6, "Amount", SqlDbType.Int, false, false, false, true); }
+		}
+
+        public static EntityField ResultAmount
+		{
+            get { return new EntityField("BUS_ExceptionReportDetail", 6, "ResultAmount", SqlDbType.Int, false, false, false, true); }
 		}
 
 		public static EntityField DetailContent
@@ -321,7 +345,11 @@ namespace DQS.Module.Entities
 
 		ValidateDate,
 
+        LockAmount,
+
 		Amount,
+
+        ResultAmount,
 
 		DetailContent,
 

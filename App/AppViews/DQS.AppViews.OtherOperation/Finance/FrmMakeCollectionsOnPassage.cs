@@ -70,33 +70,11 @@ namespace DQS.AppViews.OtherOperation.Finance
             {
                 string sql = @"EXEC sp_ShowMakeCollectionsOnPassage '{0}','{1}','{2}','{3}','{4}'";
                 sql = string.Format(sql, deStartDate.Text.Trim(), deEndDate.Text.Trim(), txtDealerCode.Text.Trim(), txtBillCode.Text.Trim(), txtBusinessPerson.Text.Trim());
-//SELECT BusinessBillID AS [ID] ,
-//          BusinessBillCode AS [单据编号] ,
-//          DealerName AS [往来单位名称] ,
-//          TotalPrice AS [总金额] ,
-//          (SELECT SUM((UnitPrice-PurchaasePrice)*Amount) FROM dbo.FIN_MakeCollectionsOnPassageDetail mo WHERE mo.BusinessBillID = m.BusinessBillID) AS [利润],
-//          OperatePerson AS [开票员] ,
-//          BusinessPerson AS [业务员] ,
-//DepartmentName as [部门],
-//          BusinessBillDate AS [下单日期] ,
-//          DealerCode AS [往来单位编码] ,
-//          DealerSpell AS [往来单位简拼] ,
-//          DealerType AS [往来单位类型] ,
-//          StoreOutPerson AS [出库员] ,
-//          StoreOutDate AS [出库日期] ,
-//          OperateDate AS [操作时间] 
-//FROM FIN_MakeCollectionsOnPassage m WHERE (DealerCode LIKE '%" + txtDealerCode.Text.Trim() + "%' OR DealerName LIKE '%" + txtDealerCode.Text.Trim() + "%' OR DealerSpell LIKE '%" + txtDealerCode.Text.Trim() + "%') AND (BusinessBillCode LIKE '%" + txtBillCode.Text.Trim() + "%') AND (BusinessPerson LIKE '%" + txtBusinessPerson.Text.Trim() + "%' OR dbo.fn_GetPy(BusinessPerson) LIKE '%" + txtBusinessPerson.Text.Trim() + "%')" + sqlSearch;
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 try
                 {
                     sda.Fill(ds, "Table");
-                    //decimal Price = 0;
-                    //for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
-                    //{
-                    //    Price += Convert.ToDecimal(ds.Tables["Table"].Rows[i]["总金额"]);
-                    //}
-                    //lblTotalPrice.Text = Price.ToString();
 
                     gridControl.DataSource = ds.Tables["Table"];
                     gridView.OptionsView.ColumnAutoWidth = false;
@@ -105,6 +83,10 @@ namespace DQS.AppViews.OtherOperation.Finance
 
                     gridView.Columns["总金额"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
                     gridView.Columns["总金额"].SummaryItem.DisplayFormat = "合计: {0}";
+                    gridView.Columns["实际总金额"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                    gridView.Columns["实际总金额"].SummaryItem.DisplayFormat = "合计: {0}";
+                    gridView.Columns["利润"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                    gridView.Columns["利润"].SummaryItem.DisplayFormat = "合计: {0}";
 
                     for (int i = 0; i < gridView.Columns.Count; i++)
                     {
@@ -145,14 +127,13 @@ namespace DQS.AppViews.OtherOperation.Finance
             {
                 using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
                 {
-                    string insertBill = @"DELETE FIN_MakeCollectionsOnPassage WHERE BusinessBillID = '{0}'
-
-DELETE FIN_MakeCollectionsOnPassageDetail WHERE BusinessBillID = '{0}'
-";
+                    int detailID = int.Parse(gridView.GetDataRow(gridView.FocusedRowHandle)["DetailID"].ToString());
+                    int storeID = int.Parse(gridView.GetDataRow(gridView.FocusedRowHandle)["ID"].ToString());
+                    string insertBill = @"EXEC sp_DelMakeCollectionsOnPassageDetail {0},{1}";
                     try
                     {
                         conn.Open();
-                        SqlCommand Bcommand = new SqlCommand(String.Format(insertBill, ((gridView.GetDataRow(gridView.FocusedRowHandle)["ID"].ToString()))), conn);
+                        SqlCommand Bcommand = new SqlCommand(String.Format(insertBill, detailID,storeID), conn);
                         Bcommand.ExecuteNonQuery();
                     }
                     catch (Exception ex)

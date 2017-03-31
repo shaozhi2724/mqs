@@ -53,7 +53,7 @@ namespace DQS.AppViews.OtherOperation.Finance
                 string sql = @"
 SELECT BillCode AS [单据编号],CONVERT(NVARCHAR(60),BillDate,23) AS [单据日期],b.DealerCode AS [单位编码],b.DealerName AS [单位名称],TotalPrice AS [金额] FROM BUS_Bill b 
 INNER JOIN dbo.BFI_Dealer d ON b.DealerID = d.DealerID
-WHERE IsBillIn = 1 AND BillStatus < 3 
+WHERE IsBillIn = 1 AND b.BillTypeID = 1 AND BillStatus < 3 
 AND NOT EXISTS (SELECT * FROM dbo.FIN_Advance a WHERE b.BillCode = a.BillCode)
 AND b.BillCode LIKE '%{0}%' AND (d.DealerCode LIKE '%{1}%' OR d.DealerName LIKE '%{1}%' OR d.DealerSpell LIKE '%{1}%')";
                 sql = string.Format(sql, txtBillCode.Text.Trim(), txtDealerCode.Text.Trim());

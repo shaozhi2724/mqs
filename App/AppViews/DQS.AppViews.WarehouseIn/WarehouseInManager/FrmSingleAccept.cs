@@ -33,9 +33,31 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             this.popupGridSampling.PopupView.KeyDown += SamplingPopupView_KeyDown;
 
             RepositoryItemComboBox cbo = new RepositoryItemComboBox();
-            cbo.Items.Add("合格");
-            cbo.Items.Add("不合格");
-            this.popupGrid.PopupView.Columns["验收结果"].ColumnEdit = cbo;
+
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                string sql = "SELECT AcceptResult FROM BUS_AcceptDetail GROUP BY AcceptResult";
+                SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
+                DataSet ds = new DataSet();
+                try
+                {
+                    sda.Fill(ds, "Table");
+                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                    {
+                        cbo.Items.Add(ds.Tables["Table"].Rows[i]["AcceptResult"].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+
+            this.popupGrid.PopupView.Columns["验收结果及处置措施"].ColumnEdit = cbo;
 
             RepositoryItemComboBox cboresult = new RepositoryItemComboBox();
 
@@ -61,7 +83,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     conn.Close();
                 }
             }
-            this.popupGrid.PopupView.Columns["不合格事项及处置措施"].ColumnEdit = cboresult;
+            this.popupGrid.PopupView.Columns["不合格事项"].ColumnEdit = cboresult;
 
             if (this.Tag != null)
             {
@@ -84,6 +106,20 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 this.popupGridSampling.SetGridData(m_id.Value, false);
 
                 popupGrid.IsPurchase = txtBillTypeName.Text == "采购进货" ? true : false;
+
+                bool isback = txtBillTypeName.Text.Trim() == "销售退货" ? true : false;
+                if (isback)
+                {
+                    popupGrid.PopupView.Columns["批号"].OptionsColumn.AllowEdit = false;
+                    popupGrid.PopupView.Columns["生产日期"].OptionsColumn.AllowEdit = false;
+                    popupGrid.PopupView.Columns["有效期至"].OptionsColumn.AllowEdit = false;
+                }
+                else
+                {
+                    popupGrid.PopupView.Columns["批号"].OptionsColumn.AllowEdit = true;
+                    popupGrid.PopupView.Columns["生产日期"].OptionsColumn.AllowEdit = true;
+                    popupGrid.PopupView.Columns["有效期至"].OptionsColumn.AllowEdit = true;
+                }
 
             }
             else
@@ -237,11 +273,34 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
             this.DialogResult = DialogResult.OK;
         }*/
+        private bool ValidateResultAmount()
+        {
+            int rowCount = this.popupGrid.PopupView.RowCount;
+            for (int i = 0; i < rowCount; i++)
+            {
+                object acceptAmout = this.popupGrid.PopupView.GetRowCellValue(i, "验收数量");
+                if (acceptAmout != null && acceptAmout != DBNull.Value)
+                {
+                    object rAmount = this.popupGrid.PopupView.GetRowCellValue(i, "验收合格数量");
+                    object wAmount = this.popupGrid.PopupView.GetRowCellValue(i, "验收不合格数量");
+                    if (rAmount != null && rAmount != DBNull.Value)
+                    {
+                        if (Convert.ToInt32(rAmount) + Convert.ToInt32(wAmount) != Convert.ToInt32(acceptAmout))
+                        {
+                            XtraMessageBox.Show(String.Format("表格中第{0}行产品的合格与不合格数量填写有误，请检查后重新填写。", (i + 1)), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
+                if (!ValidateResultAmount()) return;
                 if (!this.ftPanel.ValidateIsNullFields()) return;
 
                 if (!ValidateDealerQualification()) return;
@@ -559,6 +618,11 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         if (!this.ValidateAmount()) return;
                         if (!this.ValidateBatchNo()) return;
                         if (!this.ValidateBatchDate()) return;
+
+                        for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
+                        {
+                            if (!ValidateIsSupervise(i)) return;
+                        }
                         if (!this.ValidateSamplingAmount()) return;
                         foreach (var busAcceptDetailEntity in acceptDetails)
                         {
@@ -947,6 +1011,27 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         return;
                     }
                 }
+
+                string sql = @"EXEC sp_AcceptForDamaged '{0}'";
+                sql = string.Format(sql, txtAcceptCode.Text);
+                using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                {
+                    conn.Open(); //连接数据库
+                    //必须为SqlCommand指定数据库连接和登记的事务
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -955,6 +1040,23 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             }
 
             this.DialogResult = DialogResult.OK;
+        }
+
+        public bool ValidateIsSupervise(int i)
+        {
+            object productID = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
+
+            if (productID != null && productID != DBNull.Value)
+            {
+                BFIProductEntity product = new BFIProductEntity { ProductID = (int)productID };
+                product.Fetch();
+                if (product.SuperviseSignBar.Trim() != "")
+                {
+                    DialogResult dr = XtraMessageBox.Show(string.Format("第{0}行产品：{1} 为电子监管产品，是否已经扫描电子监管码？", i + 1, product.ProductName), "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    return dr == DialogResult.Yes;
+                }
+            }
+            return true;
         }
 
         private void GenerateUnqualifiedStoreBill(BUSAcceptEntity acceptEntity, List<BUSAcceptDetailEntity> unqualifiedAcceptDetails)
@@ -1186,7 +1288,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     {
                         this.popupGrid.PopupView.SetRowCellValue(i, "验收合格数量", amount);
                         this.popupGrid.PopupView.SetRowCellValue(i, "验收不合格数量", "0");
-                        this.popupGrid.PopupView.SetRowCellValue(i, "验收结果", "合格");
+                        this.popupGrid.PopupView.SetRowCellValue(i, "验收结果及处置措施", "合格");
                     }
                 }
             }
@@ -1550,6 +1652,19 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 this.txtDealerName.Text = (this.txtBillCode.EditData as DataRow)["往来单位名称"].ToString();
                 this.txtDealerName.Tag = (this.txtBillCode.EditData as DataRow)["往来单位ID"].ToString();
                 this.txtAcceptRemark.Focus();
+                bool isback = txtBillTypeName.Text.Trim() == "销售退货" ? true : false;
+                if (isback)
+                {
+                    popupGrid.PopupView.Columns["批号"].OptionsColumn.AllowEdit = false;
+                    popupGrid.PopupView.Columns["生产日期"].OptionsColumn.AllowEdit = false;
+                    popupGrid.PopupView.Columns["有效期至"].OptionsColumn.AllowEdit = false;
+                }
+                else
+                {
+                    popupGrid.PopupView.Columns["批号"].OptionsColumn.AllowEdit = true;
+                    popupGrid.PopupView.Columns["生产日期"].OptionsColumn.AllowEdit = true;
+                    popupGrid.PopupView.Columns["有效期至"].OptionsColumn.AllowEdit = true;
+                }
 
                 object id = (this.txtBillCode.EditData as DataRow)["收货ID"].ToString();
 
@@ -1592,6 +1707,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     {
                         e.ActiveOperationColumn.PopupForm.Filter = String.Format("[产品ID] IN ({0}) ", string.Join(",", productIDs.ToArray()));
                         popupGrid.AcceptCode = txtAcceptCode.Text.Trim();
+                        popupGrid.AcceptType = txtBillTypeName.Text.Trim();
                     }
                     else
                     {

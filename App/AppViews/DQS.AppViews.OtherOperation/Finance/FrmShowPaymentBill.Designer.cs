@@ -48,6 +48,8 @@
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.btnDel = new DevExpress.XtraEditors.SimpleButton();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
+            this.txtPaymentCode = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
@@ -62,6 +64,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtBillingCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPaymentCode.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl
@@ -94,10 +97,12 @@
             this.panelControl2.Controls.Add(this.btnSearch);
             this.panelControl2.Controls.Add(this.deStartDate);
             this.panelControl2.Controls.Add(this.txtDealerCode);
+            this.panelControl2.Controls.Add(this.txtPaymentCode);
             this.panelControl2.Controls.Add(this.txtVoucherCode);
             this.panelControl2.Controls.Add(this.labelControl5);
             this.panelControl2.Controls.Add(this.labelControl4);
             this.panelControl2.Controls.Add(this.labelControl3);
+            this.panelControl2.Controls.Add(this.labelControl7);
             this.panelControl2.Controls.Add(this.labelControl2);
             this.panelControl2.Controls.Add(this.txtBillCode);
             this.panelControl2.Controls.Add(this.labelControl6);
@@ -154,7 +159,7 @@
             // 
             this.txtDealerCode.Location = new System.Drawing.Point(75, 37);
             this.txtDealerCode.Name = "txtDealerCode";
-            this.txtDealerCode.Size = new System.Drawing.Size(322, 21);
+            this.txtDealerCode.Size = new System.Drawing.Size(116, 21);
             this.txtDealerCode.TabIndex = 1;
             this.txtDealerCode.TextChanged += new System.EventHandler(this.txtChanged);
             // 
@@ -192,7 +197,7 @@
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(215, 14);
+            this.labelControl2.Location = new System.Drawing.Point(212, 14);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(36, 14);
             this.labelControl2.TabIndex = 0;
@@ -262,6 +267,22 @@
             this.btnAdd.Text = "新建";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // labelControl7
+            // 
+            this.labelControl7.Location = new System.Drawing.Point(203, 40);
+            this.labelControl7.Name = "labelControl7";
+            this.labelControl7.Size = new System.Drawing.Size(60, 14);
+            this.labelControl7.TabIndex = 0;
+            this.labelControl7.Text = "发票编号：";
+            // 
+            // txtPaymentCode
+            // 
+            this.txtPaymentCode.Location = new System.Drawing.Point(269, 37);
+            this.txtPaymentCode.Name = "txtPaymentCode";
+            this.txtPaymentCode.Size = new System.Drawing.Size(128, 21);
+            this.txtPaymentCode.TabIndex = 1;
+            this.txtPaymentCode.TextChanged += new System.EventHandler(this.txtChanged);
+            // 
             // FrmShowPaymentBill
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -289,6 +310,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtBillingCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtPaymentCode.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -315,5 +337,7 @@
         private DevExpress.XtraEditors.SimpleButton btnSearch;
         private DevExpress.XtraEditors.SimpleButton btnDel;
         private DevExpress.XtraEditors.SimpleButton btnAdd;
+        private DevExpress.XtraEditors.TextEdit txtPaymentCode;
+        private DevExpress.XtraEditors.LabelControl labelControl7;
     }
 }

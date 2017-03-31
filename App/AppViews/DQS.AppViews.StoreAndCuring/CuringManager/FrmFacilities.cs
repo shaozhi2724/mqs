@@ -62,5 +62,44 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
                 }
             }
         }
+
+        protected override void CustomFacilitiesVerification()
+        {
+            object id = this.gvData.GetFocusedRowCellValue("设备ID");
+            if (id != null && id != DBNull.Value)
+            {
+                using (FrmFacilitiesVerification verification = new FrmFacilitiesVerification(Convert.ToInt32(id)))
+                {
+                    if (verification.ShowDialog(this) == DialogResult.OK)
+                    {
+                        //base.CustomRefresh();
+                    }
+                }
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择设备。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
+
+        protected override void CustomFacilitiesService()
+        {
+            object id = this.gvData.GetFocusedRowCellValue("设备ID");
+            if (id != null && id != DBNull.Value)
+            {
+                using (FrmFacilitiesService service = new FrmFacilitiesService(Convert.ToInt32(id)))
+                {
+                    if (service.ShowDialog(this) == DialogResult.OK)
+                    {
+                        //base.CustomRefresh();
+                    }
+                }
+            }
+            else
+            {
+                XtraMessageBox.Show("请选择设备。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }

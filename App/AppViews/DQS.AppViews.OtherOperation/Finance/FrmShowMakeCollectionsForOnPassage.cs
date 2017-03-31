@@ -53,8 +53,10 @@ namespace DQS.AppViews.OtherOperation.Finance
             sqlSearch = " AND (m.OperateDate BETWEEN '" + deStartDate.Text.Trim() + " 00:00:00' AND '" + deEndDate.Text.Trim() + " 23:59:59')";
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string sqlBill = @"SELECT DISTINCT m.MakeCollectionsID,m.MakeCollectionsCode AS [收款单号],m.VoucherCode AS [凭证号],m.MakeCollectionsPerson AS [收款人],m.OperateDate AS [收款日期],m.DealerName AS [往来单位名称],m.MakeCollectionsType AS [收款方式],TotalPrice AS [总金额],m.DealerCode AS [往来单位编号],m.DealerSpell AS [往来单位简拼]
-FROM dbo.FIN_MakeCollections m WHERE m.MakeCollectionsCode LIKE 'ZTSK%' AND (m.DealerCode LIKE '%{0}%' OR m.DealerName LIKE '%{0}%' OR m.DealerSpell LIKE '%{0}%') AND (m.MakeCollectionsCode LIKE '%{1}%') AND (m.VoucherCode LIKE '%{2}%')" + sqlSearch;
+                string sqlBill = @"SELECT DISTINCT m.MakeCollectionsID,m.MakeCollectionsCode AS [收款单号],m.VoucherCode AS [凭证号],m.MakeCollectionsPerson AS [收款人],m.OperateDate AS [收款日期],m.DealerName AS [往来单位名称],m.MakeCollectionsType AS [收款方式],m.TotalPrice AS [总金额],SUM(md.AgioPrice) [金额],m.DealerCode AS [往来单位编号],m.DealerSpell AS [往来单位简拼]
+FROM dbo.FIN_MakeCollections m 
+INNER JOIN dbo.FIN_MakeCollectionsDetail md ON m.MakeCollectionsCode = md.MakeCollectionsCode
+WHERE m.MakeCollectionsCode LIKE 'ZTSK%' AND (m.DealerCode LIKE '%{0}%' OR m.DealerName LIKE '%{0}%' OR m.DealerSpell LIKE '%{0}%') AND (m.MakeCollectionsCode LIKE '%{1}%') AND (m.VoucherCode LIKE '%{2}%')" + sqlSearch + @"GROUP BY m.MakeCollectionsID,m.MakeCollectionsCode,m.VoucherCode,m.MakeCollectionsPerson,m.OperateDate,m.DealerName,m.MakeCollectionsType,m.TotalPrice,m.DealerCode,m.DealerSpell";
                 sqlBill = String.Format(sqlBill, txtDealerCode.Text.Trim(), txtMakeCollectionsCode.Text.Trim(), txtVoucherCode.Text.Trim());
                 SqlDataAdapter sdad = new SqlDataAdapter(sqlBill, conn);
                 DataSet ds = new DataSet();
@@ -75,6 +77,8 @@ FROM dbo.FIN_MakeCollections m WHERE m.MakeCollectionsCode LIKE 'ZTSK%' AND (m.D
 
                     gridView.Columns["总金额"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
                     gridView.Columns["总金额"].SummaryItem.DisplayFormat = "合计: {0}";
+                    gridView.Columns["金额"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                    gridView.Columns["金额"].SummaryItem.DisplayFormat = "合计: {0}";
 
                     for (int i = 0; i < gridView.Columns.Count; i++)
                     {

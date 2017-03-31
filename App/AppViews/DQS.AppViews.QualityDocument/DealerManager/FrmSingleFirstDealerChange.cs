@@ -198,25 +198,52 @@ namespace DQS.AppViews.QualityDocument.DealerManager
             }
             BFIBusinessRangeEntity range = new BFIBusinessRangeEntity { DealerID = dealerId };
             range.DeleteByCommonly();
-
-            EntityCollection<SYSCategoryEntity> categories = new EntityCollection<SYSCategoryEntity>();
-            categories.Fetch(SYSCategoryEntityFields.CategoryCode == "ProductStyle");
-
-            foreach (SYSCategoryEntity category in categories)
+            BFIDealerEntity dealer = new BFIDealerEntity { DealerID = dealerId };
+            dealer.Fetch();
+            if (dealer.IndustryStyle == "生产厂商" && DQS.Controls.Properties.Settings.Default.IsControlDealerAsProductPhy) 
             {
-                if (businessRanges.Contains(category.ItemName.Trim()))
+                EntityCollection<SYSCategoryEntity> categories = new EntityCollection<SYSCategoryEntity>();
+                categories.Fetch(SYSCategoryEntityFields.CategoryCode == "PhysicType");
+
+                foreach (SYSCategoryEntity category in categories)
                 {
-                    BFIBusinessRangeEntity newRange = new BFIBusinessRangeEntity();
-                    newRange.DealerID = dealerId;
-                    newRange.ProductStyleID = category.ItemID;
-                    newRange.ProductStyleName = category.ItemName;
-                    newRange.RangeStyle = 1;
-                    newRange.RangeStyleName = "往来单位";
-                    newRange.CreateDate = createDate;
-                    newRange.LastModifyDate = createDate;
-                    newRange.CreateUserID = createUserId;
-                    newRange.LastModifyUserID = createUserId;
-                    newRange.Save();
+                    if (businessRanges.Contains(category.ItemName.Trim()))
+                    {
+                        BFIBusinessRangeEntity newRange = new BFIBusinessRangeEntity();
+                        newRange.DealerID = dealerId;
+                        newRange.ProductStyleID = category.ItemID;
+                        newRange.ProductStyleName = category.ItemName;
+                        newRange.RangeStyle = 1;
+                        newRange.RangeStyleName = "往来单位";
+                        newRange.CreateDate = createDate;
+                        newRange.LastModifyDate = createDate;
+                        newRange.CreateUserID = createUserId;
+                        newRange.LastModifyUserID = createUserId;
+                        newRange.Save();
+                    }
+                }
+            }
+            else
+            {
+                EntityCollection<SYSCategoryEntity> categories = new EntityCollection<SYSCategoryEntity>();
+                categories.Fetch(SYSCategoryEntityFields.CategoryCode == "ProductStyle");
+
+                foreach (SYSCategoryEntity category in categories)
+                {
+                    if (businessRanges.Contains(category.ItemName.Trim()))
+                    {
+                        BFIBusinessRangeEntity newRange = new BFIBusinessRangeEntity();
+                        newRange.DealerID = dealerId;
+                        newRange.ProductStyleID = category.ItemID;
+                        newRange.ProductStyleName = category.ItemName;
+                        newRange.RangeStyle = 1;
+                        newRange.RangeStyleName = "往来单位";
+                        newRange.CreateDate = createDate;
+                        newRange.LastModifyDate = createDate;
+                        newRange.CreateUserID = createUserId;
+                        newRange.LastModifyUserID = createUserId;
+                        newRange.Save();
+                    }
                 }
             }
         }

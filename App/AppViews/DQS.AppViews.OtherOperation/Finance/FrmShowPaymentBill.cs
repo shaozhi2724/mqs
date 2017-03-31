@@ -36,7 +36,7 @@ namespace DQS.AppViews.OtherOperation.Finance
             {
                 string sql = @"SELECT 
 	md.PaymentBillID,md.PaymentBillCode AS [自动生成单号],
-	DealerName AS [往来单位名称],md.VoucherCode AS [税号],
+	DealerName AS [往来单位名称],md.VoucherCode AS [税号],PaymentCode [发票编号],
 	BillingCode AS [发票号],
 	IncludeTaxPrice AS [含税金额],
 	NotIncludeTaxPrice AS [不含税金额],
@@ -45,9 +45,9 @@ namespace DQS.AppViews.OtherOperation.Finance
 	BillingType AS [发票类型],
 	BillingDate AS [发票日期],
 	DealerCode AS [往来单位编码],
-	DealerSpell AS [往来单位简拼] FROM dbo.FIN_PaymentBill md WHERE (md.DealerCode LIKE '%{0}%' OR md.DealerName LIKE '%{0}%' OR md.DealerSpell LIKE '%{0}%') AND (md.BillingCode LIKE '%{1}%') AND (md.VoucherCode LIKE '%{2}%')" + sqlSearch;
+	DealerSpell AS [往来单位简拼] FROM dbo.FIN_PaymentBill md WHERE (md.DealerCode LIKE '%{0}%' OR md.DealerName LIKE '%{0}%' OR md.DealerSpell LIKE '%{0}%') AND (md.BillingCode LIKE '%{1}%') AND (md.VoucherCode LIKE '%{2}%') AND (md.PaymentCode LIKE '%{3}%')" + sqlSearch;
 
-                sql = String.Format(sql, txtDealerCode.Text.Trim(), txtBillingCode.Text.Trim(), txtVoucherCode.Text.Trim(), txtBillCode.Text.Trim());
+                sql = String.Format(sql, txtDealerCode.Text.Trim(), txtBillingCode.Text.Trim(), txtVoucherCode.Text.Trim(), txtPaymentCode.Text.Trim());
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 try
@@ -152,7 +152,7 @@ DELETE dbo.FIN_PaymentBillDetail WHERE {0}";
 
         private void gridView_DoubleClick(object sender, EventArgs e)
         {
-            string sql = @"EXEC sp_PaymentBillDetail '" + gridView.GetDataRow(gridView.FocusedRowHandle)["自动生成单号"].ToString() + "'";
+            string sql = @"EXEC sp_PaymentBillDetail '" + gridView.GetDataRow(gridView.FocusedRowHandle)["自动生成单号"].ToString() + "','" + gridView.GetDataRow(gridView.FocusedRowHandle)["往来单位编码"].ToString() + "'";
             using (FrmDetails fs = new FrmDetails())
             {
                 fs.sqlConditions = sql;

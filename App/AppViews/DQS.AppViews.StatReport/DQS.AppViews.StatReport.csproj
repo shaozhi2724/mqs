@@ -61,6 +61,9 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\..\..\packages\NPOI.1.2.5\lib\net40\NPOI.dll</HintPath>
+    </Reference>
     <Reference Include="ORMSCore, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\DQS.App\ORMSCore.dll</HintPath>
@@ -126,11 +129,23 @@
     <Compile Include="StatManager\FrmGridViewer.Designer.cs">
       <DependentUpon>FrmGridViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="StatManager\FrmImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmImport.Designer.cs">
+      <DependentUpon>FrmImport.cs</DependentUpon>
+    </Compile>
     <Compile Include="StatManager\FrmNewGridViewer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="StatManager\FrmNewGridViewer.Designer.cs">
       <DependentUpon>FrmNewGridViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatManager\FrmNewGridViewerDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatManager\FrmNewGridViewerDetail.Designer.cs">
+      <DependentUpon>FrmNewGridViewerDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="StatManager\FrmPastProductStoreDeatils.cs">
       <SubType>Form</SubType>
@@ -247,8 +262,14 @@
     <EmbeddedResource Include="StatManager\FrmGridViewer.resx">
       <DependentUpon>FrmGridViewer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmImport.resx">
+      <DependentUpon>FrmImport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StatManager\FrmNewGridViewer.resx">
       <DependentUpon>FrmNewGridViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatManager\FrmNewGridViewerDetail.resx">
+      <DependentUpon>FrmNewGridViewerDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StatManager\FrmPastProductStoreDeatils.resx">
       <DependentUpon>FrmPastProductStoreDeatils.cs</DependentUpon>

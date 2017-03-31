@@ -1380,6 +1380,15 @@ WHERE BillID={1}
             {
                 rdgBillStyle.SelectedIndex = 0;
             }
+            if (!entity.IsNullField("InvoiceTypeName"))
+            {
+                var index = rdgPaymentType.Properties.Items.GetItemIndexByValue(entity.InvoiceTypeName);
+                rdgPaymentType.SelectedIndex = index;
+            }
+            else
+            {
+                rdgPaymentType.SelectedIndex = 0;
+            }
 
             if (!entity.IsNullField("ContractNo"))
             {
@@ -1441,6 +1450,7 @@ WHERE BillID={1}
             }
 
             entity.BillStyle = this.rdgBillStyle.Properties.Items[rdgBillStyle.SelectedIndex].Value.ToString();
+            entity.InvoiceTypeName = this.rdgPaymentType.Properties.Items[rdgPaymentType.SelectedIndex].Value.ToString();
 
 
             if (this.cboQualified.Text != "")

@@ -36,7 +36,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                 //rdgIsLockedBatch.Enabled = false;
                 txtLockedRemark.Enabled = false;
                 txtPopBatch.Enabled = true;
-                txtLockedAmount.Enabled = true;
+                txtLockedAmount.Enabled = DQS.Controls.Properties.Settings.Default.IsProductLockModify;
                 this.CustomGetEntity(entity);
 
             }
@@ -78,6 +78,18 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
         {
             if (!entity.IsNullField("ProductID"))
             {
+                BFIProductEntity product = new BFIProductEntity { ProductID = entity.ProductID };
+                product.Fetch();
+                this.txtPopupProduct.Text = product.ProductCode;
+                this.txtPopupProduct.SetMemberValue(product.ProductID);
+                this.txtProductName.Text = product.ProductName;
+                this.txtProductSpec.Text = product.ProductSpec;
+                this.txtProductUnit.Text = product.ProductUnit;
+                this.txtPackageSpec.Text = product.PackageSpec;
+                this.txtAuthorizedNo.Text =product.AuthorizedNo;
+                this.txtProductStyle.Text =product.ProductStyle;
+                this.txtProducerName.Text =product.ProducerName;
+                /*
                 this.txtPopupProduct.SetMemberValue(entity.ProductID);
                 this.txtProductName.Text = (this.txtPopupProduct.EditData as DataRow)["产品名称"].ToString();
                 this.txtProductSpec.Text = (this.txtPopupProduct.EditData as DataRow)["规格型号"].ToString();
@@ -87,7 +99,10 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                 this.txtAuthorizedNo.Text = (this.txtPopupProduct.EditData as DataRow)["注册证号"].ToString();
                 this.txtProductStyle.Text = (this.txtPopupProduct.EditData as DataRow)["产品类别"].ToString();
                 this.txtProducerName.Text = (this.txtPopupProduct.EditData as DataRow)["生产厂商"].ToString();
+                 */
             }
+
+            txtPopBatch.Tag = entity.InStoreID;
 
             if (!entity.IsNullField("BatchNo"))
             {
@@ -326,7 +341,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
         private void SetLockedBatch(bool isLocked)
         {
             this.txtPopBatch.Enabled = isLocked;
-            this.txtLockedAmount.Enabled = isLocked;
+            this.txtLockedAmount.Enabled = DQS.Controls.Properties.Settings.Default.IsProductLockModify;
         }
 
         //设置是否解除锁定

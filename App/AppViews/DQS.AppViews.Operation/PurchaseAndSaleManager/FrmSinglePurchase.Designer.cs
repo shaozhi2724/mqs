@@ -38,6 +38,7 @@
             this.layControl = new DevExpress.XtraLayout.LayoutControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.txtTimeLimit = new DQS.Controls.BUSBillEntityTextBox();
+            this.rdgPaymentType = new DevExpress.XtraEditors.RadioGroup();
             this.txtCarryCompnay = new DQS.Controls.BUSBillEntityTextBox();
             this.txtTransportTool = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cboDepartment = new DQS.Controls.ComboBoxCategoryEx();
@@ -78,6 +79,7 @@
             this.layCarryCompnay = new DevExpress.XtraLayout.LayoutControlItem();
             this.layTimeLimit = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layPaymentType = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.pnlAction)).BeginInit();
             this.pnlAction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupButtom)).BeginInit();
@@ -88,6 +90,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
             this.layControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtTimeLimit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rdgPaymentType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCarryCompnay.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTransportTool.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboDepartment.Properties)).BeginInit();
@@ -128,6 +131,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layCarryCompnay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layTimeLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPaymentType)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlAction
@@ -234,6 +238,7 @@
             // 
             this.layControl.Controls.Add(this.labelControl2);
             this.layControl.Controls.Add(this.txtTimeLimit);
+            this.layControl.Controls.Add(this.rdgPaymentType);
             this.layControl.Controls.Add(this.txtCarryCompnay);
             this.layControl.Controls.Add(this.txtTransportTool);
             this.layControl.Controls.Add(this.cboDepartment);
@@ -264,7 +269,7 @@
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(815, 141);
+            this.labelControl2.Location = new System.Drawing.Point(815, 145);
             this.labelControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(24, 17);
@@ -280,12 +285,27 @@
             this.txtTimeLimit.IsNullString = null;
             this.txtTimeLimit.IsNullValidate = false;
             this.txtTimeLimit.IsTransferAlphabetic = false;
-            this.txtTimeLimit.Location = new System.Drawing.Point(490, 141);
+            this.txtTimeLimit.Location = new System.Drawing.Point(490, 145);
             this.txtTimeLimit.Name = "txtTimeLimit";
             this.txtTimeLimit.Properties.NullValuePrompt = "运输时限不能为空。";
             this.txtTimeLimit.Size = new System.Drawing.Size(321, 21);
             this.txtTimeLimit.StyleController = this.layControl;
             this.txtTimeLimit.TabIndex = 11;
+            // 
+            // rdgPaymentType
+            // 
+            this.rdgPaymentType.EditValue = "应付";
+            this.rdgPaymentType.Location = new System.Drawing.Point(326, 91);
+            this.rdgPaymentType.Name = "rdgPaymentType";
+            this.rdgPaymentType.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.rdgPaymentType.Properties.Appearance.Options.UseBackColor = true;
+            this.rdgPaymentType.Properties.Columns = 2;
+            this.rdgPaymentType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("应付", "应付"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("预付", "预付")});
+            this.rdgPaymentType.Size = new System.Drawing.Size(96, 25);
+            this.rdgPaymentType.StyleController = this.layControl;
+            this.rdgPaymentType.TabIndex = 1;
             // 
             // txtCarryCompnay
             // 
@@ -295,7 +315,7 @@
             this.txtCarryCompnay.IsNullString = null;
             this.txtCarryCompnay.IsNullValidate = false;
             this.txtCarryCompnay.IsTransferAlphabetic = false;
-            this.txtCarryCompnay.Location = new System.Drawing.Point(75, 141);
+            this.txtCarryCompnay.Location = new System.Drawing.Point(75, 145);
             this.txtCarryCompnay.Name = "txtCarryCompnay";
             this.txtCarryCompnay.Properties.NullValuePrompt = "承运方不能为空。";
             this.txtCarryCompnay.Size = new System.Drawing.Size(348, 21);
@@ -304,7 +324,7 @@
             // 
             // txtTransportTool
             // 
-            this.txtTransportTool.Location = new System.Drawing.Point(490, 116);
+            this.txtTransportTool.Location = new System.Drawing.Point(490, 120);
             this.txtTransportTool.Name = "txtTransportTool";
             this.txtTransportTool.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtTransportTool.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -320,7 +340,7 @@
             this.cboDepartment.CategoryCode = "PaymentType";
             this.cboDepartment.FirstDefaultItemText = null;
             this.cboDepartment.FormatQueryString = null;
-            this.cboDepartment.Location = new System.Drawing.Point(490, 216);
+            this.cboDepartment.Location = new System.Drawing.Point(490, 220);
             this.cboDepartment.Name = "cboDepartment";
             this.cboDepartment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -332,7 +352,7 @@
             // 
             // txtTransportType
             // 
-            this.txtTransportType.Location = new System.Drawing.Point(75, 116);
+            this.txtTransportType.Location = new System.Drawing.Point(75, 120);
             this.txtTransportType.Name = "txtTransportType";
             this.txtTransportType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtTransportType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -351,7 +371,7 @@
             this.txtBillDate.IsNullString = null;
             this.txtBillDate.IsNullValidate = false;
             this.txtBillDate.IsTransferAlphabetic = false;
-            this.txtBillDate.Location = new System.Drawing.Point(490, 191);
+            this.txtBillDate.Location = new System.Drawing.Point(490, 195);
             this.txtBillDate.Name = "txtBillDate";
             this.txtBillDate.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtBillDate.Properties.Appearance.Options.UseBackColor = true;
@@ -383,7 +403,7 @@
             this.busBillEntityTextBox1.IsNullString = null;
             this.busBillEntityTextBox1.IsNullValidate = false;
             this.busBillEntityTextBox1.IsTransferAlphabetic = false;
-            this.busBillEntityTextBox1.Location = new System.Drawing.Point(75, 241);
+            this.busBillEntityTextBox1.Location = new System.Drawing.Point(75, 245);
             this.busBillEntityTextBox1.Name = "busBillEntityTextBox1";
             this.busBillEntityTextBox1.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.busBillEntityTextBox1.Properties.Appearance.Options.UseBackColor = true;
@@ -400,7 +420,7 @@
             this.txtBillRemark.IsNullString = null;
             this.txtBillRemark.IsNullValidate = false;
             this.txtBillRemark.IsTransferAlphabetic = false;
-            this.txtBillRemark.Location = new System.Drawing.Point(75, 216);
+            this.txtBillRemark.Location = new System.Drawing.Point(75, 220);
             this.txtBillRemark.Name = "txtBillRemark";
             this.txtBillRemark.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtBillRemark.Properties.Appearance.Options.UseBackColor = true;
@@ -452,7 +472,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbxPaymentType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbxPaymentType.SelectedValue = null;
-            this.cbxPaymentType.Size = new System.Drawing.Size(347, 21);
+            this.cbxPaymentType.Size = new System.Drawing.Size(184, 21);
             this.cbxPaymentType.StyleController = this.layControl;
             this.cbxPaymentType.TabIndex = 5;
             // 
@@ -505,7 +525,7 @@
             this.txtContractNo.IsNullString = null;
             this.txtContractNo.IsNullValidate = false;
             this.txtContractNo.IsTransferAlphabetic = false;
-            this.txtContractNo.Location = new System.Drawing.Point(75, 166);
+            this.txtContractNo.Location = new System.Drawing.Point(75, 170);
             this.txtContractNo.Name = "txtContractNo";
             this.txtContractNo.Size = new System.Drawing.Size(347, 21);
             this.txtContractNo.StyleController = this.layControl;
@@ -523,7 +543,7 @@
             this.txtOperator.IsNullString = null;
             this.txtOperator.IsNullValidate = false;
             this.txtOperator.IsTransferAlphabetic = true;
-            this.txtOperator.Location = new System.Drawing.Point(489, 166);
+            this.txtOperator.Location = new System.Drawing.Point(489, 170);
             this.txtOperator.MemberText = "员工姓名";
             this.txtOperator.MemberValue = "员工ID";
             this.txtOperator.Name = "txtOperator";
@@ -588,7 +608,7 @@
             this.txtTotalPrice.IsNullString = null;
             this.txtTotalPrice.IsNullValidate = false;
             this.txtTotalPrice.IsTransferAlphabetic = false;
-            this.txtTotalPrice.Location = new System.Drawing.Point(75, 191);
+            this.txtTotalPrice.Location = new System.Drawing.Point(75, 195);
             this.txtTotalPrice.Name = "txtTotalPrice";
             this.txtTotalPrice.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtTotalPrice.Properties.Appearance.Options.UseBackColor = true;
@@ -625,10 +645,11 @@
             this.layTransportTool,
             this.layCarryCompnay,
             this.layTimeLimit,
-            this.layoutControlItem1});
+            this.layoutControlItem1,
+            this.layPaymentType});
             this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
-            this.layControlGroup.Size = new System.Drawing.Size(851, 274);
+            this.layControlGroup.Size = new System.Drawing.Size(851, 278);
             this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layControlGroup.Text = "采购订单";
             this.layControlGroup.TextVisible = false;
@@ -669,7 +690,7 @@
             this.layPaymentTypeName.CustomizationFormText = "付款方式";
             this.layPaymentTypeName.Location = new System.Drawing.Point(0, 79);
             this.layPaymentTypeName.Name = "layPaymentTypeName";
-            this.layPaymentTypeName.Size = new System.Drawing.Size(414, 25);
+            this.layPaymentTypeName.Size = new System.Drawing.Size(251, 29);
             this.layPaymentTypeName.Text = "付款方式";
             this.layPaymentTypeName.TextSize = new System.Drawing.Size(60, 17);
             // 
@@ -679,7 +700,7 @@
             this.layDeliveryTypeName.CustomizationFormText = "配送方式";
             this.layDeliveryTypeName.Location = new System.Drawing.Point(414, 79);
             this.layDeliveryTypeName.Name = "layDeliveryTypeName";
-            this.layDeliveryTypeName.Size = new System.Drawing.Size(417, 25);
+            this.layDeliveryTypeName.Size = new System.Drawing.Size(417, 29);
             this.layDeliveryTypeName.Text = "配送方式";
             this.layDeliveryTypeName.TextSize = new System.Drawing.Size(60, 17);
             // 
@@ -687,7 +708,7 @@
             // 
             this.layTotalPrice.Control = this.txtTotalPrice;
             this.layTotalPrice.CustomizationFormText = "订单总额";
-            this.layTotalPrice.Location = new System.Drawing.Point(0, 179);
+            this.layTotalPrice.Location = new System.Drawing.Point(0, 183);
             this.layTotalPrice.Name = "layoutControlItem8";
             this.layTotalPrice.Size = new System.Drawing.Size(415, 25);
             this.layTotalPrice.Text = "订单总额";
@@ -697,7 +718,7 @@
             // 
             this.layContractNo.Control = this.txtContractNo;
             this.layContractNo.CustomizationFormText = "合同号";
-            this.layContractNo.Location = new System.Drawing.Point(0, 154);
+            this.layContractNo.Location = new System.Drawing.Point(0, 158);
             this.layContractNo.Name = "layoutControlItem11";
             this.layContractNo.Size = new System.Drawing.Size(414, 25);
             this.layContractNo.Text = "合同号";
@@ -707,7 +728,7 @@
             // 
             this.layOperator.Control = this.txtOperator;
             this.layOperator.CustomizationFormText = "采购员";
-            this.layOperator.Location = new System.Drawing.Point(414, 154);
+            this.layOperator.Location = new System.Drawing.Point(414, 158);
             this.layOperator.Name = "layoutControlItem10";
             this.layOperator.Size = new System.Drawing.Size(417, 25);
             this.layOperator.Text = "采购员";
@@ -746,7 +767,7 @@
             // 
             this.layRemark.Control = this.txtBillRemark;
             this.layRemark.CustomizationFormText = "备注";
-            this.layRemark.Location = new System.Drawing.Point(0, 204);
+            this.layRemark.Location = new System.Drawing.Point(0, 208);
             this.layRemark.Name = "layRemark";
             this.layRemark.Size = new System.Drawing.Size(415, 25);
             this.layRemark.Text = "备注";
@@ -756,7 +777,7 @@
             // 
             this.layoutControlDel.Control = this.busBillEntityTextBox1;
             this.layoutControlDel.CustomizationFormText = "删除原因";
-            this.layoutControlDel.Location = new System.Drawing.Point(0, 229);
+            this.layoutControlDel.Location = new System.Drawing.Point(0, 233);
             this.layoutControlDel.Name = "layoutControlDel";
             this.layoutControlDel.Size = new System.Drawing.Size(831, 25);
             this.layoutControlDel.Text = "删除原因";
@@ -777,7 +798,7 @@
             // 
             this.layBillDate.Control = this.txtBillDate;
             this.layBillDate.CustomizationFormText = "购货日期";
-            this.layBillDate.Location = new System.Drawing.Point(415, 179);
+            this.layBillDate.Location = new System.Drawing.Point(415, 183);
             this.layBillDate.Name = "layBillDate";
             this.layBillDate.Size = new System.Drawing.Size(416, 25);
             this.layBillDate.Text = "购货日期";
@@ -787,7 +808,7 @@
             // 
             this.layDepartment.Control = this.cboDepartment;
             this.layDepartment.CustomizationFormText = "部门";
-            this.layDepartment.Location = new System.Drawing.Point(415, 204);
+            this.layDepartment.Location = new System.Drawing.Point(415, 208);
             this.layDepartment.Name = "layDepartment";
             this.layDepartment.Size = new System.Drawing.Size(416, 25);
             this.layDepartment.Text = "部门";
@@ -798,7 +819,7 @@
             // 
             this.layTransportType.Control = this.txtTransportType;
             this.layTransportType.CustomizationFormText = "运输方式";
-            this.layTransportType.Location = new System.Drawing.Point(0, 104);
+            this.layTransportType.Location = new System.Drawing.Point(0, 108);
             this.layTransportType.Name = "layTransportType";
             this.layTransportType.Size = new System.Drawing.Size(415, 25);
             this.layTransportType.Text = "运输方式";
@@ -809,7 +830,7 @@
             // 
             this.layTransportTool.Control = this.txtTransportTool;
             this.layTransportTool.CustomizationFormText = "运输工具";
-            this.layTransportTool.Location = new System.Drawing.Point(415, 104);
+            this.layTransportTool.Location = new System.Drawing.Point(415, 108);
             this.layTransportTool.Name = "layTransportTool";
             this.layTransportTool.Size = new System.Drawing.Size(416, 25);
             this.layTransportTool.Text = "运输工具";
@@ -820,7 +841,7 @@
             // 
             this.layCarryCompnay.Control = this.txtCarryCompnay;
             this.layCarryCompnay.CustomizationFormText = "承运方";
-            this.layCarryCompnay.Location = new System.Drawing.Point(0, 129);
+            this.layCarryCompnay.Location = new System.Drawing.Point(0, 133);
             this.layCarryCompnay.Name = "layCarryCompnay";
             this.layCarryCompnay.Size = new System.Drawing.Size(415, 25);
             this.layCarryCompnay.Text = "承运方";
@@ -831,7 +852,7 @@
             // 
             this.layTimeLimit.Control = this.txtTimeLimit;
             this.layTimeLimit.CustomizationFormText = "运输时限";
-            this.layTimeLimit.Location = new System.Drawing.Point(415, 129);
+            this.layTimeLimit.Location = new System.Drawing.Point(415, 133);
             this.layTimeLimit.Name = "layTimeLimit";
             this.layTimeLimit.Size = new System.Drawing.Size(388, 25);
             this.layTimeLimit.Text = "运输时限";
@@ -842,7 +863,7 @@
             // 
             this.layoutControlItem1.Control = this.labelControl2;
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem1.Location = new System.Drawing.Point(803, 129);
+            this.layoutControlItem1.Location = new System.Drawing.Point(803, 133);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Size = new System.Drawing.Size(28, 25);
             this.layoutControlItem1.Text = "layoutControlItem1";
@@ -850,6 +871,16 @@
             this.layoutControlItem1.TextToControlDistance = 0;
             this.layoutControlItem1.TextVisible = false;
             this.layoutControlItem1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            // 
+            // layPaymentType
+            // 
+            this.layPaymentType.Control = this.rdgPaymentType;
+            this.layPaymentType.CustomizationFormText = "付款类型";
+            this.layPaymentType.Location = new System.Drawing.Point(251, 79);
+            this.layPaymentType.Name = "layPaymentType";
+            this.layPaymentType.Size = new System.Drawing.Size(163, 29);
+            this.layPaymentType.Text = "付款类型";
+            this.layPaymentType.TextSize = new System.Drawing.Size(60, 17);
             // 
             // FrmSinglePurchase
             // 
@@ -876,6 +907,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).EndInit();
             this.layControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtTimeLimit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rdgPaymentType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCarryCompnay.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTransportTool.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboDepartment.Properties)).EndInit();
@@ -916,6 +948,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layCarryCompnay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layTimeLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layPaymentType)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -973,6 +1006,8 @@
         private DevExpress.XtraLayout.LayoutControlItem layTimeLimit;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraEditors.RadioGroup rdgPaymentType;
+        private DevExpress.XtraLayout.LayoutControlItem layPaymentType;
 
     }
 }

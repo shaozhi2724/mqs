@@ -21,6 +21,8 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
         private int? m_id;
         List<string> operators = new List<string>();
 
+        //string opers = "";
+
         public FrmSingleProvider()
         {
             InitializeComponent();
@@ -212,10 +214,11 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                 this.cbbDealerStatus.Text = entity.DealerStatus;
             }
 
-            if (!entity.IsNullField("Reservation5"))
-            {
-                this.cboOperator.Text = entity.Reservation5;
-            }
+            //if (!entity.IsNullField("Reservation5"))
+            //{
+            //    opers = entity.Reservation5;
+            //    this.cboOperator.Text = entity.Reservation5;
+            //}
 
         }
 
@@ -252,9 +255,28 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
 
             entity.DealerArea = txtDealerArea.Text.Trim();
 
-            if (this.cboOperator.Text != "")
+            //if (this.cboOperator.Text != "")
+            //{
+            //    entity.Reservation5 = this.cboOperator.Text;
+            //}
+            //else
+            //{
+            //    entity.Reservation5 = "";
+            //}
+        }
+
+        private void cboOperator_QueryCloseUp(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string txt = cboOperator.SelectedText;
+            //opers = cboOperator.EditValue.ToString();
+
+            if (txtOpers.Text == "")
             {
-                entity.Reservation5 = this.cboOperator.Text;
+                txtOpers.Text = txt;
+            }
+            else if (!txtOpers.Text.Contains(txt))
+            {
+                txtOpers.Text += ("," + txt);
             }
         }
     }

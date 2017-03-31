@@ -20,6 +20,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
     {
         private int? m_id;
 
+
         public FrmSingleFirstProduct()
         {
             InitializeComponent();
@@ -27,6 +28,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         private void FrmSingleFirstProduct_Load(object sender, EventArgs e)
         {
+            this.cbxProductType.InitSource();
             this.cbxPhysicType.InitSource();
             this.cbxStockCondition.InitSource();
             this.cbxProductStyle.InitSource();
@@ -36,6 +38,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
             this.cboSaleTax.SelectedValue = 3;
             this.cbxProductCycleStyle.InitSource();
             this.cbxIsForeignDrug.Checked = false;
+            BindDealer();
             tabGrantedPerson.PageVisible = GlobalItem.g_CurrentUser.UserCode == "admin" || GlobalItem.g_CurrentUser.UserCode == "root" ? true : false;
             if (this.Tag != null)
             {
@@ -67,6 +70,32 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                 BindGrantedPersons(m_id.Value);
             }
             RenderRequiredFields();
+        }
+
+        private void BindDealer()
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                string sql = "SELECT DealerName FROM dbo.BFI_Dealer WHERE DealerType = '供应商' AND (DealerStatus IS NULL OR DealerStatus != '禁用')";
+                SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
+                DataSet ds = new DataSet();
+                try
+                {
+                    sda.Fill(ds, "Table");
+                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                    {
+                        txtFirstDealerName.Properties.Items.Add(ds.Tables["Table"].Rows[i]["DealerName"].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
 
         private void BindGrantedPersons(int productID)
@@ -149,12 +178,18 @@ WHERE UP.ProductID = {0}", productID);
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (!this.ftPanel.ValidateIsNullFields()) return;
-            //if (null == cbxPhysicType.SelectedValue)
-            //{
-            //    XtraMessageBox.Show(cbxPhysicType.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            //    cbxPhysicType.Focus();
-            //    return;
-            //}
+            if (null == cbxProductType.SelectedValue)
+            {
+                XtraMessageBox.Show(cbxProductType.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                cbxProductType.Focus();
+                return;
+            }
+            if (null == cbxPhysicType.SelectedValue)
+            {
+                XtraMessageBox.Show(cbxPhysicType.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                cbxPhysicType.Focus();
+                return;
+            }
             if (null == cbxProductStyle.SelectedValue)
             {
                 XtraMessageBox.Show(cbxProductStyle.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -289,6 +324,10 @@ WHERE UP.ProductID = {0}", productID);
         /// <param name="entity">实体</param>
         protected virtual void CustomGetEntity(BFIProductEntity entity)
         {
+            if (!entity.IsNullField("Reservation1"))
+            {
+                this.cbxProductType.SelectedValue = entity.Reservation1;
+            }
             if (!entity.IsNullField("PhysicTypeID"))
             {
                 this.cbxPhysicType.SelectedValue = entity.PhysicTypeID;
@@ -317,6 +356,11 @@ WHERE UP.ProductID = {0}", productID);
             if (!entity.IsNullField("CycleType"))
             {
                 this.cbxProductCycleStyle.Text = entity.CycleType;
+            }
+
+            if (!entity.IsNullField("FirstDealerName"))
+            {
+                this.txtFirstDealerName.Text = entity.FirstDealerName;
             }
             chkBoxUseDescription.UnCheckAll();
             if (!entity.IsNullField("IsUseToChildren"))
@@ -363,6 +407,11 @@ WHERE UP.ProductID = {0}", productID);
         /// <param name="entity">实体</param>
         protected virtual void CustomSetEntity(BFIProductEntity entity)
         {
+            if (this.cbxProductType.SelectedValue != null)
+            {
+                entity.Reservation1 = this.cbxProductType.SelectedValue.ToString();
+                entity.Reservation2 = this.cbxProductType.Text.Trim();
+            }
             if (this.cbxPhysicType.SelectedValue != null)
             {
                 entity.PhysicTypeID = Convert.ToInt32(this.cbxPhysicType.SelectedValue);
@@ -389,6 +438,14 @@ WHERE UP.ProductID = {0}", productID);
             if (this.cbxProductCycleStyle.SelectedValue != null)
             {
                 entity.CycleType = this.cbxProductCycleStyle.Text;
+            }
+            if (this.txtFirstDealerName.Text != null)
+            {
+                entity.FirstDealerName = this.txtFirstDealerName.Text;
+            }
+            else
+            {
+                entity.FirstDealerName = "";
             }
             if (this.txtProductSpell.Text.Trim() == "")
             {

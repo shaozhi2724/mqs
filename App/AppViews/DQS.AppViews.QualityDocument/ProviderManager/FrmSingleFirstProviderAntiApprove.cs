@@ -32,6 +32,8 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
         const string certificateCategory = "ProviderCertificate";
         private string[] m_ImageType = new string[] { "BMP", "JPG", "GIF", "PNG", "PCX", "DCX", "EMF", "JIF", "JPE", "JFIF", "JPEG", "RLE", "DIB", "PCD", "DXF", "ICO", "WMF", "TIFF", "TGA" };
 
+        //string opers = "";
+
         private Guid antiApproveID;
         public FrmSingleFirstProviderAntiApprove()
         {
@@ -303,8 +305,8 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                 needComparedControls.Add("BusinessRange", chklbcProductStyle.Name);
                 needComparedFields.Add("SalePriceListID", layControl.GetItemByControl(cbxPrice).Text);
                 needComparedControls.Add("SalePriceListID", cbxPrice.Name);
-                needComparedFields.Add("Reservation5", layControl.GetItemByControl(cboOperator).Text);
-                needComparedControls.Add("Reservation5", cboOperator.Name);
+                //needComparedFields.Add("Reservation5", layControl.GetItemByControl(txtOpers).Text);
+                //needComparedControls.Add("Reservation5", txtOpers.Name);
 
                 EntityCollection<BFIBusinessRangeEntity> oldRanges = new EntityCollection<BFIBusinessRangeEntity>();
                 oldRanges.Fetch(BFIBusinessRangeEntityFields.DealerID == m_id.Value);
@@ -600,10 +602,11 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                 cbxPrice.EditValue = entity.SalePriceListID;
             }
 
-            if (!entity.IsNullField("Reservation5"))
-            {
-                this.cboOperator.Text = entity.Reservation5;
-            }
+            //if (!entity.IsNullField("Reservation5"))
+            //{
+            //    opers = entity.Reservation5;
+            //    this.cboOperator.Text = entity.Reservation5;
+            //}
         }
 
         /// <summary>
@@ -635,10 +638,10 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
             entity.DealerArea = txtDealerArea.Text.Trim();
             entity.SalePriceListID = Convert.ToInt32(cbxPrice.EditValue);
 
-            if (this.cboOperator.Text != "")
-            {
-                entity.Reservation5 = this.cboOperator.Text;
-            }
+            //if (this.cboOperator.Text != "")
+            //{
+            //    entity.Reservation5 = this.cboOperator.Text;
+            //}
         }
 
         private void chkCheck_CheckedChanged(object sender, EventArgs e)
@@ -1265,6 +1268,20 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
             {
                 layBusinessRange.CustomizationFormText = "经营范围";
                 layBusinessRange.Text = "经营范围";
+            }
+        }
+
+        private void cboOperator_QueryCloseUp(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string txt = cboOperator.SelectedText;
+
+            if (txtOpers.Text == "")
+            {
+                txtOpers.Text = txt;
+            }
+            else if (!txtOpers.Text.Contains(txt))
+            {
+                txtOpers.Text += ("," + txt);
             }
         }
 
