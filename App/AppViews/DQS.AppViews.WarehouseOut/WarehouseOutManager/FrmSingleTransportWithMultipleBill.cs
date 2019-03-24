@@ -12,6 +12,7 @@ using DevExpress.XtraLayout.Utils;
 using DQS.Module.Entities;
 using DQS.Common;
 using ORMSCore;
+using System.Data.SqlClient;
 
 namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
 {
@@ -377,6 +378,28 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                             billEntity.BillStatusName = "运输结束";
                         }
                         billEntity.Update();
+                        using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                        {
+                            string sqlBill = "EXEC sp_UpdateStatusForOut '{0}','{1}','{2}'";
+
+                            try
+                            {
+                                conn.Open();//连接数据库
+                                if (entity.TransportStatusID != 1)
+                                {
+                                    SqlCommand Bcommand = new SqlCommand(string.Format(sqlBill, entity.BillCode, "运输结束", GlobalItem.g_CurrentEmployee.EmployeeName), conn);
+                                    Bcommand.ExecuteNonQuery();
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                XtraMessageBox.Show(ex.ToString(), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            finally
+                            {
+                                conn.Close();
+                            }
+                        }
                     }
                     else
                     {
@@ -408,6 +431,31 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                                 billEntity.BillStatusName = "运输结束";
                             }
                             billEntity.Update();
+
+                            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                            {
+                                string sqlBill = "EXEC sp_UpdateStatusForOut '{0}','{1}','{2}'";
+
+                                try
+                                {
+                                    conn.Open();//连接数据库
+                                    SqlCommand Bcommand = new SqlCommand(string.Format(sqlBill, entity.BillCode, "正在运输", GlobalItem.g_CurrentEmployee.EmployeeName), conn);
+                                    Bcommand.ExecuteNonQuery();
+                                    if (entity.TransportStatusID != 1)
+                                    {
+                                        Bcommand = new SqlCommand(string.Format(sqlBill, entity.BillCode, "运输结束", GlobalItem.g_CurrentEmployee.EmployeeName), conn);
+                                        Bcommand.ExecuteNonQuery();
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    XtraMessageBox.Show(ex.ToString(), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                                finally
+                                {
+                                    conn.Close();
+                                }
+                            }
                         }
                         //}
                         //else

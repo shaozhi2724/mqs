@@ -853,7 +853,6 @@
             this.layDepartment.Size = new System.Drawing.Size(286, 25);
             this.layDepartment.Text = "所属部门";
             this.layDepartment.TextSize = new System.Drawing.Size(60, 17);
-            this.layDepartment.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // layBirthday
             // 

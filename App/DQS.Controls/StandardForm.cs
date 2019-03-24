@@ -269,6 +269,15 @@ namespace DQS.Controls
                 case "检定":
                     this.CustomFacilitiesVerification();
                     break;
+                case "调价":
+                    this.CustomChangePrice();
+                    break;
+                case "健康档案":
+                    this.CustomCheckBody();
+                    break;
+                case "培训档案":
+                    this.CustomPlanDocument();
+                    break;
                 default:
                     break;
             }
@@ -782,6 +791,30 @@ namespace DQS.Controls
         protected virtual void CustomFacilitiesVerification()
         {
             SaveDataLog("检定");
+        }
+
+        /// <summary>
+        /// 库存调价
+        /// </summary>
+        protected virtual void CustomChangePrice()
+        {
+            SaveDataLog("库存调价");
+        }
+
+        /// <summary>
+        /// 健康档案
+        /// </summary>
+        protected virtual void CustomCheckBody()
+        {
+            SaveDataLog("健康档案");
+        }
+
+        /// <summary>
+        /// 培训档案
+        /// </summary>
+        protected virtual void CustomPlanDocument()
+        {
+            SaveDataLog("培训档案");
         }
 
         /// <summary>

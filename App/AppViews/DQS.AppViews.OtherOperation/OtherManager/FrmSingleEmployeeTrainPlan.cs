@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DQS.Module.Entities;
 using DQS.Common;
+using System.Data.SqlClient;
 
 namespace DQS.AppViews.OtherOperation.OtherManager
 {
@@ -18,6 +19,34 @@ namespace DQS.AppViews.OtherOperation.OtherManager
         public FrmSingleEmployeeTrainPlan()
         {
             InitializeComponent();
+            LoadType("BUS_EmployeeTrainPlan", "TrainContent", txtTrainContent);
+            LoadType("BUS_EmployeeTrainPlan", "Reservation2", txtAim);
+        }
+
+        private void LoadType(string tableName, string tableColumn, ComboBoxEdit cbo)
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                string sql = "SELECT " + tableColumn + " FROM " + tableName + " GROUP BY " + tableColumn;
+                SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
+                DataSet ds = new DataSet();
+                try
+                {
+                    sda.Fill(ds, "Table");
+                    for (int i = 0; i < ds.Tables["Table"].Rows.Count; i++)
+                    {
+                        cbo.Properties.Items.Add(ds.Tables["Table"].Rows[i][tableColumn].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
 
         private void FrmSingleEmployeeTrainPlan_Load(object sender, EventArgs e)
@@ -56,6 +85,32 @@ namespace DQS.AppViews.OtherOperation.OtherManager
                 entity.LastModifyDate = DateTime.Now;
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.Update();
+                if (entity.IsTrained)
+                {
+                    using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                    {
+                        string sql = "EXEC sp_InsertEmployeeTrainPlanDocument {0}";
+                        sql = string.Format(sql, Convert.ToInt32(this.Tag));
+                        SqlCommand com = new SqlCommand(sql, conn);
+                        try
+                        {
+                            conn.Open();
+                            int i = com.ExecuteNonQuery();
+                            if (i > 0)
+                            {
+                                MessageBox.Show("保存成功。");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString());
+                        }
+                        finally
+                        {
+                            conn.Close();
+                        }
+                    }
+                }
             }
             else
             {
@@ -93,6 +148,21 @@ namespace DQS.AppViews.OtherOperation.OtherManager
                 this.cbxTrainType.Text = entity.TrainType;
             }
 
+            if (!entity.IsNullField("TrainContent"))
+            {
+                this.txtTrainContent.Text = entity.TrainContent;
+            }
+
+            if (!entity.IsNullField("Reservation2"))
+            {
+                this.txtAim.Text = entity.Reservation2;
+            }
+
+            if (!entity.IsNullField("Reservation3"))
+            {
+                this.dteCheckDate.DateTime = Convert.ToDateTime(entity.Reservation3);
+            }
+
             if (!entity.IsNullField("StartTime"))
             {
                 this.dteStartTime.DateTime = entity.StartTime;
@@ -123,6 +193,21 @@ namespace DQS.AppViews.OtherOperation.OtherManager
             if (this.cbxTrainType.Text.Trim().Length >0)
             {
                 entity.TrainType = this.cbxTrainType.Text.Trim();
+            }
+
+            if (this.cbxTrainType.Text.Trim().Length >0)
+            {
+                entity.TrainContent = this.txtTrainContent.Text.Trim();
+            }
+
+            if (this.txtAim.Text.Trim().Length > 0)
+            {
+                entity.Reservation2 = this.txtAim.Text.Trim();
+            }
+
+            if (this.dteCheckDate.Text.Trim().Length > 0)
+            {
+                entity.Reservation3 = this.dteCheckDate.DateTime.ToString("yyyy-MM-dd HH:mm:ss");
             }
 
             if (this.dteStartTime.Text.Trim().Length > 0)

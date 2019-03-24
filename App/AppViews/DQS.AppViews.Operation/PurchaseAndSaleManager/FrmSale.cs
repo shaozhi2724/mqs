@@ -246,6 +246,25 @@ UPDATE dbo.WMS_RegulatoryCode SET ReviewCode = NULL,StatusID = 0,StatusName = '�
                         entity.BillStatusName = "已审核";
                         entity.Update();
                     }
+                    using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                    {
+                        string sqlBill = string.Format("EXEC sp_UpdateStatusForOut '{0}','{1}','{2}'", entity.BillCode, "已审核",GlobalItem.g_CurrentEmployee.EmployeeName);
+
+                        try
+                        {
+                            conn.Open();//连接数据库
+                            SqlCommand Bcommand = new SqlCommand(sqlBill, conn);
+                            Bcommand.ExecuteNonQuery();
+                        }
+                        catch (Exception ex)
+                        {
+                            XtraMessageBox.Show(ex.ToString(), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        finally
+                        {
+                            conn.Close();
+                        }
+                    }
                     this.pageNavigator.ShowData();
                 }
             }
@@ -394,9 +413,37 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
                 }
                 else
                 {
-                    entity.BillStatus = 1;
-                    entity.BillStatusName = "已下单";
-                    entity.Update();
+                    if (entity.BillStatus == 2)
+                    {
+                        entity.BillStatus = 1;
+                        entity.BillStatusName = "已下单";
+                        entity.Update();
+                    }
+                    else if (entity.BillStatus == 1 && entity.TransportCode.Length > 0)
+                    {
+                        DialogResult result = XtraMessageBox.Show("该单为网页订单，再次重置将删除订单，是否继续？", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (result == DialogResult.Yes)
+                        {
+                            string sql = string.Format("EXEC sp_BackAppBill '{0}'", entity.BillCode); 
+                            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                            {
+                                conn.Open();//连接数据库
+                                try
+                                {
+                                    SqlCommand cmd = new SqlCommand(sql, conn);
+                                    cmd.ExecuteNonQuery();
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show(ex.ToString());
+                                }
+                                finally
+                                {
+                                    conn.Close();
+                                }
+                            }
+                        }
+                    }
                 }
 
 

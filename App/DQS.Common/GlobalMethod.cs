@@ -145,8 +145,16 @@ namespace DQS.Common
                     viewName = "vw_BusinessStoreDetailForOutSale";
                 }
             }
-
-            string querySql = String.Format("SELECT * FROM [{0}] WHERE [{1}] = '{2}'", viewName, keyField, keyValue);
+            string querySql = "";
+            if (viewName == "vw_AllPurchaseDetail" || viewName == "vw_AllReceiveDetail" || viewName == "vw_AllAcceptDetail" || viewName == "vw_AllStockInDeatil" || viewName == "vw_AllWarehouseInBillDetail" || viewName == "vw_AllWarehouseInBillDetailForAccept" || viewName == "vw_AllWarehouseInBillDetailForStoreIn")
+            {
+                querySql = String.Format("SELECT * FROM [{0}] WHERE [{1}] = '{2}' ORDER BY 序号", viewName, keyField, keyValue);
+            }
+            else
+            {
+                querySql = String.Format("SELECT * FROM [{0}] WHERE [{1}] = '{2}'", viewName, keyField, keyValue);
+            }
+            
             using (DataSet dataSet = new DataSet())
             {
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
@@ -573,11 +581,76 @@ namespace DQS.Common
             return capstr;
         }
 
+
+
+        public static string GetPYString(string str)
+        {
+            string tempStr = "";
+            foreach (char c in str)
+            {
+                if ((int)c >= 33 && (int)c <= 126)
+                {//字母和符号原样保留 
+                    tempStr += c.ToString();
+                }
+                else
+                {//累加拼音声母 
+                    tempStr += GetPYChar(c.ToString());
+                }
+            }
+            return tempStr;
+        }
+ 
+        /// 
+        /// 取单个字符的拼音声母 
+        /// 
+        /// 要转换的单个汉字 
+        /// 拼音声母 
+        public static string GetPYChar(string c)
+        {
+            byte[] array = new byte[2];
+            array = System.Text.Encoding.Default.GetBytes(c);
+            int i = (short)(array[0] - '\0') * 256 + ((short)(array[1] - '\0'));
+            if (i < 0xB0A1) return "*";
+            if (i < 0xB0C5) return "a";
+            if (i < 0xB2C1) return "b";
+            if (i < 0xB4EE) return "c";
+            if (i < 0xB6EA) return "d";
+            if (i < 0xB7A2) return "e";
+            if (i < 0xB8C1) return "f";
+            if (i < 0xB9FE) return "g";
+            if (i < 0xBBF7) return "h";
+            if (i < 0xBFA6) return "g";
+            if (i < 0xC0AC) return "k";
+            if (i < 0xC2E8) return "l";
+            if (i < 0xC4C3) return "m";
+            if (i < 0xC5B6) return "n";
+            if (i < 0xC5BE) return "o";
+            if (i < 0xC6DA) return "p";
+            if (i < 0xC8BB) return "q";
+            if (i < 0xC8F6) return "r";
+            if (i < 0xCBFA) return "s";
+            if (i < 0xCDDA) return "t";
+            if (i < 0xCEF4) return "w";
+            if (i < 0xD1B9) return "x";
+            if (i < 0xD4D1) return "y";
+            if (i < 0xD7FA) return "z";
+            return "*";
+        }
+
+
         #endregion
 
-        public static DataTable GetReviewByProduct(int productID,string batchNo,int dealerID)
+        public static DataTable GetReviewByProduct(int productID,string batchNo,int dealerID,int departmentid)
         {
-            string querySql = String.Format("SELECT DISTINCT(复核ID),复核单号,复核日期,复核人员,销售单号,往来单位名称,业务员,备注 FROM vw_AllSaleBackReview WHERE 往来单位ID = '{0}' AND 产品ID = '{1}' AND 批号 = '{2}'", dealerID, productID, batchNo);
+            string querySql = "";
+            if (departmentid == 0)
+            {
+                querySql = String.Format("SELECT DISTINCT(复核ID),复核单号,复核日期,复核人员,销售单号,往来单位名称,业务员,备注 FROM vw_AllSaleBackReview WHERE 往来单位ID = '{0}' AND 产品ID = '{1}' AND [批号] = '{2}'", dealerID, productID, batchNo);
+            }
+            else
+            {
+                querySql = String.Format("SELECT DISTINCT(复核ID),复核单号,复核日期,复核人员,销售单号,往来单位名称,业务员,备注 FROM vw_AllSaleBackReview WHERE 往来单位ID = '{0}' AND 所属部门ID = {1} AND 产品ID = '{2}' AND [批号] = '{3}'", dealerID, departmentid, productID, batchNo);
+            }
             using (DataSet dataSet = new DataSet())
             {
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
@@ -593,9 +666,35 @@ namespace DQS.Common
         /// <param name="productID"></param>
         /// <param name="batchNo"></param>
         /// <returns></returns>
-        public static DataTable GetStoreInByProduct(int productID,string batchNo)
+        public static DataTable GetStoreInByProduct(int productID,string batchNo ,int instoreid)
         {
-            string querySql = String.Format("SELECT DISTINCT(入库单ID),入库单编号,入库日期,入库员,订单ID,采购单编号,采购员,往来单位ID,往来单位编码,往来单位名称,往来单位地址,采购员	FROM vw_AllStoreInRecord WHERE 产品ID = '{0}' AND 批号 = '{1}'", productID, batchNo);
+            string querySql = "";
+            if (instoreid == 0)
+            {
+                querySql = String.Format("SELECT DISTINCT(入库单ID),入库单编号,入库日期,入库员,订单ID,采购单编号,采购员,往来单位ID,往来单位编码,往来单位名称,往来单位地址,采购员	FROM vw_AllStoreInRecord WHERE 产品ID = '{0}' AND [批号] = '{1}'", productID, batchNo);
+            }
+            else
+            {
+                string sql = "SELECT InStoreCode,StoreTypeName FROM dbo.BUS_InStoreDetail WHERE InStoreID = " + instoreid;
+                using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                {
+                    SqlDataAdapter sdad = new SqlDataAdapter(sql, conn);
+                    DataSet ds = new DataSet();
+                    conn.Open();
+
+                    sdad.Fill(ds, "Table");
+                    string instorecode = ds.Tables["Table"].Rows[0]["InStoreCode"].ToString();
+                    string type = ds.Tables["Table"].Rows[0]["StoreTypeName"].ToString();
+                    if (type != "采购进货")
+                    {
+                        querySql = String.Format("SELECT DISTINCT(入库单ID),入库单编号,入库日期,入库员,订单ID,采购单编号,采购员,往来单位ID,往来单位编码,往来单位名称,往来单位地址,采购员	FROM vw_AllStoreInRecord WHERE 产品ID = '{0}' AND [批号] = '{1}'", productID, batchNo);
+                    }
+                    else
+                    {
+                        querySql = String.Format("SELECT DISTINCT(入库单ID),入库单编号,入库日期,入库员,订单ID,采购单编号,采购员,往来单位ID,往来单位编码,往来单位名称,往来单位地址,采购员	FROM vw_AllStoreInRecord WHERE 产品ID = '{0}' AND [批号] = '{1}' AND 入库单编号 = '{2}'", productID, batchNo, instorecode);
+                    }
+                }
+            }
             using (DataSet dataSet = new DataSet())
             {
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
@@ -612,7 +711,7 @@ namespace DQS.Common
         /// <returns></returns>
         public static DataTable GetStoreInByProduct(int storeID)
         {
-            string querySql = String.Format("SELECT 产品ID,产品编号, 产品名称, 生产厂商, 包装规格型号, 包装比例, 注册证号, 存储条件, 类别, 单位, 批号, 生产日期, 有效期至,单价,数量 FROM dbo.vw_AllStoreInRecord WHERE 入库单ID = '{0}'", storeID);
+            string querySql = String.Format("SELECT 产品ID,产品编号, 产品名称, 生产厂商, 包装规格型号, 包装比例, 注册证号, 存储条件, 类别, 单位, [批号], 生产日期, 有效期至,单价,数量 FROM dbo.vw_AllStoreInRecord WHERE 入库单ID = '{0}'", storeID);
             using (DataSet dataSet = new DataSet())
             {
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
@@ -625,7 +724,7 @@ namespace DQS.Common
 
         public static DataTable GetReviewDetialByProduct(string reviewCode)
         {
-            string querySql = String.Format("SELECT 产品ID, 产品编号, 产品名称, 生产厂商, 规格型号, 包装规格型号, 包装比例,业务员, 注册证号, 贮藏条件, 产品类别, 单位, 批号, 生产日期, 有效期至, 出库数量, 复核数量, 单价, 入库ID FROM vw_AllSaleBackReview WHERE 复核单号 = '{0}'", reviewCode);
+            string querySql = String.Format("SELECT 产品ID, 产品编号, 产品名称, 生产厂商, 规格型号, 包装规格型号, 包装比例,业务员, 注册证号, 贮藏条件, 产品类别, 单位, [批号], 生产日期, 有效期至, 出库数量, 复核数量, 单价, 入库ID,批发价,零售价 FROM vw_AllSaleBackReview WHERE 复核单号 = '{0}'", reviewCode);
             using (DataSet dataSet = new DataSet())
             {
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))

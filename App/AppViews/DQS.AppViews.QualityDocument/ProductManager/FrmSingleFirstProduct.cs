@@ -449,7 +449,7 @@ WHERE UP.ProductID = {0}", productID);
             }
             if (this.txtProductSpell.Text.Trim() == "")
             {
-                entity.ProductSpell = GlobalMethod.GetAlphabetic(txtProductName.Text.Trim());
+                entity.ProductSpell = GlobalMethod.GetPYString(txtProductName.Text.Trim());
             }
             entity.IsUseToChildren = chkBoxUseDescription.Items[0].CheckState == CheckState.Checked ? true : false;
             entity.IsUseToOldPeople = chkBoxUseDescription.Items[1].CheckState == CheckState.Checked ? true : false;

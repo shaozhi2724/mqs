@@ -15,6 +15,7 @@ using System.IO;
 using SyncService.Code;
 using SyncService;
 using System.Data.SqlClient;
+using EncryptionLibrary;
 
 namespace SyncService
 {
@@ -36,11 +37,12 @@ namespace SyncService
 
             DataSyncWS client = new DataSyncWS();
             string message = "";
-            client.Url = "http://124.193.157.37:8067/DataSyncService.asmx";
+            client.Url = "http://210.73.89.77:3030/DataSyncService.asmx";
             AuthenticationPT auth = new AuthenticationPT();
-            auth.UserCode = "bjjzt";
-            auth.Password = SHA256("1");
+            auth.UserCode = "bjkyxh";
+            auth.Password = EncryptionLibrary.Encryption.SHA256("1");
             var data = client.GetSyncData("0f5501ec-dfde-46fd-9190-72f6a3fefe12", auth, out message);
+            string xmlStr = EncryptionLibrary.Encryption._7UnZipAndFromUTF8(data); //引用EncryptionLibrary.dll转化xml
             //client.UploadSyncData();
             client.Dispose();
             if (message != "")
@@ -52,6 +54,7 @@ namespace SyncService
             {
                 txtDownCon.Text = "无订单！";
             }
+            txtDownCon.Text = xmlStr;
 
             #region
             /*

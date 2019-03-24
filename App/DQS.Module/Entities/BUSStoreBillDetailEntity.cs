@@ -176,6 +176,12 @@ namespace DQS.Module.Entities
 			set { this.SetValue("Reservation10", value); } 
 		}
 
+        public string SerialNumber
+		{
+            get { return (string)this.GetValue("SerialNumber"); }
+            set { this.SetValue("SerialNumber", value); } 
+		}
+
 		public BUSStoreBillDetailEntity()
 		{
 			this.TableName = "BUS_StoreBillDetail";
@@ -207,6 +213,7 @@ namespace DQS.Module.Entities
 			this.Fields.Add("Reservation8", BUSStoreBillDetailEntityFields.Reservation8);
 			this.Fields.Add("Reservation9", BUSStoreBillDetailEntityFields.Reservation9);
 			this.Fields.Add("Reservation10", BUSStoreBillDetailEntityFields.Reservation10);
+            this.Fields.Add("SerialNumber", BUSStoreBillDetailEntityFields.SerialNumber);
 		}
 	}
 
@@ -349,6 +356,11 @@ namespace DQS.Module.Entities
 			get { return new EntityField("BUS_StoreBillDetail", 26, "Reservation10", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
+        public static EntityField SerialNumber
+		{
+            get { return new EntityField("BUS_StoreBillDetail", 27, "SerialNumber", SqlDbType.NVarChar, false, false, false, true); }
+		}
+
 	}
 
 	#endregion
@@ -410,6 +422,8 @@ namespace DQS.Module.Entities
 		Reservation9,
 
 		Reservation10,
+
+        SerialNumber,
 
 	}
 

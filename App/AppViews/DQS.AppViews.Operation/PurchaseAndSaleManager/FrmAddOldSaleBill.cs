@@ -179,14 +179,14 @@ N'{6}',N'{7}',N'{8}',N'{9}',1,N'送货',0,N'{10}',N'',1,
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 string sql = @"INSERT dbo.BUS_BillDetail(BillID,ProductID,BatchNo,ProduceDate,ValidateDate,Amount,
-UnitPrice,TotalPrice,TradePrice,RetailPrice,StoreAmount)
-VALUES ({0},{1},N'{2}','{3}','{4}',{5},{6},0,{7},{8},0)
+UnitPrice,TotalPrice,TradePrice,RetailPrice,StoreAmount,InUnitPrice)
+VALUES ({0},{1},N'{2}','{3}','{4}',{5},{6},0,{7},{8},0,{9})
 
 
 UPDATE bus_billdetail SET totalprice = amount*unitprice WHERE billid = {0}
 UPDATE bus_bill SET totalprice = (SELECT SUM(totalprice) FROM bus_billdetail WHERE billid = {0}) WHERE billid = {0}
 ";
-                sql = string.Format(sql, GetSaleID(), txtProductName.Tag, txtBatchNo.Text, deStartDate.Text, deEndDate.Text, txtAmount.Text, txtUnitPrice.Text, txtPiFa.Text, txtLiSh.Text);
+                sql = string.Format(sql, GetSaleID(), txtProductName.Tag, txtBatchNo.Text, deStartDate.Text, deEndDate.Text, txtAmount.Text, txtUnitPrice.Text, txtPiFa.Text, txtLiSh.Text, txtInUnitPrice.Text);
                 try
                 {
                     conn.Open();

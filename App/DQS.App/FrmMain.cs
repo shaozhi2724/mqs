@@ -414,10 +414,15 @@ namespace DQS.App
                 }
             }
 
+            bool checkEnterpriseGSP = CheckEnterpriseGSP();
             bool checkEnterpriseLicense = CheckEnterpriseGSPLicense();
             bool checkEnterpriseTradeLicense = CheckEnterpriseTradeLicense();
 
             string message = "";
+            if (!checkEnterpriseGSP)
+            {
+                message += "- 企业GSP证书已到期\n";
+            }
             if (!checkEnterpriseLicense)
             {
                 message += "- 企业营业执照已到期\n";
@@ -623,11 +628,16 @@ namespace DQS.App
 
                     string fullClass = menuRow["MenuFullClass"].ToString();
 
+                    bool checkEnterpriseGSP = CheckEnterpriseGSP();
                     bool checkEnterpriseLicense = CheckEnterpriseGSPLicense();
                     bool checkEnterpriseTradeLicense = CheckEnterpriseTradeLicense();
                     if (fullClass.Contains("DQS.AppViews.Operation"))
                     {
                         string message = "";
+                        if (!checkEnterpriseGSP)
+                        {
+                            message += "- 企业GSP证书已到期\n";
+                        }
                         if (!checkEnterpriseLicense)
                         {
                             message += "- 企业营业执照已到期\n";
@@ -731,6 +741,38 @@ namespace DQS.App
                     #endregion
                 }
             }
+        }
+
+        private bool CheckEnterpriseGSP()
+        {
+            EntityCollection<BFIEnterpriseEntity> entities = new EntityCollection<BFIEnterpriseEntity>();
+            entities.Fetch();
+
+            if (entities.Count > 0)
+            {
+                BFIEnterpriseEntity entity = entities[0] as BFIEnterpriseEntity;
+                if (!entity.IsNullField("GSPValidateDate"))
+                {
+                    if (DateTime.Today > entity.GSPValidateDate)
+                    {
+                        EntityCollection<BFIEnterpriseGSPLockHistoryEntity> lockHistories = new EntityCollection<BFIEnterpriseGSPLockHistoryEntity>();
+                        lockHistories.Fetch(BFIEnterpriseGSPLockHistoryEntityFields.OldLicenseValidateDate == entity.GSPValidateDate | BFIEnterpriseGSPLockHistoryEntityFields.LockDate == entity.GSPValidateDate);
+                        if (lockHistories.Count == 0)
+                        {
+                            BFIEnterpriseGSPLockHistoryEntity lockHistory = new BFIEnterpriseGSPLockHistoryEntity();
+                            lockHistory.ActionName = "锁定";
+                            lockHistory.ActionDate = entity.LicenseValidateDate.Date;
+                            lockHistory.OldLicenseValidateDate = entity.LicenseValidateDate;
+                            lockHistory.LockDate = entity.LicenseValidateDate;
+                            lockHistory.CreateUserName = "系统";
+                            lockHistory.Save();
+                        }
+                        return false;
+                    }
+                }
+            }
+            return true;
+            //this.Close();
         }
 
         private bool CheckEnterpriseGSPLicense()

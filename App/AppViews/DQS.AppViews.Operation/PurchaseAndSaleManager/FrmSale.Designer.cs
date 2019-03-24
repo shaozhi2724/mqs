@@ -133,7 +133,7 @@
             // 
             // txtDealer
             // 
-            this.txtDealer.FormatQueryString = "[往来单位名称] LIKE \'%{0}%\' OR [往来单位Spell] LIKE \'%{0}%\' ";
+            this.txtDealer.FormatQueryString = "([往来单位名称] LIKE \'%{0}%\' OR [往来单位Spell] LIKE \'%{0}%\' )";
             this.txtDealer.Location = new System.Drawing.Point(217, 12);
             this.txtDealer.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtDealer.Name = "txtDealer";

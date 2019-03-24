@@ -117,11 +117,23 @@
     <Compile Include="CuringManager\FrmCuringCycle.Designer.cs">
       <DependentUpon>FrmCuringCycle.cs</DependentUpon>
     </Compile>
+    <Compile Include="CuringManager\FrmCuringEmphasisProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmCuringEmphasisProducts.Designer.cs">
+      <DependentUpon>FrmCuringEmphasisProducts.cs</DependentUpon>
+    </Compile>
     <Compile Include="CuringManager\FrmCuringPlan.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CuringManager\FrmCuringPlan.Designer.cs">
       <DependentUpon>FrmCuringPlan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuringManager\FrmCuringProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmCuringProducts.Designer.cs">
+      <DependentUpon>FrmCuringProducts.cs</DependentUpon>
     </Compile>
     <Compile Include="CuringManager\FrmCuringRecord.cs">
       <SubType>Form</SubType>
@@ -159,6 +171,12 @@
     <Compile Include="CuringManager\FrmFacilitiesVerification.Designer.cs">
       <DependentUpon>FrmFacilitiesVerification.cs</DependentUpon>
     </Compile>
+    <Compile Include="CuringManager\FrmSearchProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmSearchProducts.Designer.cs">
+      <DependentUpon>FrmSearchProducts.cs</DependentUpon>
+    </Compile>
     <Compile Include="CuringManager\FrmSelectFacilities.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +188,18 @@
     </Compile>
     <Compile Include="CuringManager\FrmSingleCuringCycle.Designer.cs">
       <DependentUpon>FrmSingleCuringCycle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuringManager\FrmSingleCuringEmphasisProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmSingleCuringEmphasisProducts.Designer.cs">
+      <DependentUpon>FrmSingleCuringEmphasisProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuringManager\FrmSingleCuringProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmSingleCuringProducts.Designer.cs">
+      <DependentUpon>FrmSingleCuringProducts.cs</DependentUpon>
     </Compile>
     <Compile Include="CuringManager\FrmSingleCuringRecord.cs">
       <SubType>Form</SubType>
@@ -207,11 +237,23 @@
     <Compile Include="CuringManager\FrmSingleFacilitiesVerification.Designer.cs">
       <DependentUpon>FrmSingleFacilitiesVerification.cs</DependentUpon>
     </Compile>
+    <Compile Include="CuringManager\FrmSingleTools.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmSingleTools.Designer.cs">
+      <DependentUpon>FrmSingleTools.cs</DependentUpon>
+    </Compile>
     <Compile Include="CuringManager\FrmTemperatureFacilities.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CuringManager\FrmTemperatureFacilities.Designer.cs">
       <DependentUpon>FrmTemperatureFacilities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuringManager\FrmTools.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuringManager\FrmTools.Designer.cs">
+      <DependentUpon>FrmTools.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmStoreAndCuring.cs">
       <SubType>Form</SubType>
@@ -236,6 +278,12 @@
     </Compile>
     <Compile Include="StockManager\FrmBeginInventory.Designer.cs">
       <DependentUpon>FrmBeginInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StockManager\FrmChangePrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmChangePrice.Designer.cs">
+      <DependentUpon>FrmChangePrice.cs</DependentUpon>
     </Compile>
     <Compile Include="StockManager\FrmChooseStoreDetails.cs">
       <SubType>Form</SubType>
@@ -327,14 +375,26 @@
     <Compile Include="StockManager\FrmUpdateBeginInventory.Designer.cs">
       <DependentUpon>FrmUpdateBeginInventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="StockManager\FrmYgcgTj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockManager\FrmYgcgTj.Designer.cs">
+      <DependentUpon>FrmYgcgTj.cs</DependentUpon>
+    </Compile>
     <Compile Include="StockManager\GetDepartment.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CuringManager\FrmCuringCycle.resx">
       <DependentUpon>FrmCuringCycle.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmCuringEmphasisProducts.resx">
+      <DependentUpon>FrmCuringEmphasisProducts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CuringManager\FrmCuringPlan.resx">
       <DependentUpon>FrmCuringPlan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmCuringProducts.resx">
+      <DependentUpon>FrmCuringProducts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CuringManager\FrmCuringRecord.resx">
       <DependentUpon>FrmCuringRecord.cs</DependentUpon>
@@ -354,11 +414,20 @@
     <EmbeddedResource Include="CuringManager\FrmFacilitiesVerification.resx">
       <DependentUpon>FrmFacilitiesVerification.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmSearchProducts.resx">
+      <DependentUpon>FrmSearchProducts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CuringManager\FrmSelectFacilities.resx">
       <DependentUpon>FrmSelectFacilities.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CuringManager\FrmSingleCuringCycle.resx">
       <DependentUpon>FrmSingleCuringCycle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmSingleCuringEmphasisProducts.resx">
+      <DependentUpon>FrmSingleCuringEmphasisProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmSingleCuringProducts.resx">
+      <DependentUpon>FrmSingleCuringProducts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CuringManager\FrmSingleCuringRecord.resx">
       <DependentUpon>FrmSingleCuringRecord.cs</DependentUpon>
@@ -378,8 +447,14 @@
     <EmbeddedResource Include="CuringManager\FrmSingleFacilitiesVerification.resx">
       <DependentUpon>FrmSingleFacilitiesVerification.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmSingleTools.resx">
+      <DependentUpon>FrmSingleTools.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CuringManager\FrmTemperatureFacilities.resx">
       <DependentUpon>FrmTemperatureFacilities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuringManager\FrmTools.resx">
+      <DependentUpon>FrmTools.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmStoreAndCuring.resx">
       <DependentUpon>FrmStoreAndCuring.cs</DependentUpon>
@@ -394,6 +469,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StockManager\FrmBeginInventory.resx">
       <DependentUpon>FrmBeginInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmChangePrice.resx">
+      <DependentUpon>FrmChangePrice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StockManager\FrmChooseStoreDetails.resx">
       <DependentUpon>FrmChooseStoreDetails.cs</DependentUpon>
@@ -439,6 +517,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StockManager\FrmUpdateBeginInventory.resx">
       <DependentUpon>FrmUpdateBeginInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockManager\FrmYgcgTj.resx">
+      <DependentUpon>FrmYgcgTj.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

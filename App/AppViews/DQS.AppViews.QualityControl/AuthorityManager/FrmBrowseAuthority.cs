@@ -10,12 +10,15 @@ using ORMSCore;
 using DQS.Module.Entities;
 using DevExpress.XtraTreeList.Nodes;
 using DQS.Controls;
+using System.Data.SqlClient;
+using DQS.Common;
 
 namespace DQS.AppViews.QualityControl.AuthorityManager
 {
     public partial class FrmBrowseAuthority : DevExpress.XtraEditors.XtraForm
     {
 
+        List<string> rolemenus = new List<string>();
         public FrmBrowseAuthority()
         {
             InitializeComponent();
@@ -225,6 +228,7 @@ namespace DQS.AppViews.QualityControl.AuthorityManager
 
         private void lbcRole_SelectedIndexChanged(object sender, EventArgs e)
         {
+            rolemenus.Clear();
             if (lbcRole.SelectedItem != null)
             {
                 ATCRoleEntity selectRole = (lbcRole.SelectedItem as ListEntityItem).Key as ATCRoleEntity;
@@ -241,6 +245,7 @@ namespace DQS.AppViews.QualityControl.AuthorityManager
                     foreach (ATCRoleMenuEntity rm in roleMenus)
                     {
                         this.SetCheckedByMenuCode(this.treeMenu.Nodes, rm.MenuCode);
+                        rolemenus.Add(rm.MenuCode);
                     }
                 }
                 else
@@ -263,25 +268,168 @@ namespace DQS.AppViews.QualityControl.AuthorityManager
 
                 this.GetCheckedMenuCode(this.treeMenu.Nodes, munus);
 
-                foreach (ListEntityItem roleItem in this.lbcRole.SelectedItems)
+                if (GlobalItem.g_CurrentUser.UserCode == "admin")
                 {
-                    ATCRoleMenuEntity roleMenu = new ATCRoleMenuEntity { RoleID = (roleItem.Key as ATCRoleEntity).RoleID };
-                    roleMenu.Delete();
-
-                    foreach (string menuCode in munus)
+                    foreach (ListEntityItem roleItem in this.lbcRole.SelectedItems)
                     {
-                        roleMenu.MenuCode = menuCode;
-                        roleMenu.CreateDate = DateTime.Now;
-                        roleMenu.Save();
+                        //(roleItem.Key as ATCRoleEntity).RoleID;
+                        ATCRoleMenuEntity roleMenu = new ATCRoleMenuEntity { RoleID = (roleItem.Key as ATCRoleEntity).RoleID };
+                        roleMenu.Delete();
+
+                        foreach (string menuCode in munus)
+                        {
+                            roleMenu.MenuCode = menuCode;
+                            roleMenu.CreateDate = DateTime.Now;
+                            roleMenu.Save();
+                        }
+                    }
+
+                    XtraMessageBox.Show("保存成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    if (CheckList(munus, rolemenus))
+                    {
+                        MessageBox.Show("没有任何修改。");
+                    }
+                    else
+                    {
+
+                        EntityCollection<ATCUserPageEntity> userPages = new EntityCollection<ATCUserPageEntity>();
+                        PredicateExpression pe = new PredicateExpression();
+                        pe.Add(ATCUserPageEntityFields.UserID == GlobalItem.g_CurrentUser.UserID);
+                        pe.Add(ATCUserPageEntityFields.DocumentCode == "BrowseAuthorityChange");
+                        DataTable data = userPages.FetchTable(pe);
+
+                        if (data.Rows.Count <= 0)
+                        {
+                            XtraMessageBox.Show("系统未设置您的审批流程，无法点击保存功能。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        }
+
+                        foreach (ListEntityItem roleItem in this.lbcRole.SelectedItems)
+                        {
+                            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                            {
+                                string sql = @"SELECT COUNT(0) num FROM dbo.ATC_BrowseAuthorityChange WHERE RoleID = '" + (roleItem.Key as ATCRoleEntity).RoleID + "' AND AppStatus = ''";
+
+                                try
+                                {
+                                    conn.Open();
+                                    SqlCommand comm = new SqlCommand(sql, conn);
+                                    int num = int.Parse(comm.ExecuteScalar().ToString());
+                                    if (num > 0)
+                                    {
+                                        MessageBox.Show("有申请变更未处理，请处理后操作。");
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        string code = "LL" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                                        string insertsql = @"EXEC sp_InsertOldRoleMenuChange '{0}','{1}','{2}','{3}'";
+                                        insertsql = string.Format(insertsql, code, (roleItem.Key as ATCRoleEntity).RoleID, (roleItem.Key as ATCRoleEntity).RoleName, GlobalItem.g_CurrentUser.UserName);
+                                        comm = new SqlCommand(insertsql, conn);
+                                        comm.ExecuteNonQuery();
+                                        foreach (var item in munus)
+                                        {
+                                            string insertnewsql = @"EXEC sp_InsertNewRoleMenuChange '{0}','{1}'";
+                                            comm = new SqlCommand(string.Format(insertnewsql, code, item), conn);
+                                            comm.ExecuteNonQuery();
+                                        }
+
+                                        if (data.Rows.Count > 0)
+                                        {
+                                            //按审批顺序排序
+                                            data.DefaultView.Sort = "ApprovalSort";
+                                            data = data.DefaultView.ToTable();
+
+                                            ATCApproveEntity approveEntity = new ATCApproveEntity();
+                                            approveEntity.InternalNo = code;
+                                            approveEntity.DocumentCode = "BrowseAuthorityChange";
+                                            approveEntity.BillCode = code;
+                                            approveEntity.ApproveTitle = string.Format("{0}角色浏览权限变更，编号：{1}", (roleItem.Key as ATCRoleEntity).RoleName, code);
+                                            approveEntity.ApprovalContent = String.Format("{0}角色浏览权限变更，编号：{1}", (roleItem.Key as ATCRoleEntity).RoleName, code);
+                                            approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+                                            approveEntity.CreateDate = DateTime.Now;
+                                            approveEntity.IsApprovaled = false;
+
+
+                                            //获得新建的ID号
+                                            string searchsql = @"SELECT ID FROM ATC_BrowseAuthorityChange WHERE ChangeCode = '" + code + "'";
+                                            comm = new SqlCommand(searchsql, conn);
+                                            int bgid = int.Parse(comm.ExecuteScalar().ToString());
+
+                                            for (int i = 0; i < data.Rows.Count; i++)
+                                            {
+                                                var approveCode = approveEntity.InternalNo + (i + 1).ToString("00");
+                                                approveEntity.ApproveCode = approveCode;
+                                                approveEntity.IsWhole = Convert.ToBoolean(data.Rows[i]["IsWhole"]);
+                                                approveEntity.ApproveOrder = Convert.ToInt32(data.Rows[i]["ApprovalSort"]);
+                                                var approvalUserId = new Guid(data.Rows[i]["ApprovalUserID"].ToString());
+                                                approveEntity.ApprovalUserID = approvalUserId;
+                                                approveEntity.Save();
+
+                                                //添加消息提醒
+                                                ATCApproveNotificationEntity notification = new ATCApproveNotificationEntity();
+                                                notification.CreateUserID = approveEntity.CreateUserID;
+                                                var userName = GlobalItem.g_CurrentEmployee == null
+                                                    ? GlobalItem.g_CurrentUser.UserName
+                                                    : GlobalItem.g_CurrentEmployee.EmployeeName;
+                                                notification.CreateUserName = userName;
+                                                notification.FormClass = "BrowseAuthorityChange";
+                                                notification.IsRead = false;
+                                                notification.TargetID = bgid;
+                                                notification.TargetCode = code;
+                                                notification.ApproveCode = approveCode;
+                                                notification.Message = string.Format("{0} 于 {1} 浏览权限变更申请（单号 {2}）。请您审批。", userName,
+                                                    DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), code);
+                                                notification.OwnerUserID = approvalUserId;
+                                                notification.Save();
+                                            }
+                                        }
+
+                                        MessageBox.Show("变更申请保存成功。");
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show(ex.ToString());
+                                }
+                                finally
+                                {
+                                    conn.Close();
+                                }
+                            }
+                        }
                     }
                 }
-
-                XtraMessageBox.Show("保存成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private bool CheckList(List<string> lista,List<string> listb)
+        {
+            bool isall = true;
+            foreach (var item in lista)
+            {
+                if (!listb.Contains(item))
+                {
+                    isall = false;
+                    return isall;
+                }
+            }
+            foreach (var item in listb)
+            {
+                if (!lista.Contains(item))
+                {
+                    isall = false;
+                    return isall;
+                }
+            }
+            return isall;
         }
 
         private void btnQuery_Click(object sender, EventArgs e)

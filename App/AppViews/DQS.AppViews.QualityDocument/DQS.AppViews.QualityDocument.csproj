@@ -159,6 +159,12 @@
     <Compile Include="DealerManager\FrmSingleFirstDealerChange.designer.cs">
       <DependentUpon>FrmSingleFirstDealerChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="EnterpriseManager\FrmEmployeeCheckBody.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterpriseManager\FrmEmployeeCheckBody.Designer.cs">
+      <DependentUpon>FrmEmployeeCheckBody.cs</DependentUpon>
+    </Compile>
     <Compile Include="EnterpriseManager\FrmEnterpriseAttachment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,6 +189,18 @@
     <Compile Include="EnterpriseManager\FrmEnterpriseInfo.Designer.cs">
       <DependentUpon>FrmEnterpriseInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="EnterpriseManager\FrmRangeChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterpriseManager\FrmRangeChange.Designer.cs">
+      <DependentUpon>FrmRangeChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EnterpriseManager\FrmSingleEmployeeCheckBody.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterpriseManager\FrmSingleEmployeeCheckBody.Designer.cs">
+      <DependentUpon>FrmSingleEmployeeCheckBody.cs</DependentUpon>
+    </Compile>
     <Compile Include="EnterpriseManager\FrmSingleEnterpriseChangeHistory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,6 +212,12 @@
     </Compile>
     <Compile Include="EnterpriseManager\FrmSingleEnterprise.Designer.cs">
       <DependentUpon>FrmSingleEnterprise.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EnterpriseManager\FrmSingleRangeChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterpriseManager\FrmSingleRangeChange.Designer.cs">
+      <DependentUpon>FrmSingleRangeChange.cs</DependentUpon>
     </Compile>
     <Compile Include="Extension.cs" />
     <Compile Include="FrmQualificationChange.cs">
@@ -286,6 +310,12 @@
     <Compile Include="ProductManager\FrmProductInfoChangeRequest.Designer.cs">
       <DependentUpon>FrmProductInfoChangeRequest.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProductManager\FrmProductPriceChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductManager\FrmProductPriceChange.Designer.cs">
+      <DependentUpon>FrmProductPriceChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProductManager\FrmSingleFirstProductChangeDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -339,6 +369,12 @@
     </Compile>
     <Compile Include="ProductManager\FrmSingleProduct.designer.cs">
       <DependentUpon>FrmSingleProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductManager\FrmSingleProductPriceChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductManager\FrmSingleProductPriceChange.Designer.cs">
+      <DependentUpon>FrmSingleProductPriceChange.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -471,6 +507,9 @@
     <EmbeddedResource Include="DealerManager\FrmSingleFirstDealerChange.resx">
       <DependentUpon>FrmSingleFirstDealerChange.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EnterpriseManager\FrmEmployeeCheckBody.resx">
+      <DependentUpon>FrmEmployeeCheckBody.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EnterpriseManager\FrmEnterpriseAttachment.resx">
       <DependentUpon>FrmEnterpriseAttachment.cs</DependentUpon>
     </EmbeddedResource>
@@ -483,11 +522,20 @@
     <EmbeddedResource Include="EnterpriseManager\FrmEnterpriseInfo.resx">
       <DependentUpon>FrmEnterpriseInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EnterpriseManager\FrmRangeChange.resx">
+      <DependentUpon>FrmRangeChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnterpriseManager\FrmSingleEmployeeCheckBody.resx">
+      <DependentUpon>FrmSingleEmployeeCheckBody.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EnterpriseManager\FrmSingleEnterpriseChangeHistory.resx">
       <DependentUpon>FrmSingleEnterpriseChangeHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EnterpriseManager\FrmSingleEnterprise.resx">
       <DependentUpon>FrmSingleEnterprise.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnterpriseManager\FrmSingleRangeChange.resx">
+      <DependentUpon>FrmSingleRangeChange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmQualificationChange.resx">
       <DependentUpon>FrmQualificationChange.cs</DependentUpon>
@@ -535,6 +583,9 @@
       <DependentUpon>FrmProductInfoChangeRequest.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProductManager\FrmProductPriceChange.resx">
+      <DependentUpon>FrmProductPriceChange.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProductManager\FrmSingleFirstProductChangeDetail.resx">
       <DependentUpon>FrmSingleFirstProductChangeDetail.cs</DependentUpon>
     </EmbeddedResource>
@@ -561,6 +612,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProductManager\FrmSingleProduct.resx">
       <DependentUpon>FrmSingleProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductManager\FrmSingleProductPriceChange.resx">
+      <DependentUpon>FrmSingleProductPriceChange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

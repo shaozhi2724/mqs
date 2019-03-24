@@ -128,6 +128,12 @@
     <Compile Include="AuthorityManager\FrmBrowseAuthority.Designer.cs">
       <DependentUpon>FrmBrowseAuthority.cs</DependentUpon>
     </Compile>
+    <Compile Include="AuthorityManager\FrmBrowseAuthorityChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AuthorityManager\FrmBrowseAuthorityChange.Designer.cs">
+      <DependentUpon>FrmBrowseAuthorityChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="AuthorityManager\FrmConstitutionDesign.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +145,12 @@
     </Compile>
     <Compile Include="AuthorityManager\FrmFunctionAuthority.Designer.cs">
       <DependentUpon>FrmFunctionAuthority.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AuthorityManager\FrmSingleBrowseAuthorityChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AuthorityManager\FrmSingleBrowseAuthorityChange.Designer.cs">
+      <DependentUpon>FrmSingleBrowseAuthorityChange.cs</DependentUpon>
     </Compile>
     <Compile Include="AuthorityManager\FrmSingleConstitutionDesign.cs">
       <SubType>Form</SubType>
@@ -260,6 +272,12 @@
     <Compile Include="UserManager\FrmSingleUser.designer.cs">
       <DependentUpon>FrmSingleUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserManager\FrmSingleUserRoleChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManager\FrmSingleUserRoleChange.Designer.cs">
+      <DependentUpon>FrmSingleUserRoleChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserManager\FrmUserInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -272,6 +290,12 @@
     <Compile Include="UserManager\FrmUserRole.Designer.cs">
       <DependentUpon>FrmUserRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserManager\FrmUserRoleChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManager\FrmUserRoleChange.Designer.cs">
+      <DependentUpon>FrmUserRoleChange.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AuthorityManager\FrmApproveAuthority.resx">
@@ -280,11 +304,17 @@
     <EmbeddedResource Include="AuthorityManager\FrmBrowseAuthority.resx">
       <DependentUpon>FrmBrowseAuthority.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AuthorityManager\FrmBrowseAuthorityChange.resx">
+      <DependentUpon>FrmBrowseAuthorityChange.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AuthorityManager\FrmConstitutionDesign.resx">
       <DependentUpon>FrmConstitutionDesign.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AuthorityManager\FrmFunctionAuthority.resx">
       <DependentUpon>FrmFunctionAuthority.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AuthorityManager\FrmSingleBrowseAuthorityChange.resx">
+      <DependentUpon>FrmSingleBrowseAuthorityChange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AuthorityManager\FrmSingleConstitutionDesign.resx">
       <DependentUpon>FrmSingleConstitutionDesign.cs</DependentUpon>
@@ -347,11 +377,17 @@
     <EmbeddedResource Include="UserManager\FrmSingleUser.resx">
       <DependentUpon>FrmSingleUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserManager\FrmSingleUserRoleChange.resx">
+      <DependentUpon>FrmSingleUserRoleChange.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserManager\FrmUserInfo.resx">
       <DependentUpon>FrmUserInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserManager\FrmUserRole.resx">
       <DependentUpon>FrmUserRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManager\FrmUserRoleChange.resx">
+      <DependentUpon>FrmUserRoleChange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

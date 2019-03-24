@@ -63,7 +63,7 @@ namespace DQS.AppViews.Operation.BackManager
         private void LoadCboQualified()
         {
             cboQualified.Properties.Items.Add("合格");
-            cboQualified.Properties.Items.Add("不合格");
+            cboQualified.Properties.Items.Add("退货");
             //cboQualified.Text = "";
         }
 
@@ -438,34 +438,17 @@ namespace DQS.AppViews.Operation.BackManager
                     int InStoreDetailID = Convert.ToInt32(popupGrid.PopupView.GetDataRow(i)["入库ID"]);
                     int ProductID = Convert.ToInt32(popupGrid.PopupView.GetDataRow(i)["产品ID"]);
                     string BatchNo = popupGrid.PopupView.GetDataRow(i)["批号"].ToString();
-                    //DateTime ProduceDate = (DateTime)popupGrid.PopupView.GetDataRow(i)["生产日期"];
-                    //DateTime ValidateDate = (DateTime)popupGrid.PopupView.GetDataRow(i)["有效期至"];
-                    //string SterilizationBatchNo = popupGrid.PopupView.GetDataRow(i)["灭菌批号"].ToString();
-                    //object sdate = popupGrid.PopupView.GetDataRow(i)["灭菌日期"];
-                    //DateTime SterilizationDate;
-                    //if (sdate != null && sdate != DBNull.Value)
-                    //{
-                    //    SterilizationDate = (DateTime)sdate;
-                    //}
-                    //else
-                    //{
-                    //    SterilizationDate = Convert.ToDateTime("1900-01-01");
-                    //}
                     int Amount = Convert.ToInt32(popupGrid.PopupView.GetDataRow(i)["数量"]);
                     double UnitPrice = Convert.ToDouble(popupGrid.PopupView.GetDataRow(i)["单价"]);
                     double TotalPrice = Convert.ToDouble(popupGrid.PopupView.GetDataRow(i)["金额"]);
                     svd.InStoreDetailID = InStoreDetailID;
                     svd.ProductID = ProductID;
                     svd.BatchNo = BatchNo;
-                    //svd.ProduceDate = ProduceDate;
-                    //svd.ValidateDate = ValidateDate;
                     svd.OutAmount = Amount;
                     svd.UnitPrice = UnitPrice;
                     svd.TotalPrice = TotalPrice;
                     svd.TradePrice = 0;
                     svd.RetailPrice = 0;
-                    //svd.SterilizationBatchNo = SterilizationBatchNo;
-                    //svd.SterilizationDate = SterilizationDate;
                     BFIProductEntity productEntity = new BFIProductEntity
                     {
                         ProductID = ProductID
@@ -1156,9 +1139,23 @@ WHERE BillID={1}
                             //}
                             double UnitPrice = Convert.ToDouble(popupGrid.PopupView.GetDataRow(i)["单价"]);
                             double TotalPrice = Convert.ToDouble(popupGrid.PopupView.GetDataRow(i)["金额"]);
-                            double TradePrice = Convert.ToDouble(popupGrid.PopupView.GetDataRow(i)["批发价"]);
-                            double RetailPrice = Convert.ToDouble(popupGrid.PopupView.GetDataRow(i)["零售价"]);
-                            string Reservation1 = popupGrid.PopupView.GetDataRow(i)["销项税"].ToString();
+                            //var TradePrice = popupGrid.PopupView.GetDataRow(i)["批发价"];
+                            //var RetailPrice = popupGrid.PopupView.GetDataRow(i)["零售价"];
+                            //string Reservation1 = popupGrid.PopupView.GetDataRow(i)["销项税"].ToString();
+                            //if (TradePrice != null && TradePrice != DBNull.Value)
+                            //{
+                            //}
+                            //else
+                            //{
+                            //    TradePrice = 0.0;
+                            //}
+                            //if (RetailPrice != null && RetailPrice != DBNull.Value)
+                            //{
+                            //}
+                            //else
+                            //{
+                            //    RetailPrice = 0.0;
+                            //}
                             int InStoreID = Convert.ToInt32(popupGrid.PopupView.GetRowCellValue(i, "入库ID"));
                             int Amount = Convert.ToInt32(popupGrid.PopupView.GetDataRow(i)["数量"]);
                             string BatchNo = popupGrid.PopupView.GetDataRow(i)["批号"].ToString();
@@ -1188,11 +1185,11 @@ WHERE BillID={1}
                                 svd.OutAmount = Amount;
                                 svd.UnitPrice = UnitPrice;
                                 svd.TotalPrice = TotalPrice;
-                                svd.TradePrice = TradePrice;
-                                svd.RetailPrice = RetailPrice;
+                                //svd.TradePrice = Convert.ToDouble(TradePrice);
+                                //svd.RetailPrice = Convert.ToDouble(RetailPrice);
                                 //svd.SterilizationBatchNo = SterilizationBatchNo;
                                 //svd.SterilizationDate = SterilizationDate;
-                                svd.Reservation1 = Reservation1;
+                                //svd.Reservation1 = Reservation1;
                                 list.Add(svd);
                             }
                             else
@@ -1213,11 +1210,11 @@ WHERE BillID={1}
                                 svd.OutAmount = Amount;
                                 svd.UnitPrice = UnitPrice;
                                 svd.TotalPrice = TotalPrice;
-                                svd.TradePrice = TradePrice;
-                                svd.RetailPrice = RetailPrice;
+                                //svd.TradePrice = Convert.ToDouble(TradePrice);
+                                //svd.RetailPrice = Convert.ToDouble(RetailPrice);
                                 //svd.SterilizationBatchNo = SterilizationBatchNo;
                                 //svd.SterilizationDate = SterilizationDate;
-                                svd.Reservation1 = Reservation1;
+                                //svd.Reservation1 = Reservation1;
                                 list.Add(svd);
                             }
                         }
@@ -1254,7 +1251,7 @@ WHERE BillID={1}
                             list[i].TotalPrice,
                             list[i].TradePrice,
                             list[i].RetailPrice,
-                            list[i].Reservation1,
+                            list[i].Reservation1 == null ? "0" : list[i].Reservation1,
                             list[i].isPrint);
                         SqlCommand cmd = new SqlCommand(sql, conn);
                         cmd.ExecuteNonQuery();
@@ -1714,9 +1711,14 @@ WHERE BillID={1}
                     XtraMessageBox.Show("请选择产品。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+                var instoreid = gridview.GetFocusedRowCellValue("入库ID");
+                if (null == instoreid || instoreid.ToString() == "")
+                {
+                    instoreid = 0;
+                }
                 string productName = gridview.GetFocusedRowCellValue("产品名称").ToString();
                 string batchNo = gridview.GetFocusedRowCellValue("批号").ToString();
-                using (FrmStoreInRecord fsir=new FrmStoreInRecord((int)productID,productName,batchNo))
+                using (FrmStoreInRecord fsir=new FrmStoreInRecord((int)productID,productName,batchNo,(int)instoreid))
                 {
                     DialogResult dr = fsir.ShowDialog(this);
                     if (dr == DialogResult.OK)

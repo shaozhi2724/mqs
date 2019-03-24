@@ -158,6 +158,8 @@
             this.tabGrantedPerson = new DevExpress.XtraTab.XtraTabPage();
             this.popupGrid = new DQS.Controls.PopupGrid();
             this.rdbtnIsUseToPregnantYes = new System.Windows.Forms.RadioButton();
+            this.txtzb = new DQS.Controls.BFIProductEntityTextBox();
+            this.layzb = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.pnOperating)).BeginInit();
             this.pnOperating.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
@@ -290,6 +292,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layProductEntityTextBox1)).BeginInit();
             this.tabGrantedPerson.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.popupGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtzb.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layzb)).BeginInit();
             this.SuspendLayout();
             // 
             // pnOperating
@@ -363,6 +367,7 @@
             // 
             // layControl
             // 
+            this.layControl.Controls.Add(this.txtzb);
             this.layControl.Controls.Add(this.cbxProductType);
             this.layControl.Controls.Add(this.txtPricePercent);
             this.layControl.Controls.Add(this.txtProductSpell);
@@ -642,7 +647,7 @@
             this.txtCharacter.IsTransferAlphabetic = false;
             this.txtCharacter.Location = new System.Drawing.Point(119, 370);
             this.txtCharacter.Name = "txtCharacter";
-            this.txtCharacter.Size = new System.Drawing.Size(700, 21);
+            this.txtCharacter.Size = new System.Drawing.Size(294, 21);
             this.txtCharacter.StyleController = this.layControl;
             this.txtCharacter.TabIndex = 31;
             // 
@@ -1020,7 +1025,8 @@
             this.layProductionPostalCode,
             this.layProductSpell,
             this.layPricePercent,
-            this.layProductType});
+            this.layProductType,
+            this.layzb});
             this.layControlGroup.Location = new System.Drawing.Point(0, -93);
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(831, 521);
@@ -1144,7 +1150,7 @@
             this.layCharacter.CustomizationFormText = "性状";
             this.layCharacter.Location = new System.Drawing.Point(0, 451);
             this.layCharacter.Name = "layCharacter";
-            this.layCharacter.Size = new System.Drawing.Size(811, 25);
+            this.layCharacter.Size = new System.Drawing.Size(405, 25);
             this.layCharacter.Text = "性状";
             this.layCharacter.TextSize = new System.Drawing.Size(104, 17);
             this.layCharacter.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
@@ -2016,6 +2022,30 @@
             this.rdbtnIsUseToPregnantYes.Text = "是";
             this.rdbtnIsUseToPregnantYes.UseVisualStyleBackColor = true;
             // 
+            // txtzb
+            // 
+            this.txtzb.AlphabeticFiled = null;
+            this.txtzb.EntityField = DQS.Module.Entities.BFIProductEntityFields2.Reservation4;
+            this.txtzb.IsIntegerOnly = false;
+            this.txtzb.IsNullString = null;
+            this.txtzb.IsNullValidate = false;
+            this.txtzb.IsTransferAlphabetic = false;
+            this.txtzb.Location = new System.Drawing.Point(524, 370);
+            this.txtzb.Name = "txtzb";
+            this.txtzb.Size = new System.Drawing.Size(295, 21);
+            this.txtzb.StyleController = this.layControl;
+            this.txtzb.TabIndex = 52;
+            // 
+            // layzb
+            // 
+            this.layzb.Control = this.txtzb;
+            this.layzb.CustomizationFormText = "中包数量";
+            this.layzb.Location = new System.Drawing.Point(405, 451);
+            this.layzb.Name = "layzb";
+            this.layzb.Size = new System.Drawing.Size(406, 25);
+            this.layzb.Text = "中包数量";
+            this.layzb.TextSize = new System.Drawing.Size(104, 17);
+            // 
             // FrmSingleFirstProduct
             // 
             this.AcceptButton = this.btnSave;
@@ -2164,6 +2194,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layProductEntityTextBox1)).EndInit();
             this.tabGrantedPerson.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.popupGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtzb.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layzb)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2300,5 +2332,7 @@
         private DevExpress.XtraEditors.ComboBoxEdit txtFirstDealerName;
         private Controls.ComboBoxCategoryEx cbxProductType;
         private DevExpress.XtraLayout.LayoutControlItem layProductType;
+        private Controls.BFIProductEntityTextBox txtzb;
+        private DevExpress.XtraLayout.LayoutControlItem layzb;
     }
 }

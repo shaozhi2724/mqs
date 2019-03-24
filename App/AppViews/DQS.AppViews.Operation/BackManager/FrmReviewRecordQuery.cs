@@ -137,7 +137,18 @@ namespace DQS.AppViews.Operation.BackManager
 
         private void txtBillCode_BeforePopupShow(object sender, Controls.CommonCode.BeforePopupShowArgs e)
         {
-            if(this.txtDealerName.Text.Trim() != "")
+            if (this.txtDealerName.Text.Trim() != "")
+            {
+                if (DQS.Controls.Properties.Settings.Default.IsLockDepartment)
+                {
+                    this.txtBillCode.Filter = String.Format("往来单位名称 = '{0}' AND 所属部门ID = '{1}'", this.txtDealerName.Text.Trim(), GlobalItem.g_CurrentEmployee.DepartmentID);
+                }
+                else
+                {
+                    this.txtBillCode.Filter = String.Format("往来单位名称 = '{0}'", this.txtDealerName.Text.Trim());
+                }
+            }
+            else
             {
                 this.txtBillCode.Filter = String.Format("往来单位名称 = '{0}'", this.txtDealerName.Text.Trim());
             }

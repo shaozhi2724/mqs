@@ -20,6 +20,7 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>发布\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -32,7 +33,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -253,6 +253,12 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmNewConnIP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmNewConnIP.Designer.cs">
+      <DependentUpon>FrmNewConnIP.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmPriceSearch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -309,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCategorySetting.resx">
       <DependentUpon>FrmCategorySetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmNewConnIP.resx">
+      <DependentUpon>FrmNewConnIP.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPriceSearch.resx">
       <DependentUpon>FrmPriceSearch.cs</DependentUpon>

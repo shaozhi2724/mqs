@@ -43,7 +43,6 @@
             this.txtBudget = new DQS.Controls.BUSEmployeeTrainPlanEntityTextBox();
             this.txtTrainTarget = new DQS.Controls.BUSEmployeeTrainPlanEntityTextBox();
             this.txtCheckStyle = new DQS.Controls.BUSEmployeeTrainPlanEntityTextBox();
-            this.txtTrainContent = new DQS.Controls.BUSEmployeeTrainPlanEntityTextBox();
             this.txtCheckPerson = new DQS.Controls.BUSEmployeeTrainPlanEntityTextBox();
             this.txtUndertakeDept = new DQS.Controls.BUSEmployeeTrainPlanEntityTextBox();
             this.txtDuration = new DQS.Controls.BUSEmployeeTrainPlanEntityTextBox();
@@ -78,6 +77,13 @@
             this.layTrainAddress = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.ftPanel = new DQS.Controls.FieldTextBoxPanel();
+            this.dteCheckDate = new DevExpress.XtraEditors.DateEdit();
+            this.layCheckDate = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtRequest = new DQS.Controls.BUSEmployeeTrainPlanEntityTextBox();
+            this.layRequest = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtTrainContent = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txtAim = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.layAim = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.pnOperating)).BeginInit();
             this.pnOperating.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtProposer.Properties)).BeginInit();
@@ -96,7 +102,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtBudget.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTrainTarget.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCheckStyle.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTrainContent.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCheckPerson.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUndertakeDept.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDuration.Properties)).BeginInit();
@@ -132,6 +137,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
             this.ftPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dteCheckDate.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dteCheckDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layCheckDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRequest.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layRequest)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTrainContent.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAim.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layAim)).BeginInit();
             this.SuspendLayout();
             // 
             // pnOperating
@@ -139,10 +152,9 @@
             this.pnOperating.Controls.Add(this.btnCancel);
             this.pnOperating.Controls.Add(this.btnSave);
             this.pnOperating.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnOperating.Location = new System.Drawing.Point(0, 392);
-            this.pnOperating.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pnOperating.Location = new System.Drawing.Point(0, 380);
             this.pnOperating.Name = "pnOperating";
-            this.pnOperating.Size = new System.Drawing.Size(635, 50);
+            this.pnOperating.Size = new System.Drawing.Size(606, 39);
             this.pnOperating.TabIndex = 1;
             // 
             // btnCancel
@@ -152,10 +164,9 @@
             this.btnCancel.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Appearance.Options.UseFont = true;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(536, 12);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCancel.Location = new System.Drawing.Point(519, 9);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(86, 27);
+            this.btnCancel.Size = new System.Drawing.Size(75, 21);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "取消(&C)";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -166,10 +177,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Appearance.Options.UseFont = true;
-            this.btnSave.Location = new System.Drawing.Point(435, 12);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnSave.Location = new System.Drawing.Point(431, 9);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(86, 27);
+            this.btnSave.Size = new System.Drawing.Size(75, 21);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "保存(&S)";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -182,15 +192,17 @@
             this.txtProposer.IsNullString = null;
             this.txtProposer.IsNullValidate = false;
             this.txtProposer.IsTransferAlphabetic = true;
-            this.txtProposer.Location = new System.Drawing.Point(111, 273);
-            this.txtProposer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtProposer.Location = new System.Drawing.Point(92, 262);
             this.txtProposer.Name = "txtProposer";
-            this.txtProposer.Size = new System.Drawing.Size(205, 25);
+            this.txtProposer.Size = new System.Drawing.Size(209, 21);
             this.txtProposer.StyleController = this.layControl;
             this.txtProposer.TabIndex = 18;
             // 
             // layControl
             // 
+            this.layControl.Controls.Add(this.dteCheckDate);
+            this.layControl.Controls.Add(this.txtAim);
+            this.layControl.Controls.Add(this.txtRequest);
             this.layControl.Controls.Add(this.txtTrainCode);
             this.layControl.Controls.Add(this.txtTrainName);
             this.layControl.Controls.Add(this.rgpIsTrained);
@@ -202,7 +214,6 @@
             this.layControl.Controls.Add(this.txtBudget);
             this.layControl.Controls.Add(this.txtTrainTarget);
             this.layControl.Controls.Add(this.txtCheckStyle);
-            this.layControl.Controls.Add(this.txtTrainContent);
             this.layControl.Controls.Add(this.txtCheckPerson);
             this.layControl.Controls.Add(this.txtUndertakeDept);
             this.layControl.Controls.Add(this.txtDuration);
@@ -213,12 +224,12 @@
             this.layControl.Controls.Add(this.txtTeachingMaterial);
             this.layControl.Controls.Add(this.txtPresentLevel);
             this.layControl.Controls.Add(this.txtTrainAddress);
+            this.layControl.Controls.Add(this.txtTrainContent);
             this.layControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layControl.Location = new System.Drawing.Point(2, 2);
-            this.layControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.layControl.Name = "layControl";
             this.layControl.Root = this.layControlGroup;
-            this.layControl.Size = new System.Drawing.Size(631, 388);
+            this.layControl.Size = new System.Drawing.Size(602, 376);
             this.layControl.TabIndex = 0;
             this.layControl.Text = "layControl";
             // 
@@ -230,10 +241,9 @@
             this.txtTrainCode.IsNullString = "培训编号不能为空。";
             this.txtTrainCode.IsNullValidate = true;
             this.txtTrainCode.IsTransferAlphabetic = false;
-            this.txtTrainCode.Location = new System.Drawing.Point(111, 12);
-            this.txtTrainCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTrainCode.Location = new System.Drawing.Point(92, 12);
             this.txtTrainCode.Name = "txtTrainCode";
-            this.txtTrainCode.Size = new System.Drawing.Size(205, 25);
+            this.txtTrainCode.Size = new System.Drawing.Size(209, 21);
             this.txtTrainCode.StyleController = this.layControl;
             this.txtTrainCode.TabIndex = 0;
             // 
@@ -245,79 +255,76 @@
             this.txtTrainName.IsNullString = "培训名称不能为空。";
             this.txtTrainName.IsNullValidate = true;
             this.txtTrainName.IsTransferAlphabetic = false;
-            this.txtTrainName.Location = new System.Drawing.Point(419, 12);
-            this.txtTrainName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTrainName.Location = new System.Drawing.Point(385, 12);
             this.txtTrainName.Name = "txtTrainName";
-            this.txtTrainName.Size = new System.Drawing.Size(200, 25);
+            this.txtTrainName.Size = new System.Drawing.Size(205, 21);
             this.txtTrainName.StyleController = this.layControl;
             this.txtTrainName.TabIndex = 1;
             // 
             // rgpIsTrained
             // 
             this.rgpIsTrained.EditValue = false;
-            this.rgpIsTrained.Location = new System.Drawing.Point(417, 302);
-            this.rgpIsTrained.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.rgpIsTrained.Location = new System.Drawing.Point(385, 312);
             this.rgpIsTrained.Name = "rgpIsTrained";
             this.rgpIsTrained.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem(false, "未培训"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(true, "已培训")});
-            this.rgpIsTrained.Size = new System.Drawing.Size(202, 74);
+            this.rgpIsTrained.Size = new System.Drawing.Size(205, 52);
             this.rgpIsTrained.StyleController = this.layControl;
             this.rgpIsTrained.TabIndex = 21;
             // 
             // dtePropoDate
             // 
             this.dtePropoDate.EditValue = null;
-            this.dtePropoDate.Location = new System.Drawing.Point(419, 273);
-            this.dtePropoDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dtePropoDate.Location = new System.Drawing.Point(92, 287);
             this.dtePropoDate.Name = "dtePropoDate";
             this.dtePropoDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dtePropoDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dtePropoDate.Size = new System.Drawing.Size(200, 25);
+            this.dtePropoDate.Size = new System.Drawing.Size(209, 21);
             this.dtePropoDate.StyleController = this.layControl;
             this.dtePropoDate.TabIndex = 19;
             // 
             // dteEndTime
             // 
             this.dteEndTime.EditValue = null;
-            this.dteEndTime.Location = new System.Drawing.Point(419, 186);
-            this.dteEndTime.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dteEndTime.Location = new System.Drawing.Point(385, 187);
             this.dteEndTime.Name = "dteEndTime";
             this.dteEndTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dteEndTime.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dteEndTime.Size = new System.Drawing.Size(200, 25);
+            this.dteEndTime.Size = new System.Drawing.Size(205, 21);
             this.dteEndTime.StyleController = this.layControl;
             this.dteEndTime.TabIndex = 13;
             // 
             // dteStartTime
             // 
             this.dteStartTime.EditValue = null;
-            this.dteStartTime.Location = new System.Drawing.Point(111, 186);
-            this.dteStartTime.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dteStartTime.Location = new System.Drawing.Point(92, 187);
             this.dteStartTime.Name = "dteStartTime";
             this.dteStartTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dteStartTime.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dteStartTime.Size = new System.Drawing.Size(205, 25);
+            this.dteStartTime.Size = new System.Drawing.Size(209, 21);
             this.dteStartTime.StyleController = this.layControl;
             this.dteStartTime.TabIndex = 12;
             // 
             // cbxTrainType
             // 
+            this.cbxTrainType.AddFirstDefaultItem = false;
             this.cbxTrainType.CategoryCode = "TrainType";
-            this.cbxTrainType.Location = new System.Drawing.Point(111, 99);
-            this.cbxTrainType.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cbxTrainType.FirstDefaultItemText = null;
+            this.cbxTrainType.FormatQueryString = null;
+            this.cbxTrainType.Location = new System.Drawing.Point(92, 112);
             this.cbxTrainType.Name = "cbxTrainType";
             this.cbxTrainType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbxTrainType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbxTrainType.SelectedValue = null;
-            this.cbxTrainType.Size = new System.Drawing.Size(205, 25);
+            this.cbxTrainType.Size = new System.Drawing.Size(209, 21);
             this.cbxTrainType.StyleController = this.layControl;
             this.cbxTrainType.TabIndex = 6;
             // 
@@ -329,10 +336,9 @@
             this.txtBudget.IsNullString = null;
             this.txtBudget.IsNullValidate = false;
             this.txtBudget.IsTransferAlphabetic = false;
-            this.txtBudget.Location = new System.Drawing.Point(419, 244);
-            this.txtBudget.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtBudget.Location = new System.Drawing.Point(385, 262);
             this.txtBudget.Name = "txtBudget";
-            this.txtBudget.Size = new System.Drawing.Size(200, 25);
+            this.txtBudget.Size = new System.Drawing.Size(205, 21);
             this.txtBudget.StyleController = this.layControl;
             this.txtBudget.TabIndex = 17;
             // 
@@ -344,10 +350,9 @@
             this.txtTrainTarget.IsNullString = null;
             this.txtTrainTarget.IsNullValidate = false;
             this.txtTrainTarget.IsTransferAlphabetic = false;
-            this.txtTrainTarget.Location = new System.Drawing.Point(111, 41);
-            this.txtTrainTarget.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTrainTarget.Location = new System.Drawing.Point(92, 37);
             this.txtTrainTarget.Name = "txtTrainTarget";
-            this.txtTrainTarget.Size = new System.Drawing.Size(205, 25);
+            this.txtTrainTarget.Size = new System.Drawing.Size(209, 21);
             this.txtTrainTarget.StyleController = this.layControl;
             this.txtTrainTarget.TabIndex = 2;
             // 
@@ -359,27 +364,11 @@
             this.txtCheckStyle.IsNullString = null;
             this.txtCheckStyle.IsNullValidate = false;
             this.txtCheckStyle.IsTransferAlphabetic = false;
-            this.txtCheckStyle.Location = new System.Drawing.Point(111, 244);
-            this.txtCheckStyle.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCheckStyle.Location = new System.Drawing.Point(92, 237);
             this.txtCheckStyle.Name = "txtCheckStyle";
-            this.txtCheckStyle.Size = new System.Drawing.Size(205, 25);
+            this.txtCheckStyle.Size = new System.Drawing.Size(209, 21);
             this.txtCheckStyle.StyleController = this.layControl;
             this.txtCheckStyle.TabIndex = 16;
-            // 
-            // txtTrainContent
-            // 
-            this.txtTrainContent.AlphabeticFiled = null;
-            this.txtTrainContent.EntityField = DQS.Module.Entities.BUSEmployeeTrainPlanEntityFields2.TrainContent;
-            this.txtTrainContent.IsIntegerOnly = false;
-            this.txtTrainContent.IsNullString = null;
-            this.txtTrainContent.IsNullValidate = false;
-            this.txtTrainContent.IsTransferAlphabetic = false;
-            this.txtTrainContent.Location = new System.Drawing.Point(419, 41);
-            this.txtTrainContent.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtTrainContent.Name = "txtTrainContent";
-            this.txtTrainContent.Size = new System.Drawing.Size(200, 25);
-            this.txtTrainContent.StyleController = this.layControl;
-            this.txtTrainContent.TabIndex = 3;
             // 
             // txtCheckPerson
             // 
@@ -389,10 +378,9 @@
             this.txtCheckPerson.IsNullString = null;
             this.txtCheckPerson.IsNullValidate = false;
             this.txtCheckPerson.IsTransferAlphabetic = true;
-            this.txtCheckPerson.Location = new System.Drawing.Point(419, 215);
-            this.txtCheckPerson.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCheckPerson.Location = new System.Drawing.Point(385, 212);
             this.txtCheckPerson.Name = "txtCheckPerson";
-            this.txtCheckPerson.Size = new System.Drawing.Size(200, 25);
+            this.txtCheckPerson.Size = new System.Drawing.Size(205, 21);
             this.txtCheckPerson.StyleController = this.layControl;
             this.txtCheckPerson.TabIndex = 15;
             // 
@@ -404,10 +392,9 @@
             this.txtUndertakeDept.IsNullString = null;
             this.txtUndertakeDept.IsNullValidate = false;
             this.txtUndertakeDept.IsTransferAlphabetic = false;
-            this.txtUndertakeDept.Location = new System.Drawing.Point(111, 70);
-            this.txtUndertakeDept.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtUndertakeDept.Location = new System.Drawing.Point(92, 87);
             this.txtUndertakeDept.Name = "txtUndertakeDept";
-            this.txtUndertakeDept.Size = new System.Drawing.Size(205, 25);
+            this.txtUndertakeDept.Size = new System.Drawing.Size(209, 21);
             this.txtUndertakeDept.StyleController = this.layControl;
             this.txtUndertakeDept.TabIndex = 4;
             // 
@@ -419,10 +406,9 @@
             this.txtDuration.IsNullString = null;
             this.txtDuration.IsNullValidate = false;
             this.txtDuration.IsTransferAlphabetic = false;
-            this.txtDuration.Location = new System.Drawing.Point(111, 215);
-            this.txtDuration.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDuration.Location = new System.Drawing.Point(92, 212);
             this.txtDuration.Name = "txtDuration";
-            this.txtDuration.Size = new System.Drawing.Size(205, 25);
+            this.txtDuration.Size = new System.Drawing.Size(209, 21);
             this.txtDuration.StyleController = this.layControl;
             this.txtDuration.TabIndex = 14;
             // 
@@ -434,10 +420,9 @@
             this.txtAssistDept.IsNullString = null;
             this.txtAssistDept.IsNullValidate = false;
             this.txtAssistDept.IsTransferAlphabetic = false;
-            this.txtAssistDept.Location = new System.Drawing.Point(419, 70);
-            this.txtAssistDept.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtAssistDept.Location = new System.Drawing.Point(385, 87);
             this.txtAssistDept.Name = "txtAssistDept";
-            this.txtAssistDept.Size = new System.Drawing.Size(200, 25);
+            this.txtAssistDept.Size = new System.Drawing.Size(205, 21);
             this.txtAssistDept.StyleController = this.layControl;
             this.txtAssistDept.TabIndex = 5;
             // 
@@ -449,10 +434,9 @@
             this.txtTrainStyle.IsNullString = null;
             this.txtTrainStyle.IsNullValidate = false;
             this.txtTrainStyle.IsTransferAlphabetic = false;
-            this.txtTrainStyle.Location = new System.Drawing.Point(419, 99);
-            this.txtTrainStyle.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTrainStyle.Location = new System.Drawing.Point(385, 112);
             this.txtTrainStyle.Name = "txtTrainStyle";
-            this.txtTrainStyle.Size = new System.Drawing.Size(200, 25);
+            this.txtTrainStyle.Size = new System.Drawing.Size(205, 21);
             this.txtTrainStyle.StyleController = this.layControl;
             this.txtTrainStyle.TabIndex = 7;
             // 
@@ -464,10 +448,9 @@
             this.txtLecturer.IsNullString = null;
             this.txtLecturer.IsNullValidate = false;
             this.txtLecturer.IsTransferAlphabetic = false;
-            this.txtLecturer.Location = new System.Drawing.Point(111, 128);
-            this.txtLecturer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtLecturer.Location = new System.Drawing.Point(92, 137);
             this.txtLecturer.Name = "txtLecturer";
-            this.txtLecturer.Size = new System.Drawing.Size(205, 25);
+            this.txtLecturer.Size = new System.Drawing.Size(209, 21);
             this.txtLecturer.StyleController = this.layControl;
             this.txtLecturer.TabIndex = 8;
             // 
@@ -479,10 +462,9 @@
             this.txtAnticipativeLevel.IsNullString = null;
             this.txtAnticipativeLevel.IsNullValidate = false;
             this.txtAnticipativeLevel.IsTransferAlphabetic = false;
-            this.txtAnticipativeLevel.Location = new System.Drawing.Point(111, 157);
-            this.txtAnticipativeLevel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtAnticipativeLevel.Location = new System.Drawing.Point(92, 162);
             this.txtAnticipativeLevel.Name = "txtAnticipativeLevel";
-            this.txtAnticipativeLevel.Size = new System.Drawing.Size(205, 25);
+            this.txtAnticipativeLevel.Size = new System.Drawing.Size(209, 21);
             this.txtAnticipativeLevel.StyleController = this.layControl;
             this.txtAnticipativeLevel.TabIndex = 10;
             // 
@@ -494,10 +476,9 @@
             this.txtTeachingMaterial.IsNullString = null;
             this.txtTeachingMaterial.IsNullValidate = false;
             this.txtTeachingMaterial.IsTransferAlphabetic = false;
-            this.txtTeachingMaterial.Location = new System.Drawing.Point(419, 128);
-            this.txtTeachingMaterial.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTeachingMaterial.Location = new System.Drawing.Point(385, 137);
             this.txtTeachingMaterial.Name = "txtTeachingMaterial";
-            this.txtTeachingMaterial.Size = new System.Drawing.Size(200, 25);
+            this.txtTeachingMaterial.Size = new System.Drawing.Size(205, 21);
             this.txtTeachingMaterial.StyleController = this.layControl;
             this.txtTeachingMaterial.TabIndex = 9;
             // 
@@ -509,10 +490,9 @@
             this.txtPresentLevel.IsNullString = null;
             this.txtPresentLevel.IsNullValidate = false;
             this.txtPresentLevel.IsTransferAlphabetic = false;
-            this.txtPresentLevel.Location = new System.Drawing.Point(419, 157);
-            this.txtPresentLevel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtPresentLevel.Location = new System.Drawing.Point(385, 162);
             this.txtPresentLevel.Name = "txtPresentLevel";
-            this.txtPresentLevel.Size = new System.Drawing.Size(200, 25);
+            this.txtPresentLevel.Size = new System.Drawing.Size(205, 21);
             this.txtPresentLevel.StyleController = this.layControl;
             this.txtPresentLevel.TabIndex = 11;
             // 
@@ -524,10 +504,9 @@
             this.txtTrainAddress.IsNullString = null;
             this.txtTrainAddress.IsNullValidate = false;
             this.txtTrainAddress.IsTransferAlphabetic = false;
-            this.txtTrainAddress.Location = new System.Drawing.Point(111, 302);
-            this.txtTrainAddress.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTrainAddress.Location = new System.Drawing.Point(385, 287);
             this.txtTrainAddress.Name = "txtTrainAddress";
-            this.txtTrainAddress.Size = new System.Drawing.Size(203, 25);
+            this.txtTrainAddress.Size = new System.Drawing.Size(205, 21);
             this.txtTrainAddress.StyleController = this.layControl;
             this.txtTrainAddress.TabIndex = 20;
             // 
@@ -552,18 +531,21 @@
             this.layDuration,
             this.layCheckPerson,
             this.layCheckStyle,
-            this.layBudget,
-            this.layProposer,
             this.layTrainType,
             this.layPresentLevel,
             this.layStartTime,
             this.layEndTime,
             this.layPropoDate,
+            this.layoutControlItem1,
+            this.layCheckDate,
+            this.layProposer,
+            this.layBudget,
             this.layTrainAddress,
-            this.layoutControlItem1});
+            this.layRequest,
+            this.layAim});
             this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
-            this.layControlGroup.Size = new System.Drawing.Size(631, 388);
+            this.layControlGroup.Size = new System.Drawing.Size(602, 376);
             this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layControlGroup.Text = "员工培训计划";
             this.layControlGroup.TextVisible = false;
@@ -574,242 +556,317 @@
             this.layTrainID.CustomizationFormText = "培训编号";
             this.layTrainID.Location = new System.Drawing.Point(0, 0);
             this.layTrainID.Name = "layTrainID";
-            this.layTrainID.Size = new System.Drawing.Size(308, 29);
+            this.layTrainID.Size = new System.Drawing.Size(293, 25);
             this.layTrainID.Text = "培训编号";
-            this.layTrainID.TextSize = new System.Drawing.Size(96, 20);
+            this.layTrainID.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layTrainName
             // 
             this.layTrainName.Control = this.txtTrainName;
             this.layTrainName.CustomizationFormText = "培训名称";
-            this.layTrainName.Location = new System.Drawing.Point(308, 0);
+            this.layTrainName.Location = new System.Drawing.Point(293, 0);
             this.layTrainName.Name = "layTrainName";
-            this.layTrainName.Size = new System.Drawing.Size(303, 29);
+            this.layTrainName.Size = new System.Drawing.Size(289, 25);
             this.layTrainName.Text = "培训名称";
-            this.layTrainName.TextSize = new System.Drawing.Size(96, 20);
+            this.layTrainName.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layTrainTarget
             // 
             this.layTrainTarget.Control = this.txtTrainTarget;
             this.layTrainTarget.CustomizationFormText = "培训对象";
-            this.layTrainTarget.Location = new System.Drawing.Point(0, 29);
+            this.layTrainTarget.Location = new System.Drawing.Point(0, 25);
             this.layTrainTarget.Name = "layTrainTarget";
-            this.layTrainTarget.Size = new System.Drawing.Size(308, 29);
+            this.layTrainTarget.Size = new System.Drawing.Size(293, 25);
             this.layTrainTarget.Text = "培训对象";
-            this.layTrainTarget.TextSize = new System.Drawing.Size(96, 20);
+            this.layTrainTarget.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layTrainContent
             // 
             this.layTrainContent.Control = this.txtTrainContent;
             this.layTrainContent.CustomizationFormText = "培训内容";
-            this.layTrainContent.Location = new System.Drawing.Point(308, 29);
+            this.layTrainContent.Location = new System.Drawing.Point(293, 25);
             this.layTrainContent.Name = "layTrainContent";
-            this.layTrainContent.Size = new System.Drawing.Size(303, 29);
+            this.layTrainContent.Size = new System.Drawing.Size(289, 25);
             this.layTrainContent.Text = "培训内容";
-            this.layTrainContent.TextSize = new System.Drawing.Size(96, 20);
+            this.layTrainContent.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layUndertakeDept
             // 
             this.layUndertakeDept.Control = this.txtUndertakeDept;
             this.layUndertakeDept.CustomizationFormText = "承办部门/人";
-            this.layUndertakeDept.Location = new System.Drawing.Point(0, 58);
+            this.layUndertakeDept.Location = new System.Drawing.Point(0, 75);
             this.layUndertakeDept.Name = "layUndertakeDept";
-            this.layUndertakeDept.Size = new System.Drawing.Size(308, 29);
+            this.layUndertakeDept.Size = new System.Drawing.Size(293, 25);
             this.layUndertakeDept.Text = "承办部门/人";
-            this.layUndertakeDept.TextSize = new System.Drawing.Size(96, 20);
+            this.layUndertakeDept.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layAssistDept
             // 
             this.layAssistDept.Control = this.txtAssistDept;
             this.layAssistDept.CustomizationFormText = "协助部门/人";
-            this.layAssistDept.Location = new System.Drawing.Point(308, 58);
+            this.layAssistDept.Location = new System.Drawing.Point(293, 75);
             this.layAssistDept.Name = "layAssistDept";
-            this.layAssistDept.Size = new System.Drawing.Size(303, 29);
+            this.layAssistDept.Size = new System.Drawing.Size(289, 25);
             this.layAssistDept.Text = "协助部门/人";
-            this.layAssistDept.TextSize = new System.Drawing.Size(96, 20);
+            this.layAssistDept.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layTrainStyle
             // 
             this.layTrainStyle.Control = this.txtTrainStyle;
             this.layTrainStyle.CustomizationFormText = "培训方式";
-            this.layTrainStyle.Location = new System.Drawing.Point(308, 87);
+            this.layTrainStyle.Location = new System.Drawing.Point(293, 100);
             this.layTrainStyle.Name = "layTrainStyle";
-            this.layTrainStyle.Size = new System.Drawing.Size(303, 29);
+            this.layTrainStyle.Size = new System.Drawing.Size(289, 25);
             this.layTrainStyle.Text = "培训方式";
-            this.layTrainStyle.TextSize = new System.Drawing.Size(96, 20);
+            this.layTrainStyle.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layLecturer
             // 
             this.layLecturer.Control = this.txtLecturer;
             this.layLecturer.CustomizationFormText = "培训讲师/机构";
-            this.layLecturer.Location = new System.Drawing.Point(0, 116);
+            this.layLecturer.Location = new System.Drawing.Point(0, 125);
             this.layLecturer.Name = "layLecturer";
-            this.layLecturer.Size = new System.Drawing.Size(308, 29);
+            this.layLecturer.Size = new System.Drawing.Size(293, 25);
             this.layLecturer.Text = "培训讲师/机构";
-            this.layLecturer.TextSize = new System.Drawing.Size(96, 20);
+            this.layLecturer.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layTeachingMaterial
             // 
             this.layTeachingMaterial.Control = this.txtTeachingMaterial;
             this.layTeachingMaterial.CustomizationFormText = "教材";
-            this.layTeachingMaterial.Location = new System.Drawing.Point(308, 116);
+            this.layTeachingMaterial.Location = new System.Drawing.Point(293, 125);
             this.layTeachingMaterial.Name = "layTeachingMaterial";
-            this.layTeachingMaterial.Size = new System.Drawing.Size(303, 29);
+            this.layTeachingMaterial.Size = new System.Drawing.Size(289, 25);
             this.layTeachingMaterial.Text = "教材";
-            this.layTeachingMaterial.TextSize = new System.Drawing.Size(96, 20);
+            this.layTeachingMaterial.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layAnticipativeLevel
             // 
             this.layAnticipativeLevel.Control = this.txtAnticipativeLevel;
             this.layAnticipativeLevel.CustomizationFormText = "预期水平";
-            this.layAnticipativeLevel.Location = new System.Drawing.Point(0, 145);
+            this.layAnticipativeLevel.Location = new System.Drawing.Point(0, 150);
             this.layAnticipativeLevel.Name = "layAnticipativeLevel";
-            this.layAnticipativeLevel.Size = new System.Drawing.Size(308, 29);
+            this.layAnticipativeLevel.Size = new System.Drawing.Size(293, 25);
             this.layAnticipativeLevel.Text = "预期水平";
-            this.layAnticipativeLevel.TextSize = new System.Drawing.Size(96, 20);
+            this.layAnticipativeLevel.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layDuration
             // 
             this.layDuration.Control = this.txtDuration;
             this.layDuration.CustomizationFormText = "培训时长";
-            this.layDuration.Location = new System.Drawing.Point(0, 203);
+            this.layDuration.Location = new System.Drawing.Point(0, 200);
             this.layDuration.Name = "layDuration";
-            this.layDuration.Size = new System.Drawing.Size(308, 29);
+            this.layDuration.Size = new System.Drawing.Size(293, 25);
             this.layDuration.Text = "培训时长";
-            this.layDuration.TextSize = new System.Drawing.Size(96, 20);
+            this.layDuration.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layCheckPerson
             // 
             this.layCheckPerson.Control = this.txtCheckPerson;
             this.layCheckPerson.CustomizationFormText = "考核人";
-            this.layCheckPerson.Location = new System.Drawing.Point(308, 203);
+            this.layCheckPerson.Location = new System.Drawing.Point(293, 200);
             this.layCheckPerson.Name = "layCheckPerson";
-            this.layCheckPerson.Size = new System.Drawing.Size(303, 29);
+            this.layCheckPerson.Size = new System.Drawing.Size(289, 25);
             this.layCheckPerson.Text = "考核人";
-            this.layCheckPerson.TextSize = new System.Drawing.Size(96, 20);
+            this.layCheckPerson.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layCheckStyle
             // 
             this.layCheckStyle.Control = this.txtCheckStyle;
             this.layCheckStyle.CustomizationFormText = "考核方式";
-            this.layCheckStyle.Location = new System.Drawing.Point(0, 232);
+            this.layCheckStyle.Location = new System.Drawing.Point(0, 225);
             this.layCheckStyle.Name = "layCheckStyle";
-            this.layCheckStyle.Size = new System.Drawing.Size(308, 29);
+            this.layCheckStyle.Size = new System.Drawing.Size(293, 25);
             this.layCheckStyle.Text = "考核方式";
-            this.layCheckStyle.TextSize = new System.Drawing.Size(96, 20);
+            this.layCheckStyle.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layBudget
             // 
             this.layBudget.Control = this.txtBudget;
             this.layBudget.CustomizationFormText = "费用预算";
-            this.layBudget.Location = new System.Drawing.Point(308, 232);
+            this.layBudget.Location = new System.Drawing.Point(293, 250);
             this.layBudget.Name = "layBudget";
-            this.layBudget.Size = new System.Drawing.Size(303, 29);
+            this.layBudget.Size = new System.Drawing.Size(289, 25);
             this.layBudget.Text = "费用预算";
-            this.layBudget.TextSize = new System.Drawing.Size(96, 20);
+            this.layBudget.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layProposer
             // 
             this.layProposer.Control = this.txtProposer;
             this.layProposer.CustomizationFormText = "申请人";
-            this.layProposer.Location = new System.Drawing.Point(0, 261);
+            this.layProposer.Location = new System.Drawing.Point(0, 250);
             this.layProposer.Name = "layProposer";
-            this.layProposer.Size = new System.Drawing.Size(308, 29);
+            this.layProposer.Size = new System.Drawing.Size(293, 25);
             this.layProposer.Text = "申请人";
-            this.layProposer.TextSize = new System.Drawing.Size(96, 20);
+            this.layProposer.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layTrainType
             // 
             this.layTrainType.Control = this.cbxTrainType;
             this.layTrainType.CustomizationFormText = "培训类别";
-            this.layTrainType.Location = new System.Drawing.Point(0, 87);
+            this.layTrainType.Location = new System.Drawing.Point(0, 100);
             this.layTrainType.Name = "layTrainType";
-            this.layTrainType.Size = new System.Drawing.Size(308, 29);
+            this.layTrainType.Size = new System.Drawing.Size(293, 25);
             this.layTrainType.Text = "培训类别";
-            this.layTrainType.TextSize = new System.Drawing.Size(96, 20);
+            this.layTrainType.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layPresentLevel
             // 
             this.layPresentLevel.Control = this.txtPresentLevel;
             this.layPresentLevel.CustomizationFormText = "现有水平";
-            this.layPresentLevel.Location = new System.Drawing.Point(308, 145);
+            this.layPresentLevel.Location = new System.Drawing.Point(293, 150);
             this.layPresentLevel.Name = "layPresentLevel";
-            this.layPresentLevel.Size = new System.Drawing.Size(303, 29);
+            this.layPresentLevel.Size = new System.Drawing.Size(289, 25);
             this.layPresentLevel.Text = "现有水平";
-            this.layPresentLevel.TextSize = new System.Drawing.Size(96, 20);
+            this.layPresentLevel.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layStartTime
             // 
             this.layStartTime.Control = this.dteStartTime;
             this.layStartTime.CustomizationFormText = "培训开始时间";
-            this.layStartTime.Location = new System.Drawing.Point(0, 174);
+            this.layStartTime.Location = new System.Drawing.Point(0, 175);
             this.layStartTime.Name = "layStartTime";
-            this.layStartTime.Size = new System.Drawing.Size(308, 29);
+            this.layStartTime.Size = new System.Drawing.Size(293, 25);
             this.layStartTime.Text = "培训开始时间";
-            this.layStartTime.TextSize = new System.Drawing.Size(96, 20);
+            this.layStartTime.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layEndTime
             // 
             this.layEndTime.Control = this.dteEndTime;
             this.layEndTime.CustomizationFormText = "培训结束时间";
-            this.layEndTime.Location = new System.Drawing.Point(308, 174);
+            this.layEndTime.Location = new System.Drawing.Point(293, 175);
             this.layEndTime.Name = "layEndTime";
-            this.layEndTime.Size = new System.Drawing.Size(303, 29);
+            this.layEndTime.Size = new System.Drawing.Size(289, 25);
             this.layEndTime.Text = "培训结束时间";
-            this.layEndTime.TextSize = new System.Drawing.Size(96, 20);
+            this.layEndTime.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layPropoDate
             // 
             this.layPropoDate.Control = this.dtePropoDate;
             this.layPropoDate.CustomizationFormText = "申请时间";
-            this.layPropoDate.Location = new System.Drawing.Point(308, 261);
+            this.layPropoDate.Location = new System.Drawing.Point(0, 275);
             this.layPropoDate.Name = "layPropoDate";
-            this.layPropoDate.Size = new System.Drawing.Size(303, 29);
+            this.layPropoDate.Size = new System.Drawing.Size(293, 25);
             this.layPropoDate.Text = "申请时间";
-            this.layPropoDate.TextSize = new System.Drawing.Size(96, 20);
+            this.layPropoDate.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layTrainAddress
             // 
             this.layTrainAddress.Control = this.txtTrainAddress;
             this.layTrainAddress.CustomizationFormText = "培训地点";
-            this.layTrainAddress.Location = new System.Drawing.Point(0, 290);
+            this.layTrainAddress.Location = new System.Drawing.Point(293, 275);
             this.layTrainAddress.Name = "layTrainAddress";
-            this.layTrainAddress.Size = new System.Drawing.Size(306, 78);
+            this.layTrainAddress.Size = new System.Drawing.Size(289, 25);
             this.layTrainAddress.Text = "培训地点";
-            this.layTrainAddress.TextSize = new System.Drawing.Size(96, 20);
+            this.layTrainAddress.TextSize = new System.Drawing.Size(77, 17);
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.rgpIsTrained;
             this.layoutControlItem1.CustomizationFormText = "是否培训";
-            this.layoutControlItem1.Location = new System.Drawing.Point(306, 290);
+            this.layoutControlItem1.Location = new System.Drawing.Point(293, 300);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(305, 78);
+            this.layoutControlItem1.Size = new System.Drawing.Size(289, 56);
             this.layoutControlItem1.Text = "是否培训";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(96, 20);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(77, 17);
             // 
             // ftPanel
             // 
             this.ftPanel.Controls.Add(this.layControl);
             this.ftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ftPanel.Location = new System.Drawing.Point(0, 0);
-            this.ftPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ftPanel.Name = "ftPanel";
-            this.ftPanel.Size = new System.Drawing.Size(635, 392);
+            this.ftPanel.Size = new System.Drawing.Size(606, 380);
             this.ftPanel.TabIndex = 0;
             this.ftPanel.TypeOfEntity = DQS.Module.EntityType2.BUSEmployeeTrainPlanEntity;
+            // 
+            // dteCheckDate
+            // 
+            this.dteCheckDate.EditValue = null;
+            this.dteCheckDate.Location = new System.Drawing.Point(385, 237);
+            this.dteCheckDate.Name = "dteCheckDate";
+            this.dteCheckDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dteCheckDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.dteCheckDate.Size = new System.Drawing.Size(205, 21);
+            this.dteCheckDate.StyleController = this.layControl;
+            this.dteCheckDate.TabIndex = 13;
+            // 
+            // layCheckDate
+            // 
+            this.layCheckDate.Control = this.dteCheckDate;
+            this.layCheckDate.CustomizationFormText = "考核日期";
+            this.layCheckDate.Location = new System.Drawing.Point(293, 225);
+            this.layCheckDate.Name = "layCheckDate";
+            this.layCheckDate.Size = new System.Drawing.Size(289, 25);
+            this.layCheckDate.Text = "考核日期";
+            this.layCheckDate.TextSize = new System.Drawing.Size(77, 17);
+            // 
+            // txtRequest
+            // 
+            this.txtRequest.AlphabeticFiled = null;
+            this.txtRequest.EntityField = DQS.Module.Entities.BUSEmployeeTrainPlanEntityFields2.Reservation1;
+            this.txtRequest.IsIntegerOnly = false;
+            this.txtRequest.IsNullString = null;
+            this.txtRequest.IsNullValidate = false;
+            this.txtRequest.IsTransferAlphabetic = false;
+            this.txtRequest.Location = new System.Drawing.Point(92, 312);
+            this.txtRequest.Name = "txtRequest";
+            this.txtRequest.Size = new System.Drawing.Size(209, 21);
+            this.txtRequest.StyleController = this.layControl;
+            this.txtRequest.TabIndex = 20;
+            // 
+            // layRequest
+            // 
+            this.layRequest.Control = this.txtRequest;
+            this.layRequest.CustomizationFormText = "培训要求";
+            this.layRequest.Location = new System.Drawing.Point(0, 300);
+            this.layRequest.Name = "layRequest";
+            this.layRequest.Size = new System.Drawing.Size(293, 56);
+            this.layRequest.Text = "培训要求";
+            this.layRequest.TextSize = new System.Drawing.Size(77, 17);
+            // 
+            // txtTrainContent
+            // 
+            this.txtTrainContent.Location = new System.Drawing.Point(385, 37);
+            this.txtTrainContent.Name = "txtTrainContent";
+            this.txtTrainContent.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtTrainContent.Size = new System.Drawing.Size(205, 21);
+            this.txtTrainContent.StyleController = this.layControl;
+            this.txtTrainContent.TabIndex = 3;
+            // 
+            // txtAim
+            // 
+            this.txtAim.Location = new System.Drawing.Point(92, 62);
+            this.txtAim.Name = "txtAim";
+            this.txtAim.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtAim.Size = new System.Drawing.Size(498, 21);
+            this.txtAim.StyleController = this.layControl;
+            this.txtAim.TabIndex = 3;
+            // 
+            // layAim
+            // 
+            this.layAim.Control = this.txtAim;
+            this.layAim.CustomizationFormText = "培训目的";
+            this.layAim.Location = new System.Drawing.Point(0, 50);
+            this.layAim.Name = "layAim";
+            this.layAim.Size = new System.Drawing.Size(582, 25);
+            this.layAim.Text = "培训目的";
+            this.layAim.TextSize = new System.Drawing.Size(77, 17);
             // 
             // FrmSingleEmployeeTrainPlan
             // 
             this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(635, 442);
+            this.ClientSize = new System.Drawing.Size(606, 419);
             this.Controls.Add(this.ftPanel);
             this.Controls.Add(this.pnOperating);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmSingleEmployeeTrainPlan";
@@ -835,7 +892,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtBudget.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTrainTarget.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCheckStyle.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTrainContent.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCheckPerson.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUndertakeDept.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDuration.Properties)).EndInit();
@@ -871,6 +927,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).EndInit();
             this.ftPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dteCheckDate.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dteCheckDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layCheckDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRequest.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layRequest)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTrainContent.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAim.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layAim)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -897,7 +961,6 @@
         private DQS.Controls.BUSEmployeeTrainPlanEntityTextBox txtTrainCode;
         private DQS.Controls.BUSEmployeeTrainPlanEntityTextBox txtTrainName;
         private DQS.Controls.BUSEmployeeTrainPlanEntityTextBox txtTrainTarget;
-        private DQS.Controls.BUSEmployeeTrainPlanEntityTextBox txtTrainContent;
         private DQS.Controls.BUSEmployeeTrainPlanEntityTextBox txtUndertakeDept;
         private DQS.Controls.BUSEmployeeTrainPlanEntityTextBox txtAssistDept;
         private DevExpress.XtraLayout.LayoutControlItem layTrainID;
@@ -927,5 +990,12 @@
         private DevExpress.XtraLayout.LayoutControlItem layPropoDate;
         private DevExpress.XtraEditors.RadioGroup rgpIsTrained;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraEditors.DateEdit dteCheckDate;
+        private DevExpress.XtraEditors.ComboBoxEdit txtAim;
+        private Controls.BUSEmployeeTrainPlanEntityTextBox txtRequest;
+        private DevExpress.XtraEditors.ComboBoxEdit txtTrainContent;
+        private DevExpress.XtraLayout.LayoutControlItem layCheckDate;
+        private DevExpress.XtraLayout.LayoutControlItem layRequest;
+        private DevExpress.XtraLayout.LayoutControlItem layAim;
     }
 }

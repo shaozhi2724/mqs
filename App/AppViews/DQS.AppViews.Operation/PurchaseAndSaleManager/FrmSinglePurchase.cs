@@ -884,6 +884,10 @@ WHERE BillID={1}
                     cboDepartment.Properties.ReadOnly = true;
                 }
             }
+            if (!this.ValidateDealerManQu())
+            {
+                e.Cancel = true;
+            }
             if (!this.ValidateDealerQualificationfordetail())
             {
                 e.Cancel = true;
@@ -908,6 +912,66 @@ WHERE BillID={1}
                 this.txtBusinessPerson.Filter = String.Format("所属单位 = '{0}'", this.txtDealerName.Text.Trim());
             }
 
+        }
+
+        private bool ValidateDealerManQu()
+        {
+            //获取客户的过期证书
+            if (this.txtBusinessPerson.Text != "")
+            {
+                int ManID = Convert.ToInt32(this.txtBusinessPerson.Tag);
+                ViewCollection<AllQualificationView> qualifications = new ViewCollection<AllQualificationView>();
+
+                PredicateExpression pe = new PredicateExpression();
+                pe.Add(AllQualificationViewFields.所属表ID == "BFI_Salesman");
+                pe.Add(AllQualificationViewFields.所属ID == ManID);
+                pe.Add(AllQualificationViewFields.到期状态 == "已过期");
+                qualifications.Fetch(pe);
+
+                bool isgo = true;
+                string message = "";
+                foreach (var item in qualifications)
+                {
+                    var itemli = (AllQualificationView)item;
+                    if (itemli.到期状态 == "已过期")
+                    {
+                        isgo = false;
+                    }
+                    string validate = "";
+                    try
+                    {
+                        validate = itemli.到期日期.ToString("d");
+                    }
+                    catch (Exception)
+                    {
+                        validate = "空";
+                    }
+                    string mes = itemli.档案名称 + "--" + itemli.到期状态 + "--" + validate + "\r\n";
+                    message += mes;
+                }
+
+                if (qualifications.Count > 0)
+                {
+                    if (isgo)
+                    {
+                        XtraMessageBox.Show(String.Format("销售员的电子档案即将过期！\r\n{0}", message), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return true;
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show(String.Format("销售员的电子档案已过期，无法生成订单，请修改！\r\n{0}", message), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            else
+            {
+                //XtraMessageBox.Show("请先选择采购员", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //return false;
+                return true;
+            }
         }
 
         /// <summary>

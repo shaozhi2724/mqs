@@ -156,7 +156,7 @@
             // rdgPaymentType
             // 
             this.rdgPaymentType.EditValue = "应付";
-            this.rdgPaymentType.Location = new System.Drawing.Point(318, 116);
+            this.rdgPaymentType.Location = new System.Drawing.Point(318, 54);
             this.rdgPaymentType.Name = "rdgPaymentType";
             this.rdgPaymentType.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.rdgPaymentType.Properties.Appearance.Options.UseBackColor = true;
@@ -174,7 +174,7 @@
             this.cboDepartment.CategoryCode = "PaymentType";
             this.cboDepartment.FirstDefaultItemText = null;
             this.cboDepartment.FormatQueryString = null;
-            this.cboDepartment.Location = new System.Drawing.Point(700, 170);
+            this.cboDepartment.Location = new System.Drawing.Point(700, 108);
             this.cboDepartment.Name = "cboDepartment";
             this.cboDepartment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -191,7 +191,7 @@
             this.cboQualified.EditValue = "合格";
             this.cboQualified.FirstDefaultItemText = null;
             this.cboQualified.FormatQueryString = null;
-            this.cboQualified.Location = new System.Drawing.Point(502, 170);
+            this.cboQualified.Location = new System.Drawing.Point(502, 108);
             this.cboQualified.Name = "cboQualified";
             this.cboQualified.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -210,7 +210,7 @@
             this.txtPurchaseBillCode.IsNullString = "采购单不能为空。";
             this.txtPurchaseBillCode.IsNullValidate = false;
             this.txtPurchaseBillCode.IsTransferAlphabetic = false;
-            this.txtPurchaseBillCode.Location = new System.Drawing.Point(87, 145);
+            this.txtPurchaseBillCode.Location = new System.Drawing.Point(87, 83);
             this.txtPurchaseBillCode.Name = "txtPurchaseBillCode";
             this.txtPurchaseBillCode.Properties.ReadOnly = true;
             this.txtPurchaseBillCode.Size = new System.Drawing.Size(336, 21);
@@ -225,7 +225,7 @@
             this.txtDealerName2.IsNullString = null;
             this.txtDealerName2.IsNullValidate = false;
             this.txtDealerName2.IsTransferAlphabetic = false;
-            this.txtDealerName2.Location = new System.Drawing.Point(87, 41);
+            this.txtDealerName2.Location = new System.Drawing.Point(87, -21);
             this.txtDealerName2.Name = "txtDealerName2";
             this.txtDealerName2.Properties.ReadOnly = true;
             this.txtDealerName2.Size = new System.Drawing.Size(336, 21);
@@ -240,7 +240,7 @@
             this.busBillEntityTextBox1.IsNullString = "";
             this.busBillEntityTextBox1.IsNullValidate = false;
             this.busBillEntityTextBox1.IsTransferAlphabetic = false;
-            this.busBillEntityTextBox1.Location = new System.Drawing.Point(87, 195);
+            this.busBillEntityTextBox1.Location = new System.Drawing.Point(87, 133);
             this.busBillEntityTextBox1.Name = "busBillEntityTextBox1";
             this.busBillEntityTextBox1.Size = new System.Drawing.Size(752, 21);
             this.busBillEntityTextBox1.StyleController = this.layControl;
@@ -254,7 +254,7 @@
             this.txtReason.IsNullString = "退回原因不能为空。";
             this.txtReason.IsNullValidate = true;
             this.txtReason.IsTransferAlphabetic = false;
-            this.txtReason.Location = new System.Drawing.Point(502, 145);
+            this.txtReason.Location = new System.Drawing.Point(502, 83);
             this.txtReason.Name = "txtReason";
             this.txtReason.Size = new System.Drawing.Size(337, 21);
             this.txtReason.StyleController = this.layControl;
@@ -263,7 +263,7 @@
             // rdgBillStyle
             // 
             this.rdgBillStyle.EditValue = "正常";
-            this.rdgBillStyle.Location = new System.Drawing.Point(502, 12);
+            this.rdgBillStyle.Location = new System.Drawing.Point(502, -50);
             this.rdgBillStyle.Name = "rdgBillStyle";
             this.rdgBillStyle.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.rdgBillStyle.Properties.Appearance.Options.UseBackColor = true;
@@ -281,7 +281,7 @@
             this.cbxDeliveryType.CategoryCode = "DeliveryType";
             this.cbxDeliveryType.FirstDefaultItemText = null;
             this.cbxDeliveryType.FormatQueryString = null;
-            this.cbxDeliveryType.Location = new System.Drawing.Point(501, 116);
+            this.cbxDeliveryType.Location = new System.Drawing.Point(501, 54);
             this.cbxDeliveryType.Name = "cbxDeliveryType";
             this.cbxDeliveryType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -297,7 +297,7 @@
             this.cbxPaymentType.CategoryCode = "PaymentType";
             this.cbxPaymentType.FirstDefaultItemText = null;
             this.cbxPaymentType.FormatQueryString = null;
-            this.cbxPaymentType.Location = new System.Drawing.Point(87, 116);
+            this.cbxPaymentType.Location = new System.Drawing.Point(87, 54);
             this.cbxPaymentType.Name = "cbxPaymentType";
             this.cbxPaymentType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -315,7 +315,7 @@
             this.txtBillCode.IsNullString = "采购退回单号不能为空。";
             this.txtBillCode.IsNullValidate = true;
             this.txtBillCode.IsTransferAlphabetic = false;
-            this.txtBillCode.Location = new System.Drawing.Point(87, 12);
+            this.txtBillCode.Location = new System.Drawing.Point(87, -50);
             this.txtBillCode.Name = "txtBillCode";
             this.txtBillCode.Size = new System.Drawing.Size(336, 21);
             this.txtBillCode.StyleController = this.layControl;
@@ -333,7 +333,7 @@
             this.txtDealerName.IsNullString = "往来单位不能为空。";
             this.txtDealerName.IsNullValidate = true;
             this.txtDealerName.IsTransferAlphabetic = true;
-            this.txtDealerName.Location = new System.Drawing.Point(87, 66);
+            this.txtDealerName.Location = new System.Drawing.Point(87, 4);
             this.txtDealerName.MemberText = "单位名称";
             this.txtDealerName.MemberValue = "单位ID";
             this.txtDealerName.Name = "txtDealerName";
@@ -356,7 +356,7 @@
             this.txtDealerAddress.IsNullString = null;
             this.txtDealerAddress.IsNullValidate = false;
             this.txtDealerAddress.IsTransferAlphabetic = false;
-            this.txtDealerAddress.Location = new System.Drawing.Point(502, 41);
+            this.txtDealerAddress.Location = new System.Drawing.Point(502, -21);
             this.txtDealerAddress.Name = "txtDealerAddress";
             this.txtDealerAddress.Properties.ReadOnly = true;
             this.txtDealerAddress.Size = new System.Drawing.Size(337, 21);
@@ -372,7 +372,7 @@
             this.txtTotalPrice.IsNullString = null;
             this.txtTotalPrice.IsNullValidate = false;
             this.txtTotalPrice.IsTransferAlphabetic = false;
-            this.txtTotalPrice.Location = new System.Drawing.Point(87, 170);
+            this.txtTotalPrice.Location = new System.Drawing.Point(87, 108);
             this.txtTotalPrice.Name = "txtTotalPrice";
             this.txtTotalPrice.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtTotalPrice.Properties.Appearance.Options.UseBackColor = true;
@@ -393,7 +393,7 @@
             this.txtBusinessPerson.IsNullString = null;
             this.txtBusinessPerson.IsNullValidate = false;
             this.txtBusinessPerson.IsTransferAlphabetic = true;
-            this.txtBusinessPerson.Location = new System.Drawing.Point(87, 91);
+            this.txtBusinessPerson.Location = new System.Drawing.Point(87, 29);
             this.txtBusinessPerson.MemberText = "人员姓名";
             this.txtBusinessPerson.MemberValue = "人员ID";
             this.txtBusinessPerson.Name = "txtBusinessPerson";
@@ -417,7 +417,7 @@
             this.txtBusinessPhone.IsNullString = null;
             this.txtBusinessPhone.IsNullValidate = false;
             this.txtBusinessPhone.IsTransferAlphabetic = false;
-            this.txtBusinessPhone.Location = new System.Drawing.Point(501, 91);
+            this.txtBusinessPhone.Location = new System.Drawing.Point(501, 29);
             this.txtBusinessPhone.Name = "txtBusinessPhone";
             this.txtBusinessPhone.Size = new System.Drawing.Size(338, 21);
             this.txtBusinessPhone.StyleController = this.layControl;
@@ -448,7 +448,7 @@
             this.layQualified,
             this.layDepartment,
             this.layPaymentTypeName});
-            this.layControlGroup.Location = new System.Drawing.Point(0, 0);
+            this.layControlGroup.Location = new System.Drawing.Point(0, -62);
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(851, 228);
             this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);

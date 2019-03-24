@@ -37,7 +37,6 @@
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl = new DevExpress.XtraEditors.PanelControl();
-            this.pictureEdit = new DevExpress.XtraEditors.PictureEdit();
             this.gcDetails = new DevExpress.XtraEditors.GroupControl();
             this.gridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -50,18 +49,18 @@
             this.colBatchNo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colAttachmentName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
-            this.splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
+            this.pictureEdit = new DevExpress.XtraEditors.PictureEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSearch)).BeginInit();
             this.gcSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtBatchNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl)).BeginInit();
             this.panelControl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcDetails)).BeginInit();
             this.gcDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gcSearch
@@ -140,21 +139,11 @@
             // panelControl
             // 
             this.panelControl.Controls.Add(this.pictureEdit);
-            this.panelControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl.Location = new System.Drawing.Point(0, 385);
+            this.panelControl.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelControl.Location = new System.Drawing.Point(450, 64);
             this.panelControl.Name = "panelControl";
-            this.panelControl.Size = new System.Drawing.Size(884, 184);
+            this.panelControl.Size = new System.Drawing.Size(434, 528);
             this.panelControl.TabIndex = 1;
-            // 
-            // pictureEdit
-            // 
-            this.pictureEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureEdit.Location = new System.Drawing.Point(2, 2);
-            this.pictureEdit.Name = "pictureEdit";
-            this.pictureEdit.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
-            this.pictureEdit.Size = new System.Drawing.Size(880, 180);
-            this.pictureEdit.TabIndex = 2;
-            this.pictureEdit.Visible = false;
             // 
             // gcDetails
             // 
@@ -162,7 +151,7 @@
             this.gcDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcDetails.Location = new System.Drawing.Point(0, 64);
             this.gcDetails.Name = "gcDetails";
-            this.gcDetails.Size = new System.Drawing.Size(884, 321);
+            this.gcDetails.Size = new System.Drawing.Size(450, 528);
             this.gcDetails.TabIndex = 2;
             this.gcDetails.Text = "明细";
             // 
@@ -172,7 +161,7 @@
             this.gridControl.Location = new System.Drawing.Point(2, 23);
             this.gridControl.MainView = this.gridView;
             this.gridControl.Name = "gridControl";
-            this.gridControl.Size = new System.Drawing.Size(880, 296);
+            this.gridControl.Size = new System.Drawing.Size(446, 503);
             this.gridControl.TabIndex = 0;
             this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView});
@@ -194,7 +183,7 @@
             this.gridView.OptionsBehavior.Editable = false;
             this.gridView.OptionsBehavior.ReadOnly = true;
             this.gridView.OptionsView.ShowGroupPanel = false;
-            this.gridView.Click += new System.EventHandler(this.gridView_Click);
+            this.gridView.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gridView_RowClick);
             // 
             // colAcceptAttachmentID
             // 
@@ -260,21 +249,20 @@
             // 
             this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
             // 
-            // splitterControl1
+            // pictureEdit
             // 
-            this.splitterControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.splitterControl1.Location = new System.Drawing.Point(0, 379);
-            this.splitterControl1.Name = "splitterControl1";
-            this.splitterControl1.Size = new System.Drawing.Size(884, 6);
-            this.splitterControl1.TabIndex = 3;
-            this.splitterControl1.TabStop = false;
+            this.pictureEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureEdit.Location = new System.Drawing.Point(2, 2);
+            this.pictureEdit.Name = "pictureEdit";
+            this.pictureEdit.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
+            this.pictureEdit.Size = new System.Drawing.Size(430, 524);
+            this.pictureEdit.TabIndex = 2;
             // 
             // FrmDownAttachment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 569);
-            this.Controls.Add(this.splitterControl1);
+            this.ClientSize = new System.Drawing.Size(884, 592);
             this.Controls.Add(this.gcDetails);
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.gcSearch);
@@ -282,6 +270,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "附件下载";
+            this.Load += new System.EventHandler(this.FrmDownAttachment_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcSearch)).EndInit();
             this.gcSearch.ResumeLayout(false);
             this.gcSearch.PerformLayout();
@@ -289,11 +278,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl)).EndInit();
             this.panelControl.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcDetails)).EndInit();
             this.gcDetails.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -322,6 +311,5 @@
         private DevExpress.XtraGrid.Columns.GridColumn colAttachmentName;
         private System.Drawing.Printing.PrintDocument printDocument;
         private DevExpress.XtraEditors.PictureEdit pictureEdit;
-        private DevExpress.XtraEditors.SplitterControl splitterControl1;
     }
 }

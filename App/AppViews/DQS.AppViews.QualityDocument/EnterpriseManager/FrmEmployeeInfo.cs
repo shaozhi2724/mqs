@@ -24,6 +24,18 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
             
         }
 
+        protected override void CustomCheckBody()
+        {
+            object id = gvData.GetFocusedRowCellValue("员工ID");
+            if (id != null)
+            {
+                using (FrmEmployeeCheckBody frm = new FrmEmployeeCheckBody(int.Parse(id.ToString())))
+                {
+                    frm.ShowDialog();
+                }
+            }
+        }
+
         protected override void CustomQualification()
         {
             object id = gvData.GetFocusedRowCellValue("员工ID");

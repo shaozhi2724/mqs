@@ -32,6 +32,7 @@
             this.lblEndDate = new DevExpress.XtraEditors.LabelControl();
             this.lblStartDate = new DevExpress.XtraEditors.LabelControl();
             this.btnChooseSearch = new DevExpress.XtraEditors.SimpleButton();
+            this.btnImport = new DevExpress.XtraEditors.SimpleButton();
             this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
@@ -40,7 +41,6 @@
             this.btnReSet = new DevExpress.XtraEditors.SimpleButton();
             this.gridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.btnImport = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deEndDate.Properties.VistaTimeProperties)).BeginInit();
@@ -97,6 +97,16 @@
             this.btnChooseSearch.Text = "查询条件";
             this.btnChooseSearch.Visible = false;
             this.btnChooseSearch.Click += new System.EventHandler(this.btnChooseSearch_Click);
+            // 
+            // btnImport
+            // 
+            this.btnImport.Location = new System.Drawing.Point(252, 9);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(75, 23);
+            this.btnImport.TabIndex = 1;
+            this.btnImport.Text = "导入";
+            this.btnImport.Visible = false;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // btnPrint
             // 
@@ -177,20 +187,10 @@
             // gridView
             // 
             this.gridView.GridControl = this.gridControl;
-            this.gridView.IndicatorWidth = 40;
+            this.gridView.IndicatorWidth = 50;
             this.gridView.Name = "gridView";
             this.gridView.OptionsView.ShowFooter = true;
             this.gridView.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
-            // 
-            // btnImport
-            // 
-            this.btnImport.Location = new System.Drawing.Point(252, 9);
-            this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(75, 23);
-            this.btnImport.TabIndex = 1;
-            this.btnImport.Text = "导入";
-            this.btnImport.Visible = false;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // FrmGridViewer
             // 

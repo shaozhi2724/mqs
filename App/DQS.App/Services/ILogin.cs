@@ -12,5 +12,6 @@ namespace DQS.App.Services
         List<SYSConnection> getConnList(out string cboText);
         bool isVisible(out string EnterpriseName);
         void SaveConfiguration(string connection);
+        bool CanCn();
     }
 }

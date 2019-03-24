@@ -81,6 +81,7 @@
     <Compile Include="Entities\BFIEnterpriseAttachmentEntity.cs" />
     <Compile Include="Entities\BFIEnterpriseChangeHistoryEntity.cs" />
     <Compile Include="Entities\BFIEnterpriseEntity.cs" />
+    <Compile Include="Entities\BFIEnterpriseGSPLockHistoryEntity.cs" />
     <Compile Include="Entities\BFIEnterpriseLicenseLockHistoryEntity.cs" />
     <Compile Include="Entities\BFIEnterpriseTradeLicenseLockHistoryEntity.cs" />
     <Compile Include="Entities\BFILabelStructureEntity.cs" />

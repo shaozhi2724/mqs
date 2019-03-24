@@ -182,6 +182,12 @@ namespace DQS.Module.Entities
 			set { this.SetValue("Reservation10", value); } 
 		}
 
+        public double InUnitPrice
+        {
+            get { return (double)this.GetValue("InUnitPrice"); }
+            set { this.SetValue("InUnitPrice", value); }
+        }
+
 		public BUSBillDetailEntity()
 		{
 			this.TableName = "BUS_BillDetail";
@@ -214,6 +220,7 @@ namespace DQS.Module.Entities
 			this.Fields.Add("Reservation8", BUSBillDetailEntityFields.Reservation8);
 			this.Fields.Add("Reservation9", BUSBillDetailEntityFields.Reservation9);
 			this.Fields.Add("Reservation10", BUSBillDetailEntityFields.Reservation10);
+            this.Fields.Add("InUnitPrice", BUSBillDetailEntityFields.InUnitPrice);
 		}
 	}
 
@@ -361,6 +368,11 @@ namespace DQS.Module.Entities
 			get { return new EntityField("BUS_BillDetail", 27, "Reservation10", SqlDbType.NVarChar, false, false, false, true); }
 		}
 
+        public static EntityField InUnitPrice
+		{
+            get { return new EntityField("BUS_BillDetail", 28, "InUnitPrice", SqlDbType.Float, false, false, false, true); }
+		}
+
 	}
 
 	#endregion
@@ -424,6 +436,8 @@ namespace DQS.Module.Entities
 		Reservation9,
 
 		Reservation10,
+
+        InUnitPrice,
 
 	}
 

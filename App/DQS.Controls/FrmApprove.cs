@@ -16,7 +16,7 @@ using DQS.Controls;
 
 namespace DQS.Controls
 {
-    public partial class FrmApprove : DevExpress.XtraEditors.XtraForm
+    public partial class FrmApprove : XtraForm
     {
         private string m_DocumentCode;
         private string m_BillCode;
@@ -156,6 +156,114 @@ namespace DQS.Controls
                 approve.ApprovalRemark = this.txtApprovalRemark.Text.Trim();
                 approve.ApprovalDate = DateTime.Now;
                 approve.Update();
+            }
+            if (approve.DocumentCode == "BrowseAuthorityChange")
+            {
+                approve.IsPass = false;
+                approve.ApprovalSuggestion = this.txtApprovalSuggestion.Text.Trim();
+                approve.ApprovalResult = this.txtApprovalResult.Text.Trim();
+                approve.ApprovalRemark = this.txtApprovalRemark.Text.Trim();
+                approve.ApprovalDate = DateTime.Now;
+                approve.Update();
+                using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                {
+                    string sql = @"UPDATE dbo.ATC_BrowseAuthorityChange SET AppStatus = '未批准' WHERE ChangeCode = '" + approve.BillCode + "'";
+                    try
+                    {
+                        conn.Open();
+                        SqlCommand comm = new SqlCommand(sql, conn);
+                        comm.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+            if (approve.DocumentCode == "RangeChange")
+            {
+                approve.IsPass = false;
+                approve.ApprovalSuggestion = this.txtApprovalSuggestion.Text.Trim();
+                approve.ApprovalResult = this.txtApprovalResult.Text.Trim();
+                approve.ApprovalRemark = this.txtApprovalRemark.Text.Trim();
+                approve.ApprovalDate = DateTime.Now;
+                approve.Update();
+                using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                {
+                    string sql = @"UPDATE dbo.BFI_RangeChange SET AppStatus = '未批准' WHERE ChangeCode = '" + approve.BillCode + "'";
+                    try
+                    {
+                        conn.Open();
+                        SqlCommand comm = new SqlCommand(sql, conn);
+                        comm.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+            if (approve.DocumentCode == "ProductPriceChange")
+            {
+                approve.IsPass = false;
+                approve.ApprovalSuggestion = this.txtApprovalSuggestion.Text.Trim();
+                approve.ApprovalResult = this.txtApprovalResult.Text.Trim();
+                approve.ApprovalRemark = this.txtApprovalRemark.Text.Trim();
+                approve.ApprovalDate = DateTime.Now;
+                approve.Update();
+                using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                {
+                    string sql = @"UPDATE dbo.BUS_ProductPriceChange SET AppStatus = '未批准' WHERE ChangeCode = '" + approve.BillCode + "'";
+                    try
+                    {
+                        conn.Open();
+                        SqlCommand comm = new SqlCommand(sql, conn);
+                        comm.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+            if (approve.DocumentCode == "UserRoleChange")
+            {
+                approve.IsPass = false;
+                approve.ApprovalSuggestion = this.txtApprovalSuggestion.Text.Trim();
+                approve.ApprovalResult = this.txtApprovalResult.Text.Trim();
+                approve.ApprovalRemark = this.txtApprovalRemark.Text.Trim();
+                approve.ApprovalDate = DateTime.Now;
+                approve.Update();
+                using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                {
+                    string sql = @"UPDATE dbo.ATC_UserRoleChange SET AppStatus = '未批准' WHERE ChangeCode = '" + approve.BillCode + "'";
+                    try
+                    {
+                        conn.Open();
+                        SqlCommand comm = new SqlCommand(sql, conn);
+                        comm.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
             }
 
 

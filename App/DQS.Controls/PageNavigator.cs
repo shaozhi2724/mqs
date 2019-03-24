@@ -11,6 +11,7 @@ using System.Data;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Columns;
+using DQS.Common;
 
 namespace DQS.Controls
 {
@@ -358,6 +359,20 @@ namespace DQS.Controls
                     else
                     {
                         filter = DefaultFilter;
+                    }
+                }
+                if (DQS.Controls.Properties.Settings.Default.IsLockDepartment)
+                {
+                    if (this.ViewName == "vw_AllSale")
+                    {
+                        if (!string.IsNullOrWhiteSpace(Filter))
+                        {
+                            filter += " AND ([所属部门ID] = " + GlobalItem.g_CurrentEmployee.DepartmentID + ")";
+                        }
+                        else
+                        {
+                            filter += "([所属部门ID] = " + GlobalItem.g_CurrentEmployee.DepartmentID + ")";
+                        }
                     }
                 }
                 DataSet data = Procedures.Pagination(this.Fields, this.ViewName, this.PrimaryField, this.SortField, this.SortType, this.PageSize, this.PageIndex, filter, ref pPageCount, ref pRecordCount);

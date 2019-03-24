@@ -61,7 +61,9 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                     SterilizationBatchNo = sterilizationBatchNo,
                     SterilizationDate = sterilizationDate,
                     Amount = amount,
-                    UnitPrice = unitPrice
+                    UnitPrice = unitPrice,
+                    DepartmentID = 1,
+                    DepartmentName = "业务部"
                 });
             }
             else

@@ -28,7 +28,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            ValidateNewRecord();
+            if(!ValidateNewRecord()) return;
             NewLoad();
             this.DialogResult = DialogResult.Yes;
         }

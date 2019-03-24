@@ -178,5 +178,17 @@ namespace DQS.AppViews.Operation.Properties {
                 this["IsRestriction"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EqSaleBillPrice {
+            get {
+                return ((bool)(this["EqSaleBillPrice"]));
+            }
+            set {
+                this["EqSaleBillPrice"] = value;
+            }
+        }
     }
 }

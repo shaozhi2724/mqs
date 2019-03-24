@@ -156,7 +156,7 @@
             // gridView
             // 
             this.gridView.GridControl = this.gridControl;
-            this.gridView.IndicatorWidth = 40;
+            this.gridView.IndicatorWidth = 50;
             this.gridView.Name = "gridView";
             this.gridView.OptionsView.ShowFooter = true;
             this.gridView.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);

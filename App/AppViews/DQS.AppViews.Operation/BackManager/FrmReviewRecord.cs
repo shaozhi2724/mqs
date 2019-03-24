@@ -55,7 +55,7 @@ namespace DQS.AppViews.Operation.BackManager
             int productID = (int)this.txtProductName.Tag;
             string productName = this.txtProductName.Text;
             string batchNo = this.txtBatchNo.Text;
-            DataTable data = GlobalMethod.GetReviewByProduct(productID, batchNo, dealerID);
+            DataTable data = GlobalMethod.GetReviewByProduct(productID, batchNo, dealerID, DQS.Controls.Properties.Settings.Default.IsLockDepartment ? GlobalItem.g_CurrentEmployee.DepartmentID : 0);
             this.gvBill.DataSource = data;
 
 

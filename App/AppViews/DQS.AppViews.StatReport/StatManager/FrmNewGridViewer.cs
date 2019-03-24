@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using DQS.Common;
 using DQS.Controls;
@@ -60,28 +61,118 @@ namespace DQS.AppViews.StatReport.StatManager
 
         private void btnExport_Click(object sender, EventArgs e)
         {
+            //SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            //saveFileDialog.Title = "导出Excel";
+
+            //saveFileDialog.Filter = "Excel文件(*.xls)|*.xls";
+
+            //DialogResult dialogResult = saveFileDialog.ShowDialog(this);
+
+            //if (dialogResult == DialogResult.OK)
+            //{
+
+                //DevExpress.XtraPrinting.XlsExportOptions options = new DevExpress.XtraPrinting.XlsExportOptions();
+
+                //gridControl.ExportToXls(saveFileDialog.FileName);
+                DataTable dt = gridControl.DataSource as DataTable;
+
+
+                DataGridToExcel(dt,gridView);
+
+                //XtraMessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            //}
+        }
+
+ #region 用流将数据导入到Excel中
+
+        public static void DataGridToExcel(DataTable dt, GridView dgv)
+        {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-
-            saveFileDialog.Title = "导出Excel";
-
             saveFileDialog.Filter = "Excel文件(*.xls)|*.xls";
-
-            DialogResult dialogResult = saveFileDialog.ShowDialog(this);
-
-            if (dialogResult == DialogResult.OK)
+            //saveFileDialog.FilterIndex = 0;
+            //saveFileDialog.RestoreDirectory = true;
+            //saveFileDialog.CreatePrompt = true;
+            saveFileDialog.Title = "导出Excel文件到";
+            //DateTime now = SystemManage.GetTimeNow();
+            //saveFileDialog.FileName = title;
+            DialogResult dr = saveFileDialog.ShowDialog();
+            if (dr == DialogResult.Cancel)
+                return;
+            Stream myStream;
+            myStream = saveFileDialog.OpenFile();
+            string fileName = saveFileDialog.FileName;
+            if (fileName == "")
             {
-
-                DevExpress.XtraPrinting.XlsExportOptions options = new DevExpress.XtraPrinting.XlsExportOptions();
-
-                //gridControl1.ExportToXls(saveFileDialog.FileName, options);  
-
-                //gridControl.ExportToExcelOld(saveFileDialog.FileName);
-                gridControl.ExportToXls(saveFileDialog.FileName);
-
-                DevExpress.XtraEditors.XtraMessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                XtraMessageBox.Show("请输入文件名!", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
+            StreamWriter sw = new StreamWriter(myStream, System.Text.Encoding.GetEncoding("gb2312"));
+            string str = "";
+            try
+            {
+                //写标题
+                //string stc = title;
+                //sw.WriteLine(stc);
+                for (int i = 0; i <= dgv.Columns.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        str += "序号";
+                    }
+                    else
+                    {
+                        if (dgv.Columns[i - 1].Visible == true)
+                        {
+                            str += "\t";
+                            str += dgv.Columns[i - 1].FieldName;
+                        }
+                    }
+                }
+                sw.WriteLine(str);
+                int count = 0;
+                //写内容
+                for (int j = 0; j < dt.Rows.Count; j++)
+                {
+                    string tempStr = "";
+                    for (int k = 0; k < dt.Columns.Count + 1; k++)
+                    {
+                        if (k == 0)
+                        {
+                            tempStr = (count+1).ToString();
+                        }
+                        else
+                        {
+                            if (dgv.Columns[k - 1].Visible == true)
+                            {
+                                tempStr += "\t";
+                                tempStr += dt.Rows[j][k - 1].ToString().Trim();
+                            }
+                        }
+                    }
+                    sw.WriteLine(tempStr);
+                    count++;
+                }
+                sw.Close();
+                sw.Dispose();
+                myStream.Close();
+                myStream.Dispose();
+                XtraMessageBox.Show("操作成功!", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+            catch (Exception e)
+            {
+                XtraMessageBox.Show("操作失败!", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+            finally
+            {
+                sw.Close();
+                myStream.Close();
             }
         }
+
+ #endregion
+
 
         private void LoadControl()
         {
@@ -155,8 +246,6 @@ namespace DQS.AppViews.StatReport.StatManager
             choose = "";
             foreach (Control item in panelControl.Controls)
             {
-                //MessageBox.Show(item.GetType().ToString()+"-----"+item.Name+"-----"+item.Text);
-                //MessageBox.Show(item.GetType().Name+"-----"+item.GetType().ToString());
                 if (item.GetType().Name.Equals("TextEdit"))
                 {
                     if (item.Text.Trim() != "")
@@ -165,10 +254,18 @@ namespace DQS.AppViews.StatReport.StatManager
                     }
                 }
             }
+            if (DQS.Controls.Properties.Settings.Default.IsLockDepartment)
+            {
+                choose += " AND (DepartmentID = " + GlobalItem.g_CurrentEmployee.DepartmentID + ")";
+            }
         }
 
         private void gridLoad()
         {
+            if (DQS.Controls.Properties.Settings.Default.IsLockDepartment)
+            {
+                choose += " AND (DepartmentID = " + GlobalItem.g_CurrentEmployee.DepartmentID + ")";
+            }
             string pageName = this.Tag.ToString();
             //设置数据
             sysPage = GlobalMethod.GetFormPage(pageName);

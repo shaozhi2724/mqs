@@ -852,12 +852,16 @@ WHERE BillID={1}
                             this.popupGrid.PopupView.SetFocusedRowCellValue("复核数量", frmReviewRecord.EditRow["复核数量"]);
                             this.popupGrid.PopupView.SetFocusedRowCellValue("单价", frmReviewRecord.EditRow["单价"]);
                             this.popupGrid.PopupView.SetFocusedRowCellValue("入库ID", frmReviewRecord.EditRow["入库ID"]);
+                            this.popupGrid.PopupView.SetFocusedRowCellValue("批发价", frmReviewRecord.EditRow["批发价"]);
+                            this.popupGrid.PopupView.SetFocusedRowCellValue("零售价", frmReviewRecord.EditRow["零售价"]);
 
                             _operator = frmReviewRecord.EditRow["业务员"].ToString();
                             this.txtSaleBillCode.Text = frmReviewRecord.SaleBillCode;
                             this.txtReviewCode.Text = frmReviewRecord.ReviewCode;
 
                             popupGrid.PopupView.Columns["批号"].OptionsColumn.AllowEdit = DQS.Controls.Properties.Settings.Default.IsModifyBatchNoForSaleBack;
+                            popupGrid.PopupView.Columns["生产日期"].OptionsColumn.AllowEdit = DQS.Controls.Properties.Settings.Default.IsModifyBatchNoForSaleBack;
+                            popupGrid.PopupView.Columns["有效期至"].OptionsColumn.AllowEdit = DQS.Controls.Properties.Settings.Default.IsModifyBatchNoForSaleBack;
 
                         }
                     }
@@ -995,6 +999,8 @@ WHERE BillID={1}
                 {
                     BindSelectedReviewDetails(doc);
                     popupGrid.PopupView.Columns["批号"].OptionsColumn.AllowEdit = DQS.Controls.Properties.Settings.Default.IsModifyBatchNoForSaleBack;
+                    popupGrid.PopupView.Columns["生产日期"].OptionsColumn.AllowEdit = DQS.Controls.Properties.Settings.Default.IsModifyBatchNoForSaleBack;
+                    popupGrid.PopupView.Columns["有效期至"].OptionsColumn.AllowEdit = DQS.Controls.Properties.Settings.Default.IsModifyBatchNoForSaleBack;
                 }
             }
             else
@@ -1005,6 +1011,8 @@ WHERE BillID={1}
                 {
                     BindSelectedReviewDetails(doc);
                     popupGrid.PopupView.Columns["批号"].OptionsColumn.AllowEdit = DQS.Controls.Properties.Settings.Default.IsModifyBatchNoForSaleBack;
+                    popupGrid.PopupView.Columns["生产日期"].OptionsColumn.AllowEdit = DQS.Controls.Properties.Settings.Default.IsModifyBatchNoForSaleBack;
+                    popupGrid.PopupView.Columns["有效期至"].OptionsColumn.AllowEdit = DQS.Controls.Properties.Settings.Default.IsModifyBatchNoForSaleBack;
                 }
             }
         }

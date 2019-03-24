@@ -85,6 +85,14 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             }
             this.popupGrid.PopupView.Columns["不合格事项"].ColumnEdit = cboresult;
 
+            RepositoryItemComboBox cboSolution = new RepositoryItemComboBox();
+
+            cboSolution.Items.Add("合格区");
+            cboSolution.Items.Add("不合格区");
+            cboSolution.Items.Add("退货区");
+
+            this.popupGrid.PopupView.Columns["存储库区"].ColumnEdit = cboSolution;
+
             if (this.Tag != null)
             {
                 this.btnSaveAndIn.Enabled = false;
@@ -139,140 +147,6 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             }
         }
 
-        /*private void btnSave_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!this.ftPanel.ValidateIsNullFields()) return;
-                BUSAcceptEntity entity = this.ftPanel.GetEntity() as BUSAcceptEntity;
-                this.CustomSetEntity(entity);
-                if (this.m_id != null)
-                {
-                    #region 修改
-
-                    List<EntityBase> children = this.popupGrid.GetEntities();
-                    if (!this.ValidateAmount()) return;
-                    if (!this.ValidateBatchNo()) return;
-                    if (!this.ValidateBatchDate()) return;
-                    if (!this.ValidateSamplingAmount()) return;
-
-                    entity.LastModifyDate = DateTime.Now;
-                    entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
-                    entity.Update();
-                    //先删除
-                    BUSAcceptDetailEntity childToDelete = new BUSAcceptDetailEntity { AcceptID = m_id.Value };
-                    childToDelete.DeleteByCommonly();
-
-                    //后加
-                    foreach (EntityBase childEntity in children)
-                    {
-                        BUSAcceptDetailEntity child = childEntity as BUSAcceptDetailEntity;
-                        child.AcceptID = m_id.Value;
-                        child.Save();
-                    }
-                    //存在则修改
-                    if (this.popupGridSampling.PopupView.GetRowCellValue(0, this.popupGridSampling.PopupView.Columns[0]) != null && this.popupGridSampling.PopupView.GetRowCellValue(0, this.popupGridSampling.PopupView.Columns[0]) != DBNull.Value)
-                    {
-                        //先删除
-                        BUSSamplingEntity samplingToDelete = new BUSSamplingEntity() { AcceptID = m_id.Value };
-                        samplingToDelete.DeleteByCommonly();
-
-                        //添加抽检记录
-                        List<EntityBase> samplings = this.popupGridSampling.GetEntities();
-                        foreach (EntityBase samplingEntity in samplings)
-                        {
-                            BUSSamplingEntity sampling = samplingEntity as BUSSamplingEntity;
-                            sampling.SamplingCode = Guid.NewGuid().ToString();
-                            sampling.SamplingDate = DateTime.Now;
-                            sampling.AcceptID = m_id.Value;
-                            sampling.BillCode = entity.BillCode;
-                            sampling.BillDate = entity.BillDate;
-                            sampling.BillID = entity.BillID;
-                            sampling.BillTypeID = entity.BillTypeID;
-                            sampling.BillTypeName = entity.BillTypeName;
-                            sampling.BillTypeSpell = entity.BillTypeSpell;
-                            sampling.DealerID = entity.DealerID;
-                            sampling.DealerCode = entity.DealerCode;
-                            sampling.DealerName = entity.DealerName;
-                            sampling.Inspector = this.txtAcceptPerson.Text.Trim();
-                            sampling.InspectorSpell = GlobalMethod.GetAlphabetic(this.txtAcceptPerson.Text.Trim());
-                            sampling.Save();
-                        }
-                    }
-                    #endregion
-                }
-                else
-                {
-                    if (entity.IsNew(BUSAcceptEntityFields.AcceptCode == entity.AcceptCode))
-                    {
-                        #region 新建
-                        entity.AcceptDate = DateTime.Now;
-                        List<EntityBase> children = this.popupGrid.GetEntities();
-                        if (!this.ValidateAmount()) return;
-                        if (!this.ValidateBatchNo()) return;
-                        if (!this.ValidateBatchDate()) return;
-                        if (!this.ValidateSamplingAmount()) return;
-
-                        entity.CreateDate = DateTime.Now;
-                        entity.LastModifyDate = DateTime.Now;
-                        entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                        entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
-                        entity.Save();
-
-                        BUSBillEntity bill = new BUSBillEntity { BillID = entity.BillID, BillStatus = 4, BillStatusName = "已验收" };
-                        bill.Update();
-
-                        //查询出其ID
-                        entity.Fetch();
-
-                        foreach (EntityBase childEntity in children)
-                        {
-                            BUSAcceptDetailEntity child = childEntity as BUSAcceptDetailEntity;
-                            child.AcceptID = entity.AcceptID;
-                            child.Save();
-                        }
-                        //存在则添加
-                        if (this.popupGridSampling.PopupView.GetRowCellValue(0, this.popupGridSampling.PopupView.Columns[0]) != null && this.popupGridSampling.PopupView.GetRowCellValue(0, this.popupGridSampling.PopupView.Columns[0]) != DBNull.Value)
-                        {
-                            List<EntityBase> samplings = this.popupGridSampling.GetEntities();
-                            //添加抽检记录
-                            foreach (EntityBase samplingEntity in samplings)
-                            {
-                                BUSSamplingEntity sampling = samplingEntity as BUSSamplingEntity;
-                                sampling.SamplingCode = Guid.NewGuid().ToString();
-                                sampling.SamplingDate = DateTime.Now;
-                                sampling.AcceptID = entity.AcceptID;
-                                sampling.BillCode = entity.BillCode;
-                                sampling.BillDate = entity.BillDate;
-                                sampling.BillID = entity.BillID;
-                                sampling.BillTypeID = entity.BillTypeID;
-                                sampling.BillTypeName = entity.BillTypeName;
-                                sampling.BillTypeSpell = entity.BillTypeSpell;
-                                sampling.DealerID = entity.DealerID;
-                                sampling.DealerCode = entity.DealerCode;
-                                sampling.DealerName = entity.DealerName;
-                                sampling.Inspector = this.txtAcceptPerson.Text.Trim();
-                                sampling.InspectorSpell = GlobalMethod.GetAlphabetic(this.txtAcceptPerson.Text.Trim());
-                                sampling.Save();
-                            }
-                        }
-                        #endregion
-                    }
-                    else
-                    {
-                        XtraMessageBox.Show("验收单已存在。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            this.DialogResult = DialogResult.OK;
-        }*/
         private bool ValidateResultAmount()
         {
             int rowCount = this.popupGrid.PopupView.RowCount;
@@ -439,24 +313,24 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         sbill.Fetch();
                         if (!sbill.IsNullField("StoreID"))
                         {
-                            EntityCollection<BUSStoreBillDetailEntity> storeBillDetails = new EntityCollection<BUSStoreBillDetailEntity>();
-                            PredicateExpression pe = new PredicateExpression();
-                            pe.Add(BUSStoreBillDetailEntityFields.StoreID == sbill.StoreID);
-                            storeBillDetails.Fetch(pe);
-                            if (storeBillDetails.Count > 0)
+                            string sql = @"EXEC sp_DelUnqualifiedStoreDetail {0}";
+                            sql = string.Format(sql, sbill.StoreID);
+                            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
                             {
-                                foreach (var item in storeBillDetails)
+                                conn.Open(); //连接数据库
+                                //必须为SqlCommand指定数据库连接和登记的事务
+                                SqlCommand cmd = new SqlCommand(sql, conn);
+                                try
                                 {
-                                    var billDetail = item as BUSStoreBillDetailEntity;
-                                    BUSUnqualifiedStoreDetailEntity storeDetail = new BUSUnqualifiedStoreDetailEntity { ProductID = billDetail.ProductID, BatchNo = billDetail.BatchNo };
-
-                                    if (!storeDetail.IsNew(BUSUnqualifiedStoreDetailEntityFields.ProductID == storeDetail.ProductID & BUSUnqualifiedStoreDetailEntityFields.BatchNo == storeDetail.BatchNo))
-                                    {
-                                        //更新不合格品库存
-                                        storeDetail.Fetch();
-                                        storeDetail.Amount = storeDetail.Amount - billDetail.Amount;
-                                        storeDetail.Update();
-                                    }
+                                    cmd.ExecuteNonQuery();
+                                }
+                                catch (Exception ex)
+                                {
+                                    XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                                finally
+                                {
+                                    conn.Close();
                                 }
                             }
                         }
@@ -465,7 +339,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         List<BUSAcceptDetailEntity> unqualifiedAcceptDetails = new List<BUSAcceptDetailEntity>();
                         foreach (var unqualifiedDetail in unqualifiedDetails)
                         {
-                            var detail = acceptDetails.FirstOrDefault(p => p.ProductID == unqualifiedDetail.ProductID && p.BatchNo == unqualifiedDetail.BatchNo);
+                            var detail = acceptDetails.FirstOrDefault(p => p.ProductID == unqualifiedDetail.ProductID && p.BatchNo == unqualifiedDetail.BatchNo && p.UnqualifiedAmount > 0);
                             if (null != detail)
                             {
                                 var busAcceptDetailEntity = new BUSAcceptDetailEntity
@@ -475,7 +349,8 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                                     Amount = unqualifiedDetail.TotalBillAmount,
                                     ReceiveAmount = unqualifiedDetail.TotalUnqualifiedAmount,
                                     QualifiedAmount = unqualifiedDetail.TotalQualifiedAmount,
-                                    UnqualifiedAmount = unqualifiedDetail.TotalUnqualifiedAmount
+                                    UnqualifiedAmount = unqualifiedDetail.TotalUnqualifiedAmount,
+                                    AcceptSolution = detail.IsNullField("AcceptSolution") ? "不合格区" : detail.AcceptSolution
                                 };
                                 if (!detail.IsNullField("ProduceDate"))
                                 {
@@ -503,25 +378,24 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         store.Fetch();
                         if (!store.IsNullField("StoreID"))
                         {
-                            //先删除原先的库存
-                            EntityCollection<BUSStoreBillDetailEntity> storeBillDetails = new EntityCollection<BUSStoreBillDetailEntity>();
-                            PredicateExpression pe = new PredicateExpression();
-                            pe.Add(BUSStoreBillDetailEntityFields.StoreID == store.StoreID);
-                            storeBillDetails.Fetch(pe);
-                            if (storeBillDetails.Count > 0)
+                            string sql = @"EXEC sp_DelUnqualifiedStoreDetail {0}";
+                            sql = string.Format(sql, store.StoreID);
+                            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
                             {
-                                foreach (var item in storeBillDetails)
+                                conn.Open(); //连接数据库
+                                //必须为SqlCommand指定数据库连接和登记的事务
+                                SqlCommand cmd = new SqlCommand(sql, conn);
+                                try
                                 {
-                                    var billDetail = item as BUSStoreBillDetailEntity;
-                                    BUSUnqualifiedStoreDetailEntity storeDetail = new BUSUnqualifiedStoreDetailEntity { ProductID = billDetail.ProductID, BatchNo = billDetail.BatchNo };
-
-                                    if (!storeDetail.IsNew(BUSUnqualifiedStoreDetailEntityFields.ProductID == storeDetail.ProductID & BUSUnqualifiedStoreDetailEntityFields.BatchNo == storeDetail.BatchNo))
-                                    {
-                                        //更新不合格品库存
-                                        storeDetail.Fetch();
-                                        storeDetail.Amount = storeDetail.Amount - billDetail.Amount;
-                                        storeDetail.Update();
-                                    }
+                                    cmd.ExecuteNonQuery();
+                                }
+                                catch (Exception ex)
+                                {
+                                    XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                                finally
+                                {
+                                    conn.Close();
                                 }
                             }
 
@@ -728,7 +602,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                                     List<BUSAcceptDetailEntity> unqualifiedAcceptDetails = new List<BUSAcceptDetailEntity>();
                                     foreach (var unqualifiedDetail in unqualifiedDetails)
                                     {
-                                        var detail = acceptDetails.FirstOrDefault(p => p.ProductID == unqualifiedDetail.ProductID && p.BatchNo == unqualifiedDetail.BatchNo);
+                                        var detail = acceptDetails.FirstOrDefault(p => p.ProductID == unqualifiedDetail.ProductID && p.BatchNo == unqualifiedDetail.BatchNo && p.UnqualifiedAmount > 0);
                                         if (null != detail)
                                         {
                                             var busAcceptDetailEntity = new BUSAcceptDetailEntity
@@ -738,7 +612,8 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                                                 Amount = unqualifiedDetail.TotalBillAmount,
                                                 ReceiveAmount = unqualifiedDetail.TotalUnqualifiedAmount,
                                                 QualifiedAmount = unqualifiedDetail.TotalQualifiedAmount,
-                                                UnqualifiedAmount = unqualifiedDetail.TotalUnqualifiedAmount
+                                                UnqualifiedAmount = unqualifiedDetail.TotalUnqualifiedAmount,
+                                                AcceptSolution = detail.IsNullField("AcceptSolution") ? "不合格区" : detail.AcceptSolution
                                             };
                                             if (!detail.IsNullField("ProduceDate"))
                                             {
@@ -901,7 +776,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                                     List<BUSAcceptDetailEntity> unqualifiedAcceptDetails = new List<BUSAcceptDetailEntity>();
                                     foreach (var unqualifiedDetail in unqualifiedDetails)
                                     {
-                                        var detail = acceptDetails.FirstOrDefault(p => p.ProductID == unqualifiedDetail.ProductID && p.BatchNo==unqualifiedDetail.BatchNo);
+                                        var detail = acceptDetails.FirstOrDefault(p => p.ProductID == unqualifiedDetail.ProductID && p.BatchNo==unqualifiedDetail.BatchNo && p.UnqualifiedAmount > 0);
                                         if (null != detail)
                                         {
 
@@ -918,7 +793,8 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                                                 Amount = unqualifiedDetail.UnqualifiedAmount,
                                                 ReceiveAmount = ReceiveAmountList[0].ReceiveAmount,
                                                 QualifiedAmount = unqualifiedDetail.QualifiedAmount,
-                                                UnqualifiedAmount = unqualifiedDetail.UnqualifiedAmount
+                                                UnqualifiedAmount = unqualifiedDetail.UnqualifiedAmount,
+                                                AcceptSolution = detail.IsNullField("AcceptSolution") ? "不合格区" : detail.AcceptSolution
                                             };
                                             if (!detail.IsNullField("ProduceDate"))
                                             {
@@ -1012,13 +888,13 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     }
                 }
 
-                string sql = @"EXEC sp_AcceptForDamaged '{0}'";
-                sql = string.Format(sql, txtAcceptCode.Text);
+                string sqlDamaged = @"EXEC sp_AcceptForDamaged '{0}'";
+                sqlDamaged = string.Format(sqlDamaged, txtAcceptCode.Text);
                 using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
                 {
                     conn.Open(); //连接数据库
                     //必须为SqlCommand指定数据库连接和登记的事务
-                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    SqlCommand cmd = new SqlCommand(sqlDamaged, conn);
                     try
                     {
                         cmd.ExecuteNonQuery();
@@ -1114,6 +990,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     BillAmount = unqualifiedAcceptDetail.ReceiveAmount,
                     QualifiedAmount = unqualifiedAcceptDetail.QualifiedAmount,
                     Amount = unqualifiedAcceptDetail.UnqualifiedAmount,
+                    Reservation7 = unqualifiedAcceptDetail.AcceptSolution,
                     CreateUserID = GlobalItem.g_CurrentUser.UserID,
                     CreateDate = DateTime.Now,
                     DetailRemark = string.Format("{0} - 验收不合格品入库 {1} (总数:{2})", acceptEntity.BillCode, unqualifiedAcceptDetail.ProductID, unqualifiedAcceptDetail.UnqualifiedAmount)
@@ -1131,9 +1008,9 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     storeBillDetail.BatchNo = unqualifiedAcceptDetail.BatchNo;
                 }
                 storeBillDetail.Save();
-
-                UpdateUnqualifiedStoreDetail(storeBillDetail);
             }
+
+            UpdateUnqualifiedStoreDetail(storeBillEntity.StoreID);
 
         }
 
@@ -1500,8 +1377,10 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     }
                     if (Convert.ToDateTime(validateDate) < DateTime.Today)
                     {
-                        var dialogResult = XtraMessageBox.Show(String.Format("第{0}行，产品已过有效期，属于不合格品，应该按不合格品验收。\n“确定”：操作无误，继续保存。\n“取消”：返回重新填写。", (i + 1)), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
-                        return dialogResult == DialogResult.OK;
+                        //var dialogResult = XtraMessageBox.Show(String.Format("第{0}行，产品已过有效期，属于不合格品，应该按不合格品验收。\n“确定”：操作无误，继续保存。\n“取消”：返回重新填写。", (i + 1)), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+                        //return dialogResult == DialogResult.OK;
+                        var dialogResult = XtraMessageBox.Show(String.Format("第{0}行，产品已过有效期，属于不合格品，应该按不合格品验收。\n“确定”：操作无误，继续保存。\n“取消”：返回重新填写。", (i + 1)), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return false;
                     }
                 }
             }
@@ -1898,11 +1777,33 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 }
             }
         }
-        public static void UpdateUnqualifiedStoreDetail(BUSStoreBillDetailEntity billDetail)
+        public static void UpdateUnqualifiedStoreDetail(int StoreID)
         {
-            BUSUnqualifiedStoreDetailEntity storeDetail = new BUSUnqualifiedStoreDetailEntity { ProductID = billDetail.ProductID, BatchNo = billDetail.BatchNo };
 
-            if (storeDetail.IsNew(BUSUnqualifiedStoreDetailEntityFields.ProductID == storeDetail.ProductID & BUSUnqualifiedStoreDetailEntityFields.BatchNo == storeDetail.BatchNo))
+            string sql = @"EXEC sp_InsertUnqualifiedStoreDetail {0}";
+            sql = string.Format(sql, StoreID);
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                conn.Open(); //连接数据库
+                //必须为SqlCommand指定数据库连接和登记的事务
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message, "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            /*
+            BUSUnqualifiedStoreDetailEntity storeDetail = new BUSUnqualifiedStoreDetailEntity { ProductID = billDetail.ProductID, BatchNo = billDetail.BatchNo, DetailRemark = billDetail.Reservation7 };
+
+            if (storeDetail.IsNew(BUSUnqualifiedStoreDetailEntityFields.ProductID == storeDetail.ProductID & BUSUnqualifiedStoreDetailEntityFields.BatchNo == storeDetail.BatchNo & BUSUnqualifiedStoreDetailEntityFields.DetailRemark == storeDetail.DetailRemark))
             {
                 //新建不合格品库存
                 storeDetail.ProduceDate = billDetail.ProduceDate;
@@ -1914,6 +1815,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 storeDetail.LastCuringDate = DateTime.Now;
                 storeDetail.CreateStoreID = billDetail.StoreID;
                 storeDetail.LastStoreID = billDetail.StoreID;
+                storeDetail.DetailRemark = billDetail.Reservation7;
                 storeDetail.Save();
 
             }
@@ -1927,6 +1829,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 storeDetail.Amount = storeDetail.Amount + billDetail.Amount;
                 storeDetail.Update();
             }
+            */
         }
 
         private void btnAttachment_Click(object sender, EventArgs e)
@@ -2097,7 +2000,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         List<BUSAcceptDetailEntity> unqualifiedAcceptDetails = new List<BUSAcceptDetailEntity>();
                         foreach (var unqualifiedDetail in unqualifiedDetails)
                         {
-                            var detail = acceptDetails.FirstOrDefault(p => p.ProductID == unqualifiedDetail.ProductID && p.BatchNo == unqualifiedDetail.BatchNo);
+                            var detail = acceptDetails.FirstOrDefault(p => p.ProductID == unqualifiedDetail.ProductID && p.BatchNo == unqualifiedDetail.BatchNo && p.UnqualifiedAmount > 0);
                             if (null != detail)
                             {
                                 var busAcceptDetailEntity = new BUSAcceptDetailEntity
@@ -2107,7 +2010,8 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                                     Amount = unqualifiedDetail.TotalBillAmount,
                                     ReceiveAmount = unqualifiedDetail.TotalUnqualifiedAmount,
                                     QualifiedAmount = unqualifiedDetail.TotalQualifiedAmount,
-                                    UnqualifiedAmount = unqualifiedDetail.TotalUnqualifiedAmount
+                                    UnqualifiedAmount = unqualifiedDetail.TotalUnqualifiedAmount,
+                                    AcceptSolution = detail.IsNullField("AcceptSolution") ? "不合格区" : detail.AcceptSolution
                                 };
                                 if (!detail.IsNullField("ProduceDate"))
                                 {
@@ -2275,7 +2179,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         List<BUSAcceptDetailEntity> unqualifiedAcceptDetails = new List<BUSAcceptDetailEntity>();
                         foreach (var unqualifiedDetail in unqualifiedDetails)
                         {
-                            var detail = acceptDetails.FirstOrDefault(p => p.ProductID == unqualifiedDetail.ProductID && p.BatchNo == unqualifiedDetail.BatchNo);
+                            var detail = acceptDetails.FirstOrDefault(p => p.ProductID == unqualifiedDetail.ProductID && p.BatchNo == unqualifiedDetail.BatchNo && p.UnqualifiedAmount > 0);
                             if (null != detail)
                             {
 
@@ -2292,7 +2196,8 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                                     Amount = unqualifiedDetail.UnqualifiedAmount,
                                     ReceiveAmount = ReceiveAmountList[0].ReceiveAmount,
                                     QualifiedAmount = unqualifiedDetail.QualifiedAmount,
-                                    UnqualifiedAmount = unqualifiedDetail.UnqualifiedAmount
+                                    UnqualifiedAmount = unqualifiedDetail.UnqualifiedAmount,
+                                    AcceptSolution = detail.IsNullField("AcceptSolution") ? "不合格区" : detail.AcceptSolution
                                 };
                                 if (!detail.IsNullField("ProduceDate"))
                                 {

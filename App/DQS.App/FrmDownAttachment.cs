@@ -152,10 +152,18 @@ ORDER BY a.CreateDate DESC";
                 XtraMessageBox.Show(exception.ToString());
             }
         }
-
-        private void PicLoad()
+        private void PicControl(int i)
         {
-            int AcceptAttachmentID = Convert.ToInt32(gridView.GetDataRow(gridView.FocusedRowHandle)["AcceptAttachmentID"]);
+            if (gridView.RowCount > 0)
+            {
+                int AcceptAttachmentID = Convert.ToInt32(gridView.GetDataRow(i)["AcceptAttachmentID"]);
+                PicLoad(AcceptAttachmentID);
+            }
+        }
+
+        private void PicLoad(int AcceptAttachmentID)
+        {
+            pictureEdit.Image = null;
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 string sql = @"SELECT AttachmentContent FROM BUS_AcceptAttachment WHERE AcceptAttachmentID = " + AcceptAttachmentID;
@@ -180,14 +188,21 @@ ORDER BY a.CreateDate DESC";
                     conn.Close();
                 }
             }
-            //pictureEdit.Properties.SizeMode = "Zoom";
         }
 
-        private void gridView_Click(object sender, EventArgs e)
+        private void gridView_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
         {
             if (gridView.RowCount > 0)
             {
-                PicLoad();
+                PicControl(e.RowHandle);
+            }
+        }
+
+        private void FrmDownAttachment_Load(object sender, EventArgs e)
+        {
+            if (gridView.RowCount > 0)
+            {
+                PicControl(0);
             }
         }
     }

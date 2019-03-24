@@ -93,6 +93,12 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
                 datBusinessValidateDate.Focus();
                 return;
             }
+            if (string.IsNullOrWhiteSpace(datGSPValidateDate.Text))
+            {
+                XtraMessageBox.Show(datGSPValidateDate.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                datGSPValidateDate.Focus();
+                return;
+            }
             //if (null == cbxEnterpriseType.SelectedValue)
             //{
             //    XtraMessageBox.Show(cbxEnterpriseType.Properties.NullValuePrompt, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -177,7 +183,8 @@ INSERT INTO dbo.BFI_EnterpriseChangeHistory
     Reservation9,
     Reservation10,
     ChangeUserName,
-    ChangeDate
+    ChangeDate,
+GSPValidateDate
 )
 SELECT
     EnterpriseID,
@@ -231,7 +238,8 @@ SELECT
     Reservation9,
     Reservation10,
     '{1}',
-    GETDATE()
+    GETDATE(),
+GSPValidateDate
 FROM dbo.BFI_Enterprise
 WHERE EnterpriseID={0}
 ";
@@ -338,6 +346,43 @@ WHERE EnterpriseID={0}
                     }
                 }
                 #endregion
+
+                #region GSP证书到期日修改
+                DateTime oldGSPValidateDate = oldEntity.GSPValidateDate;
+
+                if (entity.GSPValidateDate != oldGSPValidateDate)
+                {
+                    //解锁
+                    if (entity.GSPValidateDate > DateTime.Today)
+                    {
+                        BFIEnterpriseGSPLockHistoryEntity lockHistory = new BFIEnterpriseGSPLockHistoryEntity();
+                        lockHistory.ActionName = "解锁";
+                        lockHistory.ActionDate = DateTime.Today;
+                        lockHistory.OldLicenseValidateDate = oldTradeLicenseValidateDate;
+                        lockHistory.NewLicenseValidateDate = entity.TradeLicenseValidateDate;
+                        lockHistory.LockDate = oldTradeLicenseValidateDate;
+                        lockHistory.UnLockDate = DateTime.Today;
+                        lockHistory.CreateUserName = GlobalItem.g_CurrentEmployee == null
+                            ? GlobalItem.g_CurrentUser.UserName
+                            : GlobalItem.g_CurrentEmployee.EmployeeName;
+                        lockHistory.Save();
+                    }
+                    //锁定
+                    if (entity.GSPValidateDate < DateTime.Today)
+                    {
+                        BFIEnterpriseGSPLockHistoryEntity lockHistory = new BFIEnterpriseGSPLockHistoryEntity();
+                        lockHistory.ActionName = "锁定";
+                        lockHistory.ActionDate = DateTime.Today;
+                        lockHistory.OldLicenseValidateDate = oldTradeLicenseValidateDate;
+                        lockHistory.NewLicenseValidateDate = entity.TradeLicenseValidateDate;
+                        lockHistory.LockDate = entity.TradeLicenseValidateDate;
+                        lockHistory.CreateUserName = GlobalItem.g_CurrentEmployee == null
+                            ? GlobalItem.g_CurrentUser.UserName
+                            : GlobalItem.g_CurrentEmployee.EmployeeName;
+                        lockHistory.Save();
+                    }
+                }
+                #endregion
                 entity.LastModifyDate = DateTime.Now;
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.Update();
@@ -397,6 +442,11 @@ WHERE EnterpriseID={0}
                 this.datBusinessValidateDate.DateTime = entity.TradeLicenseValidateDate;
             }
 
+            if (!entity.IsNullField("GSPValidateDate"))
+            {
+                this.datGSPValidateDate.DateTime = entity.GSPValidateDate;
+            }
+
         }
 
         /// <summary>
@@ -443,6 +493,11 @@ WHERE EnterpriseID={0}
             if (this.datBusinessValidateDate.Text.Trim().Length > 0)
             {
                 entity.TradeLicenseValidateDate = this.datBusinessValidateDate.DateTime;
+            }
+
+            if (this.datGSPValidateDate.Text.Trim().Length > 0)
+            {
+                entity.GSPValidateDate = this.datGSPValidateDate.DateTime;
             }
         }
 

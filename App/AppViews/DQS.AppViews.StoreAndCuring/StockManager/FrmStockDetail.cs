@@ -91,5 +91,21 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                 }
             }
         }
+
+        protected override void CustomChangePrice()
+        {
+            object id = this.gvData.GetFocusedRowCellValue("InStoreID");
+            if (id != null && id != DBNull.Value)
+            {
+                using (FrmChangePrice fa = new FrmChangePrice(Convert.ToInt32(id)))
+                {
+                    DialogResult dr = fa.ShowDialog();
+                    if (dr == DialogResult.Yes)
+                    {
+                        base.CustomRefresh();
+                    }
+                }
+            }
+        }
     }
 }

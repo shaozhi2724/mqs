@@ -195,7 +195,7 @@ namespace DQS.AppViews.OtherOperation.Finance
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 string sql = @"EXEC sp_MakeCollectionsDetailForBill '{0}'";
-                sql = String.Format(sql, " AND BillDetailID IN (" + detailID + ")");
+                sql = String.Format(sql, " AND DetailID IN (" + detailID + ")");
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 try
@@ -438,6 +438,7 @@ namespace DQS.AppViews.OtherOperation.Finance
         /// </summary>
         private bool validatetxt()
         {
+            /*
             if (cboBillingType.Text.Trim() == "")
             {
                 XtraMessageBox.Show("请选择发票类型！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -456,7 +457,14 @@ namespace DQS.AppViews.OtherOperation.Finance
                 txtTaxCode.Focus();
                 return false;
             }
-            else if (deBillDate.Text.Trim() == "")
+            */
+            if (cboTax.Text.Trim() == "")
+            {
+                XtraMessageBox.Show("填写税率！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                cboTax.Focus();
+                return false;
+            }
+            if (deBillDate.Text.Trim() == "")
             {
                 XtraMessageBox.Show("请选择发票日期！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 deBillDate.Focus();

@@ -147,7 +147,7 @@
           <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_BusinessStoreDetailForSale</ViewName>
           <PrimaryField>产品ID</PrimaryField>
-          <Fields>产品ID,入库ID,产品编号,产品名称,产品名称Spell,生产厂商,生产厂商Spell,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,批号,生产日期,有效期至,灭菌批号,灭菌日期,过期状态,锁定状态,库存数量</Fields>
+          <Fields>产品ID,入库ID,产品编号,产品名称,产品名称Spell,生产厂商,生产厂商Spell,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,[批号],生产日期,有效期至,灭菌批号,灭菌日期,过期状态,锁定状态,库存数量</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
@@ -258,7 +258,7 @@
           <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_BusinessStoreDetailForSale</ViewName>
           <PrimaryField>产品ID</PrimaryField>
-          <Fields>产品ID,产品编号,产品名称,规格型号,包装规格型号,单位,批号,灭菌批号,灭菌日期,库存数量,产品类别,所属部门,生产厂商,包装比例,注册证号,贮藏条件,进货价,批发价,零售价,产品名称Spell,生产日期,有效期至,过期状态,锁定状态,当天限购数量,当月限购数量,StyleID,StyleName,标售价</Fields>
+          <Fields>产品ID,产品编号,产品名称,规格型号,包装规格型号,单位,[批号],灭菌批号,灭菌日期,库存数量,产品类别,所属部门,生产厂商,包装比例,注册证号,贮藏条件,进货价,批发价,零售价,产品名称Spell,生产日期,有效期至,过期状态,锁定状态,当天限购数量,当月限购数量,StyleID,StyleName,标售价</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
@@ -290,7 +290,7 @@
           <FormatQueryString>[批号] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_StoreDetail</ViewName>
           <PrimaryField>产品ID</PrimaryField>
-          <Fields>产品ID,批号,生产日期,有效期至,库存数量</Fields>
+          <Fields>产品ID,[批号],生产日期,有效期至,库存数量</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
@@ -301,8 +301,8 @@
         <Column Name="DetailID" FieldType="System.Int32" Visible="false" AllowEdit="false"/>
         <Column Name="产品编号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品编号"/>
         <Column Name="产品名称" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品名称"/>
-        <Column Name="进货价" FieldType="System.Double" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="进货价"/>
-        <Column Name="标售价" FieldType="System.Double" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="标售价"/>
+        <Column Name="进货价" EntityField="InUnitPrice" FieldType="System.Double" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="进货价"/>
+        <!--<Column Name="标售价" FieldType="System.Double" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="标售价"/>-->
         <Column Name="批发价" EntityField="TradePrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price1" PopupField="批发价"/>
         <Column Name="零售价" EntityField="RetailPrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price2" PopupField="零售价"/>
         <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
@@ -446,6 +446,8 @@
         <Column Name="单价" EntityField="UnitPrice" FieldType="System.Double" Visible="true" AllowEdit="true" PopupForm="Price" PopupField="价格"/>
         <Column Name="数量" EntityField="Amount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
         <Column Name="金额" EntityField="TotalPrice" FieldType="System.Double"  Visible="true" AllowEdit="false" />
+        <Column Name="批发价" EntityField="TradePrice" FieldType="System.Double" Visible="true" AllowEdit="true"/>
+        <Column Name="零售价" EntityField="RetailPrice" FieldType="System.Double" Visible="true" AllowEdit="true"/>
         <Column Name="开票日期" DataType="System.DateTime" Visible="false" AllowEdit="false"/>
         <Column Name="单据编号" DataType="System.String" Visible="false" AllowEdit="false"/>
         <Column Name="开票员" DataType="System.String" Visible="false" AllowEdit="false"/>
@@ -638,7 +640,7 @@
           <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_AllProduct</ViewName>
           <PrimaryField>产品ID</PrimaryField>
-          <Fields>产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,单价,批号,生产日期,有效期至</Fields>
+          <Fields>产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,单价,[批号],生产日期,有效期至</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
@@ -651,6 +653,7 @@
         <Column Name="规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="规格型号"/>
         <Column Name="包装规格型号" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装规格型号"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="true" PopupForm="Product" PopupField="批号" />
+        <Column Name="序列号" EntityField="SerialNumber" FieldType="System.String" Visible="true" Nullable="true" AllowEdit="true" PopupField="序列号" />
         <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="true" PopupForm="Product" PopupField="生产日期" />
         <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="true" PopupForm="Product" PopupField="有效期至" />
         <Column Name="收货数量" EntityField="Amount" FieldType="System.Int32" Visible="true" Nullable="true" AllowEdit="false" />
@@ -661,6 +664,7 @@
         <Column Name="拒收数量" EntityField="Reservation5" FieldType="System.Int32" Visible="true" Nullable="true" AllowEdit="false" />
         <Column Name="不合格事项" EntityField="DetailRemark" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="true" />
         <Column Name="验收结果及处置措施" EntityField="AcceptResult" FieldType="System.String" Visible="true" AllowEdit="true" />
+        <Column Name="存储库区" EntityField="AcceptSolution" FieldType="System.String" Visible="true" Nullable="true" AllowEdit="true" />
         <Column Name="包装比例" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="包装比例"/>
         <Column Name="贮藏条件" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="贮藏条件"/>
         <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="产品类别"/>
@@ -755,6 +759,7 @@
         <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="序列号" EntityField="SerialNumber" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="false"/>
         <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false"/>
         <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false"/>
         <Column Name="灭菌批号" EntityField="SterilizationBatchNo" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="false" />
@@ -827,7 +832,7 @@
           <FormatQueryString>[批号] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_StoreDetail</ViewName>
           <PrimaryField>产品ID</PrimaryField>
-          <Fields>产品ID,批号,生产日期,有效期至,灭菌批号,灭菌日期,库存数量</Fields>
+          <Fields>产品ID,[批号],生产日期,有效期至,灭菌批号,灭菌日期,库存数量</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
@@ -846,6 +851,7 @@
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="Product" PopupField="单位"/>
         <Column Name="订单数量" EntityField="BillAmount" FieldType="System.Int32" Nullable="true" Visible="true" AllowEdit="false"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false" PopupForm="ProductBatch" PopupField="批号"/>
+        <Column Name="序列号" EntityField="SerialNumber" FieldType="System.String" Visible="true" Nullable="true" AllowEdit="true" PopupField="序列号"/>
         <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false" PopupForm="ProductBatch" PopupField="生产日期"/>
         <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false" PopupForm="ProductBatch" PopupField="有效期至"/>
         <Column Name="灭菌批号" EntityField="SterilizationBatchNo" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="false" PopupForm="ProductBatch" PopupField="灭菌批号" />
@@ -901,6 +907,7 @@
         <Column Name="产品类别" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="单位" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="批号" EntityField="BatchNo" FieldType="System.String" Visible="true" AllowEdit="false"/>
+        <Column Name="序列号" EntityField="SerialNumber" FieldType="System.String" Visible="true" Nullable="true" AllowEdit="false"/>
         <Column Name="生产日期" EntityField="ProduceDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false"/>
         <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="false"/>
         <Column Name="灭菌批号" EntityField="SterilizationBatchNo" FieldType="System.String" Nullable="true" Visible="true" AllowEdit="false" />
@@ -1003,7 +1010,7 @@
           <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_BusinessStoreDetailForInitInventory</ViewName>
           <PrimaryField>产品ID</PrimaryField>
-          <Fields>库存ID,产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,批号,生产日期,有效期至,库存数量</Fields>
+          <Fields>库存ID,产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,[批号],生产日期,有效期至,库存数量</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
@@ -1037,7 +1044,7 @@
           <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_LockedStoreDetail</ViewName>
           <PrimaryField>产品ID</PrimaryField>
-          <Fields>产品ID,入库ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,批号,生产日期,有效期至,库存数量,锁定数量</Fields>
+          <Fields>产品ID,入库ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,[批号],生产日期,有效期至,库存数量,锁定数量</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
@@ -1071,7 +1078,7 @@
           <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_UnStoreDetail</ViewName>
           <PrimaryField>产品ID</PrimaryField>
-          <Fields>产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,批号,生产日期,有效期至,数量</Fields>
+          <Fields>产品ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,[批号],生产日期,有效期至,数量</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>
@@ -1104,7 +1111,7 @@
           <FormatQueryString>[产品编号] LIKE '%{0}%' OR [产品名称] LIKE '%{0}%' OR [产品名称Spell] LIKE '%{0}%'</FormatQueryString>
           <ViewName>vw_LockedStoreDetail</ViewName>
           <PrimaryField>产品ID</PrimaryField>
-          <Fields>产品ID,入库ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,批号,生产日期,有效期至,锁定数量,异常内容</Fields>
+          <Fields>产品ID,入库ID,产品编号,产品名称,产品名称Spell,生产厂商,规格型号,包装规格型号,包装比例,注册证号,贮藏条件,产品类别,单位,[批号],生产日期,有效期至,锁定数量,异常内容</Fields>
           <Filter></Filter>
           <PageSize>100</PageSize>
         </PopupForm>

@@ -46,10 +46,11 @@
             this.txtBillingCode = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
             this.btnDel = new DevExpress.XtraEditors.SimpleButton();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
-            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
+            this.btnUpdate = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
@@ -243,15 +244,25 @@
             this.panelControl1.Controls.Add(this.btnExport);
             this.panelControl1.Controls.Add(this.btnPrint);
             this.panelControl1.Controls.Add(this.btnDel);
+            this.panelControl1.Controls.Add(this.btnUpdate);
             this.panelControl1.Controls.Add(this.btnAdd);
             this.panelControl1.Location = new System.Drawing.Point(3, 3);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(799, 50);
             this.panelControl1.TabIndex = 22;
             // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(421, 11);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(79, 27);
+            this.btnExport.TabIndex = 0;
+            this.btnExport.Text = "导出";
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(215, 11);
+            this.btnPrint.Location = new System.Drawing.Point(318, 11);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(79, 27);
             this.btnPrint.TabIndex = 0;
@@ -260,7 +271,7 @@
             // 
             // btnDel
             // 
-            this.btnDel.Location = new System.Drawing.Point(112, 11);
+            this.btnDel.Location = new System.Drawing.Point(215, 11);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(79, 27);
             this.btnDel.TabIndex = 0;
@@ -276,14 +287,14 @@
             this.btnAdd.Text = "新建";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // btnExport
+            // btnUpdate
             // 
-            this.btnExport.Location = new System.Drawing.Point(318, 11);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(79, 27);
-            this.btnExport.TabIndex = 0;
-            this.btnExport.Text = "导出";
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            this.btnUpdate.Location = new System.Drawing.Point(112, 11);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(79, 27);
+            this.btnUpdate.TabIndex = 0;
+            this.btnUpdate.Text = "修改";
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // FrmShowMakeCollectionsBill
             // 
@@ -340,6 +351,7 @@
         private DevExpress.XtraEditors.SimpleButton btnAdd;
         private DevExpress.XtraEditors.SimpleButton btnPrint;
         private DevExpress.XtraEditors.SimpleButton btnExport;
+        private DevExpress.XtraEditors.SimpleButton btnUpdate;
 
     }
 }

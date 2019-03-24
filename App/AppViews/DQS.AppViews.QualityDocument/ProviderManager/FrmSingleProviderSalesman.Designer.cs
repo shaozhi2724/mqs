@@ -89,6 +89,8 @@
             this.chkBCType = new DevExpress.XtraEditors.CheckedListBoxControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.checkTypeAll = new DevExpress.XtraEditors.CheckEdit();
+            this.btnGO = new DevExpress.XtraEditors.SimpleButton();
+            this.txtqk = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.pnOperating)).BeginInit();
             this.pnOperating.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
@@ -160,6 +162,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.checkTypeAll.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtqk.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // pnOperating
@@ -169,7 +172,7 @@
             this.pnOperating.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnOperating.Location = new System.Drawing.Point(0, 440);
             this.pnOperating.Name = "pnOperating";
-            this.pnOperating.Size = new System.Drawing.Size(715, 43);
+            this.pnOperating.Size = new System.Drawing.Size(859, 43);
             this.pnOperating.TabIndex = 1;
             // 
             // btnCancel
@@ -179,7 +182,7 @@
             this.btnCancel.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Appearance.Options.UseFont = true;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(628, 9);
+            this.btnCancel.Location = new System.Drawing.Point(772, 9);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -192,7 +195,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Appearance.Options.UseFont = true;
-            this.btnSave.Location = new System.Drawing.Point(540, 9);
+            this.btnSave.Location = new System.Drawing.Point(684, 9);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 0;
@@ -768,7 +771,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedTabPage = this.tabInfo;
-            this.tabControl.Size = new System.Drawing.Size(715, 440);
+            this.tabControl.Size = new System.Drawing.Size(859, 440);
             this.tabControl.TabIndex = 2;
             this.tabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabInfo,
@@ -787,7 +790,7 @@
             this.tabRange.Controls.Add(this.grpProduct);
             this.tabRange.Controls.Add(this.grpType);
             this.tabRange.Name = "tabRange";
-            this.tabRange.Size = new System.Drawing.Size(708, 410);
+            this.tabRange.Size = new System.Drawing.Size(852, 410);
             this.tabRange.Text = "经营范围";
             // 
             // grpTypeDetail
@@ -797,7 +800,7 @@
             this.grpTypeDetail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpTypeDetail.Location = new System.Drawing.Point(163, 0);
             this.grpTypeDetail.Name = "grpTypeDetail";
-            this.grpTypeDetail.Size = new System.Drawing.Size(330, 410);
+            this.grpTypeDetail.Size = new System.Drawing.Size(371, 410);
             this.grpTypeDetail.TabIndex = 1;
             this.grpTypeDetail.Text = "类别明细";
             // 
@@ -807,7 +810,7 @@
             this.chkBCTypeDetail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkBCTypeDetail.Location = new System.Drawing.Point(2, 55);
             this.chkBCTypeDetail.Name = "chkBCTypeDetail";
-            this.chkBCTypeDetail.Size = new System.Drawing.Size(326, 353);
+            this.chkBCTypeDetail.Size = new System.Drawing.Size(367, 353);
             this.chkBCTypeDetail.TabIndex = 1;
             // 
             // panelControl1
@@ -816,7 +819,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(2, 23);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(326, 32);
+            this.panelControl1.Size = new System.Drawing.Size(367, 32);
             this.panelControl1.TabIndex = 0;
             // 
             // checkTypeDetailAll
@@ -833,9 +836,9 @@
             this.grpProduct.Controls.Add(this.chkBCProduct);
             this.grpProduct.Controls.Add(this.panelControl3);
             this.grpProduct.Dock = System.Windows.Forms.DockStyle.Right;
-            this.grpProduct.Location = new System.Drawing.Point(493, 0);
+            this.grpProduct.Location = new System.Drawing.Point(534, 0);
             this.grpProduct.Name = "grpProduct";
-            this.grpProduct.Size = new System.Drawing.Size(215, 410);
+            this.grpProduct.Size = new System.Drawing.Size(318, 410);
             this.grpProduct.TabIndex = 2;
             this.grpProduct.Text = "产品";
             // 
@@ -845,16 +848,19 @@
             this.chkBCProduct.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkBCProduct.Location = new System.Drawing.Point(2, 55);
             this.chkBCProduct.Name = "chkBCProduct";
-            this.chkBCProduct.Size = new System.Drawing.Size(211, 353);
+            this.chkBCProduct.Size = new System.Drawing.Size(314, 353);
             this.chkBCProduct.TabIndex = 2;
+            this.chkBCProduct.Click += new System.EventHandler(this.chkBCProduct_Click);
             // 
             // panelControl3
             // 
+            this.panelControl3.Controls.Add(this.btnGO);
+            this.panelControl3.Controls.Add(this.txtqk);
             this.panelControl3.Controls.Add(this.checkProductAll);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl3.Location = new System.Drawing.Point(2, 23);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(211, 32);
+            this.panelControl3.Size = new System.Drawing.Size(314, 32);
             this.panelControl3.TabIndex = 1;
             // 
             // checkProductAll
@@ -904,13 +910,33 @@
             this.checkTypeAll.TabIndex = 1;
             this.checkTypeAll.CheckedChanged += new System.EventHandler(this.checkTypeAll_CheckedChanged);
             // 
+            // btnGO
+            // 
+            this.btnGO.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGO.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGO.Appearance.Options.UseFont = true;
+            this.btnGO.Location = new System.Drawing.Point(274, 5);
+            this.btnGO.Name = "btnGO";
+            this.btnGO.Size = new System.Drawing.Size(26, 23);
+            this.btnGO.TabIndex = 4;
+            this.btnGO.Text = "GO";
+            this.btnGO.Click += new System.EventHandler(this.btnGO_Click);
+            // 
+            // txtqk
+            // 
+            this.txtqk.Location = new System.Drawing.Point(176, 6);
+            this.txtqk.Name = "txtqk";
+            this.txtqk.Size = new System.Drawing.Size(92, 21);
+            this.txtqk.TabIndex = 5;
+            // 
             // FrmSingleProviderSalesman
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(715, 483);
+            this.ClientSize = new System.Drawing.Size(859, 483);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.pnOperating);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -992,6 +1018,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.checkTypeAll.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtqk.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1059,5 +1086,7 @@
         private DevExpress.XtraEditors.CheckedListBoxControl chkBCType;
         private DevExpress.XtraEditors.PanelControl panelControl2;
         private DevExpress.XtraEditors.CheckEdit checkTypeAll;
+        private DevExpress.XtraEditors.SimpleButton btnGO;
+        private DevExpress.XtraEditors.TextEdit txtqk;
     }
 }

@@ -208,5 +208,26 @@ namespace DQS.AppViews.OtherOperation.Finance
 
             }
         }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (gridView.RowCount <= 0)
+            {
+                return;
+            }
+            object id = gridView.GetDataRow(gridView.FocusedRowHandle)["MakeCollectionsBillID"];
+            if (id != null)
+            {
+                string code = gridView.GetDataRow(gridView.FocusedRowHandle)["自动生成单号"].ToString();
+                using (FrmUpdateMakeCollectionsBill fb = new FrmUpdateMakeCollectionsBill(int.Parse(id.ToString()),code))
+                {
+                    DialogResult dr = fb.ShowDialog();
+                    if (dr == DialogResult.Yes)
+                    {
+                        gridLoad();
+                    }
+                }
+            }
+        }
     }
 }

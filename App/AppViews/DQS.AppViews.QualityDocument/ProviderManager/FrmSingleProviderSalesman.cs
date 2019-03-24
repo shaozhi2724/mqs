@@ -11,12 +11,15 @@ using DQS.Common;
 using DevExpress.XtraEditors.Controls;
 using ORMSCore;
 using DQS.Controls;
+using DQS.AppViews.QualityDocument.EnterpriseManager;
 
 namespace DQS.AppViews.QualityDocument.ProviderManager
 {
     public partial class FrmSingleProviderSalesman : DevExpress.XtraEditors.XtraForm
     {
         private int? m_id;
+
+        List<chkProduct> chkproducts = new List<chkProduct>();
 
         public FrmSingleProviderSalesman()
         {
@@ -30,6 +33,7 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
             BindPhysicTypes();
             BindProductStyles();
             BindProducts();
+            LoadchkProduct();
 
             if (this.Tag != null)
             {
@@ -274,7 +278,11 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
 
             foreach (BFIProductEntity c in products)
             {
-                this.chkBCProduct.Items.Add(new ListEntityItem(c, c.ProductCode + "-" + c.ProductName + "-" + c.ProductSpec + "-" + c.ProducerName));
+                //this.chkBCProduct.Items.Add(new ListEntityItem(c, c.ProductCode + "-" + c.ProductName + "-" + c.ProductSpec + "-" + c.ProducerName));
+                chkProduct chk = new chkProduct();
+                chk.product = c.ProductCode + "-" + c.ProductName + "-" + c.ProductSpec + "-" + c.ProducerName;
+                chk.ischeck = 0;
+                chkproducts.Add(chk);
             }
         }
 
@@ -304,14 +312,17 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                 range.Remark = "";
                 range.Save();
             }
-            foreach (CheckedListBoxItem productStyle in this.chkBCProduct.CheckedItems)
+            foreach (var item in chkproducts)
             {
-                string productCode = productStyle.Value.ToString();
-                string[] sArray = productCode.Split('-');
-                range.CheckType = "产品";
-                range.CheckValue = sArray[0];
-                range.Remark = productStyle.Value.ToString();
-                range.Save();
+                if (item.ischeck == 1)
+                {
+                    string productCode = item.product;
+                    string[] sArray = productCode.Split('-');
+                    range.CheckType = "产品";
+                    range.CheckValue = sArray[0];
+                    range.Remark = item.product;
+                    range.Save();
+                }
             }
         }
 
@@ -349,11 +360,96 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
             {
                 checkProductAll.Text = "反选";
                 this.chkBCProduct.CheckAll();
+                foreach (var item in chkproducts)
+                {
+                    if (item.product.Contains(txtqk.Text.Trim()))
+                    {
+                        item.ischeck = 1;
+                    }
+                }
             }
             else
             {
                 checkProductAll.Text = "全选";
                 this.chkBCProduct.UnCheckAll();
+                foreach (var item in chkproducts)
+                {
+                    if (item.product.Contains(txtqk.Text.Trim()))
+                    {
+                        item.ischeck = 0;
+                    }
+                }
+            }
+        }
+
+        private void btnGO_Click(object sender, EventArgs e)
+        {
+            chkBCProduct.Items.Clear();
+            LoadchkProductDetail();
+        }
+        private void LoadchkProductDetail()
+        {
+            foreach (var item in chkproducts)
+            {
+                if (item.product.Contains(txtqk.Text.Trim()))
+                {
+                    chkBCProduct.Items.Add(item.product, item.ischeck == 1 ? true : false);
+                }
+            }
+        }
+
+        private void LoadchkProduct()
+        {
+            if (this.Tag != null)
+            {
+                this.m_id = Convert.ToInt32(this.Tag);
+                BFISalesmanEntity entity = new BFISalesmanEntity { SalesmanID = m_id.Value };
+                entity.Fetch();
+
+                EntityCollection<BFIPersonRangeEntity> ranges = new EntityCollection<BFIPersonRangeEntity>();
+                ranges.Fetch(BFIPersonRangeEntityFields.PersonType == "客户"
+                    & BFIPersonRangeEntityFields.PersonID == entity.SalesmanID
+                    & BFIPersonRangeEntityFields.CheckType == "产品");
+
+                if (ranges.Count > 0)
+                {
+                    foreach (BFIPersonRangeEntity range in ranges)
+                    {
+                        foreach (var item in chkproducts)
+                        {
+                            if (item.product == range.Remark)
+                            {
+                                item.ischeck = 1;
+                                break;
+                            }
+                        }
+                    }
+                }
+                LoadchkProductDetail();
+            }
+            else
+            {
+                LoadchkProductDetail();
+            }
+        }
+
+        private void chkBCProduct_Click(object sender, EventArgs e)
+        {
+            var item = (CheckedListBoxItem)chkBCProduct.SelectedItem;
+            foreach (var product in chkproducts)
+            {
+                if (product.product == item.Value.ToString())
+                {
+                    product.ischeck = product.ischeck == 0 ? 1 : 0;
+                }
+            }
+            foreach (CheckedListBoxItem chkitem in chkBCProduct.Items)
+            {
+                if (chkitem.Value.ToString() == item.Value.ToString())
+                {
+                    chkitem.CheckState = item.CheckState;
+                    break;
+                }
             }
         }
     }

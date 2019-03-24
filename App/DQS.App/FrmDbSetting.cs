@@ -18,17 +18,20 @@ namespace DQS.App
 
         private void FrmDbSetting_Load(object sender, EventArgs e)
         {
-            this.lblUserID.Enabled = false;
-            this.txtUserID.Enabled = false;
+            this.lblUserID.Enabled = true;
+            this.txtUserID.Enabled = true;
 
-            this.lblPassword.Enabled = false;
-            this.txtPassword.Enabled = false;
+            this.lblPassword.Enabled = true;
+            this.txtPassword.Enabled = true;
             if(!string.IsNullOrWhiteSpace(ConnectionString))
             {
-                SqlConnection sqlConnection = new SqlConnection();
+                radSecurity.SelectedIndex = 1;
+                SqlConnectionStringBuilder sqlConnection = new SqlConnectionStringBuilder();
                 sqlConnection.ConnectionString = ConnectionString;
                 txtServer.Text = sqlConnection.DataSource;
-                txtDatabase.Text = sqlConnection.Database;
+                txtDatabase.Text = sqlConnection.InitialCatalog;
+                txtUserID.Text = sqlConnection.UserID;
+                txtPassword.Text = sqlConnection.Password;
             }
         }
 
@@ -55,8 +58,6 @@ namespace DQS.App
                         ConnectionString = GenerateSQLConnectionString(txtServer.Text.Trim(), txtDatabase.Text.Trim(),
                             txtUserID.Text.Trim(), txtPassword.Text.Trim());
                     }
-
-
                     this.DialogResult = DialogResult.OK;
                 }
                 this.Close();

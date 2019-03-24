@@ -64,16 +64,35 @@ namespace DQS.App
 
         private void FrmLogin_Load(object sender, EventArgs e)
         {
-            this.Text = "登录";
             if (Settings.Default.AutoCheckForUpdate)
             {
                 ThreadPool.QueueUserWorkItem((w) => Updater.CheckForUpdate(ShowUpdateDialog));
-            } 
+            }
+            if (!_login.CanCn())
+            {
+            /*
+                using (FrmNewConnIP frm = new FrmNewConnIP())
+                {
+                    DialogResult dr = frm.ShowDialog();
+                    if (dr == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+                    if (dr == DialogResult.Yes)
+                    {
+                        FrmLogin_Load(null, null);
+                    }
+                }
+            */
+                MessageBox.Show("未连接服务器");
+                return;
+            }
             LoadVersion();
         }
 
         private void LoadVersion()
         {
+            this.Text = "登录";
             this.lblUserError.Text = "";
             this.lblPasswordError.Text = "";
             string EnterpriseName;
@@ -188,6 +207,7 @@ namespace DQS.App
             if (dcDialog.ShowDialog(this) == DialogResult.OK)
             {
                 _login.SaveConfiguration(dcDialog.ConnectionString);
+                LoadVersion();
             }
         }
 

@@ -585,7 +585,7 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                                 sql = String.Format(sql, InStoreID, Amount);
                                 SqlCommand cmd = new SqlCommand(sql, conn);
                                 object result = cmd.ExecuteScalar();
-                                if (result == "NO")
+                                if (result.ToString() == "NO")
                                 {
                                     _amountErrors.Add(String.Format("第{0}行，{1} 批号为{2}库存不足。", i + 1, productEntity.ProductName, BatchNo));
                                 }
@@ -1134,7 +1134,7 @@ WHERE BillID={1}
                     {
                         //if (!Settings.Default.IsNewStoreDetail)
                         //{
-                        //    if (!this.ValidateBatchNo()) return;
+                        //if (!this.ValidateBatchNo()) return;
                         //}
                         if (!this.ValidateDealerRange()) return; //验证客户经营范围
                         if (!this.ValidateDealerQualificationfordetail()) return; //验证客户的电子档案
@@ -1145,6 +1145,7 @@ WHERE BillID={1}
                         }
                         if (!this.ProductStyle()) return;//验证现金交易
 
+                        if (!this.ValidatePrice()) return;//验证同批号产品，单价不一致不能开单
                         if (!this.ValidateBatchDate()) return;
                         if (!this.ValidateValidDate()) return;
                         if (!this.ValidateLockStatus()) return;
@@ -1539,6 +1540,29 @@ WHERE BillID={1}
             string popupFormName = "";
             if (null != e.PopupRow)
             {
+                object InID = e.PopupRow["入库ID"].ToString();
+                if (InID != null && InID != DBNull.Value)
+                {
+                    for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
+                    {
+                        object InID2 = this.popupGrid.PopupView.GetRowCellValue(i, "入库ID");
+                        if (InID2 != null && InID2 != DBNull.Value)
+                        {
+                            if (int.Parse(InID.ToString()) == int.Parse(InID2.ToString()))
+                            {
+                                XtraMessageBox.Show("该产品已经选择过，请重新选择。",
+                                                    "系统提示",
+                                                    MessageBoxButtons.OK,
+                                                    MessageBoxIcon.Warning);
+                                e.PopupRow.Delete();
+                                e.Cancel = true;
+                                return;
+                            }
+                        }
+                    }
+                }
+
+
                 var grid = (sender as PopupGrid);
 
                 if (grid != null)
@@ -2194,6 +2218,11 @@ WHERE BillID={1}
                 e.Cancel = true;
             }
 
+            if (!this.ValidateDealerManQu())
+            {
+                e.Cancel = true;
+            }
+
             if (!this.ValidateDealerQualificationfordetail())
             {
                 e.Cancel = true;
@@ -2324,39 +2353,56 @@ WHERE BillID={1}
             }
         }
 
-        //验证同一产品不可出现相同批号
+        //验证同一产品批号，单价不可以不一致
+        private bool ValidatePrice()
+        {
+            for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
+            {
+                object pCode = this.popupGrid.PopupView.GetRowCellValue(i, "产品编号");
+                object productName = this.popupGrid.PopupView.GetRowCellValue(i, "产品名称");
+                object batchNo = this.popupGrid.PopupView.GetRowCellValue(i, "批号");
+                object pPrice = this.popupGrid.PopupView.GetRowCellValue(i, "单价");
+
+                if (pCode != null && pCode != DBNull.Value)
+                {
+                    for (int j = 0; j < this.popupGrid.PopupView.RowCount; j++)
+                    {
+                        object pCode2 = this.popupGrid.PopupView.GetRowCellValue(j, "产品编号");
+                        object batchNo2 = this.popupGrid.PopupView.GetRowCellValue(j, "批号");
+                        object pPrice2 = this.popupGrid.PopupView.GetRowCellValue(j, "单价");
+                        if (pCode.ToString().Trim() == pCode2.ToString().Trim()
+                            && batchNo.ToString().Trim() == batchNo2.ToString().Trim())
+                        {
+                            if (pPrice.ToString().Trim() != pPrice2.ToString().Trim())
+                            {
+                                XtraMessageBox.Show(String.Format("第{0}行产品‘{1}’与第{2}行产品单价不一致。",i+1, productName, j+1), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        //验证同一产品不可选择同库存记录
         private bool ValidateBatchNo()
         {
             for (int i = 0; i < this.popupGrid.PopupView.RowCount; i++)
             {
-                object amount = this.popupGrid.PopupView.GetRowCellValue(i, "数量");
-                object productName = this.popupGrid.PopupView.GetRowCellValue(i, "产品名称");
-                object productSpec = this.popupGrid.PopupView.GetRowCellValue(i, "规格型号");
-                object packageSpec = this.popupGrid.PopupView.GetRowCellValue(i, "包装规格型号");
+                object inStoreID = this.popupGrid.PopupView.GetRowCellValue(i, "入库ID");
 
-                if (amount != null && amount != DBNull.Value)
+                if (inStoreID != null && inStoreID != DBNull.Value)
                 {
-                    List<string> batchNos = new List<string>();
-
                     for (int j = 0; j < this.popupGrid.PopupView.RowCount; j++)
                     {
-                        object productName2 = this.popupGrid.PopupView.GetRowCellValue(j, "产品名称");//同一产品比较
-                        object productSpec2 = this.popupGrid.PopupView.GetRowCellValue(j, "规格型号");
-                        object packageSpec2 = this.popupGrid.PopupView.GetRowCellValue(j, "包装规格型号");
-                        if (productName.ToString().Trim() == productName2.ToString().Trim()
-                            && productSpec.ToString().Trim() == productSpec2.ToString().Trim()
-                            && packageSpec.ToString().Trim() == packageSpec2.ToString().Trim())
+                        object inStoreID2 = this.popupGrid.PopupView.GetRowCellValue(j, "入库ID");
+                        object productName = this.popupGrid.PopupView.GetRowCellValue(j, "产品名称");
+                        if (inStoreID.ToString().Trim() == inStoreID2.ToString().Trim())
                         {
-                            object batchNo = this.popupGrid.PopupView.GetRowCellValue(j, "批号");
-                            if (batchNos.Contains(batchNo.ToString().Trim()))
-                            {
-                                XtraMessageBox.Show(String.Format("产品‘{0}’存在相同的批号{1}。", productName, batchNo), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                return false;
-                            }
-                            else
-                            {
-                                batchNos.Add(batchNo.ToString().Trim());
-                            }
+                            XtraMessageBox.Show(String.Format("第{1}和第{2}行，产品‘{0}’是相同的库存记录，请重新选择。", productName, i + 1, j + 1), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return false;
                         }
                     }
                 }
@@ -2415,11 +2461,23 @@ WHERE BillID={1}
                         {
                             var dialogResult = XtraMessageBox.Show(String.Format("第{0}行，产品的单价不能小于进货价！", (i + 1)), "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return dialogResult == DialogResult.No;
+                        
                         }
-                        if (Convert.ToDecimal(unitPrice) == Convert.ToDecimal(purchasePrice))
+                        if (Settings.Default.EqSaleBillPrice)
                         {
-                            var dialogResult = XtraMessageBox.Show(String.Format("第{0}行，产品的单价等于进货价，是否开单！", (i + 1)), "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                            return dialogResult == DialogResult.Yes;
+                            if (Convert.ToDecimal(unitPrice) == Convert.ToDecimal(purchasePrice))
+                            {
+                                var dialogResult = XtraMessageBox.Show(String.Format("第{0}行，产品的单价等于进货价，是否开单！", (i + 1)), "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                                return dialogResult == DialogResult.Yes;
+                            }
+                        }
+                        else
+                        {
+                            if (Convert.ToDecimal(unitPrice) == Convert.ToDecimal(purchasePrice))
+                            {
+                                var dialogResult = XtraMessageBox.Show(String.Format("第{0}行，产品的单价等于进货价，不能开单！", (i + 1)), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return dialogResult == DialogResult.No;
+                            }
                         }
                         if (Convert.ToDecimal(tradePrice) > 0 && Convert.ToDecimal(unitPrice) > Convert.ToDecimal(tradePrice))
                         {
@@ -2977,6 +3035,66 @@ WHERE BillID={1}
             }
         }
 
+        private bool ValidateDealerManQu()
+        {
+            //获取客户的过期证书
+            if (this.txtBusinessPerson.Text != "")
+            {
+                int ManID = Convert.ToInt32(this.txtBusinessPerson.Tag);
+                ViewCollection<AllQualificationView> qualifications = new ViewCollection<AllQualificationView>();
+
+                PredicateExpression pe = new PredicateExpression();
+                pe.Add(AllQualificationViewFields.所属表ID == "BFI_Salesman");
+                pe.Add(AllQualificationViewFields.所属ID == ManID);
+                pe.Add(AllQualificationViewFields.到期状态 == "已过期");
+                qualifications.Fetch(pe);
+
+                bool isgo = true;
+                string message = "";
+                foreach (var item in qualifications)
+                {
+                    var itemli = (AllQualificationView)item;
+                    if (itemli.到期状态 == "已过期")
+                    {
+                        isgo = false;
+                    }
+                    string validate = "";
+                    try
+                    {
+                        validate = itemli.到期日期.ToString("d");
+                    }
+                    catch (Exception)
+                    {
+                        validate = "空";
+                    }
+                    string mes = itemli.档案名称 + "--" + itemli.到期状态 + "--" + validate + "\r\n";
+                    message += mes;
+                }
+
+                if (qualifications.Count > 0)
+                {
+                    if (isgo)
+                    {
+                        XtraMessageBox.Show(String.Format("采购员的电子档案即将过期！\r\n{0}", message), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return true;
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show(String.Format("采购员的电子档案已过期，无法生成订单，请修改！\r\n{0}", message), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            else
+            {
+                //XtraMessageBox.Show("请先选择采购员", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //return false;
+                return true;
+            }
+        }
+
         private void txtBusinessPerson_PopupClosing(object sender, EventArgs e)
         {
             if (this.txtBusinessPerson.EditData != null)
@@ -3196,7 +3314,7 @@ WHERE BillID={1}
                 {
                     //if (!Settings.Default.IsNewStoreDetail)
                     //{
-                    //    if (!this.ValidateBatchNo()) return;
+                    //if (!this.ValidateBatchNo()) return;
                     //}
                     if (!this.ValidateDealerRange()) return; //验证客户经营范围
                     if (!this.ValidateDealerQualificationfordetail()) return; //验证客户的电子档案
@@ -3207,6 +3325,7 @@ WHERE BillID={1}
                     }
                     if (!this.ProductStyle()) return;//验证现金交易
 
+                    if (!this.ValidatePrice()) return;//验证同批号产品，单价不一致不能开单
                     if (!this.ValidateBatchDate()) return;
                     if (!this.ValidateValidDate()) return;
                     if (!this.ValidateLockStatus()) return;
@@ -3737,7 +3856,7 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
                     //cmd.ExecuteNonQuery();
 
                     int returnValue = 0;
-                    SqlCommand cmd = new SqlCommand("sp_InsertNewStoreDetail", conn);
+                    SqlCommand cmd = new SqlCommand("sp_InsertNewStoreDetailForOut", conn);
 
                     cmd.Parameters.Add(new SqlParameter("@BillID", BillID));
                     cmd.Parameters.Add(new SqlParameter("@BillCode", BillCode));

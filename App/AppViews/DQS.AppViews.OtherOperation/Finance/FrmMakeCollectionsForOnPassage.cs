@@ -173,8 +173,8 @@ namespace DQS.AppViews.OtherOperation.Finance
             {
                 string sql = @"SELECT 
 	onp.MakeCollectionsOnPassageID AS [OnPassageID],
-	ra.ReceivablesCode AS [应收单据编号],
-	ra.VoucherCode AS [凭证号],
+	ISNULL(ra.ReceivablesCode,'') AS [应收单据编号],
+	ISNULL(ra.VoucherCode,'') AS [凭证号],
 	onp.BusinessBillID AS [StoreID],
 	onp.BusinessBillCode AS [单据编码],
 	onp.DealerCode AS [往来单位编码],
@@ -200,7 +200,7 @@ namespace DQS.AppViews.OtherOperation.Finance
 FROM dbo.FIN_MakeCollectionsOnPassageDetail onp 
 INNER JOIN dbo.FIN_MakeCollectionsOnPassage fm ON onp.BusinessBillID = fm.BusinessBillID
 LEFT JOIN dbo.FIN_Receivables ra ON onp.BusinessBillID = ra.BusinessBillID
-WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.BusinessBillID = nr.BusinessBillID) AND onp.BusinessBillDetailID IN (" + StoreID + ")";
+WHERE NOT EXISTS(SELECT 0 FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.BusinessBillDetailID = nr.BusinessBillDetailID) AND onp.BusinessBillDetailID IN (" + StoreID + ")";
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataSet ds = new DataSet();
                 try
@@ -473,12 +473,6 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.Busine
                         command.ExecuteNonQuery();
                     }
 
-                    foreach (int detailid in DetailList)
-                    {
-                        command = new SqlCommand(String.Format(insertMakecollectionsDetail, detailid, txtMakeCollectionsCode.Text.Trim(),txtVoucherCode.Text.Trim()), conn);
-                        command.ExecuteNonQuery();
-                    }
-
                     if (cboChoose.Text == "按单据收款")
                     {
                         for (int i = 0; i < dt.Rows.Count; i++)
@@ -508,6 +502,12 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_MakeCollectionsDetail nr WHERE onp.Busine
                             saveDealerCode,
                             txtDealerName.Text.Trim(),
                             saveDealerSpell), conn);
+                        command.ExecuteNonQuery();
+                    }
+
+                    foreach (int detailid in DetailList)
+                    {
+                        command = new SqlCommand(String.Format(insertMakecollectionsDetail, detailid, txtMakeCollectionsCode.Text.Trim(),txtVoucherCode.Text.Trim()), conn);
                         command.ExecuteNonQuery();
                     }
                 }

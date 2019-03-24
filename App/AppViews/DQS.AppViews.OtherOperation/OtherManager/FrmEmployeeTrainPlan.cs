@@ -21,5 +21,17 @@ namespace DQS.AppViews.OtherOperation.OtherManager
         {
             base.InitPage();
         }
+
+        protected override void CustomPlanDocument()
+        {
+            object id = gvData.GetFocusedRowCellValue("培训ID");
+            if (id != null)
+            {
+                using (FrmEmployeeTrainPlanDocument frm = new FrmEmployeeTrainPlanDocument(int.Parse(id.ToString())))
+                {
+                    frm.ShowDialog();
+                }
+            }
+        }
     }
 }

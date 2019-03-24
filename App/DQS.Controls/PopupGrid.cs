@@ -255,15 +255,8 @@ namespace DQS.Controls
                 {
                     if (this.OperationName == "Sale" && (col.PopupForm.ViewName == "vw_BusinessStoreDetailForSale" || col.PopupForm.ViewName == "vw_BusinessStoreDetailForOutSale"))
                     {
-                        //if (!Settings.Default.IsNewStoreDetail)
-                        //{
-                        //    ShowSingleProductSelectionPopupQuery(isPopupClosed, col);
-                        //}
-                        //else
-                        //{
                             //新库存
                             ShowSingleProductSelectionNew(isPopupClosed, col);
-                        //}
                     }
                     else
                     {
@@ -425,15 +418,34 @@ namespace DQS.Controls
 
         private void ShowSingleSelectionPopupQuery(bool isPopupClosed, OperationGridColumn col)
         {
-            if (col.PopupForm.ViewName == "vw_ProductForDealer")
+            if (this.OperationName == "Purchase")
             {
-                col.PopupForm.Filter = "([状态] is  null or [状态] = '正常') and [单位ID] = " + DealerID;
+                if (Settings.Default.IsProductForDealer)
+                {
+                    col.PopupForm.ViewName = "vw_ProductForDealer";
+                    BFIDealerEntity dealer = new BFIDealerEntity { DealerID = DealerID };
+                    dealer.Fetch();
+                    if (dealer.IndustryStyle == "生产厂商")
+                    {
+                        col.PopupForm.Filter = "([状态] is  null or [状态] = '正常') and [单位ID] = " + DealerID;
+                    }
+                    else
+                    {
+                        col.PopupForm.ViewName = "vw_AllProduct";
+                        col.PopupForm.Filter = "([状态] is  null or [状态] = '正常')";
+                    }
+                }
+                else
+                {
+                    col.PopupForm.ViewName = "vw_AllProduct";
+                    col.PopupForm.Filter = "([状态] is  null or [状态] = '正常')";
+                }
             }
 
             if (this.OperationName == "PurchaseBack" && !IsQualified)
             {
                 col.PopupForm.ViewName = "vw_ProductForUnQualified";
-                col.PopupForm.Filter = "";
+                col.PopupForm.Filter = "货区 = '退货区'";
             }
             if (this.OperationName == "SaleBack" && col.PopupForm.ViewName == "vw_AllProductForSaleBack")
             {
@@ -443,7 +455,7 @@ namespace DQS.Controls
             if (this.OperationName == "Accept" && AcceptType == "销售退货")
             {
                 col.PopupForm.ViewName = "vw_ProductForAcceptForBack";
-                //col.PopupForm.Fields += ",批号,生产日期,有效期至";
+                //col.PopupForm.Fields += ",[批号],生产日期,有效期至";
                 col.PopupForm.Filter = "单号 = '" + AcceptCode + "'";
             }
             else if (this.OperationName == "Accept")

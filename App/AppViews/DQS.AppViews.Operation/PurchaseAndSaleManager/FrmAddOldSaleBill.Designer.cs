@@ -75,6 +75,8 @@
             this.lblName = new DevExpress.XtraEditors.LabelControl();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.txtChoose = new DevExpress.XtraEditors.TextEdit();
+            this.txtInUnitPrice = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
@@ -108,6 +110,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtChoose.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInUnitPrice.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -125,14 +128,14 @@
             // 
             this.panelControl3.Controls.Add(this.btnOKReview);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl3.Location = new System.Drawing.Point(2, 398);
+            this.panelControl3.Location = new System.Drawing.Point(2, 428);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(454, 77);
+            this.panelControl3.Size = new System.Drawing.Size(454, 47);
             this.panelControl3.TabIndex = 2;
             // 
             // btnOKReview
             // 
-            this.btnOKReview.Location = new System.Drawing.Point(203, 20);
+            this.btnOKReview.Location = new System.Drawing.Point(203, 14);
             this.btnOKReview.Name = "btnOKReview";
             this.btnOKReview.Size = new System.Drawing.Size(75, 23);
             this.btnOKReview.TabIndex = 39;
@@ -143,11 +146,13 @@
             // 
             this.groupControl2.Controls.Add(this.labelControl15);
             this.groupControl2.Controls.Add(this.btnSaveDetail);
+            this.groupControl2.Controls.Add(this.labelControl18);
             this.groupControl2.Controls.Add(this.labelControl13);
             this.groupControl2.Controls.Add(this.labelControl14);
             this.groupControl2.Controls.Add(this.labelControl12);
             this.groupControl2.Controls.Add(this.txtLiSh);
             this.groupControl2.Controls.Add(this.labelControl9);
+            this.groupControl2.Controls.Add(this.txtInUnitPrice);
             this.groupControl2.Controls.Add(this.txtUnitPrice);
             this.groupControl2.Controls.Add(this.txtPiFa);
             this.groupControl2.Controls.Add(this.txtAmount);
@@ -161,7 +166,7 @@
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl2.Location = new System.Drawing.Point(2, 228);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(454, 170);
+            this.groupControl2.Size = new System.Drawing.Size(454, 200);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "添加明细信息";
             // 
@@ -175,7 +180,7 @@
             // 
             // btnSaveDetail
             // 
-            this.btnSaveDetail.Location = new System.Drawing.Point(203, 131);
+            this.btnSaveDetail.Location = new System.Drawing.Point(203, 156);
             this.btnSaveDetail.Name = "btnSaveDetail";
             this.btnSaveDetail.Size = new System.Drawing.Size(75, 23);
             this.btnSaveDetail.TabIndex = 55;
@@ -542,6 +547,21 @@
             this.txtChoose.Size = new System.Drawing.Size(144, 21);
             this.txtChoose.TabIndex = 4;
             // 
+            // txtInUnitPrice
+            // 
+            this.txtInUnitPrice.Location = new System.Drawing.Point(86, 131);
+            this.txtInUnitPrice.Name = "txtInUnitPrice";
+            this.txtInUnitPrice.Size = new System.Drawing.Size(70, 21);
+            this.txtInUnitPrice.TabIndex = 52;
+            // 
+            // labelControl18
+            // 
+            this.labelControl18.Location = new System.Drawing.Point(20, 134);
+            this.labelControl18.Name = "labelControl18";
+            this.labelControl18.Size = new System.Drawing.Size(60, 14);
+            this.labelControl18.TabIndex = 44;
+            this.labelControl18.Text = "采购单价：";
+            // 
             // FrmAddOldSaleBill
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -589,6 +609,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtChoose.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInUnitPrice.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -642,5 +663,7 @@
         private DevExpress.XtraEditors.LabelControl lblName;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
         private DevExpress.XtraEditors.TextEdit txtChoose;
+        private DevExpress.XtraEditors.LabelControl labelControl18;
+        private DevExpress.XtraEditors.TextEdit txtInUnitPrice;
     }
 }

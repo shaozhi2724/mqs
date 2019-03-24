@@ -166,5 +166,17 @@ namespace DQS.Controls.Properties {
                 this["IsLockDepartment"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsProductForDealer {
+            get {
+                return ((bool)(this["IsProductForDealer"]));
+            }
+            set {
+                this["IsProductForDealer"] = value;
+            }
+        }
     }
 }

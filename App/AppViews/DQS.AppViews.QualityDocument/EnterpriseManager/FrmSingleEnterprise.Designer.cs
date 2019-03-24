@@ -96,6 +96,8 @@
             this.layRegisterLicenseNo = new DevExpress.XtraLayout.LayoutControlItem();
             this.layRegisterTaxNo = new DevExpress.XtraLayout.LayoutControlItem();
             this.layTaxValidateDate = new DevExpress.XtraLayout.LayoutControlItem();
+            this.datGSPValidateDate = new DevExpress.XtraEditors.DateEdit();
+            this.layGSPValidateDate = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.pnOperating)).BeginInit();
             this.pnOperating.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
@@ -167,6 +169,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layRegisterLicenseNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layRegisterTaxNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layTaxValidateDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datGSPValidateDate.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datGSPValidateDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layGSPValidateDate)).BeginInit();
             this.SuspendLayout();
             // 
             // pnOperating
@@ -246,6 +251,7 @@
             // 
             // layControl
             // 
+            this.layControl.Controls.Add(this.datGSPValidateDate);
             this.layControl.Controls.Add(this.datBusinessValidateDate);
             this.layControl.Controls.Add(this.txtOrganizationCode);
             this.layControl.Controls.Add(this.cbxEnterpriseLevel);
@@ -292,7 +298,7 @@
             this.datBusinessValidateDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.datBusinessValidateDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datBusinessValidateDate.Properties.NullValuePrompt = "请选择产品经营许可证到期日";
+            this.datBusinessValidateDate.Properties.NullValuePrompt = "请选择经营许可证到期日";
             this.datBusinessValidateDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.datBusinessValidateDate.Size = new System.Drawing.Size(153, 21);
@@ -352,7 +358,7 @@
             this.datLicenseValidateDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.datLicenseValidateDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datLicenseValidateDate.Properties.NullValuePrompt = "请选择GSP证书到期日";
+            this.datLicenseValidateDate.Properties.NullValuePrompt = "请选择营业执照到期日";
             this.datLicenseValidateDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.datLicenseValidateDate.Size = new System.Drawing.Size(155, 21);
@@ -398,7 +404,7 @@
             this.txtEnterpriseCode.Location = new System.Drawing.Point(111, 12);
             this.txtEnterpriseCode.Name = "txtEnterpriseCode";
             this.txtEnterpriseCode.Properties.ReadOnly = true;
-            this.txtEnterpriseCode.Size = new System.Drawing.Size(155, 21);
+            this.txtEnterpriseCode.Size = new System.Drawing.Size(85, 21);
             this.txtEnterpriseCode.StyleController = this.layControl;
             this.txtEnterpriseCode.TabIndex = 0;
             // 
@@ -410,9 +416,9 @@
             this.txtEnterpriseName.IsNullString = "企业名称不能为空。";
             this.txtEnterpriseName.IsNullValidate = true;
             this.txtEnterpriseName.IsTransferAlphabetic = true;
-            this.txtEnterpriseName.Location = new System.Drawing.Point(369, 12);
+            this.txtEnterpriseName.Location = new System.Drawing.Point(299, 12);
             this.txtEnterpriseName.Name = "txtEnterpriseName";
-            this.txtEnterpriseName.Size = new System.Drawing.Size(409, 21);
+            this.txtEnterpriseName.Size = new System.Drawing.Size(223, 21);
             this.txtEnterpriseName.StyleController = this.layControl;
             this.txtEnterpriseName.TabIndex = 1;
             // 
@@ -758,7 +764,8 @@
             this.layBusinessValidateDate,
             this.layRegisterLicenseNo,
             this.layRegisterTaxNo,
-            this.layTaxValidateDate});
+            this.layTaxValidateDate,
+            this.layGSPValidateDate});
             this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(790, 345);
@@ -792,7 +799,7 @@
             this.layEnterpriseCode.CustomizationFormText = "企业编号";
             this.layEnterpriseCode.Location = new System.Drawing.Point(0, 0);
             this.layEnterpriseCode.Name = "layEnterpriseCode";
-            this.layEnterpriseCode.Size = new System.Drawing.Size(258, 25);
+            this.layEnterpriseCode.Size = new System.Drawing.Size(188, 25);
             this.layEnterpriseCode.Text = "企业编号";
             this.layEnterpriseCode.TextSize = new System.Drawing.Size(96, 17);
             // 
@@ -840,9 +847,9 @@
             // 
             this.layEnterpriseName.Control = this.txtEnterpriseName;
             this.layEnterpriseName.CustomizationFormText = "企业名称";
-            this.layEnterpriseName.Location = new System.Drawing.Point(258, 0);
+            this.layEnterpriseName.Location = new System.Drawing.Point(188, 0);
             this.layEnterpriseName.Name = "layEnterpriseName";
-            this.layEnterpriseName.Size = new System.Drawing.Size(512, 25);
+            this.layEnterpriseName.Size = new System.Drawing.Size(326, 25);
             this.layEnterpriseName.Text = "企业名称";
             this.layEnterpriseName.TextSize = new System.Drawing.Size(96, 17);
             // 
@@ -1067,6 +1074,31 @@
             this.layTaxValidateDate.Text = "税务登记证到期日";
             this.layTaxValidateDate.TextSize = new System.Drawing.Size(96, 17);
             // 
+            // datGSPValidateDate
+            // 
+            this.datGSPValidateDate.EditValue = null;
+            this.datGSPValidateDate.Location = new System.Drawing.Point(625, 12);
+            this.datGSPValidateDate.Name = "datGSPValidateDate";
+            this.datGSPValidateDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.datGSPValidateDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.datGSPValidateDate.Properties.NullValuePrompt = "请选择GSP证书到期日";
+            this.datGSPValidateDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.datGSPValidateDate.Size = new System.Drawing.Size(153, 21);
+            this.datGSPValidateDate.StyleController = this.layControl;
+            this.datGSPValidateDate.TabIndex = 3;
+            // 
+            // layGSPValidateDate
+            // 
+            this.layGSPValidateDate.Control = this.datGSPValidateDate;
+            this.layGSPValidateDate.CustomizationFormText = "GSP证书到期日";
+            this.layGSPValidateDate.Location = new System.Drawing.Point(514, 0);
+            this.layGSPValidateDate.Name = "layGSPValidateDate";
+            this.layGSPValidateDate.Size = new System.Drawing.Size(256, 25);
+            this.layGSPValidateDate.Text = "GSP证书到期日";
+            this.layGSPValidateDate.TextSize = new System.Drawing.Size(96, 17);
+            // 
             // FrmSingleEnterprise
             // 
             this.AcceptButton = this.btnSave;
@@ -1155,6 +1187,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layRegisterLicenseNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layRegisterTaxNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layTaxValidateDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datGSPValidateDate.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datGSPValidateDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layGSPValidateDate)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1229,5 +1264,7 @@
         private DevExpress.XtraEditors.DateEdit datBusinessValidateDate;
         private DevExpress.XtraLayout.LayoutControlItem layBusinessValidateDate;
         private DevExpress.XtraEditors.SimpleButton btnEnterprisePic;
+        private DevExpress.XtraEditors.DateEdit datGSPValidateDate;
+        private DevExpress.XtraLayout.LayoutControlItem layGSPValidateDate;
     }
 }

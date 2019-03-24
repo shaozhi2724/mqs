@@ -405,6 +405,12 @@
     <Compile Include="Finance\FrmStoreInventory.Designer.cs">
       <DependentUpon>FrmStoreInventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Finance\FrmUpdateMakeCollectionsBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance\FrmUpdateMakeCollectionsBill.Designer.cs">
+      <DependentUpon>FrmUpdateMakeCollectionsBill.cs</DependentUpon>
+    </Compile>
     <Compile Include="Finance\GridCheckMarksSelection.cs" />
     <Compile Include="FrmOtherOperation.cs">
       <SubType>Form</SubType>
@@ -424,6 +430,12 @@
     <Compile Include="OtherManager\FrmEmployeeTrainPlan.Designer.cs">
       <DependentUpon>FrmEmployeeTrainPlan.cs</DependentUpon>
     </Compile>
+    <Compile Include="OtherManager\FrmEmployeeTrainPlanDocument.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OtherManager\FrmEmployeeTrainPlanDocument.Designer.cs">
+      <DependentUpon>FrmEmployeeTrainPlanDocument.cs</DependentUpon>
+    </Compile>
     <Compile Include="OtherManager\FrmQualityAdvisory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -436,6 +448,12 @@
     <Compile Include="OtherManager\FrmQualityComplaint.Designer.cs">
       <DependentUpon>FrmQualityComplaint.cs</DependentUpon>
     </Compile>
+    <Compile Include="OtherManager\FrmSearchEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OtherManager\FrmSearchEmployee.Designer.cs">
+      <DependentUpon>FrmSearchEmployee.cs</DependentUpon>
+    </Compile>
     <Compile Include="OtherManager\FrmSingleAdverseReaction.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -447,6 +465,12 @@
     </Compile>
     <Compile Include="OtherManager\FrmSingleEmployeeTrainPlan.designer.cs">
       <DependentUpon>FrmSingleEmployeeTrainPlan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OtherManager\FrmSingleEmployeeTrainPlanDocument.cs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OtherManager\FrmSingleEmployeeTrainPlanDocument.cs.Designer.cs">
+      <DependentUpon>FrmSingleEmployeeTrainPlanDocument.cs.cs</DependentUpon>
     </Compile>
     <Compile Include="OtherManager\FrmSingleQualityAdvisory.cs">
       <SubType>Form</SubType>
@@ -633,6 +657,9 @@
     <EmbeddedResource Include="Finance\FrmStoreInventory.resx">
       <DependentUpon>FrmStoreInventory.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Finance\FrmUpdateMakeCollectionsBill.resx">
+      <DependentUpon>FrmUpdateMakeCollectionsBill.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmOtherOperation.resx">
       <DependentUpon>FrmOtherOperation.cs</DependentUpon>
     </EmbeddedResource>
@@ -642,17 +669,26 @@
     <EmbeddedResource Include="OtherManager\FrmEmployeeTrainPlan.resx">
       <DependentUpon>FrmEmployeeTrainPlan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OtherManager\FrmEmployeeTrainPlanDocument.resx">
+      <DependentUpon>FrmEmployeeTrainPlanDocument.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OtherManager\FrmQualityAdvisory.resx">
       <DependentUpon>FrmQualityAdvisory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OtherManager\FrmQualityComplaint.resx">
       <DependentUpon>FrmQualityComplaint.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OtherManager\FrmSearchEmployee.resx">
+      <DependentUpon>FrmSearchEmployee.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OtherManager\FrmSingleAdverseReaction.resx">
       <DependentUpon>FrmSingleAdverseReaction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OtherManager\FrmSingleEmployeeTrainPlan.resx">
       <DependentUpon>FrmSingleEmployeeTrainPlan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OtherManager\FrmSingleEmployeeTrainPlanDocument.cs.resx">
+      <DependentUpon>FrmSingleEmployeeTrainPlanDocument.cs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OtherManager\FrmSingleQualityAdvisory.resx">
       <DependentUpon>FrmSingleQualityAdvisory.cs</DependentUpon>
@@ -709,6 +745,24 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\预览.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\编辑 %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\删除.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\上传.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\下载.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\新建 %282%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

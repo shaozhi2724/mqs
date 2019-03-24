@@ -19,7 +19,7 @@ namespace DQS.Module
 		/// </summary>
 		public static DataSet Pagination(string pFields, string pViewName, string pPrimaryField, string pSortField, string pSortType, int pPageSize, int pPageIndex, string pFilter, ref int pPageCount, ref int pRecordCount)
 		{
-			SqlParameter param_Fields = new SqlParameter("@Fields", SqlDbType.VarChar) { Value = pFields };
+            SqlParameter param_Fields = new SqlParameter("@Fields", SqlDbType.VarChar) { Value = pFields.Replace(",批号", ",[批号]") };
 
 			SqlParameter param_ViewName = new SqlParameter("@ViewName", SqlDbType.VarChar) { Value = pViewName };
 

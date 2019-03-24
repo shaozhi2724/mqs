@@ -9,6 +9,7 @@ using DevExpress.XtraEditors;
 using DQS.Module.Entities;
 using ORMSCore;
 using DQS.Common;
+using System.Data.SqlClient;
 
 namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
 {
@@ -154,6 +155,25 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                             //}
                         }
 
+                        using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                        {
+                            string sqlBill = string.Format("EXEC sp_UpdateStatusForOut '{0}','{1}','{2}'", entity.SaleBillCode, "已复核", GlobalItem.g_CurrentEmployee.EmployeeName);
+
+                            try
+                            {
+                                conn.Open();//连接数据库
+                                SqlCommand Bcommand = new SqlCommand(sqlBill, conn);
+                                Bcommand.ExecuteNonQuery();
+                            }
+                            catch (Exception ex)
+                            {
+                                XtraMessageBox.Show(ex.ToString(), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            finally
+                            {
+                                conn.Close();
+                            }
+                        }
 
                         #endregion
                     }

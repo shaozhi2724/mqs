@@ -37,6 +37,12 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
 
             if (this.Tag != null)
             {
+                if (GlobalItem.g_CurrentUser.UserName == "admin")
+                {
+                    btnUpdateStoreAmount.Text = "更新库存";
+                    btnUpdateStoreAmount.Visible = true;
+                    btnUpdateStoreAmount.Enabled = true;
+                }
                 this.m_id = Convert.ToInt32(this.Tag);
                 btnImport.Enabled = true;
                 BUSInventoryEntity entity = new BUSInventoryEntity { InventoryID = m_id.Value };
@@ -216,7 +222,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                             BUSInventoryDetailEntity child = childEntity as BUSInventoryDetailEntity;
                             child.InventoryID = entity.InventoryID;
                             child.Save();
-                            UpdateLastCuringDate(child.InStoreID);
+                            //UpdateLastCuringDate(child.InStoreID);
                         }
 
                         #endregion
@@ -354,33 +360,33 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
         }
         private void btnUpdateStoreAmount_Click(object sender, EventArgs e)
         {
-            if (SaveInventoryRecords())
-            {
-                BUSInventoryEntity entity = new BUSInventoryEntity {InventoryID = m_id.Value};
+            //if (SaveInventoryRecords())
+            //{
+            BUSInventoryEntity entity = new BUSInventoryEntity { InventoryID = m_id.Value };
 
-                entity.StatusID = 2;
-                entity.StatusName = "已处理";
-                entity.StatusSpell = "ycl";
-                entity.Update();
-                List<EntityBase> children = this.popupGrid.GetEntities();
+            //    entity.StatusID = 2;
+            //    entity.StatusName = "已处理";
+            //    entity.StatusSpell = "ycl";
+            //    entity.Update();
+            //    List<EntityBase> children = this.popupGrid.GetEntities();
 
-                BUSInventoryDetailEntity childToDelete = new BUSInventoryDetailEntity { InventoryID = m_id.Value };
-                childToDelete.DeleteByCommonly();
-                foreach (EntityBase childEntity in children)
-                {
-                    BUSInventoryDetailEntity child = childEntity as BUSInventoryDetailEntity;
-                    child.InventoryID = entity.InventoryID;
-                    child.Save();
-                    UpdateLastCuringDate(child.InStoreID);
-                }
+            //    BUSInventoryDetailEntity childToDelete = new BUSInventoryDetailEntity { InventoryID = m_id.Value };
+            //    childToDelete.DeleteByCommonly();
+            //    foreach (EntityBase childEntity in children)
+            //    {
+            //        BUSInventoryDetailEntity child = childEntity as BUSInventoryDetailEntity;
+            //        child.InventoryID = entity.InventoryID;
+            //        child.Save();
+            //        UpdateLastCuringDate(child.InStoreID);
+            //    }
                 UpdateStoreAmount(entity.InventoryID);
 
                 this.DialogResult = DialogResult.OK;
-            }
-            else
-            {
-                this.DialogResult = DialogResult.None;
-            }
+            //}
+            //else
+            //{
+            //    this.DialogResult = DialogResult.None;
+            //}
         }
 
         private void popupGrid_PopupClosed(object sender, DQS.Controls.CommonCode.PopupFormClosedArgs e)
@@ -392,12 +398,15 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                 object fieldValue = this.popupGrid.PopupView.GetRowCellValue(i, "产品ID");
                 object productName = this.popupGrid.PopupView.GetRowCellValue(i, "产品名称");
                 object fieldValue2 = this.popupGrid.PopupView.GetRowCellValue(i, fieldName2);
+                object inStoreid = this.popupGrid.PopupView.GetRowCellValue(i, "入库ID");
                 if (fieldValue != null && fieldValue != DBNull.Value)
                 {
                     if (e.PopupRows.Any(p => p[fieldName] != null && p[fieldName] != DBNull.Value
                                                   && fieldValue.ToString().Trim() == p[fieldName].ToString().Trim()
                                                   && p[fieldName2] != null && p[fieldName2] != DBNull.Value
-                                                  && fieldValue2.ToString().Trim() == p[fieldName2].ToString().Trim()))
+                                                  && fieldValue2.ToString().Trim() == p[fieldName2].ToString().Trim()
+                                                  && p["库存ID"] != null && p["库存ID"] != DBNull.Value
+                                                  && inStoreid.ToString().Trim() == p["库存ID"].ToString().Trim()))
                     {
                         XtraMessageBox.Show(string.Format("产品{0}(批号:{1})已存在。", productName, fieldValue2), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         this.popupGrid.PopupView.FocusedRowHandle = i;
@@ -587,9 +596,10 @@ WHERE StoreDetailID={0}
             {
                 object fieldValue = this.popupGrid.PopupView.GetRowCellValue(i, fieldName);
                 object fieldValue2 = this.popupGrid.PopupView.GetRowCellValue(i, fieldName2);
+                object instoreid = this.popupGrid.PopupView.GetRowCellValue(i, "入库ID");
                 if (fieldValue != null && fieldValue != DBNull.Value)
                 {
-                    string item = string.Format("([产品ID]={0} AND [批号]='{1}')", fieldValue, fieldValue2);
+                    string item = string.Format("([产品ID]={0} AND [批号]='{1}' AND [库存ID]='{2}')", fieldValue, fieldValue2, instoreid);
                     if (!filters.Contains(item))
                     {
                         filters.Add(item);

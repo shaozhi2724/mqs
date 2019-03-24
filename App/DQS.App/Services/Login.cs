@@ -151,6 +151,27 @@ namespace DQS.App.Services
             GlobalItem.g_DbConnectStrings = connection;
             CommonSettings.DbConnectStrings = connection;
         }
+
+        public bool CanCn()
+        {
+            bool can = true;
+            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            {
+                try
+                {
+                    conn.Open();
+                }
+                catch (Exception)
+                {
+                    can = false;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            return can;
+        }
     }
     public class SYSConnection
     {

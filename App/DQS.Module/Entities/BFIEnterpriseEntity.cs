@@ -314,6 +314,12 @@ namespace DQS.Module.Entities
 			set { this.SetValue("Reservation10", value); } 
 		}
 
+        public DateTime GSPValidateDate
+		{
+            get { return (DateTime)this.GetValue("GSPValidateDate"); }
+            set { this.SetValue("GSPValidateDate", value); } 
+		}
+
 		public BFIEnterpriseEntity()
 		{
 			this.TableName = "BFI_Enterprise";
@@ -368,6 +374,7 @@ namespace DQS.Module.Entities
 			this.Fields.Add("Reservation8", BFIEnterpriseEntityFields.Reservation8);
 			this.Fields.Add("Reservation9", BFIEnterpriseEntityFields.Reservation9);
 			this.Fields.Add("Reservation10", BFIEnterpriseEntityFields.Reservation10);
+            this.Fields.Add("GSPValidateDate", BFIEnterpriseEntityFields.GSPValidateDate);
 		}
 	}
 
@@ -624,6 +631,11 @@ namespace DQS.Module.Entities
 		{
 			get { return new EntityField("BFI_Enterprise", 49, "Reservation10", SqlDbType.NVarChar, false, false, false, true); }
 		}
+
+        public static EntityField GSPValidateDate
+		{
+            get { return new EntityField("BFI_Enterprise", 50, "GSPValidateDate", SqlDbType.DateTime, false, false, false, true); }
+		}
 	}
 
 	#endregion
@@ -732,6 +744,7 @@ namespace DQS.Module.Entities
 
 		Reservation10,
 
+        GSPValidateDate
 	}
 
 	#endregion

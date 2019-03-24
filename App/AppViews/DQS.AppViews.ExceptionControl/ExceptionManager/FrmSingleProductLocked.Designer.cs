@@ -238,7 +238,7 @@
             // 
             this.txtPopBatch.AlphabeticFiled = null;
             this.txtPopBatch.EditData = null;
-            this.txtPopBatch.Fields = "产品ID,入库ID,批号,生产日期,有效期至,库存数量";
+            this.txtPopBatch.Fields = "产品ID,入库ID,[批号],生产日期,有效期至,库存数量";
             this.txtPopBatch.Filter = "";
             this.txtPopBatch.FormatQueryString = "[批号] LIKE \'%{0}%\'";
             this.txtPopBatch.GroupColumn = null;
