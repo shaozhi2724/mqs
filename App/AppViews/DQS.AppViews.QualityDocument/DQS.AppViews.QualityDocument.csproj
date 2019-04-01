@@ -220,6 +220,12 @@
       <DependentUpon>FrmSingleRangeChange.cs</DependentUpon>
     </Compile>
     <Compile Include="Extension.cs" />
+    <Compile Include="FrmAlter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAlter.Designer.cs">
+      <DependentUpon>FrmAlter.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmQualificationChange.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -536,6 +542,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EnterpriseManager\FrmSingleRangeChange.resx">
       <DependentUpon>FrmSingleRangeChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAlter.resx">
+      <DependentUpon>FrmAlter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmQualificationChange.resx">
       <DependentUpon>FrmQualificationChange.cs</DependentUpon>

@@ -491,5 +491,24 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                 layBusinessRange.Text = "经营范围";
             }
         }
+
+        private void txtDealerName_Leave(object sender, EventArgs e)
+        {
+            //提示是否有重复的
+            if (this.m_id == null)
+            {
+                EntityCollection<BFIDealerEntity> haveotherdealers = new EntityCollection<BFIDealerEntity>();
+
+                PredicateExpression pes = new PredicateExpression();
+                pes.Add(BFIDealerEntityFields.DealerType == "供应商");
+                pes.Add(BFIDealerEntityFields.DealerName == txtDealerName.Text.Trim());
+                haveotherdealers.Fetch(pes);
+
+                if (haveotherdealers.Count > 0)
+                {
+                    MessageBox.Show("此供应商名称已存在系统中，如果确定输入，请忽略此提示。");
+                }
+            }
+        }
     }
 }

@@ -335,8 +335,8 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                 bool certificateChanged = CompareAndSaveDifferences();
                 if (!compareResult.AreEqual || certificateChanged)
                 {
-                    if (DialogResult.Yes ==
-                        XtraMessageBox.Show("确定提交信息变更请求？", "确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    FrmAlter frmalter = new FrmAlter();
+                    if (DialogResult.Yes == frmalter.ShowDialog())
                     {
                         string requestPerson = GlobalItem.g_CurrentUser.UserName;
                         if (null != GlobalItem.g_CurrentEmployee)
@@ -358,8 +358,13 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                         antiApproveEntity.RequestPerson = requestPerson;
                         antiApproveEntity.StatusID = 1;
                         antiApproveEntity.StatusName = "申请变更";
+                        antiApproveEntity.ApproveReason = frmalter.Reason;
 
                         antiApproveEntity.Save();
+
+                        //更新BFI_Dealer表中的Reservation10字段为变更原因
+                        oldEntity.Reservation10 = frmalter.Reason;
+                        oldEntity.Update();
 
                         foreach (Difference difference in compareResult.Differences)
                         {

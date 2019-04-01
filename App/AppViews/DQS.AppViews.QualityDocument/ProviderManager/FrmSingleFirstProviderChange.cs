@@ -382,6 +382,11 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
             {
                 this.txtCreateDate.Text = entity.CreateDate.ToString("yyyy年M月d日 HH时m分");
             }
+
+            if (!entity.IsNullField("ApproveReason"))
+            {
+                this.txtReason.Text = entity.ApproveReason;
+            }
             btnDealerInfo.Tag = entity.AntiApproveItemID;
         }
     }

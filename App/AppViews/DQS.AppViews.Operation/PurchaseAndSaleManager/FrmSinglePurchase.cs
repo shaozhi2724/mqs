@@ -909,7 +909,8 @@ WHERE BillID={1}
         {
             if (this.txtDealerName.SelectedValue != null)
             {
-                this.txtBusinessPerson.Filter = String.Format("所属单位 = '{0}'", this.txtDealerName.Text.Trim());
+                //this.txtBusinessPerson.Filter = String.Format("所属单位 = '{0}'", this.txtDealerName.Text.Trim());
+                this.txtBusinessPerson.Filter = String.Format("所属单位ID = {0}", Convert.ToInt32(this.txtDealerName.SelectedValue));
             }
 
         }
@@ -1587,7 +1588,10 @@ WHERE BillID={1}
 
         private void BandSaleMan(int dealerID)
         {
-            string sql = "SELECT TOP 1 SalesmanID,SalesmanName,MobilePhone FROM dbo.BFI_Salesman WHERE DealerID = " + dealerID;
+            string sql = @"SELECT TOP 1 SalesmanID,SalesmanName,MobilePhone,SalesmanStatus FROM (
+SELECT SalesmanID,SalesmanName,MobilePhone,CASE WHEN (SELECT COUNT(0) FROM dbo.BFI_Qualification bq WHERE bq.BelongID = bs.SalesmanID AND BelongTable = 'BFI_Salesman' AND bq.ValidateDate < GETDATE())> 0 THEN '已过期' ELSE '未过期' END SalesmanStatus
+FROM dbo.BFI_Salesman bs
+WHERE DealerID =  " + dealerID + ") t ORDER BY t.SalesmanStatus";
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
                 conn.Open(); //连接数据库

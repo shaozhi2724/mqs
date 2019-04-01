@@ -526,5 +526,20 @@ WHERE UP.ProductID = {0}", productID);
                 }
             }
         }
+
+        private void txtProductName_Leave(object sender, EventArgs e)
+        {
+            //提示是否有重复的
+            if (this.m_id == null)
+            {
+                EntityCollection<BFIProductEntity> haveotherproducts = new EntityCollection<BFIProductEntity>();
+                haveotherproducts.Fetch(BFIProductEntityFields.ProductName == txtProductName.Text.Trim());
+
+                if (haveotherproducts.Count > 0)
+                {
+                    MessageBox.Show("此产品名称已存在系统中，如果确定输入，请忽略此提示。");
+                }
+            }
+        }
     }
 }

@@ -98,6 +98,12 @@ namespace DQS.Module.Entities
 			set { this.SetValue("ApproveDate", value); } 
 		}
 
+        public string ApproveReason
+        {
+            get { return (string)this.GetValue("ApproveReason"); }
+            set { this.SetValue("ApproveReason", value); }
+        }
+
 		public ATCAntiApproveEntity()
 		{
 			this.TableName = "ATC_AntiApprove";
@@ -116,6 +122,7 @@ namespace DQS.Module.Entities
 			this.Fields.Add("ApproveUserID", ATCAntiApproveEntityFields.ApproveUserID);
 			this.Fields.Add("ApprovePerson", ATCAntiApproveEntityFields.ApprovePerson);
 			this.Fields.Add("ApproveDate", ATCAntiApproveEntityFields.ApproveDate);
+            this.Fields.Add("ApproveReason", ATCAntiApproveEntityFields.ApproveReason);
 		}
 	}
 
@@ -193,6 +200,11 @@ namespace DQS.Module.Entities
 			get { return new EntityField("ATC_AntiApprove", 13, "ApproveDate", SqlDbType.DateTime, false, false, false, true); }
 		}
 
+        public static EntityField ApproveReason
+		{
+            get { return new EntityField("ATC_AntiApprove", 14, "ApproveReason", SqlDbType.NVarChar, false, false, false, true); }
+		}
+
 	}
 
 	#endregion
@@ -228,6 +240,8 @@ namespace DQS.Module.Entities
 		ApprovePerson,
 
 		ApproveDate,
+
+        ApproveReason
 
 	}
 

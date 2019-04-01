@@ -529,5 +529,24 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                 txtOpers.Text += ("," + txt);
             }
         }
+
+        private void txtDealerName_Leave(object sender, EventArgs e)
+        {
+            //提示是否有重复的
+            if (this.m_id == null)
+            {
+                EntityCollection<BFIDealerEntity> haveotherproviders = new EntityCollection<BFIDealerEntity>();
+
+                PredicateExpression pes = new PredicateExpression();
+                pes.Add(BFIDealerEntityFields.DealerType == "客户");
+                pes.Add(BFIDealerEntityFields.DealerName == txtDealerName.Text.Trim());
+                haveotherproviders.Fetch(pes);
+
+                if (haveotherproviders.Count > 0)
+                {
+                    MessageBox.Show("此客户名称已存在系统中，如果确定输入，请忽略此提示。");
+                }
+            }
+        }
     }
 }
