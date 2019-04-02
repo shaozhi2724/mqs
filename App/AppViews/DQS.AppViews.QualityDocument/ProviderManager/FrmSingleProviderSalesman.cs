@@ -12,6 +12,7 @@ using DevExpress.XtraEditors.Controls;
 using ORMSCore;
 using DQS.Controls;
 using DQS.AppViews.QualityDocument.EnterpriseManager;
+using DevExpress.XtraLayout.Utils;
 
 namespace DQS.AppViews.QualityDocument.ProviderManager
 {
@@ -45,6 +46,8 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                 this.ftPanel.SetEntity(entity);
 
                 this.txtSalesmanCode.Enabled = false;
+                this.layReservation10.Visibility = LayoutVisibility.Always;
+                this.txtReservation10.IsNullValidate = true;
 
                 this.CustomGetEntity(entity);
 
