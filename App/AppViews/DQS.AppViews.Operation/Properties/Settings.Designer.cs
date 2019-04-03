@@ -190,5 +190,17 @@ namespace DQS.AppViews.Operation.Properties {
                 this["EqSaleBillPrice"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsEmptySaleManSaveBill {
+            get {
+                return ((bool)(this["IsEmptySaleManSaveBill"]));
+            }
+            set {
+                this["IsEmptySaleManSaveBill"] = value;
+            }
+        }
     }
 }

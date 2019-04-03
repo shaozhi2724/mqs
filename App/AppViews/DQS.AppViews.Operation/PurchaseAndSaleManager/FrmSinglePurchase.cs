@@ -969,9 +969,15 @@ WHERE BillID={1}
             }
             else
             {
-                //XtraMessageBox.Show("请先选择采购员", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //return false;
-                return true;
+                if (!Settings.Default.IsEmptySaleManSaveBill)
+                {
+                    XtraMessageBox.Show("请先选择采购员", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
         }
 

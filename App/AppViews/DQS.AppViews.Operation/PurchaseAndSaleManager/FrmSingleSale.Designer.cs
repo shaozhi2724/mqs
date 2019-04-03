@@ -237,7 +237,7 @@
             this.txtDiscount.AlphabeticFiled = null;
             this.txtDiscount.EditValue = "100";
             this.txtDiscount.EntityField = DQS.Module.Entities.BUSBillEntityFields2.Discount;
-            this.txtDiscount.IsIntegerOnly = true;
+            this.txtDiscount.IsIntegerOnly = false;
             this.txtDiscount.IsNullString = "不能为空。";
             this.txtDiscount.IsNullValidate = true;
             this.txtDiscount.IsTransferAlphabetic = false;
@@ -433,7 +433,7 @@
             // busBillEntityTextBox1
             // 
             this.busBillEntityTextBox1.AlphabeticFiled = null;
-            this.busBillEntityTextBox1.EntityField = DQS.Module.Entities.BUSBillEntityFields2.Reservation7;
+            this.busBillEntityTextBox1.EntityField = DQS.Module.Entities.BUSBillEntityFields2.Reservation5;
             this.busBillEntityTextBox1.IsIntegerOnly = false;
             this.busBillEntityTextBox1.IsNullString = null;
             this.busBillEntityTextBox1.IsNullValidate = false;
