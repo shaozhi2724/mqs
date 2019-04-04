@@ -15,7 +15,7 @@ using System.IO;
 using SyncService.Code;
 using SyncService;
 using System.Data.SqlClient;
-using EncryptionLibrary;
+//using EncryptionLibrary;
 
 namespace SyncService
 {
@@ -40,9 +40,9 @@ namespace SyncService
             client.Url = "http://210.73.89.77:3030/DataSyncService.asmx";
             AuthenticationPT auth = new AuthenticationPT();
             auth.UserCode = "bjkyxh";
-            auth.Password = EncryptionLibrary.Encryption.SHA256("1");
+            auth.Password = "";// EncryptionLibrary.Encryption.SHA256("1");
             var data = client.GetSyncData("0f5501ec-dfde-46fd-9190-72f6a3fefe12", auth, out message);
-            string xmlStr = EncryptionLibrary.Encryption._7UnZipAndFromUTF8(data); //引用EncryptionLibrary.dll转化xml
+            string xmlStr = "";// EncryptionLibrary.Encryption._7UnZipAndFromUTF8(data); //引用EncryptionLibrary.dll转化xml
             //client.UploadSyncData();
             client.Dispose();
             if (message != "")
