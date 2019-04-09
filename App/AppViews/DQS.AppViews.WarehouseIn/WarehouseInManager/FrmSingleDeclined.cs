@@ -56,6 +56,15 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Reservation1 = txtDeclinedReason.Text.Trim();
                     entity.Update();
+
+                    List<EntityBase> children = this.popupGrid.GetEntities();
+                    List<BUSDeclinedDetailEntity> busDeclinedDetailEntities = children.Cast<BUSDeclinedDetailEntity>().ToList();
+
+                    foreach (BUSDeclinedDetailEntity child in busDeclinedDetailEntities)
+                    {
+                        child.Update();
+                    }
+
                 }
             }
             catch (Exception ex)
