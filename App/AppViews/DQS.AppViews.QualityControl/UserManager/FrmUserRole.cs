@@ -31,7 +31,10 @@ namespace DQS.AppViews.QualityControl.UserManager
 
             foreach (ATCUserEntity u in users)
             {
-                this.lbcUser.Items.Add(new ListEntityItem(u, u.UserName));
+                if (u.UserStatus == 1)
+                {
+                    this.lbcUser.Items.Add(new ListEntityItem(u, u.UserName));
+                }
             }
 
             EntityCollection<ATCRoleEntity> roles = new EntityCollection<ATCRoleEntity>();
@@ -39,7 +42,10 @@ namespace DQS.AppViews.QualityControl.UserManager
 
             foreach (ATCRoleEntity r in roles)
             {
-                this.chklbcRole.Items.Add(new ListEntityItem(r, r.RoleName));
+                if (r.RoleStatus == 1)
+                {
+                    this.chklbcRole.Items.Add(new ListEntityItem(r, r.RoleName));
+                }
             }
 
             if (lbcUser.Items.Count > 0)

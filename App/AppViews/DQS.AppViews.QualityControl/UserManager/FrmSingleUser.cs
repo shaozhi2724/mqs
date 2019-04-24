@@ -154,6 +154,32 @@ namespace DQS.AppViews.QualityControl.UserManager
                 entity.Update();
                 //SaveGrantedProducts(this.m_id.Value, txtUserName.Text.Trim());
                 SaveGrantedAreas(this.m_id.Value, txtUserName.Text.Trim());
+                /*数据库处理一些相关数据*/
+                string functionSql = "EXEC dbo.sp_user_function @userid = '{0}'";
+                string sql = string.Format(functionSql, this.m_id.Value);
+                SqlCommand command = new SqlConnection(GlobalItem.g_DbConnectStrings).CreateCommand();
+                command.CommandType = CommandType.Text;
+                command.CommandText = sql;
+                using (command.Connection)
+                {
+                    try
+                    {
+                        command.Connection.Open();
+                        command.ExecuteNonQuery();
+                        command.Dispose();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    finally
+                    {
+                        if (command.Connection.State != ConnectionState.Closed)
+                        {
+                            command.Connection.Close();
+                        }
+                    }
+                }
             }
             else
             {

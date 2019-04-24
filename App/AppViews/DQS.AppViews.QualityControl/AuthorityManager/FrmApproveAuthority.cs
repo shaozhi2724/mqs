@@ -54,7 +54,10 @@ namespace DQS.AppViews.QualityControl.AuthorityManager
             this.lbcUser.Items.Clear();
             foreach (ATCUserEntity u in users)
             {
-                this.lbcUser.Items.Add(new ListEntityItem(u, u.UserName));
+                if (u.UserStatus == 1)
+                {
+                    this.lbcUser.Items.Add(new ListEntityItem(u, u.UserName));
+                }
             }
         }
 
@@ -79,23 +82,26 @@ namespace DQS.AppViews.QualityControl.AuthorityManager
             this.chklbcApprovalUser.Items.Clear();
             foreach (ATCUserEntity u in users)
             {
-                int index = this.chklbcApprovalUser.Items.Add(new ListEntityItem(u, u.UserName), u.UserName);
-
-                if (data.Rows.Count > 0)//若存在对应关系
+                if (u.UserStatus == 1)
                 {
-                    this.rdgApproveStyle.SelectedIndex = Convert.ToInt32(data.Rows[0]["IsWhole"]);
-                    
-                    DataRow[] rows = data.Select(String.Format("ApprovalUserID = '{0}'", u.UserID));
+                    int index = this.chklbcApprovalUser.Items.Add(new ListEntityItem(u, u.UserName), u.UserName);
 
-                    if (rows.Length > 0)//若匹配
+                    if (data.Rows.Count > 0)//若存在对应关系
                     {
-                        this.chklbcApprovalUser.Items[index].CheckState = CheckState.Checked;
+                        this.rdgApproveStyle.SelectedIndex = Convert.ToInt32(data.Rows[0]["IsWhole"]);
 
-                        if (this.rdgApproveStyle.SelectedIndex == 1)
+                        DataRow[] rows = data.Select(String.Format("ApprovalUserID = '{0}'", u.UserID));
+
+                        if (rows.Length > 0)//若匹配
                         {
-                            //更改序号与数据库匹配
-                            this.chklbcApprovalUser.Items[index].Description = "";
-                            this.chklbcApprovalUser.Items[index].Description = String.Format("{0}\t\t审批顺序：{1}", u.UserName, rows[0]["ApprovalSort"]);
+                            this.chklbcApprovalUser.Items[index].CheckState = CheckState.Checked;
+
+                            if (this.rdgApproveStyle.SelectedIndex == 1)
+                            {
+                                //更改序号与数据库匹配
+                                this.chklbcApprovalUser.Items[index].Description = "";
+                                this.chklbcApprovalUser.Items[index].Description = String.Format("{0}\t\t审批顺序：{1}", u.UserName, rows[0]["ApprovalSort"]);
+                            }
                         }
                     }
                 }
