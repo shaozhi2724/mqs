@@ -971,7 +971,7 @@ WHERE BillID={1}
             {
                 if (!Settings.Default.IsEmptySaleManSaveBill)
                 {
-                    XtraMessageBox.Show("请先选择采购员", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    XtraMessageBox.Show("请先选择销售员", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
                 else

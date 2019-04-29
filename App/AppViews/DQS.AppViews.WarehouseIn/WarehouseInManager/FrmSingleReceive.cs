@@ -424,6 +424,17 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
         private void GenerateDeclinedBill(BUSReceiveEntity receiveEntity,
             List<BUSReceiveDetailEntity> busReceiveDetailEntities)
         {
+            String reason = "";
+            String handle = "";
+            using (FrmAcceptDeclinedReason frm = new FrmAcceptDeclinedReason())
+            {
+                var dialog = frm.ShowDialog();
+                if (dialog == DialogResult.OK)
+                {
+                    reason = frm.reason;
+                    handle = frm.handle;
+                }
+            }
             BUSDeclinedEntity entity = new BUSDeclinedEntity
             {
                 BillID = receiveEntity.BillID,
@@ -445,7 +456,9 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 CreateUserID = GlobalItem.g_CurrentUser.UserID,
                 DeclinedDate = DateTime.Now,
                 DeclinedType = "收货拒收",
-                DeclinedCode = "SHJS-" + receiveEntity.BillCode
+                DeclinedCode = "SHJS-" + receiveEntity.BillCode,
+                Reservation1 = reason,
+                Reservation2 = handle
             };
             receiveEntity.ReceiveRemark = string.Format("收货数量与订单数量不符，收货拒收单号:{0}", entity.DeclinedCode);
             if (null != GlobalItem.g_CurrentEmployee)
@@ -500,6 +513,17 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 if (!receiveDetail.IsNullField("BatchNo"))
                 {
                     declinedDetail.BatchNo = receiveDetail.BatchNo;
+                }
+                else
+                {
+                    using (FrmReceiveDeclinedDetail frm = new FrmReceiveDeclinedDetail(receiveDetail.ProductID))
+                    {
+                        var result = frm.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            declinedDetail.BatchNo = frm.batchno;
+                        }
+                    }
                 }
                 declinedDetail.Save();
             }

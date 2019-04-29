@@ -104,6 +104,12 @@
     <Compile Include="WarehouseInManager\FrmAcceptAttachmentProgressing.Designer.cs">
       <DependentUpon>FrmAcceptAttachmentProgressing.cs</DependentUpon>
     </Compile>
+    <Compile Include="WarehouseInManager\FrmAcceptDeclinedReason.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmAcceptDeclinedReason.Designer.cs">
+      <DependentUpon>FrmAcceptDeclinedReason.cs</DependentUpon>
+    </Compile>
     <Compile Include="WarehouseInManager\FrmReceiveAttachmentProgressing.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +163,12 @@
     </Compile>
     <Compile Include="WarehouseInManager\FrmReceive.Designer.cs">
       <DependentUpon>FrmReceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmReceiveDeclinedDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WarehouseInManager\FrmReceiveDeclinedDetail.Designer.cs">
+      <DependentUpon>FrmReceiveDeclinedDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="WarehouseInManager\FrmReCheck.cs">
       <SubType>Form</SubType>
@@ -235,6 +247,7 @@
     <EmbeddedResource Include="FrmWarehouseIn.resx">
       <DependentUpon>FrmWarehouseIn.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -242,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WarehouseInManager\FrmAcceptAttachmentProgressing.resx">
       <DependentUpon>FrmAcceptAttachmentProgressing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmAcceptDeclinedReason.resx">
+      <DependentUpon>FrmAcceptDeclinedReason.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WarehouseInManager\FrmReceiveAttachmentProgressing.resx">
       <DependentUpon>FrmReceiveAttachmentProgressing.cs</DependentUpon>
@@ -269,6 +285,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WarehouseInManager\FrmReceive.resx">
       <DependentUpon>FrmReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WarehouseInManager\FrmReceiveDeclinedDetail.resx">
+      <DependentUpon>FrmReceiveDeclinedDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WarehouseInManager\FrmReCheckReason.resx">
       <DependentUpon>FrmReCheckReason.cs</DependentUpon>

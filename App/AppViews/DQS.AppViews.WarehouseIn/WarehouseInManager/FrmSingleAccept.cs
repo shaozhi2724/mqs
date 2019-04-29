@@ -1017,6 +1017,17 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
         private void GenerateDeclinedBill(BUSAcceptEntity acceptEntity,
             List<BUSAcceptDetailEntity> acceptDetailEntities)
         {
+            String reason = "";
+            String handle = "";
+            using (FrmAcceptDeclinedReason frm = new FrmAcceptDeclinedReason())
+            {
+                var dialog = frm.ShowDialog();
+                if (dialog == DialogResult.OK)
+                {
+                    reason = frm.reason;
+                    handle = frm.handle;
+                }
+            }
             var declinedCode = "YSJS-" + acceptEntity.BillCode;
             BUSDeclinedEntity entity = new BUSDeclinedEntity
             {
@@ -1036,7 +1047,9 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 CreateUserID = GlobalItem.g_CurrentUser.UserID,
                 DeclinedDate = DateTime.Now,
                 DeclinedType = "验收拒收",
-                DeclinedCode = declinedCode
+                DeclinedCode = declinedCode,
+                Reservation1 = reason,
+                Reservation2 = handle
             };
 
             entity.Fetch();
