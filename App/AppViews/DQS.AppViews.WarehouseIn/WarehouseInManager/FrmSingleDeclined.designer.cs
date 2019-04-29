@@ -30,6 +30,7 @@
         {
             this.ftPanel = new DQS.Controls.FieldTextBoxPanel();
             this.layControl = new DevExpress.XtraLayout.LayoutControl();
+            this.txtReservation2 = new DQS.Controls.BUSDeclinedEntityTextBox();
             this.txtDeclinedReason = new DQS.Controls.BUSDeclinedEntityTextBox();
             this.txtBillCode = new DQS.Controls.BUSDeclinedEntityTextBox();
             this.txtDeclinedRemark = new DQS.Controls.BUSDeclinedEntityTextBox();
@@ -47,6 +48,7 @@
             this.layBillTypeName = new DevExpress.XtraLayout.LayoutControlItem();
             this.layDeclinedPerson = new DevExpress.XtraLayout.LayoutControlItem();
             this.layDeclinedReason = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layReservation2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.pnlAction = new DevExpress.XtraEditors.PanelControl();
             this.btnPrint = new DQS.Controls.StiPrintButtonEx();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
@@ -62,12 +64,11 @@
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtReservation2 = new DQS.Controls.BUSDeclinedEntityTextBox();
-            this.layReservation2 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
             this.ftPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
             this.layControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReservation2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDeclinedReason.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBillCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDeclinedRemark.Properties)).BeginInit();
@@ -85,6 +86,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layBillTypeName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layDeclinedPerson)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layDeclinedReason)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layReservation2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlAction)).BeginInit();
             this.pnlAction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gpcButtom)).BeginInit();
@@ -99,8 +101,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtReservation2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layReservation2)).BeginInit();
             this.SuspendLayout();
             // 
             // ftPanel
@@ -132,9 +132,24 @@
             this.layControl.TabIndex = 0;
             this.layControl.Text = "layControl";
             // 
+            // txtReservation2
+            // 
+            this.txtReservation2.AlphabeticFiled = null;
+            this.txtReservation2.EntityField = DQS.Module.Entities.BUSDeclinedEntityFields2.Reservation2;
+            this.txtReservation2.IsIntegerOnly = false;
+            this.txtReservation2.IsNullString = null;
+            this.txtReservation2.IsNullValidate = true;
+            this.txtReservation2.IsTransferAlphabetic = false;
+            this.txtReservation2.Location = new System.Drawing.Point(63, 112);
+            this.txtReservation2.Name = "txtReservation2";
+            this.txtReservation2.Size = new System.Drawing.Size(793, 21);
+            this.txtReservation2.StyleController = this.layControl;
+            this.txtReservation2.TabIndex = 6;
+            // 
             // txtDeclinedReason
             // 
             this.txtDeclinedReason.AlphabeticFiled = null;
+            this.txtDeclinedReason.Enabled = false;
             this.txtDeclinedReason.EntityField = DQS.Module.Entities.BUSDeclinedEntityFields2.Reservation1;
             this.txtDeclinedReason.IsIntegerOnly = false;
             this.txtDeclinedReason.IsNullString = null;
@@ -362,6 +377,16 @@
             this.layDeclinedReason.Text = "拒收原因";
             this.layDeclinedReason.TextSize = new System.Drawing.Size(48, 17);
             // 
+            // layReservation2
+            // 
+            this.layReservation2.Control = this.txtReservation2;
+            this.layReservation2.CustomizationFormText = "处理方式";
+            this.layReservation2.Location = new System.Drawing.Point(0, 100);
+            this.layReservation2.Name = "layReservation2";
+            this.layReservation2.Size = new System.Drawing.Size(848, 25);
+            this.layReservation2.Text = "处理方式";
+            this.layReservation2.TextSize = new System.Drawing.Size(48, 17);
+            // 
             // pnlAction
             // 
             this.pnlAction.Controls.Add(this.btnPrint);
@@ -409,6 +434,7 @@
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "保存(&S)";
+            this.btnSave.Visible = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // gpcButtom
@@ -427,6 +453,7 @@
             // 
             this.popupGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.popupGrid.IsCalculatePrice = false;
+            this.popupGrid.IsCompute = false;
             this.popupGrid.Location = new System.Drawing.Point(2, 25);
             this.popupGrid.Name = "popupGrid";
             this.popupGrid.OperationName = "Declined";
@@ -532,30 +559,6 @@
             this.layoutControlItem9.TextSize = new System.Drawing.Size(60, 20);
             this.layoutControlItem9.TextToControlDistance = 5;
             // 
-            // txtReservation2
-            // 
-            this.txtReservation2.AlphabeticFiled = null;
-            this.txtReservation2.EntityField = DQS.Module.Entities.BUSDeclinedEntityFields2.Reservation2;
-            this.txtReservation2.IsIntegerOnly = false;
-            this.txtReservation2.IsNullString = null;
-            this.txtReservation2.IsNullValidate = true;
-            this.txtReservation2.IsTransferAlphabetic = false;
-            this.txtReservation2.Location = new System.Drawing.Point(63, 112);
-            this.txtReservation2.Name = "txtReservation2";
-            this.txtReservation2.Size = new System.Drawing.Size(793, 21);
-            this.txtReservation2.StyleController = this.layControl;
-            this.txtReservation2.TabIndex = 6;
-            // 
-            // layReservation2
-            // 
-            this.layReservation2.Control = this.txtReservation2;
-            this.layReservation2.CustomizationFormText = "处理方式";
-            this.layReservation2.Location = new System.Drawing.Point(0, 100);
-            this.layReservation2.Name = "layReservation2";
-            this.layReservation2.Size = new System.Drawing.Size(848, 25);
-            this.layReservation2.Text = "处理方式";
-            this.layReservation2.TextSize = new System.Drawing.Size(48, 17);
-            // 
             // FrmSingleDeclined
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -575,6 +578,7 @@
             this.ftPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).EndInit();
             this.layControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtReservation2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDeclinedReason.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBillCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDeclinedRemark.Properties)).EndInit();
@@ -592,6 +596,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layBillTypeName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layDeclinedPerson)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layDeclinedReason)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layReservation2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlAction)).EndInit();
             this.pnlAction.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gpcButtom)).EndInit();
@@ -606,8 +611,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtReservation2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layReservation2)).EndInit();
             this.ResumeLayout(false);
 
         }
