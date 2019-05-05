@@ -2,6 +2,7 @@
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
+using DevExpress.XtraPrinting;
 using DQS.Common;
 using DQS.Controls;
 using DQS.Module.Entities;
@@ -61,27 +62,27 @@ namespace DQS.AppViews.StatReport.StatManager
 
         private void btnExport_Click(object sender, EventArgs e)
         {
+            System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            saveFileDialog.Title = "导出Excel";
+            saveFileDialog.Filter = "Excel文件(*.xls)|*.xls";
+            System.Windows.Forms.DialogResult dialogResult = saveFileDialog.ShowDialog(this);
+            if (dialogResult == System.Windows.Forms.DialogResult.OK)
+            {
+                XlsExportOptions xlsExportOptions = new XlsExportOptions();
+                this.gridControl.ExportToXls(saveFileDialog.FileName);
+                XtraMessageBox.Show("保存成功！", "提示", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Asterisk);
+            }
             //SaveFileDialog saveFileDialog = new SaveFileDialog();
-
             //saveFileDialog.Title = "导出Excel";
-
             //saveFileDialog.Filter = "Excel文件(*.xls)|*.xls";
-
             //DialogResult dialogResult = saveFileDialog.ShowDialog(this);
-
             //if (dialogResult == DialogResult.OK)
             //{
-
                 //DevExpress.XtraPrinting.XlsExportOptions options = new DevExpress.XtraPrinting.XlsExportOptions();
-
                 //gridControl.ExportToXls(saveFileDialog.FileName);
-                DataTable dt = gridControl.DataSource as DataTable;
-
-
-                DataGridToExcel(dt,gridView);
-
+                //DataTable dt = gridControl.DataSource as DataTable;
+                //DataGridToExcel(dt,gridView);
                 //XtraMessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             //}
         }
 
