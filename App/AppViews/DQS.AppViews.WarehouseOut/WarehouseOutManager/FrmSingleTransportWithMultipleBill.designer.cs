@@ -183,7 +183,7 @@
             // 
             // txtTransportTool
             // 
-            this.txtTransportTool.Location = new System.Drawing.Point(384, 212);
+            this.txtTransportTool.Location = new System.Drawing.Point(384, 155);
             this.txtTransportTool.Name = "txtTransportTool";
             this.txtTransportTool.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtTransportTool.Properties.Appearance.BackColor = System.Drawing.Color.White;
@@ -203,7 +203,7 @@
             this.txtCommissionedManagers.IsNullString = null;
             this.txtCommissionedManagers.IsNullValidate = false;
             this.txtCommissionedManagers.IsTransferAlphabetic = false;
-            this.txtCommissionedManagers.Location = new System.Drawing.Point(384, 237);
+            this.txtCommissionedManagers.Location = new System.Drawing.Point(384, 180);
             this.txtCommissionedManagers.Name = "txtCommissionedManagers";
             this.txtCommissionedManagers.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtCommissionedManagers.Properties.Appearance.Options.UseBackColor = true;
@@ -214,7 +214,7 @@
             // tmeArriveTime
             // 
             this.tmeArriveTime.EditValue = new System.DateTime(2013, 10, 18, 0, 0, 0, 0);
-            this.tmeArriveTime.Location = new System.Drawing.Point(384, 162);
+            this.tmeArriveTime.Location = new System.Drawing.Point(384, 105);
             this.tmeArriveTime.Name = "tmeArriveTime";
             this.tmeArriveTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -225,7 +225,7 @@
             // tmeStartTime
             // 
             this.tmeStartTime.EditValue = new System.DateTime(2013, 10, 18, 0, 0, 0, 0);
-            this.tmeStartTime.Location = new System.Drawing.Point(384, 137);
+            this.tmeStartTime.Location = new System.Drawing.Point(384, 80);
             this.tmeStartTime.Name = "tmeStartTime";
             this.tmeStartTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -235,7 +235,7 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(293, 287);
+            this.labelControl1.Location = new System.Drawing.Point(293, 230);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(24, 14);
             this.labelControl1.StyleController = this.layControl;
@@ -249,7 +249,7 @@
             0,
             0,
             0});
-            this.speMinTimeLimit.Location = new System.Drawing.Point(75, 287);
+            this.speMinTimeLimit.Location = new System.Drawing.Point(75, 230);
             this.speMinTimeLimit.Name = "speMinTimeLimit";
             this.speMinTimeLimit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -269,7 +269,7 @@
             this.txtPopCarCode.IsNullString = "";
             this.txtPopCarCode.IsNullValidate = false;
             this.txtPopCarCode.IsTransferAlphabetic = false;
-            this.txtPopCarCode.Location = new System.Drawing.Point(75, 262);
+            this.txtPopCarCode.Location = new System.Drawing.Point(75, 205);
             this.txtPopCarCode.MemberText = "车辆编号";
             this.txtPopCarCode.MemberValue = "车辆ID";
             this.txtPopCarCode.Name = "txtPopCarCode";
@@ -292,7 +292,7 @@
             this.txtTransportRemark.IsNullString = null;
             this.txtTransportRemark.IsNullValidate = false;
             this.txtTransportRemark.IsTransferAlphabetic = false;
-            this.txtTransportRemark.Location = new System.Drawing.Point(75, 312);
+            this.txtTransportRemark.Location = new System.Drawing.Point(75, 255);
             this.txtTransportRemark.Name = "txtTransportRemark";
             this.txtTransportRemark.Size = new System.Drawing.Size(652, 21);
             this.txtTransportRemark.StyleController = this.layControl;
@@ -306,7 +306,7 @@
             this.txtTransportCode.IsNullString = "运输单号不能为空。";
             this.txtTransportCode.IsNullValidate = true;
             this.txtTransportCode.IsTransferAlphabetic = false;
-            this.txtTransportCode.Location = new System.Drawing.Point(75, 12);
+            this.txtTransportCode.Location = new System.Drawing.Point(75, -45);
             this.txtTransportCode.Name = "txtTransportCode";
             this.txtTransportCode.Size = new System.Drawing.Size(242, 21);
             this.txtTransportCode.StyleController = this.layControl;
@@ -324,7 +324,7 @@
             this.txtBillCode.IsNullString = "订单编号不能为空。";
             this.txtBillCode.IsNullValidate = true;
             this.txtBillCode.IsTransferAlphabetic = false;
-            this.txtBillCode.Location = new System.Drawing.Point(384, 12);
+            this.txtBillCode.Location = new System.Drawing.Point(384, -45);
             this.txtBillCode.MemberText = "订单编号";
             this.txtBillCode.MemberValue = "订单ID";
             this.txtBillCode.Name = "txtBillCode";
@@ -346,7 +346,7 @@
             this.txtCarName.IsNullString = null;
             this.txtCarName.IsNullValidate = false;
             this.txtCarName.IsTransferAlphabetic = false;
-            this.txtCarName.Location = new System.Drawing.Point(384, 287);
+            this.txtCarName.Location = new System.Drawing.Point(384, 230);
             this.txtCarName.Name = "txtCarName";
             this.txtCarName.Size = new System.Drawing.Size(343, 21);
             this.txtCarName.StyleController = this.layControl;
@@ -359,7 +359,7 @@
             this.txtCarNo.IsNullString = null;
             this.txtCarNo.IsNullValidate = false;
             this.txtCarNo.IsTransferAlphabetic = false;
-            this.txtCarNo.Location = new System.Drawing.Point(384, 262);
+            this.txtCarNo.Location = new System.Drawing.Point(384, 205);
             this.txtCarNo.Name = "txtCarNo";
             this.txtCarNo.Size = new System.Drawing.Size(343, 21);
             this.txtCarNo.StyleController = this.layControl;
@@ -373,7 +373,7 @@
             this.txtRelatePersonContact.IsNullString = null;
             this.txtRelatePersonContact.IsNullValidate = false;
             this.txtRelatePersonContact.IsTransferAlphabetic = false;
-            this.txtRelatePersonContact.Location = new System.Drawing.Point(385, 112);
+            this.txtRelatePersonContact.Location = new System.Drawing.Point(385, 55);
             this.txtRelatePersonContact.Name = "txtRelatePersonContact";
             this.txtRelatePersonContact.Size = new System.Drawing.Size(342, 21);
             this.txtRelatePersonContact.StyleController = this.layControl;
@@ -391,7 +391,7 @@
             this.txtRelatePerson.IsNullString = "";
             this.txtRelatePerson.IsNullValidate = false;
             this.txtRelatePerson.IsTransferAlphabetic = true;
-            this.txtRelatePerson.Location = new System.Drawing.Point(75, 112);
+            this.txtRelatePerson.Location = new System.Drawing.Point(75, 55);
             this.txtRelatePerson.MemberText = "人员姓名";
             this.txtRelatePerson.MemberValue = "人员ID";
             this.txtRelatePerson.Name = "txtRelatePerson";
@@ -415,7 +415,7 @@
             this.txtRelateAddress.IsNullString = null;
             this.txtRelateAddress.IsNullValidate = false;
             this.txtRelateAddress.IsTransferAlphabetic = false;
-            this.txtRelateAddress.Location = new System.Drawing.Point(75, 87);
+            this.txtRelateAddress.Location = new System.Drawing.Point(75, 30);
             this.txtRelateAddress.Name = "txtRelateAddress";
             this.txtRelateAddress.Properties.ReadOnly = true;
             this.txtRelateAddress.Size = new System.Drawing.Size(652, 21);
@@ -430,7 +430,7 @@
             this.txtRelateCompany.IsNullString = null;
             this.txtRelateCompany.IsNullValidate = false;
             this.txtRelateCompany.IsTransferAlphabetic = true;
-            this.txtRelateCompany.Location = new System.Drawing.Point(75, 62);
+            this.txtRelateCompany.Location = new System.Drawing.Point(75, 5);
             this.txtRelateCompany.Name = "txtRelateCompany";
             this.txtRelateCompany.Properties.ReadOnly = true;
             this.txtRelateCompany.Size = new System.Drawing.Size(652, 21);
@@ -439,7 +439,7 @@
             // 
             // txtDeliveryPerson
             // 
-            this.txtDeliveryPerson.Location = new System.Drawing.Point(75, 237);
+            this.txtDeliveryPerson.Location = new System.Drawing.Point(75, 180);
             this.txtDeliveryPerson.Name = "txtDeliveryPerson";
             this.txtDeliveryPerson.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtDeliveryPerson.Properties.Appearance.BackColor = System.Drawing.Color.White;
@@ -451,7 +451,7 @@
             // dteStartTime
             // 
             this.dteStartTime.EditValue = null;
-            this.dteStartTime.Location = new System.Drawing.Point(75, 137);
+            this.dteStartTime.Location = new System.Drawing.Point(75, 80);
             this.dteStartTime.Name = "dteStartTime";
             this.dteStartTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -467,7 +467,7 @@
             // dteArriveTime
             // 
             this.dteArriveTime.EditValue = null;
-            this.dteArriveTime.Location = new System.Drawing.Point(75, 162);
+            this.dteArriveTime.Location = new System.Drawing.Point(75, 105);
             this.dteArriveTime.Name = "dteArriveTime";
             this.dteArriveTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -481,7 +481,7 @@
             // 
             // txtShippingAddress
             // 
-            this.txtShippingAddress.Location = new System.Drawing.Point(75, 37);
+            this.txtShippingAddress.Location = new System.Drawing.Point(75, -20);
             this.txtShippingAddress.Name = "txtShippingAddress";
             this.txtShippingAddress.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtShippingAddress.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -493,7 +493,7 @@
             // 
             // txtTransportType
             // 
-            this.txtTransportType.Location = new System.Drawing.Point(75, 212);
+            this.txtTransportType.Location = new System.Drawing.Point(75, 155);
             this.txtTransportType.Name = "txtTransportType";
             this.txtTransportType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.txtTransportType.Properties.Appearance.BackColor = System.Drawing.Color.White;
@@ -507,7 +507,7 @@
             // 
             // txtCarryCompnay
             // 
-            this.txtCarryCompnay.Location = new System.Drawing.Point(75, 187);
+            this.txtCarryCompnay.Location = new System.Drawing.Point(75, 130);
             this.txtCarryCompnay.Name = "txtCarryCompnay";
             this.txtCarryCompnay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -545,7 +545,7 @@
             this.layTransportType,
             this.layTransportTool,
             this.layoutControlItem2});
-            this.layControlGroup.Location = new System.Drawing.Point(0, 0);
+            this.layControlGroup.Location = new System.Drawing.Point(0, -57);
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(739, 345);
             this.layControlGroup.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);

@@ -43,6 +43,12 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                 LoadDepartment();
             }
 
+            if (GetSettingValue.GetSettingValueFor("IsEnableBillModify"))
+            {
+                txtDealerAddress.Properties.ReadOnly = true;
+                this.txtBusinessPhone.Properties.ReadOnly = true;
+            }
+
             if (this.Tag != null)
             {
                 this.m_id = Convert.ToInt32(this.Tag);

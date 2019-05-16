@@ -179,6 +179,7 @@
     <Compile Include="Entities\SYSMenuEntity.cs" />
     <Compile Include="Entities\SYSPageEntity.cs" />
     <Compile Include="Entities\SYSPageFunctionEntity.cs" />
+    <Compile Include="Entities\SYSPromSetting.cs" />
     <Compile Include="Entities\WMSRegulatoryCodeEntity.cs" />
     <Compile Include="EntityType.cs" />
     <Compile Include="Procedures.cs" />

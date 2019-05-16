@@ -516,6 +516,11 @@ namespace DQS.Module
         {
             get { return new BUSReCheckBillDetailEntity(); }
         }
+
+        public static EntityBase SYSPromSettingEntity
+        {
+            get { return new SYSPromSettingEntity(); }
+        }
     }
 
     #region EntityType2
@@ -716,7 +721,8 @@ namespace DQS.Module
 
         BUSReCheckBillEntity,
 
-        BUSReCheckBillDetailEntity
+        BUSReCheckBillDetailEntity,
+        SYSPromSettingEntity
 
     }
 

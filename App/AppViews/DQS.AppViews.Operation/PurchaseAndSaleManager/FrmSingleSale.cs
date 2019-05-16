@@ -71,6 +71,11 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
             cbo.Items.Add("否");
             this.popupGrid.PopupView.Columns["是否打印检报"].ColumnEdit = cbo;
 
+            if (GetSettingValue.GetSettingValueFor("IsEnableBillModify"))
+            {
+                txtDealerAddress.Properties.ReadOnly = true;
+                this.txtBusinessPhone.Properties.ReadOnly = true;
+            }
 
             if (Settings.Default.IsUseDepartment)
             {

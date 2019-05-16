@@ -111,6 +111,10 @@ namespace DQS.AppViews.Operation.BackManager
             this.popupGrid.PopupView.KeyDown += PopupView_KeyDown;
             popupGrid.Tag = "0$0";
 
+            if (GetSettingValue.GetSettingValueFor("IsEnableBillModify"))
+            {
+                this.txtBusinessPhone.Properties.ReadOnly = true;
+            }
 
             if (Settings.Default.IsUseDepartment)
             {

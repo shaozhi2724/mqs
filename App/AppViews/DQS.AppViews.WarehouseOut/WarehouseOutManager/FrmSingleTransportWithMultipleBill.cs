@@ -27,6 +27,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
 
         private void FrmSingleTransportWithMultipleBill_Load(object sender, EventArgs e)
         {
+            bool isenabletool = GetSettingValue.GetSettingValueFor("IsEnableBillModify");
             this.popupGrid.InitGrid();
             BindLookupData();
             if (this.Tag != null)
@@ -42,9 +43,33 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                 txtBillCode.Enabled = false;
 
                 this.CustomGetEntity(entity);
+                if (isenabletool)
+                {
+                    txtShippingAddress.Properties.ReadOnly = true;
+                    txtRelatePerson.Properties.ReadOnly = true;
+                    txtRelatePersonContact.Properties.ReadOnly = true;
+                    dteStartTime.Properties.ReadOnly = true;
+                    tmeStartTime.Properties.ReadOnly = true;
+                    txtCarryCompnay.Properties.ReadOnly = true;
+                    txtTransportType.Properties.ReadOnly = true;
+                    txtTransportTool.Properties.ReadOnly = true;
+                    txtDeliveryPerson.Properties.ReadOnly = true;
+                    txtCommissionedManagers.Properties.ReadOnly = true;
+                    txtPopCarCode.Enabled = false;
+                    txtCarName.Properties.ReadOnly = true;
+                    txtCarNo.Properties.ReadOnly = true;
+                    speMinTimeLimit.Properties.ReadOnly = true;
+                    txtTransportRemark.Properties.ReadOnly = true;
+                }
             }
             else
             {
+                if (isenabletool)
+                {
+                    txtDeliveryPerson.Properties.ReadOnly = true;
+                    txtCarNo.Properties.ReadOnly = true;
+                    txtCarName.Properties.ReadOnly = true;
+                }
                 this.txtTransportCode.Text = "YS" + DateTime.Now.ToString("yyyyMMddHHmmss");
                 this.txtTransportCode.Select(this.txtTransportCode.Text.Length, 0);
 
