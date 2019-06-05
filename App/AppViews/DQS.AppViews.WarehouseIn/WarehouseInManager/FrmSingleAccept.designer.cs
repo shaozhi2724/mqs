@@ -136,6 +136,7 @@
             this.txtAcceptDate.IsTransferAlphabetic = false;
             this.txtAcceptDate.Location = new System.Drawing.Point(63, 87);
             this.txtAcceptDate.Name = "txtAcceptDate";
+            this.txtAcceptDate.Properties.ReadOnly = true;
             this.txtAcceptDate.Size = new System.Drawing.Size(776, 21);
             this.txtAcceptDate.StyleController = this.layControl;
             this.txtAcceptDate.TabIndex = 8;
