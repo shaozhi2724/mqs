@@ -165,72 +165,76 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
                                 }
                                 else
                                 {
-                                    string code = "JYFW" + DateTime.Now.ToString("yyyyMMddHHmmss");
-                                    string insertsql = @"EXEC sp_InsertOldRangeChange '{0}','{1}'";
-                                    insertsql = string.Format(insertsql, code, GlobalItem.g_CurrentUser.UserName);
-                                    comm = new SqlCommand(insertsql, conn);
-                                    comm.ExecuteNonQuery();
-
-                                    foreach (CheckedListBoxItem productStyle in this.chklbcProductStyle.CheckedItems)
+                                    FrmAlter frmalter = new FrmAlter();
+                                    if (DialogResult.Yes == frmalter.ShowDialog())
                                     {
-                                        SYSCategoryEntity category = (productStyle.Value as ListEntityItem).Key as SYSCategoryEntity;
-                                        string insertnewsql = @"EXEC sp_InsertNewRangeChange '{0}',{1},'{2}'";
-                                        comm = new SqlCommand(string.Format(insertnewsql, code, category.ItemID,category.ItemName), conn);
+                                        string code = "JYFW" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                                        string insertsql = @"EXEC sp_InsertOldRangeChange '{0}','{1}'";
+                                        insertsql = string.Format(insertsql, code, GlobalItem.g_CurrentUser.UserName);
+                                        comm = new SqlCommand(insertsql, conn);
                                         comm.ExecuteNonQuery();
-                                    }
 
-                                    if (data.Rows.Count > 0)
-                                    {
-                                        //按审批顺序排序
-                                        data.DefaultView.Sort = "ApprovalSort";
-                                        data = data.DefaultView.ToTable();
-
-                                        ATCApproveEntity approveEntity = new ATCApproveEntity();
-                                        approveEntity.InternalNo = code;
-                                        approveEntity.DocumentCode = "RangeChange";
-                                        approveEntity.BillCode = code;
-                                        approveEntity.ApproveTitle = string.Format("本企业经营范围变更，编号：{0}", code);
-                                        approveEntity.ApprovalContent = String.Format("本企业经营范围变更，编号：{0}", code);
-                                        approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                                        approveEntity.CreateDate = DateTime.Now;
-                                        approveEntity.IsApprovaled = false;
-
-
-                                        //获得新建的ID号
-                                        string searchsql = @"SELECT ID FROM BFI_RangeChange WHERE ChangeCode = '" + code + "'";
-                                        comm = new SqlCommand(searchsql, conn);
-                                        int bgid = int.Parse(comm.ExecuteScalar().ToString());
-
-                                        for (int i = 0; i < data.Rows.Count; i++)
+                                        foreach (CheckedListBoxItem productStyle in this.chklbcProductStyle.CheckedItems)
                                         {
-                                            var approveCode = approveEntity.InternalNo + (i + 1).ToString("00");
-                                            approveEntity.ApproveCode = approveCode;
-                                            approveEntity.IsWhole = Convert.ToBoolean(data.Rows[i]["IsWhole"]);
-                                            approveEntity.ApproveOrder = Convert.ToInt32(data.Rows[i]["ApprovalSort"]);
-                                            var approvalUserId = new Guid(data.Rows[i]["ApprovalUserID"].ToString());
-                                            approveEntity.ApprovalUserID = approvalUserId;
-                                            approveEntity.Save();
-
-                                            //添加消息提醒
-                                            ATCApproveNotificationEntity notification = new ATCApproveNotificationEntity();
-                                            notification.CreateUserID = approveEntity.CreateUserID;
-                                            var userName = GlobalItem.g_CurrentEmployee == null
-                                                ? GlobalItem.g_CurrentUser.UserName
-                                                : GlobalItem.g_CurrentEmployee.EmployeeName;
-                                            notification.CreateUserName = userName;
-                                            notification.FormClass = "RangeChange";
-                                            notification.IsRead = false;
-                                            notification.TargetID = bgid;
-                                            notification.TargetCode = code;
-                                            notification.ApproveCode = approveCode;
-                                            notification.Message = string.Format("{0} 于 {1} 本企业经营范围变更申请（单号 {2}）。请您审批。", userName,
-                                                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), code);
-                                            notification.OwnerUserID = approvalUserId;
-                                            notification.Save();
+                                            SYSCategoryEntity category = (productStyle.Value as ListEntityItem).Key as SYSCategoryEntity;
+                                            string insertnewsql = @"EXEC sp_InsertNewRangeChange '{0}',{1},'{2}'";
+                                            comm = new SqlCommand(string.Format(insertnewsql, code, category.ItemID, category.ItemName), conn);
+                                            comm.ExecuteNonQuery();
                                         }
-                                    }
 
-                                    MessageBox.Show("变更申请保存成功。");
+                                        if (data.Rows.Count > 0)
+                                        {
+                                            //按审批顺序排序
+                                            data.DefaultView.Sort = "ApprovalSort";
+                                            data = data.DefaultView.ToTable();
+
+                                            ATCApproveEntity approveEntity = new ATCApproveEntity();
+                                            approveEntity.InternalNo = code;
+                                            approveEntity.DocumentCode = "RangeChange";
+                                            approveEntity.BillCode = code;
+                                            approveEntity.ApproveTitle = string.Format("本企业经营范围变更，编号：{0}", code);
+                                            approveEntity.ApprovalContent = String.Format("本企业经营范围变更，编号：{0}", code);
+                                            approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+                                            approveEntity.CreateDate = DateTime.Now;
+                                            approveEntity.IsApprovaled = false;
+
+
+                                            //获得新建的ID号
+                                            string searchsql = @"SELECT ID FROM BFI_RangeChange WHERE ChangeCode = '" + code + "'";
+                                            comm = new SqlCommand(searchsql, conn);
+                                            int bgid = int.Parse(comm.ExecuteScalar().ToString());
+
+                                            for (int i = 0; i < data.Rows.Count; i++)
+                                            {
+                                                var approveCode = approveEntity.InternalNo + (i + 1).ToString("00");
+                                                approveEntity.ApproveCode = approveCode;
+                                                approveEntity.IsWhole = Convert.ToBoolean(data.Rows[i]["IsWhole"]);
+                                                approveEntity.ApproveOrder = Convert.ToInt32(data.Rows[i]["ApprovalSort"]);
+                                                var approvalUserId = new Guid(data.Rows[i]["ApprovalUserID"].ToString());
+                                                approveEntity.ApprovalUserID = approvalUserId;
+                                                approveEntity.Save();
+
+                                                //添加消息提醒
+                                                ATCApproveNotificationEntity notification = new ATCApproveNotificationEntity();
+                                                notification.CreateUserID = approveEntity.CreateUserID;
+                                                var userName = GlobalItem.g_CurrentEmployee == null
+                                                    ? GlobalItem.g_CurrentUser.UserName
+                                                    : GlobalItem.g_CurrentEmployee.EmployeeName;
+                                                notification.CreateUserName = userName;
+                                                notification.FormClass = "RangeChange";
+                                                notification.IsRead = false;
+                                                notification.TargetID = bgid;
+                                                notification.TargetCode = code;
+                                                notification.ApproveCode = approveCode;
+                                                notification.Message = string.Format("{0} 于 {1} 本企业经营范围变更申请（单号 {2}）。请您审批。", userName,
+                                                    DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), code);
+                                                notification.OwnerUserID = approvalUserId;
+                                                notification.Save();
+                                            }
+                                        }
+
+                                        MessageBox.Show("变更申请保存成功。");
+                                    }
                                 }
                             }
                             catch (Exception ex)

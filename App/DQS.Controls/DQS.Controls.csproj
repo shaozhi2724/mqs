@@ -261,6 +261,7 @@
     <Compile Include="FrmSingleQualification.Designer.cs">
       <DependentUpon>FrmSingleQualification.cs</DependentUpon>
     </Compile>
+    <Compile Include="GetSettingValue.cs" />
     <Compile Include="HomePageForm.cs">
       <SubType>Form</SubType>
     </Compile>

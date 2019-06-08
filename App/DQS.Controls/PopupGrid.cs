@@ -431,8 +431,16 @@ namespace DQS.Controls
                     }
                     else
                     {
-                        col.PopupForm.ViewName = "vw_AllProduct";
-                        col.PopupForm.Filter = "([状态] is  null or [状态] = '正常')";
+                        bool isAllProductForDealer = GetSettingValue.GetSettingValueFor("IsProductForDealer");
+                        if (isAllProductForDealer)
+                        {
+                            col.PopupForm.Filter = "([状态] is  null or [状态] = '正常') and [单位ID] = " + DealerID;
+                        }
+                        else
+                        {
+                            col.PopupForm.ViewName = "vw_AllProduct";
+                            col.PopupForm.Filter = "([状态] is  null or [状态] = '正常')";
+                        }
                     }
                 }
                 else
