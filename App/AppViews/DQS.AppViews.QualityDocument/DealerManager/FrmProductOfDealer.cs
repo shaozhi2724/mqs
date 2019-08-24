@@ -19,10 +19,12 @@ namespace DQS.AppViews.QualityDocument.DealerManager
             InitializeComponent();
         }
 
+        public string frmType = "";
         public int SearchID = 0;
         public string SelectSql = "";
         public string DelSql = "";
         public string InSql = "";
+        public string DealerName = "";
 
 
 
@@ -38,32 +40,100 @@ namespace DQS.AppViews.QualityDocument.DealerManager
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+            if (frmType == "Dealer")
             {
-                string del = @"EXEC " + DelSql + " {0}";
-                string insertBill = @"EXEC " + InSql + " {0},{1},'{2}'";
+                using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                {
+                    // 保存的时候判断是否有未审批的变更单号
+                    string selsql = "SELECT COUNT(0) havecount FROM dbo.BUS_DealerVSProductChange WHERE AppStatus = '' AND DealerID = " + SearchID;
 
-                try
-                {
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand(String.Format(del, SearchID), conn);
-                    cmd.ExecuteNonQuery();
-                    foreach (int ProductID in BillList)
+                    try
                     {
-                        SqlCommand command = new SqlCommand(String.Format(insertBill, SearchID, ProductID, GlobalItem.g_CurrentUser.UserName), conn);
-                        command.ExecuteNonQuery();
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand(selsql, conn);
+                        int havecount = int.Parse(cmd.ExecuteScalar().ToString());
+                        if (havecount > 0)
+                        {
+                            // 如果有,提示,退出
+                            XtraMessageBox.Show("该供应商有未完成审批的产品关联,请处理完成后,重新操作.", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        else
+                        {
+                            FrmAlter frmalter = new FrmAlter();
+                            if (DialogResult.Yes == frmalter.ShowDialog())
+                            {
+                                // 如果没有,保存到变更表
+                                // 先保存旧数据,再保存新数据
+                                string code = "GN" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                                string insertsql = @"INSERT dbo.BUS_DealerVSProductChange(ChangeCode ,DealerID ,DealerName ,ChangeReason ,CreateDate ,CreateUserName ,AppStatus)
+VALUES( N'" + code + "' ," + SearchID + " ,N'" + DealerName + "' ,N'" + frmalter.Reason + "' ,GETDATE() ,N'" + GlobalItem.g_CurrentUser.UserName + "' ,'')";
+                                cmd = new SqlCommand(insertsql, conn);
+                                int savecount = cmd.ExecuteNonQuery();
+                                if (savecount == 0)
+                                {
+                                    XtraMessageBox.Show("保存失败,请重试。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                else
+                                {
+                                    string selectchangeid = "SELECT ID FROM dbo.BUS_DealerVSProductChange WHERE ChangeCode = '" + code + "'";
+                                    cmd = new SqlCommand(selectchangeid, conn);
+                                    int changeid = int.Parse(cmd.ExecuteScalar().ToString());
+                                    //保存旧数据
+                                    string insertoldsql = @"INSERT dbo.BUS_DealerVSProductChangeDetail( ChangeID, DataType, ProductID )
+SELECT " + changeid + ",'OLD',ProductID FROM dbo.BUS_DealerVSProduct WHERE DealerID = " + SearchID;
+                                    cmd = new SqlCommand(insertoldsql, conn);
+                                    cmd.ExecuteNonQuery();
+                                    string insertnewsql = "INSERT dbo.BUS_DealerVSProductChangeDetail( ChangeID, DataType, ProductID )VALUES( {0},'NEW',{1} )";
+                                    foreach (int ProductID in BillList)
+                                    {
+                                        cmd = new SqlCommand(string.Format(insertnewsql, changeid, ProductID), conn);
+                                        cmd.ExecuteNonQuery();
+                                    }
+                                }
+                            }
+                            XtraMessageBox.Show("保存成功。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
-                    XtraMessageBox.Show("保存成功。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
+                    catch (Exception ex)
+                    {
+                        XtraMessageBox.Show(ex.ToString(), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                } 
+            }
+            else
+            {
+                using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
                 {
-                    XtraMessageBox.Show(ex.ToString(), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    conn.Close();
-                }
-            } 
+                    string del = @"EXEC " + DelSql + " {0}";
+                    string insertBill = @"EXEC " + InSql + " {0},{1},'{2}'";
+
+                    try
+                    {
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand(String.Format(del, SearchID), conn);
+                        cmd.ExecuteNonQuery();
+                        foreach (int ProductID in BillList)
+                        {
+                            SqlCommand command = new SqlCommand(String.Format(insertBill, SearchID, ProductID, GlobalItem.g_CurrentUser.UserName), conn);
+                            command.ExecuteNonQuery();
+                        }
+                        XtraMessageBox.Show("保存成功。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        XtraMessageBox.Show(ex.ToString(), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                } 
+            }
             this.DialogResult = DialogResult.Yes;
         }
 

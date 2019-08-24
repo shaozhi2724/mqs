@@ -31,6 +31,7 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
                 if (id != null)
                 {
                     pod.SearchID = Convert.ToInt32(id);
+                    pod.frmType = "Department";
                     pod.SelectSql = "SELECT ProductID FROM BUS_DepartmentVSProduct WHERE DepartmentID = ";
                     pod.DelSql = "sp_DelDepartmentVSProduct";
                     pod.InSql = "sp_SaveDepartmentVSProduct";

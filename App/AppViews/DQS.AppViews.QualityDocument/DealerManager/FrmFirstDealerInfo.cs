@@ -99,6 +99,8 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                 if (id != null)
                 {
                     pod.SearchID = Convert.ToInt32(id);
+                    pod.frmType = "Dealer";
+                    pod.DealerName = gvData.GetFocusedRowCellValue("单位名称").ToString();
                     pod.SelectSql = "SELECT ProductID FROM BUS_DealerVSProduct WHERE DealerID = ";
                     pod.DelSql = "sp_DelDealerVSProduct";
                     pod.InSql = "sp_SaveDealerVSProduct";
