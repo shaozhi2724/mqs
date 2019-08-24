@@ -169,8 +169,8 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
                                     if (DialogResult.Yes == frmalter.ShowDialog())
                                     {
                                         string code = "JYFW" + DateTime.Now.ToString("yyyyMMddHHmmss");
-                                        string insertsql = @"EXEC sp_InsertOldRangeChange '{0}','{1}'";
-                                        insertsql = string.Format(insertsql, code, GlobalItem.g_CurrentUser.UserName);
+                                        string insertsql = @"EXEC sp_InsertOldRangeChange '{0}','{1}','{2}'";
+                                        insertsql = string.Format(insertsql, code, GlobalItem.g_CurrentUser.UserName, frmalter.Reason);
                                         comm = new SqlCommand(insertsql, conn);
                                         comm.ExecuteNonQuery();
 
