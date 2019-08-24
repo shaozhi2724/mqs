@@ -11,6 +11,10 @@ using DQS.Module.Entities;
 using DevExpress.XtraEditors.Controls;
 using DQS.Controls;
 using DQS.Module;
+using DQS.Common;
+using DevExpress.XtraTreeList.Nodes;
+using System.Linq;
+using System.Data.SqlClient;
 
 namespace DQS.AppViews.QualityControl.AuthorityManager
 {
@@ -186,23 +190,178 @@ namespace DQS.AppViews.QualityControl.AuthorityManager
                     XtraMessageBox.Show("请选择功能！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
-
-                ATCRolePageEntity rolePage = new ATCRolePageEntity { RoleID = ((lbcRole.SelectedItem as ListEntityItem).Key as ATCRoleEntity).RoleID, PageCode = (lbcPage.SelectedItem as ListDataRowItem).Key["PageCode"].ToString() };
-
-                rolePage.Delete();
-
-                foreach (CheckedListBoxItem functionItem in this.chklbcFunction.CheckedItems)
+                // 如果是admin,直接保存,不生成审批记录
+                if (GlobalItem.g_CurrentUser.UserCode == "admin")
                 {
-                    rolePage.FunctionCode = (functionItem.Value as ListDataRowItem).Key["FunctionCode"].ToString();
-                    rolePage.Save();
-                }
+                    ATCRolePageEntity rolePage = new ATCRolePageEntity { RoleID = ((lbcRole.SelectedItem as ListEntityItem).Key as ATCRoleEntity).RoleID, PageCode = (lbcPage.SelectedItem as ListDataRowItem).Key["PageCode"].ToString() };
 
-                XtraMessageBox.Show("保存成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    rolePage.Delete();
+
+                    foreach (CheckedListBoxItem functionItem in this.chklbcFunction.CheckedItems)
+                    {
+                        rolePage.FunctionCode = (functionItem.Value as ListDataRowItem).Key["FunctionCode"].ToString();
+                        rolePage.Save();
+                    }
+
+                    XtraMessageBox.Show("保存成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    //获取原有的功能列表
+                    EntityCollection<ATCRolePageEntity> rolefuns = new EntityCollection<ATCRolePageEntity>();
+                    rolefuns.Fetch(ATCRolePageEntityFields.RoleID == ((lbcRole.SelectedItem as ListEntityItem).Key as ATCRoleEntity).RoleID);
+                    rolefuns.Fetch(ATCRolePageEntityFields.PageCode == (lbcPage.SelectedItem as ListDataRowItem).Key["PageCode"].ToString());
+                    List<string> funstrs =
+                        rolefuns.Cast<ATCRolePageEntity>().ToList().Select(p => p.FunctionCode).ToList();
+                    //选中的list
+                    List<string> nowfunstrs = new List<string>();
+                    foreach (CheckedListBoxItem functionItem in this.chklbcFunction.CheckedItems)
+                    {
+                        nowfunstrs.Add((functionItem.Value as ListDataRowItem).Key["FunctionCode"].ToString());
+                    }
+                    //判断是否有改动
+                    if (CheckList(funstrs, nowfunstrs))
+                    {
+
+                        XtraMessageBox.Show("没有任何修改！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        EntityCollection<ATCUserPageEntity> userPages = new EntityCollection<ATCUserPageEntity>();
+                        PredicateExpression pe = new PredicateExpression();
+                        pe.Add(ATCUserPageEntityFields.UserID == GlobalItem.g_CurrentUser.UserID);
+                        pe.Add(ATCUserPageEntityFields.DocumentCode == "FunctionAuthorityChange");
+                        DataTable data = userPages.FetchTable(pe);
+
+                        if (data.Rows.Count <= 0)
+                        {
+                            XtraMessageBox.Show("系统未设置您的审批流程，无法点击保存功能。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        }
+                        foreach (ListEntityItem roleItem in this.lbcRole.SelectedItems)
+                        {
+
+                            using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
+                            {
+                                string sql = @"SELECT COUNT(0) num FROM dbo.ATC_FunctionAuthorityChange WHERE RoleID = '" + ((lbcRole.SelectedItem as ListEntityItem).Key as ATCRoleEntity).RoleID + "' AND PageCode = '" + (lbcPage.SelectedItem as ListDataRowItem).Key["PageCode"].ToString() + "' AND AppStatus = ''";
+
+                                try
+                                {
+                                    conn.Open();
+                                    SqlCommand comm = new SqlCommand(sql, conn);
+                                    int num = int.Parse(comm.ExecuteScalar().ToString());
+                                    if (num > 0)
+                                    {
+                                        XtraMessageBox.Show("有申请变更未处理，请处理后操作！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        string code = "GN" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                                        string insertsql = @"EXEC sp_InsertOldRolePageFunctionChange '{0}','{1}','{2}','{3}'";
+                                        insertsql = string.Format(insertsql, code, ((lbcRole.SelectedItem as ListEntityItem).Key as ATCRoleEntity).RoleID, (lbcPage.SelectedItem as ListDataRowItem).Key["PageCode"].ToString(), GlobalItem.g_CurrentUser.UserName);
+                                        comm = new SqlCommand(insertsql, conn);
+                                        comm.ExecuteNonQuery();
+                                        foreach (var item in nowfunstrs)
+                                        {
+                                            string insertnewsql = @"EXEC sp_InsertNewRolePageFunctionChange '{0}','{1}'";
+                                            comm = new SqlCommand(string.Format(insertnewsql, code, item), conn);
+                                            comm.ExecuteNonQuery();
+                                        }
+
+                                        if (data.Rows.Count > 0)
+                                        {
+                                            //按审批顺序排序
+                                            data.DefaultView.Sort = "ApprovalSort";
+                                            data = data.DefaultView.ToTable();
+
+                                            ATCApproveEntity approveEntity = new ATCApproveEntity();
+                                            approveEntity.InternalNo = code;
+                                            approveEntity.DocumentCode = "FunctionAuthorityChange";
+                                            approveEntity.BillCode = code;
+                                            approveEntity.ApproveTitle = string.Format("{0}角色功能权限变更，编号：{1}", (roleItem.Key as ATCRoleEntity).RoleName, code);
+                                            approveEntity.ApprovalContent = String.Format("{0}角色功能权限变更，编号：{1}", (roleItem.Key as ATCRoleEntity).RoleName, code);
+                                            approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
+                                            approveEntity.CreateDate = DateTime.Now;
+                                            approveEntity.IsApprovaled = false;
+
+
+                                            //获得新建的ID号
+                                            string searchsql = @"SELECT ID FROM ATC_FunctionAuthorityChange WHERE ChangeCode = '" + code + "'";
+                                            comm = new SqlCommand(searchsql, conn);
+                                            int bgid = int.Parse(comm.ExecuteScalar().ToString());
+
+                                            for (int i = 0; i < data.Rows.Count; i++)
+                                            {
+                                                var approveCode = approveEntity.InternalNo + (i + 1).ToString("00");
+                                                approveEntity.ApproveCode = approveCode;
+                                                approveEntity.IsWhole = Convert.ToBoolean(data.Rows[i]["IsWhole"]);
+                                                approveEntity.ApproveOrder = Convert.ToInt32(data.Rows[i]["ApprovalSort"]);
+                                                var approvalUserId = new Guid(data.Rows[i]["ApprovalUserID"].ToString());
+                                                approveEntity.ApprovalUserID = approvalUserId;
+                                                approveEntity.Save();
+
+                                                //添加消息提醒
+                                                ATCApproveNotificationEntity notification = new ATCApproveNotificationEntity();
+                                                notification.CreateUserID = approveEntity.CreateUserID;
+                                                var userName = GlobalItem.g_CurrentEmployee == null
+                                                    ? GlobalItem.g_CurrentUser.UserName
+                                                    : GlobalItem.g_CurrentEmployee.EmployeeName;
+                                                notification.CreateUserName = userName;
+                                                notification.FormClass = "FunctionAuthorityChange";
+                                                notification.IsRead = false;
+                                                notification.TargetID = bgid;
+                                                notification.TargetCode = code;
+                                                notification.ApproveCode = approveCode;
+                                                notification.Message = string.Format("{0} 于 {1} 功能权限变更申请（单号 {2}）。请您审批。", userName,
+                                                    DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), code);
+                                                notification.OwnerUserID = approvalUserId;
+                                                notification.Save();
+                                            }
+                                        }
+
+                                        XtraMessageBox.Show("变更申请保存成功！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    XtraMessageBox.Show(ex.ToString(), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                finally
+                                {
+                                    conn.Close();
+                                }
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private bool CheckList(List<string> lista, List<string> listb)
+        {
+            bool isall = true;
+            foreach (var item in lista)
+            {
+                if (!listb.Contains(item))
+                {
+                    isall = false;
+                    return isall;
+                }
+            }
+            foreach (var item in listb)
+            {
+                if (!lista.Contains(item))
+                {
+                    isall = false;
+                    return isall;
+                }
+            }
+            return isall;
         }
 
         private void btnRoleQuery_Click(object sender, EventArgs e)
