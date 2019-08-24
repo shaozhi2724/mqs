@@ -611,7 +611,7 @@
             this.layStartTime.Location = new System.Drawing.Point(0, 125);
             this.layStartTime.Name = "layStartTime";
             this.layStartTime.Size = new System.Drawing.Size(309, 25);
-            this.layStartTime.Text = "起运日期";
+            this.layStartTime.Text = "启运日期";
             this.layStartTime.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layTransportRemark
@@ -673,7 +673,7 @@
             this.layoutControlItem5.Location = new System.Drawing.Point(309, 125);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Size = new System.Drawing.Size(410, 25);
-            this.layoutControlItem5.Text = "起运时间";
+            this.layoutControlItem5.Text = "启运时间";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(60, 17);
             // 
             // layoutControlItem6

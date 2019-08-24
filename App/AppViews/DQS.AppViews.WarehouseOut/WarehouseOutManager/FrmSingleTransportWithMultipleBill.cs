@@ -28,6 +28,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
         private void FrmSingleTransportWithMultipleBill_Load(object sender, EventArgs e)
         {
             bool isenabletool = GetSettingValue.GetSettingValueFor("IsEnableBillModify");
+            bool isenablealltool = GetSettingValue.GetSettingValueFor("IsAllEnableModify");
             this.popupGrid.InitGrid();
             BindLookupData();
             if (this.Tag != null)
@@ -60,6 +61,11 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                     txtCarNo.Properties.ReadOnly = true;
                     speMinTimeLimit.Properties.ReadOnly = true;
                     txtTransportRemark.Properties.ReadOnly = true;
+                }
+                if (isenablealltool)
+                {
+                    ftPanel.Enabled = false;
+                    btnSave.Enabled = false;
                 }
             }
             else

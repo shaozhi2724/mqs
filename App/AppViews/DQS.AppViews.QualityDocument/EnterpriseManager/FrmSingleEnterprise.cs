@@ -447,6 +447,11 @@ WHERE EnterpriseID={0}
                 this.datGSPValidateDate.DateTime = entity.GSPValidateDate;
             }
 
+            if (!entity.IsNullField("LicenseYearValidateDate"))
+            {
+                this.dateLicenseYearValidateDate.DateTime = entity.LicenseYearValidateDate;
+            }
+
         }
 
         /// <summary>
@@ -498,6 +503,11 @@ WHERE EnterpriseID={0}
             if (this.datGSPValidateDate.Text.Trim().Length > 0)
             {
                 entity.GSPValidateDate = this.datGSPValidateDate.DateTime;
+            }
+
+            if (this.dateLicenseYearValidateDate.Text.Trim().Length > 0)
+            {
+                entity.LicenseYearValidateDate = this.dateLicenseYearValidateDate.DateTime;
             }
         }
 
