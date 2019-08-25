@@ -28,6 +28,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
         }
         protected override void CustomDelete()
         {
+            this.SaveDataLog("删除");
             object id = this.gvData.GetFocusedRowCellValue("记录ID");
             if (id != null && id != DBNull.Value)
             {

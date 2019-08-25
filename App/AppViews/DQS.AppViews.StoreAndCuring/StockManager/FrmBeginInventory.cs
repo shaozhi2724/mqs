@@ -25,6 +25,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
 
         protected override void CustomAdd()
         {
+            this.SaveDataLog("新建");
             object id = this.gvData.GetFocusedRowCellValue("产品ID");
             if (id != null && id != DBNull.Value)
             {
@@ -37,6 +38,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
 
         protected override void CustomModify()
         {
+            this.SaveDataLog("修改");
             using (FrmUpdateBeginInventory frm = new FrmUpdateBeginInventory())
             {
                 frm.ShowDialog();

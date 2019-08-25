@@ -24,6 +24,7 @@ namespace DQS.AppViews.OtherOperation.OtherManager
 
         protected override void CustomPlanDocument()
         {
+            this.SaveDataLog("培训档案");
             object id = gvData.GetFocusedRowCellValue("培训ID");
             if (id != null)
             {

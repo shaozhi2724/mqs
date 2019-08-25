@@ -29,6 +29,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
         protected override void CustomApprove()
         {
+            this.SaveDataLog("审批");
             object id = this.gvData.GetFocusedRowCellValue("记录ID");
             if (id != null && id != DBNull.Value)
             {
@@ -43,6 +44,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
         protected override void CustomDelete()
         {
+            this.SaveDataLog("删除");
             object approveStatus = this.gvData.GetFocusedRowCellValue("审批状态");
             object unqualifiedCode = this.gvData.GetFocusedRowCellValue("记录编号");
             if (unqualifiedCode != null && unqualifiedCode != DBNull.Value && approveStatus != null && approveStatus != DBNull.Value)
@@ -72,6 +74,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
         protected override void CustomPrint()
         {
+            this.SaveDataLog("打印");
             object id = gvData.GetFocusedRowCellValue("记录ID");
             if (id != null)
             {

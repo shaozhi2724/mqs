@@ -41,6 +41,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
 
         protected override void CustomQualification()
         {
+            this.SaveDataLog("电子档案");
             object id = gvData.GetFocusedRowCellValue("单位ID");
             if (id != null)
             {

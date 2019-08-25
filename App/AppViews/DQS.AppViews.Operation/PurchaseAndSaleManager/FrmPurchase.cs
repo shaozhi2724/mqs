@@ -28,6 +28,7 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
 
         protected override void CustomModify()
         {
+            this.SaveDataLog("修改");
             object id = this.gvData.GetFocusedRowCellValue("采购单ID");
             if (id != null && id != DBNull.Value)
             {
@@ -47,6 +48,7 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
 
         protected override void CustomDelete()
         {
+            this.SaveDataLog("删除");
             object id = this.gvData.GetFocusedRowCellValue("采购单ID");
             if (id != null && id != DBNull.Value)
             {
@@ -122,6 +124,7 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
 
         protected override void CustomApprove()
         {
+            this.SaveDataLog("审批");
             object id = this.gvData.GetFocusedRowCellValue("采购单ID");
             if (id != null && id != DBNull.Value)
             {
@@ -150,6 +153,7 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
 
         protected override void CustomRejectApprove()
         {
+            this.SaveDataLog("反审批");
             object id = this.gvData.GetFocusedRowCellValue("采购单ID");
             if (id != null && id != DBNull.Value)
             {
@@ -227,6 +231,7 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
         }
         protected override void CustomChangeStatus()
         {
+            this.SaveDataLog("变更");
             object id = this.gvData.GetFocusedRowCellValue("采购单ID");
             if (id != null && id != DBNull.Value)
             {
@@ -266,6 +271,7 @@ UPDATE dbo.BUS_Bill SET BillStatus=1,BillStatusName='已下单',ReceiveID=NULL,R
 
         protected override void CustomRegulatoryCode()
         {
+            this.SaveDataLog("流通监管码");
             object id = this.gvData.GetFocusedRowCellValue("采购单ID");
             if (id != null && id != DBNull.Value)
             {

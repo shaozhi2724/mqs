@@ -33,6 +33,7 @@ namespace DQS.AppViews.Operation.PriceManager
 
         protected override void CustomModify()
         {
+            this.SaveDataLog("修改");
             /*object id = this.gvData.GetFocusedRowCellValue("销售单ID");
             if (id != null && id != DBNull.Value)
             {

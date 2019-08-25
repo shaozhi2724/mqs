@@ -55,6 +55,7 @@ namespace DQS.AppViews.QualityControl.AuthorityManager
         }
         protected override void CustomApprove()
         {
+            this.SaveDataLog("审批");
             object id = this.gvData.GetFocusedRowCellValue("变更ID");
             if (id != null && id != DBNull.Value)
             {

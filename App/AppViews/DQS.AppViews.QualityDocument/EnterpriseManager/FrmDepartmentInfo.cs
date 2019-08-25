@@ -25,6 +25,7 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
         }
         protected override void CustomProductForDealer()
         {
+            this.SaveDataLog("关联产品");
             using (FrmProductOfDealer pod = new FrmProductOfDealer())
             {
                 object id = gvData.GetFocusedRowCellValue("部门ID");

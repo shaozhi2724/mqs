@@ -43,6 +43,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         protected override void CustomQualification()
         {
+            this.SaveDataLog("电子档案");
             object id = gvData.GetFocusedRowCellValue("产品ID");
             if (id != null)
             {
@@ -115,6 +116,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         protected override void CustomApprove()
         {
+            this.SaveDataLog("审批");
             object id = this.gvData.GetFocusedRowCellValue("产品ID");
             if (id != null && id != DBNull.Value)
             {
@@ -200,6 +202,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         protected override void CustomModifyRequest()
         {
+            this.SaveDataLog("信息变更");
             try
             {
                 object id = gvData.GetFocusedRowCellValue("产品ID");
@@ -266,6 +269,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         protected override void CustomDelete()
         {
+            this.SaveDataLog("删除");
             object approveStatus = this.gvData.GetFocusedRowCellValue("审批状态");
             object productCode = this.gvData.GetFocusedRowCellValue("产品编号");
             if (productCode != null && productCode != DBNull.Value && approveStatus != null && approveStatus != DBNull.Value)
@@ -294,6 +298,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
         }
         protected override void CustomProductPrice()
         {
+            this.SaveDataLog("产品价格");
             object productID = gvData.GetFocusedRowCellValue("产品ID");
             object productName = gvData.GetFocusedRowCellValue("产品名称");
             if (productID != null)
@@ -311,6 +316,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         protected override void CustomPrint()
         {
+            this.SaveDataLog("打印");
             //object productID = gvData.GetFocusedRowCellValue("产品ID");
             //if (productID != null)
             //{

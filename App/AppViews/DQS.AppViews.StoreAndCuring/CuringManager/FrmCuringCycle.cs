@@ -24,6 +24,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
 
         protected override void CustomModify()
         {
+            this.SaveDataLog("修改");
             object cycleCode = this.gvData.GetFocusedRowCellValue("周期编码");
             object productID = this.gvData.GetFocusedRowCellValue("产品ID");
             object productCode = this.gvData.GetFocusedRowCellValue("产品编号");
@@ -93,6 +94,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
         }
         protected override void CustomModify(bool isView)
         {
+            this.SaveDataLog("修改");
             object cycleCode = this.gvData.GetFocusedRowCellValue("周期编码");
             object productID = this.gvData.GetFocusedRowCellValue("产品ID");
             object productCode = this.gvData.GetFocusedRowCellValue("产品编号");

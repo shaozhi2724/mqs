@@ -30,6 +30,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
 
         protected override void CustomModify()
         {
+            this.SaveDataLog("修改");
             object id = this.gvData.GetFocusedRowCellValue("返单ID");
             string statusName = gvData.GetFocusedRowCellValue("状态").ToString();
             if (statusName == "已通过" || statusName == "已处理")
@@ -52,6 +53,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
         }
         protected override void CustomApprove()
         {
+            this.SaveDataLog("审批");
             object id = this.gvData.GetFocusedRowCellValue("返单ID");
             object bid = this.gvData.GetFocusedRowCellValue("单据ID");
             if (id != null && id != DBNull.Value)

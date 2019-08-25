@@ -78,6 +78,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
 
         protected override void CustomModify()
         {
+            this.SaveDataLog("修改");
             object id = this.gvData.GetFocusedRowCellValue("InStoreID");
             if (id != null && id != DBNull.Value)
             {
@@ -94,6 +95,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
 
         protected override void CustomChangePrice()
         {
+            this.SaveDataLog("调价");
             object id = this.gvData.GetFocusedRowCellValue("InStoreID");
             if (id != null && id != DBNull.Value)
             {

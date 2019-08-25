@@ -24,6 +24,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
 
         protected override void CustomApprove()
         {
+            this.SaveDataLog("审批");
             object id = this.gvData.GetFocusedRowCellValue("更改ID");
             object status = this.gvData.GetFocusedRowCellValue("状态");
             if (id != null && id != DBNull.Value)

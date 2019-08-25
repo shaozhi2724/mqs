@@ -436,7 +436,7 @@ namespace DQS.Controls
             return filedNames;
         }
 
-        private void SaveDataLog(string Operate)
+        public void SaveDataLog(string Operate)
         {
             SYSDateDataLogEntity sysDataLog = new SYSDateDataLogEntity();
             sysDataLog.UserName = GlobalItem.g_CurrentUser.UserName;
@@ -451,6 +451,7 @@ namespace DQS.Controls
         /// </summary>
         protected virtual void CustomAdd()
         {
+            SaveDataLog("新建");
             if (sysPage != null)
             {
                 try
@@ -460,7 +461,6 @@ namespace DQS.Controls
                         XtraMessageBox.Show("未设置 SingleFullClass 的值。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
-                    SaveDataLog("新建");
                     //MessageBox.Show(sysPage.PageName.ToString());
                     XtraForm singleForm = Activator.CreateInstance(Type.GetType(sysPage.SingleFullClass)) as XtraForm;
                     DialogResult result = singleForm.ShowDialog();
@@ -486,6 +486,7 @@ namespace DQS.Controls
         /// </summary>
         protected virtual void CustomModify()
         {
+            SaveDataLog("修改");
             if (sysPage != null)
             {
                 try
@@ -495,7 +496,6 @@ namespace DQS.Controls
                         //XtraMessageBox.Show("未设置 SingleFullClass 的值。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
-                    SaveDataLog("修改");
 
                     XtraForm singleForm = Activator.CreateInstance(Type.GetType(sysPage.SingleFullClass)) as XtraForm;
                     singleForm.Tag = gvData.GetFocusedRowCellValue(sysPage.ViewPrimaryField);
@@ -521,6 +521,7 @@ namespace DQS.Controls
         }
         protected virtual void CustomModify(bool isView)
         {
+            SaveDataLog("修改");
             if (sysPage != null)
             {
                 try
@@ -575,6 +576,7 @@ namespace DQS.Controls
         /// </summary>
         protected virtual void CustomDelete()
         {
+            SaveDataLog("删除");
             if (sysPage != null)
             {
                 try
@@ -600,8 +602,6 @@ namespace DQS.Controls
                             CustomGroup();
                         }
                     }
-
-                    SaveDataLog("删除");
                 }
                 catch (Exception ex)
                 {
@@ -869,6 +869,7 @@ namespace DQS.Controls
         }
         public virtual void CustomFastQuery(List<string> filters)
         {
+            SaveDataLog("查询");
             if (filters.Count > 0)
             {
                 if (pageNavigator.Filter.StartsWith("所属部门ID") || pageNavigator.Filter.Contains("[产品ID] IN ("))
@@ -891,6 +892,7 @@ namespace DQS.Controls
         }
         protected DialogResult BaseApprove()
         {
+            SaveDataLog("审批");
             if (gvData.FocusedRowHandle < 0)
             {
                 return DialogResult.None;//无数据

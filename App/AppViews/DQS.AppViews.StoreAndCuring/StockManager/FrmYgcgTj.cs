@@ -25,6 +25,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
         }
         protected override void CustomModify()
         {
+            this.SaveDataLog("修改");
             object id = this.gvData.GetFocusedRowCellValue("入库ID");
             if (id != null && id != DBNull.Value)
             {
@@ -44,6 +45,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
 
         protected override void CustomPrint()
         {
+            this.SaveDataLog("打印");
             object id = this.gvData.GetFocusedRowCellValue("入库ID");
             if (id != null)
             {

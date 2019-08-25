@@ -26,6 +26,7 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
 
         protected override void CustomCheckBody()
         {
+            this.SaveDataLog("健康档案");
             object id = gvData.GetFocusedRowCellValue("员工ID");
             if (id != null)
             {
@@ -38,6 +39,7 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
 
         protected override void CustomQualification()
         {
+            this.SaveDataLog("电子档案");
             object id = gvData.GetFocusedRowCellValue("员工ID");
             if (id != null)
             {

@@ -29,6 +29,7 @@ namespace DQS.AppViews.Operation.OnlyBackManager
         }
         protected override void CustomApprove()
         {
+            this.SaveDataLog("审批");
             object id = this.gvData.GetFocusedRowCellValue("直调单ID");
             if (id != null && id != DBNull.Value)
             {
@@ -51,6 +52,7 @@ namespace DQS.AppViews.Operation.OnlyBackManager
 
         protected override void CustomModify()
         {
+            this.SaveDataLog("修改");
             object id = this.gvData.GetFocusedRowCellValue("直调单ID");
             if (id != null && id != DBNull.Value)
             {
@@ -99,6 +101,7 @@ UPDATE dbo.BUS_OnlyBill SET BillRemark = '修改' WHERE BillID = '{0}'
 
         protected override void CustomDelete()
         {
+            this.SaveDataLog("删除");
             object id = this.gvData.GetFocusedRowCellValue("直调单ID");
             if (id != null && id != DBNull.Value)
             {

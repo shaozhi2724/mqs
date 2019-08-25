@@ -45,6 +45,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         protected override void CustomApprove()
         {
+            this.SaveDataLog("审批");
             object id = gvData.GetFocusedRowCellValue("变更ID");
             if (id != null)
             {

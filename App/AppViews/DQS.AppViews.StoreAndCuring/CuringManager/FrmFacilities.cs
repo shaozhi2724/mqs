@@ -28,6 +28,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
         }
         protected override void CustomDelete()
         {
+            this.SaveDataLog("删除");
             object id = this.gvData.GetFocusedRowCellValue("设备ID");
             if (id != null && id != DBNull.Value)
             {
@@ -65,6 +66,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
 
         protected override void CustomFacilitiesVerification()
         {
+            this.SaveDataLog("检定");
             object id = this.gvData.GetFocusedRowCellValue("设备ID");
             if (id != null && id != DBNull.Value)
             {
@@ -85,6 +87,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
 
         protected override void CustomFacilitiesService()
         {
+            this.SaveDataLog("维修");
             object id = this.gvData.GetFocusedRowCellValue("设备ID");
             if (id != null && id != DBNull.Value)
             {

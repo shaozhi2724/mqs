@@ -32,6 +32,7 @@ namespace DQS.AppViews.Operation.PriceManager
 
         protected override void CustomDelete()
         {
+            this.SaveDataLog("删除");
             object id = this.gvData.GetFocusedRowCellValue("价格表ID");
             if(Convert.ToInt32(id) < 3)
             {

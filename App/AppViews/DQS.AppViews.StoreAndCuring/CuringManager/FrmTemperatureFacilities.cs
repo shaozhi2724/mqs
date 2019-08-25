@@ -24,6 +24,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
         }
         protected override void CustomModify()
         {
+            this.SaveDataLog("修改");
             object id = this.gvData.GetFocusedRowCellValue("维修ID");
             object fid = this.gvData.GetFocusedRowCellValue("设备ID");
             if (id != null && id != DBNull.Value)

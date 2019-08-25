@@ -48,6 +48,7 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
 
         protected override void CustomQualification()
         {
+            this.SaveDataLog("电子档案");
             object id = gvData.GetFocusedRowCellValue("单位ID");
             if (id != null)
             {
@@ -91,6 +92,7 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
 
         protected override void CustomModifyRequest()
         {
+            this.SaveDataLog("信息变更");
             try
             {
                 object id = gvData.GetFocusedRowCellValue("单位ID");
@@ -187,6 +189,7 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
 
         protected override void CustomApprove()
         {
+            this.SaveDataLog("审批");
             object id = this.gvData.GetFocusedRowCellValue("单位ID");
             if (id != null && id != DBNull.Value)
             {
@@ -247,6 +250,7 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
         }
         protected override void CustomDelete()
         {
+            this.SaveDataLog("删除");
             object approveStatus = this.gvData.GetFocusedRowCellValue("审批状态");
             object dealerCode = this.gvData.GetFocusedRowCellValue("单位编号");
             if (dealerCode != null && dealerCode != DBNull.Value && approveStatus != null && approveStatus != DBNull.Value)
@@ -275,6 +279,7 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
         }
         protected override void CustomPrint()
         {
+            this.SaveDataLog("打印");
             object id = gvData.GetFocusedRowCellValue("单位ID");
             if (id != null)
             {

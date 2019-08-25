@@ -27,6 +27,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
         }
         protected override void CustomPrint()
         {
+            this.SaveDataLog("打印");
             StiReport.ClearReportCache();
             string reportFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "养护记录.mrt");
             StiReport report = new StiReport();

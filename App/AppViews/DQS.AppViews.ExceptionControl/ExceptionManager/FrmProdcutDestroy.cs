@@ -27,6 +27,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
         protected override void CustomApprove()
         {
+            this.SaveDataLog("审批");
             object id = this.gvData.GetFocusedRowCellValue("销毁ID");
             if (id != null && id != DBNull.Value)
             {
@@ -75,6 +76,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
         protected override void CustomDelete()
         {
+            this.SaveDataLog("删除");
             object approveStatus = this.gvData.GetFocusedRowCellValue("审批状态");
             object destroyCode = this.gvData.GetFocusedRowCellValue("销毁编号");
             if (destroyCode != null && destroyCode != DBNull.Value && approveStatus != null && approveStatus != DBNull.Value)

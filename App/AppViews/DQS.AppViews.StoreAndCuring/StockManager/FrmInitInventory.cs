@@ -29,6 +29,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
 
         protected override void CustomDelete()
         {
+            this.SaveDataLog("删除");
 
             object id = gvData.GetFocusedRowCellValue("库存ID");
             if (id != null)

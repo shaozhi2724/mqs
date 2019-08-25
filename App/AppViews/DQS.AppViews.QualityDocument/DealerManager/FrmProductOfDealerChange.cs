@@ -24,6 +24,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
 
         protected override void CustomApprove()
         {
+            this.SaveDataLog("审批");
             object id = this.gvData.GetFocusedRowCellValue("变更ID");
             object dealerid = this.gvData.GetFocusedRowCellValue("单位ID");
             object status = this.gvData.GetFocusedRowCellValue("状态");

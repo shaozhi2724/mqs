@@ -25,6 +25,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         protected override void CustomAdd()
         {
+            this.SaveDataLog("新建");
             using (FrmSinglePrice2 frmSinglePrice = new FrmSinglePrice2())
             {
                 if (frmSinglePrice.ShowDialog(this) == DialogResult.OK)
@@ -36,6 +37,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         protected override void CustomModify()
         {
+            this.SaveDataLog("修改");
             object productID = gvData.GetFocusedRowCellValue("产品ID");
             if (productID != null)
             {
@@ -50,6 +52,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
         }
         protected override void CustomModify(bool isView)
         {
+            this.SaveDataLog("修改");
             object productID = gvData.GetFocusedRowCellValue("产品ID");
             if (productID != null)
             {
@@ -65,6 +68,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         protected override void CustomDelete()
         {
+            this.SaveDataLog("删除");
             object productID = gvData.GetFocusedRowCellValue("产品ID");
             if (productID != null)
             {

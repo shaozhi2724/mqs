@@ -28,6 +28,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
         protected override void CustomPrint()
         {
+            this.SaveDataLog("打印");
             object id = this.gvData.GetFocusedRowCellValue("验收单ID");
             if (id != null)
             {
@@ -57,6 +58,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
         protected override void CustomReCheck()
         {
+            this.SaveDataLog("复查");
             object id = this.gvData.GetFocusedRowCellValue("验收单ID");
             if (id != null)
             {
@@ -99,6 +101,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
         protected override void CustomApprove()
         {
+            this.SaveDataLog("审批");
             object id = this.gvData.GetFocusedRowCellValue("验收单ID");
             if (id != null && id != DBNull.Value)
             {

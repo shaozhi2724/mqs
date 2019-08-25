@@ -22,6 +22,7 @@ namespace DQS.AppViews.OtherOperation.BillPriceManager
 
         protected override void CustomApprove()
         {
+            this.SaveDataLog("审批");
             object id = this.gvData.GetFocusedRowCellValue("调价单ID");
             if (id != null && id != DBNull.Value)
             {

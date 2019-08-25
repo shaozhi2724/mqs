@@ -25,6 +25,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         protected override void CustomModify()
         {
+            this.SaveDataLog("修改");
             object itemType = gvData.GetFocusedRowCellValue("分类类型");
             if (itemType != null)
             {
@@ -42,6 +43,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
 
         protected override void CustomDelete()
         {
+            this.SaveDataLog("删除");
             object itemType = gvData.GetFocusedRowCellValue("分类类型");
             if (itemType != null)
             {

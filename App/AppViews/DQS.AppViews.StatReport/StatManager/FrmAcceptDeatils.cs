@@ -23,6 +23,7 @@ namespace DQS.AppViews.StatReport.StatManager
         }
         protected override void CustomPrint()
         {
+            this.SaveDataLog("打印");
             //base.SinglePrint("验收记录查询", 0);
             base.CustomPrint();
         }
