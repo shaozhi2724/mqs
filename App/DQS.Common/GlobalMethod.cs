@@ -781,6 +781,18 @@ namespace DQS.Common
                     adapter.Fill(dataSet, "本企业经营许可证到期日锁定记录");
                 }
 
+                querySql = "SELECT CONVERT(NVARCHAR(60),GSPValidateDate,23) GSP到期日期, CASE WHEN GSPValidateDate > GETDATE() THEN '即将过期'ELSE '已过期' END AS 过期状态 FROM dbo.BFI_Enterprise WHERE DATEADD(MONTH,1,GETDATE()) > GSPValidateDate";
+                using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
+                {
+                    adapter.Fill(dataSet, "本企业GSP到期日预警");
+                }
+
+                querySql = "SELECT CONVERT(NVARCHAR(60),TradeLicenseValidateDate,23) 经营许可证到期日期, CASE WHEN TradeLicenseValidateDate > GETDATE() THEN '即将过期'ELSE '已过期' END AS 过期状态 FROM dbo.BFI_Enterprise WHERE DATEADD(MONTH,1,GETDATE()) > TradeLicenseValidateDate";
+                using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
+                {
+                    adapter.Fill(dataSet, "本企业经营许可证到期日预警");
+                }
+
                 querySql = "SELECT * FROM vw_Transport";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
                 {

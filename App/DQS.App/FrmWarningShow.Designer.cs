@@ -45,9 +45,12 @@
             this.gridProduct = new DQS.Controls.StandardGrid();
             this.xtbTransport = new DevExpress.XtraTab.XtraTabPage();
             this.gridTransport = new DQS.Controls.StandardGrid();
+            this.xtbgsp = new DevExpress.XtraTab.XtraTabPage();
+            this.gridgsp = new DQS.Controls.StandardGrid();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.xtbxkz = new DevExpress.XtraTab.XtraTabPage();
             ((System.ComponentModel.ISupportInitialize)(this.xtcMain)).BeginInit();
             this.xtcMain.SuspendLayout();
             this.xtbBatchWaning.SuspendLayout();
@@ -66,6 +69,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridProduct)).BeginInit();
             this.xtbTransport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridTransport)).BeginInit();
+            this.xtbgsp.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridgsp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
@@ -88,7 +93,9 @@
             this.xtbQualificationWaning,
             this.xtbProviderQualificationWaning,
             this.xtbProductQualificationWaning,
-            this.xtbTransport});
+            this.xtbTransport,
+            this.xtbgsp,
+            this.xtbxkz});
             // 
             // xtbBatchWaning
             // 
@@ -228,6 +235,23 @@
             this.gridTransport.TabIndex = 3;
             this.gridTransport.ViewName = null;
             // 
+            // xtbgsp
+            // 
+            this.xtbgsp.Controls.Add(this.gridgsp);
+            this.xtbgsp.Name = "xtbgsp";
+            this.xtbgsp.Size = new System.Drawing.Size(1054, 508);
+            this.xtbgsp.Text = "本企业GSP到期日预警";
+            // 
+            // gridgsp
+            // 
+            this.gridgsp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridgsp.Filter = null;
+            this.gridgsp.Location = new System.Drawing.Point(0, 0);
+            this.gridgsp.Name = "gridgsp";
+            this.gridgsp.Size = new System.Drawing.Size(1054, 508);
+            this.gridgsp.TabIndex = 4;
+            this.gridgsp.ViewName = null;
+            // 
             // panelControl1
             // 
             this.panelControl1.Controls.Add(this.btnExport);
@@ -254,6 +278,12 @@
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(1065, 542);
             this.panelControl2.TabIndex = 1;
+            // 
+            // xtbxkz
+            // 
+            this.xtbxkz.Name = "xtbxkz";
+            this.xtbxkz.Size = new System.Drawing.Size(0, 0);
+            this.xtbxkz.Text = "本企业经营许可证到期日预警";
             // 
             // FrmWarningShow
             // 
@@ -285,6 +315,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridProduct)).EndInit();
             this.xtbTransport.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridTransport)).EndInit();
+            this.xtbgsp.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridgsp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
@@ -315,5 +347,8 @@
         private Controls.StandardGrid gridProvider;
         private DevExpress.XtraTab.XtraTabPage xtbProductQualificationWaning;
         private Controls.StandardGrid gridProduct;
+        private DevExpress.XtraTab.XtraTabPage xtbgsp;
+        private Controls.StandardGrid gridgsp;
+        private DevExpress.XtraTab.XtraTabPage xtbxkz;
     }
 }
