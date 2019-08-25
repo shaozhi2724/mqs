@@ -26,6 +26,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
         private void FrmSingleReceive_Load(object sender, EventArgs e)
         {
+            bool isModifyArrivedTime = GetSettingValue.GetSettingValueFor("IsModifyArrivedTime");
             this.popupGrid.InitGrid();
             BindLookupData();
             if (this.Tag != null)
@@ -50,7 +51,9 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             else
             {
                 this.dateTransportDate.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                this.txtArriveTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                this.dateArrived.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                dateArrived.Enabled = isModifyArrivedTime;
 
                 this.txtReceiveCode.Text = "SH" + DateTime.Now.ToString("yyyyMMddHHmmss");
                 this.txtReceiveCode.Select(this.txtReceiveCode.Text.Length, 0);
@@ -642,6 +645,11 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 this.dateTransportDate.Text = entity.Reservation3;
             }
 
+            if (!entity.IsNullField("Reservation4"))
+            {
+                this.dateArrived.Text = entity.Reservation4;
+            }
+
         }
 
         /// <summary>
@@ -683,6 +691,10 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             if (!string.IsNullOrWhiteSpace(dateTransportDate.Text))
             {
                 entity.Reservation3 = dateTransportDate.Text;
+            }
+            if (!string.IsNullOrWhiteSpace(dateArrived.Text))
+            {
+                entity.Reservation4 = dateArrived.Text;
             }
             this.SetReceiveStatus(entity);
         }
@@ -1122,8 +1134,16 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
         {
             if (this.Tag == null)
             {
-                TimeSpan span = DateTime.Now - dateTransportDate.DateTime;
-                txtTransportTime.Text = Convert.ToInt32(span.TotalHours).ToString();
+                if (!string.IsNullOrWhiteSpace(dateArrived.Text))
+                {
+                    TimeSpan span = dateArrived.DateTime - dateTransportDate.DateTime;
+                    txtTransportTime.Text = Convert.ToInt32(span.TotalHours).ToString();
+                }
+                else
+                {
+                    TimeSpan span = DateTime.Now - dateTransportDate.DateTime;
+                    txtTransportTime.Text = Convert.ToInt32(span.TotalHours).ToString();
+                }
             }
         }
 
