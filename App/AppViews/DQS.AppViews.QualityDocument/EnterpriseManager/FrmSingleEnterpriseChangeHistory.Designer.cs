@@ -36,36 +36,38 @@
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.ftPanel = new DQS.Controls.FieldTextBoxPanel();
             this.layControl = new DevExpress.XtraLayout.LayoutControl();
+            this.dateLicenseYearValidateDate = new DevExpress.XtraEditors.DateEdit();
+            this.datGSPValidateDate = new DevExpress.XtraEditors.DateEdit();
             this.datBusinessValidateDate = new DevExpress.XtraEditors.DateEdit();
-            this.txtOrganizationCode = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
+            this.txtOrganizationCode = new DQS.Controls.BFIEnterpriseEntityTextBox();
             this.cbxEnterpriseLevel = new DQS.Controls.ComboBoxCategoryEx();
             this.datTaxValidateDate = new DevExpress.XtraEditors.DateEdit();
             this.datLicenseValidateDate = new DevExpress.XtraEditors.DateEdit();
-            this.txtRegisterTaxNo = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtRegisterLicenseNo = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtEnterpriseCode = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtEnterpriseName = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
+            this.txtRegisterTaxNo = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtRegisterLicenseNo = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtEnterpriseCode = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtEnterpriseName = new DQS.Controls.BFIEnterpriseEntityTextBox();
             this.cbxEnterpriseType = new DQS.Controls.ComboBoxCategoryEx();
             this.cbxEnterpriseStyle = new DQS.Controls.ComboBoxCategoryEx();
             this.cbxIndustryStyle = new DQS.Controls.ComboBoxCategoryEx();
             this.dteRegisterData = new DevExpress.XtraEditors.DateEdit();
-            this.txtEnterpriseRemark = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtEmployeeNum = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtAccountBankCode = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtAccountNo = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtAccountBankName = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtRegisterCapital = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtRegisterAddress = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtLegalPhone = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtLegalPerson = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtContactPhone = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtContactPerson = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtEnterpriseWebSiteUrl = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtEnterprisePostalCode = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtEnterpriseMail = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtEnterpriseFaxNo = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtEnterprisePhone = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
-            this.txtEnterpriseAddress = new DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox();
+            this.txtEnterpriseRemark = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtEmployeeNum = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtAccountBankCode = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtAccountNo = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtAccountBankName = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtRegisterCapital = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtRegisterAddress = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtLegalPhone = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtLegalPerson = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtContactPhone = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtContactPerson = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtEnterpriseWebSiteUrl = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtEnterprisePostalCode = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtEnterpriseMail = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtEnterpriseFaxNo = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtEnterprisePhone = new DQS.Controls.BFIEnterpriseEntityTextBox();
+            this.txtEnterpriseAddress = new DQS.Controls.BFIEnterpriseEntityTextBox();
             this.layControlGroup = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layEnterprisePhone = new DevExpress.XtraLayout.LayoutControlItem();
             this.layEnterprisePostalCode = new DevExpress.XtraLayout.LayoutControlItem();
@@ -90,13 +92,15 @@
             this.layLegalPerson = new DevExpress.XtraLayout.LayoutControlItem();
             this.layBusinessPhone = new DevExpress.XtraLayout.LayoutControlItem();
             this.layEmployeeNum = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layRegisterLicenseNo = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layTaxValidateDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.layEnterpriseLevel = new DevExpress.XtraLayout.LayoutControlItem();
             this.layLicenseValidateDate = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layRegisterTaxNo = new DevExpress.XtraLayout.LayoutControlItem();
             this.layOrganizationCode = new DevExpress.XtraLayout.LayoutControlItem();
             this.layBusinessValidateDate = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layRegisterLicenseNo = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layRegisterTaxNo = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layTaxValidateDate = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layGSPValidateDate = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutLicenseYearValidateDate = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.pnOperating)).BeginInit();
             this.pnOperating.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -108,6 +112,10 @@
             this.ftPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
             this.layControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dateLicenseYearValidateDate.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateLicenseYearValidateDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datGSPValidateDate.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datGSPValidateDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datBusinessValidateDate.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datBusinessValidateDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOrganizationCode.Properties)).BeginInit();
@@ -166,13 +174,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.layLegalPerson)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layBusinessPhone)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layEmployeeNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layRegisterLicenseNo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layTaxValidateDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layEnterpriseLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layLicenseValidateDate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layRegisterTaxNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layOrganizationCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layBusinessValidateDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layRegisterLicenseNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layRegisterTaxNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layTaxValidateDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layGSPValidateDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutLicenseYearValidateDate)).BeginInit();
             this.SuspendLayout();
             // 
             // pnOperating
@@ -249,6 +259,8 @@
             // 
             // layControl
             // 
+            this.layControl.Controls.Add(this.dateLicenseYearValidateDate);
+            this.layControl.Controls.Add(this.datGSPValidateDate);
             this.layControl.Controls.Add(this.datBusinessValidateDate);
             this.layControl.Controls.Add(this.txtOrganizationCode);
             this.layControl.Controls.Add(this.cbxEnterpriseLevel);
@@ -284,37 +296,65 @@
             this.layControl.Name = "layControl";
             this.layControl.Root = this.layControlGroup;
             this.layControl.Size = new System.Drawing.Size(691, 311);
-            this.layControl.TabIndex = 0;
+            this.layControl.TabIndex = 1;
             this.layControl.Text = "layControl";
+            // 
+            // dateLicenseYearValidateDate
+            // 
+            this.dateLicenseYearValidateDate.EditValue = null;
+            this.dateLicenseYearValidateDate.Location = new System.Drawing.Point(123, 87);
+            this.dateLicenseYearValidateDate.Name = "dateLicenseYearValidateDate";
+            this.dateLicenseYearValidateDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.dateLicenseYearValidateDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateLicenseYearValidateDate.Properties.NullValuePrompt = "请选择营业执照年报到期日";
+            this.dateLicenseYearValidateDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.dateLicenseYearValidateDate.Size = new System.Drawing.Size(104, 21);
+            this.dateLicenseYearValidateDate.StyleController = this.layControl;
+            this.dateLicenseYearValidateDate.TabIndex = 3;
+            // 
+            // datGSPValidateDate
+            // 
+            this.datGSPValidateDate.EditValue = null;
+            this.datGSPValidateDate.Location = new System.Drawing.Point(562, 12);
+            this.datGSPValidateDate.Name = "datGSPValidateDate";
+            this.datGSPValidateDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.datGSPValidateDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.datGSPValidateDate.Properties.NullValuePrompt = "请选择GSP证书到期日";
+            this.datGSPValidateDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.datGSPValidateDate.Size = new System.Drawing.Size(100, 21);
+            this.datGSPValidateDate.StyleController = this.layControl;
+            this.datGSPValidateDate.TabIndex = 3;
             // 
             // datBusinessValidateDate
             // 
             this.datBusinessValidateDate.EditValue = null;
-            this.datBusinessValidateDate.Location = new System.Drawing.Point(437, 37);
+            this.datBusinessValidateDate.Location = new System.Drawing.Point(342, 37);
             this.datBusinessValidateDate.Name = "datBusinessValidateDate";
             this.datBusinessValidateDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.datBusinessValidateDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datBusinessValidateDate.Properties.NullValuePrompt = "请选择产品经营许可证到期日";
-            this.datBusinessValidateDate.Properties.ReadOnly = true;
+            this.datBusinessValidateDate.Properties.NullValuePrompt = "请选择经营许可证到期日";
             this.datBusinessValidateDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.datBusinessValidateDate.Size = new System.Drawing.Size(225, 21);
+            this.datBusinessValidateDate.Size = new System.Drawing.Size(103, 21);
             this.datBusinessValidateDate.StyleController = this.layControl;
             this.datBusinessValidateDate.TabIndex = 3;
             // 
             // txtOrganizationCode
             // 
             this.txtOrganizationCode.AlphabeticFiled = null;
-            this.txtOrganizationCode.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.OrganizationCode;
+            this.txtOrganizationCode.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.OrganizationCode;
             this.txtOrganizationCode.IsIntegerOnly = false;
             this.txtOrganizationCode.IsNullString = null;
             this.txtOrganizationCode.IsNullValidate = false;
             this.txtOrganizationCode.IsTransferAlphabetic = false;
-            this.txtOrganizationCode.Location = new System.Drawing.Point(111, 62);
+            this.txtOrganizationCode.Location = new System.Drawing.Point(560, 37);
             this.txtOrganizationCode.Name = "txtOrganizationCode";
-            this.txtOrganizationCode.Properties.ReadOnly = true;
-            this.txtOrganizationCode.Size = new System.Drawing.Size(223, 21);
+            this.txtOrganizationCode.Size = new System.Drawing.Size(102, 21);
             this.txtOrganizationCode.StyleController = this.layControl;
             this.txtOrganizationCode.TabIndex = 3;
             // 
@@ -324,107 +364,100 @@
             this.cbxEnterpriseLevel.CategoryCode = "EnterpriseLevel";
             this.cbxEnterpriseLevel.FirstDefaultItemText = null;
             this.cbxEnterpriseLevel.FormatQueryString = null;
-            this.cbxEnterpriseLevel.Location = new System.Drawing.Point(111, 287);
+            this.cbxEnterpriseLevel.Location = new System.Drawing.Point(123, 287);
             this.cbxEnterpriseLevel.Name = "cbxEnterpriseLevel";
-            this.cbxEnterpriseLevel.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cbxEnterpriseLevel.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbxEnterpriseLevel.Properties.NullValuePrompt = "请选择企业级别";
             this.cbxEnterpriseLevel.Properties.NullValuePromptShowForEmptyValue = true;
-            this.cbxEnterpriseLevel.Properties.ReadOnly = true;
             this.cbxEnterpriseLevel.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbxEnterpriseLevel.SelectedValue = null;
-            this.cbxEnterpriseLevel.Size = new System.Drawing.Size(227, 21);
+            this.cbxEnterpriseLevel.Size = new System.Drawing.Size(104, 21);
             this.cbxEnterpriseLevel.StyleController = this.layControl;
-            this.cbxEnterpriseLevel.TabIndex = 26;
+            this.cbxEnterpriseLevel.TabIndex = 25;
             // 
             // datTaxValidateDate
             // 
             this.datTaxValidateDate.EditValue = null;
-            this.datTaxValidateDate.Location = new System.Drawing.Point(547, 212);
+            this.datTaxValidateDate.Location = new System.Drawing.Point(560, 62);
             this.datTaxValidateDate.Name = "datTaxValidateDate";
             this.datTaxValidateDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datTaxValidateDate.Properties.ReadOnly = true;
             this.datTaxValidateDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.datTaxValidateDate.Size = new System.Drawing.Size(115, 21);
+            this.datTaxValidateDate.Size = new System.Drawing.Size(102, 21);
             this.datTaxValidateDate.StyleController = this.layControl;
-            this.datTaxValidateDate.TabIndex = 19;
+            this.datTaxValidateDate.TabIndex = 18;
             // 
             // datLicenseValidateDate
             // 
             this.datLicenseValidateDate.EditValue = null;
-            this.datLicenseValidateDate.Location = new System.Drawing.Point(111, 37);
+            this.datLicenseValidateDate.Location = new System.Drawing.Point(123, 37);
             this.datLicenseValidateDate.Name = "datLicenseValidateDate";
             this.datLicenseValidateDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.datLicenseValidateDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.datLicenseValidateDate.Properties.NullValuePrompt = "请选择GSP证书到期日";
-            this.datLicenseValidateDate.Properties.ReadOnly = true;
+            this.datLicenseValidateDate.Properties.NullValuePrompt = "请选择营业执照到期日";
             this.datLicenseValidateDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.datLicenseValidateDate.Size = new System.Drawing.Size(223, 21);
+            this.datLicenseValidateDate.Size = new System.Drawing.Size(104, 21);
             this.datLicenseValidateDate.StyleController = this.layControl;
             this.datLicenseValidateDate.TabIndex = 2;
             // 
             // txtRegisterTaxNo
             // 
             this.txtRegisterTaxNo.AlphabeticFiled = null;
-            this.txtRegisterTaxNo.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.RegisterTaxNo;
+            this.txtRegisterTaxNo.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.RegisterTaxNo;
             this.txtRegisterTaxNo.IsIntegerOnly = false;
             this.txtRegisterTaxNo.IsNullString = null;
             this.txtRegisterTaxNo.IsNullValidate = false;
             this.txtRegisterTaxNo.IsTransferAlphabetic = false;
-            this.txtRegisterTaxNo.Location = new System.Drawing.Point(329, 212);
+            this.txtRegisterTaxNo.Location = new System.Drawing.Point(341, 62);
             this.txtRegisterTaxNo.Name = "txtRegisterTaxNo";
-            this.txtRegisterTaxNo.Properties.ReadOnly = true;
-            this.txtRegisterTaxNo.Size = new System.Drawing.Size(115, 21);
+            this.txtRegisterTaxNo.Size = new System.Drawing.Size(104, 21);
             this.txtRegisterTaxNo.StyleController = this.layControl;
-            this.txtRegisterTaxNo.TabIndex = 18;
+            this.txtRegisterTaxNo.TabIndex = 17;
             // 
             // txtRegisterLicenseNo
             // 
             this.txtRegisterLicenseNo.AlphabeticFiled = null;
-            this.txtRegisterLicenseNo.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.RegisterLicenseNo;
+            this.txtRegisterLicenseNo.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.RegisterLicenseNo;
             this.txtRegisterLicenseNo.IsIntegerOnly = false;
             this.txtRegisterLicenseNo.IsNullString = null;
             this.txtRegisterLicenseNo.IsNullValidate = false;
             this.txtRegisterLicenseNo.IsTransferAlphabetic = false;
-            this.txtRegisterLicenseNo.Location = new System.Drawing.Point(111, 212);
+            this.txtRegisterLicenseNo.Location = new System.Drawing.Point(123, 62);
             this.txtRegisterLicenseNo.Name = "txtRegisterLicenseNo";
-            this.txtRegisterLicenseNo.Properties.ReadOnly = true;
-            this.txtRegisterLicenseNo.Size = new System.Drawing.Size(115, 21);
+            this.txtRegisterLicenseNo.Size = new System.Drawing.Size(103, 21);
             this.txtRegisterLicenseNo.StyleController = this.layControl;
-            this.txtRegisterLicenseNo.TabIndex = 17;
+            this.txtRegisterLicenseNo.TabIndex = 16;
             // 
             // txtEnterpriseCode
             // 
             this.txtEnterpriseCode.AlphabeticFiled = null;
-            this.txtEnterpriseCode.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.EnterpriseCode;
+            this.txtEnterpriseCode.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.EnterpriseCode;
             this.txtEnterpriseCode.IsIntegerOnly = false;
             this.txtEnterpriseCode.IsNullString = "企业编号不能为空。";
             this.txtEnterpriseCode.IsNullValidate = true;
             this.txtEnterpriseCode.IsTransferAlphabetic = false;
-            this.txtEnterpriseCode.Location = new System.Drawing.Point(111, 12);
+            this.txtEnterpriseCode.Location = new System.Drawing.Point(123, 12);
             this.txtEnterpriseCode.Name = "txtEnterpriseCode";
             this.txtEnterpriseCode.Properties.ReadOnly = true;
-            this.txtEnterpriseCode.Size = new System.Drawing.Size(116, 21);
+            this.txtEnterpriseCode.Size = new System.Drawing.Size(50, 21);
             this.txtEnterpriseCode.StyleController = this.layControl;
             this.txtEnterpriseCode.TabIndex = 0;
             // 
             // txtEnterpriseName
             // 
             this.txtEnterpriseName.AlphabeticFiled = "EnterpriseSpell";
-            this.txtEnterpriseName.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.EnterpriseName;
+            this.txtEnterpriseName.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.EnterpriseName;
             this.txtEnterpriseName.IsIntegerOnly = false;
             this.txtEnterpriseName.IsNullString = "企业名称不能为空。";
             this.txtEnterpriseName.IsNullValidate = true;
             this.txtEnterpriseName.IsTransferAlphabetic = true;
-            this.txtEnterpriseName.Location = new System.Drawing.Point(330, 12);
+            this.txtEnterpriseName.Location = new System.Drawing.Point(288, 12);
             this.txtEnterpriseName.Name = "txtEnterpriseName";
-            this.txtEnterpriseName.Properties.ReadOnly = true;
-            this.txtEnterpriseName.Size = new System.Drawing.Size(332, 21);
+            this.txtEnterpriseName.Size = new System.Drawing.Size(159, 21);
             this.txtEnterpriseName.StyleController = this.layControl;
             this.txtEnterpriseName.TabIndex = 1;
             // 
@@ -435,19 +468,16 @@
             this.cbxEnterpriseType.CategoryCode = "EnterpriseType";
             this.cbxEnterpriseType.FirstDefaultItemText = null;
             this.cbxEnterpriseType.FormatQueryString = null;
-            this.cbxEnterpriseType.Location = new System.Drawing.Point(111, 262);
+            this.cbxEnterpriseType.Location = new System.Drawing.Point(123, 262);
             this.cbxEnterpriseType.Name = "cbxEnterpriseType";
-            this.cbxEnterpriseType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cbxEnterpriseType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbxEnterpriseType.Properties.NullValuePrompt = "请选择企业类型";
-            this.cbxEnterpriseType.Properties.NullValuePromptShowForEmptyValue = true;
-            this.cbxEnterpriseType.Properties.ReadOnly = true;
             this.cbxEnterpriseType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbxEnterpriseType.SelectedValue = null;
-            this.cbxEnterpriseType.Size = new System.Drawing.Size(115, 21);
+            this.cbxEnterpriseType.Size = new System.Drawing.Size(103, 21);
             this.cbxEnterpriseType.StyleController = this.layControl;
-            this.cbxEnterpriseType.TabIndex = 23;
+            this.cbxEnterpriseType.TabIndex = 22;
             // 
             // cbxEnterpriseStyle
             // 
@@ -455,19 +485,17 @@
             this.cbxEnterpriseStyle.CategoryCode = "EnterpriseStyle";
             this.cbxEnterpriseStyle.FirstDefaultItemText = null;
             this.cbxEnterpriseStyle.FormatQueryString = null;
-            this.cbxEnterpriseStyle.Location = new System.Drawing.Point(548, 262);
+            this.cbxEnterpriseStyle.Location = new System.Drawing.Point(560, 262);
             this.cbxEnterpriseStyle.Name = "cbxEnterpriseStyle";
-            this.cbxEnterpriseStyle.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cbxEnterpriseStyle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbxEnterpriseStyle.Properties.NullValuePrompt = "请选择企业性质";
             this.cbxEnterpriseStyle.Properties.NullValuePromptShowForEmptyValue = true;
-            this.cbxEnterpriseStyle.Properties.ReadOnly = true;
             this.cbxEnterpriseStyle.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbxEnterpriseStyle.SelectedValue = null;
-            this.cbxEnterpriseStyle.Size = new System.Drawing.Size(114, 21);
+            this.cbxEnterpriseStyle.Size = new System.Drawing.Size(102, 21);
             this.cbxEnterpriseStyle.StyleController = this.layControl;
-            this.cbxEnterpriseStyle.TabIndex = 25;
+            this.cbxEnterpriseStyle.TabIndex = 24;
             // 
             // cbxIndustryStyle
             // 
@@ -475,286 +503,266 @@
             this.cbxIndustryStyle.CategoryCode = "IndustryStyle";
             this.cbxIndustryStyle.FirstDefaultItemText = null;
             this.cbxIndustryStyle.FormatQueryString = null;
-            this.cbxIndustryStyle.Location = new System.Drawing.Point(329, 262);
+            this.cbxIndustryStyle.Location = new System.Drawing.Point(341, 262);
             this.cbxIndustryStyle.Name = "cbxIndustryStyle";
-            this.cbxIndustryStyle.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cbxIndustryStyle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbxIndustryStyle.Properties.NullValuePrompt = "请选择行业类别";
             this.cbxIndustryStyle.Properties.NullValuePromptShowForEmptyValue = true;
-            this.cbxIndustryStyle.Properties.ReadOnly = true;
             this.cbxIndustryStyle.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbxIndustryStyle.SelectedValue = null;
-            this.cbxIndustryStyle.Size = new System.Drawing.Size(116, 21);
+            this.cbxIndustryStyle.Size = new System.Drawing.Size(104, 21);
             this.cbxIndustryStyle.StyleController = this.layControl;
-            this.cbxIndustryStyle.TabIndex = 24;
+            this.cbxIndustryStyle.TabIndex = 23;
             // 
             // dteRegisterData
             // 
             this.dteRegisterData.EditValue = null;
-            this.dteRegisterData.Location = new System.Drawing.Point(330, 187);
+            this.dteRegisterData.Location = new System.Drawing.Point(342, 212);
             this.dteRegisterData.Name = "dteRegisterData";
             this.dteRegisterData.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dteRegisterData.Properties.ReadOnly = true;
             this.dteRegisterData.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dteRegisterData.Size = new System.Drawing.Size(115, 21);
+            this.dteRegisterData.Size = new System.Drawing.Size(103, 21);
             this.dteRegisterData.StyleController = this.layControl;
-            this.dteRegisterData.TabIndex = 15;
+            this.dteRegisterData.TabIndex = 14;
             // 
             // txtEnterpriseRemark
             // 
             this.txtEnterpriseRemark.AlphabeticFiled = null;
-            this.txtEnterpriseRemark.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.EnterpriseRemark;
+            this.txtEnterpriseRemark.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.EnterpriseRemark;
             this.txtEnterpriseRemark.IsIntegerOnly = false;
             this.txtEnterpriseRemark.IsNullString = null;
             this.txtEnterpriseRemark.IsNullValidate = false;
             this.txtEnterpriseRemark.IsTransferAlphabetic = false;
-            this.txtEnterpriseRemark.Location = new System.Drawing.Point(111, 312);
+            this.txtEnterpriseRemark.Location = new System.Drawing.Point(123, 312);
             this.txtEnterpriseRemark.Name = "txtEnterpriseRemark";
-            this.txtEnterpriseRemark.Properties.ReadOnly = true;
-            this.txtEnterpriseRemark.Size = new System.Drawing.Size(551, 21);
+            this.txtEnterpriseRemark.Size = new System.Drawing.Size(539, 21);
             this.txtEnterpriseRemark.StyleController = this.layControl;
-            this.txtEnterpriseRemark.TabIndex = 28;
+            this.txtEnterpriseRemark.TabIndex = 27;
             // 
             // txtEmployeeNum
             // 
             this.txtEmployeeNum.AlphabeticFiled = null;
-            this.txtEmployeeNum.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.EmployeeNum;
+            this.txtEmployeeNum.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.EmployeeNum;
             this.txtEmployeeNum.IsIntegerOnly = false;
             this.txtEmployeeNum.IsNullString = null;
             this.txtEmployeeNum.IsNullValidate = false;
             this.txtEmployeeNum.IsTransferAlphabetic = false;
-            this.txtEmployeeNum.Location = new System.Drawing.Point(441, 287);
+            this.txtEmployeeNum.Location = new System.Drawing.Point(342, 287);
             this.txtEmployeeNum.Name = "txtEmployeeNum";
-            this.txtEmployeeNum.Properties.ReadOnly = true;
-            this.txtEmployeeNum.Size = new System.Drawing.Size(221, 21);
+            this.txtEmployeeNum.Size = new System.Drawing.Size(320, 21);
             this.txtEmployeeNum.StyleController = this.layControl;
-            this.txtEmployeeNum.TabIndex = 27;
+            this.txtEmployeeNum.TabIndex = 26;
             // 
             // txtAccountBankCode
             // 
             this.txtAccountBankCode.AlphabeticFiled = null;
-            this.txtAccountBankCode.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.AccountBankCode;
+            this.txtAccountBankCode.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.AccountBankCode;
             this.txtAccountBankCode.IsIntegerOnly = false;
             this.txtAccountBankCode.IsNullString = null;
             this.txtAccountBankCode.IsNullValidate = false;
             this.txtAccountBankCode.IsTransferAlphabetic = false;
-            this.txtAccountBankCode.Location = new System.Drawing.Point(111, 237);
+            this.txtAccountBankCode.Location = new System.Drawing.Point(123, 237);
             this.txtAccountBankCode.Name = "txtAccountBankCode";
-            this.txtAccountBankCode.Properties.ReadOnly = true;
-            this.txtAccountBankCode.Size = new System.Drawing.Size(116, 21);
+            this.txtAccountBankCode.Size = new System.Drawing.Size(104, 21);
             this.txtAccountBankCode.StyleController = this.layControl;
-            this.txtAccountBankCode.TabIndex = 20;
+            this.txtAccountBankCode.TabIndex = 19;
             // 
             // txtAccountNo
             // 
             this.txtAccountNo.AlphabeticFiled = null;
-            this.txtAccountNo.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.AccountNo;
+            this.txtAccountNo.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.AccountNo;
             this.txtAccountNo.IsIntegerOnly = false;
             this.txtAccountNo.IsNullString = null;
             this.txtAccountNo.IsNullValidate = false;
             this.txtAccountNo.IsTransferAlphabetic = false;
-            this.txtAccountNo.Location = new System.Drawing.Point(548, 237);
+            this.txtAccountNo.Location = new System.Drawing.Point(560, 237);
             this.txtAccountNo.Name = "txtAccountNo";
-            this.txtAccountNo.Properties.ReadOnly = true;
-            this.txtAccountNo.Size = new System.Drawing.Size(114, 21);
+            this.txtAccountNo.Size = new System.Drawing.Size(102, 21);
             this.txtAccountNo.StyleController = this.layControl;
-            this.txtAccountNo.TabIndex = 22;
+            this.txtAccountNo.TabIndex = 21;
             // 
             // txtAccountBankName
             // 
             this.txtAccountBankName.AlphabeticFiled = null;
-            this.txtAccountBankName.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.AccountBankName;
+            this.txtAccountBankName.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.AccountBankName;
             this.txtAccountBankName.IsIntegerOnly = false;
             this.txtAccountBankName.IsNullString = null;
             this.txtAccountBankName.IsNullValidate = false;
             this.txtAccountBankName.IsTransferAlphabetic = false;
-            this.txtAccountBankName.Location = new System.Drawing.Point(330, 237);
+            this.txtAccountBankName.Location = new System.Drawing.Point(342, 237);
             this.txtAccountBankName.Name = "txtAccountBankName";
-            this.txtAccountBankName.Properties.ReadOnly = true;
-            this.txtAccountBankName.Size = new System.Drawing.Size(115, 21);
+            this.txtAccountBankName.Size = new System.Drawing.Size(103, 21);
             this.txtAccountBankName.StyleController = this.layControl;
-            this.txtAccountBankName.TabIndex = 21;
+            this.txtAccountBankName.TabIndex = 20;
             // 
             // txtRegisterCapital
             // 
             this.txtRegisterCapital.AlphabeticFiled = null;
-            this.txtRegisterCapital.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.RegisterCapital;
+            this.txtRegisterCapital.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.RegisterCapital;
             this.txtRegisterCapital.IsIntegerOnly = false;
             this.txtRegisterCapital.IsNullString = "注册资本不能为空。";
-            this.txtRegisterCapital.IsNullValidate = true;
+            this.txtRegisterCapital.IsNullValidate = false;
             this.txtRegisterCapital.IsTransferAlphabetic = false;
-            this.txtRegisterCapital.Location = new System.Drawing.Point(548, 187);
+            this.txtRegisterCapital.Location = new System.Drawing.Point(560, 212);
             this.txtRegisterCapital.Name = "txtRegisterCapital";
-            this.txtRegisterCapital.Properties.ReadOnly = true;
-            this.txtRegisterCapital.Size = new System.Drawing.Size(114, 21);
+            this.txtRegisterCapital.Size = new System.Drawing.Size(102, 21);
             this.txtRegisterCapital.StyleController = this.layControl;
-            this.txtRegisterCapital.TabIndex = 16;
+            this.txtRegisterCapital.TabIndex = 15;
             // 
             // txtRegisterAddress
             // 
             this.txtRegisterAddress.AlphabeticFiled = null;
-            this.txtRegisterAddress.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.RegisterAddress;
+            this.txtRegisterAddress.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.RegisterAddress;
             this.txtRegisterAddress.IsIntegerOnly = false;
             this.txtRegisterAddress.IsNullString = "注册地址不能为空。";
-            this.txtRegisterAddress.IsNullValidate = true;
+            this.txtRegisterAddress.IsNullValidate = false;
             this.txtRegisterAddress.IsTransferAlphabetic = false;
-            this.txtRegisterAddress.Location = new System.Drawing.Point(111, 187);
+            this.txtRegisterAddress.Location = new System.Drawing.Point(123, 212);
             this.txtRegisterAddress.Name = "txtRegisterAddress";
-            this.txtRegisterAddress.Properties.ReadOnly = true;
-            this.txtRegisterAddress.Size = new System.Drawing.Size(116, 21);
+            this.txtRegisterAddress.Size = new System.Drawing.Size(104, 21);
             this.txtRegisterAddress.StyleController = this.layControl;
-            this.txtRegisterAddress.TabIndex = 14;
+            this.txtRegisterAddress.TabIndex = 13;
             // 
             // txtLegalPhone
             // 
             this.txtLegalPhone.AlphabeticFiled = null;
-            this.txtLegalPhone.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.LegalPhone;
+            this.txtLegalPhone.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.LegalPhone;
             this.txtLegalPhone.IsIntegerOnly = false;
             this.txtLegalPhone.IsNullString = null;
             this.txtLegalPhone.IsNullValidate = false;
             this.txtLegalPhone.IsTransferAlphabetic = false;
-            this.txtLegalPhone.Location = new System.Drawing.Point(441, 162);
+            this.txtLegalPhone.Location = new System.Drawing.Point(342, 187);
             this.txtLegalPhone.Name = "txtLegalPhone";
-            this.txtLegalPhone.Properties.ReadOnly = true;
-            this.txtLegalPhone.Size = new System.Drawing.Size(221, 21);
+            this.txtLegalPhone.Size = new System.Drawing.Size(320, 21);
             this.txtLegalPhone.StyleController = this.layControl;
-            this.txtLegalPhone.TabIndex = 13;
+            this.txtLegalPhone.TabIndex = 12;
             // 
             // txtLegalPerson
             // 
             this.txtLegalPerson.AlphabeticFiled = "LegalSpell";
-            this.txtLegalPerson.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.LegalPerson;
+            this.txtLegalPerson.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.LegalPerson;
             this.txtLegalPerson.IsIntegerOnly = false;
             this.txtLegalPerson.IsNullString = "法人姓名不能为空。";
-            this.txtLegalPerson.IsNullValidate = true;
+            this.txtLegalPerson.IsNullValidate = false;
             this.txtLegalPerson.IsTransferAlphabetic = true;
-            this.txtLegalPerson.Location = new System.Drawing.Point(441, 137);
+            this.txtLegalPerson.Location = new System.Drawing.Point(342, 162);
             this.txtLegalPerson.Name = "txtLegalPerson";
-            this.txtLegalPerson.Properties.ReadOnly = true;
-            this.txtLegalPerson.Size = new System.Drawing.Size(221, 21);
+            this.txtLegalPerson.Size = new System.Drawing.Size(320, 21);
             this.txtLegalPerson.StyleController = this.layControl;
-            this.txtLegalPerson.TabIndex = 11;
+            this.txtLegalPerson.TabIndex = 10;
             // 
             // txtContactPhone
             // 
             this.txtContactPhone.AlphabeticFiled = null;
-            this.txtContactPhone.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.ContactPhone;
+            this.txtContactPhone.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.ContactPhone;
             this.txtContactPhone.IsIntegerOnly = false;
             this.txtContactPhone.IsNullString = null;
             this.txtContactPhone.IsNullValidate = false;
             this.txtContactPhone.IsTransferAlphabetic = false;
-            this.txtContactPhone.Location = new System.Drawing.Point(111, 162);
+            this.txtContactPhone.Location = new System.Drawing.Point(123, 187);
             this.txtContactPhone.Name = "txtContactPhone";
-            this.txtContactPhone.Properties.ReadOnly = true;
-            this.txtContactPhone.Size = new System.Drawing.Size(227, 21);
+            this.txtContactPhone.Size = new System.Drawing.Size(104, 21);
             this.txtContactPhone.StyleController = this.layControl;
-            this.txtContactPhone.TabIndex = 12;
+            this.txtContactPhone.TabIndex = 11;
             // 
             // txtContactPerson
             // 
             this.txtContactPerson.AlphabeticFiled = "BusinessPersonSpell";
-            this.txtContactPerson.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.ContactPerson;
+            this.txtContactPerson.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.ContactPerson;
             this.txtContactPerson.IsIntegerOnly = false;
             this.txtContactPerson.IsNullString = "业务联系人不能为空。";
-            this.txtContactPerson.IsNullValidate = true;
+            this.txtContactPerson.IsNullValidate = false;
             this.txtContactPerson.IsTransferAlphabetic = true;
-            this.txtContactPerson.Location = new System.Drawing.Point(111, 137);
+            this.txtContactPerson.Location = new System.Drawing.Point(123, 162);
             this.txtContactPerson.Name = "txtContactPerson";
-            this.txtContactPerson.Properties.ReadOnly = true;
-            this.txtContactPerson.Size = new System.Drawing.Size(227, 21);
+            this.txtContactPerson.Size = new System.Drawing.Size(104, 21);
             this.txtContactPerson.StyleController = this.layControl;
-            this.txtContactPerson.TabIndex = 10;
+            this.txtContactPerson.TabIndex = 9;
             // 
             // txtEnterpriseWebSiteUrl
             // 
             this.txtEnterpriseWebSiteUrl.AlphabeticFiled = null;
-            this.txtEnterpriseWebSiteUrl.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.EnterpriseWebSiteUrl;
+            this.txtEnterpriseWebSiteUrl.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.EnterpriseWebSiteUrl;
             this.txtEnterpriseWebSiteUrl.IsIntegerOnly = false;
             this.txtEnterpriseWebSiteUrl.IsNullString = null;
             this.txtEnterpriseWebSiteUrl.IsNullValidate = false;
             this.txtEnterpriseWebSiteUrl.IsTransferAlphabetic = false;
-            this.txtEnterpriseWebSiteUrl.Location = new System.Drawing.Point(441, 112);
+            this.txtEnterpriseWebSiteUrl.Location = new System.Drawing.Point(342, 137);
             this.txtEnterpriseWebSiteUrl.Name = "txtEnterpriseWebSiteUrl";
-            this.txtEnterpriseWebSiteUrl.Properties.ReadOnly = true;
-            this.txtEnterpriseWebSiteUrl.Size = new System.Drawing.Size(221, 21);
+            this.txtEnterpriseWebSiteUrl.Size = new System.Drawing.Size(320, 21);
             this.txtEnterpriseWebSiteUrl.StyleController = this.layControl;
-            this.txtEnterpriseWebSiteUrl.TabIndex = 9;
+            this.txtEnterpriseWebSiteUrl.TabIndex = 7;
             // 
             // txtEnterprisePostalCode
             // 
             this.txtEnterprisePostalCode.AlphabeticFiled = null;
-            this.txtEnterprisePostalCode.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.EnterprisePostalCode;
+            this.txtEnterprisePostalCode.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.EnterprisePostalCode;
             this.txtEnterprisePostalCode.IsIntegerOnly = false;
             this.txtEnterprisePostalCode.IsNullString = null;
             this.txtEnterprisePostalCode.IsNullValidate = false;
             this.txtEnterprisePostalCode.IsTransferAlphabetic = false;
-            this.txtEnterprisePostalCode.Location = new System.Drawing.Point(330, 87);
+            this.txtEnterprisePostalCode.Location = new System.Drawing.Point(342, 112);
             this.txtEnterprisePostalCode.Name = "txtEnterprisePostalCode";
-            this.txtEnterprisePostalCode.Properties.ReadOnly = true;
-            this.txtEnterprisePostalCode.Size = new System.Drawing.Size(114, 21);
+            this.txtEnterprisePostalCode.Size = new System.Drawing.Size(103, 21);
             this.txtEnterprisePostalCode.StyleController = this.layControl;
             this.txtEnterprisePostalCode.TabIndex = 6;
             // 
             // txtEnterpriseMail
             // 
             this.txtEnterpriseMail.AlphabeticFiled = null;
-            this.txtEnterpriseMail.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.EnterpriseMail;
+            this.txtEnterpriseMail.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.EnterpriseMail;
             this.txtEnterpriseMail.IsIntegerOnly = false;
             this.txtEnterpriseMail.IsNullString = null;
             this.txtEnterpriseMail.IsNullValidate = false;
             this.txtEnterpriseMail.IsTransferAlphabetic = false;
-            this.txtEnterpriseMail.Location = new System.Drawing.Point(111, 112);
+            this.txtEnterpriseMail.Location = new System.Drawing.Point(123, 137);
             this.txtEnterpriseMail.Name = "txtEnterpriseMail";
-            this.txtEnterpriseMail.Properties.ReadOnly = true;
-            this.txtEnterpriseMail.Size = new System.Drawing.Size(227, 21);
+            this.txtEnterpriseMail.Size = new System.Drawing.Size(104, 21);
             this.txtEnterpriseMail.StyleController = this.layControl;
             this.txtEnterpriseMail.TabIndex = 8;
             // 
             // txtEnterpriseFaxNo
             // 
             this.txtEnterpriseFaxNo.AlphabeticFiled = null;
-            this.txtEnterpriseFaxNo.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.EnterpriseFaxNo;
+            this.txtEnterpriseFaxNo.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.EnterpriseFaxNo;
             this.txtEnterpriseFaxNo.IsIntegerOnly = false;
             this.txtEnterpriseFaxNo.IsNullString = null;
             this.txtEnterpriseFaxNo.IsNullValidate = false;
             this.txtEnterpriseFaxNo.IsTransferAlphabetic = false;
-            this.txtEnterpriseFaxNo.Location = new System.Drawing.Point(547, 87);
+            this.txtEnterpriseFaxNo.Location = new System.Drawing.Point(560, 112);
             this.txtEnterpriseFaxNo.Name = "txtEnterpriseFaxNo";
-            this.txtEnterpriseFaxNo.Properties.ReadOnly = true;
-            this.txtEnterpriseFaxNo.Size = new System.Drawing.Size(115, 21);
+            this.txtEnterpriseFaxNo.Size = new System.Drawing.Size(102, 21);
             this.txtEnterpriseFaxNo.StyleController = this.layControl;
             this.txtEnterpriseFaxNo.TabIndex = 7;
             // 
             // txtEnterprisePhone
             // 
             this.txtEnterprisePhone.AlphabeticFiled = "LeaderSpell";
-            this.txtEnterprisePhone.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.EnterprisePhone;
+            this.txtEnterprisePhone.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.EnterprisePhone;
             this.txtEnterprisePhone.IsIntegerOnly = false;
             this.txtEnterprisePhone.IsNullString = "企业电话不能为空。";
-            this.txtEnterprisePhone.IsNullValidate = true;
+            this.txtEnterprisePhone.IsNullValidate = false;
             this.txtEnterprisePhone.IsTransferAlphabetic = true;
-            this.txtEnterprisePhone.Location = new System.Drawing.Point(111, 87);
+            this.txtEnterprisePhone.Location = new System.Drawing.Point(123, 112);
             this.txtEnterprisePhone.Name = "txtEnterprisePhone";
-            this.txtEnterprisePhone.Properties.ReadOnly = true;
-            this.txtEnterprisePhone.Size = new System.Drawing.Size(116, 21);
+            this.txtEnterprisePhone.Size = new System.Drawing.Size(104, 21);
             this.txtEnterprisePhone.StyleController = this.layControl;
             this.txtEnterprisePhone.TabIndex = 5;
             // 
             // txtEnterpriseAddress
             // 
             this.txtEnterpriseAddress.AlphabeticFiled = null;
-            this.txtEnterpriseAddress.EntityField = DQS.Module.Entities.BFIEnterpriseChangeHistoryEntityFields2.EnterpriseAddress;
+            this.txtEnterpriseAddress.EntityField = DQS.Module.Entities.BFIEnterpriseEntityFields2.EnterpriseAddress;
             this.txtEnterpriseAddress.IsIntegerOnly = false;
             this.txtEnterpriseAddress.IsNullString = null;
             this.txtEnterpriseAddress.IsNullValidate = false;
             this.txtEnterpriseAddress.IsTransferAlphabetic = false;
-            this.txtEnterpriseAddress.Location = new System.Drawing.Point(437, 62);
+            this.txtEnterpriseAddress.Location = new System.Drawing.Point(342, 87);
             this.txtEnterpriseAddress.Name = "txtEnterpriseAddress";
-            this.txtEnterpriseAddress.Properties.ReadOnly = true;
-            this.txtEnterpriseAddress.Size = new System.Drawing.Size(225, 21);
+            this.txtEnterpriseAddress.Size = new System.Drawing.Size(320, 21);
             this.txtEnterpriseAddress.StyleController = this.layControl;
             this.txtEnterpriseAddress.TabIndex = 4;
             // 
@@ -789,13 +797,15 @@
             this.layLegalPerson,
             this.layBusinessPhone,
             this.layEmployeeNum,
-            this.layRegisterLicenseNo,
-            this.layTaxValidateDate,
             this.layEnterpriseLevel,
             this.layLicenseValidateDate,
-            this.layRegisterTaxNo,
             this.layOrganizationCode,
-            this.layBusinessValidateDate});
+            this.layBusinessValidateDate,
+            this.layRegisterLicenseNo,
+            this.layRegisterTaxNo,
+            this.layTaxValidateDate,
+            this.layGSPValidateDate,
+            this.layoutLicenseYearValidateDate});
             this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(674, 345);
@@ -807,21 +817,21 @@
             // 
             this.layEnterprisePhone.Control = this.txtEnterprisePhone;
             this.layEnterprisePhone.CustomizationFormText = "企业电话";
-            this.layEnterprisePhone.Location = new System.Drawing.Point(0, 75);
+            this.layEnterprisePhone.Location = new System.Drawing.Point(0, 100);
             this.layEnterprisePhone.Name = "layEnterprisePhone";
             this.layEnterprisePhone.Size = new System.Drawing.Size(219, 25);
             this.layEnterprisePhone.Text = "企业电话";
-            this.layEnterprisePhone.TextSize = new System.Drawing.Size(96, 17);
+            this.layEnterprisePhone.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layEnterprisePostalCode
             // 
             this.layEnterprisePostalCode.Control = this.txtEnterprisePostalCode;
             this.layEnterprisePostalCode.CustomizationFormText = "邮政编码";
-            this.layEnterprisePostalCode.Location = new System.Drawing.Point(219, 75);
+            this.layEnterprisePostalCode.Location = new System.Drawing.Point(219, 100);
             this.layEnterprisePostalCode.Name = "layEnterprisePostalCode";
-            this.layEnterprisePostalCode.Size = new System.Drawing.Size(217, 25);
+            this.layEnterprisePostalCode.Size = new System.Drawing.Size(218, 25);
             this.layEnterprisePostalCode.Text = "邮政编码";
-            this.layEnterprisePostalCode.TextSize = new System.Drawing.Size(96, 17);
+            this.layEnterprisePostalCode.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layEnterpriseCode
             // 
@@ -829,39 +839,39 @@
             this.layEnterpriseCode.CustomizationFormText = "企业编号";
             this.layEnterpriseCode.Location = new System.Drawing.Point(0, 0);
             this.layEnterpriseCode.Name = "layEnterpriseCode";
-            this.layEnterpriseCode.Size = new System.Drawing.Size(219, 25);
+            this.layEnterpriseCode.Size = new System.Drawing.Size(165, 25);
             this.layEnterpriseCode.Text = "企业编号";
-            this.layEnterpriseCode.TextSize = new System.Drawing.Size(96, 17);
+            this.layEnterpriseCode.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layEnterpriseMail
             // 
             this.layEnterpriseMail.Control = this.txtEnterpriseMail;
             this.layEnterpriseMail.CustomizationFormText = "电子邮箱";
-            this.layEnterpriseMail.Location = new System.Drawing.Point(0, 100);
+            this.layEnterpriseMail.Location = new System.Drawing.Point(0, 125);
             this.layEnterpriseMail.Name = "layEnterpriseMail";
-            this.layEnterpriseMail.Size = new System.Drawing.Size(330, 25);
+            this.layEnterpriseMail.Size = new System.Drawing.Size(219, 25);
             this.layEnterpriseMail.Text = "电子邮箱";
-            this.layEnterpriseMail.TextSize = new System.Drawing.Size(96, 17);
+            this.layEnterpriseMail.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layEnterpriseFaxNo
             // 
             this.layEnterpriseFaxNo.Control = this.txtEnterpriseFaxNo;
             this.layEnterpriseFaxNo.CustomizationFormText = "传真号码";
-            this.layEnterpriseFaxNo.Location = new System.Drawing.Point(436, 75);
+            this.layEnterpriseFaxNo.Location = new System.Drawing.Point(437, 100);
             this.layEnterpriseFaxNo.Name = "layEnterpriseFaxNo";
-            this.layEnterpriseFaxNo.Size = new System.Drawing.Size(218, 25);
+            this.layEnterpriseFaxNo.Size = new System.Drawing.Size(217, 25);
             this.layEnterpriseFaxNo.Text = "传真号码";
-            this.layEnterpriseFaxNo.TextSize = new System.Drawing.Size(96, 17);
+            this.layEnterpriseFaxNo.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layEnterpriseWebSiteUrl
             // 
             this.layEnterpriseWebSiteUrl.Control = this.txtEnterpriseWebSiteUrl;
             this.layEnterpriseWebSiteUrl.CustomizationFormText = "企业网址";
-            this.layEnterpriseWebSiteUrl.Location = new System.Drawing.Point(330, 100);
+            this.layEnterpriseWebSiteUrl.Location = new System.Drawing.Point(219, 125);
             this.layEnterpriseWebSiteUrl.Name = "layEnterpriseWebSiteUrl";
-            this.layEnterpriseWebSiteUrl.Size = new System.Drawing.Size(324, 25);
+            this.layEnterpriseWebSiteUrl.Size = new System.Drawing.Size(435, 25);
             this.layEnterpriseWebSiteUrl.Text = "企业网址";
-            this.layEnterpriseWebSiteUrl.TextSize = new System.Drawing.Size(96, 17);
+            this.layEnterpriseWebSiteUrl.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layEnterpriseRemark
             // 
@@ -871,27 +881,27 @@
             this.layEnterpriseRemark.Name = "layEnterpriseRemark";
             this.layEnterpriseRemark.Size = new System.Drawing.Size(654, 25);
             this.layEnterpriseRemark.Text = "备注";
-            this.layEnterpriseRemark.TextSize = new System.Drawing.Size(96, 17);
+            this.layEnterpriseRemark.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layEnterpriseName
             // 
             this.layEnterpriseName.Control = this.txtEnterpriseName;
             this.layEnterpriseName.CustomizationFormText = "企业名称";
-            this.layEnterpriseName.Location = new System.Drawing.Point(219, 0);
+            this.layEnterpriseName.Location = new System.Drawing.Point(165, 0);
             this.layEnterpriseName.Name = "layEnterpriseName";
-            this.layEnterpriseName.Size = new System.Drawing.Size(435, 25);
+            this.layEnterpriseName.Size = new System.Drawing.Size(274, 25);
             this.layEnterpriseName.Text = "企业名称";
-            this.layEnterpriseName.TextSize = new System.Drawing.Size(96, 17);
+            this.layEnterpriseName.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layEnterpriseAddress
             // 
             this.layEnterpriseAddress.Control = this.txtEnterpriseAddress;
             this.layEnterpriseAddress.CustomizationFormText = "通讯地址";
-            this.layEnterpriseAddress.Location = new System.Drawing.Point(326, 50);
+            this.layEnterpriseAddress.Location = new System.Drawing.Point(219, 75);
             this.layEnterpriseAddress.Name = "layEnterpriseAddress";
-            this.layEnterpriseAddress.Size = new System.Drawing.Size(328, 25);
+            this.layEnterpriseAddress.Size = new System.Drawing.Size(435, 25);
             this.layEnterpriseAddress.Text = "通讯地址";
-            this.layEnterpriseAddress.TextSize = new System.Drawing.Size(96, 17);
+            this.layEnterpriseAddress.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layAccountBankCode
             // 
@@ -901,7 +911,7 @@
             this.layAccountBankCode.Name = "layAccountBankCode";
             this.layAccountBankCode.Size = new System.Drawing.Size(219, 25);
             this.layAccountBankCode.Text = "电子行号";
-            this.layAccountBankCode.TextSize = new System.Drawing.Size(96, 17);
+            this.layAccountBankCode.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layAccountBankName
             // 
@@ -911,17 +921,17 @@
             this.layAccountBankName.Name = "layAccountBankName";
             this.layAccountBankName.Size = new System.Drawing.Size(218, 25);
             this.layAccountBankName.Text = "开户行";
-            this.layAccountBankName.TextSize = new System.Drawing.Size(96, 17);
+            this.layAccountBankName.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layRegisterData
             // 
             this.layRegisterData.Control = this.dteRegisterData;
             this.layRegisterData.CustomizationFormText = "注册日期";
-            this.layRegisterData.Location = new System.Drawing.Point(219, 175);
+            this.layRegisterData.Location = new System.Drawing.Point(219, 200);
             this.layRegisterData.Name = "layRegisterData";
             this.layRegisterData.Size = new System.Drawing.Size(218, 25);
             this.layRegisterData.Text = "注册日期";
-            this.layRegisterData.TextSize = new System.Drawing.Size(96, 17);
+            this.layRegisterData.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layEnterpriseType
             // 
@@ -931,17 +941,18 @@
             this.layEnterpriseType.Name = "layEnterpriseType";
             this.layEnterpriseType.Size = new System.Drawing.Size(218, 25);
             this.layEnterpriseType.Text = "企业类型";
-            this.layEnterpriseType.TextSize = new System.Drawing.Size(96, 17);
+            this.layEnterpriseType.TextSize = new System.Drawing.Size(108, 17);
+            this.layEnterpriseType.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // layBusinessPerson
             // 
             this.layBusinessPerson.Control = this.txtContactPerson;
             this.layBusinessPerson.CustomizationFormText = "企业联系人";
-            this.layBusinessPerson.Location = new System.Drawing.Point(0, 125);
+            this.layBusinessPerson.Location = new System.Drawing.Point(0, 150);
             this.layBusinessPerson.Name = "layBusinessPerson";
-            this.layBusinessPerson.Size = new System.Drawing.Size(330, 25);
+            this.layBusinessPerson.Size = new System.Drawing.Size(219, 25);
             this.layBusinessPerson.Text = "企业联系人";
-            this.layBusinessPerson.TextSize = new System.Drawing.Size(96, 17);
+            this.layBusinessPerson.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layEnterpriseStyle
             // 
@@ -951,7 +962,7 @@
             this.layEnterpriseStyle.Name = "layEnterpriseStyle";
             this.layEnterpriseStyle.Size = new System.Drawing.Size(217, 25);
             this.layEnterpriseStyle.Text = "企业性质";
-            this.layEnterpriseStyle.TextSize = new System.Drawing.Size(96, 17);
+            this.layEnterpriseStyle.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layIndustryStyle
             // 
@@ -961,37 +972,37 @@
             this.layIndustryStyle.Name = "layIndustryStyle";
             this.layIndustryStyle.Size = new System.Drawing.Size(219, 25);
             this.layIndustryStyle.Text = "行业类别";
-            this.layIndustryStyle.TextSize = new System.Drawing.Size(96, 17);
+            this.layIndustryStyle.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layLegalPhone
             // 
             this.layLegalPhone.Control = this.txtLegalPhone;
             this.layLegalPhone.CustomizationFormText = "法人联系电话";
-            this.layLegalPhone.Location = new System.Drawing.Point(330, 150);
+            this.layLegalPhone.Location = new System.Drawing.Point(219, 175);
             this.layLegalPhone.Name = "layLegalPhone";
-            this.layLegalPhone.Size = new System.Drawing.Size(324, 25);
+            this.layLegalPhone.Size = new System.Drawing.Size(435, 25);
             this.layLegalPhone.Text = "法人联系电话";
-            this.layLegalPhone.TextSize = new System.Drawing.Size(96, 17);
+            this.layLegalPhone.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layRegisterCapital
             // 
             this.layRegisterCapital.Control = this.txtRegisterCapital;
             this.layRegisterCapital.CustomizationFormText = "注册资本";
-            this.layRegisterCapital.Location = new System.Drawing.Point(437, 175);
+            this.layRegisterCapital.Location = new System.Drawing.Point(437, 200);
             this.layRegisterCapital.Name = "layRegisterCapital";
             this.layRegisterCapital.Size = new System.Drawing.Size(217, 25);
             this.layRegisterCapital.Text = "注册资本";
-            this.layRegisterCapital.TextSize = new System.Drawing.Size(96, 17);
+            this.layRegisterCapital.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layRegisterAddress
             // 
             this.layRegisterAddress.Control = this.txtRegisterAddress;
             this.layRegisterAddress.CustomizationFormText = "注册地址";
-            this.layRegisterAddress.Location = new System.Drawing.Point(0, 175);
+            this.layRegisterAddress.Location = new System.Drawing.Point(0, 200);
             this.layRegisterAddress.Name = "layRegisterAddress";
             this.layRegisterAddress.Size = new System.Drawing.Size(219, 25);
             this.layRegisterAddress.Text = "注册地址";
-            this.layRegisterAddress.TextSize = new System.Drawing.Size(96, 17);
+            this.layRegisterAddress.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layAccountNo
             // 
@@ -1001,57 +1012,37 @@
             this.layAccountNo.Name = "layAccountNo";
             this.layAccountNo.Size = new System.Drawing.Size(217, 25);
             this.layAccountNo.Text = "银行账号";
-            this.layAccountNo.TextSize = new System.Drawing.Size(96, 17);
+            this.layAccountNo.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layLegalPerson
             // 
             this.layLegalPerson.Control = this.txtLegalPerson;
             this.layLegalPerson.CustomizationFormText = "法人姓名";
-            this.layLegalPerson.Location = new System.Drawing.Point(330, 125);
+            this.layLegalPerson.Location = new System.Drawing.Point(219, 150);
             this.layLegalPerson.Name = "layLegalPerson";
-            this.layLegalPerson.Size = new System.Drawing.Size(324, 25);
+            this.layLegalPerson.Size = new System.Drawing.Size(435, 25);
             this.layLegalPerson.Text = "法人姓名";
-            this.layLegalPerson.TextSize = new System.Drawing.Size(96, 17);
+            this.layLegalPerson.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layBusinessPhone
             // 
             this.layBusinessPhone.Control = this.txtContactPhone;
             this.layBusinessPhone.CustomizationFormText = "企业联系电话";
-            this.layBusinessPhone.Location = new System.Drawing.Point(0, 150);
+            this.layBusinessPhone.Location = new System.Drawing.Point(0, 175);
             this.layBusinessPhone.Name = "layBusinessPhone";
-            this.layBusinessPhone.Size = new System.Drawing.Size(330, 25);
+            this.layBusinessPhone.Size = new System.Drawing.Size(219, 25);
             this.layBusinessPhone.Text = "企业联系电话";
-            this.layBusinessPhone.TextSize = new System.Drawing.Size(96, 17);
+            this.layBusinessPhone.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layEmployeeNum
             // 
             this.layEmployeeNum.Control = this.txtEmployeeNum;
             this.layEmployeeNum.CustomizationFormText = "从业人数";
-            this.layEmployeeNum.Location = new System.Drawing.Point(330, 275);
+            this.layEmployeeNum.Location = new System.Drawing.Point(219, 275);
             this.layEmployeeNum.Name = "layEmployeeNum";
-            this.layEmployeeNum.Size = new System.Drawing.Size(324, 25);
+            this.layEmployeeNum.Size = new System.Drawing.Size(435, 25);
             this.layEmployeeNum.Text = "从业人数";
-            this.layEmployeeNum.TextSize = new System.Drawing.Size(96, 17);
-            // 
-            // layRegisterLicenseNo
-            // 
-            this.layRegisterLicenseNo.Control = this.txtRegisterLicenseNo;
-            this.layRegisterLicenseNo.CustomizationFormText = "营业执照注册号";
-            this.layRegisterLicenseNo.Location = new System.Drawing.Point(0, 200);
-            this.layRegisterLicenseNo.Name = "layRegisterLicenseNo";
-            this.layRegisterLicenseNo.Size = new System.Drawing.Size(218, 25);
-            this.layRegisterLicenseNo.Text = "营业执照注册号";
-            this.layRegisterLicenseNo.TextSize = new System.Drawing.Size(96, 17);
-            // 
-            // layTaxValidateDate
-            // 
-            this.layTaxValidateDate.Control = this.datTaxValidateDate;
-            this.layTaxValidateDate.CustomizationFormText = "税务登记证到期日";
-            this.layTaxValidateDate.Location = new System.Drawing.Point(436, 200);
-            this.layTaxValidateDate.Name = "layTaxValidateDate";
-            this.layTaxValidateDate.Size = new System.Drawing.Size(218, 25);
-            this.layTaxValidateDate.Text = "税务登记证到期日";
-            this.layTaxValidateDate.TextSize = new System.Drawing.Size(96, 17);
+            this.layEmployeeNum.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layEnterpriseLevel
             // 
@@ -1059,9 +1050,9 @@
             this.layEnterpriseLevel.CustomizationFormText = "企业级别";
             this.layEnterpriseLevel.Location = new System.Drawing.Point(0, 275);
             this.layEnterpriseLevel.Name = "layEnterpriseLevel";
-            this.layEnterpriseLevel.Size = new System.Drawing.Size(330, 25);
+            this.layEnterpriseLevel.Size = new System.Drawing.Size(219, 25);
             this.layEnterpriseLevel.Text = "企业级别";
-            this.layEnterpriseLevel.TextSize = new System.Drawing.Size(96, 17);
+            this.layEnterpriseLevel.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layLicenseValidateDate
             // 
@@ -1069,39 +1060,79 @@
             this.layLicenseValidateDate.CustomizationFormText = "营业执照到期日";
             this.layLicenseValidateDate.Location = new System.Drawing.Point(0, 25);
             this.layLicenseValidateDate.Name = "layLicenseValidateDate";
-            this.layLicenseValidateDate.Size = new System.Drawing.Size(326, 25);
+            this.layLicenseValidateDate.Size = new System.Drawing.Size(219, 25);
             this.layLicenseValidateDate.Text = "营业执照到期日";
-            this.layLicenseValidateDate.TextSize = new System.Drawing.Size(96, 17);
-            // 
-            // layRegisterTaxNo
-            // 
-            this.layRegisterTaxNo.Control = this.txtRegisterTaxNo;
-            this.layRegisterTaxNo.CustomizationFormText = "税务登记证号";
-            this.layRegisterTaxNo.Location = new System.Drawing.Point(218, 200);
-            this.layRegisterTaxNo.Name = "layRegisterTaxNo";
-            this.layRegisterTaxNo.Size = new System.Drawing.Size(218, 25);
-            this.layRegisterTaxNo.Text = "税务登记证号";
-            this.layRegisterTaxNo.TextSize = new System.Drawing.Size(96, 17);
+            this.layLicenseValidateDate.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layOrganizationCode
             // 
             this.layOrganizationCode.Control = this.txtOrganizationCode;
             this.layOrganizationCode.CustomizationFormText = "组织机构代码";
-            this.layOrganizationCode.Location = new System.Drawing.Point(0, 50);
+            this.layOrganizationCode.Location = new System.Drawing.Point(437, 25);
             this.layOrganizationCode.Name = "layOrganizationCode";
-            this.layOrganizationCode.Size = new System.Drawing.Size(326, 25);
+            this.layOrganizationCode.Size = new System.Drawing.Size(217, 25);
             this.layOrganizationCode.Text = "组织机构代码";
-            this.layOrganizationCode.TextSize = new System.Drawing.Size(96, 17);
+            this.layOrganizationCode.TextSize = new System.Drawing.Size(108, 17);
             // 
             // layBusinessValidateDate
             // 
             this.layBusinessValidateDate.Control = this.datBusinessValidateDate;
             this.layBusinessValidateDate.CustomizationFormText = "经营许可证到期日";
-            this.layBusinessValidateDate.Location = new System.Drawing.Point(326, 25);
+            this.layBusinessValidateDate.Location = new System.Drawing.Point(219, 25);
             this.layBusinessValidateDate.Name = "layBusinessValidateDate";
-            this.layBusinessValidateDate.Size = new System.Drawing.Size(328, 25);
+            this.layBusinessValidateDate.Size = new System.Drawing.Size(218, 25);
             this.layBusinessValidateDate.Text = "经营许可证到期日";
-            this.layBusinessValidateDate.TextSize = new System.Drawing.Size(96, 17);
+            this.layBusinessValidateDate.TextSize = new System.Drawing.Size(108, 17);
+            // 
+            // layRegisterLicenseNo
+            // 
+            this.layRegisterLicenseNo.Control = this.txtRegisterLicenseNo;
+            this.layRegisterLicenseNo.CustomizationFormText = "营业执照注册号";
+            this.layRegisterLicenseNo.Location = new System.Drawing.Point(0, 50);
+            this.layRegisterLicenseNo.Name = "layRegisterLicenseNo";
+            this.layRegisterLicenseNo.Size = new System.Drawing.Size(218, 25);
+            this.layRegisterLicenseNo.Text = "营业执照注册号";
+            this.layRegisterLicenseNo.TextSize = new System.Drawing.Size(108, 17);
+            // 
+            // layRegisterTaxNo
+            // 
+            this.layRegisterTaxNo.Control = this.txtRegisterTaxNo;
+            this.layRegisterTaxNo.CustomizationFormText = "税务登记证号";
+            this.layRegisterTaxNo.Location = new System.Drawing.Point(218, 50);
+            this.layRegisterTaxNo.Name = "layRegisterTaxNo";
+            this.layRegisterTaxNo.Size = new System.Drawing.Size(219, 25);
+            this.layRegisterTaxNo.Text = "税务登记证号";
+            this.layRegisterTaxNo.TextSize = new System.Drawing.Size(108, 17);
+            // 
+            // layTaxValidateDate
+            // 
+            this.layTaxValidateDate.Control = this.datTaxValidateDate;
+            this.layTaxValidateDate.CustomizationFormText = "税务登记证到期日";
+            this.layTaxValidateDate.Location = new System.Drawing.Point(437, 50);
+            this.layTaxValidateDate.Name = "layTaxValidateDate";
+            this.layTaxValidateDate.Size = new System.Drawing.Size(217, 25);
+            this.layTaxValidateDate.Text = "税务登记证到期日";
+            this.layTaxValidateDate.TextSize = new System.Drawing.Size(108, 17);
+            // 
+            // layGSPValidateDate
+            // 
+            this.layGSPValidateDate.Control = this.datGSPValidateDate;
+            this.layGSPValidateDate.CustomizationFormText = "GSP证书到期日";
+            this.layGSPValidateDate.Location = new System.Drawing.Point(439, 0);
+            this.layGSPValidateDate.Name = "layGSPValidateDate";
+            this.layGSPValidateDate.Size = new System.Drawing.Size(215, 25);
+            this.layGSPValidateDate.Text = "GSP证书到期日";
+            this.layGSPValidateDate.TextSize = new System.Drawing.Size(108, 17);
+            // 
+            // layoutLicenseYearValidateDate
+            // 
+            this.layoutLicenseYearValidateDate.Control = this.dateLicenseYearValidateDate;
+            this.layoutLicenseYearValidateDate.CustomizationFormText = "营业执照年报到期日";
+            this.layoutLicenseYearValidateDate.Location = new System.Drawing.Point(0, 75);
+            this.layoutLicenseYearValidateDate.Name = "layoutLicenseYearValidateDate";
+            this.layoutLicenseYearValidateDate.Size = new System.Drawing.Size(219, 25);
+            this.layoutLicenseYearValidateDate.Text = "营业执照年报到期日";
+            this.layoutLicenseYearValidateDate.TextSize = new System.Drawing.Size(108, 17);
             // 
             // FrmSingleEnterpriseChangeHistory
             // 
@@ -1132,6 +1163,10 @@
             this.ftPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).EndInit();
             this.layControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dateLicenseYearValidateDate.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateLicenseYearValidateDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datGSPValidateDate.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datGSPValidateDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datBusinessValidateDate.Properties.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datBusinessValidateDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOrganizationCode.Properties)).EndInit();
@@ -1190,13 +1225,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.layLegalPerson)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layBusinessPhone)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layEmployeeNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layRegisterLicenseNo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layTaxValidateDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layEnterpriseLevel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layLicenseValidateDate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layRegisterTaxNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layOrganizationCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layBusinessValidateDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layRegisterLicenseNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layRegisterTaxNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layTaxValidateDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layGSPValidateDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutLicenseYearValidateDate)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1206,71 +1243,75 @@
         private DevExpress.XtraEditors.PanelControl pnOperating;
         private DevExpress.XtraEditors.SimpleButton btnCancel;
         private DQS.Controls.FieldTextBoxPanel ftPanel;
-        private DevExpress.XtraLayout.LayoutControl layControl;
-        private DevExpress.XtraLayout.LayoutControlGroup layControlGroup;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtEnterprisePhone;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtEnterpriseAddress;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtEnterpriseName;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtEnterpriseCode;
-        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseCode;
-        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseName;
-        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseAddress;
-        private DevExpress.XtraLayout.LayoutControlItem layEnterprisePhone;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtEnterpriseFaxNo;
-        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseFaxNo;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtContactPhone;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtContactPerson;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtEnterpriseWebSiteUrl;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtEnterprisePostalCode;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtEnterpriseMail;
-        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseMail;
-        private DevExpress.XtraLayout.LayoutControlItem layEnterprisePostalCode;
-        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseWebSiteUrl;
-        private DevExpress.XtraLayout.LayoutControlItem layBusinessPerson;
-        private DevExpress.XtraLayout.LayoutControlItem layBusinessPhone;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtRegisterCapital;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtRegisterAddress;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtLegalPhone;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtLegalPerson;
-        private DevExpress.XtraLayout.LayoutControlItem layLegalPerson;
-        private DevExpress.XtraLayout.LayoutControlItem layLegalPhone;
-        private DevExpress.XtraLayout.LayoutControlItem layRegisterAddress;
-        private DevExpress.XtraLayout.LayoutControlItem layRegisterCapital;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtEnterpriseRemark;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtEmployeeNum;
-        private DQS.Controls.ComboBoxCategoryEx cbxIndustryStyle;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtAccountBankCode;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtAccountNo;
-        private DQS.Controls.BFIEnterpriseChangeHistoryEntityTextBox txtAccountBankName;
-        private DevExpress.XtraLayout.LayoutControlItem layAccountBankName;
-        private DevExpress.XtraLayout.LayoutControlItem layAccountNo;
-        private DevExpress.XtraLayout.LayoutControlItem layAccountBankCode;
-        private DevExpress.XtraLayout.LayoutControlItem layEmployeeNum;
-        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseRemark;
-        private DevExpress.XtraEditors.DateEdit dteRegisterData;
-        private DevExpress.XtraLayout.LayoutControlItem layRegisterData;
-        private DQS.Controls.ComboBoxCategoryEx cbxEnterpriseStyle;
-        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseStyle;
-        private DQS.Controls.ComboBoxCategoryEx cbxEnterpriseType;
-        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseType;
-        private DevExpress.XtraLayout.LayoutControlItem layIndustryStyle;
-        private Controls.BFIEnterpriseChangeHistoryEntityTextBox txtRegisterTaxNo;
-        private Controls.BFIEnterpriseChangeHistoryEntityTextBox txtRegisterLicenseNo;
-        private DevExpress.XtraLayout.LayoutControlItem layRegisterLicenseNo;
-        private DevExpress.XtraLayout.LayoutControlItem layRegisterTaxNo;
-        private DevExpress.XtraEditors.DateEdit datLicenseValidateDate;
-        private DevExpress.XtraLayout.LayoutControlItem layLicenseValidateDate;
-        private DevExpress.XtraEditors.DateEdit datTaxValidateDate;
-        private DevExpress.XtraLayout.LayoutControlItem layTaxValidateDate;
-        private Controls.ComboBoxCategoryEx cbxEnterpriseLevel;
-        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseLevel;
-        private Controls.BFIEnterpriseChangeHistoryEntityTextBox txtOrganizationCode;
-        private DevExpress.XtraLayout.LayoutControlItem layOrganizationCode;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.ListBoxControl lbcHistories;
         private DevExpress.XtraEditors.SplitterControl splitterControl1;
         private DevExpress.XtraEditors.GroupControl groupControl2;
+        private DevExpress.XtraLayout.LayoutControl layControl;
+        private DevExpress.XtraEditors.DateEdit dateLicenseYearValidateDate;
+        private DevExpress.XtraEditors.DateEdit datGSPValidateDate;
         private DevExpress.XtraEditors.DateEdit datBusinessValidateDate;
+        private Controls.BFIEnterpriseEntityTextBox txtOrganizationCode;
+        private Controls.ComboBoxCategoryEx cbxEnterpriseLevel;
+        private DevExpress.XtraEditors.DateEdit datTaxValidateDate;
+        private DevExpress.XtraEditors.DateEdit datLicenseValidateDate;
+        private Controls.BFIEnterpriseEntityTextBox txtRegisterTaxNo;
+        private Controls.BFIEnterpriseEntityTextBox txtRegisterLicenseNo;
+        private Controls.BFIEnterpriseEntityTextBox txtEnterpriseCode;
+        private Controls.BFIEnterpriseEntityTextBox txtEnterpriseName;
+        private Controls.ComboBoxCategoryEx cbxEnterpriseType;
+        private Controls.ComboBoxCategoryEx cbxEnterpriseStyle;
+        private Controls.ComboBoxCategoryEx cbxIndustryStyle;
+        private DevExpress.XtraEditors.DateEdit dteRegisterData;
+        private Controls.BFIEnterpriseEntityTextBox txtEnterpriseRemark;
+        private Controls.BFIEnterpriseEntityTextBox txtEmployeeNum;
+        private Controls.BFIEnterpriseEntityTextBox txtAccountBankCode;
+        private Controls.BFIEnterpriseEntityTextBox txtAccountNo;
+        private Controls.BFIEnterpriseEntityTextBox txtAccountBankName;
+        private Controls.BFIEnterpriseEntityTextBox txtRegisterCapital;
+        private Controls.BFIEnterpriseEntityTextBox txtRegisterAddress;
+        private Controls.BFIEnterpriseEntityTextBox txtLegalPhone;
+        private Controls.BFIEnterpriseEntityTextBox txtLegalPerson;
+        private Controls.BFIEnterpriseEntityTextBox txtContactPhone;
+        private Controls.BFIEnterpriseEntityTextBox txtContactPerson;
+        private Controls.BFIEnterpriseEntityTextBox txtEnterpriseWebSiteUrl;
+        private Controls.BFIEnterpriseEntityTextBox txtEnterprisePostalCode;
+        private Controls.BFIEnterpriseEntityTextBox txtEnterpriseMail;
+        private Controls.BFIEnterpriseEntityTextBox txtEnterpriseFaxNo;
+        private Controls.BFIEnterpriseEntityTextBox txtEnterprisePhone;
+        private Controls.BFIEnterpriseEntityTextBox txtEnterpriseAddress;
+        private DevExpress.XtraLayout.LayoutControlGroup layControlGroup;
+        private DevExpress.XtraLayout.LayoutControlItem layEnterprisePhone;
+        private DevExpress.XtraLayout.LayoutControlItem layEnterprisePostalCode;
+        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseCode;
+        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseMail;
+        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseFaxNo;
+        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseWebSiteUrl;
+        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseRemark;
+        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseName;
+        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseAddress;
+        private DevExpress.XtraLayout.LayoutControlItem layAccountBankCode;
+        private DevExpress.XtraLayout.LayoutControlItem layAccountBankName;
+        private DevExpress.XtraLayout.LayoutControlItem layRegisterData;
+        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseType;
+        private DevExpress.XtraLayout.LayoutControlItem layBusinessPerson;
+        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseStyle;
+        private DevExpress.XtraLayout.LayoutControlItem layIndustryStyle;
+        private DevExpress.XtraLayout.LayoutControlItem layLegalPhone;
+        private DevExpress.XtraLayout.LayoutControlItem layRegisterCapital;
+        private DevExpress.XtraLayout.LayoutControlItem layRegisterAddress;
+        private DevExpress.XtraLayout.LayoutControlItem layAccountNo;
+        private DevExpress.XtraLayout.LayoutControlItem layLegalPerson;
+        private DevExpress.XtraLayout.LayoutControlItem layBusinessPhone;
+        private DevExpress.XtraLayout.LayoutControlItem layEmployeeNum;
+        private DevExpress.XtraLayout.LayoutControlItem layEnterpriseLevel;
+        private DevExpress.XtraLayout.LayoutControlItem layLicenseValidateDate;
+        private DevExpress.XtraLayout.LayoutControlItem layOrganizationCode;
         private DevExpress.XtraLayout.LayoutControlItem layBusinessValidateDate;
+        private DevExpress.XtraLayout.LayoutControlItem layRegisterLicenseNo;
+        private DevExpress.XtraLayout.LayoutControlItem layRegisterTaxNo;
+        private DevExpress.XtraLayout.LayoutControlItem layTaxValidateDate;
+        private DevExpress.XtraLayout.LayoutControlItem layGSPValidateDate;
+        private DevExpress.XtraLayout.LayoutControlItem layoutLicenseYearValidateDate;
     }
 }

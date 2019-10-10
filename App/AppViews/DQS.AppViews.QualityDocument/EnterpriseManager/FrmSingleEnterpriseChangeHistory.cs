@@ -161,6 +161,24 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
             {
                 datBusinessValidateDate.Text = "";
             }
+
+            if (!entity.IsNullField("GSPValidateDate"))
+            {
+                this.datGSPValidateDate.DateTime = entity.GSPValidateDate;
+            }
+            else
+            {
+                datGSPValidateDate.Text = "";
+            }
+
+            if (!entity.IsNullField("LicenseYearValidateDate"))
+            {
+                this.dateLicenseYearValidateDate.DateTime = entity.LicenseYearValidateDate;
+            }
+            else
+            {
+                dateLicenseYearValidateDate.Text = "";
+            }
         }
         private void lbcHistories_SelectedIndexChanged(object sender, EventArgs e)
         {

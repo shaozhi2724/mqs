@@ -184,7 +184,8 @@ INSERT INTO dbo.BFI_EnterpriseChangeHistory
     Reservation10,
     ChangeUserName,
     ChangeDate,
-GSPValidateDate
+GSPValidateDate,
+LicenseYearValidateDate
 )
 SELECT
     EnterpriseID,
@@ -239,7 +240,8 @@ SELECT
     Reservation10,
     '{1}',
     GETDATE(),
-GSPValidateDate
+GSPValidateDate,
+LicenseYearValidateDate
 FROM dbo.BFI_Enterprise
 WHERE EnterpriseID={0}
 ";

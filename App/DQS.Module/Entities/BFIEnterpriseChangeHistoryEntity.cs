@@ -329,8 +329,20 @@ namespace DQS.Module.Entities
 		public DateTime ChangeDate
 		{
 			get { return (DateTime)this.GetValue("ChangeDate"); } 
-			set { this.SetValue("ChangeDate", value); } 
-		}
+			set { this.SetValue("ChangeDate", value); }
+        }
+
+        public DateTime GSPValidateDate
+        {
+            get { return (DateTime)this.GetValue("GSPValidateDate"); }
+            set { this.SetValue("GSPValidateDate", value); }
+        }
+
+        public DateTime LicenseYearValidateDate
+        {
+            get { return (DateTime)this.GetValue("LicenseYearValidateDate"); }
+            set { this.SetValue("LicenseYearValidateDate", value); }
+        }
 
 		public BFIEnterpriseChangeHistoryEntity()
 		{
@@ -388,7 +400,9 @@ namespace DQS.Module.Entities
 			this.Fields.Add("Reservation9", BFIEnterpriseChangeHistoryEntityFields.Reservation9);
 			this.Fields.Add("Reservation10", BFIEnterpriseChangeHistoryEntityFields.Reservation10);
 			this.Fields.Add("ChangeUserName", BFIEnterpriseChangeHistoryEntityFields.ChangeUserName);
-			this.Fields.Add("ChangeDate", BFIEnterpriseChangeHistoryEntityFields.ChangeDate);
+            this.Fields.Add("ChangeDate", BFIEnterpriseChangeHistoryEntityFields.ChangeDate);
+            this.Fields.Add("GSPValidateDate", BFIEnterpriseChangeHistoryEntityFields.GSPValidateDate);
+            this.Fields.Add("LicenseYearValidateDate", BFIEnterpriseChangeHistoryEntityFields.LicenseYearValidateDate);
 		}
 	}
 
@@ -659,7 +673,17 @@ namespace DQS.Module.Entities
 		public static EntityField ChangeDate
 		{
 			get { return new EntityField("BFI_EnterpriseChangeHistory", 52, "ChangeDate", SqlDbType.DateTime, false, false, false, false); }
-		}
+        }
+
+        public static EntityField GSPValidateDate
+        {
+            get { return new EntityField("BFI_EnterpriseChangeHistory", 53, "GSPValidateDate", SqlDbType.DateTime, false, false, false, true); }
+        }
+
+        public static EntityField LicenseYearValidateDate
+        {
+            get { return new EntityField("BFI_EnterpriseChangeHistory", 54, "LicenseYearValidateDate", SqlDbType.DateTime, false, false, false, true); }
+        }
 
 	}
 
@@ -774,6 +798,10 @@ namespace DQS.Module.Entities
 		ChangeUserName,
 
 		ChangeDate,
+
+        GSPValidateDate,
+
+        LicenseYearValidateDate
 
 	}
 
