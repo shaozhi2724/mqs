@@ -712,6 +712,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 this.txtTransportTool.Text = (this.txtBillCode.EditData as DataRow)["运输工具"].ToString();
                 this.txtTimeLimit.Text = (this.txtBillCode.EditData as DataRow)["运输时限"].ToString();
                 this.dateTransportDate.Text = (this.txtBillCode.EditData as DataRow)["下单日期"].ToString();
+                this.txtdep.Text = (this.txtBillCode.EditData as DataRow)["部门"].ToString();
                 string deliveryTypeName = (this.txtBillCode.EditData as DataRow)["配送方式"].ToString();
                 if (DQS.Controls.Properties.Settings.Default.IsThird)
                 {

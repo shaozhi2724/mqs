@@ -26,6 +26,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
     {
         private int? m_id;
 
+        private string m_CertificateCategory;
+
         const string tableName = "BFI_Product";
         const string fieldName = "ProductID";
         const string certificateCategory = "ProductCertificate";
@@ -35,6 +37,14 @@ namespace DQS.AppViews.QualityDocument.ProductManager
         {
             InitializeComponent();
             this.gridQualificationControl.GridViewData.FocusedRowChanged += Qualification_FocusedRowChanged;
+        }
+        public FrmSingleFirstProductAntiApprove(string certificateCategory)
+        {
+            InitializeComponent();
+            this.gridQualificationControl.GridViewData.FocusedRowChanged += Qualification_FocusedRowChanged;
+            this.m_CertificateCategory = certificateCategory;
+            this.cbxProductType.CategoryCode = this.m_CertificateCategory;
+            this.cbxProductType.InitSource();
         }
 
         private void FrmSingleFirstProductAntiApprove_Load(object sender, EventArgs e)

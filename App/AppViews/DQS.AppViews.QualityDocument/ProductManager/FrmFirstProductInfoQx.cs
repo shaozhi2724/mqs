@@ -12,14 +12,14 @@ using ORMSCore;
 
 namespace DQS.AppViews.QualityDocument.ProductManager
 {
-    public partial class FrmFirstProductInfo : StandardForm
+    public partial class FrmFirstProductInfoQx : StandardForm
     {
-        public FrmFirstProductInfo()
+        public FrmFirstProductInfoQx()
         {
             InitializeComponent();
         }
 
-        private void FrmFirstProductInfo_Load(object sender, EventArgs e)
+        private void FrmFirstProductInfoQx_Load(object sender, EventArgs e)
         {
             this.pageNavigator.SortField = "创建日期";
             this.pageNavigator.SortType = "DESC";
@@ -44,7 +44,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
         protected override void CustomQualification()
         {
             this.SaveDataLog("电子档案");
-            object id = gvData.GetFocusedRowCellValue("产品ID");
+            object id = gvData.GetFocusedRowCellValue("器械ID");
             if (id != null)
             {
                 using (FrmQualification frmQualification = new FrmQualification(Convert.ToInt32(id), "BFI_Product", "ProductID", "ProductCertificate"))
@@ -117,7 +117,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
         protected override void CustomApprove()
         {
             this.SaveDataLog("审批");
-            object id = this.gvData.GetFocusedRowCellValue("产品ID");
+            object id = this.gvData.GetFocusedRowCellValue("器械ID");
             if (id != null && id != DBNull.Value)
             {
                 object approveStatus = this.gvData.GetFocusedRowCellValue("审批状态");
@@ -189,7 +189,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                 DialogResult dr = base.BaseApprove();
                 if (dr == DialogResult.Yes)
                 {
-                    //更新首营产品状态
+                    //更新首营器械状态
                     BFIProductEntity product = new BFIProductEntity();
                     product.BusinessStatus = 1;
                     product.ProductID = Convert.ToInt32(id);
@@ -205,7 +205,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
             this.SaveDataLog("信息变更");
             try
             {
-                object id = gvData.GetFocusedRowCellValue("产品ID");
+                object id = gvData.GetFocusedRowCellValue("器械ID");
                 if (id != null)
                 {
                     object approveStatus = this.gvData.GetFocusedRowCellValue("审批状态");
@@ -249,7 +249,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                             MessageBoxIcon.Error);
                         return;
                     }
-                    FrmSingleFirstProductAntiApprove singleForm = new FrmSingleFirstProductAntiApprove("ProductType");
+                    FrmSingleFirstProductAntiApprove singleForm = new FrmSingleFirstProductAntiApprove("ProductQxType");
                     singleForm.Tag = (int)id;
                     if (singleForm.Tag != null)
                     {
@@ -299,8 +299,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
         protected override void CustomProductPrice()
         {
             this.SaveDataLog("产品价格");
-            object productID = gvData.GetFocusedRowCellValue("产品ID");
-            object productName = gvData.GetFocusedRowCellValue("产品名称");
+            object productID = gvData.GetFocusedRowCellValue("器械ID");
+            object productName = gvData.GetFocusedRowCellValue("器械名称");
             if (productID != null)
             {
                 using (FrmSinglePrice2 frmSinglePrice = new FrmSinglePrice2(Convert.ToInt32(productID), productName.ToString()))
@@ -317,11 +317,11 @@ namespace DQS.AppViews.QualityDocument.ProductManager
         protected override void CustomPrint()
         {
             this.SaveDataLog("打印");
-            //object productID = gvData.GetFocusedRowCellValue("产品ID");
+            //object productID = gvData.GetFocusedRowCellValue("器械ID");
             //if (productID != null)
             //{
-            //    base.SinglePrint("首营产品", "FirstProduct", "产品ID = " + productID);
-            //    //base.SinglePrint("首营产品", int.Parse(productID.ToString()));
+            //    base.SinglePrint("首营器械", "FirstProduct", "器械ID = " + productID);
+            //    //base.SinglePrint("首营器械", int.Parse(productID.ToString()));
             //}
 
             base.CustomPrint();

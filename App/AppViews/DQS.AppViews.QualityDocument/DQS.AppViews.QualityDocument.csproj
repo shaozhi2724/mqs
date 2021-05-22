@@ -286,6 +286,12 @@
     <Compile Include="FrmQualityDocument.Designer.cs">
       <DependentUpon>FrmQualityDocument.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProductManager\FrmFirstProductInfoQx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductManager\FrmFirstProductInfoQx.Designer.cs">
+      <DependentUpon>FrmFirstProductInfoQx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProductManager\FrmFirstProductInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -316,6 +322,12 @@
     <Compile Include="ProductManager\FrmPriceStyle.Designer.cs">
       <DependentUpon>FrmPriceStyle.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProductManager\FrmProductInfoQx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductManager\FrmProductInfoQx.Designer.cs">
+      <DependentUpon>FrmProductInfoQx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProductManager\FrmProductInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -333,6 +345,12 @@
     </Compile>
     <Compile Include="ProductManager\FrmProductPriceChange.Designer.cs">
       <DependentUpon>FrmProductPriceChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductManager\FrmSingleFirstProductQx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductManager\FrmSingleFirstProductQx.Designer.cs">
+      <DependentUpon>FrmSingleFirstProductQx.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductManager\FrmSingleFirstProductChangeDetail.cs">
       <SubType>Form</SubType>
@@ -381,6 +399,12 @@
     </Compile>
     <Compile Include="ProductManager\FrmSinglePriceStyle.Designer.cs">
       <DependentUpon>FrmSinglePriceStyle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductManager\FrmSingleProductQx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductManager\FrmSingleProductQx.designer.cs">
+      <DependentUpon>FrmSingleProductQx.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductManager\FrmSingleProduct.cs">
       <SubType>Form</SubType>
@@ -588,6 +612,9 @@
     <EmbeddedResource Include="FrmQualityDocument.resx">
       <DependentUpon>FrmQualityDocument.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProductManager\FrmFirstProductInfoQx.resx">
+      <DependentUpon>FrmFirstProductInfoQx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProductManager\FrmFirstProductInfo.resx">
       <DependentUpon>FrmFirstProductInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -603,6 +630,9 @@
     <EmbeddedResource Include="ProductManager\FrmPriceStyle.resx">
       <DependentUpon>FrmPriceStyle.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProductManager\FrmProductInfoQx.resx">
+      <DependentUpon>FrmProductInfoQx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProductManager\FrmProductInfo.resx">
       <DependentUpon>FrmProductInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -612,6 +642,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProductManager\FrmProductPriceChange.resx">
       <DependentUpon>FrmProductPriceChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductManager\FrmSingleFirstProductQx.resx">
+      <DependentUpon>FrmSingleFirstProductQx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductManager\FrmSingleFirstProductChangeDetail.resx">
       <DependentUpon>FrmSingleFirstProductChangeDetail.cs</DependentUpon>
@@ -637,13 +670,15 @@
     <EmbeddedResource Include="ProductManager\FrmSinglePriceStyle.resx">
       <DependentUpon>FrmSinglePriceStyle.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProductManager\FrmSingleProductQx.resx">
+      <DependentUpon>FrmSingleProductQx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProductManager\FrmSingleProduct.resx">
       <DependentUpon>FrmSingleProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductManager\FrmSingleProductPriceChange.resx">
       <DependentUpon>FrmSingleProductPriceChange.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>

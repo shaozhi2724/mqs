@@ -30,6 +30,7 @@
         {
             this.ftPanel = new DQS.Controls.FieldTextBoxPanel();
             this.layControl = new DevExpress.XtraLayout.LayoutControl();
+            this.dateArrived = new DevExpress.XtraEditors.DateEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.txtTimeLimit = new DQS.Controls.BUSReceiveEntityTextBox();
@@ -67,6 +68,7 @@
             this.layTimeLimit = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutArrived = new DevExpress.XtraLayout.LayoutControlItem();
             this.pnlAction = new DevExpress.XtraEditors.PanelControl();
             this.btnReCheck = new DevExpress.XtraEditors.SimpleButton();
             this.btnTemperature = new DevExpress.XtraEditors.SimpleButton();
@@ -78,12 +80,14 @@
             this.btnOneKeyFinish = new DevExpress.XtraEditors.SimpleButton();
             this.gpcButtom = new DevExpress.XtraEditors.GroupControl();
             this.popupGrid = new DQS.Controls.PopupGrid();
-            this.dateArrived = new DevExpress.XtraEditors.DateEdit();
-            this.layoutArrived = new DevExpress.XtraLayout.LayoutControlItem();
+            this.laydep = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtdep = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
             this.ftPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).BeginInit();
             this.layControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dateArrived.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateArrived.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTimeLimit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTransportDate.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTransportDate.Properties)).BeginInit();
@@ -120,14 +124,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layTimeLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutArrived)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlAction)).BeginInit();
             this.pnlAction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gpcButtom)).BeginInit();
             this.gpcButtom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.popupGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateArrived.Properties.VistaTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateArrived.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutArrived)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.laydep)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtdep.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // ftPanel
@@ -161,6 +165,7 @@
             this.layControl.Controls.Add(this.txtCarryCompnay);
             this.layControl.Controls.Add(this.txtDealerName);
             this.layControl.Controls.Add(this.txtTransportTool);
+            this.layControl.Controls.Add(this.txtdep);
             this.layControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layControl.Location = new System.Drawing.Point(2, 2);
             this.layControl.Name = "layControl";
@@ -168,6 +173,28 @@
             this.layControl.Size = new System.Drawing.Size(868, 227);
             this.layControl.TabIndex = 0;
             this.layControl.Text = "layControl";
+            // 
+            // dateArrived
+            // 
+            this.dateArrived.EditValue = null;
+            this.dateArrived.Enabled = false;
+            this.dateArrived.Location = new System.Drawing.Point(63, 187);
+            this.dateArrived.Name = "dateArrived";
+            this.dateArrived.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateArrived.Properties.DisplayFormat.FormatString = "G";
+            this.dateArrived.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateArrived.Properties.EditFormat.FormatString = "G";
+            this.dateArrived.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateArrived.Properties.Mask.EditMask = "G";
+            this.dateArrived.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.True;
+            this.dateArrived.Properties.VistaEditTime = DevExpress.Utils.DefaultBoolean.True;
+            this.dateArrived.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.dateArrived.Size = new System.Drawing.Size(325, 21);
+            this.dateArrived.StyleController = this.layControl;
+            this.dateArrived.TabIndex = 16;
+            this.dateArrived.TextChanged += new System.EventHandler(this.dateTransportDate_TextChanged);
             // 
             // labelControl1
             // 
@@ -258,7 +285,7 @@
             this.txtDealerAddress.Location = new System.Drawing.Point(63, 137);
             this.txtDealerAddress.Name = "txtDealerAddress";
             this.txtDealerAddress.Properties.ReadOnly = true;
-            this.txtDealerAddress.Size = new System.Drawing.Size(776, 21);
+            this.txtDealerAddress.Size = new System.Drawing.Size(360, 21);
             this.txtDealerAddress.StyleController = this.layControl;
             this.txtDealerAddress.TabIndex = 7;
             // 
@@ -480,7 +507,8 @@
             this.layTimeLimit,
             this.layoutControlItem2,
             this.layoutControlItem3,
-            this.layoutArrived});
+            this.layoutArrived,
+            this.laydep});
             this.layControlGroup.Location = new System.Drawing.Point(0, 0);
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(851, 245);
@@ -604,7 +632,7 @@
             this.layDealerAddress.CustomizationFormText = "发运地点";
             this.layDealerAddress.Location = new System.Drawing.Point(0, 125);
             this.layDealerAddress.Name = "layDealerAddress";
-            this.layDealerAddress.Size = new System.Drawing.Size(831, 25);
+            this.layDealerAddress.Size = new System.Drawing.Size(415, 25);
             this.layDealerAddress.Text = "发运地点";
             this.layDealerAddress.TextSize = new System.Drawing.Size(48, 17);
             // 
@@ -671,6 +699,16 @@
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextToControlDistance = 0;
             this.layoutControlItem3.TextVisible = false;
+            // 
+            // layoutArrived
+            // 
+            this.layoutArrived.Control = this.dateArrived;
+            this.layoutArrived.CustomizationFormText = "到货时间";
+            this.layoutArrived.Location = new System.Drawing.Point(0, 175);
+            this.layoutArrived.Name = "layoutArrived";
+            this.layoutArrived.Size = new System.Drawing.Size(380, 25);
+            this.layoutArrived.Text = "到货时间";
+            this.layoutArrived.TextSize = new System.Drawing.Size(48, 17);
             // 
             // pnlAction
             // 
@@ -809,37 +847,24 @@
             this.popupGrid.Size = new System.Drawing.Size(868, 225);
             this.popupGrid.TabIndex = 2;
             // 
-            // dateArrived
+            // laydep
             // 
-            this.dateArrived.EditValue = null;
-            this.dateArrived.Enabled = false;
-            this.dateArrived.Location = new System.Drawing.Point(63, 187);
-            this.dateArrived.Name = "dateArrived";
-            this.dateArrived.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateArrived.Properties.DisplayFormat.FormatString = "G";
-            this.dateArrived.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.dateArrived.Properties.EditFormat.FormatString = "G";
-            this.dateArrived.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.dateArrived.Properties.Mask.EditMask = "G";
-            this.dateArrived.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.True;
-            this.dateArrived.Properties.VistaEditTime = DevExpress.Utils.DefaultBoolean.True;
-            this.dateArrived.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dateArrived.Size = new System.Drawing.Size(325, 21);
-            this.dateArrived.StyleController = this.layControl;
-            this.dateArrived.TabIndex = 16;
-            this.dateArrived.TextChanged += new System.EventHandler(this.dateTransportDate_TextChanged);
+            this.laydep.Control = this.txtdep;
+            this.laydep.CustomizationFormText = "部门";
+            this.laydep.Location = new System.Drawing.Point(415, 125);
+            this.laydep.Name = "laydep";
+            this.laydep.Size = new System.Drawing.Size(416, 25);
+            this.laydep.Text = "部门";
+            this.laydep.TextSize = new System.Drawing.Size(48, 17);
             // 
-            // layoutArrived
+            // txtdep
             // 
-            this.layoutArrived.Control = this.dateArrived;
-            this.layoutArrived.CustomizationFormText = "到货时间";
-            this.layoutArrived.Location = new System.Drawing.Point(0, 175);
-            this.layoutArrived.Name = "layoutArrived";
-            this.layoutArrived.Size = new System.Drawing.Size(380, 25);
-            this.layoutArrived.Text = "到货时间";
-            this.layoutArrived.TextSize = new System.Drawing.Size(48, 17);
+            this.txtdep.Location = new System.Drawing.Point(478, 137);
+            this.txtdep.Name = "txtdep";
+            this.txtdep.Properties.ReadOnly = true;
+            this.txtdep.Size = new System.Drawing.Size(361, 21);
+            this.txtdep.StyleController = this.layControl;
+            this.txtdep.TabIndex = 17;
             // 
             // FrmSingleReceive
             // 
@@ -860,6 +885,8 @@
             this.ftPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layControl)).EndInit();
             this.layControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dateArrived.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateArrived.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTimeLimit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTransportDate.Properties.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTransportDate.Properties)).EndInit();
@@ -896,14 +923,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layTimeLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutArrived)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlAction)).EndInit();
             this.pnlAction.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gpcButtom)).EndInit();
             this.gpcButtom.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.popupGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateArrived.Properties.VistaTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateArrived.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutArrived)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.laydep)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtdep.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -962,6 +989,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraEditors.DateEdit dateArrived;
         private DevExpress.XtraLayout.LayoutControlItem layoutArrived;
-
+        private DevExpress.XtraEditors.TextEdit txtdep;
+        private DevExpress.XtraLayout.LayoutControlItem laydep;
     }
 }
