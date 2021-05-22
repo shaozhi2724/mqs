@@ -160,6 +160,8 @@
             this.tabGrantedPerson = new DevExpress.XtraTab.XtraTabPage();
             this.popupGrid = new DQS.Controls.PopupGrid();
             this.rdbtnIsUseToPregnantYes = new System.Windows.Forms.RadioButton();
+            this.txtReservation5 = new DQS.Controls.BFIProductEntityTextBox();
+            this.layReservation5 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.pnOperating)).BeginInit();
             this.pnOperating.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ftPanel)).BeginInit();
@@ -294,6 +296,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layProductEntityTextBox1)).BeginInit();
             this.tabGrantedPerson.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.popupGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReservation5.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layReservation5)).BeginInit();
             this.SuspendLayout();
             // 
             // pnOperating
@@ -367,6 +371,7 @@
             // 
             // layControl
             // 
+            this.layControl.Controls.Add(this.txtReservation5);
             this.layControl.Controls.Add(this.txtzb);
             this.layControl.Controls.Add(this.cbxProductType);
             this.layControl.Controls.Add(this.txtPricePercent);
@@ -752,7 +757,7 @@
             this.cbxProductStyle.Properties.NullValuePromptShowForEmptyValue = true;
             this.cbxProductStyle.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbxProductStyle.SelectedValue = null;
-            this.cbxProductStyle.Size = new System.Drawing.Size(700, 21);
+            this.cbxProductStyle.Size = new System.Drawing.Size(294, 21);
             this.cbxProductStyle.StyleController = this.layControl;
             this.cbxProductStyle.TabIndex = 11;
             // 
@@ -1042,7 +1047,8 @@
             this.layProductSpell,
             this.layPricePercent,
             this.layProductType,
-            this.layzb});
+            this.layzb,
+            this.layReservation5});
             this.layControlGroup.Location = new System.Drawing.Point(0, -93);
             this.layControlGroup.Name = "layControlGroup";
             this.layControlGroup.Size = new System.Drawing.Size(831, 521);
@@ -1126,7 +1132,7 @@
             this.layProductStyle.CustomizationFormText = "产品类别";
             this.layProductStyle.Location = new System.Drawing.Point(0, 151);
             this.layProductStyle.Name = "layProductStyle";
-            this.layProductStyle.Size = new System.Drawing.Size(811, 25);
+            this.layProductStyle.Size = new System.Drawing.Size(405, 25);
             this.layProductStyle.Text = "产品类别";
             this.layProductStyle.TextSize = new System.Drawing.Size(104, 17);
             // 
@@ -2048,6 +2054,30 @@
             this.rdbtnIsUseToPregnantYes.Text = "是";
             this.rdbtnIsUseToPregnantYes.UseVisualStyleBackColor = true;
             // 
+            // txtReservation5
+            // 
+            this.txtReservation5.AlphabeticFiled = null;
+            this.txtReservation5.EntityField = DQS.Module.Entities.BFIProductEntityFields2.Reservation5;
+            this.txtReservation5.IsIntegerOnly = false;
+            this.txtReservation5.IsNullString = "上市许可持有人不能为空。";
+            this.txtReservation5.IsNullValidate = false;
+            this.txtReservation5.IsTransferAlphabetic = true;
+            this.txtReservation5.Location = new System.Drawing.Point(524, 70);
+            this.txtReservation5.Name = "txtReservation5";
+            this.txtReservation5.Size = new System.Drawing.Size(295, 21);
+            this.txtReservation5.StyleController = this.layControl;
+            this.txtReservation5.TabIndex = 52;
+            // 
+            // layReservation5
+            // 
+            this.layReservation5.Control = this.txtReservation5;
+            this.layReservation5.CustomizationFormText = "上市许可持有人";
+            this.layReservation5.Location = new System.Drawing.Point(405, 151);
+            this.layReservation5.Name = "layReservation5";
+            this.layReservation5.Size = new System.Drawing.Size(406, 25);
+            this.layReservation5.Text = "上市许可持有人";
+            this.layReservation5.TextSize = new System.Drawing.Size(104, 17);
+            // 
             // FrmSingleFirstProduct
             // 
             this.AcceptButton = this.btnSave;
@@ -2198,6 +2228,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layProductEntityTextBox1)).EndInit();
             this.tabGrantedPerson.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.popupGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReservation5.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layReservation5)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2336,5 +2368,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layProductType;
         private Controls.BFIProductEntityTextBox txtzb;
         private DevExpress.XtraLayout.LayoutControlItem layzb;
+        private Controls.BFIProductEntityTextBox txtReservation5;
+        private DevExpress.XtraLayout.LayoutControlItem layReservation5;
     }
 }
