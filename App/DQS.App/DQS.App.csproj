@@ -223,6 +223,30 @@
     <Compile Include="FrmChangePassword.Designer.cs">
       <DependentUpon>FrmChangePassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmChangeReason.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmChangeReason.Designer.cs">
+      <DependentUpon>FrmChangeReason.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCheckZone.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCheckZone.Designer.cs">
+      <DependentUpon>FrmCheckZone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCreateXml.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCreateXml.Designer.cs">
+      <DependentUpon>FrmCreateXml.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDateUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDateUpdate.Designer.cs">
+      <DependentUpon>FrmDateUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmDbSetting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -234,6 +258,18 @@
     </Compile>
     <Compile Include="FrmDownAttachment.Designer.cs">
       <DependentUpon>FrmDownAttachment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmHG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHG.Designer.cs">
+      <DependentUpon>FrmHG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmInStore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmInStore.Designer.cs">
+      <DependentUpon>FrmInStore.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmLicenserIdentification.cs">
       <SubType>Form</SubType>
@@ -253,6 +289,12 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmNewAllProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmNewAllProduct.Designer.cs">
+      <DependentUpon>FrmNewAllProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmNewConnIP.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -264,6 +306,30 @@
     </Compile>
     <Compile Include="FrmPriceSearch.Designer.cs">
       <DependentUpon>FrmPriceSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmProduct.Designer.cs">
+      <DependentUpon>FrmProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmProductCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmProductCheck.Designer.cs">
+      <DependentUpon>FrmProductCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRepairStore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRepairStore.Designer.cs">
+      <DependentUpon>FrmRepairStore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmReview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReview.Designer.cs">
+      <DependentUpon>FrmReview.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmUpdateBatchNo.cs">
       <SubType>Form</SubType>
@@ -316,11 +382,44 @@
     <EmbeddedResource Include="FrmCategorySetting.resx">
       <DependentUpon>FrmCategorySetting.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmChangeReason.resx">
+      <DependentUpon>FrmChangeReason.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCheckZone.resx">
+      <DependentUpon>FrmCheckZone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCreateXml.resx">
+      <DependentUpon>FrmCreateXml.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDateUpdate.resx">
+      <DependentUpon>FrmDateUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmHG.resx">
+      <DependentUpon>FrmHG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmInStore.resx">
+      <DependentUpon>FrmInStore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmNewAllProduct.resx">
+      <DependentUpon>FrmNewAllProduct.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmNewConnIP.resx">
       <DependentUpon>FrmNewConnIP.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPriceSearch.resx">
       <DependentUpon>FrmPriceSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmProduct.resx">
+      <DependentUpon>FrmProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmProductCheck.resx">
+      <DependentUpon>FrmProductCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRepairStore.resx">
+      <DependentUpon>FrmRepairStore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmReview.resx">
+      <DependentUpon>FrmReview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmUpdateBatchNo.resx">
       <DependentUpon>FrmUpdateBatchNo.cs</DependentUpon>
