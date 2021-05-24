@@ -659,6 +659,7 @@
         <Column Name="有效期至" EntityField="ValidateDate" FieldType="System.DateTime" Visible="true" Nullable="true" AllowEdit="true" PopupForm="Product" PopupField="有效期至" />
         <Column Name="收货数量" EntityField="Amount" FieldType="System.Int32" Visible="true" Nullable="true" AllowEdit="false" />
         <Column Name="验收数量" EntityField="ReceiveAmount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
+        <Column Name="抽检数量" FieldType="System.Int32" Visible="false" AllowEdit="false" />
         <Column Name="件数" FieldType="System.String" Visible="true" AllowEdit="false"/>
         <Column Name="验收合格数量" EntityField="QualifiedAmount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
         <Column Name="验收不合格数量" EntityField="UnqualifiedAmount" FieldType="System.Int32" Visible="true" AllowEdit="true" />
@@ -704,7 +705,8 @@
         <Column Name="生产日期" DataType="System.DateTime" DefaultValue="2013-05-15"/>
         <Column Name="有效期至" DataType="System.DateTime" DefaultValue="2016-05-14"/>
         <Column Name="验收数量" DataType="System.Int32" DefaultValue="200"/>
-        <Column Name="验收结果" DataType="System.String" DefaultValue="合格"/>
+        <Column Name="抽检数量" DataType="System.Int32" DefaultValue="200"/>
+        <Column Name="验收结果及处置措施" DataType="System.String" DefaultValue="aa合格"/>
         <Column Name="产品类别" DataType="System.String" DefaultValue="基本药"/>
         <Column Name="单位" DataType="System.String" DefaultValue="丸"/>
       </Deatils>
