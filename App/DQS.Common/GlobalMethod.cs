@@ -769,13 +769,20 @@ namespace DQS.Common
                     adapter.Fill(dataSet, "产品电子档案到期预警");
                 }
 
-                querySql = "SELECT OldLicenseValidateDate AS 原到期日期, NewLicenseValidateDate AS 新到期日期, ActionName AS 状态, LockDate AS 锁定日期, UnLockDate AS 解锁日期, CreateUserName AS 操作人 FROM dbo.BFI_EnterpriseLicenseLockHistory ORDER BY EnterpriseLicenseLockHistoryID DESC";
+                querySql = @"SELECT eh.OldLicenseValidateDate AS 原到期日期, eh.NewLicenseValidateDate AS 新到期日期, eh.ActionName AS 状态, eh.LockDate AS 锁定日期, eh.UnLockDate AS 解锁日期, eh.CreateUserName AS 操作人 
+FROM dbo.BFI_EnterpriseLicenseLockHistory eh
+INNER JOIN dbo.BFI_Enterprise be ON 1 = 1
+WHERE be.LicenseValidateDate < GETDATE()
+ORDER BY EnterpriseLicenseLockHistoryID DESC";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
                 {
                     adapter.Fill(dataSet, "本企业营业执照到期日锁定记录");
                 }
 
-                querySql = "SELECT OldLicenseValidateDate AS 原到期日期, NewLicenseValidateDate AS 新到期日期, ActionName AS 状态, LockDate AS 锁定日期, UnLockDate AS 解锁日期, CreateUserName AS 操作人 FROM dbo.BFI_EnterpriseTradeLicenseLockHistory ORDER BY EnterpriseTradeLicenseLockHistoryID DESC";
+                querySql = @"SELECT eh.OldLicenseValidateDate AS 原到期日期, eh.NewLicenseValidateDate AS 新到期日期, eh.ActionName AS 状态, eh.LockDate AS 锁定日期, eh.UnLockDate AS 解锁日期, eh.CreateUserName AS 操作人 FROM dbo.BFI_EnterpriseTradeLicenseLockHistory eh
+INNER JOIN dbo.BFI_Enterprise be ON 1 = 1
+WHERE be.LicenseValidateDate < GETDATE()
+ORDER BY EnterpriseTradeLicenseLockHistoryID DESC";
                 using (SqlDataAdapter adapter = new SqlDataAdapter(querySql, GlobalItem.g_DbConnectStrings))
                 {
                     adapter.Fill(dataSet, "本企业经营许可证到期日锁定记录");
