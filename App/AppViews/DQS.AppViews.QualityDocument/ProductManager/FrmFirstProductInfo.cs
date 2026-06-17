@@ -149,7 +149,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                             {
                                 if (!quatity.IsNullField("ValidateDate"))
                                 {
-                                    if (DateTime.Now > quatity.ValidateDate)
+                                    if (DateTime.UtcNow.AddHours(8) > quatity.ValidateDate)
                                     {
                                         unValidQuatificateNames.Add(quatity.CertificateStyle);
                                     }

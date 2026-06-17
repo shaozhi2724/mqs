@@ -182,7 +182,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                 {
                     entity.ApprovePerson = currentUser.UserName;
                 }
-                entity.ApproveDate = DateTime.Now;
+                entity.ApproveDate = DateTime.UtcNow.AddHours(8);
                 entity.Update();
 
                 UpdateCertificates();
@@ -360,7 +360,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                 {
                     entity.ApprovePerson = currentUser.UserName;
                 }
-                entity.ApproveDate = DateTime.Now;
+                entity.ApproveDate = DateTime.UtcNow.AddHours(8);
                 entity.StatusID = 3;
                 entity.StatusName = "拒绝变更";
                 entity.Update();

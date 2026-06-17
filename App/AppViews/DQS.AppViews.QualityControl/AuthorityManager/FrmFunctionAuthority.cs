@@ -257,7 +257,7 @@ namespace DQS.AppViews.QualityControl.AuthorityManager
                                     }
                                     else
                                     {
-                                        string code = "GN" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                                        string code = "GN" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                                         string insertsql = @"EXEC sp_InsertOldRolePageFunctionChange '{0}','{1}','{2}','{3}'";
                                         insertsql = string.Format(insertsql, code, ((lbcRole.SelectedItem as ListEntityItem).Key as ATCRoleEntity).RoleID, (lbcPage.SelectedItem as ListDataRowItem).Key["PageCode"].ToString(), GlobalItem.g_CurrentUser.UserName);
                                         comm = new SqlCommand(insertsql, conn);
@@ -282,7 +282,7 @@ namespace DQS.AppViews.QualityControl.AuthorityManager
                                             approveEntity.ApproveTitle = string.Format("{0}角色功能权限变更，编号：{1}", (roleItem.Key as ATCRoleEntity).RoleName, code);
                                             approveEntity.ApprovalContent = String.Format("{0}角色功能权限变更，编号：{1}", (roleItem.Key as ATCRoleEntity).RoleName, code);
                                             approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                                            approveEntity.CreateDate = DateTime.Now;
+                                            approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                                             approveEntity.IsApprovaled = false;
 
 
@@ -314,7 +314,7 @@ namespace DQS.AppViews.QualityControl.AuthorityManager
                                                 notification.TargetCode = code;
                                                 notification.ApproveCode = approveCode;
                                                 notification.Message = string.Format("{0} 于 {1} 功能权限变更申请（单号 {2}）。请您审批。", userName,
-                                                    DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), code);
+                                                    DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), code);
                                                 notification.OwnerUserID = approvalUserId;
                                                 notification.Save();
                                             }

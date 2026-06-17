@@ -27,6 +27,11 @@ namespace DQS.AppViews.StatReport.StatManager
 
         private void FrmGridViewer_Load(object sender, EventArgs e)
         {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new OnChangeEventHandler(FrmGridViewer_Load), new object[] { sender, e });
+                return;
+            }
             string pageName = this.Tag.ToString();
             //设置数据
             sysPage = GlobalMethod.GetFormPage(pageName);

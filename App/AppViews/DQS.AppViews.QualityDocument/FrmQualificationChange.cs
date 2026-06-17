@@ -44,23 +44,23 @@ namespace DQS.AppViews.QualityDocument
 
             if (this.m_TableName == "BFI_Product")
             {
-                this.txtQualificationCode.Text = "PT" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtQualificationCode.Text = "PT" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
             }
             else if (this.m_TableName == "BFI_Dealer")
             {
-                this.txtQualificationCode.Text = "DR" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtQualificationCode.Text = "DR" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
             }
             else if (this.m_TableName == "BFI_Employee")
             {
-                this.txtQualificationCode.Text = "EE" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtQualificationCode.Text = "EE" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
             }
             else if (this.m_TableName == "BFI_Salesman")
             {
-                this.txtQualificationCode.Text = "SN" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtQualificationCode.Text = "SN" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
             }
             else
             {
-                this.txtQualificationCode.Text = "XX" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtQualificationCode.Text = "XX" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
             }
             this.cbxCertificateStyle.CategoryCode = this.m_CertificateCategory;
             this.cbxCertificateStyle.InitSource();
@@ -118,24 +118,24 @@ namespace DQS.AppViews.QualityDocument
                 {
                     if (entityChange.IsNullField("CreateUserID"))
                     {
-                        entityChange.CreateDate = DateTime.Now;
+                        entityChange.CreateDate = DateTime.UtcNow.AddHours(8);
                         entityChange.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     }
                     else
                     {
-                        entityChange.LastModifyDate = DateTime.Now;
+                        entityChange.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         entityChange.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     }
                 }
 
                 if (entity.IsNullField("CreateUserID"))
                 {
-                    entity.CreateDate = DateTime.Now;
+                    entity.CreateDate = DateTime.UtcNow.AddHours(8);
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                 }
                 else
                 {
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 }
                 BFIQualificationEntity oldentity = new BFIQualificationEntity{ QualificationID = m_id.Value};
@@ -183,7 +183,7 @@ namespace DQS.AppViews.QualityDocument
 
                 if (isChanged)
                 {
-                    entityChange.LastModifyDate = DateTime.Now;
+                    entityChange.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entityChange.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entityChange.Update();
 /*
@@ -198,7 +198,7 @@ namespace DQS.AppViews.QualityDocument
                     actionEntity.Action = 2;
                     actionEntity.ActionRemark = string.Format("修改电子档案: {0}(编号: {1})", txtQualificationName.Text.Trim(), txtQualificationCode.Text.Trim());
                     actionEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                    actionEntity.CreateDate = DateTime.Now;
+                    actionEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                     actionEntity.Save();
 */
                 }
@@ -211,7 +211,7 @@ namespace DQS.AppViews.QualityDocument
                     entity.BelongID = this.m_QualificationId;
                     entity.BelongTable = this.m_TableName;
                     entity.BelongFieldName = this.m_FieldName;
-                    entity.CreateDate = DateTime.Now;
+                    entity.CreateDate = DateTime.UtcNow.AddHours(8);
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Save();
                     entity.Fetch();
@@ -227,7 +227,7 @@ namespace DQS.AppViews.QualityDocument
                     actionEntity.Action = 1;
                     actionEntity.ActionRemark = string.Format("新建电子档案: {0}(编号: {1})", txtQualificationName.Text.Trim(), txtQualificationCode.Text.Trim());
                     actionEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                    actionEntity.CreateDate = DateTime.Now;
+                    actionEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                     actionEntity.Save();
                 }
                 else

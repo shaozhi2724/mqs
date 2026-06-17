@@ -121,7 +121,7 @@ namespace DQS.AppViews.OtherOperation.BillPriceManager
                     child.BillPriceHistoryID = priceHistory.BillPriceHistoryID;
                     child.BillID = entity.BillID;
 
-                    child.CreateDate = DateTime.Now;
+                    child.CreateDate = DateTime.UtcNow.AddHours(8);
                     child.CreateUserName = GlobalItem.g_CurrentEmployee != null ? GlobalItem.g_CurrentEmployee.EmployeeName : GlobalItem.g_CurrentUser.UserName;
                     child.Save();
                 }
@@ -146,7 +146,7 @@ namespace DQS.AppViews.OtherOperation.BillPriceManager
                     approveEntity.ApproveTitle = string.Format("销售调价(正常)，编号：{0}", entity.BillPriceHistoryCode);
                     approveEntity.ApprovalContent = String.Format("销售调价(正常) {0} 申请审批。", entity.BillPriceHistoryCode);
                     approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                    approveEntity.CreateDate = DateTime.Now;
+                    approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                     approveEntity.IsApprovaled = false;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
@@ -288,7 +288,7 @@ namespace DQS.AppViews.OtherOperation.BillPriceManager
             entity.BillCode = txtBillCode.Text.Trim();
             entity.NewTotalPrice = Convert.ToDouble(txtNewTotalPrice.Text);
             entity.PriceHistoryRemark = txtPriceHistoryRemark.Text.Trim();
-            entity.CreateDate = DateTime.Now;
+            entity.CreateDate = DateTime.UtcNow.AddHours(8);
             entity.CreateUserName = GlobalItem.g_CurrentEmployee != null
                 ? GlobalItem.g_CurrentEmployee.EmployeeName
                 : GlobalItem.g_CurrentUser.UserName;

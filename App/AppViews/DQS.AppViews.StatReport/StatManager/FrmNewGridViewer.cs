@@ -32,6 +32,11 @@ namespace DQS.AppViews.StatReport.StatManager
 
         private void FrmNewGridViewer_Load(object sender, EventArgs e)
         {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new OnChangeEventHandler(FrmNewGridViewer_Load), new object[] { sender, e });
+                return;
+            }
             deStartDate.Text = DateTime.Today.ToString("d");
             deEndDate.Text = DateTime.Today.ToString("d");
             gridLoad();

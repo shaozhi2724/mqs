@@ -121,7 +121,7 @@ VALUES  ('{0}','{1}',0,N'未使用','{2}')";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     try
                     {
-                        cmd.CommandText = string.Format(sql, codeViewModel, _CorpCode, DateTime.Now);
+                        cmd.CommandText = string.Format(sql, codeViewModel, _CorpCode, DateTime.UtcNow.AddHours(8));
                         int num = cmd.ExecuteNonQuery();
                         if (num == 1)
                         {

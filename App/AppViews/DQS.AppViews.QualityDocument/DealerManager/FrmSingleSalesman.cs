@@ -137,7 +137,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
             }
             else
             {
-                this.txtSalesmanCode.Text = "GYXSRY" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtSalesmanCode.Text = "GYXSRY" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                 this.txtSalesmanCode.Select(this.txtSalesmanCode.Text.Length, 0);
             }
 
@@ -152,7 +152,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
 
             if (this.m_id != null)
             {
-                entity.LastModifyDate = DateTime.Now;
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.Update();
                 SaveProductStyles(m_id.Value);
@@ -161,8 +161,8 @@ namespace DQS.AppViews.QualityDocument.DealerManager
             {
                 if (entity.IsNew())
                 {
-                    entity.CreateDate = DateTime.Now;
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Save();
@@ -296,8 +296,8 @@ namespace DQS.AppViews.QualityDocument.DealerManager
 
             range.PersonType = "供应商";
             range.PersonID = personID;
-            range.CreateDate = DateTime.Now;
-            range.LastModifyDate = DateTime.Now;
+            range.CreateDate = DateTime.UtcNow.AddHours(8);
+            range.LastModifyDate = DateTime.UtcNow.AddHours(8);
             range.CreateUserID = GlobalItem.g_CurrentUser.UserID;
             range.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
             foreach (CheckedListBoxItem productStyle in this.chkBCType.CheckedItems)

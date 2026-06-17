@@ -35,7 +35,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
             cboDepartment.SelectedIndex = 0;
             txtCuringName.Text = GlobalItem.g_CurrentUser.UserName;
             txtCreateUser.Text = GlobalItem.g_CurrentUser.UserName;
-            deCuringDate.Text = DateTime.Now.ToString("d");
+            deCuringDate.Text = DateTime.UtcNow.AddHours(8).ToString("d");
         }
         private void LoadType()
         {
@@ -161,7 +161,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
             foreach (var item in facilities)
             {
                 if (!SaveCuring(item.ID, curingPerson, department, curingDate, item.CuringResult, 
-                    item.CuringRunTime, item.CuringRemark, createUser, DateTime.Now))
+                    item.CuringRunTime, item.CuringRemark, createUser, DateTime.UtcNow.AddHours(8)))
                 {
                     XtraMessageBox.Show("保存失败！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;

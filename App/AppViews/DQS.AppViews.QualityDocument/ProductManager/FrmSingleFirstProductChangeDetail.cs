@@ -276,7 +276,7 @@ WHERE UP.ProductID = {0}", productID);
                         i++;
                     }
                 }
-                else if (industryStyle == "医疗机构")
+                else if (industryStyle.Contains("医疗机构"))
                 {
 
                     DataTable requiredRecords = GlobalMethod.GetViewData(RequiredCertificatesViewName,
@@ -358,11 +358,11 @@ WHERE UP.ProductID = {0}", productID);
                     {
                         string status = "未过期";
                         DateTime validDate = (DateTime)dataRow["ValidateDate"];
-                        if (DateTime.Now > validDate)
+                        if (DateTime.UtcNow.AddHours(8) > validDate)
                         {
                             status = "已过期";
                         }
-                        else if (validDate.AddDays(-30) < DateTime.Now)
+                        else if (validDate.AddDays(-30) < DateTime.UtcNow.AddHours(8))
                         {
                             status = "即将过期";
                         }
@@ -496,7 +496,7 @@ WHERE UP.ProductID = {0}", productID);
             if (rows.Length == 0)
             {
                 DataRow row = dataTable.NewRow();
-                string code = string.Format("{0}{1}D", codePrefix, DateTime.Now.ToString("yyyyMMddHHmmssfff"));
+                string code = string.Format("{0}{1}D", codePrefix, DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmssfff"));
                 row["档案编号"] = code;
                 row["档案名称"] = quatificationName;
                 row["证书类型"] = quatificationName;
@@ -511,7 +511,7 @@ WHERE UP.ProductID = {0}", productID);
                 {
                     if (dataRow["档案编号"].ToString().Length != 20 && !dataRow["档案编号"].ToString().EndsWith("D"))
                     {
-                        string code = string.Format("{0}{1}D", codePrefix, DateTime.Now.ToString("yyyyMMddHHmmssfff"));
+                        string code = string.Format("{0}{1}D", codePrefix, DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmssfff"));
                         dataRow["档案编号"] = code;
                         var id = dataRow["档案ID"];
                         if (DBNull.Value != id)

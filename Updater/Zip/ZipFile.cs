@@ -4286,7 +4286,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 			}
 			else {
 				int counter = 0;
-				int suffixSeed = DateTime.Now.Second;
+				int suffixSeed = DateTime.UtcNow.AddHours(8).Second;
 
 				while ( result == null ) {
 					counter += 1;
@@ -4300,7 +4300,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 								result = newName;
 							}
 							catch {
-								suffixSeed = DateTime.Now.Second;
+								suffixSeed = DateTime.UtcNow.AddHours(8).Second;
 							}
 						}
 						else {

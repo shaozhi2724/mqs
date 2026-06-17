@@ -132,7 +132,7 @@ namespace SyncService
                 ygcg.DEGREE = item.DEGREE.ToString();
                 ygcg.COMPANY_ID = item.COMPANY_ID;
                 ygcg.DEPART_NAME = item.DEPART_NAME;
-                ygcg.ImportDate = DateTime.Now;
+                ygcg.ImportDate = DateTime.UtcNow.AddHours(8);
                 ygcgs.Add(ygcg);
             }
             using (SqlConnection conn = new SqlConnection("Data Source=.; Initial Catalog=HGCS;Integrated Security=false;UID=sa;PWD=bokesys.com"))

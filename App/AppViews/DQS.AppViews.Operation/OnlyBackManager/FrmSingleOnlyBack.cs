@@ -100,8 +100,8 @@ namespace DQS.AppViews.Operation.OnlyBackManager
         private string LoadCode()
         {
 
-            string str = DateTime.Now.ToString("yyyyMMdd");
-            string strban = DateTime.Now.ToString("yyyyMM");
+            string str = DateTime.UtcNow.AddHours(8).ToString("yyyyMMdd");
+            string strban = DateTime.UtcNow.AddHours(8).ToString("yyyyMM");
             string sql = "SELECT TOP 1 BillCode FROM dbo.BUS_OnlyBill WHERE BillCode LIKE 'ZD" + strban + "%' ORDER BY BillID DESC";
 
 
@@ -365,7 +365,7 @@ namespace DQS.AppViews.Operation.OnlyBackManager
                             entity.BillRemark = "";
                         }
                     }
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -419,9 +419,9 @@ namespace DQS.AppViews.Operation.OnlyBackManager
                         entity.BillCode = GlobalMethod.GetNewSaleBillCode(txtBillCode.Text.Substring(0, 2),
                             txtBillCode.Text);
 
-                        entity.BillDate = DateTime.Now;
-                        entity.CreateDate = DateTime.Now;
-                        entity.LastModifyDate = DateTime.Now;
+                        entity.BillDate = DateTime.UtcNow.AddHours(8);
+                        entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                        entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.Save();
@@ -460,7 +460,7 @@ namespace DQS.AppViews.Operation.OnlyBackManager
                             approveEntity.ApprovalContent = String.Format("{0}({1}) {2} 申请审批。", entity.BillTypeName,
                                 entity.BillStyle, entity.BillCode);
                             approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                            approveEntity.CreateDate = DateTime.Now;
+                            approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                             approveEntity.IsApprovaled = false;
                             for (int i = 0; i < data.Rows.Count; i++)
                             {
@@ -485,7 +485,7 @@ namespace DQS.AppViews.Operation.OnlyBackManager
                                 notification.TargetCode = entity.BillCode;
                                 notification.ApproveCode = approveCode;
                                 notification.Message = string.Format("{0} 于 {1} 申请产品直调订单（单号 {2}）。请您审批。", userName,
-                                    DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.BillCode);
+                                    DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), entity.BillCode);
                                 notification.OwnerUserID = approvalUserId;
                                 notification.Save();
                             }

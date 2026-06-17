@@ -59,7 +59,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
             }
             else
             {
-                this.txtDestroyCode.Text = "YPXH" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtDestroyCode.Text = "YPXH" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                 this.txtDestroyCode.Select(this.txtDestroyCode.Text.Length, 0);
                 if (GlobalItem.g_CurrentEmployee != null)
                 {
@@ -69,8 +69,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                 {
                     txtTransactor.Text = GlobalItem.g_CurrentUser.UserName;
                 }
-                dteDestroyDate.DateTime = DateTime.Now;
-                tmeDestroyTime.Time = DateTime.Now;
+                dteDestroyDate.DateTime = DateTime.UtcNow.AddHours(8);
+                tmeDestroyTime.Time = DateTime.UtcNow.AddHours(8);
             }
         }
 
@@ -89,7 +89,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                 {
                     #region 修改
 
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -116,8 +116,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
                         List<EntityBase> children = this.popupGrid.GetEntities();
 
-                        entity.CreateDate = DateTime.Now;
-                        entity.LastModifyDate = DateTime.Now;
+                        entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                        entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.DestroyStatusID = 1;
@@ -172,7 +172,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                             approveEntity.ApproveTitle = string.Format("产品销毁，编号：{0}", entity.DestroyCode);
                             approveEntity.ApprovalContent = String.Format("产品销毁 {0}:{2}{1}{2} 申请审批。", entity.DestroyCode, message.ToString(), Environment.NewLine);
                             approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                            approveEntity.CreateDate = DateTime.Now;
+                            approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                             approveEntity.IsApprovaled = false;
                             for (int i = 0; i < data.Rows.Count; i++)
                             {
@@ -197,7 +197,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                                 notification.TargetCode = entity.DestroyCode;
                                 notification.ApproveCode = approveCode;
                                 notification.Message = string.Format("{0} 于 {1} 申请产品销毁（单号 {2}）。请您审批。", userName,
-                                    DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.DestroyCode);
+                                    DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), entity.DestroyCode);
                                 notification.OwnerUserID = approvalUserId;
                                 notification.Save();
                             }

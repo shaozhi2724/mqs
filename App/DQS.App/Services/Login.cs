@@ -75,12 +75,14 @@ namespace DQS.App.Services
                 }
             }
 
-            SYSDateLogEntity sysDateLog = new SYSDateLogEntity();
-            sysDateLog.UserName = GlobalItem.g_CurrentUser.UserName;
-            sysDateLog.Operate = "登录系统";
-            sysDateLog.OperateDate = DateTime.Now;
-            sysDateLog.Save();
-
+            if (GlobalItem.g_CurrentUser.UserCode != "root" && GlobalItem.g_CurrentUser.UserCode != "admin")
+            {
+                SYSDateLogEntity sysDateLog = new SYSDateLogEntity();
+                sysDateLog.UserName = GlobalItem.g_CurrentUser.UserName;
+                sysDateLog.Operate = "登录系统";
+                sysDateLog.OperateDate = DateTime.UtcNow.AddHours(8);
+                sysDateLog.Save();
+            }
             codeError = "";
             pwdError = "";
         }

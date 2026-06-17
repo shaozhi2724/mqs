@@ -109,8 +109,8 @@ namespace DQS.AppViews.OtherOperation.Finance
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string str = DateTime.Now.ToString("yyyyMMdd");
-                string strban = DateTime.Now.ToString("yyyyMM");
+                string str = DateTime.UtcNow.AddHours(8).ToString("yyyyMMdd");
+                string strban = DateTime.UtcNow.AddHours(8).ToString("yyyyMM");
                 string sql = "SELECT TOP 1 InventoryCode FROM dbo.FIN_Inventory WHERE InventoryCode LIKE 'JCDJ" + strban + "%' ORDER BY InventoryID DESC";
                 try
                 {

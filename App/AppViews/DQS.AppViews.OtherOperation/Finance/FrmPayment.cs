@@ -322,8 +322,8 @@ WHERE NOT EXISTS(SELECT * FROM dbo.FIN_PaymentDetail nr WHERE onp.BusinessBillID
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string str = DateTime.Now.ToString("yyyyMMdd");
-                string strban = DateTime.Now.ToString("yyyyMM");
+                string str = DateTime.UtcNow.AddHours(8).ToString("yyyyMMdd");
+                string strban = DateTime.UtcNow.AddHours(8).ToString("yyyyMM");
                 string sql = "SELECT TOP 1 PaymentCode FROM FIN_Payment WHERE PaymentCode LIKE 'FKDJ" + strban + "%' ORDER BY PaymentID DESC";
                 try
                 {

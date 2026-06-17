@@ -168,6 +168,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.13.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="ORMSCore, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Remotion">
       <HintPath>..\..\packages\LinqToExcel.1.10.1\lib\Remotion.dll</HintPath>
@@ -190,6 +193,9 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http">
+      <HintPath>..\..\packages\System.Net.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq">
@@ -265,6 +271,12 @@
     <Compile Include="FrmPriceSearch.Designer.cs">
       <DependentUpon>FrmPriceSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmStoreReset.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmStoreReset.Designer.cs">
+      <DependentUpon>FrmStoreReset.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmUpdateBatchNo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -276,6 +288,12 @@
     </Compile>
     <Compile Include="FrmUpdateViewPrice.Designer.cs">
       <DependentUpon>FrmUpdateViewPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUploadData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUploadData.Designer.cs">
+      <DependentUpon>FrmUploadData.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmWarningMessage.cs">
       <SubType>Form</SubType>
@@ -289,12 +307,15 @@
     <Compile Include="FrmWarningShow.Designer.cs">
       <DependentUpon>FrmWarningShow.cs</DependentUpon>
     </Compile>
+    <Compile Include="HttpUtil.cs" />
     <Compile Include="Licenser\DQSLicenseManager.cs" />
     <Compile Include="Licenser\RockeyLicenseManager.cs" />
     <Compile Include="Licenser\SenseLockKeyManager.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PushClass.cs" />
+    <Compile Include="PushStoreAmount.cs" />
     <Compile Include="Service References\MQSKeyServices\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -303,6 +324,7 @@
     <Compile Include="Services\ILogin.cs" />
     <Compile Include="Services\Login.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="StoreAmount.cs" />
     <Compile Include="UpdateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -322,6 +344,9 @@
     <EmbeddedResource Include="FrmPriceSearch.resx">
       <DependentUpon>FrmPriceSearch.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmStoreReset.resx">
+      <DependentUpon>FrmStoreReset.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmUpdateBatchNo.resx">
       <DependentUpon>FrmUpdateBatchNo.cs</DependentUpon>
     </EmbeddedResource>
@@ -330,6 +355,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmUpdateViewPrice.resx">
       <DependentUpon>FrmUpdateViewPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUploadData.resx">
+      <DependentUpon>FrmUploadData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateForm.resx">
       <DependentUpon>UpdateForm.cs</DependentUpon>

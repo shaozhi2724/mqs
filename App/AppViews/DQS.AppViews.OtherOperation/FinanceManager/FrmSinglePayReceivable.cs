@@ -253,7 +253,7 @@ namespace DQS.AppViews.OtherOperation.FinanceManager
             entity.BillCode = txtBillCode.Text.Trim();
             entity.AccountsReceivable = Convert.ToDouble(txtAccountsReceivable.Text);
             entity.BillReceivableRemark = txtBillReceivableRemark.Text.Trim();
-            entity.CreateDate = DateTime.Now;
+            entity.CreateDate = DateTime.UtcNow.AddHours(8);
             entity.CreateUserName = GlobalItem.g_CurrentEmployee != null
                 ? GlobalItem.g_CurrentEmployee.EmployeeName
                 : GlobalItem.g_CurrentUser.UserName;

@@ -331,7 +331,7 @@ namespace DQS.AppViews.QualityDocument.StoreManager
 
                         structure.StructureID = Convert.ToInt32(structureID);
 
-                        structure.LastModifyDate = DateTime.Now;
+                        structure.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         structure.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                         structure.Update();
 
@@ -406,8 +406,8 @@ namespace DQS.AppViews.QualityDocument.StoreManager
 
                     if (structure.IsNew())
                     {
-                        structure.CreateDate = DateTime.Now;
-                        structure.LastModifyDate = DateTime.Now;
+                        structure.CreateDate = DateTime.UtcNow.AddHours(8);
+                        structure.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         structure.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         structure.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                         structure.Save();

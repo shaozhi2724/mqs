@@ -190,8 +190,8 @@ FROM dbo.FIN_MakeCollectionsOnPassage onp WHERE NOT EXISTS(SELECT * FROM dbo.FIN
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string str = DateTime.Now.ToString("yyyyMMdd");
-                string strban = DateTime.Now.ToString("yyyyMM");
+                string str = DateTime.UtcNow.AddHours(8).ToString("yyyyMMdd");
+                string strban = DateTime.UtcNow.AddHours(8).ToString("yyyyMM");
                 string sql = "SELECT TOP 1 ReceivablesCode FROM FIN_Receivables WHERE ReceivablesCode LIKE 'YSDJ" + strban + "%' ORDER BY ReceivablesID DESC";
                 try
                 {

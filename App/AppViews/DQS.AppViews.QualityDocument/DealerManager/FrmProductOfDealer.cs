@@ -65,7 +65,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                             {
                                 // 如果没有,保存到变更表
                                 // 先保存旧数据,再保存新数据
-                                string code = "GN" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                                string code = "GN" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                                 string insertsql = @"INSERT dbo.BUS_DealerVSProductChange(ChangeCode ,DealerID ,DealerName ,ChangeReason ,CreateDate ,CreateUserName ,AppStatus)
 VALUES( N'" + code + "' ," + SearchID + " ,N'" + DealerName + "' ,N'" + frmalter.Reason + "' ,GETDATE() ,N'" + GlobalItem.g_CurrentUser.UserName + "' ,'')";
                                 cmd = new SqlCommand(insertsql, conn);

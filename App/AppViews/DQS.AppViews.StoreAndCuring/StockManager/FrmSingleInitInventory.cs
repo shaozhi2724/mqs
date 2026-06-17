@@ -125,7 +125,7 @@ WHERE StoreDetailID={0}
                         : GlobalItem.g_CurrentEmployee.EmployeeName;
                     string sql = string.Format(sqlString, m_id.Value, changeUserName,
                         entity.ProductID, entity.BatchNo, entity.ProduceDate, entity.ValidateDate,
-                        entity.Amount, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.DetailRemark,
+                        entity.Amount, DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), entity.DetailRemark,
                         entity.IsNullField("DepartmentID") ? 0 : entity.DepartmentID);
                     SqlCommand command = new SqlConnection(GlobalItem.g_DbConnectStrings).CreateCommand();
                     command.CommandType = CommandType.Text;
@@ -159,8 +159,8 @@ WHERE StoreDetailID={0}
                     {
                         storeDetail.DepartmentID = entity.DepartmentID;
                     }
-                    storeDetail.LastCuringDate = DateTime.Now;
-                    storeDetail.LastModifyDate = DateTime.Now;
+                    storeDetail.LastCuringDate = DateTime.UtcNow.AddHours(8);
+                    storeDetail.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     storeDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     storeDetail.Update();
 
@@ -170,9 +170,9 @@ WHERE StoreDetailID={0}
                 {
                     #region 新建
 
-                    entity.LastCuringDate = DateTime.Now;
-                    entity.CreateDate = DateTime.Now;
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastCuringDate = DateTime.UtcNow.AddHours(8);
+                    entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Save();

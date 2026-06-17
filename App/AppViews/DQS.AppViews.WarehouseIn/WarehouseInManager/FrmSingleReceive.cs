@@ -50,12 +50,12 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             }
             else
             {
-                this.dateTransportDate.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                this.dateArrived.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                this.dateTransportDate.Text = DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss");
+                this.dateArrived.Text = DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss");
 
                 dateArrived.Enabled = isModifyArrivedTime;
 
-                this.txtReceiveCode.Text = "SH" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtReceiveCode.Text = "SH" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                 this.txtReceiveCode.Select(this.txtReceiveCode.Text.Length, 0);
 
                 if (GlobalItem.g_CurrentEmployee != null)
@@ -221,7 +221,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                                 break;
                         }
                     }
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
                     if (!busReceiveDetailEntities.Any() || busReceiveDetailEntities.TrueForAll(p => p.ReceiveAmount == 0))
@@ -351,9 +351,9 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                                     break;
                             }
                         }
-                        entity.ReceiveDate = DateTime.Now;
-                        entity.CreateDate = DateTime.Now;
-                        entity.LastModifyDate = DateTime.Now;
+                        entity.ReceiveDate = DateTime.UtcNow.AddHours(8);
+                        entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                        entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                         if (!busReceiveDetailEntities.Any() || busReceiveDetailEntities.TrueForAll(p => p.ReceiveAmount == 0))
@@ -455,9 +455,9 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 DealerCode = receiveEntity.DealerCode,
                 DealerName = receiveEntity.DealerName,
                 DealerSpell = receiveEntity.DealerSpell,
-                CreateDate = DateTime.Now,
+                CreateDate = DateTime.UtcNow.AddHours(8),
                 CreateUserID = GlobalItem.g_CurrentUser.UserID,
-                DeclinedDate = DateTime.Now,
+                DeclinedDate = DateTime.UtcNow.AddHours(8),
                 DeclinedType = "收货拒收",
                 DeclinedCode = "SHJS-" + receiveEntity.BillCode,
                 Reservation1 = reason,
@@ -480,7 +480,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             }
             if (!entity.IsNew(BUSDeclinedEntityFields.DeclinedCode == entity.DeclinedCode))
             {
-                entity.LastModifyDate = DateTime.Now;
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.Update();
                 entity.Fetch();
@@ -502,7 +502,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     Amount = receiveDetail.Amount,
                     DeclinedAmount = receiveDetail.Amount - receiveDetail.ReceiveAmount,
                     CreateUserID = GlobalItem.g_CurrentUser.UserID,
-                    CreateDate = DateTime.Now,
+                    CreateDate = DateTime.UtcNow.AddHours(8),
                     DetailRemark = string.Format("{0} - 收货拒收 {1} (总数:{2}，收货：{3}，拒收：{4})", receiveEntity.BillCode, receiveDetail.ProductID, receiveDetail.Amount, receiveDetail.ReceiveAmount, receiveDetail.Amount - receiveDetail.ReceiveAmount)
                 };
                 if (!receiveDetail.IsNullField("ProduceDate"))
@@ -998,9 +998,9 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                             break;
                     }
                 }
-                entity.ReceiveDate = DateTime.Now;
-                entity.CreateDate = DateTime.Now;
-                entity.LastModifyDate = DateTime.Now;
+                entity.ReceiveDate = DateTime.UtcNow.AddHours(8);
+                entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 //entity.Reservation7 = reason;
@@ -1076,7 +1076,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     approveEntity.ApprovalContent = String.Format("{0}({1}) {2} --收货，申请审批。", entity.BillTypeName,
                         entity.ReceiveStatus, entity.ReceiveCode);
                     approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                    approveEntity.CreateDate = DateTime.Now;
+                    approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                     approveEntity.IsApprovaled = false;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
@@ -1101,7 +1101,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         notification.TargetCode = entity.BillCode;
                         notification.ApproveCode = approveCode;
                         notification.Message = string.Format("{0} 于 {1} 收货申请（单号 {2}）。请您审批。", userName,
-                            DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.BillCode);
+                            DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), entity.BillCode);
                         notification.OwnerUserID = approvalUserId;
                         notification.Save();
                     }
@@ -1142,7 +1142,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 }
                 else
                 {
-                    TimeSpan span = DateTime.Now - dateTransportDate.DateTime;
+                    TimeSpan span = DateTime.UtcNow.AddHours(8) - dateTransportDate.DateTime;
                     txtTransportTime.Text = Convert.ToInt32(span.TotalHours).ToString();
                 }
             }

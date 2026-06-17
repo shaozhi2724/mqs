@@ -132,7 +132,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             }
             else
             {
-                this.txtAcceptCode.Text = "YS" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtAcceptCode.Text = "YS" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                 this.txtAcceptCode.Select(this.txtAcceptCode.Text.Length, 0);
 
                 if (GlobalItem.g_CurrentEmployee != null)
@@ -406,7 +406,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                             store.Delete();
                         }
                     }
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     if (!countedAcceptDetails.Any() ||
                         countedAcceptDetails.ToList().TrueForAll(p => p.TotalReceiveAmount == 0))
@@ -465,7 +465,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         {
                             BUSSamplingEntity sampling = samplingEntity as BUSSamplingEntity;
                             sampling.SamplingCode = Guid.NewGuid().ToString();
-                            sampling.SamplingDate = DateTime.Now;
+                            sampling.SamplingDate = DateTime.UtcNow.AddHours(8);
                             sampling.AcceptID = m_id.Value;
                             sampling.BillCode = entity.BillCode;
                             sampling.BillDate = entity.BillDate;
@@ -488,7 +488,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     if (entity.IsNew(BUSAcceptEntityFields.AcceptCode == entity.AcceptCode))
                     {
                         #region 新建
-                        entity.AcceptDate = DateTime.Now;
+                        entity.AcceptDate = DateTime.UtcNow.AddHours(8);
                         if (!this.ValidateAmount()) return;
                         if (!this.ValidateBatchNo()) return;
                         if (!this.ValidateBatchDate()) return;
@@ -636,8 +636,8 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                                     }
                                 }
                             }
-                            entity.CreateDate = DateTime.Now;
-                            entity.LastModifyDate = DateTime.Now;
+                            entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                            entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                             entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                             entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                             entity.Save();
@@ -674,7 +674,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                                 {
                                     BUSSamplingEntity sampling = samplingEntity as BUSSamplingEntity;
                                     sampling.SamplingCode = Guid.NewGuid().ToString();
-                                    sampling.SamplingDate = DateTime.Now;
+                                    sampling.SamplingDate = DateTime.UtcNow.AddHours(8);
                                     sampling.AcceptID = entity.AcceptID;
                                     sampling.BillCode = entity.BillCode;
                                     sampling.BillDate = entity.BillDate;
@@ -817,8 +817,8 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                                     }
                                 }
                             }
-                            entity.CreateDate = DateTime.Now;
-                            entity.LastModifyDate = DateTime.Now;
+                            entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                            entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                             entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                             entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                             entity.Save();
@@ -855,7 +855,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                                 {
                                     BUSSamplingEntity sampling = samplingEntity as BUSSamplingEntity;
                                     sampling.SamplingCode = Guid.NewGuid().ToString();
-                                    sampling.SamplingDate = DateTime.Now;
+                                    sampling.SamplingDate = DateTime.UtcNow.AddHours(8);
                                     sampling.AcceptID = entity.AcceptID;
                                     sampling.BillCode = entity.BillCode;
                                     sampling.BillDate = entity.BillDate;
@@ -955,7 +955,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             {
                 storeBillEntity = new BUSStoreBillEntity();
             }
-            storeBillEntity.StoreDate = DateTime.Now;
+            storeBillEntity.StoreDate = DateTime.UtcNow.AddHours(8);
             storeBillEntity.PurchaseBillID = acceptEntity.BillID;
             storeBillEntity.PurchaseBillCode = acceptEntity.BillCode;
             storeBillEntity.DealerID = acceptEntity.DealerID;
@@ -964,12 +964,12 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             storeBillEntity.StoreKeeper = storeKeeper;
             storeBillEntity.StoreTypeID = 3;
             storeBillEntity.StoreTypeName = "不合格品";
-            storeBillEntity.CreateDate = DateTime.Now;
+            storeBillEntity.CreateDate = DateTime.UtcNow.AddHours(8);
             storeBillEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
             if (!storeBillEntity.IsNew(BUSStoreBillEntityFields.StoreCode == storeBillEntity.StoreCode))
             {
                 storeBillEntity.StoreCode = "BRK" + txtBillCode.Text.Substring(2);
-                storeBillEntity.LastModifyDate = DateTime.Now;
+                storeBillEntity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 storeBillEntity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 storeBillEntity.Update();
                 BUSStoreBillDetailEntity childToDelete = new BUSStoreBillDetailEntity { StoreID = storeBillEntity.StoreID };
@@ -992,7 +992,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     Amount = unqualifiedAcceptDetail.UnqualifiedAmount,
                     Reservation7 = unqualifiedAcceptDetail.AcceptSolution,
                     CreateUserID = GlobalItem.g_CurrentUser.UserID,
-                    CreateDate = DateTime.Now,
+                    CreateDate = DateTime.UtcNow.AddHours(8),
                     DetailRemark = string.Format("{0} - 验收不合格品入库 {1} (总数:{2})", acceptEntity.BillCode, unqualifiedAcceptDetail.ProductID, unqualifiedAcceptDetail.UnqualifiedAmount)
                 };
                 if (!unqualifiedAcceptDetail.IsNullField("ProduceDate"))
@@ -1043,9 +1043,9 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 DealerCode = acceptEntity.DealerCode,
                 DealerName = acceptEntity.DealerName,
                 DealerSpell = acceptEntity.DealerSpell,
-                CreateDate = DateTime.Now,
+                CreateDate = DateTime.UtcNow.AddHours(8),
                 CreateUserID = GlobalItem.g_CurrentUser.UserID,
-                DeclinedDate = DateTime.Now,
+                DeclinedDate = DateTime.UtcNow.AddHours(8),
                 DeclinedType = "验收拒收",
                 DeclinedCode = declinedCode,
                 Reservation1 = reason,
@@ -1062,7 +1062,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
             if (!entity.IsNew(BUSDeclinedEntityFields.DeclinedCode == declinedCode))
             {
-                entity.LastModifyDate = DateTime.Now;
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.Update();
                 BUSDeclinedDetailEntity childToDelete = new BUSDeclinedDetailEntity { DeclinedID = entity.DeclinedID };
@@ -1083,7 +1083,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     Amount = receiveDetail.Amount,
                     DeclinedAmount = receiveDetail.Amount - receiveDetail.ReceiveAmount,
                     CreateUserID = GlobalItem.g_CurrentUser.UserID,
-                    CreateDate = DateTime.Now,
+                    CreateDate = DateTime.UtcNow.AddHours(8),
                     DetailRemark = string.Format("{0} - 验收拒收 {1} (总数:{2}，收货：{3}，拒收：{4})", acceptEntity.BillCode, receiveDetail.ProductID, receiveDetail.Amount, receiveDetail.ReceiveAmount, receiveDetail.Amount - receiveDetail.ReceiveAmount)
                 };
                 if (!receiveDetail.IsNullField("ProduceDate"))
@@ -1822,10 +1822,10 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 storeDetail.ProduceDate = billDetail.ProduceDate;
                 storeDetail.ValidateDate = billDetail.ValidateDate;
                 storeDetail.Amount = billDetail.Amount;
-                storeDetail.CreateDate = DateTime.Now;
-                storeDetail.LastModifyDate = DateTime.Now;
+                storeDetail.CreateDate = DateTime.UtcNow.AddHours(8);
+                storeDetail.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 storeDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
-                storeDetail.LastCuringDate = DateTime.Now;
+                storeDetail.LastCuringDate = DateTime.UtcNow.AddHours(8);
                 storeDetail.CreateStoreID = billDetail.StoreID;
                 storeDetail.LastStoreID = billDetail.StoreID;
                 storeDetail.DetailRemark = billDetail.Reservation7;
@@ -1837,7 +1837,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 //更新不合格品库存
                 storeDetail.Fetch();
                 storeDetail.LastStoreID = billDetail.StoreID;
-                storeDetail.LastModifyDate = DateTime.Now;
+                storeDetail.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 storeDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 storeDetail.Amount = storeDetail.Amount + billDetail.Amount;
                 storeDetail.Update();
@@ -1889,7 +1889,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             List<EntityBase> children = this.popupGrid.GetEntities();
             List<BUSAcceptDetailEntity> acceptDetails = children.Cast<BUSAcceptDetailEntity>().ToList();
 
-            entity.AcceptDate = DateTime.Now;
+            entity.AcceptDate = DateTime.UtcNow.AddHours(8);
             if (!this.ValidateAmount()) return;
             if (!this.ValidateBatchNo()) return;
             if (!this.ValidateBatchDate()) return;
@@ -2047,8 +2047,8 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         }
                     }
                 }
-                entity.CreateDate = DateTime.Now;
-                entity.LastModifyDate = DateTime.Now;
+                entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 //entity.Reservation1 = reason;
@@ -2090,7 +2090,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     {
                         BUSSamplingEntity sampling = samplingEntity as BUSSamplingEntity;
                         sampling.SamplingCode = Guid.NewGuid().ToString();
-                        sampling.SamplingDate = DateTime.Now;
+                        sampling.SamplingDate = DateTime.UtcNow.AddHours(8);
                         sampling.AcceptID = entity.AcceptID;
                         sampling.BillCode = entity.BillCode;
                         sampling.BillDate = entity.BillDate;
@@ -2233,8 +2233,8 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                         }
                     }
                 }
-                entity.CreateDate = DateTime.Now;
-                entity.LastModifyDate = DateTime.Now;
+                entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 //entity.Reservation1 = reason;
@@ -2277,7 +2277,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     {
                         BUSSamplingEntity sampling = samplingEntity as BUSSamplingEntity;
                         sampling.SamplingCode = Guid.NewGuid().ToString();
-                        sampling.SamplingDate = DateTime.Now;
+                        sampling.SamplingDate = DateTime.UtcNow.AddHours(8);
                         sampling.AcceptID = entity.AcceptID;
                         sampling.BillCode = entity.BillCode;
                         sampling.BillDate = entity.BillDate;
@@ -2313,7 +2313,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 approveEntity.ApprovalContent = String.Format("{0} {1} --验收，申请审批。", entity.BillTypeName,
                     entity.ReceiveCode);
                 approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                approveEntity.CreateDate = DateTime.Now;
+                approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                 approveEntity.IsApprovaled = false;
                 for (int i = 0; i < data.Rows.Count; i++)
                 {
@@ -2338,7 +2338,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     notification.TargetCode = entity.BillCode;
                     notification.ApproveCode = approveCode;
                     notification.Message = string.Format("{0} 于 {1} 验收申请（单号 {2}）。请您审批。", userName,
-                        DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.BillCode);
+                        DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), entity.BillCode);
                     notification.OwnerUserID = approvalUserId;
                     notification.Save();
                 }

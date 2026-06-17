@@ -188,7 +188,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entity.ProductID = this.m_ProductID.Value;
                     entity.PriceID = 1;
                     entity.Price = Convert.ToDouble(this.txtJHJ.Value);
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -205,8 +205,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entityHistory.ProductID = this.m_ProductID.Value;
                     entityHistory.PriceID = 1;
                     entityHistory.NewPrice = Convert.ToDouble(this.txtJHJ.Value);
-                    entityHistory.CreateDate = DateTime.Now;
-                    entityHistory.LastModifyDate = DateTime.Now;
+                    entityHistory.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entityHistory.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entityHistory.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entityHistory.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     //调价则记录
@@ -219,7 +219,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entity.ProductID = this.m_ProductID.Value;
                     entity.PriceID = 2;
                     entity.Price = Convert.ToDouble(this.txtPFJ.Value);
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -236,8 +236,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entityHistory.ProductID = this.m_ProductID.Value;
                     entityHistory.PriceID = 2;
                     entityHistory.NewPrice = Convert.ToDouble(this.txtPFJ.Value);
-                    entityHistory.CreateDate = DateTime.Now;
-                    entityHistory.LastModifyDate = DateTime.Now;
+                    entityHistory.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entityHistory.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entityHistory.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entityHistory.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     //调价则记录
@@ -250,7 +250,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entity.ProductID = this.m_ProductID.Value;
                     entity.PriceID = 3;
                     entity.Price = Convert.ToDouble(this.txtLSJ.Value);
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -267,8 +267,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entityHistory.ProductID = this.m_ProductID.Value;
                     entityHistory.PriceID = 3;
                     entityHistory.NewPrice = Convert.ToDouble(this.txtLSJ.Value);
-                    entityHistory.CreateDate = DateTime.Now;
-                    entityHistory.LastModifyDate = DateTime.Now;
+                    entityHistory.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entityHistory.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entityHistory.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entityHistory.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
@@ -282,7 +282,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entity.ProductID = this.m_ProductID.Value;
                     entity.PriceID = 4;
                     entity.Price = Convert.ToDouble(this.txtHYJ.Value);
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -299,8 +299,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entityHistory.ProductID = this.m_ProductID.Value;
                     entityHistory.PriceID = 4;
                     entityHistory.NewPrice = Convert.ToDouble(this.txtHYJ.Value);
-                    entityHistory.CreateDate = DateTime.Now;
-                    entityHistory.LastModifyDate = DateTime.Now;
+                    entityHistory.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entityHistory.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entityHistory.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entityHistory.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
@@ -314,7 +314,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entity.ProductID = this.m_ProductID.Value;
                     entity.PriceID = 5;
                     entity.Price = Convert.ToDouble(this.txtXJ1.Value);
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -331,8 +331,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entityHistory.ProductID = this.m_ProductID.Value;
                     entityHistory.PriceID = 5;
                     entityHistory.NewPrice = Convert.ToDouble(this.txtXJ1.Value);
-                    entityHistory.CreateDate = DateTime.Now;
-                    entityHistory.LastModifyDate = DateTime.Now;
+                    entityHistory.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entityHistory.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entityHistory.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entityHistory.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
@@ -346,7 +346,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entity.ProductID = this.m_ProductID.Value;
                     entity.PriceID = 6;
                     entity.Price = Convert.ToDouble(this.txtXJ2.Value);
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -363,8 +363,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entityHistory.ProductID = this.m_ProductID.Value;
                     entityHistory.PriceID = 6;
                     entityHistory.NewPrice = Convert.ToDouble(this.txtXJ2.Value);
-                    entityHistory.CreateDate = DateTime.Now;
-                    entityHistory.LastModifyDate = DateTime.Now;
+                    entityHistory.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entityHistory.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entityHistory.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entityHistory.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
@@ -378,7 +378,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entity.ProductID = this.m_ProductID.Value;
                     entity.PriceID = 7;
                     entity.Price = Convert.ToDouble(this.txtXJ3.Value);
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -395,8 +395,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entityHistory.ProductID = this.m_ProductID.Value;
                     entityHistory.PriceID = 7;
                     entityHistory.NewPrice = Convert.ToDouble(this.txtXJ3.Value);
-                    entityHistory.CreateDate = DateTime.Now;
-                    entityHistory.LastModifyDate = DateTime.Now;
+                    entityHistory.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entityHistory.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entityHistory.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entityHistory.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
@@ -410,7 +410,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entity.ProductID = this.m_ProductID.Value;
                     entity.PriceID = 8;
                     entity.Price = Convert.ToDouble(this.txtXJ4.Value);
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -427,8 +427,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entityHistory.ProductID = this.m_ProductID.Value;
                     entityHistory.PriceID = 8;
                     entityHistory.NewPrice = Convert.ToDouble(this.txtXJ4.Value);
-                    entityHistory.CreateDate = DateTime.Now;
-                    entityHistory.LastModifyDate = DateTime.Now;
+                    entityHistory.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entityHistory.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entityHistory.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entityHistory.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
@@ -442,7 +442,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entity.ProductID = this.m_ProductID.Value;
                     entity.PriceID = 9;
                     entity.Price = Convert.ToDouble(this.txtXJ5.Value);
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -459,8 +459,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entityHistory.ProductID = this.m_ProductID.Value;
                     entityHistory.PriceID = 9;
                     entityHistory.NewPrice = Convert.ToDouble(this.txtXJ5.Value);
-                    entityHistory.CreateDate = DateTime.Now;
-                    entityHistory.LastModifyDate = DateTime.Now;
+                    entityHistory.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entityHistory.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entityHistory.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entityHistory.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
@@ -474,7 +474,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entity.ProductID = this.m_ProductID.Value;
                     entity.PriceID = 10;
                     entity.Price = Convert.ToDouble(this.txtXJ6.Value);
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -491,8 +491,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entityHistory.ProductID = this.m_ProductID.Value;
                     entityHistory.PriceID = 10;
                     entityHistory.NewPrice = Convert.ToDouble(this.txtXJ6.Value);
-                    entityHistory.CreateDate = DateTime.Now;
-                    entityHistory.LastModifyDate = DateTime.Now;
+                    entityHistory.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entityHistory.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entityHistory.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entityHistory.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
@@ -506,7 +506,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entity.ProductID = this.m_ProductID.Value;
                     entity.PriceID = 11;
                     entity.Price = Convert.ToDouble(this.txtXJ7.Value);
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -523,8 +523,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                     entityHistory.ProductID = this.m_ProductID.Value;
                     entityHistory.PriceID = 11;
                     entityHistory.NewPrice = Convert.ToDouble(this.txtXJ7.Value);
-                    entityHistory.CreateDate = DateTime.Now;
-                    entityHistory.LastModifyDate = DateTime.Now;
+                    entityHistory.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entityHistory.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entityHistory.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entityHistory.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
@@ -616,7 +616,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                                 }
                                 else
                                 {
-                                    string code = "JG" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                                    string code = "JG" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                                     string insertsql = @"EXEC sp_InsertOldProductPriceChange '{0}',{1},'{2}'";
                                     insertsql = string.Format(insertsql, code,this.m_ProductID.Value, GlobalItem.g_CurrentUser.UserName);
                                     comm = new SqlCommand(insertsql, conn);
@@ -641,7 +641,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                                         approveEntity.ApproveTitle = string.Format("产品价格信息变更，编号：{0}", code);
                                         approveEntity.ApprovalContent = String.Format("角色浏览权限变更，编号：{0}", code);
                                         approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                                        approveEntity.CreateDate = DateTime.Now;
+                                        approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                                         approveEntity.IsApprovaled = false;
 
 
@@ -673,7 +673,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                                             notification.TargetCode = code;
                                             notification.ApproveCode = approveCode;
                                             notification.Message = string.Format("{0} 于 {1} 价格信息变更申请（单号 {2}）。请您审批。", userName,
-                                                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), code);
+                                                DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), code);
                                             notification.OwnerUserID = approvalUserId;
                                             notification.Save();
                                         }
@@ -701,8 +701,8 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                 entity.ProductID = Convert.ToInt32(txtPopupProduct.SelectedValue);
                 if (entity.IsNew(BFIProductPriceEntityFields.ProductID == entity.ProductID))
                 {
-                    entity.CreateDate = DateTime.Now;
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 

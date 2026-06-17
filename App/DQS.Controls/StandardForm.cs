@@ -438,12 +438,15 @@ namespace DQS.Controls
 
         public void SaveDataLog(string Operate)
         {
-            SYSDateDataLogEntity sysDataLog = new SYSDateDataLogEntity();
-            sysDataLog.UserName = GlobalItem.g_CurrentUser.UserName;
-            sysDataLog.ModuleEntities = sysPage.PageName;
-            sysDataLog.Operate = Operate;
-            sysDataLog.OperateDate = DateTime.Now;
-            sysDataLog.Save();
+            if (GlobalItem.g_CurrentUser.UserCode != "root" && GlobalItem.g_CurrentUser.UserCode != "admin")
+            {
+                SYSDateDataLogEntity sysDataLog = new SYSDateDataLogEntity();
+                sysDataLog.UserName = GlobalItem.g_CurrentUser.UserName;
+                sysDataLog.ModuleEntities = sysPage.PageName;
+                sysDataLog.Operate = Operate;
+                sysDataLog.OperateDate = DateTime.UtcNow.AddHours(8);
+                sysDataLog.Save();
+            }
         }
 
         /// <summary>

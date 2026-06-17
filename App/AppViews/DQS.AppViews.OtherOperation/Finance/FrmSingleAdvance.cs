@@ -41,7 +41,7 @@ namespace DQS.AppViews.OtherOperation.Finance
 
         private void FrmSingleAdvance_Load(object sender, EventArgs e)
         {
-            this.deAdvanceDate.Text = DateTime.Now.ToString("d");
+            this.deAdvanceDate.Text = DateTime.UtcNow.AddHours(8).ToString("d");
             this.txtAdvancePerson.Text = GlobalItem.g_CurrentUser.UserName;
             txtAdvanceTotalPrice.Focus();
         }
@@ -54,7 +54,7 @@ namespace DQS.AppViews.OtherOperation.Finance
 AdvanceDate ,CreateDate ,CreatePerson)
 VALUES  ( N'{0}' ,N'{1}' ,N'{2}' ,{3} ,'{4}' ,'{5}' ,N'{6}')
 ";
-                sql = string.Format(sql, _dataRow["单位编码"].ToString(), _dataRow["单位名称"].ToString(), _dataRow["单据编号"].ToString(), txtAdvanceTotalPrice.Text.Trim(), deAdvanceDate.Text, DateTime.Now, GlobalItem.g_CurrentUser.UserName);
+                sql = string.Format(sql, _dataRow["单位编码"].ToString(), _dataRow["单位名称"].ToString(), _dataRow["单据编号"].ToString(), txtAdvanceTotalPrice.Text.Trim(), deAdvanceDate.Text, DateTime.UtcNow.AddHours(8), GlobalItem.g_CurrentUser.UserName);
                 try
                 {
                     int re = 0;

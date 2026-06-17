@@ -113,7 +113,7 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                     DealerID = entity.DealerID
                 };
                 dealer.Fetch();
-                if (dealer.IndustryStyle == "医疗机构")
+                if (dealer.IndustryStyle.Contains("医疗机构"))
                 {
                     this.layReservation11.Visibility = LayoutVisibility.Always;
                     this.layReservation12.Visibility = LayoutVisibility.Always;
@@ -376,7 +376,7 @@ namespace DQS.AppViews.Operation.PurchaseAndSaleManager
                     //更新库存
                     storeDetail.Fetch();
                     //storeDetail.LastStoreID = billDetail.BillID;
-                    storeDetail.LastModifyDate = DateTime.Now;
+                    storeDetail.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     storeDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     if (storeDetail.IsNullField("Amount"))
                     {
@@ -1027,7 +1027,7 @@ WHERE BillID={1}
                                     entity.Reservation10 = "";
                                 }
                             }
-                            entity.LastModifyDate = DateTime.Now;
+                            entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                             entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
                             CheckBillModify(m_id.Value);
@@ -1086,7 +1086,7 @@ WHERE BillID={1}
                                     priceEntity.ProductID = child.ProductID;
                                     priceEntity.BatchNo = child.BatchNo;
                                     priceEntity.SalePrice = child.UnitPrice;
-                                    priceEntity.CreateDate = DateTime.Now;
+                                    priceEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                                     priceEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                                     priceEntity.Save();
                                 }
@@ -1305,9 +1305,9 @@ WHERE BillID={1}
                             return;
                         }
 
-                        entity.BillDate = DateTime.Now;
-                        entity.CreateDate = DateTime.Now;
-                        entity.LastModifyDate = DateTime.Now;
+                        entity.BillDate = DateTime.UtcNow.AddHours(8);
+                        entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                        entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.Save();
@@ -1339,7 +1339,7 @@ WHERE BillID={1}
                                     priceEntity.ProductID = child.ProductID;
                                     priceEntity.BatchNo = child.BatchNo;
                                     priceEntity.SalePrice = child.UnitPrice;
-                                    priceEntity.CreateDate = DateTime.Now;
+                                    priceEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                                     priceEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                                     priceEntity.Save();
                                 }
@@ -1398,7 +1398,7 @@ WHERE BillID={1}
                             approveEntity.ApprovalContent = String.Format("{0}({1}) {2} 申请审批。", entity.BillTypeName,
                                 entity.BillStyle, entity.BillCode);
                             approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                            approveEntity.CreateDate = DateTime.Now;
+                            approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                             approveEntity.IsApprovaled = false;
                             for (int i = 0; i < data.Rows.Count; i++)
                             {
@@ -1423,7 +1423,7 @@ WHERE BillID={1}
                                 notification.TargetCode = entity.BillCode;
                                 notification.ApproveCode = approveCode;
                                 notification.Message = string.Format("{0} 于 {1} 申请产品销售（单号 {2}）。请您审批。", userName,
-                                    DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.BillCode);
+                                    DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), entity.BillCode);
                                 notification.OwnerUserID = approvalUserId;
                                 notification.Save();
                             }
@@ -1503,7 +1503,7 @@ WHERE BillID={1}
                             wmscode.ReviewCode = saleCode;
                             wmscode.StatusID = 1;
                             wmscode.StatusName = "已关联";
-                            wmscode.RelationDate = DateTime.Now;
+                            wmscode.RelationDate = DateTime.UtcNow.AddHours(8);
                             wmscode.Update();
                         }
                         else
@@ -2084,7 +2084,7 @@ WHERE BillID={1}
                         DealerID = dealerID
                     };
                     dealer.Fetch();
-                    if (dealer.IndustryStyle == "医疗机构")
+                    if (dealer.IndustryStyle.Contains("医疗机构"))
                     {
                         this.layReservation11.Visibility = LayoutVisibility.Always;
                         this.layReservation12.Visibility = LayoutVisibility.Always;
@@ -2539,7 +2539,7 @@ WHERE DealerID =  " + dealerID + ") t ORDER BY t.SalesmanStatus";
                 EntityCollection<BFIBusinessRangeEntity> ranges = new EntityCollection<BFIBusinessRangeEntity>();
                 ranges.Fetch(BFIBusinessRangeEntityFields.DealerID == dealerID);
 
-                if (dealer.IndustryStyle == "医疗机构")
+                if (dealer.IndustryStyle.Contains("医疗机构"))
                 {
                     if (ranges.Count > 0)
                     {
@@ -3206,7 +3206,7 @@ WHERE DealerID =  " + dealerID + ") t ORDER BY t.SalesmanStatus";
             //更新库存
             storeDetail.Fetch();
             storeDetail.LastStoreID = billDetail.BillID;
-            storeDetail.LastModifyDate = DateTime.Now;
+            storeDetail.LastModifyDate = DateTime.UtcNow.AddHours(8);
             storeDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
             if (storeDetail.IsNullField("Amount"))
             {
@@ -3433,9 +3433,9 @@ WHERE DealerID =  " + dealerID + ") t ORDER BY t.SalesmanStatus";
                         return;
                     }
 
-                    entity.BillDate = DateTime.Now;
-                    entity.CreateDate = DateTime.Now;
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.BillDate = DateTime.UtcNow.AddHours(8);
+                    entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Save();
@@ -3464,7 +3464,7 @@ WHERE DealerID =  " + dealerID + ") t ORDER BY t.SalesmanStatus";
                                 priceEntity.ProductID = child.ProductID;
                                 priceEntity.BatchNo = child.BatchNo;
                                 priceEntity.SalePrice = child.UnitPrice;
-                                priceEntity.CreateDate = DateTime.Now;
+                                priceEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                                 priceEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                                 priceEntity.Save();
                             }
@@ -3519,14 +3519,14 @@ WHERE DealerID =  " + dealerID + ") t ORDER BY t.SalesmanStatus";
                             entity.BillStyle, entity.BillCode);
                         approveEntity.ApprovalContent = String.Format("{0}({1}) {2} 申请审批。", entity.BillTypeName,
                             entity.BillStyle, entity.BillCode);
-                        approveEntity.ApprovalDate = DateTime.Now;
+                        approveEntity.ApprovalDate = DateTime.UtcNow.AddHours(8);
                         approveEntity.IsApprovaled = true;
                         approveEntity.IsPass = true;
                         approveEntity.ApprovalSuggestion = "";
                         approveEntity.ApprovalResult = "";
                         approveEntity.ApprovalRemark = "";
                         approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                        approveEntity.CreateDate = DateTime.Now;
+                        approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                         approveEntity.IsApprovaled = false;
                         for (int i = 0; i < data.Rows.Count; i++)
                         {
@@ -3551,7 +3551,7 @@ WHERE DealerID =  " + dealerID + ") t ORDER BY t.SalesmanStatus";
                             notification.TargetCode = entity.BillCode;
                             notification.ApproveCode = approveCode;
                             notification.Message = string.Format("{0} 于 {1} 申请产品销售（单号 {2}）。请您审批。", userName,
-                                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.BillCode);
+                                DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), entity.BillCode);
                             notification.OwnerUserID = approvalUserId;
                             notification.Save();
                         }
@@ -3586,7 +3586,7 @@ WHERE DealerID =  " + dealerID + ") t ORDER BY t.SalesmanStatus";
             bill.Update();
             BUSStoreBillEntity storebill = new BUSStoreBillEntity();
             storebill.StoreCode = txtBillCode.Text;
-            storebill.StoreDate = DateTime.Now;
+            storebill.StoreDate = DateTime.UtcNow.AddHours(8);
             storebill.IsBillIn = false;
             storebill.BillStyle = "正常";
             storebill.StoreTypeID = 1;
@@ -3598,9 +3598,9 @@ WHERE DealerID =  " + dealerID + ") t ORDER BY t.SalesmanStatus";
             storebill.SaleBillCode = txtBillCode.Text;
             storebill.Operator = bill.Operator;
             storebill.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-            storebill.CreateDate = DateTime.Now;
+            storebill.CreateDate = DateTime.UtcNow.AddHours(8);
             storebill.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
-            storebill.LastModifyDate = DateTime.Now;
+            storebill.LastModifyDate = DateTime.UtcNow.AddHours(8);
             storebill.Reservation1 = "2";
             storebill.Reservation9 = "保存并出库";
             storebill.Save();

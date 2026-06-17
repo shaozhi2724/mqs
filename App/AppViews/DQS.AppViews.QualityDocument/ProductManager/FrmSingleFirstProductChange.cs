@@ -172,7 +172,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                 {
                     entity.ApprovePerson = currentUser.UserName;
                 }
-                entity.ApproveDate = DateTime.Now;
+                entity.ApproveDate = DateTime.UtcNow.AddHours(8);
                 entity.Update();
 
                 UpdateCertificates();
@@ -294,7 +294,7 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                 {
                     entity.ApprovePerson = currentUser.UserName;
                 }
-                entity.ApproveDate = DateTime.Now;
+                entity.ApproveDate = DateTime.UtcNow.AddHours(8);
                 entity.Update();
             }
 

@@ -164,7 +164,7 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
         private void BindProductStyles()
         {
             chklbcProductStyle.Items.Clear();
-            if (cbxIndustryStyle.Text == "医疗机构")
+            if (cbxIndustryStyle.Text.Contains("医疗机构"))
             {
                 layBusinessRange.Text = "诊疗范围";
                 layBusinessRange.CustomizationFormText = "诊疗范围";
@@ -251,7 +251,7 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
 
             if (this.m_id != null)
             {
-                entity.LastModifyDate = DateTime.Now;
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.Update();
 
@@ -279,18 +279,18 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                     data = data.DefaultView.ToTable();
 
                     ATCApproveEntity approveEntity = new ATCApproveEntity();
-                    approveEntity.InternalNo = "SYYP" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                    approveEntity.InternalNo = "SYYP" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                     approveEntity.DocumentCode = "FirstProvider";
                     approveEntity.BillCode = entity.DealerCode;
                     approveEntity.ApproveTitle = "首营往来单位，编号：" + entity.DealerCode;
                     approveEntity.ApprovalContent = String.Format("首营往来单位 {0} 申请审批。", entity.DealerName);
                     approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                    approveEntity.CreateDate = DateTime.Now;
+                    approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                     approveEntity.IsApprovaled = false;
                     
 
-                    entity.CreateDate = DateTime.Now;
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Save();
@@ -319,7 +319,7 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                         notification.TargetCode = entity.DealerCode;
                         notification.ApproveCode = approveCode;
                         notification.Message = string.Format("{0} 于 {1} 申请首营往来单位（名称 {2}）。请您审批。", userName,
-                            DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.DealerName);
+                            DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), entity.DealerName);
                         notification.OwnerUserID = approvalUserId;
                         notification.Save();
                     }
@@ -347,8 +347,8 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                 range.ProductStyleName = category.ItemName;
                 range.RangeStyle = 1;
                 range.RangeStyleName = "往来单位";
-                range.CreateDate = DateTime.Now;
-                range.LastModifyDate = DateTime.Now;
+                range.CreateDate = DateTime.UtcNow.AddHours(8);
+                range.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 range.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                 range.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 range.Save();

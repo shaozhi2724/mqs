@@ -89,8 +89,8 @@ namespace DQS.AppViews.Operation.PriceManager
                         return;
                     }
 
-                    entity.CreateDate = DateTime.Now;
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Save();
@@ -115,7 +115,7 @@ namespace DQS.AppViews.Operation.PriceManager
                     entity.Fetch();
 
                     this.CustomSetEntity(entity);
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
                 }
@@ -212,8 +212,8 @@ namespace DQS.AppViews.Operation.PriceManager
                     return;
                 }
 
-                entity.CreateDate = DateTime.Now;
-                entity.LastModifyDate = DateTime.Now;
+                entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.Save();
@@ -244,7 +244,7 @@ namespace DQS.AppViews.Operation.PriceManager
                 entity.Fetch();
 
                 this.CustomSetEntity(entity);
-                entity.LastModifyDate = DateTime.Now;
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.Update();
                 priceListVersions.Fetch(BFIPriceListVersionEntityFields.PriceListID == _priceListEntity.PriceListID &

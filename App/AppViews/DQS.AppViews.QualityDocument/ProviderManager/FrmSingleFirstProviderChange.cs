@@ -182,7 +182,7 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                 {
                     entity.ApprovePerson = currentUser.UserName;
                 }
-                entity.ApproveDate = DateTime.Now;
+                entity.ApproveDate = DateTime.UtcNow.AddHours(8);
                 entity.Update();
 
                 UpdateCertificates();
@@ -204,7 +204,7 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
 
 
             EntityCollection<SYSCategoryEntity> categories = new EntityCollection<SYSCategoryEntity>();
-            if (dealer.IndustryStyle == "医疗机构")
+            if (dealer.IndustryStyle.Contains("医疗机构"))
             {
                 categories.Fetch(SYSCategoryEntityFields.CategoryCode == "MedicalSubject");
             }
@@ -343,7 +343,7 @@ namespace DQS.AppViews.QualityDocument.ProviderManager
                 {
                     entity.ApprovePerson = currentUser.UserName;
                 }
-                entity.ApproveDate = DateTime.Now;
+                entity.ApproveDate = DateTime.UtcNow.AddHours(8);
                 entity.StatusID = 3;
                 entity.StatusName = "拒绝变更";
                 entity.Update();

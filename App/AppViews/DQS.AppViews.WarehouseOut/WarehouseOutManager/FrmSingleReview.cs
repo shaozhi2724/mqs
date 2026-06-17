@@ -45,7 +45,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
             }
             else
             {
-                this.txtReviewCode.Text = "FH" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtReviewCode.Text = "FH" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                 this.txtReviewCode.Select(this.txtReviewCode.Text.Length, 0);
 
 
@@ -76,7 +76,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
 
                     List<EntityBase> children = this.popupGrid.GetEntities();
 
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
                     //状态
@@ -117,12 +117,12 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                     {
                         #region 新建
 
-                        entity.ReviewDate = DateTime.Now;
+                        entity.ReviewDate = DateTime.UtcNow.AddHours(8);
 
                         List<EntityBase> children = this.popupGrid.GetEntities();
 
-                        entity.CreateDate = DateTime.Now;
-                        entity.LastModifyDate = DateTime.Now;
+                        entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                        entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
@@ -280,7 +280,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
         //    //更新库存
         //    storeDetail.Fetch();
         //    storeDetail.LastStoreID = reviewDetail.ReviewID;
-        //    storeDetail.LastModifyDate = DateTime.Now;
+        //    storeDetail.LastModifyDate = DateTime.UtcNow.AddHours(8);
         //    storeDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
         //    if (storeDetail.IsNullField("Amount"))
         //    {

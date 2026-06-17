@@ -35,8 +35,8 @@ namespace DQS.Controls
 
             entity.QualificationID = this.m_QualificationID;
 
-            entity.CreateDate = DateTime.Now;
-            entity.LastModifyDate = DateTime.Now;
+            entity.CreateDate = DateTime.UtcNow.AddHours(8);
+            entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
             entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
             entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
             entity.Save();

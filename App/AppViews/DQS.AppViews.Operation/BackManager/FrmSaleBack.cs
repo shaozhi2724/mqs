@@ -109,11 +109,11 @@ namespace DQS.AppViews.Operation.BackManager
                                     }
                                 }
                             }
-                            string time = string.Format("{0:yyyy年MM月dd日 HH:mm:ss}", DateTime.Now);
+                            string time = string.Format("{0:yyyy年MM月dd日 HH:mm:ss}", DateTime.UtcNow.AddHours(8));
                             //删除
                             entity.BillStatus = 9;
                             entity.BillStatusName = "已删除";
-                            entity.LastModifyDate = DateTime.Now;
+                            entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                             entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                             entity.Reservation5 = "已删除。操作员：" + userName + "于" + time + "删除，删除原因为：" + reason;
                             entity.Update();

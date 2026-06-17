@@ -27,7 +27,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
             }
             else
             {
-                txtCreateDate.Text = DateTime.Now.ToString();
+                txtCreateDate.Text = DateTime.UtcNow.AddHours(8).ToString();
                 txtCuringPerson.Text = GlobalItem.g_CurrentUser.UserName;
             }
             LoadType("BUS_CuringTools", "ToolsType", txtToolsType);

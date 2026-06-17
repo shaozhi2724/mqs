@@ -159,7 +159,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                         attchment.AttachmentName = file.Name;
                         attchment.AttachmentSize = GlobalMethod.FormatFileSize(file.Length);
                         attchment.AttachmentType = file.Extension;
-                        attchment.CreateDate = DateTime.Now;
+                        attchment.CreateDate = DateTime.UtcNow.AddHours(8);
                         attchment.TransportID = m_Id;
 
                         attchment.AttachmentContent = File.ReadAllBytes(file.FullName);

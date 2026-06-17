@@ -119,7 +119,7 @@ namespace DQS.App.Licenser
                 {
                     if (feature.timeDepend)
                     {
-                        if (DateTime.Now > feature.expiration)
+                        if (DateTime.UtcNow.AddHours(8) > feature.expiration)
                         {
                             if (bThrow)
                             {
@@ -321,17 +321,17 @@ namespace DQS.App.Licenser
                 foreach (System.Management.ManagementObject mo in moc)
                 {
                     //Only get the first one
-                    if (result == "")
-                    {
-                        try
-                        {
-                            result = mo[wmiProperty].ToString();
-                            break;
-                        }
-                        catch
-                        {
-                        }
-                    }
+                    //if (result == "")
+                    //{
+                    //    try
+                    //    {
+                    //        result = mo[wmiProperty].ToString();
+                    //        break;
+                    //    }
+                    //    catch
+                    //    {
+                    //    }
+                    //}
                 }
                 return result;
             }

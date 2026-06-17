@@ -29,9 +29,9 @@ namespace DQS.SvrHost
 
         private void FrmDbBack_Load(object sender, EventArgs e)
         {
-            this.dtStart.DateTime = DateTime.Now.AddDays(-7);
-            this.dtEnd.DateTime = DateTime.Now;
-            this.bsiPlan.Caption = String.Format("摘要：下次系统自动备份将在 {0:yyyy-MM-dd} 0:00:00 进行。", DateTime.Now.AddMonths(1));
+            this.dtStart.DateTime = DateTime.UtcNow.AddHours(8).AddDays(-7);
+            this.dtEnd.DateTime = DateTime.UtcNow.AddHours(8);
+            this.bsiPlan.Caption = String.Format("摘要：下次系统自动备份将在 {0:yyyy-MM-dd} 0:00:00 进行。", DateTime.UtcNow.AddHours(8).AddMonths(1));
 
             ViewCollection<AllDbBackupsView> backups = new ViewCollection<AllDbBackupsView>();
             DataTable data = backups.FetchTable();

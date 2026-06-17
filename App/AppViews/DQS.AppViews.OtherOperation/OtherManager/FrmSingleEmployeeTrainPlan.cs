@@ -68,7 +68,7 @@ namespace DQS.AppViews.OtherOperation.OtherManager
             }
             else
             {
-                this.txtTrainCode.Text = "YGPX" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtTrainCode.Text = "YGPX" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                 this.txtTrainCode.Select(this.txtTrainCode.Text.Length, 0);
             }
         }
@@ -82,7 +82,7 @@ namespace DQS.AppViews.OtherOperation.OtherManager
 
             if (this.m_id != null)
             {
-                entity.LastModifyDate = DateTime.Now;
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.Update();
                 if (entity.IsTrained)
@@ -116,8 +116,8 @@ namespace DQS.AppViews.OtherOperation.OtherManager
             {
                 if (entity.IsNew())
                 {
-                    entity.CreateDate = DateTime.Now;
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Save();

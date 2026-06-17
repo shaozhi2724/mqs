@@ -47,10 +47,10 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
             }
             else
             {
-                this.txtStoreCode.Text = "RK" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtStoreCode.Text = "RK" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                 this.txtStoreCode.Select(this.txtStoreCode.Text.Length, 0);
 
-                this.txtStoreDate.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                this.txtStoreDate.Text = DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss");
 
                 if (GlobalItem.g_CurrentEmployee != null)
                 {
@@ -80,7 +80,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     List<EntityBase> children = this.popupGrid.GetEntities();
                     if (!this.ValidateAmount()) return;
 
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -116,12 +116,12 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                             }
                         }
 
-                        entity.StoreDate = DateTime.Now;
+                        entity.StoreDate = DateTime.UtcNow.AddHours(8);
 
                         List<EntityBase> children = this.popupGrid.GetEntities();
                         if (!this.ValidateAmount()) return;
-                        entity.CreateDate = DateTime.Now;
-                        entity.LastModifyDate = DateTime.Now;
+                        entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                        entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.Save();
@@ -171,7 +171,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                             {
                                 priceEntity.PurchasePrice = productPrice.PurchasePrice;
                             }
-                            priceEntity.CreateDate = DateTime.Now;
+                            priceEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                             priceEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                             priceEntity.Save();
 
@@ -364,10 +364,10 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                     storeDetail.SterilizationDate = billDetail.SterilizationDate;
                 }
                 storeDetail.Amount = billDetail.Amount;
-                storeDetail.CreateDate = DateTime.Now;
-                storeDetail.LastModifyDate = DateTime.Now;
+                storeDetail.CreateDate = DateTime.UtcNow.AddHours(8);
+                storeDetail.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 storeDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
-                storeDetail.LastCuringDate = DateTime.Now;
+                storeDetail.LastCuringDate = DateTime.UtcNow.AddHours(8);
                 storeDetail.CreateStoreID = billDetail.StoreID;
                 storeDetail.LastStoreID = billDetail.StoreID;
                 storeDetail.DepartmentID = storeDetailBelongDepartmentId;
@@ -399,7 +399,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 //更新库存
                 storeDetail.Fetch();
                 storeDetail.LastStoreID = billDetail.StoreID;
-                storeDetail.LastModifyDate = DateTime.Now;
+                storeDetail.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 storeDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 //停掉库存中价格计算。
                 /*
@@ -415,8 +415,8 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
                 */
                 if (storeDetail.Amount == 0)
                 {
-                    storeDetail.CreateDate = DateTime.Now;
-                    storeDetail.LastCuringDate = DateTime.Now;
+                    storeDetail.CreateDate = DateTime.UtcNow.AddHours(8);
+                    storeDetail.LastCuringDate = DateTime.UtcNow.AddHours(8);
                 }
                 storeDetail.Amount = storeDetail.Amount + billDetail.Amount;
                 storeDetail.Update();

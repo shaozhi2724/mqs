@@ -61,7 +61,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
             }
             else
             {
-                this.txtUnqualifiedCode.Text = "BHG" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtUnqualifiedCode.Text = "BHG" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                 this.txtUnqualifiedCode.Select(this.txtUnqualifiedCode.Text.Length, 0);
 
 
@@ -105,7 +105,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
                     List<EntityBase> children = this.popupGrid.GetEntities();
 
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -151,8 +151,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                         }
                         List<EntityBase> children = this.popupGrid.GetEntities();
 
-                        entity.CreateDate = DateTime.Now;
-                        entity.LastModifyDate = DateTime.Now;
+                        entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                        entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
@@ -201,7 +201,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                             approveEntity.ApproveTitle = string.Format("不合格产品处理，编号：{0}", entity.UnqualifiedCode);
                             approveEntity.ApprovalContent = String.Format("不合格产品处理 {0}:{2}{1}{2} 申请审批。", entity.UnqualifiedCode, message.ToString(), Environment.NewLine);
                             approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                            approveEntity.CreateDate = DateTime.Now;
+                            approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                             approveEntity.IsApprovaled = false;
                             for (int i = 0; i < data.Rows.Count; i++)
                             {
@@ -226,7 +226,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                                 notification.TargetCode = entity.UnqualifiedCode;
                                 notification.ApproveCode = approveCode;
                                 notification.Message = string.Format("{0} 于 {1} 申请处理不合格产品（单号 {2}）。请您审批。", userName,
-                                    DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.UnqualifiedCode);
+                                    DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), entity.UnqualifiedCode);
                                 notification.OwnerUserID = approvalUserId;
                                 notification.Save();
                             }
@@ -301,7 +301,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
             //更新库存
             storeDetail.Fetch();
-            storeDetail.LastModifyDate = DateTime.Now;
+            storeDetail.LastModifyDate = DateTime.UtcNow.AddHours(8);
             storeDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
             if (storeDetail.IsNullField("Amount"))
             {
@@ -323,8 +323,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                 unqualifiedStoreDetail.ValidateDate = unqualifiedDetail.ValidateDate;
                 unqualifiedStoreDetail.Amount = unqualifiedDetail.Amount;
                 unqualifiedStoreDetail.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                unqualifiedStoreDetail.CreateDate = DateTime.Now;
-                unqualifiedStoreDetail.LastCuringDate = DateTime.Now;
+                unqualifiedStoreDetail.CreateDate = DateTime.UtcNow.AddHours(8);
+                unqualifiedStoreDetail.LastCuringDate = DateTime.UtcNow.AddHours(8);
                 unqualifiedStoreDetail.Save();
 
             }
@@ -332,7 +332,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
             {
                 //更新不合格品库存
                 unqualifiedStoreDetail.Fetch();
-                unqualifiedStoreDetail.LastModifyDate = DateTime.Now;
+                unqualifiedStoreDetail.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 unqualifiedStoreDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 unqualifiedStoreDetail.Amount = unqualifiedStoreDetail.Amount + unqualifiedDetail.Amount;
                 unqualifiedStoreDetail.Update();

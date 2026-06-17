@@ -120,8 +120,8 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
                         range.ProductStyleName = category.ItemName;
                         range.RangeStyle = 0;
                         range.RangeStyleName = "企业";
-                        range.CreateDate = DateTime.Now;
-                        range.LastModifyDate = DateTime.Now;
+                        range.CreateDate = DateTime.UtcNow.AddHours(8);
+                        range.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         range.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         range.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                         range.Save();
@@ -168,7 +168,7 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
                                     FrmAlter frmalter = new FrmAlter();
                                     if (DialogResult.Yes == frmalter.ShowDialog())
                                     {
-                                        string code = "JYFW" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                                        string code = "JYFW" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                                         string insertsql = @"EXEC sp_InsertOldRangeChange '{0}','{1}','{2}'";
                                         insertsql = string.Format(insertsql, code, GlobalItem.g_CurrentUser.UserName, frmalter.Reason);
                                         comm = new SqlCommand(insertsql, conn);
@@ -195,7 +195,7 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
                                             approveEntity.ApproveTitle = string.Format("本企业经营范围变更，编号：{0}", code);
                                             approveEntity.ApprovalContent = String.Format("本企业经营范围变更，编号：{0}", code);
                                             approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                                            approveEntity.CreateDate = DateTime.Now;
+                                            approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                                             approveEntity.IsApprovaled = false;
 
 
@@ -227,7 +227,7 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
                                                 notification.TargetCode = code;
                                                 notification.ApproveCode = approveCode;
                                                 notification.Message = string.Format("{0} 于 {1} 本企业经营范围变更申请（单号 {2}）。请您审批。", userName,
-                                                    DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), code);
+                                                    DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), code);
                                                 notification.OwnerUserID = approvalUserId;
                                                 notification.Save();
                                             }

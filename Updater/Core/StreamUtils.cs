@@ -190,7 +190,7 @@ namespace ICSharpCode.SharpZipLib.Core
 
 			bool copying = true;
 
-			DateTime marker = DateTime.Now;
+			DateTime marker = DateTime.UtcNow.AddHours(8);
 			long processed = 0;
 			long target = 0;
 
@@ -219,9 +219,9 @@ namespace ICSharpCode.SharpZipLib.Core
 					copying = false;
 				}
 
-				if (DateTime.Now - marker > updateInterval) {
+				if (DateTime.UtcNow.AddHours(8) - marker > updateInterval) {
 					progressFired = true;
-					marker = DateTime.Now;
+					marker = DateTime.UtcNow.AddHours(8);
 					args = new ProgressEventArgs(name, processed, target);
 					progressHandler(sender, args);
 

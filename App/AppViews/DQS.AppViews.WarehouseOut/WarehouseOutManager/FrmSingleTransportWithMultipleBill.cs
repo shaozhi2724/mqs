@@ -76,11 +76,11 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                     txtCarNo.Properties.ReadOnly = true;
                     txtCarName.Properties.ReadOnly = true;
                 }
-                this.txtTransportCode.Text = "YS" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtTransportCode.Text = "YS" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                 this.txtTransportCode.Select(this.txtTransportCode.Text.Length, 0);
 
-                this.dteStartTime.DateTime = DateTime.Now;
-                this.tmeStartTime.Time = DateTime.Now;
+                this.dteStartTime.DateTime = DateTime.UtcNow.AddHours(8);
+                this.tmeStartTime.Time = DateTime.UtcNow.AddHours(8);
 
                 if (GlobalItem.g_CurrentEmployee != null)
                 {
@@ -391,7 +391,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                     if (this.m_id != null)
                     {
                         entity.TransportID = this.m_id.Value;
-                        entity.LastModifyDate = DateTime.Now;
+                        entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.Update();
 
@@ -436,8 +436,8 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                     {
                         //if (entity.IsNew())
                         //{
-                        entity.CreateDate = DateTime.Now;
-                        entity.LastModifyDate = DateTime.Now;
+                        entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                        entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.Save();

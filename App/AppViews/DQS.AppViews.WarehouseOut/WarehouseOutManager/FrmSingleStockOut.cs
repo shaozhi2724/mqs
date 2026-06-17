@@ -47,7 +47,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
             }
             else
             {
-                this.txtStoreCode.Text = "CK" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtStoreCode.Text = "CK" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                 this.txtStoreCode.Select(this.txtStoreCode.Text.Length, 0);
 
 
@@ -82,7 +82,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                     //if (!this.ValidateBatchNo()) return;
                     if (!this.ValidateBatchDate()) return;
 
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -118,7 +118,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
                             }
                         }
 
-                        entity.StoreDate = DateTime.Now;
+                        entity.StoreDate = DateTime.UtcNow.AddHours(8);
 
                         List<EntityBase> children = this.popupGrid.GetEntities();
                         if (!this.ValidateAmount()) return;
@@ -127,8 +127,8 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
 
                         entity.IsBillIn = false;
                         entity.Reservation1 = "2";
-                        entity.CreateDate = DateTime.Now;
-                        entity.LastModifyDate = DateTime.Now;
+                        entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                        entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.Save();
@@ -557,7 +557,7 @@ namespace DQS.AppViews.WarehouseOut.WarehouseOutManager
             //更新库存
             storeDetail.Fetch();
             storeDetail.LastStoreID = storeBillDetail.StoreID;
-            storeDetail.LastModifyDate = DateTime.Now;
+            storeDetail.LastModifyDate = DateTime.UtcNow.AddHours(8);
             storeDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
             if (storeDetail.IsNullField("Amount"))
             {

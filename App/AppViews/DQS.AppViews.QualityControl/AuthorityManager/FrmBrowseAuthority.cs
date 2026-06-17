@@ -279,7 +279,7 @@ namespace DQS.AppViews.QualityControl.AuthorityManager
                         foreach (string menuCode in munus)
                         {
                             roleMenu.MenuCode = menuCode;
-                            roleMenu.CreateDate = DateTime.Now;
+                            roleMenu.CreateDate = DateTime.UtcNow.AddHours(8);
                             roleMenu.Save();
                         }
                     }
@@ -325,7 +325,7 @@ namespace DQS.AppViews.QualityControl.AuthorityManager
                                     }
                                     else
                                     {
-                                        string code = "LL" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                                        string code = "LL" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                                         string insertsql = @"EXEC sp_InsertOldRoleMenuChange '{0}','{1}','{2}','{3}'";
                                         insertsql = string.Format(insertsql, code, (roleItem.Key as ATCRoleEntity).RoleID, (roleItem.Key as ATCRoleEntity).RoleName, GlobalItem.g_CurrentUser.UserName);
                                         comm = new SqlCommand(insertsql, conn);
@@ -350,7 +350,7 @@ namespace DQS.AppViews.QualityControl.AuthorityManager
                                             approveEntity.ApproveTitle = string.Format("{0}角色浏览权限变更，编号：{1}", (roleItem.Key as ATCRoleEntity).RoleName, code);
                                             approveEntity.ApprovalContent = String.Format("{0}角色浏览权限变更，编号：{1}", (roleItem.Key as ATCRoleEntity).RoleName, code);
                                             approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                                            approveEntity.CreateDate = DateTime.Now;
+                                            approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                                             approveEntity.IsApprovaled = false;
 
 
@@ -382,7 +382,7 @@ namespace DQS.AppViews.QualityControl.AuthorityManager
                                                 notification.TargetCode = code;
                                                 notification.ApproveCode = approveCode;
                                                 notification.Message = string.Format("{0} 于 {1} 浏览权限变更申请（单号 {2}）。请您审批。", userName,
-                                                    DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), code);
+                                                    DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), code);
                                                 notification.OwnerUserID = approvalUserId;
                                                 notification.Save();
                                             }

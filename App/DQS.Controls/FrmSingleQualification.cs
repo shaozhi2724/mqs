@@ -38,23 +38,23 @@ namespace DQS.Controls
 
             if (this.m_TableName == "BFI_Product")
             {
-                this.txtQualificationCode.Text = "PT" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtQualificationCode.Text = "PT" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
             }
             else if (this.m_TableName == "BFI_Dealer")
             {
-                this.txtQualificationCode.Text = "DR" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtQualificationCode.Text = "DR" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
             }
             else if (this.m_TableName == "BFI_Employee")
             {
-                this.txtQualificationCode.Text = "EE" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtQualificationCode.Text = "EE" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
             }
             else if (this.m_TableName == "BFI_Salesman")
             {
-                this.txtQualificationCode.Text = "SN" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtQualificationCode.Text = "SN" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
             }
             else
             {
-                this.txtQualificationCode.Text = "XX" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtQualificationCode.Text = "XX" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
             }
             this.cbxCertificateStyle.CategoryCode = this.m_CertificateCategory;
             this.cbxCertificateStyle.InitSource();
@@ -99,12 +99,12 @@ namespace DQS.Controls
             {
                 if (entity.IsNullField("CreateUserID"))
                 {
-                    entity.CreateDate = DateTime.Now;
+                    entity.CreateDate = DateTime.UtcNow.AddHours(8);
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                 }
                 else
                 {
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 }
                 entity.Update();
@@ -117,7 +117,7 @@ namespace DQS.Controls
                     entity.BelongID = this.m_QualificationId;
                     entity.BelongTable = this.m_TableName;
                     entity.BelongFieldName = this.m_FieldName;
-                    entity.CreateDate = DateTime.Now;
+                    entity.CreateDate = DateTime.UtcNow.AddHours(8);
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Save();
                 }

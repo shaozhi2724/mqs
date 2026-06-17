@@ -825,7 +825,7 @@ WHERE BillID={1}
                                     entity.BillStatusName = "已审核";
                                 }
                             }
-                            entity.LastModifyDate = DateTime.Now;
+                            entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                             entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
                             CheckBillModify(m_id.Value);
@@ -952,9 +952,9 @@ WHERE BillID={1}
                         List<EntityBase> children = this.popupGrid.GetEntities();
 
                         //entity.BillCode = GlobalMethod.GetNewPurchaseBillCode(entity.BillCode.Substring(0, 2), entity.BillCode);
-                        entity.BillDate = DateTime.Now;
-                        entity.CreateDate = DateTime.Now;
-                        entity.LastModifyDate = DateTime.Now;
+                        entity.BillDate = DateTime.UtcNow.AddHours(8);
+                        entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                        entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
@@ -1032,7 +1032,7 @@ WHERE BillID={1}
                             approveEntity.ApprovalContent = String.Format("{0}({1}) {2} 申请审批。", entity.BillTypeName,
                                 entity.BillStyle, entity.BillCode);
                             approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                            approveEntity.CreateDate = DateTime.Now;
+                            approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                             approveEntity.IsApprovaled = false;
                             for (int i = 0; i < data.Rows.Count; i++)
                             {
@@ -1057,7 +1057,7 @@ WHERE BillID={1}
                                 notification.TargetCode = entity.BillCode;
                                 notification.ApproveCode = approveCode;
                                 notification.Message = string.Format("{0} 于 {1} 申请采购退货（单号 {2}）。请您审批。", userName,
-                                    DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.BillCode);
+                                    DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), entity.BillCode);
                                 notification.OwnerUserID = approvalUserId;
                                 notification.Save();
                             }
@@ -1653,7 +1653,7 @@ WHERE BillID={1}
             //更新库存
             storeDetail.Fetch();
             storeDetail.LastStoreID = billDetail.BillID;
-            storeDetail.LastModifyDate = DateTime.Now;
+            storeDetail.LastModifyDate = DateTime.UtcNow.AddHours(8);
             storeDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
             if (storeDetail.IsNullField("Amount"))
             {
@@ -1682,7 +1682,7 @@ WHERE BillID={1}
             //更新库存
             storeDetail.Fetch();
             storeDetail.LastStoreID = billDetail.BillID;
-            storeDetail.LastModifyDate = DateTime.Now;
+            storeDetail.LastModifyDate = DateTime.UtcNow.AddHours(8);
             storeDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
             if (storeDetail.IsNullField("Amount"))
             {
@@ -1786,7 +1786,7 @@ WHERE BillID={1}
                             wmscode.ReviewCode = saleCode;
                             wmscode.StatusID = 1;
                             wmscode.StatusName = "已关联";
-                            wmscode.RelationDate = DateTime.Now;
+                            wmscode.RelationDate = DateTime.UtcNow.AddHours(8);
                             wmscode.Update();
                         }
                         else

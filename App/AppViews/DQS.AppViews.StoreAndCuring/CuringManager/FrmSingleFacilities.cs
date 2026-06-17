@@ -91,7 +91,7 @@ WHERE ID = {13}";
                         txtPrincipal.Text,
                         cboDepartmentName.Text,
                         GlobalItem.g_CurrentUser.UserName,
-                        DateTime.Now,
+                        DateTime.UtcNow.AddHours(8),
                         (int)this.Tag);
                 }
                 else

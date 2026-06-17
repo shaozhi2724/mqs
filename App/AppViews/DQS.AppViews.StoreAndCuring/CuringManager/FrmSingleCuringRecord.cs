@@ -108,7 +108,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
         {
             if (this.m_ProductID != null && this.m_ProductID != DBNull.Value)
             {
-                this.txtCuringCode.Text = "YHJL" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtCuringCode.Text = "YHJL" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                 this.txtCuringCode.Select(this.txtCuringCode.Text.Length, 0);
                 this.txtQualifiedAmount.Text = this.txtAmount.Text;
                 this.txtUnqualifiedAmount.Text = 0+"";
@@ -151,11 +151,11 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
 
             entity.ProductID = Convert.ToInt32(this.m_ProductID);
             entity.BatchNo = txtBatchNo.Text.Trim();
-            entity.CheckDate = DateTime.Now;
+            entity.CheckDate = DateTime.UtcNow.AddHours(8);
             if (entity.IsNew())
             {
-                entity.CreateDate = DateTime.Now;
-                entity.LastModifyDate = DateTime.Now;
+                entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.CheckItem = txtCheckItem.Text;
@@ -209,7 +209,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
             };
             InStoreDetails.Fetch();
 
-            InStoreDetails.CuringDate = DateTime.Now;
+            InStoreDetails.CuringDate = DateTime.UtcNow.AddHours(8);
 
             InStoreDetails.Update();
 

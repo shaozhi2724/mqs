@@ -385,7 +385,7 @@ WHERE EnterpriseID={0}
                     }
                 }
                 #endregion
-                entity.LastModifyDate = DateTime.Now;
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.Update();
             }

@@ -35,7 +35,7 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
             }
             else
             {
-                txtCheckDate.Text = DateTime.Now.ToShortDateString();
+                txtCheckDate.Text = DateTime.UtcNow.AddHours(8).ToShortDateString();
             }
         }
         private void GetCheckBody()

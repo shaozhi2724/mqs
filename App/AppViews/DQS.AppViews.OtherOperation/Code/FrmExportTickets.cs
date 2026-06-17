@@ -110,7 +110,7 @@ WHERE rc.StatusID = 1";
                 code.Fetch();
                 code.StatusID = 2;
                 code.StatusName = "已导出";
-                code.ExportDate = DateTime.Now;
+                code.ExportDate = DateTime.UtcNow.AddHours(8);
                 code.Update();
             }
         }

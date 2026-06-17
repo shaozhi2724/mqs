@@ -117,7 +117,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                             entitypl.UnLockedUser = GlobalItem.g_CurrentUser.UserName;
                         }
                         entitypl.DealResult = entity.DealSuggestion;
-                        entitypl.UnLockedDate = DateTime.Now;
+                        entitypl.UnLockedDate = DateTime.UtcNow.AddHours(8);
                         entitypl.Update();
                     }
                 }
@@ -200,8 +200,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                     }
                     unqualifiedStoreDetail.Amount = unqualifiedDetail.Amount;
                     unqualifiedStoreDetail.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                    unqualifiedStoreDetail.CreateDate = DateTime.Now;
-                    unqualifiedStoreDetail.LastCuringDate = DateTime.Now;
+                    unqualifiedStoreDetail.CreateDate = DateTime.UtcNow.AddHours(8);
+                    unqualifiedStoreDetail.LastCuringDate = DateTime.UtcNow.AddHours(8);
                     unqualifiedStoreDetail.Save();
 
                 }
@@ -209,7 +209,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                 {
                     //更新不合格品库存
                     unqualifiedStoreDetail.Fetch();
-                    unqualifiedStoreDetail.LastModifyDate = DateTime.Now;
+                    unqualifiedStoreDetail.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     unqualifiedStoreDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     unqualifiedStoreDetail.Amount = unqualifiedStoreDetail.Amount + unqualifiedDetail.Amount;
                     unqualifiedStoreDetail.Update();

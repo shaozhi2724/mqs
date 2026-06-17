@@ -108,7 +108,7 @@ WHERE InStoreID = {0}";
                 XtraMessageBox.Show("有效期不能为空。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
-            string code = "KCBG" + DateTime.Now.ToString("yyyyMMddhhmmss");
+            string code = "KCBG" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddhhmmss");
 
             string sql = @"EXEC sp_StoreDetailChange '{0}',{1},'{2}','{3}','{4}','{5}','{6}','{7}'";
             sql = string.Format(sql,

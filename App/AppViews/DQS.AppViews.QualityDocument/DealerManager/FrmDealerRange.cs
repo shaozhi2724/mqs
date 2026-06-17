@@ -113,8 +113,8 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                         range.ProductStyleName = category.ItemName;
                         range.RangeStyle = 1;
                         range.RangeStyleName = "往来单位";
-                        range.CreateDate = DateTime.Now;
-                        range.LastModifyDate = DateTime.Now;
+                        range.CreateDate = DateTime.UtcNow.AddHours(8);
+                        range.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         range.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         range.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                         range.Save();

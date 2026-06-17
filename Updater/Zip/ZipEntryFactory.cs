@@ -402,7 +402,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 
 		#region Instance Fields
 		INameTransform nameTransform_;
-		DateTime fixedDateTime_ = DateTime.Now;
+		DateTime fixedDateTime_ = DateTime.UtcNow.AddHours(8);
 		TimeSetting timeSetting_;
 		bool isUnicodeText_;
 

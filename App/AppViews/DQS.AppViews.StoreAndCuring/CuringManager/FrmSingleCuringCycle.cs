@@ -47,7 +47,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
             }
             else
             {
-                this.txtCycleCode.Text = "YHZQ" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtCycleCode.Text = "YHZQ" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                 this.txtCycleCode.Select(this.txtCycleCode.Text.Length, 0);
             }
         }
@@ -67,7 +67,7 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
 
             if (this.m_CycleCode != null && this.m_CycleCode != DBNull.Value)
             {
-                entity.LastModifyDate = DateTime.Now;
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.Update();
             }
@@ -75,8 +75,8 @@ namespace DQS.AppViews.StoreAndCuring.CuringManager
             {
                 if (entity.IsNew())
                 {
-                    entity.CreateDate = DateTime.Now;
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Save();

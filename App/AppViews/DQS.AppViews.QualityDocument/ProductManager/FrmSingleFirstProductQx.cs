@@ -226,7 +226,7 @@ WHERE UP.ProductID = {0}", productID);
 
             if (this.m_id != null)
             {
-                entity.LastModifyDate = DateTime.Now;
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.Update();
 
@@ -254,19 +254,19 @@ WHERE UP.ProductID = {0}", productID);
                     data = data.DefaultView.ToTable();
 
                     ATCApproveEntity approveEntity = new ATCApproveEntity();
-                    approveEntity.InternalNo = "SYYP" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                    approveEntity.InternalNo = "SYYP" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                     approveEntity.DocumentCode = "FirstProduct";
                     approveEntity.BillCode = entity.ProductCode;
                     approveEntity.ApproveTitle = "首营产品，编号：" + entity.ProductCode;
                     approveEntity.ApprovalContent = String.Format("首营产品 {0} 申请审批。", entity.ProductName);
                     approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                    approveEntity.CreateDate = DateTime.Now;
+                    approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                     approveEntity.IsApprovaled = false;
 
 
 
-                    entity.CreateDate = DateTime.Now;
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Save();
@@ -296,7 +296,7 @@ WHERE UP.ProductID = {0}", productID);
                         notification.TargetCode = entity.ProductCode;
                         notification.ApproveCode = approveCode;
                         notification.Message = string.Format("{0} 于 {1} 申请首营产品（名称 {2}）。请您审批。", userName,
-                            DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.ProductName);
+                            DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), entity.ProductName);
                         notification.OwnerUserID = approvalUserId;
                         notification.Save();
                     }
@@ -467,11 +467,11 @@ WHERE UP.ProductID = {0}", productID);
                 if (cycle.IsNew(BUSCuringCycleEntityFields.ProductID == productID))
                 {
                     SYSCategoryEntity cycleStyle = (SYSCategoryEntity)this.cbxProductCycleStyle.GetSelectedItem();
-                    cycle.CycleCode = "YHZQ" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                    cycle.CycleCode = "YHZQ" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                     cycle.CycleDays = Convert.ToInt32(cycleStyle.ItemDescription);
                     cycle.ProductID = productID;
-                    cycle.CreateDate = DateTime.Now;
-                    cycle.LastModifyDate = DateTime.Now;
+                    cycle.CreateDate = DateTime.UtcNow.AddHours(8);
+                    cycle.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     cycle.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     cycle.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     cycle.Save();

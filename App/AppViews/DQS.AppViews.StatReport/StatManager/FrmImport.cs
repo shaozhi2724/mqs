@@ -127,7 +127,7 @@ namespace DQS.AppViews.StatReport.StatManager
                         {
                             values += "'" + dt.Rows[i][j].ToString() + "',";
                         }
-                        string sql = insql + "VALUES(" + values + "'" + DateTime.Now + "')";
+                        string sql = insql + "VALUES(" + values + "'" + DateTime.UtcNow.AddHours(8) + "')";
                         SqlCommand cmd = new SqlCommand(sql, conn);
                         int num = cmd.ExecuteNonQuery();
                         if (num == 1)

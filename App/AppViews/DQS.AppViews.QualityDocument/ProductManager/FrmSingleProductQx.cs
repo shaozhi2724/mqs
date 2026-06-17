@@ -188,7 +188,7 @@ WHERE UP.ProductID = {0}", productID);
 
             if (this.m_id != null)
             {
-                entity.LastModifyDate = DateTime.Now;
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.Update();
 
@@ -198,8 +198,8 @@ WHERE UP.ProductID = {0}", productID);
             {
                 if (entity.IsNew())
                 {
-                    entity.CreateDate = DateTime.Now;
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Save();
@@ -369,11 +369,11 @@ WHERE UP.ProductID = {0}", productID);
                 if (cycle.IsNew(BUSCuringCycleEntityFields.ProductID == productID))
                 {
                     SYSCategoryEntity cycleStyle = (SYSCategoryEntity)this.cbxProductCycleStyle.GetSelectedItem();
-                    cycle.CycleCode = "YHZQ" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                    cycle.CycleCode = "YHZQ" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                     cycle.CycleDays = Convert.ToInt32(cycleStyle.ItemDescription);
                     cycle.ProductID = productID;
-                    cycle.CreateDate = DateTime.Now;
-                    cycle.LastModifyDate = DateTime.Now;
+                    cycle.CreateDate = DateTime.UtcNow.AddHours(8);
+                    cycle.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     cycle.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     cycle.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     cycle.Save();

@@ -192,7 +192,7 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
 
             if (this.m_id != null)
             {
-                entity.LastModifyDate = DateTime.Now;
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.Update();
                 SaveProductStyles(m_id.Value);
@@ -201,8 +201,8 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
             {
                 if (entity.IsNew())
                 {
-                    entity.CreateDate = DateTime.Now;
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Save();
@@ -343,8 +343,8 @@ namespace DQS.AppViews.QualityDocument.EnterpriseManager
 
             range.PersonType = "员工";
             range.PersonID = personID;
-            range.CreateDate = DateTime.Now;
-            range.LastModifyDate = DateTime.Now;
+            range.CreateDate = DateTime.UtcNow.AddHours(8);
+            range.LastModifyDate = DateTime.UtcNow.AddHours(8);
             range.CreateUserID = GlobalItem.g_CurrentUser.UserID;
             range.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
             foreach (CheckedListBoxItem productStyle in this.chkBCType.CheckedItems)

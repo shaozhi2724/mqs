@@ -214,7 +214,7 @@ UPDATE dbo.WMS_RegulatoryCode SET ReviewCode = NULL,StatusID = 0,StatusName = 'æ
                                     ATCApproveNotificationEntity notifica = item as ATCApproveNotificationEntity;
 
                                     notifica.IsRead = true;
-                                    notifica.ReadTime = DateTime.Now;
+                                    notifica.ReadTime = DateTime.UtcNow.AddHours(8);
                                     notifica.Update();
                                 }
                                 this.pageNavigator.ShowData();

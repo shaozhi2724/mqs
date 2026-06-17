@@ -63,8 +63,8 @@ namespace DQS.SvrHost
             gpcPlanType.Controls.Add(m_UcDbBackWeek);
             gpcPlanType.Controls[0].Dock = DockStyle.Fill;
 
-            this.dtStart.DateTime = DateTime.Now;
-            this.dtEnd.DateTime = DateTime.Now.AddYears(5);
+            this.dtStart.DateTime = DateTime.UtcNow.AddHours(8);
+            this.dtEnd.DateTime = DateTime.UtcNow.AddHours(8).AddYears(5);
             this.dtEnd.Enabled = false;
             this.rdgEnd.SelectedIndex = 1;
 

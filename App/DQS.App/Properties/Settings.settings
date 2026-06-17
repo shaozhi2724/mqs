@@ -14,5 +14,26 @@
     <Setting Name="PIN_Rockey" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Bokesys2015</Value>
     </Setting>
+    <Setting Name="PushUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://36.112.140.103/yjjypjc/</Value>
+    </Setting>
+    <Setting Name="GetToken" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">token</Value>
+    </Setting>
+    <Setting Name="GateWayData" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">api/entrance</Value>
+    </Setting>
+    <Setting Name="appKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">b39fb214899158406c880848e3105146</Value>
+    </Setting>
+    <Setting Name="appSecret" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">76729c07261cf24cdd28031222c0b2ca4348da2d8c66084fc688568899138737</Value>
+    </Setting>
+    <Setting Name="orgCode" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">91110101717773721R</Value>
+    </Setting>
+    <Setting Name="orgName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">北京紫辰宣医药经营有限公司</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

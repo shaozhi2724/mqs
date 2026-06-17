@@ -68,7 +68,7 @@ namespace DQS.Controls
             approve.ApprovalSuggestion = this.txtApprovalSuggestion.Text;
             approve.ApprovalResult = this.txtApprovalResult.Text;
             approve.ApprovalRemark = this.txtApprovalRemark.Text;
-            approve.ApprovalDate = DateTime.Now;
+            approve.ApprovalDate = DateTime.UtcNow.AddHours(8);
 
             approve.IsApprovaled = true;
 
@@ -104,7 +104,7 @@ namespace DQS.Controls
                         ATCApproveNotificationEntity notifica = item as ATCApproveNotificationEntity;
 
                         notifica.IsRead = true;
-                        notifica.ReadTime = DateTime.Now;
+                        notifica.ReadTime = DateTime.UtcNow.AddHours(8);
                         notifica.Update();
                     }
                 }
@@ -115,7 +115,7 @@ namespace DQS.Controls
                 if (null != notification)
                 {
                     notification.IsRead = true;
-                    notification.ReadTime = DateTime.Now;
+                    notification.ReadTime = DateTime.UtcNow.AddHours(8);
                     notification.Update();
                 }
                 //未全部审核通过，不可修改状态
@@ -154,7 +154,7 @@ namespace DQS.Controls
                 approve.ApprovalSuggestion = this.txtApprovalSuggestion.Text.Trim();
                 approve.ApprovalResult = this.txtApprovalResult.Text.Trim();
                 approve.ApprovalRemark = this.txtApprovalRemark.Text.Trim();
-                approve.ApprovalDate = DateTime.Now;
+                approve.ApprovalDate = DateTime.UtcNow.AddHours(8);
                 approve.Update();
             }
             if (approve.DocumentCode == "BrowseAuthorityChange")
@@ -163,7 +163,7 @@ namespace DQS.Controls
                 approve.ApprovalSuggestion = this.txtApprovalSuggestion.Text.Trim();
                 approve.ApprovalResult = this.txtApprovalResult.Text.Trim();
                 approve.ApprovalRemark = this.txtApprovalRemark.Text.Trim();
-                approve.ApprovalDate = DateTime.Now;
+                approve.ApprovalDate = DateTime.UtcNow.AddHours(8);
                 approve.Update();
                 using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
                 {
@@ -190,7 +190,7 @@ namespace DQS.Controls
                 approve.ApprovalSuggestion = this.txtApprovalSuggestion.Text.Trim();
                 approve.ApprovalResult = this.txtApprovalResult.Text.Trim();
                 approve.ApprovalRemark = this.txtApprovalRemark.Text.Trim();
-                approve.ApprovalDate = DateTime.Now;
+                approve.ApprovalDate = DateTime.UtcNow.AddHours(8);
                 approve.Update();
                 using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
                 {
@@ -217,7 +217,7 @@ namespace DQS.Controls
                 approve.ApprovalSuggestion = this.txtApprovalSuggestion.Text.Trim();
                 approve.ApprovalResult = this.txtApprovalResult.Text.Trim();
                 approve.ApprovalRemark = this.txtApprovalRemark.Text.Trim();
-                approve.ApprovalDate = DateTime.Now;
+                approve.ApprovalDate = DateTime.UtcNow.AddHours(8);
                 approve.Update();
                 using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
                 {
@@ -244,7 +244,7 @@ namespace DQS.Controls
                 approve.ApprovalSuggestion = this.txtApprovalSuggestion.Text.Trim();
                 approve.ApprovalResult = this.txtApprovalResult.Text.Trim();
                 approve.ApprovalRemark = this.txtApprovalRemark.Text.Trim();
-                approve.ApprovalDate = DateTime.Now;
+                approve.ApprovalDate = DateTime.UtcNow.AddHours(8);
                 approve.Update();
                 using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
                 {
@@ -296,7 +296,7 @@ namespace DQS.Controls
                         approveEntity.ApprovalSuggestion = txtApprovalSuggestion.Text;
                         approveEntity.ApprovalResult = txtApprovalResult.Text;
                         approveEntity.ApprovalRemark = txtApprovalRemark.Text;
-                        approveEntity.ApprovalDate = DateTime.Now;
+                        approveEntity.ApprovalDate = DateTime.UtcNow.AddHours(8);
                     }
                     approveEntity.Update();
                 }

@@ -52,7 +52,7 @@ namespace DQS.AppViews.WarehouseIn.WarehouseInManager
 
                 if (this.m_id != null)
                 {
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Reservation1 = txtDeclinedReason.Text.Trim();
                     entity.Update();

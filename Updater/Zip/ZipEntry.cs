@@ -226,7 +226,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 				throw new ArgumentOutOfRangeException("versionRequiredToExtract");
 			}
 			
-			this.DateTime = System.DateTime.Now;
+			this.DateTime = System.DateTime.UtcNow.AddHours(8);
 			this.name = name;
 			this.versionMadeBy = (ushort)madeByInfo;
 			this.versionToExtract = (ushort)versionRequiredToExtract;

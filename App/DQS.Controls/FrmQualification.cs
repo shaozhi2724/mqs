@@ -51,7 +51,7 @@ namespace DQS.Controls
             if (rows.Length == 0)
             {
                 DataRow row = dataTable.NewRow();
-                string code = string.Format("{0}{1}D", codePrefix, DateTime.Now.ToString("yyyyMMddHHmmssfff"));
+                string code = string.Format("{0}{1}D", codePrefix, DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmssfff"));
                 row["档案编号"] = code;
                 row["档案名称"] = quatificationName;
                 row["证书类型"] = quatificationName;
@@ -66,7 +66,7 @@ namespace DQS.Controls
                 {
                     if (dataRow["档案编号"].ToString().Length != 20 && !dataRow["档案编号"].ToString().EndsWith("D"))
                     {
-                        string code = string.Format("{0}{1}D", codePrefix, DateTime.Now.ToString("yyyyMMddHHmmssfff"));
+                        string code = string.Format("{0}{1}D", codePrefix, DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmssfff"));
                         dataRow["档案编号"] = code;
                         var id = dataRow["档案ID"];
                         if (DBNull.Value != id)
@@ -153,7 +153,7 @@ namespace DQS.Controls
                             i++;
                         }
                     }
-                    else if (industryStyle == "医疗机构")
+                    else if (industryStyle.Contains("医疗机构"))
                     {
                         
                         DataTable requiredRecords = GlobalMethod.GetViewData(RequiredCertificatesViewName,
@@ -540,7 +540,7 @@ namespace DQS.Controls
                         attchment.AttachmentSize = GlobalMethod.FormatFileSize(file.Length);
                         attchment.AttachmentType = file.Extension;
                         attchment.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                        attchment.CreateDate = DateTime.Now;
+                        attchment.CreateDate = DateTime.UtcNow.AddHours(8);
                         attchment.QualificationID = Convert.ToInt32(id);
 
                         attchment.AttachmentContent = File.ReadAllBytes(file.FullName);

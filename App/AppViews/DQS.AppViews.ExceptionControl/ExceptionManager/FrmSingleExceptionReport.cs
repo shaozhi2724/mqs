@@ -67,7 +67,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
             }
             else
             {
-                this.txtExceptionCode.Text = "YCSB" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtExceptionCode.Text = "YCSB" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                 this.txtExceptionCode.Select(this.txtExceptionCode.Text.Length, 0);
                 if (GlobalItem.g_CurrentEmployee != null)
                 {
@@ -78,8 +78,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                     txtFinder.Text = GlobalItem.g_CurrentUser.UserName;
                 }
                 rdgIsDeal.Enabled = false;
-                dteFinderDate.DateTime = DateTime.Now;
-                tmeFinderTime.Time = DateTime.Now;
+                dteFinderDate.DateTime = DateTime.UtcNow.AddHours(8);
+                tmeFinderTime.Time = DateTime.UtcNow.AddHours(8);
 
                 txtDealPerson.Properties.ReadOnly = true;
                 txtDealSuggestion.Properties.ReadOnly = true;
@@ -151,7 +151,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
                     List<EntityBase> children = this.popupGrid.GetEntities();
 
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Reservation2 = cboResult.SelectedItem.ToString();
                     entity.Update();
@@ -198,7 +198,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                                             entitypl.UnLockedUser = GlobalItem.g_CurrentUser.UserName;
                                         }
                                         entitypl.DealResult = entity.DealResult;
-                                        entitypl.UnLockedDate = DateTime.Now;
+                                        entitypl.UnLockedDate = DateTime.UtcNow.AddHours(8);
                                         entitypl.Update();
                                     }
                                 }
@@ -218,7 +218,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                                 return;
                             }
 
-                            string bhgCode = "BHG" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                            string bhgCode = "BHG" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                             string bhgCause = txtExceptionContent.Text;
                             string bhgResult = txtDealResult.Text;
 
@@ -243,8 +243,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                             prounquali.UnqualifiedCause = bhgCause;
                             prounquali.DealSuggestion = bhgResult;
                             prounquali.Blame = txtFinder.Text;
-                            prounquali.CreateDate = DateTime.Now;
-                            prounquali.LastModifyDate = DateTime.Now;
+                            prounquali.CreateDate = DateTime.UtcNow.AddHours(8);
+                            prounquali.LastModifyDate = DateTime.UtcNow.AddHours(8);
                             prounquali.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                             prounquali.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                             prounquali.Reservation1 = "自动生成不合格品记录";
@@ -297,7 +297,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                                 approveEntity.ApproveTitle = string.Format("不合格产品处理，编号：{0}", prounquali.UnqualifiedCode);
                                 approveEntity.ApprovalContent = String.Format("不合格产品处理 {0}:{2}{1}{2} 申请审批。", prounquali.UnqualifiedCode, message.ToString(), Environment.NewLine);
                                 approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                                approveEntity.CreateDate = DateTime.Now;
+                                approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                                 approveEntity.IsApprovaled = false;
                                 for (int i = 0; i < data.Rows.Count; i++)
                                 {
@@ -322,7 +322,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                                     notification.TargetCode = prounquali.UnqualifiedCode;
                                     notification.ApproveCode = approveCode;
                                     notification.Message = string.Format("{0} 于 {1} 申请处理不合格产品（单号 {2}）。请您审批。", userName,
-                                        DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), prounquali.UnqualifiedCode);
+                                        DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), prounquali.UnqualifiedCode);
                                     notification.OwnerUserID = approvalUserId;
                                     notification.Save();
                                 }
@@ -350,8 +350,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
                         List<EntityBase> children = this.popupGrid.GetEntities();
 
-                        entity.CreateDate = DateTime.Now;
-                        entity.LastModifyDate = DateTime.Now;
+                        entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                        entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.Save();
@@ -405,8 +405,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
             }
             else
             {
-                this.dteDealDate.DateTime = DateTime.Now;
-                this.tmeDealTime.Time = DateTime.Now;
+                this.dteDealDate.DateTime = DateTime.UtcNow.AddHours(8);
+                this.tmeDealTime.Time = DateTime.UtcNow.AddHours(8);
 
                 if (GlobalItem.g_CurrentEmployee != null)
                 {

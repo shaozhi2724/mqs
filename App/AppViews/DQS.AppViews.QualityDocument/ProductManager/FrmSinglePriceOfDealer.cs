@@ -102,13 +102,13 @@ namespace DQS.AppViews.QualityDocument.ProductManager
                                      UnitPrice = unitPrice,
                                      TradePrice = tradePrice,
                                      RetailPrice = retailPrice,
-                                     CreateDate = DateTime.Now,
+                                     CreateDate = DateTime.UtcNow.AddHours(8),
                                      CreateUserID = GlobalItem.g_CurrentUser.UserID,
                                      CreateUsername =
                                          null == GlobalItem.g_CurrentEmployee
                                              ? GlobalItem.g_CurrentUser.UserName
                                              : GlobalItem.g_CurrentEmployee.EmployeeName,
-                                     LastModifyDate = DateTime.Now,
+                                     LastModifyDate = DateTime.UtcNow.AddHours(8),
                                      LastModifyUserID = GlobalItem.g_CurrentUser.UserID
                                  });
             }

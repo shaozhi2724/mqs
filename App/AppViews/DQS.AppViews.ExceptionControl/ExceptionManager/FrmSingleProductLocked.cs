@@ -42,10 +42,10 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
             }
             else
             {
-                this.txtLockedCode.Text = "YPSD" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtLockedCode.Text = "YPSD" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                 this.txtLockedCode.Select(this.txtLockedCode.Text.Length, 0);
-                this.dteLockedDate.DateTime = DateTime.Now;
-                this.tmeLockedTime.Time = DateTime.Now;
+                this.dteLockedDate.DateTime = DateTime.UtcNow.AddHours(8);
+                this.tmeLockedTime.Time = DateTime.UtcNow.AddHours(8);
                 SetLockedBatch(true);
                 SetUnLocked(false);
                 if (GlobalItem.g_CurrentEmployee != null)
@@ -279,7 +279,7 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
 
             if (this.m_id != null)
             {
-                entity.LastModifyDate = DateTime.Now;
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.Update();
             }
@@ -289,8 +289,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
                 {
                     if (!CheckProduct()) return;
 
-                    entity.CreateDate = DateTime.Now;
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Save();
@@ -354,8 +354,8 @@ namespace DQS.AppViews.ExceptionControl.ExceptionManager
             //this.tmeUnLockedTime.Enabled = isUnLocked;
             if (isUnLocked)
             {
-                dteUnLockedDate.DateTime = DateTime.Now;
-                tmeUnLockedTime.Time = DateTime.Now;
+                dteUnLockedDate.DateTime = DateTime.UtcNow.AddHours(8);
+                tmeUnLockedTime.Time = DateTime.UtcNow.AddHours(8);
                 if (GlobalItem.g_CurrentEmployee != null)
                 {
                     txtUnLockedUser.Text = GlobalItem.g_CurrentEmployee.EmployeeName;

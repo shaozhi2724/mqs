@@ -157,8 +157,8 @@ FROM dbo.FIN_PaymentOnPassage onp WHERE NOT EXISTS(SELECT * FROM dbo.FIN_Payable
         {
             using (SqlConnection conn = new SqlConnection(GlobalItem.g_DbConnectStrings))
             {
-                string str = DateTime.Now.ToString("yyyyMMdd");
-                string strban = DateTime.Now.ToString("yyyyMM");
+                string str = DateTime.UtcNow.AddHours(8).ToString("yyyyMMdd");
+                string strban = DateTime.UtcNow.AddHours(8).ToString("yyyyMM");
                 string sql = "SELECT TOP 1 PayablesCode FROM FIN_Payables WHERE PayablesCode LIKE 'YFDJ" + strban + "%' ORDER BY PayablesID DESC";
                 try
                 {

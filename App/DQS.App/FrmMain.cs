@@ -153,7 +153,7 @@ namespace DQS.App
                                                  KeyVersion = keyVersion,
                                                  KeyDecryptedContent = decodedContent,
                                                  InstallDate = !enterprise.IsNullField("CreateDate") ? enterprise.CreateDate : DateTime.MinValue,
-                                                 InfoSendDate = DateTime.Now,
+                                                 InfoSendDate = DateTime.UtcNow.AddHours(8),
                                              });
                 service.Close();
             }
@@ -226,6 +226,16 @@ namespace DQS.App
             if (keyData == Keys.F4)
             {
                 new FrmDownAttachment().Show();
+                return true;
+            }
+            if (keyData == Keys.F5)
+            {
+                new FrmStoreReset().Show();
+                return true;
+            }
+            if (keyData == Keys.F6)
+            {
+                new FrmUploadData().Show();
                 return true;
             }
             return base.ProcessDialogKey(keyData);
@@ -362,7 +372,7 @@ namespace DQS.App
 
             this.lblUserName.Text = GlobalItem.g_CurrentUser.UserName;
 
-            this.lblDate.Text = DateTime.Now.ToString("yyyy年MM月dd日");
+            this.lblDate.Text = DateTime.UtcNow.AddHours(8).ToString("yyyy年MM月dd日");
 
             this.lblDate.Text += " " + Week();
 
@@ -1032,7 +1042,7 @@ namespace DQS.App
         private static string Week()
         {
             string[] weekdays = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-            string week = weekdays[Convert.ToInt32(DateTime.Now.DayOfWeek)];
+            string week = weekdays[Convert.ToInt32(DateTime.UtcNow.AddHours(8).DayOfWeek)];
             return week;
         }
 
@@ -1064,11 +1074,14 @@ namespace DQS.App
             }
 
 
-            SYSDateLogEntity sysDateLog = new SYSDateLogEntity();
-            sysDateLog.UserName = GlobalItem.g_CurrentUser.UserName;
-            sysDateLog.Operate = "退出系统";
-            sysDateLog.OperateDate = DateTime.Now;
-            sysDateLog.Save();
+            if (GlobalItem.g_CurrentUser.UserCode != "root" && GlobalItem.g_CurrentUser.UserCode != "admin")
+            {
+                SYSDateLogEntity sysDateLog = new SYSDateLogEntity();
+                sysDateLog.UserName = GlobalItem.g_CurrentUser.UserName;
+                sysDateLog.Operate = "退出系统";
+                sysDateLog.OperateDate = DateTime.UtcNow.AddHours(8);
+                sysDateLog.Save();
+            }
         }
 
         private void alertControl_FormLoad(object sender, AlertFormLoadEventArgs e)

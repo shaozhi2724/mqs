@@ -122,7 +122,7 @@ namespace DQS.AppViews.QualityControl.UserManager
                         foreach (CheckedListBoxItem roleItem in this.chklbcRole.CheckedItems)
                         {
                             userRole.RoleID = ((roleItem.Value as ListEntityItem).Key as ATCRoleEntity).RoleID;
-                            userRole.CreateDate = DateTime.Now;
+                            userRole.CreateDate = DateTime.UtcNow.AddHours(8);
                             userRole.Save();
                         }
                     }
@@ -177,7 +177,7 @@ namespace DQS.AppViews.QualityControl.UserManager
                                 }
                                 else
                                 {
-                                    string code = "YJ" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                                    string code = "YJ" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                                     foreach (ListEntityItem userItem in this.lbcUser.SelectedItems)
                                     {
                                         string insertsql = @"EXEC sp_InsertOldUserRoleChange '{0}','{1}','{2}','{3}'";
@@ -206,7 +206,7 @@ namespace DQS.AppViews.QualityControl.UserManager
                                         approveEntity.ApproveTitle = string.Format("用户角色变更，编号：{0}", code);
                                         approveEntity.ApprovalContent = String.Format("用户角色变更，编号：{0}", code);
                                         approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                                        approveEntity.CreateDate = DateTime.Now;
+                                        approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                                         approveEntity.IsApprovaled = false;
 
 
@@ -238,7 +238,7 @@ namespace DQS.AppViews.QualityControl.UserManager
                                             notification.TargetCode = code;
                                             notification.ApproveCode = approveCode;
                                             notification.Message = string.Format("{0} 于 {1} 用户角色变更申请（单号 {2}）。请您审批。", userName,
-                                                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), code);
+                                                DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), code);
                                             notification.OwnerUserID = approvalUserId;
                                             notification.Save();
                                         }

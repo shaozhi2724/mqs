@@ -245,7 +245,7 @@ SELECT ProductID,产品编码,产品名称,包装规格,数量,单价,金额 FRO
                 DealerID = dealerID
             };
             dealer.Fetch();
-            if (dealer.IndustryStyle == "医疗机构")
+            if (dealer.IndustryStyle.Contains("医疗机构"))
             {
                 this.layReservation11.Visibility = LayoutVisibility.Always;
                 this.layReservation12.Visibility = LayoutVisibility.Always;
@@ -597,9 +597,9 @@ SELECT ProductID,产品编码,产品名称,包装规格,数量,单价,金额 FRO
                 entity.BillStatus = 1;
                 entity.BillStatusName = "已下单";
                 entity.DepartmentID = departmentid;
-                entity.BillDate = DateTime.Now;
-                entity.CreateDate = DateTime.Now;
-                entity.LastModifyDate = DateTime.Now;
+                entity.BillDate = DateTime.UtcNow.AddHours(8);
+                entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                 entity.Save();
@@ -646,7 +646,7 @@ SELECT ProductID,产品编码,产品名称,包装规格,数量,单价,金额 FRO
                     approveEntity.ApprovalContent = String.Format("{0}({1}) {2} 申请审批。", entity.BillTypeName,
                         entity.BillStyle, entity.BillCode);
                     approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                    approveEntity.CreateDate = DateTime.Now;
+                    approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                     approveEntity.IsApprovaled = false;
                     for (int i = 0; i < data.Rows.Count; i++)
                     {
@@ -671,7 +671,7 @@ SELECT ProductID,产品编码,产品名称,包装规格,数量,单价,金额 FRO
                         notification.TargetCode = entity.BillCode;
                         notification.ApproveCode = approveCode;
                         notification.Message = string.Format("{0} 于 {1} 申请产品销售（单号 {2}）。请您审批。", userName,
-                            DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.BillCode);
+                            DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), entity.BillCode);
                         notification.OwnerUserID = approvalUserId;
                         notification.Save();
                     }

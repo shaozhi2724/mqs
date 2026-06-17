@@ -348,12 +348,12 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                             AntiApproveID = antiApproveID
                         };
                         antiApproveEntity.AntiApproveTitle = string.Format("{0} 于 {1} 申请变更首营供应商信息",
-                            requestPerson, DateTime.Now.ToString("yyyy年M月d日 HH时m分"));
+                            requestPerson, DateTime.UtcNow.AddHours(8).ToString("yyyy年M月d日 HH时m分"));
                         antiApproveEntity.DocumentCode = "FirstDealer";
                         antiApproveEntity.AntiApproveItemID = oldEntity.DealerID;
                         antiApproveEntity.AntiApproveItemCode = oldEntity.DealerCode;
                         antiApproveEntity.AntiApproveItemName = oldEntity.DealerName;
-                        antiApproveEntity.CreateDate = DateTime.Now;
+                        antiApproveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                         antiApproveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         antiApproveEntity.RequestPerson = requestPerson;
                         antiApproveEntity.StatusID = 1;
@@ -432,11 +432,11 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                 {
                     string status = "未过期";
                     DateTime validDate = (DateTime)dataRow["ValidateDate"];
-                    if (DateTime.Now > validDate)
+                    if (DateTime.UtcNow.AddHours(8) > validDate)
                     {
                         status = "已过期";
                     }
-                    else if (validDate.AddDays(-30) < DateTime.Now)
+                    else if (validDate.AddDays(-30) < DateTime.UtcNow.AddHours(8))
                     {
                         status = "即将过期";
                     }
@@ -517,7 +517,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                     actionEntity.Action = 2;
                     actionEntity.ActionRemark = resultString.ToString();
                     actionEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                    actionEntity.CreateDate = DateTime.Now;
+                    actionEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                     actionEntity.Save();
                 }
             }
@@ -698,7 +698,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                         i++;
                     }
                 }
-                else if (industryStyle == "医疗机构")
+                else if (industryStyle.Contains("医疗机构"))
                 {
 
                     DataTable requiredRecords = GlobalMethod.GetViewData(RequiredCertificatesViewName,
@@ -780,11 +780,11 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                     {
                         string status = "未过期";
                         DateTime validDate = (DateTime)dataRow["ValidateDate"];
-                        if (DateTime.Now > validDate)
+                        if (DateTime.UtcNow.AddHours(8) > validDate)
                         {
                             status = "已过期";
                         }
-                        else if (validDate.AddDays(-30) < DateTime.Now)
+                        else if (validDate.AddDays(-30) < DateTime.UtcNow.AddHours(8))
                         {
                             status = "即将过期";
                         }
@@ -924,7 +924,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
             if (rows.Length == 0)
             {
                 DataRow row = dataTable.NewRow();
-                string code = string.Format("{0}{1}D", codePrefix, DateTime.Now.ToString("yyyyMMddHHmmssfff"));
+                string code = string.Format("{0}{1}D", codePrefix, DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmssfff"));
                 row["档案编号"] = code;
                 row["档案名称"] = quatificationName;
                 row["证书类型"] = quatificationName;
@@ -939,7 +939,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                 {
                     if (dataRow["档案编号"].ToString().Length != 20 && !dataRow["档案编号"].ToString().EndsWith("D"))
                     {
-                        string code = string.Format("{0}{1}D", codePrefix, DateTime.Now.ToString("yyyyMMddHHmmssfff"));
+                        string code = string.Format("{0}{1}D", codePrefix, DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmssfff"));
                         dataRow["档案编号"] = code;
                         var id = dataRow["档案ID"];
                         if (DBNull.Value != id)
@@ -1063,7 +1063,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                     actionEntity.Action = 3;
                     actionEntity.ActionRemark = string.Format("删除证书及连带附件和属性信息");
                     actionEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                    actionEntity.CreateDate = DateTime.Now;
+                    actionEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                     actionEntity.Save();
 
                     BindQualification();
@@ -1089,7 +1089,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                         attchment.AttachmentName = file.Name;
                         attchment.AttachmentSize = GlobalMethod.FormatFileSize(file.Length);
                         attchment.AttachmentType = file.Extension;
-                        attchment.CreateDate = DateTime.Now;
+                        attchment.CreateDate = DateTime.UtcNow.AddHours(8);
                         attchment.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         attchment.QualificationID = Convert.ToInt32(id);
 
@@ -1113,7 +1113,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                         actionEntity.Action = 4;
                         actionEntity.ActionRemark = string.Format("修改:\n上传附件: {0}", attchment.AttachmentName);
                         actionEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                        actionEntity.CreateDate = DateTime.Now;
+                        actionEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                         actionEntity.Save();
                     }
                 }
@@ -1224,7 +1224,7 @@ namespace DQS.AppViews.QualityDocument.DealerManager
                     actionEntity.Action = 5;
                     actionEntity.ActionRemark = string.Format("修改: \n删除了“{0}”于 {1} 上传的附件: {2}", uploadPerson.ToString(),((DateTime)uploadDate).ToString("yyyy年M月d日"), attachmentName.ToString());
                     actionEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                    actionEntity.CreateDate = DateTime.Now;
+                    actionEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                     actionEntity.Save();
 
                     BFIQualificationAttachmentEntity entity = new BFIQualificationAttachmentEntity { AttachmentID = Convert.ToInt32(id) };

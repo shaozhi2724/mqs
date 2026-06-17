@@ -58,7 +58,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
             {
                 btnAddNew.Enabled = false;
                 btnImport.Enabled = false;
-                this.txtInventoryCode.Text = "PD" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.txtInventoryCode.Text = "PD" + DateTime.UtcNow.AddHours(8).ToString("yyyyMMddHHmmss");
                 this.txtInventoryCode.Select(this.txtInventoryCode.Text.Length, 0);
 
                 if (GlobalItem.g_CurrentEmployee != null)
@@ -128,7 +128,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                 {
                     #region 修改
 
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -140,12 +140,12 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                     {
                         #region 新建
 
-                        entity.InventoryDate = DateTime.Now;
+                        entity.InventoryDate = DateTime.UtcNow.AddHours(8);
 
                         List<EntityBase> children = this.popupGrid.GetEntities();
 
-                        entity.CreateDate = DateTime.Now;
-                        entity.LastModifyDate = DateTime.Now;
+                        entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                        entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
@@ -177,7 +177,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                             approveEntity.ApproveTitle = string.Format("盘点单-编号：{0}",entity.InventoryCode);
                             approveEntity.ApprovalContent = String.Format("盘点单-{0} 申请审批。",entity.InventoryCode);
                             approveEntity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
-                            approveEntity.CreateDate = DateTime.Now;
+                            approveEntity.CreateDate = DateTime.UtcNow.AddHours(8);
                             approveEntity.IsApprovaled = false;
                             for (int i = 0; i < data.Rows.Count; i++)
                             {
@@ -202,7 +202,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                                 notification.TargetCode = entity.InventoryCode;
                                 notification.ApproveCode = approveCode;
                                 notification.Message = string.Format("{0} 于 {1} 申请盘点单（单号 {2}）。请您审批。", userName,
-                                    DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), entity.InventoryCode);
+                                    DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), entity.InventoryCode);
                                 notification.OwnerUserID = approvalUserId;
                                 notification.Save();
                             }
@@ -253,7 +253,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                 {
                     #region 修改
 
-                    entity.LastModifyDate = DateTime.Now;
+                    entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                     entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
                     entity.Update();
 
@@ -265,12 +265,12 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                     {
                         #region 新建
 
-                        entity.InventoryDate = DateTime.Now;
+                        entity.InventoryDate = DateTime.UtcNow.AddHours(8);
 
                         List<EntityBase> children = this.popupGrid.GetEntities(false);
 
-                        entity.CreateDate = DateTime.Now;
-                        entity.LastModifyDate = DateTime.Now;
+                        entity.CreateDate = DateTime.UtcNow.AddHours(8);
+                        entity.LastModifyDate = DateTime.UtcNow.AddHours(8);
                         entity.CreateUserID = GlobalItem.g_CurrentUser.UserID;
                         entity.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
 
@@ -424,7 +424,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
                 inStoreDetail.Fetch(BUSInStoreDetailEntityFields.InStoreID == inStoreID);
                 foreach (BUSInStoreDetailEntity instore in inStoreDetail)
                 {
-                    instore.CuringDate = DateTime.Now;
+                    instore.CuringDate = DateTime.UtcNow.AddHours(8);
                     instore.Update();
                 }
             }
@@ -458,7 +458,7 @@ namespace DQS.AppViews.StoreAndCuring.StockManager
 
             foreach (BUSStoreDetailEntity entity in entities)
             {
-                DateTime lastCuringDate = DateTime.Now;
+                DateTime lastCuringDate = DateTime.UtcNow.AddHours(8);
 
                 string sqlString = @"
 INSERT INTO dbo.BUS_StoreDetailChangeHistory
@@ -573,14 +573,14 @@ WHERE StoreDetailID={0}
                 storeDetail.ProduceDate = inventoryDetail.ProduceDate;
                 storeDetail.ValidateDate = inventoryDetail.ValidateDate;
                 storeDetail.Amount = inventoryDetail.Amount;
-                storeDetail.CreateDate = DateTime.Now;
-                storeDetail.LastModifyDate = DateTime.Now;
+                storeDetail.CreateDate = DateTime.UtcNow.AddHours(8);
+                storeDetail.LastModifyDate = DateTime.UtcNow.AddHours(8);
                 storeDetail.LastModifyUserID = GlobalItem.g_CurrentUser.UserID;
-                storeDetail.LastCuringDate = DateTime.Now;
+                storeDetail.LastCuringDate = DateTime.UtcNow.AddHours(8);
                 var userName = GlobalItem.g_CurrentEmployee == null
                     ? GlobalItem.g_CurrentUser.UserName
                     : GlobalItem.g_CurrentEmployee.EmployeeName;
-                storeDetail.DetailRemark = string.Format("{0}于{1}通过盘点单：{2}进行期初,期初数据 - 批号:{3},数量:{4}", userName, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), txtInventoryCode.Text.Trim(), inventoryDetail.BatchNo,inventoryDetail.Amount);
+                storeDetail.DetailRemark = string.Format("{0}于{1}通过盘点单：{2}进行期初,期初数据 - 批号:{3},数量:{4}", userName, DateTime.UtcNow.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss"), txtInventoryCode.Text.Trim(), inventoryDetail.BatchNo,inventoryDetail.Amount);
                 storeDetail.Save();
             }
             */
